@@ -1,0 +1,143 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+  
+	<groupId>cr.talent</groupId>
+	<artifactId>talent</artifactId>
+	<packaging>pom</packaging>
+	<version>0.1</version>
+	<name>talent</name>
+  
+	<issueManagement>
+	<system>Jira</system>
+	<url>http://jira.certified.cr</url>
+	</issueManagement>
+	
+	<scm>
+		<connection>scm:git://http://git.certified.cr:7990/git/TAL/talent.git</connection>
+        <developerConnection>scm:git://http://git.certified.cr:7990/git/TAL/talent.git</developerConnection>
+        <url>http://git.certified.cr:7990</url>
+		<tag>HEAD</tag>
+    </scm>
+
+	<dependencies>
+	</dependencies>
+	
+	
+	<developers>
+		<developer>
+			<id>rodrigo.bartels</id>
+			<name>Rodrigo Bartels</name>
+			<email>rodrigobartels@gmail.com</email>
+			<roles>
+				<role>architect</role>
+				<role>product owner</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>raquel.fonseca</id>
+			<name>Raquel Fonseca</name>
+			<email>raquel.fonseca@ecci.ucr.ac.cr</email>
+			<roles>
+				<role>scrum master</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>mariana.abellan</id>
+			<name>Mariana Abellán</name>
+			<email>marianaabellan4@gmail.com</email>
+			<roles>
+				<role>ux/ui designer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>daniel.montesdeoca</id>
+			<name>Daniel Montes de Oca</name>
+			<email>daniel.montesdeocab@gmail.com</email>
+			<roles>
+				<role>team lead</role>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>maria.cubero</id>
+			<name>María José Cubero</name>
+			<email>majo.qbro@gmail.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>renato.mainieri</id>
+			<name>Renato Mainieri</name>
+			<email>renato.mainieri2110@gmail.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>elias.calderon</id>
+			<name>Elías Calderón</name>
+			<email>eliascr98@outlook.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>josue.cubero</id>
+			<name>Josué Cubero</name>
+			<email>jo96cube@gmail.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>josue.sarkis</id>
+			<name>Josué Sarkis</name>
+			<email>jolesa97@gmail.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>roberto.leandro</id>
+			<name>Roberto Leandro</name>
+			<email>roleandroflores12@gmail.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+		
+		<developer>
+			<id>otto.mena</id>
+			<name>Otto Mena Kikut</name>
+			<email>Otmerk1@gmail.com</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>UTC-6</timezone>
+		</developer>
+	</developers>
+	
+	
+	
+</project>
