@@ -1,24 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-  
+	
 	<groupId>cr.talent</groupId>
 	<artifactId>talent</artifactId>
 	<packaging>pom</packaging>
 	<version>0.1</version>
 	<name>talent</name>
-  
+	
 	<issueManagement>
-	<system>Jira</system>
-	<url>http://jira.certified.cr</url>
+		<system>Jira</system>
+		<url>http://jira.certified.cr</url>
 	</issueManagement>
 	
 	<scm>
 		<connection>scm:git://http://git.certified.cr:7990/git/TAL/talent.git</connection>
-        <developerConnection>scm:git://http://git.certified.cr:7990/git/TAL/talent.git</developerConnection>
-        <url>http://git.certified.cr:7990</url>
+		<developerConnection>scm:git://http://git.certified.cr:7990/git/TAL/talent.git</developerConnection>
+		<url>http://git.certified.cr:7990</url>
 		<tag>HEAD</tag>
-    </scm>
+	</scm>
+
+	<modules>
+		<module>talent-ws</module>
+	</modules>
 
 	<dependencies>
 	</dependencies>
@@ -137,7 +141,5 @@
 			<timezone>UTC-6</timezone>
 		</developer>
 	</developers>
-	
-	
 	
 </project>
