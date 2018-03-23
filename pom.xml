@@ -20,10 +20,6 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<modules>
-		<module>talent-ws</module>
-	</modules>
-
 	<dependencies>
 	</dependencies>
 	
@@ -141,5 +137,10 @@
 			<timezone>UTC-6</timezone>
 		</developer>
 	</developers>
+
+	<modules>
+		<module>talent-ws</module>
+		<module>talent-core</module>
+	</modules>
 	
 </project>
