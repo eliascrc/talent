@@ -16,8 +16,4 @@
     <context:component-scan base-package="cr.talent.core" />
     <aop:aspectj-autoproxy/>
 
-    <bean id = "testBean" class = "cr.talent.core.TestBean">
-        <property name = "message" value = "Talent! rules"/>
-    </bean>
-
 </beans>
