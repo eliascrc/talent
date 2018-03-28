@@ -16,10 +16,13 @@
     <context:component-scan base-package="cr.talent.core" />
     <aop:aspectj-autoproxy/>
 
-    <context:property-placeholder location="file:${user.home}/talent.properties" />
-
     <bean id="rootPlaceholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations" value="classpath:talent.properties"/>
+        <property name="locations">
+        <list>
+            <value>classpath:talent.properties</value>
+            <value>file:${user.home}/talent.properties</value>
+        </list>
+        </property>
     </bean>
 
 </beans>
