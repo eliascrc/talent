@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String hello(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
+    public String printIndex(ModelMap model) {
+        model.addAttribute("text", "This is a Controller test");
         return "index";
     }
 }
