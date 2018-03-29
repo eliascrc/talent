@@ -8,7 +8,6 @@ http://www.springframework.org/schema/context                           http://w
 	<context:component-scan base-package="cr.talent.web.controllers" />
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/jspx/" />
         <property name="suffix" value=".jspx" />
     </bean>
