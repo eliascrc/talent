@@ -18,6 +18,19 @@
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <spring.version>4.2.9.RELEASE</spring.version>
+
+      <!--JDBC properties -->
+      <jdbc.schema>talent</jdbc.schema>
+      <jdbc.base.url>jdbc:mysql://${jdbc.host}:3306/${jdbc.schema}</jdbc.base.url>
+      <jdbc.url>${jdbc.base.url}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</jdbc.url>
+      <jdbc.base.url.noschema>jdbc:mysql://${jdbc.host}:3306</jdbc.base.url.noschema>
+      <jdbc.username>talent</jdbc.username>
+      <jdbc.password>aRandomPassword</jdbc.password>
+      <jdbc.host>localhost</jdbc.host>
+      <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+
+      <!--Hibernate properties -->
+      <hibernate.dialect>org.hibernate.dialect.MySQL57InnoDBDialect</hibernate.dialect>
   </properties>
 
   <build>
@@ -60,6 +73,66 @@
           <groupId>org.springframework</groupId>
           <artifactId>spring-context</artifactId>
           <version>${spring.version}</version>
+      </dependency>
+
+     <!--Hibernate-->
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.2.15.Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>6.0.8.Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate</artifactId>
+        <version>3.5.4-Final</version>
+        <type>pom</type>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-annotations</artifactId>
+        <version>3.5.6-Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-ehcache</artifactId>
+        <version>5.2.15.Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-c3p0</artifactId>
+        <version>5.2.15.Final</version>
+      </dependency>
+
+      <!--Spring-ORM module-->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>5.0.4.RELEASE</version>
+      </dependency>
+
+      <!-- JDBC -->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>5.0.4.RELEASE</version>
+      </dependency>
+
+      <!-- MySQL-->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.9-rc</version>
       </dependency>
 
   </dependencies>
