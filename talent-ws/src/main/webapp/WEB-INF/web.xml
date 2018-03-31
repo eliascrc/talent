@@ -18,8 +18,8 @@ id="WebApp_ID" version="3.0">
 	
 	<context-param>
         	<param-name>contextConfigLocation</param-name>
-        	<param-value>../../../../../talent-core/*spring.xml</param-value>
-    	</context-param>
+        	<param-value>classpath*:${maven.multiModuleProjectDirectory}/*.spring.xml</param-value>
+	</context-param>
 
 	<servlet-mapping>
 		<servlet-name>talent-ws-mvc.spring</servlet-name>
