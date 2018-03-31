@@ -19,7 +19,7 @@
             <property name="password" value="${talent.jdbc.password}" /> 
 
             <!-- these are C3P0 properties -->
-            <property name="acquireIncrement" value="$35" />
+            <property name="acquireIncrement" value="35" />
             <property name="minPoolSize" value="3000" />
             <property name="maxPoolSize" value="3000" />
             <property name="maxIdleTime" value="30000" />
