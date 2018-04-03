@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<web-app
+  xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+id="WebApp_ID" version="3.0">
+ 
+ 
+	<servlet>
+		<servlet-name>talent-ws-mvc.spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/talent-ws-mvc.spring.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet> 
+	
+	<context-param>
+        	<param-name>contextConfigLocation</param-name>
+        	<param-value>classpath*:${maven.multiModuleProjectDirectory}/*.spring.xml</param-value>
+	</context-param>
+
+	<servlet-mapping>
+		<servlet-name>talent-ws-mvc.spring</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+</web-app>
