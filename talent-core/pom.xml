@@ -101,22 +101,22 @@
       </dependency>
 
       <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>6.0.8.Final</version>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-validator</artifactId>
+          <version>6.0.8.Final</version>
       </dependency>
+
+      <!--<dependency>
+          <groupId>javax.el</groupId>
+          <artifactId>javax.el-api</artifactId>
+          <version>3.0.0</version>
+          <scope>provided</scope>
+      </dependency>-->
 
       <dependency>
         <groupId>org.hibernate</groupId>
-        <artifactId>hibernate</artifactId>
-        <version>3.5.4-Final</version>
-        <type>pom</type>
-      </dependency>
-
-      <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-annotations</artifactId>
-        <version>3.5.6-Final</version>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.2.15.Final</version>
       </dependency>
 
       <dependency>
