@@ -15,22 +15,6 @@ id="WebApp_ID" version="3.0">
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet> 
-	
-	<context-param>
-        	<param-name>contextConfigLocation</param-name>
-        	<param-value>classpath*:${maven.multiModuleProjectDirectory}/*.spring.xml</param-value>
-	</context-param>
-
-	<listener>
-		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
-		</listener-class>
-	</listener>
-
-	<servlet-mapping>
-		<servlet-name>talent-ws-mvc.spring</servlet-name>
-		<url-pattern>*.html</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>jersey-serlvet</servlet-name>
@@ -45,7 +29,24 @@ id="WebApp_ID" version="3.0">
 	</servlet>
 
 	<servlet-mapping>
+		<servlet-name>talent-ws-mvc.spring</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
 		<url-pattern>/ws/*</url-pattern>
 	</servlet-mapping>
+
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:talent-core.spring.xml, classpath:talent-persistence.spring.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
 </web-app>
