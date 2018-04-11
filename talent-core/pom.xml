@@ -27,7 +27,7 @@
       <jdbc.username>talent</jdbc.username>
       <jdbc.password>aRandomPassword</jdbc.password>
       <jdbc.host>localhost</jdbc.host>
-      <jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+      <jdbc.driver>com.mysql.cj.jdbc.Driver</jdbc.driver>
 
       <!--Hibernate properties -->
       <hibernate.dialect>org.hibernate.dialect.MySQL57InnoDBDialect</hibernate.dialect>
