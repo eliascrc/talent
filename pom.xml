@@ -20,9 +20,32 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<dependencies>
-	</dependencies>
-	
+	<properties>
+		<spring.security.version>5.0.4.RELEASE</spring.security.version>
+	</properties>
+
+
+		<dependencies>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+
+		</dependencies>
 	
 	<developers>
 		<developer>

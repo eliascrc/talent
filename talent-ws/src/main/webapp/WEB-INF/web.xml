@@ -41,7 +41,7 @@ id="WebApp_ID" version="3.0">
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:talent-core.spring.xml, classpath:talent-persistence.spring.xml</param-value>
+		<param-value>classpath:talent-core.spring.xml, classpath:talent-persistence.spring.xml, classpath:talent-security.spring.xml</param-value>
 	</context-param>
 
 	<listener>
@@ -49,4 +49,5 @@ id="WebApp_ID" version="3.0">
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
+
 </web-app>
