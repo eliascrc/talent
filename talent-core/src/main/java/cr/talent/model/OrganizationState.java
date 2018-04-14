@@ -1,7 +1,12 @@
 package cr.talent.model;
 
+/**
+ * Represents the state that an organization can have within the Talent System.
+ *
+ *  @author María José Cubero
+ */
 public enum OrganizationState {
 
-    ENABLED, DISABLED, BASICINFORMATIONSET, PRIVACYPOLICYDEFINES, PAYMENTPLANDEFINED, USERADDINGMETHODDEFINED
+    ENABLED, DISABLED, BASIC_INFORMATION_SET, PRIVACY_POLICY_DEFINES, USER_ADDING_METHOD_DEFINED
 
 }

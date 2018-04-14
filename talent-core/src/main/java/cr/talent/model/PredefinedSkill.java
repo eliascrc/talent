@@ -14,6 +14,8 @@ public class PredefinedSkill extends Skill {
      */
     private PredefinedCategorySkill category;
 
+    public PredefinedSkill() {}
+
     public PredefinedCategorySkill getCategory() {
         return category;
     }

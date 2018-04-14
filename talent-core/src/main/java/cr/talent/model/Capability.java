@@ -2,9 +2,8 @@ package cr.talent.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Class that represents a Capability within the Talent system. It contains the capability name,
@@ -24,27 +23,11 @@ public abstract class Capability extends BasicEntity {
 
     /**
      * The level hierarchy registered for the capability. The hierarchyPosition attribute in the {@link CapabilityLevel}
-     * indicates the position in the hierarchy.
+     * indicates the position in the hierarchy (capability levels for a capability).
      */
-    private List<CapabilityLevel> levelHierarchy;
+    private Set<CapabilityLevel> levelHierarchy;
 
     public Capability(){}
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<CapabilityLevel> getLevelHierarchy() {
-        return levelHierarchy;
-    }
-
-    public void setLevelHierarchy(List<CapabilityLevel> levelHierarchy) {
-        this.levelHierarchy = levelHierarchy;
-    }
 
     @Override
     protected boolean onEquals(Object o) {
@@ -61,5 +44,21 @@ public abstract class Capability extends BasicEntity {
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
         return result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<CapabilityLevel> getLevelHierarchy() {
+        return levelHierarchy;
+    }
+
+    public void setLevelHierarchy(Set<CapabilityLevel> levelHierarchy) {
+        this.levelHierarchy = levelHierarchy;
     }
 }

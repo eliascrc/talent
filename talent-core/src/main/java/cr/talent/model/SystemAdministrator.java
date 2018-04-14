@@ -7,4 +7,8 @@ package cr.talent.model;
  * @author María José Cubero
  */
 public class SystemAdministrator extends User {
+
+    public SystemAdministrator(){
+
+    }
 }

@@ -1,6 +1,7 @@
 package cr.talent.model;
 
-import java.util.List;
+
+import java.util.Set;
 
 /**
  * Class that represents a project's capability within the Talent system.
@@ -26,7 +27,7 @@ public class ProjectCapability extends BasicEntity {
      * A list with a history of the project positions, and resources associated to them, that occupied this capability in
      * the past. It also includes the current project position that occupies this capability.
      */
-    private List<ProjectPosition> projectPositionHistory;
+    private Set<ProjectPosition> projectPositionHistory;
 
     /**
      * The project that the capability belongs to.
@@ -39,46 +40,6 @@ public class ProjectCapability extends BasicEntity {
     private OrganizationCapabilityLevel capability;
 
     public ProjectCapability(){}
-
-    public ProjectCapabilityStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ProjectCapabilityStatus status) {
-        this.status = status;
-    }
-
-    public ProjectPosition getCurrentProjectPosition() {
-        return currentProjectPosition;
-    }
-
-    public void setCurrentProjectPosition(ProjectPosition currentProjectPosition) {
-        this.currentProjectPosition = currentProjectPosition;
-    }
-
-    public List<ProjectPosition> getProjectPositionHistory() {
-        return projectPositionHistory;
-    }
-
-    public void setProjectPositionHistory(List<ProjectPosition> projectPositionHistory) {
-        this.projectPositionHistory = projectPositionHistory;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public OrganizationCapabilityLevel getCapability() {
-        return capability;
-    }
-
-    public void setCapability(OrganizationCapabilityLevel capability) {
-        this.capability = capability;
-    }
 
     @Override
     protected boolean onEquals(Object o) {
@@ -99,4 +60,43 @@ public class ProjectCapability extends BasicEntity {
         return result;
     }
 
+    public ProjectCapabilityStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProjectCapabilityStatus status) {
+        this.status = status;
+    }
+
+    public ProjectPosition getCurrentProjectPosition() {
+        return currentProjectPosition;
+    }
+
+    public void setCurrentProjectPosition(ProjectPosition currentProjectPosition) {
+        this.currentProjectPosition = currentProjectPosition;
+    }
+
+    public Set<ProjectPosition> getProjectPositionHistory() {
+        return projectPositionHistory;
+    }
+
+    public void setProjectPositionHistory(Set<ProjectPosition> projectPositionHistory) {
+        this.projectPositionHistory = projectPositionHistory;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public OrganizationCapabilityLevel getCapability() {
+        return capability;
+    }
+
+    public void setCapability(OrganizationCapabilityLevel capability) {
+        this.capability = capability;
+    }
 }

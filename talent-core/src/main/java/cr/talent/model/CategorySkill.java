@@ -24,14 +24,6 @@ public abstract class CategorySkill extends BasicEntity {
 
     public CategorySkill(){}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
@@ -47,6 +39,14 @@ public abstract class CategorySkill extends BasicEntity {
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
         return result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

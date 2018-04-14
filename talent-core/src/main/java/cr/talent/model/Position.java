@@ -15,13 +15,12 @@ public abstract class Position extends BasicEntity {
      */
     private OrganizationCapabilityLevel organizationCapabilityLevel;
 
-    public OrganizationCapabilityLevel getOrganizationCapabilityLevel() {
-        return organizationCapabilityLevel;
-    }
+    /**
+     * The technical resource that has the position
+     */
+    private TechnicalResource technicalResource;
 
-    public void setOrganizationCapabilityLevel(OrganizationCapabilityLevel organizationCapabilityLevel) {
-        this.organizationCapabilityLevel = organizationCapabilityLevel;
-    }
+    public Position(){}
 
 
     @Override
@@ -43,4 +42,19 @@ public abstract class Position extends BasicEntity {
         return result;
     }
 
+    public OrganizationCapabilityLevel getOrganizationCapabilityLevel() {
+        return organizationCapabilityLevel;
+    }
+
+    public void setOrganizationCapabilityLevel(OrganizationCapabilityLevel organizationCapabilityLevel) {
+        this.organizationCapabilityLevel = organizationCapabilityLevel;
+    }
+
+    public TechnicalResource getTechnicalResource() {
+        return technicalResource;
+    }
+
+    public void setTechnicalResource(TechnicalResource technicalResource) {
+        this.technicalResource = technicalResource;
+    }
 }

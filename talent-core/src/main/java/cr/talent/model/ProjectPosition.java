@@ -36,6 +36,8 @@ public class ProjectPosition extends Position {
      */
     private ProjectCapability projectCapability;
 
+    public ProjectPosition(){}
+
     public Date getStartDate() {
         return startDate;
     }

@@ -1,15 +1,12 @@
 package cr.talent.model;
 
-public abstract class UserAuthenticationMethod extends BasicEntity {
+/**
+ * Represents the user authentication method that a user can have within the Talent System.
+ *
+ *  @author María José Cubero
+ */
+public enum UserAuthenticationMethod{
 
-    @Override
-    protected boolean onEquals(Object o) {
-        return false;
-    }
-
-    @Override
-    protected int onHashCode(int result) {
-        return 0;
-    }
+    BASIC, DOMAIN
 
 }

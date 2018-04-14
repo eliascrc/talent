@@ -1,7 +1,7 @@
 package cr.talent.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Class that represents a Technical Resource within the Talent system. It contains the technical resource
@@ -40,17 +40,17 @@ public class TechnicalResource extends User{
     /**
      * The list of the resource's skills.
      */
-    private List<Skill> skills;
+    private Set<Skill> skills;
 
     /**
      * The list of the resource's education records.
      */
-    private List<EducationRecord> educationRecords;
+    private Set<EducationRecord> educationRecords;
 
     /**
      * The list of the resource's project positions.
      */
-    private List<ProjectPosition> projectPositions;
+    private Set<ProjectPosition> projectPositions;
 
     /**
      * The resource's job position.
@@ -75,22 +75,12 @@ public class TechnicalResource extends User{
     /**
      * The resource's kudos and warnings.
      */
-    private List<Observation> observations;
-
-    /**
-     * The resource's curriculum vitae.
-     */
-    private CurriculumVitae curriculumVitae;
-
-    /**
-     * The resource's performance reviews list.
-     */
-    private List<PerformanceReview> performanceReviews;
+    private Set<Observation> observations;
 
     /**
      * The resouce's emergency contacts list.
      */
-    private List<EmergencyContact> emergencyContacts;
+    private Set<EmergencyContact> emergencyContacts;
 
     /**
      * The resouce's language setting.
@@ -109,6 +99,27 @@ public class TechnicalResource extends User{
 
 
     public TechnicalResource(){}
+
+    @Override
+    protected boolean onEquals(Object o) {
+        boolean result = false;
+        if (o instanceof TechnicalResource){
+            TechnicalResource technicalResource = (TechnicalResource) o;
+            result = (this.username == null ? technicalResource.getUsername() == null : this.username.equals(technicalResource.getUsername())
+                    && this.password == null ? technicalResource.getPassword() == null : this.password.equals(technicalResource.getPassword())
+                    && this.organization == null ? technicalResource.getOrganization() == null : this.organization.equals(technicalResource.getOrganization()));
+        }
+        return result;
+    }
+
+    @Override
+    protected int onHashCode(int result) {
+        final int prime = 23;
+        result = prime * result + ((this.username == null)? 0 : this.username.hashCode());
+        result = prime * result + ((this.password == null)? 0 : this.password.hashCode());
+        result = prime * result + ((this.organization == null)? 0 : this.organization.hashCode());
+        return result;
+    }
 
     public boolean isAdministrator() {
         return isAdministrator;
@@ -150,27 +161,27 @@ public class TechnicalResource extends User{
         this.organization = organization;
     }
 
-    public List<Skill> getSkills() {
+    public Set<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Skill> skills) {
+    public void setSkills(Set<Skill> skills) {
         this.skills = skills;
     }
 
-    public List<EducationRecord> getEducationRecords() {
+    public Set<EducationRecord> getEducationRecords() {
         return educationRecords;
     }
 
-    public void setEducationRecords(List<EducationRecord> educationRecords) {
+    public void setEducationRecords(Set<EducationRecord> educationRecords) {
         this.educationRecords = educationRecords;
     }
 
-    public List<ProjectPosition> getProjectPositions() {
+    public Set<ProjectPosition> getProjectPositions() {
         return projectPositions;
     }
 
-    public void setProjectPositions(List<ProjectPosition> projectPositions) {
+    public void setProjectPositions(Set<ProjectPosition> projectPositions) {
         this.projectPositions = projectPositions;
     }
 
@@ -206,35 +217,19 @@ public class TechnicalResource extends User{
         this.technicalManager = technicalManager;
     }
 
-    public List<Observation> getObservations() {
+    public Set<Observation> getObservations() {
         return observations;
     }
 
-    public void setObservations(List<Observation> observations) {
+    public void setObservations(Set<Observation> observations) {
         this.observations = observations;
     }
 
-    public CurriculumVitae getCurriculumVitae() {
-        return curriculumVitae;
-    }
-
-    public void setCurriculumVitae(CurriculumVitae curriculumVitae) {
-        this.curriculumVitae = curriculumVitae;
-    }
-
-    public List<PerformanceReview> getPerformanceReviews() {
-        return performanceReviews;
-    }
-
-    public void setPerformanceReviews(List<PerformanceReview> performanceReviews) {
-        this.performanceReviews = performanceReviews;
-    }
-
-    public List<EmergencyContact> getEmergencyContacts() {
+    public Set<EmergencyContact> getEmergencyContacts() {
         return emergencyContacts;
     }
 
-    public void setEmergencyContacts(List<EmergencyContact> emergencyContacts) {
+    public void setEmergencyContacts(Set<EmergencyContact> emergencyContacts) {
         this.emergencyContacts = emergencyContacts;
     }
 
@@ -260,26 +255,5 @@ public class TechnicalResource extends User{
 
     public void setLevelAssessmentTimeGap(int levelAssessmentTimeGap) {
         this.levelAssessmentTimeGap = levelAssessmentTimeGap;
-    }
-
-    @Override
-    protected boolean onEquals(Object o) {
-        boolean result = false;
-        if (o instanceof TechnicalResource){
-            TechnicalResource technicalResource = (TechnicalResource) o;
-            result = (this.username == null ? technicalResource.getUsername() == null : this.username.equals(technicalResource.getUsername())
-                    && this.password == null ? technicalResource.getPassword() == null : this.password.equals(technicalResource.getPassword())
-                    && this.organization == null ? technicalResource.getOrganization() == null : this.organization.equals(technicalResource.getOrganization()));
-        }
-        return result;
-    }
-
-    @Override
-    protected int onHashCode(int result) {
-        final int prime = 23;
-        result = prime * result + ((this.username == null)? 0 : this.username.hashCode());
-        result = prime * result + ((this.password == null)? 0 : this.password.hashCode());
-        result = prime * result + ((this.organization == null)? 0 : this.organization.hashCode());
-        return result;
     }
 }

@@ -23,14 +23,6 @@ public abstract class Skill extends BasicEntity{
 
     public Skill(){}
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
@@ -46,6 +38,14 @@ public abstract class Skill extends BasicEntity{
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
         return result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

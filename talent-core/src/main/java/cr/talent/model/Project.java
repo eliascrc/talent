@@ -1,7 +1,7 @@
 package cr.talent.model;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Set;
 import java.util.Date;
 
 /**
@@ -31,18 +31,37 @@ public class Project extends BasicEntity {
     /**
      * A list with the capabilities of the project.
      */
-    private ArrayList<ProjectCapability> projectCapabilities;
+    private Set<ProjectCapability> projectCapabilities;
 
     /**
-     * A stack with the history of project manager's throughout the life time of the project. The top on the
-     * stack is the current or last project manager a project had.
+     * A set with the history of project manager's throughout the life time of the project.
      */
-    private Stack<ProjectManagerPosition> projectManagerHistory;
+
+    private ArrayList<ProjectManagerPosition> projectManagerHistory;
 
     /**
      * The state that the project currently has.
      */
     private ProjectState state;
+
+    public Project () {}
+
+    @Override
+    protected boolean onEquals(Object o) {
+        boolean result = false;
+        if ( o instanceof Project){
+            Project project = (Project) o;
+            result = (this.name == null ? project.getName() == null : this.name.equals(project.getName()));
+        }
+        return result;
+    }
+
+    @Override
+    protected int onHashCode(int result) {
+        final int prime = 23;
+        result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        return result;
+    }
 
     public String getName() {
         return name;
@@ -68,11 +87,11 @@ public class Project extends BasicEntity {
         this.endDate = endDate;
     }
 
-    public ArrayList<ProjectCapability> getProjectCapabilities() {
+    public Set<ProjectCapability> getProjectCapabilities() {
         return projectCapabilities;
     }
 
-    public void setProjectCapabilities(ArrayList<ProjectCapability> projectCapabilities) {
+    public void setProjectCapabilities(Set<ProjectCapability> projectCapabilities) {
         this.projectCapabilities = projectCapabilities;
     }
 
@@ -84,29 +103,12 @@ public class Project extends BasicEntity {
         this.state = state;
     }
 
-    public Stack<ProjectManagerPosition> getProjectManagerHistory() {
+    public ArrayList<ProjectManagerPosition> getProjectManagerHistory() {
         return projectManagerHistory;
     }
 
-    public void setProjectManagerHistory(Stack<ProjectManagerPosition> projectManagerHistory) {
+    public void setProjectManagerHistory(ArrayList<ProjectManagerPosition> projectManagerHistory) {
         this.projectManagerHistory = projectManagerHistory;
-    }
-
-    @Override
-    protected boolean onEquals(Object o) {
-        boolean result = false;
-        if ( o instanceof Project){
-            Project project = (Project) o;
-            result = (this.name == null ? project.getName() == null : this.name.equals(project.getName()));
-        }
-        return result;
-    }
-
-    @Override
-    protected int onHashCode(int result) {
-        final int prime = 23;
-        result = prime * result + (this.name == null ? 0 : this.name.hashCode());
-        return result;
     }
 
 }

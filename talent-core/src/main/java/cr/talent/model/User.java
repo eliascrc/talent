@@ -19,17 +19,17 @@ public abstract class User extends BasicEntity {
     protected String username;
 
     /**
-     * The user's first name
+     * The user's first name.
      */
     protected String firstName;
 
     /**
-     * The user's last name
+     * The user's last name.
      */
     protected String lastName;
 
     /**
-     * Password,
+     * User password.
      */
     protected String password;
 
@@ -54,6 +54,37 @@ public abstract class User extends BasicEntity {
     private Status status;
 
     public User (){}
+
+    @Override
+    protected boolean onEquals(Object o) {
+        boolean result = false;
+        if (o instanceof User){
+            User user = (User) o;
+            result = (this.username == null ? user.getUsername() == null : this.username.equals(user.getUsername())
+                    && this.password == null ? user.getPassword() == null : this.password.equals(user.getPassword()));
+        }
+        return result;
+    }
+
+    @Override
+    protected int onHashCode(int result) {
+        final int prime = 23;
+        result = prime * result + ((this.username == null)? 0 : this.username.hashCode());
+        result = prime * result + ((this.password == null)? 0 : this.password.hashCode());
+        return result;
+    }
+
+    /**
+     * @author Rodrigo Bartels
+     * @return StringBuilder
+     */
+    protected StringBuilder toStringBuilder() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(", username = ").append(this.getUsername());
+        sb.append(", enabled = ").append(this.isEnabled());
+        sb.append(", passwordNeedChange = ").append(this.getPasswordNeedsChange());
+        return sb;
+    }
 
     public String getUsername() {
         return username;
@@ -117,37 +148,6 @@ public abstract class User extends BasicEntity {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    @Override
-    protected boolean onEquals(Object o) {
-        boolean result = false;
-        if (o instanceof User){
-            User user = (User) o;
-            result = (this.username == null ? user.getUsername() == null : this.username.equals(user.getUsername())
-                    && this.password == null ? user.getPassword() == null : this.password.equals(user.getPassword()));
-        }
-        return result;
-    }
-
-    @Override
-    protected int onHashCode(int result) {
-        final int prime = 23;
-        result = prime * result + ((this.username == null)? 0 : this.username.hashCode());
-        result = prime * result + ((this.password == null)? 0 : this.password.hashCode());
-        return result;
-    }
-
-    /**
-     * @author Rodrigo Bartels
-     * @return StringBuilder
-     */
-    protected StringBuilder toStringBuilder() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(", username = ").append(this.getUsername());
-        sb.append(", enabled = ").append(this.isEnabled());
-        sb.append(", passwordNeedChange = ").append(this.getPasswordNeedsChange());
-        return sb;
     }
 
 }
