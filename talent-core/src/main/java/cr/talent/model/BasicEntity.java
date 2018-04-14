@@ -6,17 +6,15 @@ import org.hibernate.proxy.HibernateProxyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
+import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Entity;
-
+/**
+ * Abstract super class for all the entities within the application.
+ *
+ * @author Rodrigo A. Bartels
+ */
 @MappedSuperclass
 public abstract class BasicEntity implements Serializable, Cloneable, Comparable {
 
