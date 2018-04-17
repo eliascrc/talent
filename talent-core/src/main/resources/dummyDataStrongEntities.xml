@@ -553,65 +553,65 @@
 
 	<Table name="CapabilityLevel">
 		<capabilityLevel>
-			<name>Junior</name>
+			<name>"Junior"</name>
 			<hierarchyPosition>1</hierarchyPosition>
 		</capabilityLevel>
 		<capabilityLevel>
 			<capabilityLevel>
-			<name>Intermediate</name>
+			<name>"Intermediate"</name>
 			<hierarchyPosition>2</hierarchyPosition>
 		</capabilityLevel>
 		<capabilityLevel>
 			<capabilityLevel>
-			<name>Senior</name>
+			<name>"Senior"</name>
 			<hierarchyPosition>3</hierarchyPosition>
 		</capabilityLevel>
 		<capabilityLevel>
 			<capabilityLevel>
-			<name>Lead</name>
+			<name>"Lead"</name>
 			<hierarchyPosition>4</hierarchyPosition>
 		</capabilityLevel>
 	</Table>
 
 	<Table name="Skill">
 		<skill>
-			<name>spanish</name>
+			<name>"spanish"</name>
 		</skill>
 		<skill>
-			<name>german</name>
+			<name>"german"</name>
 		</skill>
 		<skill>
-			<name>russian</name>
+			<name>"russian"</name>
 		</skill>
 		<skill>
-			<name>english</name>
+			<name>"english"</name>
 		</skill>
 		<skill>
-			<name>esperanto</name>
+			<name>"esperanto"</name>
 		</skill>
 		<skill>
-			<name>malay</name>
+			<name>"malay"</name>
 		</skill>
 		<skill>
-			<name>sql</name>
+			<name>"sql"</name>
 		</skill>
 		<skill>
-			<name>oracle</name>
+			<name>"oracle"</name>
 		</skill>
 		<skill>
-			<name>mongo</name>
+			<name>"mongo"</name>
 		</skill>
 		<skill>
-			<name>redis</name>
+			<name>"redis"</name>
 		</skill>
 		<skill>
-			<name>java</name>
+			<name>"java"</name>
 		</skill>
 		<skill>
-			<name>python</name>
+			<name>"python"</name>
 		</skill>
 		<skill>
-			<name>fortran</name>
+			<name>"fortran"</name>
 		</skill>
 	</Table>
 
