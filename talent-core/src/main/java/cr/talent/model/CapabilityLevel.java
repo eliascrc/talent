@@ -12,20 +12,16 @@ import javax.persistence.Table;
  *
  * @author María José Cubero
  */
-@Entity
-@Table(name = "capablity_level")
 public abstract class CapabilityLevel extends BasicEntity {
 
     /**
      * The name of the capability level
      */
-    @Column (name="name")
     private String name;
 
     /**
      * The position in the level hierarchy for the capability, that the level possesses.
      */
-    @Column(name ="hierarchy_position")
     private int hierarchyPosition;
 
     public CapabilityLevel(){}

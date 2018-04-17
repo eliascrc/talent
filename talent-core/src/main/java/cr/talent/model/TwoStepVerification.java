@@ -27,12 +27,20 @@ public class TwoStepVerification extends BasicEntity{
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof TwoStepVerification){
+            TwoStepVerification twoStepVerification = (TwoStepVerification) o;
+            result = (this.resource == null ? twoStepVerification.getResource() == null :
+                    this.resource.equals(twoStepVerification.getResource()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.resource == null ? 0 : this.resource.hashCode());
+        return result;
     }
 
     public TechnicalResource getResource() {

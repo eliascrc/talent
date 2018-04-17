@@ -9,20 +9,37 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
-public class Language {
+public class Language extends BasicEntity{
 
     /**
      * Specific language
      */
-    public Set<String> languages;
+    private Language languageName;
 
     public Language(){}
 
-    public Set<String> getLanguages() {
-        return languages;
+    @Override
+    protected boolean onEquals(Object o) {
+        boolean result = false;
+        if ( o instanceof Language){
+            Language language = (Language) o;
+            result = (this.languageName == null ? language.getLanguageName() == null : this.languageName.equals(language.getLanguageName()));
+        }
+        return result;
     }
 
-    public void setLanguages(Set<String> languages) {
-        this.languages = languages;
+    @Override
+    protected int onHashCode(int result) {
+        final int prime = 23;
+        result = prime * result + (this.languageName == null ? 0 : this.languageName.hashCode());
+        return result;
+    }
+
+    public Language getLanguageName() {
+        return languageName;
+    }
+
+    public void setLanguageName(Language languageName) {
+        this.languageName = languageName;
     }
 }

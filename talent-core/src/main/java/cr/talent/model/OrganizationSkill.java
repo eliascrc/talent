@@ -1,8 +1,5 @@
 package cr.talent.model;
 
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
 import java.util.Set;
 
 /**
@@ -12,8 +9,6 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
-@Entity
-@Table(name="organization_skill")
 public class OrganizationSkill extends Skill {
 
     /**
@@ -24,26 +19,14 @@ public class OrganizationSkill extends Skill {
     /**
      * The organization skill category that the organization skill belongs to.
      */
-    @Column(name="organization_category_skill", nullable = false)
-    private OrganizationCategorySkill category;
+    private OrganizationSkillCategory category;
 
     /**
      * A list with the resources that possess and have been authorized with the organization's skill.
      */
-    @Column(name="resources")
     private Set<TechnicalResource> resources;
 
     public OrganizationSkill(){}
-
-    @Override
-    protected boolean onEquals(Object o) {
-        return false;
-    }
-
-    @Override
-    protected int onHashCode(int result) {
-        return 0;
-    }
 
     public Organization getOrganization() {
         return organization;
@@ -53,11 +36,11 @@ public class OrganizationSkill extends Skill {
         this.organization = organization;
     }
 
-    public OrganizationCategorySkill getCategory() {
+    public OrganizationSkillCategory getCategory() {
         return category;
     }
 
-    public void setCategory(OrganizationCategorySkill category) {
+    public void setCategory(OrganizationSkillCategory category) {
         this.category = category;
     }
 

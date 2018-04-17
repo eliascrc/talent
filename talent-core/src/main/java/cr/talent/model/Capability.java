@@ -1,8 +1,5 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Set;
 
 /**
@@ -11,14 +8,13 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
-@Entity
-@Table(name = "capability")
+
 public abstract class Capability extends BasicEntity {
 
     /**
      * The name of the capability.
      */
-    @Column(name = "name")
+
     private String name;
 
     /**

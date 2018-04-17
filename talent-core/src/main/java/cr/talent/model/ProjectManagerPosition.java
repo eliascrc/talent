@@ -8,7 +8,7 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
-public class ProjectManagerPosition {
+public class ProjectManagerPosition extends BasicEntity{
 
     /**
      * Start date of the project.
@@ -31,6 +31,25 @@ public class ProjectManagerPosition {
     private ProjectManager projectManager;
 
     public ProjectManagerPosition (){}
+
+    @Override
+    protected boolean onEquals(Object o) {
+        boolean result = false;
+        if ( o instanceof ProjectManagerPosition){
+            ProjectManagerPosition projectManagerPosition = (ProjectManagerPosition) o;
+            result = (this.project == null ? projectManagerPosition.getProject() == null : this.project.equals(projectManagerPosition.getProject())
+                    && this.projectManager == null ? projectManagerPosition.getProjectManager() == null : this.projectManager.equals(projectManagerPosition.getProjectManager()));
+        }
+        return result;
+    }
+
+    @Override
+    protected int onHashCode(int result) {
+        final int prime = 23;
+        result = prime * result + (this.project == null ? 0 : this.project.hashCode());
+        result = prime * result + (this.projectManager == null ? 0 : this.projectManager.hashCode());
+        return result;
+    }
 
     public Date getStartDate() {
         return startDate;
@@ -63,4 +82,5 @@ public class ProjectManagerPosition {
     public void setProjectManager(ProjectManager projectManager) {
         this.projectManager = projectManager;
     }
+
 }

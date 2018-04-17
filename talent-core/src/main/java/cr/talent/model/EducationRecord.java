@@ -46,12 +46,21 @@ public class EducationRecord extends BasicEntity{
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof EducationRecord){
+            EducationRecord educationRecord = (EducationRecord) o;
+            result = (this.resource == null ? educationRecord.getResource() == null : this.resource.equals(educationRecord.getResource())
+                    && this.title == null ? educationRecord.getTitle() == null : this.title.equals(educationRecord.getTitle()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.resource == null ? 0 : this.resource.hashCode());
+        result = prime * result + (this.title == null ? 0 : this.title.hashCode());
+        return result;
     }
 
     public String getInstitution() {

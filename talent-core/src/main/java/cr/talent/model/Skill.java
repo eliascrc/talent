@@ -11,14 +11,11 @@ import javax.persistence.Table;
  *
  * @author Elías Calderón
  */
-@Entity
-@Table(name = "skill")
 public abstract class Skill extends BasicEntity{
 
     /**
      * The name of the skill
      */
-    @Column(name = "name")
     private String name;
 
     public Skill(){}

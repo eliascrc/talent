@@ -2,11 +2,11 @@ package cr.talent.model;
 
 /**
  * Class that represents a two step verification message within the Talent system.
- * It contains the message and the information inherited from {@link cr.talent.model.BasicEntity} class.
+ * It contains the message.
  *
  * @author Elías Calderón
  */
-public class TwoStepVerificationMessage extends BasicEntity {
+public class TwoStepVerificationMessage extends BasicEntity{
 
     /**
      * The message that all the two step verifications have.
@@ -17,7 +17,13 @@ public class TwoStepVerificationMessage extends BasicEntity {
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof TwoStepVerificationMessage){
+            TwoStepVerificationMessage TwoStepVerificationMessage = (TwoStepVerificationMessage) o;
+            result = (this.message == null ? TwoStepVerificationMessage.getMessage() == null :
+                    this.message.equals(TwoStepVerificationMessage.getMessage()));
+        }
+        return result;
     }
 
     @Override
@@ -32,4 +38,5 @@ public class TwoStepVerificationMessage extends BasicEntity {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }

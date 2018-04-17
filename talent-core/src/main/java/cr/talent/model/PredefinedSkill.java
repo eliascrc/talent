@@ -12,15 +12,15 @@ public class PredefinedSkill extends Skill {
     /**
      * The predefined skill category that the predefined skill belongs to.
      */
-    private PredefinedCategorySkill category;
+    private PredefinedSkillCategory category;
 
     public PredefinedSkill() {}
 
-    public PredefinedCategorySkill getCategory() {
+    public PredefinedSkillCategory getCategory() {
         return category;
     }
 
-    public void setCategory(PredefinedCategorySkill category) {
+    public void setCategory(PredefinedSkillCategory category) {
         this.category = category;
     }
 }

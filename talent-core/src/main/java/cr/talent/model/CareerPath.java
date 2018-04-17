@@ -24,12 +24,20 @@ public class CareerPath extends BasicEntity {
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof CareerPath){
+            CareerPath careerPath = (CareerPath) o;
+            result = (this.technicalResource == null ?
+                    careerPath.getTechnicalResource() == null : this.technicalResource.equals(careerPath.getTechnicalResource()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.technicalResource == null ? 0 : this.technicalResource.hashCode());
+        return result;
     }
 
     public Set<TechnicalPosition> getPositions() {

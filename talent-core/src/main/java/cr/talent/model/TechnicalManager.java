@@ -1,8 +1,5 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,8 +10,6 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
-@Entity
-@Table(name="technical_manager")
 public class TechnicalManager extends TechnicalResourceManager {
 
     /**
@@ -25,7 +20,6 @@ public class TechnicalManager extends TechnicalResourceManager {
     /**
      * A list with the technical resources that the Technical Manager has under charge.
      */
-    @Column(name="managed_resources")
     private Set<TechnicalResource> managedResources;
 
     public TechnicalManager(){}

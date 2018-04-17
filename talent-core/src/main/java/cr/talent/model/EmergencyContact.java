@@ -33,12 +33,21 @@ public class EmergencyContact extends BasicEntity{
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof EmergencyContact){
+            EmergencyContact emergencyContact = (EmergencyContact) o;
+            result = (this.technicalResource == null ? emergencyContact.getTechnicalResource() == null : this.technicalResource.equals(emergencyContact.getTechnicalResource())
+                    && this.email == null ? emergencyContact.getEmail() == null : this.email.equals(emergencyContact.getEmail()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.technicalResource == null ? 0 : this.technicalResource.hashCode());
+        result = prime * result + (this.email == null ? 0 : this.email.hashCode());
+        return result;
     }
 
     public String getEmail() {

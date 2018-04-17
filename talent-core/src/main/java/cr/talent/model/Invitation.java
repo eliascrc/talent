@@ -40,12 +40,19 @@ public class Invitation extends BasicEntity {
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof Invitation){
+            Invitation invitation = (Invitation) o;
+            result = (this.name == null ? invitation.getName() == null : this.name.equals(invitation.getName()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        return result;
     }
 
     public String getName() {

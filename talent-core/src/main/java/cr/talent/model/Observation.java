@@ -28,12 +28,20 @@ public class Observation extends BasicEntity {
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof Observation){
+            Observation observation = (Observation) o;
+            result = (this.relatedProject == null ? observation.getRelatedProject() == null :
+                    this.relatedProject.equals(observation.getRelatedProject()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.relatedProject == null ? 0 : this.relatedProject.hashCode());
+        return result;
     }
 
     public String getDescription() {

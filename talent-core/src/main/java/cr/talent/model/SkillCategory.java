@@ -2,7 +2,6 @@ package cr.talent.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -12,24 +11,21 @@ import javax.persistence.Table;
  *
  * @author María José Cubero
  */
-@Entity
-@Table(name = "category_skill")
-public abstract class CategorySkill extends BasicEntity {
+public abstract class SkillCategory extends BasicEntity {
 
     /**
      * The name of the skill category.
      */
-    @Column(name = "name")
     private String name;
 
-    public CategorySkill(){}
+    public SkillCategory(){}
 
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
-        if ( o instanceof CategorySkill){
-            CategorySkill categorySkill = (CategorySkill) o;
-            result = (this.name == null ? categorySkill.getName() == null : this.name.equals(categorySkill.getName()));
+        if ( o instanceof SkillCategory){
+            SkillCategory skillCategory = (SkillCategory) o;
+            result = (this.name == null ? skillCategory.getName() == null : this.name.equals(skillCategory.getName()));
         }
         return result;
     }

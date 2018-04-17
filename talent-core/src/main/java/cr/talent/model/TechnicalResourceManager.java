@@ -8,7 +8,6 @@ import javax.persistence.Entity;
  *
  * @author Elías Calderón
  */
-@Entity
 public class TechnicalResourceManager extends TechnicalResource {
 
     public TechnicalResourceManager(){}

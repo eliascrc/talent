@@ -22,7 +22,6 @@ public abstract class Position extends BasicEntity {
 
     public Position(){}
 
-
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
