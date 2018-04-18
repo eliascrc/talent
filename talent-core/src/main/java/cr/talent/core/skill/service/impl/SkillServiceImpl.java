@@ -2,6 +2,7 @@ package cr.talent.core.skill.service.impl;
 
 import cr.talent.core.skill.dao.SkillDao;
 import cr.talent.core.skill.service.SkillService;
+import cr.talent.model.Skill;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
