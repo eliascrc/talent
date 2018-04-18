@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -9,6 +11,8 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "user")
 public abstract class User extends BasicEntity {
 
     public enum Status {ACTIVE, INACTIVE, SUSPENDED}

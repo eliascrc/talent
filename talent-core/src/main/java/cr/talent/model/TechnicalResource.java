@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,6 +12,8 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "technical_resource")
 public class TechnicalResource extends User{
 
     /**

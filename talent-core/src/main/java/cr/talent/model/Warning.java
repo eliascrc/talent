@@ -1,5 +1,8 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class that represents a warning within the Talent system.
  * It contains the author and the information inherited from
@@ -7,6 +10,8 @@ package cr.talent.model;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "warning")
 public class Warning extends Observation {
 
     /**

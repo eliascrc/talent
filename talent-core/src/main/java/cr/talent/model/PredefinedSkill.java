@@ -1,5 +1,8 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class that represents a predefined Skill by a system administrator within the Talent system.
  * It contains the category of the skill and the information inherited from
@@ -7,6 +10,8 @@ package cr.talent.model;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "predefined_skill")
 public class PredefinedSkill extends Skill {
 
     /**

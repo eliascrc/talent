@@ -5,7 +5,7 @@ package cr.talent.model;
  *
  *  @author María José Cubero
  */
-public enum UserAuthenticationMethod{
+public enum UserAuthenticationMethod {
 
     BASIC, DOMAIN
 

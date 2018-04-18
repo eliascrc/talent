@@ -1,11 +1,16 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class that represents a two step verification within the Talent system. It contains the technical resource
  * organization, message, verification code and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "two_step_verification")
 public class TwoStepVerification extends BasicEntity{
 
     /**

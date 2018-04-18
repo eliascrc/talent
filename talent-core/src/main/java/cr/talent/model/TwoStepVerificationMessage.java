@@ -1,11 +1,16 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class that represents a two step verification message within the Talent system.
  * It contains the message.
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "two_step_verification_message")
 public class TwoStepVerificationMessage extends BasicEntity{
 
     /**

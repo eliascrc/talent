@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
@@ -8,6 +10,8 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "project_manager_position")
 public class ProjectManagerPosition extends BasicEntity{
 
     /**
