@@ -1,5 +1,8 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class that represents a Technical Resource's position within the Talent system.
  * It contains the capability level related to the position and the information inherited from
@@ -7,6 +10,8 @@ package cr.talent.model;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "position")
 public abstract class Position extends BasicEntity {
 
     /**

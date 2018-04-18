@@ -1,5 +1,8 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Class that represents an organization capability within the Talent system.
  * It contains the information inherited from
@@ -7,6 +10,8 @@ package cr.talent.model;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "organization_capability")
 public class OrganizationCapability extends Capability {
 
     /**

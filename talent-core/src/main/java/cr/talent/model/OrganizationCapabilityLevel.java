@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -10,6 +12,8 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "organization_capability_level")
 public class OrganizationCapabilityLevel extends CapabilityLevel {
 
     /**

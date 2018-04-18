@@ -1,10 +1,15 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  *Class that represents a contact email to contact the administrators of the Talent system.
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "contact_email")
 public class ContactEmail {
 
     /**

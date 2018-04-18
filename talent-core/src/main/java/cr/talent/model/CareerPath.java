@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Set;
 
 /**
@@ -8,6 +10,8 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "career_path")
 public class CareerPath extends BasicEntity {
 
     /**

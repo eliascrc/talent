@@ -11,6 +11,8 @@ import java.util.*;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "image")
 public class Image extends BasicEntity {
 
     /**

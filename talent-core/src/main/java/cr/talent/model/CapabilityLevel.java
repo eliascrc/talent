@@ -12,6 +12,8 @@ import javax.persistence.Table;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "capability_level")
 public abstract class CapabilityLevel extends BasicEntity {
 
     /**
