@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,16 +18,19 @@ public class EmergencyContact extends BasicEntity{
     /**
      * Email of the emergency contact.
      */
+    @Column(name = "email")
     private String email;
 
     /**
      * Name of the emergency contact.
      */
+    @Column (name = "name" , nullable = false)
     private String name;
 
     /**
      * Telephone of the emergency contact.
      */
+    @Column (name = "telephone" , nullable = false)
     private String telephone;
 
     /**

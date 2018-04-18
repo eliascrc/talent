@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,16 +16,19 @@ public class ContactEmail {
     /**
      * The email that the mail will be sent to.
      */
+    @Column(name = "email" , nullable = false)
     private String email;
 
     /**
      * The subject of the email.
      */
+    @Column (name = "subject")
     private String subject;
 
     /**
      * The email content.
      */
+    @Column (name = "content")
     private String content;
 
     public ContactEmail(){}

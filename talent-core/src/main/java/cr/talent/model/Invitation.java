@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Set;
@@ -18,11 +19,13 @@ public class Invitation extends BasicEntity {
     /**
      * The name of the person receiving the invitation.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The email of the person that is going to receive the invitation.
      */
+    @Column (name = "email", nullable = false)
     private String email;
 
     /**

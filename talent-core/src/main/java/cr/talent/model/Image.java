@@ -18,6 +18,7 @@ public class Image extends BasicEntity {
     /**
      * Link to get to the image.
      */
+    @Column (name = "link" , nullable = false)
     private String link;
 
 	public Image(){}

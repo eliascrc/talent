@@ -1,7 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -18,36 +17,45 @@ public class Organization extends BasicEntity {
     /**
      * Unique Identifier for every organization in the system.
      */
+    @Column(name = "unique_identifier", nullable = false)
     private String uniqueIdentifier;
 
     /**
      * The name of the organization.
      */
+    @Column (name = "name", nullable = false)
     private String name;
 
     /**
      * Flag that indicates if the organization wants login with two step verification.
      */
+    @Column (name = "two_step_verification")
     private Boolean twoStepVerification;
 
     /**
      * The number of total technical resources involved in the organization.
      */
+    @Column (name = "total_users")
     private int totalUsers;
 
     /**
      * The state of the organization. It might be disabled, enabled or in some stage of the creation wizard.
      */
+    @Column (name = "state")
+    @Enumerated(value = EnumType.STRING)
     private OrganizationState state;
 
     /**
      * The user authentication method that the organization's administrators select.
      */
+    @Column (name = "user_authentication_method")
+    @Enumerated(value = EnumType.STRING)
     private UserAuthenticationMethod userAuthenticationMethod;
 
     /**
      * The organizatio's domain
      */
+    @Column (name = "domain")
     private String domain;
 
     /**

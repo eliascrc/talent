@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.File;
@@ -19,21 +20,25 @@ public class EducationRecord extends BasicEntity{
     /**
      * Institution that provided the education record.
      */
+    @Column(name = "institution")
     private String institution;
 
     /**
      * Date that the education record was given to the person.
      */
+    @Column (name = "date")
     private Date date;
 
     /**
      * Earned title in the education record.
      */
+    @Column (name = "title" , nullable = false)
     private String title;
 
     /**
      * Description of that education record.
      */
+    @Column (name = "description")
     private String description;
 
     /**
@@ -44,6 +49,7 @@ public class EducationRecord extends BasicEntity{
     /**
      * File with a copy of the education record.
      */
+    @Column (name = "pdf_file")
     private File pdfFile;
 
     public EducationRecord(){}

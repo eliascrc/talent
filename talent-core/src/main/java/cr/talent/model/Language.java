@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ public class Language extends BasicEntity{
     /**
      * Specific language
      */
-    private Language languageName;
+    @Column(name = "language_name", nullable = false)
+    private String languageName;
 
     public Language(){}
 
@@ -39,11 +41,11 @@ public class Language extends BasicEntity{
         return result;
     }
 
-    public Language getLanguageName() {
+    public String getLanguageName() {
         return languageName;
     }
 
-    public void setLanguageName(Language languageName) {
+    public void setLanguageName(String languageName) {
         this.languageName = languageName;
     }
 }

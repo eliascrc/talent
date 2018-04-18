@@ -19,11 +19,13 @@ public abstract class CapabilityLevel extends BasicEntity {
     /**
      * The name of the capability level
      */
+    @Column (name = "name" , nullable = false)
     private String name;
 
     /**
      * The position in the level hierarchy for the capability, that the level possesses.
      */
+    @Column (name = "hierarchy_position" , nullable = false)
     private int hierarchyPosition;
 
     public CapabilityLevel(){}

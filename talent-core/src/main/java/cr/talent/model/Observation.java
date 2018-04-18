@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -17,6 +18,7 @@ public class Observation extends BasicEntity {
     /**
      * Observation content.
      */
+    @Column(name = "description", nullable = false)
     private String description;
 
     /**
