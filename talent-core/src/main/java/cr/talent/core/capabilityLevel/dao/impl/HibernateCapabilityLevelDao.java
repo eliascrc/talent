@@ -1,6 +1,7 @@
 package cr.talent.core.capabilityLevel.dao.impl;
 
 import cr.talent.core.capabilityLevel.dao.CapabilityLevelDao;
+import cr.talent.model.CapabilityLevel;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

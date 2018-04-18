@@ -2,6 +2,7 @@ package cr.talent.core.capabilityLevel.service.impl;
 
 import cr.talent.core.capabilityLevel.dao.CapabilityLevelDao;
 import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
+import cr.talent.model.CapabilityLevel;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
