@@ -3,7 +3,7 @@
 
 	<Table name="Organization">
 		<Organization>
-			<uniqueIdentifier>1000</UniqueIdentifier>
+			<uniqueIdentifier>1000</uniqueIdentifier>
 			<name>"Monkey Labs"</name>  
 			<twoStepVerification>false</twoStepVerification>
 			<totalUsers>0:</totalUsers> 
@@ -18,7 +18,7 @@
 			<currentPaymentPlan></currentPaymentPlan>
 			<LATestTypes></LATestTypes>
 			<levelAsssesment></levelAsssesment>
-			<levelAsssesmentTimeGap>12</levelAssessmentTimeGap>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 			<skillCategories></skillCategories>
 			<levelAssessments></levelAssessments>
 			<projects></projects>
@@ -27,7 +27,7 @@
 		</Organization>
 
 		<Organization>
-			<uniqueIdentifier>1001</UniqueIdentifier>
+			<uniqueIdentifier>1001</uniqueIdentifier>
 			<name>"Andromeda Spiral"</name>  
 			<twoStepVerification>true</twoStepVerification>
 			<totalUsers>0</totalUsers> 
@@ -44,7 +44,7 @@
 			<currentPaymentPlan></currentPaymentPlan>
 			<LATestTypes></LATestTypes>
 			<levelAsssesment></levelAsssesment>
-			<levelAsssesmentTimeGap>12</levelAssessmentTimeGap>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 			<skillCategories></skillCategories>
 			<levelAssessments></levelAssessments>
 			<projects></projects>
@@ -557,17 +557,14 @@
 			<hierarchyPosition>1</hierarchyPosition>
 		</capabilityLevel>
 		<capabilityLevel>
-			<capabilityLevel>
 			<name>"Intermediate"</name>
 			<hierarchyPosition>2</hierarchyPosition>
 		</capabilityLevel>
 		<capabilityLevel>
-			<capabilityLevel>
 			<name>"Senior"</name>
 			<hierarchyPosition>3</hierarchyPosition>
 		</capabilityLevel>
 		<capabilityLevel>
-			<capabilityLevel>
 			<name>"Lead"</name>
 			<hierarchyPosition>4</hierarchyPosition>
 		</capabilityLevel>
@@ -662,35 +659,35 @@
 	</Table>
 
 	<Table name="OrganizationCategorySkill">
-		<organizationSkill>
+		<organizationCategorySkill>
 			<organization>"Monkey Labs"</organization>
-			<category>"Natural Langagues"</category>
-			<organizationSkills>"spanish,german,russian"</organizationskills>
-		</organizationSkill>
+			<category>"Natural Languages"</category>
+			<organizationSkills>"spanish,german,russian"</organizationSkills>
+		</organizationCategorySkill>
 
-		<organizationSkill>
+		<organizationCategorySkill>
 			<organization>"Andromeda Spiral"</organization>
-			<category>"Natural Langagues"</category>
-			<organizationSkills>"english,esperanto,malay"</organizationskills>
-		</organizationSkill>
+			<category>"Natural Languages"</category>
+			<organizationSkills>"english,esperanto,malay"</organizationSkills>
+		</organizationCategorySkill>
 
-		<organizationSkill>
+		<organizationCategorySkill>
 			<organization>"Monkey Labs"</organization>
 			<category>"Databases"</category>
-			<organizationSkills>"sql,mongo"</organizationskills>
-		</organizationSkill>
+			<organizationSkills>"sql,mongo"</organizationSkills>
+		</organizationCategorySkill>
 
-		<organizationSkill>
+		<organizationCategorySkill>
 			<organization>"Andromeda Spiral"</organization>
 			<category>"Databases"</category>
-			<organizationSkills>"redis,oracle"</organizationskills>
-		</organizationSkill>
+			<organizationSkills>"redis,oracle"</organizationSkills>
+		</organizationCategorySkill>
 
-		<organizationSkill>
+		<organizationCategorySkill>
 			<organization>"Monkey Labs"</organization>
 			<category>"Programming Languages"</category>
-			<organizationSkills>"java,python"</organizationskills>
-		</organizationSkill>
+			<organizationSkills>"java,python"</organizationSkills>
+		</organizationCategorySkill>
 	</Table>
 
 	<Table name="CategorySkill">
