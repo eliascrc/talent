@@ -10,6 +10,8 @@
         <security:authentication-provider ref="technicalResourceAuthenticationProvider"/>
     </security:authentication-manager>
 
-    <security:http use-expressions="false" pattern="/**/*" auto-config="true"></security:http>
+    <!-- Note: auto-config was set to true because since there is no entry point it would give an error when running tomcat
+         It will be changed with the Spring Security Rules ticket.-->
+    <security:http use-expressions="false" pattern="/**/*" auto-config="true"/>
 
 </beans>

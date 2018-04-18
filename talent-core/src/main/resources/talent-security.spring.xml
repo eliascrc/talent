@@ -15,7 +15,7 @@
         <constructor-arg index="0" value="z0Dq65m!HfRMKT"/>
     </bean>
 
-    <bean id="daoAuthenticationProvider"
+    <bean id="systemAdministratorAuthenticationProvider"
                 class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
         <property name="userDetailsService" ref="systemAdministratorService"/>
         <property name="passwordEncoder" ref="passwordEncoder"/>
