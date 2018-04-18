@@ -6,9 +6,9 @@ import org.hibernate.proxy.HibernateProxyHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Abstract super class for all the entities within the application.
@@ -219,4 +219,3 @@ public abstract class BasicEntity implements Serializable, Cloneable, Comparable
         return this.getEntityCreationTimestamp().compareTo(((BasicEntity) o).getEntityCreationTimestamp());
     }
 }
-
