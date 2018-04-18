@@ -11,6 +11,8 @@ import javax.persistence.Table;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "skill")
 public abstract class Skill extends BasicEntity{
 
     /**

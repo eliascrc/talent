@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Class that represents a Technical Resource Manager within the Talent system.
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "technical_resource_manager")
 public class TechnicalResourceManager extends TechnicalResource {
 
     public TechnicalResourceManager(){}

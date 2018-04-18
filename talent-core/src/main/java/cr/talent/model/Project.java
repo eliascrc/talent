@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.Date;
@@ -11,6 +13,8 @@ import java.util.Date;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "project")
 public class Project extends BasicEntity {
 
     /**
