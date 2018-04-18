@@ -1,6 +1,7 @@
 package cr.talent.core.organization.dao.impl;
 
 import cr.talent.core.organization.dao.OrganizationDao;
+import cr.talent.model.Organization;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
