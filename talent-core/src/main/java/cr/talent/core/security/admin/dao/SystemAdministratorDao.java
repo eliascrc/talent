@@ -2,7 +2,6 @@ package cr.talent.core.security.admin.dao;
 
 import cr.talent.model.SystemAdministrator;
 import cr.talent.support.dao.CrudDao;
-import org.springframework.stereotype.Repository;
 
 /**
  * Data access object for all the {@link SystemAdministrator} related operations.

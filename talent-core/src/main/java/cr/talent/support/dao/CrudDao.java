@@ -1,8 +1,8 @@
 package cr.talent.support.dao;
 
-import java.util.List;
-
 import cr.talent.model.BasicEntity;
+
+import java.util.List;
 
 /**
  * This interface represents the basic CRUD operations that a DAO has to

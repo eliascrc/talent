@@ -34,7 +34,8 @@ public class SecurityUtils {
             if (noSymbol)
                 noSymbol = !((c >= 33 && c <= 47) || (c >= 58 && c <= 64));
 
-            if (!(noNumber || noUpperCaseLetter || noLowerCaseLetter || noSymbol)) break;
+            if (!(noNumber || noUpperCaseLetter || noLowerCaseLetter || noSymbol))
+                break;
         }
 
         if (noNumber)

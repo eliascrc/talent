@@ -16,10 +16,10 @@ package cr.talent.support.service;
  * @author Rodrigo A. Bartels
  */
 
+import cr.talent.model.BasicEntity;
+
 import java.io.Serializable;
 import java.util.List;
-
-import cr.talent.model.BasicEntity;
 
 public interface CrudService<ModelObjectType extends BasicEntity, KeyType extends Serializable> {
 
@@ -62,5 +62,4 @@ public interface CrudService<ModelObjectType extends BasicEntity, KeyType extend
      * @return the collection of entities.
      */
     List<ModelObjectType> getAll();
-
 }

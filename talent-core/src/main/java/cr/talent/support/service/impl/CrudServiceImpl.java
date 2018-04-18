@@ -1,6 +1,6 @@
 package cr.talent.support.service.impl;
 
-/*
+/**
  * All Service implementations providing CRUD operations should inherit from
  * this class, when doing so, the inherited class should call the method
  * <code>setCrudDao</code> from its respective <code>init</code> method with a
@@ -27,7 +27,8 @@ package cr.talent.support.service.impl;
  *
  * @author Rodrigo A. Bartels
  */
-
+import cr.talent.model.BasicEntity;
+import cr.talent.support.dao.CrudDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,9 +36,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
-
-import cr.talent.model.BasicEntity;
-import cr.talent.support.dao.CrudDao;
 
 public abstract class CrudServiceImpl<ModelObjectType extends BasicEntity, KeyType extends Serializable> {
 
@@ -47,7 +45,6 @@ public abstract class CrudServiceImpl<ModelObjectType extends BasicEntity, KeyTy
 
     protected Class getDomainClass() {
         if (domainClass == null) {
-
             ParameterizedType thisType = (ParameterizedType) getClass().getGenericSuperclass();
             domainClass = (Class) thisType.getActualTypeArguments()[0];
         }

@@ -78,11 +78,10 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
             throw new IllegalArgumentException("The administrator with name: " + technicalResource.getUsername() + " already exists.");
         }
 
-        technicalResource.setEnabled(true);
-        technicalResource.setStatus(User.Status.ACTIVE);
         technicalResource.setUsername(technicalResource.getUsername().toLowerCase());
         SecurityUtils.validatePassword(technicalResource.getPassword());
         technicalResource.setPassword(passwordEncoder.encode(technicalResource.getPassword()));
+        technicalResource.setEnabled(true);
 
         return super.create(technicalResource);
     }

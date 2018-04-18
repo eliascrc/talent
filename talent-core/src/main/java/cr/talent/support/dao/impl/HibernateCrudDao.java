@@ -1,13 +1,6 @@
 package cr.talent.support.dao.impl;
 
-/*
- * Hibernate implementation of CrudDao interface.
- *
- * All Hibernate implemented DAOs must extends this class to provide full reusable CRUD support.
- *
- * @author Rodrigo A. Bartels
- */
-
+import cr.talent.model.BasicEntity;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -20,8 +13,13 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
 
-import cr.talent.model.BasicEntity;
-
+/**
+ * Hibernate implementation of CrudDao interface.
+ *
+ * All Hibernate implemented DAOs must extends this class to provide full reusable CRUD support.
+ *
+ * @author Rodrigo A. Bartels
+ */
 @Transactional
 public abstract class HibernateCrudDao<ModelObjectType extends BasicEntity, KeyType extends Serializable> {
 
@@ -41,7 +39,6 @@ public abstract class HibernateCrudDao<ModelObjectType extends BasicEntity, KeyT
         if (domainClass == null) {
             ParameterizedType thisType = (ParameterizedType) getClass().getGenericSuperclass();
             domainClass = (Class) thisType.getActualTypeArguments()[0];
-
         }
         return domainClass;
     }

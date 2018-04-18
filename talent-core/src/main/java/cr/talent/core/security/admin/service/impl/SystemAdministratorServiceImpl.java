@@ -79,11 +79,10 @@ public class SystemAdministratorServiceImpl extends CrudServiceImpl<SystemAdmini
             throw new IllegalArgumentException("The administrator with name: " + systemAdministrator.getUsername() + " already exists.");
         }
 
-        systemAdministrator.setEnabled(true);
-        systemAdministrator.setStatus(User.Status.ACTIVE);
         systemAdministrator.setUsername(systemAdministrator.getUsername().toLowerCase());
         SecurityUtils.validatePassword(systemAdministrator.getPassword());
         systemAdministrator.setPassword(passwordEncoder.encode(systemAdministrator.getPassword()));
+        systemAdministrator.setEnabled(true);
 
         return super.create(systemAdministrator);
     }
