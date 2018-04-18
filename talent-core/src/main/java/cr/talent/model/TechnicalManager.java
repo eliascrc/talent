@@ -19,7 +19,7 @@ public class TechnicalManager extends TechnicalResourceManager {
     /**
      * A map with the list of skills that each resource is requesting
      */
-    private Map<TechnicalResource, Set<Skill>> skills;
+    private Map<TechnicalResource, Set<Skill>> skillsToApprove;
 
     /**
      * A list with the technical resources that the Technical Manager has under charge.
@@ -37,10 +37,10 @@ public class TechnicalManager extends TechnicalResourceManager {
     }
 
     public Map<TechnicalResource, Set<Skill>> getSkillsMap() {
-        return skills;
+        return skillsToApprove;
     }
 
     public void setSkills(Map<TechnicalResource, Set<Skill>> skills) {
-        this.skills = skills;
+        this.skillsToApprove = skills;
     }
 }
