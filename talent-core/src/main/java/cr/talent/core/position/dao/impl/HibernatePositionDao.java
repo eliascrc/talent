@@ -1,6 +1,7 @@
 package cr.talent.core.position.dao.impl;
 
 import cr.talent.core.position.dao.PositionDao;
+import cr.talent.model.Position;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
