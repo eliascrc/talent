@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -17,11 +18,13 @@ public class ProjectManagerPosition extends BasicEntity{
     /**
      * Start date of the project.
      */
+    @Column(name = "start_date", nullable = true)
     private Date startDate;
 
     /**
      * End date of the project.
      */
+    @Column(name = "end_date")
     private Date endDate;
 
     /**

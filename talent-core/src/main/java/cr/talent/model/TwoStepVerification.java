@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -26,6 +27,7 @@ public class TwoStepVerification extends BasicEntity{
     /**
      * The verification code of the two step verification.
      */
+    @Column(name = "verification_code")
     private String verificationCode;
 
     public TwoStepVerification(){}
@@ -66,5 +68,9 @@ public class TwoStepVerification extends BasicEntity{
 
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
+    }
+
+    public void setMessage(TwoStepVerificationMessage message) {
+        this.message = message;
     }
 }

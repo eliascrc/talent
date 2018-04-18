@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -18,11 +19,13 @@ public class ProjectPosition extends Position {
     /**
      * The date that the resource started in the project position.
      */
+    @Column(name = "start_date", nullable = false)
     private Date startDate;
 
     /**
      * The date that the resource finished in the project position.
      */
+    @Column(name = "end_date")
     private Date endDate;
 
     /**
@@ -33,6 +36,7 @@ public class ProjectPosition extends Position {
     /**
      * A flag that indicates if the position has already been reviewed in past performance reviews.
      */
+    @Column(name = "reviewed", nullable = false)
     private boolean reviewed;
 
     /**

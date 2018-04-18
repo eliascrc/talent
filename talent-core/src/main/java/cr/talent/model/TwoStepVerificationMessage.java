@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -16,6 +17,7 @@ public class TwoStepVerificationMessage extends BasicEntity{
     /**
      * The message that all the two step verifications have.
      */
+    @Column(name = "message", nullable = false)
     private String message;
 
     public TwoStepVerificationMessage(){}

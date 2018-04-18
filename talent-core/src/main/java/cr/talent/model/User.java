@@ -1,7 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -20,41 +19,50 @@ public abstract class User extends BasicEntity {
     /**
      * Username can't be empty, null or duplicated. It represents the user's email address.
      */
+    @Column(name = "username", nullable = false)
     protected String username;
 
     /**
      * The user's first name.
      */
+    @Column(name = "first_name", nullable = false)
     protected String firstName;
 
     /**
      * The user's last name.
      */
+    @Column(name = "last_name", nullable = false)
     protected String lastName;
 
     /**
      * User password.
      */
+    @Column(name = "password", nullable = false)
     protected String password;
 
     /**
      * Flag to indicate if the user name has been enabled or disabled.
      */
+    @Column(name = "enabled", nullable = false)
     protected boolean enabled;
 
     /**
      * Flag to indicate if the account needs a change in the password.
      */
+    @Column(name = "password_needs_change", nullable = false)
     protected boolean passwordNeedsChange;
 
     /**
      * Timestamp of the last login of the user.
      */
+    @Column(name = "last_login_timestamp")
     private Date lastLoginTimestamp;
 
     /**
      * The status of the user account.
      */
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public User (){}

@@ -18,6 +18,7 @@ public abstract class SkillCategory extends BasicEntity {
     /**
      * The name of the skill category.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     public SkillCategory(){}

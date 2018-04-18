@@ -1,8 +1,7 @@
 package cr.talent.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -20,6 +19,8 @@ public class ProjectCapability extends BasicEntity {
     /**
      * The status for the specific capability of a project, it can be available, taken or closed.
      */
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
 	private ProjectCapabilityStatus status;
 
     /**

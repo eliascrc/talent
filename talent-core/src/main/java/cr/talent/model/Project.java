@@ -1,7 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.Date;
@@ -20,16 +19,19 @@ public class Project extends BasicEntity {
     /**
      * The name of the project.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The date in which the project started.
      */
+    @Column(name = "start_date")
     private Date startDate;
 
     /**
      * The date in which the project finished.
      */
+    @Column(name = "end_date")
     private Date endDate;
 
     /**
@@ -46,6 +48,8 @@ public class Project extends BasicEntity {
     /**
      * The state that the project currently has.
      */
+    @Column(name = "state", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ProjectState state;
 
     public Project () {}

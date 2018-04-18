@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -19,16 +20,19 @@ public class TechnicalResource extends User{
     /**
      * Defines if the user is an administrator of the organization.
      */
+    @Column(name = "is_administrator", nullable = false)
     private boolean isAdministrator;
 
     /**
      * Specifies the date of the last level assessment result.
      */
+    @Column(name = "last_level_assessment")
     private Date lastLevelAssessment;
 
     /**
      * Specifies the date of the last performance review result.
      */
+    @Column(name = "last_performance_review")
     private Date lastPerformanceReview;
 
     /**
@@ -94,13 +98,14 @@ public class TechnicalResource extends User{
     /**
      * The resource's timezone setting.
      */
+    @Column(name = "time_zone", nullable = false)
     private String timeZone;
 
     /**
      * The resource's level assessment time gap.
      */
+    @Column(name = "level_assessment_time_gap", nullable = false)
     private int levelAssessmentTimeGap;
-
 
     public TechnicalResource(){}
 

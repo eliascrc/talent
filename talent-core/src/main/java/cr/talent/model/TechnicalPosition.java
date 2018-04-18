@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Date;
@@ -17,11 +18,13 @@ public class TechnicalPosition extends Position {
     /**
      * The start date of the resource in the technical position.
      */
+    @Column(name = "start_date", nullable = false)
     private Date startDate;
 
     /**
      * The end date of the resource in the technical position.
      */
+    @Column(name = "end_date")
     private Date endDate;
 
     public TechnicalPosition (){}
