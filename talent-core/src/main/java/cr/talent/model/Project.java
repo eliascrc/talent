@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.Date;
@@ -11,38 +12,60 @@ import java.util.Date;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "project")
 public class Project extends BasicEntity {
 
     /**
      * The name of the project.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The date in which the project started.
      */
+    @Column(name = "start_date")
     private Date startDate;
 
     /**
      * The date in which the project finished.
      */
+    @Column(name = "end_date")
     private Date endDate;
 
     /**
      * A list with the capabilities of the project.
      */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
     private Set<ProjectCapability> projectCapabilities;
 
     /**
      * A set with the history of project manager's throughout the life time of the project.
      */
-
-    private ArrayList<ProjectManagerPosition> projectManagerHistory;
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
+    @OrderBy ("entityCreationTimestamp")
+    private Set<ProjectManagerPosition> projectManagerHistory;
 
     /**
      * The state that the project currently has.
      */
+    @Column(name = "state", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ProjectState state;
+
+    /**
+     * The organization that the project belongs to.
+     */
+    @ManyToOne
+    @JoinColumn(name = "organization_id", nullable = false)
+    private Organization organization;
+
+    /**
+     * List of observations made in the project.
+     */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "relatedProject")
+    private Set<Observation> observations;
 
     public Project () {}
 
@@ -103,12 +126,27 @@ public class Project extends BasicEntity {
         this.state = state;
     }
 
-    public ArrayList<ProjectManagerPosition> getProjectManagerHistory() {
+    public Set<ProjectManagerPosition> getProjectManagerHistory() {
         return projectManagerHistory;
     }
 
-    public void setProjectManagerHistory(ArrayList<ProjectManagerPosition> projectManagerHistory) {
+    public void setProjectManagerHistory(Set<ProjectManagerPosition> projectManagerHistory) {
         this.projectManagerHistory = projectManagerHistory;
     }
 
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public Set<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(Set<Observation> observations) {
+        this.observations = observations;
+    }
 }

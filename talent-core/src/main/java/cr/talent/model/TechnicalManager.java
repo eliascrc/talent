@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,16 +11,22 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
+@Entity
+@DiscriminatorValue(value = "TECHNICAL_MANAGER")
 public class TechnicalManager extends TechnicalResourceManager {
 
     /**
      * A map with the list of skills that each resource is requesting
      */
-    private Map<TechnicalResource, Set<Skill>> skills;
+    @ElementCollection
+    @CollectionTable(name="skills_to_approve",
+            joinColumns=@JoinColumn(name="technical_manager_id"))
+    private Set<SkillToApprove> skillsToApprove;
 
     /**
      * A list with the technical resources that the Technical Manager has under charge.
      */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalManager")
     private Set<TechnicalResource> managedResources;
 
     public TechnicalManager(){}
@@ -32,11 +39,11 @@ public class TechnicalManager extends TechnicalResourceManager {
         this.managedResources = managedResources;
     }
 
-    public Map<TechnicalResource, Set<Skill>> getSkillsMap() {
-        return skills;
+    public Set<SkillToApprove> getSkillsToApprove() {
+        return skillsToApprove;
     }
 
-    public void setSkills(Map<TechnicalResource, Set<Skill>> skills) {
-        this.skills = skills;
+    public void setSkillsToApprove(Set<SkillToApprove> skillsToApprove) {
+        this.skillsToApprove = skillsToApprove;
     }
 }

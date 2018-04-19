@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -9,81 +10,100 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "organization")
 public class Organization extends BasicEntity {
 
     /**
      * Unique Identifier for every organization in the system.
      */
+    @Column(name = "unique_identifier", nullable = false, unique = true)
     private String uniqueIdentifier;
 
     /**
      * The name of the organization.
      */
+    @Column (name = "name", nullable = false)
     private String name;
 
     /**
      * Flag that indicates if the organization wants login with two step verification.
      */
+    @Column (name = "two_step_verification")
     private Boolean twoStepVerification;
 
     /**
      * The number of total technical resources involved in the organization.
      */
+    @Column (name = "total_users")
     private int totalUsers;
 
     /**
      * The state of the organization. It might be disabled, enabled or in some stage of the creation wizard.
      */
+    @Column (name = "state")
+    @Enumerated(value = EnumType.STRING)
     private OrganizationState state;
 
     /**
      * The user authentication method that the organization's administrators select.
      */
+    @Column (name = "user_authentication_method")
+    @Enumerated(value = EnumType.STRING)
     private UserAuthenticationMethod userAuthenticationMethod;
 
     /**
      * The organizatio's domain
      */
+    @Column (name = "domain")
     private String domain;
 
     /**
-     * The invitatio's list for user to join an organization
+     * The invitation's list for users to join an organization
      */
-    private Set invitationsList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
+    private Set<Invitation> invitationsList;
 
     /**
      * An image with the logo of the organization.
      */
+    @Column (name = "logo")
     private Image logo;
 
     /**
      * A list with the resources that have joined the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<TechnicalResource> resources;
 
     /**
      * A list with the organization's capabilities that the administrators have selected.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<OrganizationCapability> capabilities;
 
     /**
      * A list with the categories of skills that the organization has registered.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<OrganizationSkillCategory> skillCategories;
 
     /**
      * A list with the projects that have been created in the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
   	private Set<Project> projects;
 
     /**
      * A list with the Human Resource Managers of the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization", targetEntity = TechnicalResource.class)
     private Set<HumanResourceManager> humanResourceManagers;
 
     /**
      * A list with the Technical Managers of the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization", targetEntity = TechnicalResource.class)
     private Set<TechnicalManager> technicalManagers;
 
     public Organization(){}

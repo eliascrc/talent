@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -9,11 +10,14 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
+@Entity
+@DiscriminatorValue(value = "HUMAN_RESOURCE_MANAGER")
 public class HumanResourceManager extends TechnicalResource {
 
     /**
      * List of the educations records pending to check.
      */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "humanResourceManager")
     private Set<EducationRecord> uncheckedEducationRecords;
 
     public HumanResourceManager(){}

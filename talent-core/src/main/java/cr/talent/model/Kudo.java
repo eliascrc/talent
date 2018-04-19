@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.*;
+
 /**
  * Class that represents a kudo observation within the Talent system.
  * It contains the technical resource that writes the kudo and the information inherited from
@@ -7,11 +9,15 @@ package cr.talent.model;
  *
  * @author María José Cubero
  */
+@Entity
+@DiscriminatorValue(value = "KUDO")
 public class Kudo extends Observation {
 
     /**
      * The technical resource that writes the kudo.
      */
+    @ManyToOne
+    @JoinColumn (name = "resource_id")
     private TechnicalResource author;
 
     public Kudo (){}

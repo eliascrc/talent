@@ -2,6 +2,7 @@ package cr.talent.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 
 /**
@@ -11,11 +12,13 @@ import javax.persistence.Table;
  *
  * @author María José Cubero
  */
+@MappedSuperclass
 public abstract class SkillCategory extends BasicEntity {
 
     /**
      * The name of the skill category.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     public SkillCategory(){}

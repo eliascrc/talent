@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -8,26 +9,34 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "project_manager_position")
 public class ProjectManagerPosition extends BasicEntity{
 
     /**
      * Start date of the project.
      */
+    @Column(name = "start_date", nullable = true)
     private Date startDate;
 
     /**
      * End date of the project.
      */
+    @Column(name = "end_date")
     private Date endDate;
 
     /**
      * The project of the project manager position.
      */
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
     /**
      * The project manager of this position.
      */
+    @ManyToOne
+    @JoinColumn(name = "project_manager_id", nullable = false)
     private ProjectManager projectManager;
 
     public ProjectManagerPosition (){}

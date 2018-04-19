@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -9,12 +10,21 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "language")
 public class Language extends BasicEntity{
 
     /**
      * Specific language
      */
-    private Language languageName;
+    @Column(name = "language_name", nullable = false)
+    private String languageName;
+
+    /**
+     * The resources that have this language.
+     */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "language")
+    private Set<TechnicalResource> technicalResources;
 
     public Language(){}
 
@@ -35,11 +45,19 @@ public class Language extends BasicEntity{
         return result;
     }
 
-    public Language getLanguageName() {
+    public String getLanguageName() {
         return languageName;
     }
 
-    public void setLanguageName(Language languageName) {
+    public void setLanguageName(String languageName) {
         this.languageName = languageName;
+    }
+
+    public Set<TechnicalResource> getTechnicalResources() {
+        return technicalResources;
+    }
+
+    public void setTechnicalResources(Set<TechnicalResource> technicalResources) {
+        this.technicalResources = technicalResources;
     }
 }
