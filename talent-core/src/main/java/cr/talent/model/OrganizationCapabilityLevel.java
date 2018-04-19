@@ -43,13 +43,13 @@ public class OrganizationCapabilityLevel extends CapabilityLevel {
      * A list with the positions that have this capability level ordered by date.
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organizationCapabilityLevel")
-    private ArrayList<Position> positions;
+    private Set<Position> positions;
 
     /**
      * The project capabilities that have the organization capability level.
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "capability")
-    private ProjectCapability projectCapability;
+    private Set<ProjectCapability> projectCapability;
 
     public OrganizationCapabilityLevel() {}
 
@@ -77,11 +77,11 @@ public class OrganizationCapabilityLevel extends CapabilityLevel {
         this.requiredSkills = requiredSkills;
     }
 
-    public ArrayList<Position> getPositions() {
+    public Set<Position> getPositions() {
         return positions;
     }
 
-    public void setPositions(ArrayList<Position> positions) {
+    public void setPositions(Set<Position> positions) {
         this.positions = positions;
     }
 
@@ -93,11 +93,11 @@ public class OrganizationCapabilityLevel extends CapabilityLevel {
         this.organizationCapability = organizationCapability;
     }
 
-    public ProjectCapability getProjectCapability() {
+    public Set<ProjectCapability> getProjectCapability() {
         return projectCapability;
     }
 
-    public void setProjectCapability(ProjectCapability projectCapability) {
+    public void setProjectCapability(Set<ProjectCapability> projectCapability) {
         this.projectCapability = projectCapability;
     }
 }

@@ -11,7 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "contact_email")
-public class ContactEmail {
+public class ContactEmail extends BasicEntity {
 
     /**
      * The email that the mail will be sent to.
@@ -51,5 +51,15 @@ public class ContactEmail {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    protected boolean onEquals(Object o) {
+        return false;
+    }
+
+    @Override
+    protected int onHashCode(int result) {
+        return 0;
     }
 }

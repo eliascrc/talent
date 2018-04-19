@@ -13,6 +13,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "technical_manager")
+@DiscriminatorValue(value = "TECHNICAL_MANAGER")
 public class TechnicalManager extends TechnicalResourceManager {
 
     /**

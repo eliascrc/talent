@@ -9,7 +9,9 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "technical_resource_manager")
 @DiscriminatorValue(value = "TECHNICAL_RESOURCE_MANAGER")
 public class TechnicalResourceManager extends TechnicalResource {
 
