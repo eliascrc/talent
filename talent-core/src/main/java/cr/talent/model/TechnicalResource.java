@@ -12,6 +12,7 @@ import java.util.Set;
  * @author María José Cubero
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "technical_resource")
 public class TechnicalResource extends User{
 

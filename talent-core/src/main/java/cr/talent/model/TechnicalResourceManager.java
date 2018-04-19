@@ -10,6 +10,7 @@ import java.util.Set;
  * @author Elías Calderón
  */
 @MappedSuperclass
+@DiscriminatorValue(value = "TECHNICAL_RESOURCE_MANAGER")
 public class TechnicalResourceManager extends TechnicalResource {
 
     /**

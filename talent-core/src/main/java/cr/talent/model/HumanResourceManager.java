@@ -11,6 +11,7 @@ import java.util.Set;
  * @author María José Cubero
  */
 @Entity
+@DiscriminatorValue(value = "HUMAN_RESOURCE_MANAGER")
 @Table(name = "human_resource_manager")
 public class HumanResourceManager extends TechnicalResource {
 
