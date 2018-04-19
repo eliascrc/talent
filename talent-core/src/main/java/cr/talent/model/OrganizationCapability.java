@@ -10,7 +10,6 @@ import javax.persistence.*;
  * @author María José Cubero
  */
 @Entity
-@Table(name = "organization_capability")
 @DiscriminatorValue(value = "ORGANIZATION_CAPABILITY")
 public class OrganizationCapability extends Capability {
 

@@ -10,7 +10,6 @@ import javax.persistence.*;
  * @author María José Cubero
  */
 @Entity
-@Table(name = "predefined_capability_level")
 @DiscriminatorValue(value = "PREDEFINED_CAPABILITY_LEVEL")
 public class PredefinedCapabilityLevel extends CapabilityLevel{
 

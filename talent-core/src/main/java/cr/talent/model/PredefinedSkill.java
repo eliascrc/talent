@@ -10,7 +10,6 @@ import javax.persistence.*;
  * @author María José Cubero
  */
 @Entity
-@Table(name = "predefined_skill")
 @DiscriminatorValue(value = "PREDEFINED_SKILL")
 public class PredefinedSkill extends Skill {
 

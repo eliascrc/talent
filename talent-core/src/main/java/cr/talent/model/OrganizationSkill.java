@@ -11,7 +11,6 @@ import java.util.Set;
  * @author Elías Calderón
  */
 @Entity
-@Table(name = "organization_skill")
 @DiscriminatorValue(value = "ORGANIZATION_SKILL")
 public class OrganizationSkill extends Skill {
 

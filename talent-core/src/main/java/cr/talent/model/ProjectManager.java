@@ -11,7 +11,6 @@ import java.util.Set;
  * @author María José Cubero
  */
 @Entity
-@Table(name = "project_manager")
 @DiscriminatorValue(value = "PROJECT_MANAGER")
 public class ProjectManager extends TechnicalResourceManager {
 

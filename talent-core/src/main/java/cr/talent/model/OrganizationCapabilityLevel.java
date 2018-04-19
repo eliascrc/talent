@@ -12,7 +12,6 @@ import java.util.Set;
  * @author Elías Calderón
  */
 @Entity
-@Table(name = "organization_capability_level")
 @DiscriminatorValue(value = "ORGANIZATION_CAPABILITY_LEVEL")
 public class OrganizationCapabilityLevel extends CapabilityLevel {
 

@@ -12,7 +12,6 @@ import javax.persistence.Table;
  * @author María José Cubero
  */
 @Entity
-@Table(name = "predefined_capability")
 @DiscriminatorValue(value = "PREDEFINED_CAPABILITY")
 public class PredefinedCapability extends Capability {
 

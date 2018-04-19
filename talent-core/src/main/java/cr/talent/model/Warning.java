@@ -10,7 +10,6 @@ import javax.persistence.*;
  * @author Elías Calderón
  */
 @Entity
-@Table(name = "warning")
 @DiscriminatorValue(value = "WARNING")
 public class Warning extends Observation {
 
