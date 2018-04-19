@@ -36,7 +36,7 @@ public class TechnicalPosition extends Position {
      * Technical position invitation.
      */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "invitation_technical_id")
+    @JoinColumn(name = "invitation_id", unique = true)
     private Invitation invitation;
 
     public TechnicalPosition (){}

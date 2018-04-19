@@ -81,7 +81,7 @@ public class TechnicalResource extends User{
      * The resource's career path.
      */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "career_path_id")
+    @JoinColumn(name = "career_path_id", unique = true)
     private CareerPath careerPath;
 
     /**
@@ -139,7 +139,7 @@ public class TechnicalResource extends User{
      * Technical Resouce's two step verification
      */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "two_step_verification_id")
+    @JoinColumn(name = "two_step_verification_id", unique = true)
     private TwoStepVerification twoStepVerification;
 
     public TechnicalResource(){}
@@ -315,5 +315,13 @@ public class TechnicalResource extends User{
 
     public void setSkills(Set<OrganizationSkill> skills) {
         this.skills = skills;
+    }
+
+    public TwoStepVerification getTwoStepVerification() {
+        return twoStepVerification;
+    }
+
+    public void setTwoStepVerification(TwoStepVerification twoStepVerification) {
+        this.twoStepVerification = twoStepVerification;
     }
 }
