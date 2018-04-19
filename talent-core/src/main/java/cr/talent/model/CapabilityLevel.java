@@ -9,8 +9,7 @@ import javax.persistence.*;
  *
  * @author María José Cubero
  */
-@Entity
-@Table(name = "capability_level")
+@MappedSuperclass
 public abstract class CapabilityLevel extends BasicEntity {
 
     /**

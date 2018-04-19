@@ -9,8 +9,7 @@ import javax.persistence.*;
  *
  * @author Elías Calderón
  */
-@Entity
-@Table(name = "position")
+@MappedSuperclass
 public abstract class Position extends BasicEntity {
 
     /**

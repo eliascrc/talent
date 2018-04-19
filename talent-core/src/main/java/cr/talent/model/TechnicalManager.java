@@ -18,9 +18,9 @@ public class TechnicalManager extends TechnicalResourceManager {
     /**
      * A map with the list of skills that each resource is requesting
      */
-   // @OneToMany(mappedBy = "student")
-   // @MapKeyJoinColumn(name = "exercise_id")
-   // private Map<Exercise, ExerciseState> solvedExercise;
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="technical_manager_id")
+    @MapKeyJoinColumn( name="resource_id")
     private Map<TechnicalResource, Set<Skill>> skillsToApprove;
 
     /**

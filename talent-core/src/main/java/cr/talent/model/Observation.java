@@ -10,7 +10,7 @@ import javax.persistence.*;
  * @author María José Cubero
  */
 @MappedSuperclass
-public class Observation extends BasicEntity {
+public abstract class Observation extends BasicEntity {
 
     /**
      * Observation content.

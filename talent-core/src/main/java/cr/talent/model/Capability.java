@@ -9,8 +9,7 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
-@Entity
-@Table(name = "capability")
+@MappedSuperclass
 public abstract class Capability extends BasicEntity {
 
     /**
