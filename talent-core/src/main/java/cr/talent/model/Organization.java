@@ -17,7 +17,7 @@ public class Organization extends BasicEntity {
     /**
      * Unique Identifier for every organization in the system.
      */
-    @Column(name = "unique_identifier", nullable = false)
+    @Column(name = "unique_identifier", nullable = false, unique = true)
     private String uniqueIdentifier;
 
     /**

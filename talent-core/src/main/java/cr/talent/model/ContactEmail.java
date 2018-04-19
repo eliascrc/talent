@@ -55,11 +55,18 @@ public class ContactEmail extends BasicEntity {
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof Image){
+            ContactEmail contactEmail = (ContactEmail) o;
+            result = (this.email == null ? contactEmail.getEmail() == null : this.email.equals(contactEmail.getEmail()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.email == null ? 0 : this.email.hashCode());
+        return result;
     }
 }
