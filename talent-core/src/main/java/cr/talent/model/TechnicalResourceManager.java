@@ -18,7 +18,7 @@ public class TechnicalResourceManager extends TechnicalResource {
     /**
      * List of the observations that that resouce has made.
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "autor")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "author")
     private Set<Warning> madeWarnings;
 
     public TechnicalResourceManager(){}

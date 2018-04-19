@@ -8,8 +8,10 @@ import javax.persistence.*;
  *
  * @author Elías Calderón
  */
-@MappedSuperclass
-public abstract class Skill extends BasicEntity{
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "skill")
+public abstract class Skill extends BasicEntity {
 
     /**
      * The name of the skill

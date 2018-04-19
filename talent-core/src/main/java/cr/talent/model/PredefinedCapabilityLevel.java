@@ -1,9 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a predefined capability level within the Talent system.
@@ -14,6 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "predefined_capability_level")
+@DiscriminatorValue(value = "PREDEFINED_CAPABILITY_LEVEL")
 public class PredefinedCapabilityLevel extends CapabilityLevel{
 
     /**

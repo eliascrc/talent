@@ -9,7 +9,9 @@ import javax.persistence.*;
  *
  * @author María José Cubero
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "observation")
 public abstract class Observation extends BasicEntity {
 
     /**

@@ -45,13 +45,13 @@ public class TechnicalResource extends User{
      */
     @ManyToOne
     @JoinColumn (name = "organization_id", nullable = false)
-    private Organization organization;
+    protected Organization organization;
 
     /**
      * The list of the resource's skills.
      */
     @ManyToMany(mappedBy = "resources")
-    private Set<Skill> skills;
+    private Set<OrganizationSkill> skills;
 
     /**
      * The list of the resource's education records.
@@ -132,7 +132,7 @@ public class TechnicalResource extends User{
     /**
      * List of the observations that that resouce has made.
      */
-    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "autor")
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "author")
     private Set<Kudo> madeKudo;
 
     /**
@@ -203,14 +203,6 @@ public class TechnicalResource extends User{
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
-    }
-
-    public Set<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
     }
 
     public Set<EducationRecord> getEducationRecords() {
@@ -315,5 +307,13 @@ public class TechnicalResource extends User{
 
     public void setMadeKudo(Set<Kudo> madeKudo) {
         this.madeKudo = madeKudo;
+    }
+
+    public Set<OrganizationSkill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<OrganizationSkill> skills) {
+        this.skills = skills;
     }
 }

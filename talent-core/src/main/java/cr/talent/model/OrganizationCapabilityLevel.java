@@ -13,6 +13,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "organization_capability_level")
+@DiscriminatorValue(value = "ORGANIZATION_CAPABILITY_LEVEL")
 public class OrganizationCapabilityLevel extends CapabilityLevel {
 
     /**
@@ -38,12 +39,6 @@ public class OrganizationCapabilityLevel extends CapabilityLevel {
             inverseJoinColumns = { @JoinColumn(name = "organization_skill_id") }
     )
     private Set<OrganizationSkill> requiredSkills;
-
-    /**
-     * A list with the positions that have this capability level ordered by date.
-     */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organizationCapabilityLevel")
-    private Set<Position> positions;
 
     /**
      * The project capabilities that have the organization capability level.
@@ -75,14 +70,6 @@ public class OrganizationCapabilityLevel extends CapabilityLevel {
 
     public void setRequiredSkills(Set<OrganizationSkill> requiredSkills) {
         this.requiredSkills = requiredSkills;
-    }
-
-    public Set<Position> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(Set<Position> positions) {
-        this.positions = positions;
     }
 
     public OrganizationCapability getOrganizationCapability() {

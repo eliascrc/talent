@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -12,6 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "predefined_capability")
+@DiscriminatorValue(value = "PREDEFINED_CAPABILITY")
 public class PredefinedCapability extends Capability {
 
     public PredefinedCapability(){}

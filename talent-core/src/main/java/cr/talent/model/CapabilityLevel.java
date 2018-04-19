@@ -9,7 +9,9 @@ import javax.persistence.*;
  *
  * @author María José Cubero
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "capability_level")
 public abstract class CapabilityLevel extends BasicEntity {
 
     /**
@@ -23,6 +25,13 @@ public abstract class CapabilityLevel extends BasicEntity {
      */
     @Column (name = "hierarchy_position" , nullable = false)
     private int hierarchyPosition;
+
+    /**
+     * The parent capability of the level
+     */
+    @ManyToOne
+    @JoinColumn (name = "capability_id", nullable = false)
+    private Capability capability;
 
     public CapabilityLevel(){}
 
@@ -57,5 +66,13 @@ public abstract class CapabilityLevel extends BasicEntity {
 
     public void setHierarchyPosition(int hierarchyPosition) {
         this.hierarchyPosition = hierarchyPosition;
+    }
+
+    public Capability getCapability() {
+        return capability;
+    }
+
+    public void setCapability(Capability capability) {
+        this.capability = capability;
     }
 }

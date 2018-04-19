@@ -11,6 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "kudo")
+@DiscriminatorValue(value = "KUDO")
 public class Kudo extends Observation {
 
     /**

@@ -19,10 +19,10 @@ public class TechnicalManager extends TechnicalResourceManager {
     /**
      * A map with the list of skills that each resource is requesting
      */
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="technical_manager_id")
-    @MapKeyJoinColumn( name="resource_id")
-    private Map<TechnicalResource, Set<Skill>> skillsToApprove;
+    @ElementCollection
+    @CollectionTable(name="skills_to_approve",
+            joinColumns=@JoinColumn(name="technical_manager_id"))
+    private Set<SkillToApprove> skillsToApprove;
 
     /**
      * A list with the technical resources that the Technical Manager has under charge.
@@ -40,11 +40,11 @@ public class TechnicalManager extends TechnicalResourceManager {
         this.managedResources = managedResources;
     }
 
-    public Map<TechnicalResource, Set<Skill>> getSkillsMap() {
+    public Set<SkillToApprove> getSkillsToApprove() {
         return skillsToApprove;
     }
 
-    public void setSkills(Map<TechnicalResource, Set<Skill>> skills) {
-        this.skillsToApprove = skills;
+    public void setSkillsToApprove(Set<SkillToApprove> skillsToApprove) {
+        this.skillsToApprove = skillsToApprove;
     }
 }

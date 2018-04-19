@@ -1,9 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a warning within the Talent system.
@@ -14,6 +11,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "warning")
+@DiscriminatorValue(value = "WARNING")
 public class Warning extends Observation {
 
     /**

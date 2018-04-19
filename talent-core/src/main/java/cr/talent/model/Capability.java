@@ -9,7 +9,9 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "capability")
 public abstract class Capability extends BasicEntity {
 
     /**

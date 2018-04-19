@@ -97,13 +97,13 @@ public class Organization extends BasicEntity {
     /**
      * A list with the Human Resource Managers of the organization.
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization", targetEntity = TechnicalResource.class)
     private Set<HumanResourceManager> humanResourceManagers;
 
     /**
      * A list with the Technical Managers of the organization.
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization", targetEntity = TechnicalResource.class)
     private Set<TechnicalManager> technicalManagers;
 
     public Organization(){}
