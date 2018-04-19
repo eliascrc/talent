@@ -1,7 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -17,33 +16,49 @@ import java.util.Set;
 public class OrganizationCapabilityLevel extends CapabilityLevel {
 
     /**
-     * The capability that the level belongs to.
+     * The capability of the capability level.
      */
-    private OrganizationCapability capability;
+    @ManyToOne
+    @JoinColumn(name = "org_capability_id", nullable = false)
+    private OrganizationCapability organizationCapability;
 
     /**
      * The list of the resources that have the capability level.
      */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "organizationCapabilityLevel")
     private Set<TechnicalResource> resources;
 
     /**
      * The list of the requiered skills to have that capability level.
      */
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "org_capability_level_skill",
+            joinColumns = { @JoinColumn(name = "organization_capability_level_id") },
+            inverseJoinColumns = { @JoinColumn(name = "organization_skill_id") }
+    )
     private Set<OrganizationSkill> requiredSkills;
 
     /**
-     * A list with the positions that have this capability level.
+     * A list with the positions that have this capability level ordered by date.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organizationCapabilityLevel")
     private ArrayList<Position> positions;
+
+    /**
+     * The project capabilities that have the organization capability level.
+     */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "capability")
+    private ProjectCapability projectCapability;
 
     public OrganizationCapabilityLevel() {}
 
     public OrganizationCapability getCapability() {
-        return capability;
+        return organizationCapability;
     }
 
     public void setCapability(OrganizationCapability capability) {
-        this.capability = capability;
+        this.organizationCapability = capability;
     }
 
     public Set<TechnicalResource> getResources() {
@@ -68,5 +83,21 @@ public class OrganizationCapabilityLevel extends CapabilityLevel {
 
     public void setPositions(ArrayList<Position> positions) {
         this.positions = positions;
+    }
+
+    public OrganizationCapability getOrganizationCapability() {
+        return organizationCapability;
+    }
+
+    public void setOrganizationCapability(OrganizationCapability organizationCapability) {
+        this.organizationCapability = organizationCapability;
+    }
+
+    public ProjectCapability getProjectCapability() {
+        return projectCapability;
+    }
+
+    public void setProjectCapability(ProjectCapability projectCapability) {
+        this.projectCapability = projectCapability;
     }
 }

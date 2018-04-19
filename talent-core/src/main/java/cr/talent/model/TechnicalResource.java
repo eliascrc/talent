@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -38,21 +36,26 @@ public class TechnicalResource extends User{
     /**
      * The profile picture of the user.
      */
+    @Column (name = "profile_picture")
     private Image profilePicture;
 
     /**
      * The organization that the resource belongs to.
      */
+    @ManyToOne
+    @JoinColumn (name = "organization_id", nullable = false)
     private Organization organization;
 
     /**
      * The list of the resource's skills.
      */
+    @ManyToMany(mappedBy = "resources")
     private Set<Skill> skills;
 
     /**
      * The list of the resource's education records.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "resource")
     private Set<EducationRecord> educationRecords;
 
     /**
@@ -63,16 +66,20 @@ public class TechnicalResource extends User{
     /**
      * The resource's job position.
      */
+    @OneToOne (mappedBy = "technicalResource")
     private JobPosition jobPosition;
 
     /**
      * The resource's technical position.
      */
+    @OneToOne (mappedBy = "technicalResource")
     private TechnicalPosition technicalPosition;
 
     /**
      * The resource's career path.
      */
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "career_path_id")
     private CareerPath careerPath;
 
     /**
@@ -88,11 +95,14 @@ public class TechnicalResource extends User{
     /**
      * The resouce's emergency contacts list.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
     private Set<EmergencyContact> emergencyContacts;
 
     /**
      * The resouce's language setting.
      */
+    @ManyToOne
+    @JoinColumn (name = "language_id", nullable = false)
     private Language language;
 
     /**
@@ -106,6 +116,13 @@ public class TechnicalResource extends User{
      */
     @Column(name = "level_assessment_time_gap", nullable = false)
     private int levelAssessmentTimeGap;
+
+    /**
+     * The resource's capability level of a capability.
+     */
+    @ManyToOne
+    @JoinColumn(name = "org_capability_id", nullable = false)
+    private OrganizationCapabilityLevel organizationCapabilityLevel;
 
     public TechnicalResource(){}
 
@@ -264,5 +281,13 @@ public class TechnicalResource extends User{
 
     public void setLevelAssessmentTimeGap(int levelAssessmentTimeGap) {
         this.levelAssessmentTimeGap = levelAssessmentTimeGap;
+    }
+
+    public OrganizationCapabilityLevel getOrganizationCapabilityLevel() {
+        return organizationCapabilityLevel;
+    }
+
+    public void setOrganizationCapabilityLevel(OrganizationCapabilityLevel organizationCapabilityLevel) {
+        this.organizationCapabilityLevel = organizationCapabilityLevel;
     }
 }

@@ -1,6 +1,8 @@
 package cr.talent.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,6 +19,8 @@ public class OrganizationCapability extends Capability {
     /**
      * The organization that the capability belongs to.
      */
+    @ManyToOne
+    @JoinColumn(name = "organization_id", nullable = false)
     private Organization organization;
 
     public OrganizationCapability (){}

@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -25,6 +23,7 @@ public abstract class Capability extends BasicEntity {
      * The level hierarchy registered for the capability. The hierarchyPosition attribute in the {@link CapabilityLevel}
      * indicates the position in the hierarchy (capability levels for a capability).
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "capability")
     private Set<CapabilityLevel> levelHierarchy;
 
     public Capability(){}

@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -31,17 +29,32 @@ public class Invitation extends BasicEntity {
     /**
      * The job position of the person that is going to join the organization.
      */
+    @OneToOne (mappedBy = "invitation")
     private JobPosition jobPosition;
 
     /**
      * The technical position of the person that is going to join the organization.
      */
+    @OneToOne (mappedBy = "invitation")
     private TechnicalPosition technicalPosition;
 
     /**
      * The list of skills of the person that is going to join the organization.
      */
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "invitation_skill",
+            joinColumns = { @JoinColumn(name = "invitation_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+    )
     private Set<OrganizationSkill> skills;
+
+    /**
+     * The organization where the invitation came from.
+     */
+    @ManyToOne
+    @JoinColumn (name = "organization_id", nullable = false)
+    private Organization organization;
 
     public Invitation (){}
 
@@ -100,5 +113,13 @@ public class Invitation extends BasicEntity {
 
     public void setSkills(Set<OrganizationSkill> skills) {
         this.skills = skills;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }

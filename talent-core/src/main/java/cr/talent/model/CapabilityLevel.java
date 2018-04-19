@@ -1,9 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a Capability Level within the Talent system.
@@ -62,5 +59,4 @@ public abstract class CapabilityLevel extends BasicEntity {
     public void setHierarchyPosition(int hierarchyPosition) {
         this.hierarchyPosition = hierarchyPosition;
     }
-
 }

@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
 
@@ -44,6 +42,8 @@ public class EducationRecord extends BasicEntity{
     /**
      * Technical resource that has de education record.
      */
+    @ManyToOne
+    @JoinColumn(name = "resource_id", nullable = false)
     private TechnicalResource resource;
 
     /**
@@ -51,6 +51,13 @@ public class EducationRecord extends BasicEntity{
      */
     @Column (name = "pdf_file")
     private File pdfFile;
+
+    /**
+     * The human resource manager that is going to review the education record
+     */
+    @ManyToOne
+    @JoinColumn (name = "HRM_id", nullable = false)
+    private HumanResourceManager humanResourceManager;
 
     public EducationRecord(){}
 
@@ -119,5 +126,13 @@ public class EducationRecord extends BasicEntity{
 
     public void setPdfFile(File pdfFile) {
         this.pdfFile = pdfFile;
+    }
+
+    public HumanResourceManager getHumanResourceManager() {
+        return humanResourceManager;
+    }
+
+    public void setHumanResourceManager(HumanResourceManager humanResourceManager) {
+        this.humanResourceManager = humanResourceManager;
     }
 }

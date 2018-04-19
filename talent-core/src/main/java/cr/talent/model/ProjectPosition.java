@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -29,11 +27,6 @@ public class ProjectPosition extends Position {
     private Date endDate;
 
     /**
-     * The respective project for the position that the resource occupies.
-     */
-    private Project project;
-
-    /**
      * A flag that indicates if the position has already been reviewed in past performance reviews.
      */
     @Column(name = "reviewed", nullable = false)
@@ -42,6 +35,8 @@ public class ProjectPosition extends Position {
     /**
      * A reference to the specific project capability that the position occupies or occupied in the past.
      */
+    @ManyToOne
+    @JoinColumn(name = "project_capability_id", nullable = false)
     private ProjectCapability projectCapability;
 
     public ProjectPosition(){}
@@ -60,14 +55,6 @@ public class ProjectPosition extends Position {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
     }
 
     public boolean isReviewed() {

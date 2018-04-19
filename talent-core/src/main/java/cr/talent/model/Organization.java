@@ -59,43 +59,51 @@ public class Organization extends BasicEntity {
     private String domain;
 
     /**
-     * The invitatio's list for user to join an organization
+     * The invitation's list for users to join an organization
      */
-    private Set invitationsList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
+    private Set<Invitation> invitationsList;
 
     /**
      * An image with the logo of the organization.
      */
+    @Column (name = "logo")
     private Image logo;
 
     /**
      * A list with the resources that have joined the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<TechnicalResource> resources;
 
     /**
      * A list with the organization's capabilities that the administrators have selected.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<OrganizationCapability> capabilities;
 
     /**
      * A list with the categories of skills that the organization has registered.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<OrganizationSkillCategory> skillCategories;
 
     /**
      * A list with the projects that have been created in the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
   	private Set<Project> projects;
 
     /**
      * A list with the Human Resource Managers of the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<HumanResourceManager> humanResourceManagers;
 
     /**
      * A list with the Technical Managers of the organization.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<TechnicalManager> technicalManagers;
 
     public Organization(){}

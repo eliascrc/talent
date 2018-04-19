@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -28,6 +26,13 @@ public class JobPosition extends Position {
     @Column (name = "end_date")
     private Date endDate;
 
+    /**
+     * Job position invitation.
+     */
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "invitation_job_id")
+    private Invitation invitation;
+
     public JobPosition (){}
 
     public Date getStartDate() {
@@ -44,5 +49,13 @@ public class JobPosition extends Position {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Invitation getInvitation() {
+        return invitation;
+    }
+
+    public void setInvitation(Invitation invitation) {
+        this.invitation = invitation;
     }
 }

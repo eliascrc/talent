@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a technical's resource emergency contact within the Talent system.
@@ -36,6 +34,8 @@ public class EmergencyContact extends BasicEntity{
     /**
      * User that has the emergency contact.
      */
+    @ManyToOne
+    @JoinColumn(name = "resource_id", nullable = false)
     private TechnicalResource technicalResource;
 
     public EmergencyContact(){}

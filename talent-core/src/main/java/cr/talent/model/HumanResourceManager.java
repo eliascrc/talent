@@ -1,7 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -18,6 +17,7 @@ public class HumanResourceManager extends TechnicalResource {
     /**
      * List of the educations records pending to check.
      */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "humanResourceManager")
     private Set<EducationRecord> uncheckedEducationRecords;
 
     public HumanResourceManager(){}

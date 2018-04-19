@@ -1,6 +1,8 @@
 package cr.talent.model;
 
 import javax.persistence.Entity;
+import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Map;
 import java.util.Set;
@@ -19,6 +21,9 @@ public class TechnicalManager extends TechnicalResourceManager {
     /**
      * A map with the list of skills that each resource is requesting
      */
+   // @OneToMany(mappedBy = "student")
+   // @MapKeyJoinColumn(name = "exercise_id")
+   // private Map<Exercise, ExerciseState> solvedExercise;
     private Map<TechnicalResource, Set<Skill>> skillsToApprove;
 
     /**

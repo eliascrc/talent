@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**

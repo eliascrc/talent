@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -30,11 +28,15 @@ public class ProjectManagerPosition extends BasicEntity{
     /**
      * The project of the project manager position.
      */
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
     /**
      * The project manager of this position.
      */
+    @ManyToOne
+    @JoinColumn(name = "project_manager_id", nullable = false)
     private ProjectManager projectManager;
 
     public ProjectManagerPosition (){}

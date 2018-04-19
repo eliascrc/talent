@@ -1,6 +1,8 @@
 package cr.talent.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class ProjectManager extends TechnicalResourceManager {
     /**
      * A list with the project management positions that the Project Manager has occupied in the organization.
      */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "projectManager")
     private Set<ProjectManagerPosition> projectManagerPositions;
 
     public ProjectManager(){}

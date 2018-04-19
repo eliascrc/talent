@@ -1,6 +1,8 @@
 package cr.talent.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,6 +19,8 @@ public class PredefinedSkill extends Skill {
     /**
      * The predefined skill category that the predefined skill belongs to.
      */
+    @ManyToOne
+    @JoinColumn(name = "pre_skill_category_id", nullable = false)
     private PredefinedSkillCategory category;
 
     public PredefinedSkill() {}

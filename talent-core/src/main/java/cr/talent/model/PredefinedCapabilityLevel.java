@@ -1,6 +1,8 @@
 package cr.talent.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +17,10 @@ import javax.persistence.Table;
 public class PredefinedCapabilityLevel extends CapabilityLevel{
 
     /**
-     * The predefined capability of this capability level.
+     * The capability of the capability level.
      */
+    @ManyToOne
+    @JoinColumn(name = "pre_capability_id", nullable = false)
     private PredefinedCapability capability;
 
     public PredefinedCapabilityLevel (){}

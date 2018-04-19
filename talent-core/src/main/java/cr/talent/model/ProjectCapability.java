@@ -24,24 +24,25 @@ public class ProjectCapability extends BasicEntity {
 	private ProjectCapabilityStatus status;
 
     /**
-     * The current project position, and resource associated to it, that occupies this capability.
-     */
-    private ProjectPosition currentProjectPosition;
-
-    /**
      * A list with a history of the project positions, and resources associated to them, that occupied this capability in
      * the past. It also includes the current project position that occupies this capability.
      */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "projectCapability")
+    @OrderBy ("entityCreationTimestamp" )
     private Set<ProjectPosition> projectPositionHistory;
 
     /**
      * The project that the capability belongs to.
      */
+    @ManyToOne
+    @JoinColumn (name = "project_id", nullable = false)
     private Project project;
 
     /**
-    *  The capability level that the project position should have
+    *  The capability level that the project position should have.
     */
+    @ManyToOne
+    @JoinColumn (name = "org_capability_level", nullable = false)
     private OrganizationCapabilityLevel capability;
 
     public ProjectCapability(){}
@@ -71,14 +72,6 @@ public class ProjectCapability extends BasicEntity {
 
     public void setStatus(ProjectCapabilityStatus status) {
         this.status = status;
-    }
-
-    public ProjectPosition getCurrentProjectPosition() {
-        return currentProjectPosition;
-    }
-
-    public void setCurrentProjectPosition(ProjectPosition currentProjectPosition) {
-        this.currentProjectPosition = currentProjectPosition;
     }
 
     public Set<ProjectPosition> getProjectPositionHistory() {

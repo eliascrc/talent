@@ -37,13 +37,15 @@ public class Project extends BasicEntity {
     /**
      * A list with the capabilities of the project.
      */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
     private Set<ProjectCapability> projectCapabilities;
 
     /**
      * A set with the history of project manager's throughout the life time of the project.
      */
-
-    private ArrayList<ProjectManagerPosition> projectManagerHistory;
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
+    @OrderBy ("entityCreationTimestamp")
+    private Set<ProjectManagerPosition> projectManagerHistory;
 
     /**
      * The state that the project currently has.
@@ -51,6 +53,13 @@ public class Project extends BasicEntity {
     @Column(name = "state", nullable = false)
     @Enumerated(EnumType.STRING)
     private ProjectState state;
+
+    /**
+     * The organization that the project belongs to.
+     */
+    @ManyToOne
+    @JoinColumn(name = "organization_id", nullable = false)
+    private Organization organization;
 
     public Project () {}
 
@@ -111,12 +120,19 @@ public class Project extends BasicEntity {
         this.state = state;
     }
 
-    public ArrayList<ProjectManagerPosition> getProjectManagerHistory() {
+    public Set<ProjectManagerPosition> getProjectManagerHistory() {
         return projectManagerHistory;
     }
 
-    public void setProjectManagerHistory(ArrayList<ProjectManagerPosition> projectManagerHistory) {
+    public void setProjectManagerHistory(Set<ProjectManagerPosition> projectManagerHistory) {
         this.projectManagerHistory = projectManagerHistory;
     }
 
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
 }

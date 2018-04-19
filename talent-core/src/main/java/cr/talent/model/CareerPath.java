@@ -1,7 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -17,11 +16,13 @@ public class CareerPath extends BasicEntity {
     /**
      * Technical resource wich the Career Path belongs to.
      */
+    @OneToOne (mappedBy = "careerPath")
     private TechnicalResource technicalResource;
 
     /**
-     * List of the positions of this career path
+     * List of the positions of this career path.
      */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "careerPath")
     private Set<TechnicalPosition> positions;
 
     public CareerPath(){}
