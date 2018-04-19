@@ -61,6 +61,7 @@ public class TechnicalResource extends User{
     /**
      * The list of the resource's project positions.
      */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
     private Set<ProjectPosition> projectPositions;
 
     /**
@@ -85,11 +86,14 @@ public class TechnicalResource extends User{
     /**
      * The resource's technical manager.
      */
+    @ManyToOne
+    @JoinColumn (name = "technical_manager_id")
     private TechnicalManager technicalManager;
 
     /**
      * The resource's kudos and warnings.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "observee")
     private Set<Observation> observations;
 
     /**
@@ -123,6 +127,19 @@ public class TechnicalResource extends User{
     @ManyToOne
     @JoinColumn(name = "org_capability_id", nullable = false)
     private OrganizationCapabilityLevel organizationCapabilityLevel;
+
+    /**
+     * List of the observations that that resouce has made.
+     */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "autor")
+    private Set<Kudo> madeKudo;
+
+    /**
+     * Technical Resouce's two step verification
+     */
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "two_step_verification_id")
+    private TwoStepVerification twoStepVerification;
 
     public TechnicalResource(){}
 
@@ -289,5 +306,13 @@ public class TechnicalResource extends User{
 
     public void setOrganizationCapabilityLevel(OrganizationCapabilityLevel organizationCapabilityLevel) {
         this.organizationCapabilityLevel = organizationCapabilityLevel;
+    }
+
+    public Set<Kudo> getMadeKudo() {
+        return madeKudo;
+    }
+
+    public void setMadeKudo(Set<Kudo> madeKudo) {
+        this.madeKudo = madeKudo;
     }
 }

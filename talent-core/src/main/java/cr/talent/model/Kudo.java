@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a kudo observation within the Talent system.
@@ -18,6 +16,8 @@ public class Kudo extends Observation {
     /**
      * The technical resource that writes the kudo.
      */
+    @ManyToOne
+    @JoinColumn (name = "resource_id")
     private TechnicalResource author;
 
     public Kudo (){}

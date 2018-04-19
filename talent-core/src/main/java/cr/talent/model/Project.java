@@ -61,6 +61,12 @@ public class Project extends BasicEntity {
     @JoinColumn(name = "organization_id", nullable = false)
     private Organization organization;
 
+    /**
+     * List of observations made in the project.
+     */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "relatedProject")
+    private Set<Observation> observations;
+
     public Project () {}
 
     @Override
@@ -134,5 +140,13 @@ public class Project extends BasicEntity {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public Set<Observation> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(Set<Observation> observations) {
+        this.observations = observations;
     }
 }

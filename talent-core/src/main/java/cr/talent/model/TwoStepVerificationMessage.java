@@ -1,8 +1,7 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Class that represents a two step verification message within the Talent system.
@@ -13,6 +12,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "two_step_verification_message")
 public class TwoStepVerificationMessage extends BasicEntity{
+
+    /**
+     * The two step verification list
+     */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "message")
+    private Set<TwoStepVerification> twoStepVerification;
 
     /**
      * The message that all the two step verifications have.
@@ -46,4 +51,11 @@ public class TwoStepVerificationMessage extends BasicEntity{
         this.message = message;
     }
 
+    public Set<TwoStepVerification> getTwoStepVerification() {
+        return twoStepVerification;
+    }
+
+    public void setTwoStepVerification(Set<TwoStepVerification> twoStepVerification) {
+        this.twoStepVerification = twoStepVerification;
+    }
 }

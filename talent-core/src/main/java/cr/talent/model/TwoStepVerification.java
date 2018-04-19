@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a two step verification within the Talent system. It contains the technical resource
@@ -17,11 +15,14 @@ public class TwoStepVerification extends BasicEntity{
     /**
      * The resource that will have the two step verification.
      */
+    @OneToOne(mappedBy = "twoStepVerification")
     private TechnicalResource resource;
 
     /**
      * The message to send in the two step verification.
      */
+    @ManyToOne
+    @JoinColumn (name = "two_step_message_id")
     private TwoStepVerificationMessage message;
 
     /**

@@ -10,8 +10,7 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
-@Entity
-@Table(name = "user")
+@MappedSuperclass
 public abstract class User extends BasicEntity {
 
     public enum Status {ACTIVE, INACTIVE, SUSPENDED}

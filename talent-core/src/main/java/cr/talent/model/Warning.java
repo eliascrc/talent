@@ -1,6 +1,8 @@
 package cr.talent.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,6 +19,8 @@ public class Warning extends Observation {
     /**
      * The technical resource that writes the warning.
      */
+    @ManyToOne
+    @JoinColumn(name = "resource_id")
     private TechnicalResourceManager author;
 
     public Warning(){}

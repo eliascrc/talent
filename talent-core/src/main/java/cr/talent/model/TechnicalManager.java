@@ -1,9 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Entity;
-import javax.persistence.MapKeyJoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,6 +26,7 @@ public class TechnicalManager extends TechnicalResourceManager {
     /**
      * A list with the technical resources that the Technical Manager has under charge.
      */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalManager")
     private Set<TechnicalResource> managedResources;
 
     public TechnicalManager(){}

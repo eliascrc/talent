@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents an observation(kudo or warning) within the Talent system.
@@ -11,8 +9,7 @@ import javax.persistence.Table;
  *
  * @author María José Cubero
  */
-@Entity
-@Table(name = "observation")
+@MappedSuperclass
 public class Observation extends BasicEntity {
 
     /**
@@ -24,11 +21,15 @@ public class Observation extends BasicEntity {
     /**
      * Technical resource wich is receiving the observation.
      */
+    @ManyToOne
+    @JoinColumn (name = "resource_id")
     private TechnicalResource observee;
 
     /**
      * The poject that is related to the observation.
      */
+    @ManyToOne
+    @JoinColumn (name = "project_id")
     private Project relatedProject;
 
     public Observation(){}
