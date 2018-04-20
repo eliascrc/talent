@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.*;
+
 /**
  * Class that represents an observation(kudo or warning) within the Talent system.
  * It contains the description, observee, the related project and the information inherited from
@@ -7,21 +9,29 @@ package cr.talent.model;
  *
  * @author María José Cubero
  */
-public class Observation extends BasicEntity {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "observation")
+public abstract class Observation extends BasicEntity {
 
     /**
      * Observation content.
      */
+    @Column(name = "description", nullable = false)
     private String description;
 
     /**
      * Technical resource wich is receiving the observation.
      */
+    @ManyToOne
+    @JoinColumn (name = "resource_id", unique = true)
     private TechnicalResource observee;
 
     /**
      * The poject that is related to the observation.
      */
+    @ManyToOne
+    @JoinColumn (name = "project_id")
     private Project relatedProject;
 
     public Observation(){}

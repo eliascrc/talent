@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -11,32 +12,37 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "project_capability")
 public class ProjectCapability extends BasicEntity {
 
     /**
      * The status for the specific capability of a project, it can be available, taken or closed.
      */
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
 	private ProjectCapabilityStatus status;
-
-    /**
-     * The current project position, and resource associated to it, that occupies this capability.
-     */
-    private ProjectPosition currentProjectPosition;
 
     /**
      * A list with a history of the project positions, and resources associated to them, that occupied this capability in
      * the past. It also includes the current project position that occupies this capability.
      */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "projectCapability")
+    @OrderBy ("entityCreationTimestamp" )
     private Set<ProjectPosition> projectPositionHistory;
 
     /**
      * The project that the capability belongs to.
      */
+    @ManyToOne
+    @JoinColumn (name = "project_id", nullable = false)
     private Project project;
 
     /**
-    *  The capability level that the project position should have
+    *  The capability level that the project position should have.
     */
+    @ManyToOne
+    @JoinColumn (name = "org_capability_level", nullable = false)
     private OrganizationCapabilityLevel capability;
 
     public ProjectCapability(){}
@@ -66,14 +72,6 @@ public class ProjectCapability extends BasicEntity {
 
     public void setStatus(ProjectCapabilityStatus status) {
         this.status = status;
-    }
-
-    public ProjectPosition getCurrentProjectPosition() {
-        return currentProjectPosition;
-    }
-
-    public void setCurrentProjectPosition(ProjectPosition currentProjectPosition) {
-        this.currentProjectPosition = currentProjectPosition;
     }
 
     public Set<ProjectPosition> getProjectPositionHistory() {

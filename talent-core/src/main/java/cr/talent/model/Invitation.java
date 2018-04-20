@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -9,32 +10,51 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
+@Entity
+@Table(name = "invitation")
 public class Invitation extends BasicEntity {
 
     /**
      * The name of the person receiving the invitation.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The email of the person that is going to receive the invitation.
      */
+    @Column (name = "email", nullable = false)
     private String email;
 
     /**
      * The job position of the person that is going to join the organization.
      */
+    @OneToOne (mappedBy = "invitation")
     private JobPosition jobPosition;
 
     /**
      * The technical position of the person that is going to join the organization.
      */
+    @OneToOne (mappedBy = "invitation")
     private TechnicalPosition technicalPosition;
 
     /**
      * The list of skills of the person that is going to join the organization.
      */
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "invitation_skill",
+            joinColumns = { @JoinColumn(name = "invitation_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+    )
     private Set<OrganizationSkill> skills;
+
+    /**
+     * The organization where the invitation came from.
+     */
+    @ManyToOne
+    @JoinColumn (name = "organization_id", nullable = false)
+    private Organization organization;
 
     public Invitation (){}
 
@@ -93,5 +113,13 @@ public class Invitation extends BasicEntity {
 
     public void setSkills(Set<OrganizationSkill> skills) {
         this.skills = skills;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }

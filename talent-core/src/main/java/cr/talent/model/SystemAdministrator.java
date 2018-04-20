@@ -1,8 +1,7 @@
 package cr.talent.model;
 
-import org.springframework.security.core.GrantedAuthority;
-
-import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Class that represents a System Administrator within the Talent system.
@@ -10,6 +9,8 @@ import java.util.Collection;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "system_administrator")
 public class SystemAdministrator extends User {
 
     public SystemAdministrator(){

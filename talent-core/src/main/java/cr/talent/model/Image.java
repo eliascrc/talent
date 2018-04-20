@@ -11,11 +11,14 @@ import java.util.*;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "image")
 public class Image extends BasicEntity {
 
     /**
      * Link to get to the image.
      */
+    @Column (name = "link" , nullable = false, unique = true)
     private String link;
 
 	public Image(){}

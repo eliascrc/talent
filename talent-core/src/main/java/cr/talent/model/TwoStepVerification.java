@@ -1,26 +1,34 @@
 package cr.talent.model;
 
+import javax.persistence.*;
+
 /**
  * Class that represents a two step verification within the Talent system. It contains the technical resource
  * organization, message, verification code and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "two_step_verification")
 public class TwoStepVerification extends BasicEntity{
 
     /**
      * The resource that will have the two step verification.
      */
+    @OneToOne(mappedBy = "twoStepVerification")
     private TechnicalResource resource;
 
     /**
      * The message to send in the two step verification.
      */
+    @ManyToOne
+    @JoinColumn (name = "two_step_message_id")
     private TwoStepVerificationMessage message;
 
     /**
      * The verification code of the two step verification.
      */
+    @Column(name = "verification_code")
     private String verificationCode;
 
     public TwoStepVerification(){}
@@ -61,5 +69,9 @@ public class TwoStepVerification extends BasicEntity{
 
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
+    }
+
+    public void setMessage(TwoStepVerificationMessage message) {
+        this.message = message;
     }
 }

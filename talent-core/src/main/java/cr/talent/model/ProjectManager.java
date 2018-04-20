@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -9,11 +10,14 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
+@Entity
+@DiscriminatorValue(value = "PROJECT_MANAGER")
 public class ProjectManager extends TechnicalResourceManager {
 
     /**
      * A list with the project management positions that the Project Manager has occupied in the organization.
      */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "projectManager")
     private Set<ProjectManagerPosition> projectManagerPositions;
 
     public ProjectManager(){}

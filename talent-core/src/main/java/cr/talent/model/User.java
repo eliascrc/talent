@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,6 +14,7 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
+@MappedSuperclass
 public abstract class User extends BasicEntity implements UserDetails {
 
     public enum Status {ACTIVE, INACTIVE, SUSPENDED}
@@ -20,41 +22,50 @@ public abstract class User extends BasicEntity implements UserDetails {
     /**
      * Username can't be empty, null or duplicated. It represents the user's email address.
      */
+    @Column(name = "username", nullable = false, unique = true)
     protected String username;
 
     /**
      * The user's first name.
      */
+    @Column(name = "first_name", nullable = false)
     protected String firstName;
 
     /**
      * The user's last name.
      */
+    @Column(name = "last_name", nullable = false)
     protected String lastName;
 
     /**
      * User password.
      */
+    @Column(name = "password", nullable = false)
     protected String password;
 
     /**
      * Flag to indicate if the user name has been enabled or disabled.
      */
+    @Column(name = "enabled", nullable = false)
     protected boolean enabled;
 
     /**
      * Flag to indicate if the account needs a change in the password.
      */
+    @Column(name = "password_needs_change", nullable = false)
     protected boolean passwordNeedsChange;
 
     /**
      * Timestamp of the last login of the user.
      */
+    @Column(name = "last_login_timestamp")
     private Date lastLoginTimestamp;
 
     /**
      * The status of the user account.
      */
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     public User (){}

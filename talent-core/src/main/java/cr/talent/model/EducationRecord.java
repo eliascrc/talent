@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
 
@@ -10,37 +11,53 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "education_record")
 public class EducationRecord extends BasicEntity{
 
     /**
      * Institution that provided the education record.
      */
+    @Column(name = "institution")
     private String institution;
 
     /**
      * Date that the education record was given to the person.
      */
+    @Column (name = "date")
     private Date date;
 
     /**
      * Earned title in the education record.
      */
+    @Column (name = "title" , nullable = false)
     private String title;
 
     /**
      * Description of that education record.
      */
+    @Column (name = "description")
     private String description;
 
     /**
      * Technical resource that has de education record.
      */
+    @ManyToOne
+    @JoinColumn(name = "resource_id", nullable = false)
     private TechnicalResource resource;
 
     /**
      * File with a copy of the education record.
      */
+    @Column (name = "pdf_file")
     private File pdfFile;
+
+    /**
+     * The human resource manager that is going to review the education record
+     */
+    @ManyToOne
+    @JoinColumn (name = "HRM_id", nullable = false)
+    private HumanResourceManager humanResourceManager;
 
     public EducationRecord(){}
 
@@ -109,5 +126,13 @@ public class EducationRecord extends BasicEntity{
 
     public void setPdfFile(File pdfFile) {
         this.pdfFile = pdfFile;
+    }
+
+    public HumanResourceManager getHumanResourceManager() {
+        return humanResourceManager;
+    }
+
+    public void setHumanResourceManager(HumanResourceManager humanResourceManager) {
+        this.humanResourceManager = humanResourceManager;
     }
 }

@@ -1,8 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a category for a set of skills within the Talent system.
@@ -11,11 +9,15 @@ import javax.persistence.Table;
  *
  * @author María José Cubero
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "skill_category")
 public abstract class SkillCategory extends BasicEntity {
 
     /**
      * The name of the skill category.
      */
+    @Column(name = "name", nullable = false)
     private String name;
 
     public SkillCategory(){}

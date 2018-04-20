@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.*;
+
 /**
  * Class that represents a Technical Resource's position within the Talent system.
  * It contains the capability level related to the position and the information inherited from
@@ -7,17 +9,22 @@ package cr.talent.model;
  *
  * @author Elías Calderón
  */
+@MappedSuperclass
 public abstract class Position extends BasicEntity {
 
     /**
      * The capability and level related to the position. The organization's capability can be found as an attribute
      * in {@link OrganizationCapabilityLevel}
      */
+    @ManyToOne
+    @JoinColumn(name = "org_capability_level_id", nullable = false)
     private OrganizationCapabilityLevel organizationCapabilityLevel;
 
     /**
      * The technical resource that has the position
      */
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "technical_resource_id")
     private TechnicalResource technicalResource;
 
     public Position(){}

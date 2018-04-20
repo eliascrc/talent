@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -9,17 +10,28 @@ import java.util.Date;
  *
  * @author María José Cubero
  */
+@Entity
+@Table(name = "job_position")
 public class JobPosition extends Position {
 
     /**
      * Start date of the job position.
      */
+    @Column(name = "start_date")
     private Date startDate;
 
     /**
      * End date of the job position.
      */
+    @Column (name = "end_date")
     private Date endDate;
+
+    /**
+     * Job position invitation.
+     */
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "invitation_job_id")
+    private Invitation invitation;
 
     public JobPosition (){}
 
@@ -37,5 +49,13 @@ public class JobPosition extends Position {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Invitation getInvitation() {
+        return invitation;
+    }
+
+    public void setInvitation(Invitation invitation) {
+        this.invitation = invitation;
     }
 }

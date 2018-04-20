@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -10,93 +11,136 @@ import java.util.Set;
  *
  * @author María José Cubero
  */
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "technical_resource")
 public class TechnicalResource extends User{
 
     /**
      * Defines if the user is an administrator of the organization.
      */
+    @Column(name = "is_administrator", nullable = false)
     private boolean isAdministrator;
 
     /**
      * Specifies the date of the last level assessment result.
      */
+    @Column(name = "last_level_assessment")
     private Date lastLevelAssessment;
 
     /**
      * Specifies the date of the last performance review result.
      */
+    @Column(name = "last_performance_review")
     private Date lastPerformanceReview;
 
     /**
      * The profile picture of the user.
      */
+    @Column (name = "profile_picture")
     private Image profilePicture;
 
     /**
      * The organization that the resource belongs to.
      */
-    private Organization organization;
+    @ManyToOne
+    @JoinColumn (name = "organization_id", nullable = false)
+    protected Organization organization;
 
     /**
      * The list of the resource's skills.
      */
-    private Set<Skill> skills;
+    @ManyToMany(mappedBy = "resources")
+    private Set<OrganizationSkill> skills;
 
     /**
      * The list of the resource's education records.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "resource")
     private Set<EducationRecord> educationRecords;
 
     /**
      * The list of the resource's project positions.
      */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
     private Set<ProjectPosition> projectPositions;
 
     /**
      * The resource's job position.
      */
+    @OneToOne (mappedBy = "technicalResource")
     private JobPosition jobPosition;
 
     /**
      * The resource's technical position.
      */
+    @OneToOne (mappedBy = "technicalResource")
     private TechnicalPosition technicalPosition;
 
     /**
      * The resource's career path.
      */
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "career_path_id", unique = true)
     private CareerPath careerPath;
 
     /**
      * The resource's technical manager.
      */
+    @ManyToOne
+    @JoinColumn (name = "technical_manager_id")
     private TechnicalManager technicalManager;
 
     /**
      * The resource's kudos and warnings.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "observee")
     private Set<Observation> observations;
 
     /**
      * The resouce's emergency contacts list.
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
     private Set<EmergencyContact> emergencyContacts;
 
     /**
      * The resouce's language setting.
      */
+    @ManyToOne
+    @JoinColumn (name = "language_id", nullable = false)
     private Language language;
 
     /**
      * The resource's timezone setting.
      */
+    @Column(name = "time_zone", nullable = false)
     private String timeZone;
 
     /**
      * The resource's level assessment time gap.
      */
+    @Column(name = "level_assessment_time_gap", nullable = false)
     private int levelAssessmentTimeGap;
 
+    /**
+     * The resource's capability level of a capability.
+     */
+    @ManyToOne
+    @JoinColumn(name = "org_capability_id", nullable = false)
+    private OrganizationCapabilityLevel organizationCapabilityLevel;
+
+    /**
+     * List of the observations that that resouce has made.
+     */
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "author")
+    private Set<Kudo> madeKudo;
+
+    /**
+     * Technical Resouce's two step verification
+     */
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "two_step_verification_id", unique = true)
+    private TwoStepVerification twoStepVerification;
 
     public TechnicalResource(){}
 
@@ -159,14 +203,6 @@ public class TechnicalResource extends User{
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
-    }
-
-    public Set<Skill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
     }
 
     public Set<EducationRecord> getEducationRecords() {
@@ -255,5 +291,37 @@ public class TechnicalResource extends User{
 
     public void setLevelAssessmentTimeGap(int levelAssessmentTimeGap) {
         this.levelAssessmentTimeGap = levelAssessmentTimeGap;
+    }
+
+    public OrganizationCapabilityLevel getOrganizationCapabilityLevel() {
+        return organizationCapabilityLevel;
+    }
+
+    public void setOrganizationCapabilityLevel(OrganizationCapabilityLevel organizationCapabilityLevel) {
+        this.organizationCapabilityLevel = organizationCapabilityLevel;
+    }
+
+    public Set<Kudo> getMadeKudo() {
+        return madeKudo;
+    }
+
+    public void setMadeKudo(Set<Kudo> madeKudo) {
+        this.madeKudo = madeKudo;
+    }
+
+    public Set<OrganizationSkill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<OrganizationSkill> skills) {
+        this.skills = skills;
+    }
+
+    public TwoStepVerification getTwoStepVerification() {
+        return twoStepVerification;
+    }
+
+    public void setTwoStepVerification(TwoStepVerification twoStepVerification) {
+        this.twoStepVerification = twoStepVerification;
     }
 }

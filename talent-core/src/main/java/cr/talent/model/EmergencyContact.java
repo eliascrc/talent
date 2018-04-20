@@ -1,5 +1,7 @@
 package cr.talent.model;
 
+import javax.persistence.*;
+
 /**
  * Class that represents a technical's resource emergency contact within the Talent system.
  * It contains the email, name, telephone and the information inherited from
@@ -7,26 +9,33 @@ package cr.talent.model;
  *
  * @author Elías Calderon
  */
+@Entity
+@Table(name = "emergency_contact")
 public class EmergencyContact extends BasicEntity{
 
     /**
      * Email of the emergency contact.
      */
+    @Column(name = "email")
     private String email;
 
     /**
      * Name of the emergency contact.
      */
+    @Column (name = "name" , nullable = false)
     private String name;
 
     /**
      * Telephone of the emergency contact.
      */
+    @Column (name = "telephone" , nullable = false)
     private String telephone;
 
     /**
      * User that has the emergency contact.
      */
+    @ManyToOne
+    @JoinColumn(name = "resource_id", nullable = false)
     private TechnicalResource technicalResource;
 
     public EmergencyContact(){}

@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -8,19 +9,22 @@ import java.util.Set;
  *
  * @author Elías Calderón
  */
-
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "capability")
 public abstract class Capability extends BasicEntity {
 
     /**
      * The name of the capability.
      */
-
+    @Column (name = "name", nullable = false)
     private String name;
 
     /**
      * The level hierarchy registered for the capability. The hierarchyPosition attribute in the {@link CapabilityLevel}
      * indicates the position in the hierarchy (capability levels for a capability).
      */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "capability")
     private Set<CapabilityLevel> levelHierarchy;
 
     public Capability(){}
