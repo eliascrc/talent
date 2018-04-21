@@ -6,11 +6,23 @@ import nu.xom.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class extends the XmlParser class, it parses the xml file while creating the objects that corr and setting their attributes.
+ *
+ * @author Daniel Montes de Oca & Otto Mena Kikut
+ */
 class DataParser extends XmlParser {
 
     private List<Organization> organizations;
     private List<TechnicalResource> technicalResources;
 
+    /**
+     * The class constructor. It receives the filepath to the xml file.
+     * It creates the ArrayLists that will store each object corresponding to a row of the database.
+     *
+     *
+     * @param filepath
+     */
     DataParser(String filepath) {
         super(filepath);
         this.organizations = new ArrayList<Organization>();
@@ -23,6 +35,9 @@ class DataParser extends XmlParser {
     }
 
 
+    /**
+     * Fill the organizations List.
+     */
     private void fillOrganizations() {
         Elements organizationElements = getElementOfType("organizations").get(0).getChildElements();
         for (int i = 0; i < organizationElements.size(); i++){
@@ -31,6 +46,12 @@ class DataParser extends XmlParser {
         }
     }
 
+    /**
+     * This method creates an Organization object and sets its attributes according to the text in the xml
+     *
+     * @param organizationElement the node of the xml file corresponding to the specific organization.
+     * @return
+     */
     private Organization getOrganization(Element organizationElement) {
         Organization organization = new Organization();
         organization.setUniqueIdentifier(super.getAttributeValue(organizationElement, "uniqueIdentifier"));
@@ -43,6 +64,9 @@ class DataParser extends XmlParser {
         return organization;
     }
 
+    /**
+     * Fill the technicalResources List.
+     */
     private void fillTechnicalResources () {
         Elements technicalResourceElements = getElementOfType("technicalResources").get(0).getChildElements();
         for (int i = 0; i < technicalResourceElements.size(); i++) {
@@ -51,6 +75,11 @@ class DataParser extends XmlParser {
         }
     }
 
+    /**This method creates a TechnicalResource and sets its attributes according to the text in the xml file.
+     *
+     * @param technicalResourceElement the node of the xml file corresponding to the specific technical resource.
+     * @return
+     */
     private TechnicalResource getTechnicalResource(Element technicalResourceElement) {
         TechnicalResource technicalResource = new TechnicalResource();
         technicalResource.setUsername(super.getAttributeValue(technicalResourceElement, "username"));
@@ -70,6 +99,11 @@ class DataParser extends XmlParser {
         return technicalResource;
     }
 
+    /**This method sets the organization attribute to the technical resource object.
+     *
+     * @param technicalResource the technical resource object which must be linked to respective organization
+     * @param orgUniqueIdentifier the unique identifier of the organization to which the technical resource will be linked.
+     */
     private void linkOrganization(TechnicalResource technicalResource, String orgUniqueIdentifier) {
         Organization organization = null;
 
