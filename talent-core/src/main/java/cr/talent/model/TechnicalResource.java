@@ -37,7 +37,7 @@ public class TechnicalResource extends User{
     /**
      * The profile picture of the user.
      */
-    @Column (name = "profile_picture")
+    @OneToOne
     private Image profilePicture;
 
     /**

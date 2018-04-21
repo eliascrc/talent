@@ -74,11 +74,17 @@
 
   <dependencies>
 
+      <!-- Unit testing -->
       <dependency>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
-          <version>3.8.1</version>
-          <scope>test</scope>
+          <version>4.8.1</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-core</artifactId>
+          <version>2.18.3</version>
       </dependency>
 
       <dependency>
@@ -152,14 +158,6 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.9-rc</version>
       </dependency>
-	  
-	  <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
-	  <dependency>
-		<groupId>org.mockito</groupId>
-		<artifactId>mockito-all</artifactId>
-		<version>1.9.5</version>
-		<scope>test</scope>
-	  </dependency>
 
   </dependencies>
 
