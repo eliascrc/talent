@@ -13,7 +13,8 @@ import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 
-public class ProjectTest {
+
+public class ProjectTest{
     private static final String id = "1234";
     private static final Date entityCreationTimestamp = new Date();
     private static final Date lastUpdatedTimestamp = new Date();
@@ -39,11 +40,11 @@ public class ProjectTest {
         project.setName(name);
         project.setStartDate(startdate);
         project.setEndDate(endDate);
-        project.setProjectCapabilities(new HashSet<ProjectCapability>());
-        project.setProjectManagerHistory(new HashSet<ProjectManagerPosition>());
+        project.setProjectCapabilities(new HashSet<>());
+        project.setProjectManagerHistory(new HashSet<>());
         project.setState(ProjectState.UPCOMING);
         project.setOrganization(organization);
-        project.setObservations(new HashSet<Observation>());
+        project.setObservations(new HashSet<>());
 
         // Verify the gets
         assertEquals(id, project.getId());
