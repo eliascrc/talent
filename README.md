@@ -7,6 +7,7 @@ This repository will serve to set up a different continuous integration process 
 ### Team Members
 
 Rodrigo Bartels
+Mariana Abellán
 ### Tech
 
 
