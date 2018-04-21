@@ -9,6 +9,7 @@ This repository will serve to set up a different continuous integration process 
 Rodrigo Bartels
 Mariana Abellán
 Josué Cubero
+Raquel Fonseca
 ### Tech
 
 
