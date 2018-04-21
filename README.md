@@ -11,6 +11,7 @@ Mariana Abellán
 Josué Cubero
 Raquel Fonseca
 Josué León Sarkis
+Vladimir Aguilar
 ### Tech
 
 
