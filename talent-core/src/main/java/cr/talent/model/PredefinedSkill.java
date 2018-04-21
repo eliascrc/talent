@@ -17,7 +17,7 @@ public class PredefinedSkill extends Skill {
      * The predefined skill category that the predefined skill belongs to.
      */
     @ManyToOne
-    @JoinColumn(name = "pre_skill_category_id", nullable = false)
+    @JoinColumn(name = "pre_skill_category_id")
     private PredefinedSkillCategory category;
 
     public PredefinedSkill() {}

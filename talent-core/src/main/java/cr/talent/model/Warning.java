@@ -17,7 +17,7 @@ public class Warning extends Observation {
      * The technical resource that writes the warning.
      */
     @ManyToOne
-    @JoinColumn(name = "resource_id")
+    @JoinColumn(name = "author_id")
     private TechnicalResourceManager author;
 
     public Warning(){}

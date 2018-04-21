@@ -1,5 +1,9 @@
 package cr.talent.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,7 +15,7 @@ import java.util.Date;
  * @author María José Cubero
  */
 @MappedSuperclass
-public abstract class User extends BasicEntity {
+public abstract class User extends BasicEntity implements UserDetails {
 
     public enum Status {ACTIVE, INACTIVE, SUSPENDED}
 
@@ -95,6 +99,26 @@ public abstract class User extends BasicEntity {
         sb.append(", enabled = ").append(this.isEnabled());
         sb.append(", passwordNeedChange = ").append(this.getPasswordNeedsChange());
         return sb;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
     }
 
     public String getUsername() {

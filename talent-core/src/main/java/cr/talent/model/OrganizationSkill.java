@@ -18,7 +18,7 @@ public class OrganizationSkill extends Skill {
      * The organization skill category that the organization skill belongs to.
      */
     @ManyToOne
-    @JoinColumn(name = "org_skill_category_id", nullable = false)
+    @JoinColumn(name = "org_skill_category_id")
     private OrganizationSkillCategory category;
 
     /**

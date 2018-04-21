@@ -4,8 +4,17 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 id="WebApp_ID" version="3.0">
- 
- 
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
 	<servlet>
 		<servlet-name>talent-ws-mvc.spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -41,12 +50,18 @@ id="WebApp_ID" version="3.0">
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:talent-core.spring.xml, classpath:talent-persistence.spring.xml, classpath:talent-security.spring.xml</param-value>
+		<param-value>/WEB-INF/talent-ws.spring.xml /WEB-INF/talent-web-security.spring.xml classpath:talent-core.spring.xml, classpath:talent-persistence.spring.xml, classpath:talent-security.spring.xml</param-value>
 	</context-param>
 
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
 		</listener-class>
 	</listener>
 
