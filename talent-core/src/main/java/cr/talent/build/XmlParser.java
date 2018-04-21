@@ -1,6 +1,5 @@
 package cr.talent.build;
 
-import cr.talent.model.Image;
 import nu.xom.*;
 
 import java.io.File;
@@ -8,7 +7,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
 public class XmlParser {
 
@@ -18,6 +16,7 @@ public class XmlParser {
         File file = new File(filePath);
         Builder parser = new Builder();
         Document document = null;
+        System.out.println(filePath);
         try{
             document = parser.build(file);
         }
