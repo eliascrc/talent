@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dummyData>
 
-	<table name="organization">
+	<organizations>
 		<organization>
 			<uniqueIdentifier>monkey-labs</uniqueIdentifier>
 			<name>Monkey Labs</name>
@@ -26,10 +26,10 @@
 			<performanceReviewTimeGap>6</performanceReviewTimeGap>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</organization>
-	</table>
+	</organizations>
 
 
-	<table name="technicalResource">
+	<technicalResources>
 
 		<technicalResource>
 			<username>andres.mata@example.com</username>
@@ -47,6 +47,7 @@
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>antonio.jimnez@example.com</username>
 			<firstName>Antonio</firstName>
@@ -60,10 +61,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://markinternational.info/legend-of-aang-wallpapers/219586425.html</profilePicture>
 			<organization>monkey-labs</organization>
-			<technicalManager>andres.mata@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>andrea.solano@example.com</username>
 			<firstName>Andrea</firstName>
@@ -77,15 +78,15 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://markinternational.info/legend-of-aang-wallpapers/219586425.html</profilePicture>
 			<organization>monkey-labs</organization>
-			<technicalManager>andres.mata@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
-			<username>nombre.apellido@example.com</username>
-			<firstName>Nombre</firstName>
-			<lastName>Apellido</lastName>
-			<password>apellinombre</password>
+			<username>john.doe@example.com</username>
+			<firstName>John</firstName>
+			<lastName>Doe</lastName>
+			<password>genericPassword</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
 			<status>SUSPENDED</status>
@@ -94,10 +95,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://markinternational.info/legend-of-aang-wallpapers/219586425.html</profilePicture>
 			<organization>monkey-labs</organization>
-			<technicalManager>andres.mata@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>maria.mena@example.com</username>
 			<firstName>Maria</firstName>
@@ -111,10 +112,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
-			<technicalManager>andres.mata@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>marta.martinez@example.com</username>
 			<firstName>Marta</firstName>
@@ -128,7 +129,6 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
-			<technicalManager>andres.mata@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
@@ -146,10 +146,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
-			<technicalManager>andres.mata@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>howard.lovecraft@example.com</username>
 			<firstName>Howard</firstName>
@@ -163,10 +163,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
-			<technicalManager>andres.mata@example.com</technicalManager>
 			<timeZone>UTC-7</timeZone>
 			<levelAsssesmentTimeGap>15</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>samus.aran@example.com</username>
 			<firstName>Samus</firstName>
@@ -180,10 +180,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/kenshin-himura-rurouni-kenshin-8.84.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>friedrich.gauss@example.com</username>
 			<firstName>Friedrich</firstName>
@@ -197,10 +197,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/kenshin-himura-rurouni-kenshin-8.84.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>leonhard.euler@example.com</username>
 			<firstName>Leonhard</firstName>
@@ -214,10 +214,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://img00.deviantart.net/4495/i/2012/043/0/6/star_wars_iii___general_grievous_by_petugee-d4pghoc.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>joseph.lagrange@example.com</username>
 			<firstName>Joseph</firstName>
@@ -231,10 +231,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://static.comicvine.com/uploads/original/11123/111232121/5547213-vict3.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>james.moriarty@example.com</username>
 			<firstName>James</firstName>
@@ -248,10 +248,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://static.comicvine.com/uploads/original/11123/111232121/5547213-vict3.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>keira.priestley@example.com</username>
 			<firstName>Keira</firstName>
@@ -265,10 +265,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>sanes.mikkelsen@example.com</username>
 			<firstName>Sanes</firstName>
@@ -282,10 +282,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>sophie.germain@example.com</username>
 			<firstName>Sophie</firstName>
@@ -299,10 +299,10 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://img00.deviantart.net/4495/i/2012/043/0/6/star_wars_iii___general_grievous_by_petugee-d4pghoc.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
+
 		<technicalResource>
 			<username>hajime.saito@example.com</username>
 			<firstName>Hajime</firstName>
@@ -316,14 +316,11 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
 		</technicalResource>
-	</table>
 
-	<table name="humanResourceManager">
-		<humanResourceManager>
+		<technicalResource>
 			<username>kendall.garcia@gmail.com</username>
 			<firstName>Kendall</firstName>
 			<lastName>Garcia</lastName>
@@ -338,8 +335,9 @@
 			<organization>monkey-labs</organization>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
-		</humanResourceManager>
-		<humanResourceManager>
+		</technicalResource>
+
+		<technicalResource>
 			<username>pedro.perez@gmail.com</username>
 			<firstName>Pedro</firstName>
 			<lastName>Perez</lastName>
@@ -354,27 +352,9 @@
 			<organization>andromeda-spiral</organization>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
-		</humanResourceManager>
-	</table>
+		</technicalResource>
 
-	<table name="technicalManager">
-		<technicalManager>
-			<username>andres.mata@example.com</username>
-			<firstName>Andres</firstName>
-			<lastName>Mata</lastName>
-			<password>123nombre</password>
-			<enabled>true</enabled>
-			<passwordNeedsChange>false</passwordNeedsChange>
-			<status>ACTIVE</status>
-			<isAdministrator>true</isAdministrator>
-			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
-			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
-			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
-			<organization>monkey-labs</organization>
-			<timeZone>UTC-6</timeZone>
-			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
-		</technicalManager>
-		<technicalManager>
+		<technicalResource>
 			<username>rosalind.franklin@example.com</username>
 			<firstName>Rosalind</firstName>
 			<lastName>Franklin</lastName>
@@ -389,44 +369,9 @@
 			<organization>andromeda-spiral</organization>
 			<timeZone>UTC-6</timeZone>
 			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
-		</technicalManager>
-	</table>
+		</technicalResource>
 
-	<table name="projectManager">
-		<projectManager>
-			<username>irie.aleza@example.com</username>
-			<firstName>Irie</firstName>
-			<lastName>Aleza</lastName>
-			<password>iriaena21</password>
-			<enabled>true</enabled>
-			<passwordNeedsChange>false</passwordNeedsChange>
-			<status>ACTIVE</status>
-			<isAdministrator>false</isAdministrator>
-			<lastLevelAssessment>1/1/2000</lastLevelAssessment>
-			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
-			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
-			<organization>monkey-labs</organization>
-			<timeZone>UTC-6</timeZone>
-			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
-		</projectManager>
-		<projectManager>
-			<username>general.iroh@example.com</username>
-			<firstName>General</firstName>
-			<lastName>Iroh</lastName>
-			<password>siegessuck</password>
-			<enabled>true</enabled>
-			<passwordNeedsChange>false</passwordNeedsChange>
-			<status>ACTIVE</status>
-			<isAdministrator>false</isAdministrator>
-			<lastLevelAssessment>1/1/2000</lastLevelAssessment>
-			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
-			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
-			<organization>andromeda-spiral</organization>>
-			<technicalManager>rosalind.franklin@example.com</technicalManager>
-			<timeZone>UTC-6</timeZone>
-			<levelAsssesmentTimeGap>12</levelAsssesmentTimeGap>
-		</projectManager>
-	</table>
+	</technicalResources>
 
 
 </dummyData>
