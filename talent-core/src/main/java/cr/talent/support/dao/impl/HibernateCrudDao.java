@@ -102,4 +102,3 @@ public abstract class HibernateCrudDao<ModelObjectType extends BasicEntity, KeyT
         this.sessionFactory = sessionFactory;
     }
 }
-

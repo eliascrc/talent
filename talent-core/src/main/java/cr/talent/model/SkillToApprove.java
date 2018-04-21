@@ -1,6 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
  *
  * @author Elías Calderón
  */
-@Embeddable
-public class SkillToApprove {
+@Entity
+public class SkillToApprove extends BasicEntity{
 
     /**
      * The requesting technical resource.
@@ -29,6 +29,26 @@ public class SkillToApprove {
     public SkillToApprove() {
     }
 
+    @Override
+    protected boolean onEquals(Object o) {
+        boolean result = false;
+        if ( o instanceof SkillToApprove){
+            SkillToApprove skillToApprove = (SkillToApprove) o;
+            result = (this.requestedSkill == null ? skillToApprove.getRequestedSkill() == null : this.requestedSkill.equals(skillToApprove.getRequestedSkill())
+                    && this.requestingTechnicalResource == null ? skillToApprove.getRequestingTechnicalResource() == null :
+                    this.requestingTechnicalResource.equals(skillToApprove.getRequestingTechnicalResource()));
+        }
+        return result;
+    }
+
+    @Override
+    protected int onHashCode(int result) {
+        final int prime = 23;
+        result = prime * result + (this.requestedSkill == null ? 0 : this.requestedSkill.hashCode());
+        result = prime * result + (this.requestingTechnicalResource == null ? 0 : this.requestingTechnicalResource.hashCode());
+        return result;
+    }
+
     public TechnicalResource getRequestingTechnicalResource() {
         return requestingTechnicalResource;
     }
@@ -44,4 +64,5 @@ public class SkillToApprove {
     public void setRequestedSkill(Skill requestedSkill) {
         this.requestedSkill = requestedSkill;
     }
+
 }

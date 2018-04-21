@@ -17,7 +17,7 @@ public class Kudo extends Observation {
      * The technical resource that writes the kudo.
      */
     @ManyToOne
-    @JoinColumn (name = "resource_id")
+    @JoinColumn (name = "author_id")
     private TechnicalResource author;
 
     public Kudo (){}

@@ -63,4 +63,3 @@ public interface CrudService<ModelObjectType extends BasicEntity, KeyType extend
      */
     List<ModelObjectType> getAll();
 }
-

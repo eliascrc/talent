@@ -1,9 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -14,7 +11,7 @@ import java.util.Set;
  * @author María José Cubero
  */
 @Entity
-@Table(name = "predefined_skill_category")
+@DiscriminatorValue(value = "PREDEFINED_SKILL_CATEGORY")
 public class PredefinedSkillCategory extends SkillCategory {
 
     /**

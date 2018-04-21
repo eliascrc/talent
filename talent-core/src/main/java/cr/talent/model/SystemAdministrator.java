@@ -16,4 +16,5 @@ public class SystemAdministrator extends User {
     public SystemAdministrator(){
 
     }
+
 }
