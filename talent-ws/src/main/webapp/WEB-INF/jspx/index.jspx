@@ -10,7 +10,7 @@
                 doctype-system="about:legacy-compat" />
 
     <html lang="en">
-        <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# tawkers: http://ogp.me/ns/fb/tawkers#">
+        <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
             <meta http-equiv="content-type" content="text/html; charset=utf-8" />
             <title>HTML5</title>
         </head>
