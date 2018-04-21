@@ -1,7 +1,12 @@
 package cr.talent.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -143,6 +148,19 @@ public class TechnicalResource extends User{
     private TwoStepVerification twoStepVerification;
 
     public TechnicalResource(){}
+
+    /**
+     * Method that returns the User's authorities, in this case it assigns the TECHNICAL_RESOURCE
+     * role along with the ones inherited from its super class .
+     * @return the collection of authorities
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        final Set<GrantedAuthority> authorities = new HashSet<>(super.getAuthorities());
+        if (this.enabled)
+            authorities.add(new SimpleGrantedAuthority("ROLE_TECHNICAL_RESOURCE"));
+        return authorities;
+    }
 
     @Override
     protected boolean onEquals(Object o) {
