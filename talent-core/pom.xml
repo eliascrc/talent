@@ -69,16 +69,36 @@
                 <target>1.8</target>
             </configuration>
         </plugin>
+
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>cobertura-maven-plugin</artifactId>
+            <version>2.7</version>
+            <executions>
+                <execution>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>cobertura</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
     </plugins>
   </build>
 
   <dependencies>
 
+      <!-- Unit testing -->
       <dependency>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
-          <version>3.8.1</version>
-          <scope>test</scope>
+          <version>4.8.1</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.mockito</groupId>
+          <artifactId>mockito-core</artifactId>
+          <version>2.18.3</version>
       </dependency>
 
       <dependency>
@@ -153,6 +173,28 @@
         <version>8.0.9-rc</version>
       </dependency>
 
+      <!-- XOM -->
+      <dependency>
+          <groupId>xom</groupId>
+          <artifactId>xom</artifactId>
+          <version>1.2.5</version>
+      </dependency>
+
+
   </dependencies>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

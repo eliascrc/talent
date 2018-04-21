@@ -67,7 +67,7 @@ public class Organization extends BasicEntity {
     /**
      * An image with the logo of the organization.
      */
-    @Column (name = "logo")
+    @OneToOne
     private Image logo;
 
     /**

@@ -42,7 +42,7 @@ public class TechnicalResource extends User{
     /**
      * The profile picture of the user.
      */
-    @Column (name = "profile_picture")
+    @OneToOne
     private Image profilePicture;
 
     /**
@@ -112,7 +112,7 @@ public class TechnicalResource extends User{
      * The resouce's language setting.
      */
     @ManyToOne
-    @JoinColumn (name = "language_id", nullable = false)
+    @JoinColumn (name = "language_id")
     private Language language;
 
     /**
@@ -131,7 +131,7 @@ public class TechnicalResource extends User{
      * The resource's capability level of a capability.
      */
     @ManyToOne
-    @JoinColumn(name = "org_capability_id", nullable = false)
+    @JoinColumn(name = "org_capability_id")
     private OrganizationCapabilityLevel organizationCapabilityLevel;
 
     /**
