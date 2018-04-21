@@ -1,11 +1,14 @@
 package cr.talent.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Class that represents a User within the Talent system.
@@ -81,6 +84,19 @@ public abstract class User extends BasicEntity implements UserDetails {
         return result;
     }
 
+    /**
+     * Method that returns the User's authorities, in this case it assigns the USER role,
+     * which both users Technical Resource and System Administrator have.
+     * @return the collection of authorities
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        final Set<GrantedAuthority> authorities = new HashSet<>();
+        if (this.enabled)
+            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        return authorities;
+    }
+
     @Override
     protected int onHashCode(int result) {
         final int prime = 23;
@@ -99,11 +115,6 @@ public abstract class User extends BasicEntity implements UserDetails {
         sb.append(", enabled = ").append(this.isEnabled());
         sb.append(", passwordNeedChange = ").append(this.getPasswordNeedsChange());
         return sb;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
     }
 
     @Override
