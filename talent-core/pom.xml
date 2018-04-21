@@ -55,6 +55,10 @@
   					</goals>
   				</execution>
   			</executions>
+            <configuration>
+                <show>true</show>
+                <skip>false</skip>
+            </configuration>
   		</plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
