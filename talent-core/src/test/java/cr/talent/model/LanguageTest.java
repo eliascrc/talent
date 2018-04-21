@@ -1,4 +1,4 @@
-package cr.talent.model.test;
+package cr.talent.model;
 
 public class LanguageTest {
 }
