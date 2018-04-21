@@ -14,15 +14,15 @@
         <security:form-login login-page="/login.html" default-target-url="/authenticated.html"
                 authentication-failure-url="/login.html?error" username-parameter="username"
                 password-parameter="password" />
-        <security:intercept-url pattern="ws/**/*" access="ROLE_USER, ROLE_SYSTEM_ADMINISTRATOR"/>
-        <security:intercept-url pattern="ws/**/*" access="permitAll()" method="HEAD"/>
-        <security:intercept-url pattern="ws/**/*" access="permitAll()" method="OPTIONS"/>
-        <security:intercept-url pattern="ws/admin/**" access="ROLE_SYSTEM_ADMINISTRATOR"/>
         <security:intercept-url pattern="/ws/resource.html" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login.html" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login/token.html" access="isAnonymous()"/>
         <security:intercept-url pattern="/ws/authenticated.html" access="ROLE_USER, ROLE_ADMIN"/>
         <security:intercept-url pattern="/ws/loggedIn.html" access="ROLE_USER, ROLE_ADMIN"/>
+        <security:intercept-url pattern="ws/admin/**" access="ROLE_SYSTEM_ADMINISTRATOR"/>
+        <security:intercept-url pattern="ws/**/*" access="ROLE_USER, ROLE_SYSTEM_ADMINISTRATOR"/>
+        <security:intercept-url pattern="ws/**/*" access="permitAll()" method="HEAD"/>
+        <security:intercept-url pattern="ws/**/*" access="permitAll()" method="OPTIONS"/>
     </security:http>
 
 </beans>
