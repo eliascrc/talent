@@ -5,6 +5,9 @@ import nu.xom.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class XmlParser {
@@ -19,18 +22,18 @@ public class XmlParser {
             document = parser.build(file);
         }
         catch (ParsingException ex) {
-            System.err.println("Exception parsing dummy data file");
+            System.err.println("Exception parsing dummy data file.");
         }
         catch (IOException ex) {
-            System.err.println(ex);
+            System.err.println("Exception opening the dummy data file.");
         }
 
+        assert document != null;
         this.root = document.getRootElement();
     }
 
     protected String getAttributeValue(Element parentElement, String elementName){
-        String attributeValue = parentElement.getChildElements(elementName).get(0).getValue();
-        return attributeValue;
+        return parentElement.getChildElements(elementName).get(0).getValue();
     }
 
     protected Elements getElementOfType(String attributeValue) {
@@ -38,24 +41,22 @@ public class XmlParser {
     }
 
     protected boolean getBooleanValue(Element parentElement, String elementName) {
-        boolean value;
-        if (parentElement.getChildElements(elementName).get(0).getValue() == "true") {
-            value = true;
-        } else {
-            value = false;
-        }
-
-        return value;
+        return parentElement.getChildElements(elementName).get(0).getValue().equals("true");
     }
 
     protected int getIntValue(Element parentElement, String elementName) {
         return Integer.parseInt(this.getAttributeValue(parentElement, elementName));
     }
 
-    protected Image getImage(Element parentElement, String imageElementName){
-        String attributeValue = parentElement.getChildElements(imageElementName).get(0).getValue();
-        Image image = new Image();
-        image.setLink(attributeValue);
-        return image;
+    protected Date getDateValue(Element parentElement, String elementName){
+        String attributeValue = parentElement.getChildElements(elementName).get(0).getValue();
+        try {
+            return new SimpleDateFormat("dd/MM/yyyy").parse(attributeValue);
+        }
+        catch(ParseException e){
+            System.out.println("Wrong date format");
+        }
+        return null;
     }
+
 }

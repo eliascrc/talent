@@ -10,8 +10,6 @@
 			<userAuthenticationMethod>DOMAIN</userAuthenticationMethod>
 			<logo>https://i.imgur.com/hp5r8ua.png</logo>
 			<domain>talent.cr</domain>
-			<performanceReviewTimeGap>6</performanceReviewTimeGap>
-			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</organization>
 
 		<organization>
@@ -23,8 +21,6 @@
 			<userAuthenticationMethod>DOMAIN</userAuthenticationMethod>
 			<logo>https://i.imgur.com/hp5r8ua.png</logo>
 			<domain>andromeda.cr</domain>
-			<performanceReviewTimeGap>6</performanceReviewTimeGap>
-			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</organization>
 	</organizations>
 
