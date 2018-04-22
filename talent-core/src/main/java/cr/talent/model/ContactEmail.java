@@ -9,26 +9,21 @@ import javax.persistence.Table;
  *
  * @author Elías Calderón
  */
-@Entity
-@Table(name = "contact_email")
-public class ContactEmail extends BasicEntity {
+public class ContactEmail {
 
     /**
      * The email that the mail will be sent to.
      */
-    @Column(name = "email" , nullable = false)
     private String email;
 
     /**
      * The subject of the email.
      */
-    @Column (name = "subject")
     private String subject;
 
     /**
      * The email content.
      */
-    @Column (name = "content")
     private String content;
 
     public ContactEmail(){}
@@ -53,8 +48,7 @@ public class ContactEmail extends BasicEntity {
         this.content = content;
     }
 
-    @Override
-    protected boolean onEquals(Object o) {
+    public boolean equals(Object o) {
         boolean result = false;
         if ( o instanceof Image){
             ContactEmail contactEmail = (ContactEmail) o;
@@ -63,8 +57,7 @@ public class ContactEmail extends BasicEntity {
         return result;
     }
 
-    @Override
-    protected int onHashCode(int result) {
+    public int hashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.email == null ? 0 : this.email.hashCode());
         return result;
