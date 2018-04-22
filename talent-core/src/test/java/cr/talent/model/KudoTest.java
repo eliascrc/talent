@@ -24,12 +24,12 @@ public class KudoTest {
     @Test
     public void coreTest(){
 
-        // Inheritted from BasicEntity
+        // Inherited from BasicEntity
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
-        // Inheritted from Observation
+        // Inherited from Observation
         TechnicalResource observee = mock(TechnicalResource.class);
         String description = "Great work!";
 
@@ -44,11 +44,9 @@ public class KudoTest {
         kudo.setEntityCreationTimestamp(entityCreationTimestamp);
         kudo.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         kudo.setEntityVersion(entityVersion);
-
         kudo.setDescription(description);
         kudo.setObservee(observee);
-        kudo.setRelatedProject(this.RELATED_PROJECT);
-
+        kudo.setRelatedProject(RELATED_PROJECT);
         kudo.setAuthor(author);
 
         // Verify the gets
@@ -56,11 +54,9 @@ public class KudoTest {
         assertEquals(entityCreationTimestamp, kudo.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, kudo.getLastUpdatedTimestamp());
         assertEquals(entityVersion, kudo.getEntityVersion());
-
         assertEquals(observee, kudo.getObservee());
         assertEquals(description, kudo.getDescription());
         assertEquals(RELATED_PROJECT, kudo.getRelatedProject());
-
         assertEquals(author, kudo.getAuthor());
 
     }

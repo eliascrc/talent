@@ -101,7 +101,7 @@ public class JobPositionTest{
     }
 
     @Test
-    public void testEqualForNonPersistentInvitation() {
+    public void testEqualForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
         jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
@@ -112,7 +112,7 @@ public class JobPositionTest{
     }
 
     @Test
-    public void testNonEqualForNonPersistentInvitation() {
+    public void testNonEqualForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
         jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
@@ -147,7 +147,7 @@ public class JobPositionTest{
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentinvitation() {
+    public void testEqualHashCodeForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
         jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
@@ -158,7 +158,7 @@ public class JobPositionTest{
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentinvitation() {
+    public void testNonEqualHashCodeForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
         jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 

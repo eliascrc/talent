@@ -119,7 +119,7 @@ public class InvitationTest{
         invitation1.setName(NAME);
 
         Invitation invitation2 = new Invitation();
-        invitation1.setName(NAME2);
+        invitation2.setName(NAME2);
 
         assertFalse(invitation1.equals(invitation2));
     }
@@ -149,7 +149,7 @@ public class InvitationTest{
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentinvitation() {
+    public void testEqualHashCodeForNonPersistentInvitation() {
         Invitation invitation1 = new Invitation();
         invitation1.setName(NAME);
 
@@ -160,7 +160,7 @@ public class InvitationTest{
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentinvitation() {
+    public void testNonEqualHashCodeForNonPersistentInvitation() {
         Invitation invitation1 = new Invitation();
         invitation1.setName(NAME);
 

@@ -25,13 +25,14 @@ public class PredefinedCapabilityLevelTest {
     @Test
     public void coreTest () {
 
-        // Verify the constructor
-        PredefinedCapabilityLevel predefinedCapabilityLevel = new PredefinedCapabilityLevel();
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
         int hierarchyPosition = 0;
         PredefinedCapability predefinedCapability = mock(PredefinedCapability.class);
+
+        // Verify the constructor
+        PredefinedCapabilityLevel predefinedCapabilityLevel = new PredefinedCapabilityLevel();
 
         // Verify the sets
         predefinedCapabilityLevel.setId(ID);

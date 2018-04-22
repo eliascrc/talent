@@ -11,8 +11,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-
-
 /**
  * Class that allows to test the predefined skill category methods to know all the different paths they could take.
  *
@@ -27,12 +25,15 @@ public class PredefinedSkillCategoryTest {
 
     @Test
     public void coreTest() {
-        PredefinedSkillCategory predefinedSkillCategory = new PredefinedSkillCategory();
 
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
+        //Verify constructor
+        PredefinedSkillCategory predefinedSkillCategory = new PredefinedSkillCategory();
+
+        //Verify sets
         predefinedSkillCategory.setName(NAME1);
         predefinedSkillCategory.setPredefinedSkills(new HashSet<>());
         predefinedSkillCategory.setEntityVersion(entityVersion);
@@ -40,6 +41,7 @@ public class PredefinedSkillCategoryTest {
         predefinedSkillCategory.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         predefinedSkillCategory.setId(ID1);
 
+        //Verify gets
         assertEquals(NAME1, predefinedSkillCategory.getName());
         assertEquals(entityCreationTimestamp, predefinedSkillCategory.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, predefinedSkillCategory.getLastUpdatedTimestamp());
@@ -48,6 +50,7 @@ public class PredefinedSkillCategoryTest {
         assertNotNull(predefinedSkillCategory.getPredefinedSkills());
     }
 
+    //ON EQUALS TESTS.
 
     @Test
     public void testEqualForSameObject() {
@@ -107,7 +110,7 @@ public class PredefinedSkillCategoryTest {
         assertFalse(predefinedSkillCategory1.equals(predefinedSkillCategory2));
     }
 
-
+    //ON HASH TESTS.
 
     @Test
     public void testEqualHashCodeForPersistentPredefinedSkillCategory() {

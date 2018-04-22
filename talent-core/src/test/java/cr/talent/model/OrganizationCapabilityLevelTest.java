@@ -27,15 +27,17 @@ public class OrganizationCapabilityLevelTest {
 
     @Test
     public void coreTest() {
-        OrganizationCapabilityLevel organizationCapabilityLevel = new OrganizationCapabilityLevel();
 
         int hierarchyPosition = 1;
         OrganizationCapability organizationCapability = mock(OrganizationCapability.class);
-
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
+        //Verify constructor
+        OrganizationCapabilityLevel organizationCapabilityLevel = new OrganizationCapabilityLevel();
+
+        //Verify sets
         organizationCapabilityLevel.setName(NAME1);
         organizationCapabilityLevel.setHierarchyPosition(hierarchyPosition);
         organizationCapabilityLevel.setCapability(organizationCapability);
@@ -48,6 +50,7 @@ public class OrganizationCapabilityLevelTest {
         organizationCapabilityLevel.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         organizationCapabilityLevel.setId(ID1);
 
+        //Verify gets
         assertEquals(hierarchyPosition, organizationCapabilityLevel.getHierarchyPosition());
         assertEquals(organizationCapability, organizationCapabilityLevel.getCapability());
         assertEquals(organizationCapability, organizationCapabilityLevel.getOrganizationCapability());
@@ -119,8 +122,6 @@ public class OrganizationCapabilityLevelTest {
         assertFalse(organizationCapabilityLevel1.equals(organizationCapabilityLevel2));
     }
 
-
-
     @Test
     public void testEqualHashCodeForPersistentOrganizationCapabilityLevel() {
         OrganizationCapabilityLevel organizationCapabilityLevel1 = new OrganizationCapabilityLevel();
@@ -142,8 +143,6 @@ public class OrganizationCapabilityLevelTest {
 
         assertFalse(organizationCapabilityLevel1.hashCode() == organizationCapabilityLevel2.hashCode());
     }
-
-
 
     @Test
     public void testEqualHashCodeForNonPersistentOrganizationCapabilityLevel() {

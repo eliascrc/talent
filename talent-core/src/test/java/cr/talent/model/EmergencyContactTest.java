@@ -37,10 +37,10 @@ public class EmergencyContactTest {
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
-
+        //Verify Constructor
         EmergencyContact emergencyContact = new EmergencyContact();
 
-
+        //Verify sets
         emergencyContact.setName(name);
         emergencyContact.setTelephone(telephone);
         emergencyContact.setEmail(EMAIL1);
@@ -50,6 +50,7 @@ public class EmergencyContactTest {
         emergencyContact.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         emergencyContact.setId(ID1);
 
+        //Verify gets
         assertEquals(name, emergencyContact.getName());
         assertEquals(telephone, emergencyContact.getTelephone());
         assertEquals(EMAIL1, emergencyContact.getEmail());
@@ -122,8 +123,6 @@ public class EmergencyContactTest {
 
         assertFalse(emergencyContact1.equals(emergencyContact2));
     }
-
-
 
     @Test
     public void testEqualHashCodeForPersistentEmergencyContact() {

@@ -25,11 +25,12 @@ public class ImageTest {
     @Test
     public void coreTest () {
 
-        // Verify the constructor
-        Image image = new Image();
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
+
+        // Verify the constructor
+        Image image = new Image();
 
         // Verify the sets
         image.setId(ID);

@@ -98,7 +98,7 @@ public class OrganizationSkillTest{
     }
 
     @Test
-    public void testEqualForNonPersistentInvitation() {
+    public void testEqualForNonPersistentOrganizationSkill() {
         OrganizationSkill organizationSkill1 = new OrganizationSkill();
         organizationSkill1.setName(NAME);
 
@@ -109,7 +109,7 @@ public class OrganizationSkillTest{
     }
 
     @Test
-    public void testNonEqualForNonPersistentInvitation() {
+    public void testNonEqualForNonPersistentOrganizationSkill() {
         OrganizationSkill organizationSkill1 = new OrganizationSkill();
         organizationSkill1.setName(NAME);
 
@@ -144,7 +144,7 @@ public class OrganizationSkillTest{
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentinvitation() {
+    public void testEqualHashCodeForNonPersistentOrganizationSkill() {
         OrganizationSkill organizationSkill1 = new OrganizationSkill();
         organizationSkill1.setName(NAME);
 
@@ -155,7 +155,7 @@ public class OrganizationSkillTest{
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentinvitation() {
+    public void testNonEqualHashCodeForNonPersistentOrganizationSkill() {
         OrganizationSkill organizationSkill1 = new OrganizationSkill();
         organizationSkill1.setName(NAME);
 

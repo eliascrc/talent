@@ -14,6 +14,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Class that allows to test the education record methods to know all the different paths they could take.
+ * 
  * @author Daniel Montes de Oca
  */
 public class EducationRecordTest {
@@ -28,7 +29,7 @@ public class EducationRecordTest {
     @Test
     public void coreTest() {
 
-        // Inheritted from BasicEntity
+        // Inherited from BasicEntity
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
@@ -44,7 +45,7 @@ public class EducationRecordTest {
         EducationRecord educationRecord = new EducationRecord();
 
         // Verify the setters
-        // Inheritted from BasicEntity
+        // Inherited from BasicEntity
         educationRecord.setId(ID);
         educationRecord.setEntityCreationTimestamp(entityCreationTimestamp);
         educationRecord.setLastUpdatedTimestamp(lastUpdatedTimestamp);
@@ -65,6 +66,8 @@ public class EducationRecordTest {
         assertEquals(lastUpdatedTimestamp, educationRecord.getLastUpdatedTimestamp());
         assertEquals(entityVersion, educationRecord.getEntityVersion());
         assertEquals(educationRecord.getTitle(), TITLE);
+        assertEquals(institution, educationRecord.getInstitution());
+        assertEquals(description, educationRecord.getDescription());
         assertEquals(educationRecord.getDate(), date);
         assertEquals(educationRecord.getPdfFile(), pdfFile);
         assertEquals(educationRecord.getHumanResourceManager(), humanResourceManager);
@@ -87,7 +90,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testEqualForPersistentSystemAdministrator() {
+    public void testEqualForPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setId(ID);
 
@@ -98,7 +101,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testNonEqualForPersistentSystemAdministrator() {
+    public void testNonEqualForPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setId(ID);
 
@@ -109,7 +112,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testEqualForNonPersistentSystemAdministrator() {
+    public void testEqualForNonPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setTitle(TITLE);
         educationRecord.setResource(TECHNICAL_RESOURCE);
@@ -122,7 +125,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentSystemAdministrator() {
+    public void testNonEqualForNonPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setTitle(TITLE);
         educationRecord.setResource(TECHNICAL_RESOURCE);
@@ -135,7 +138,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testEqualHashCodeForPersistentSystemAdministrator() {
+    public void testEqualHashCodeForPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setId(ID);
 
@@ -146,7 +149,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentSystemAdministrator() {
+    public void testNonEqualHashCodeForPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setId(ID);
 
@@ -157,7 +160,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentSystemAdministrator() {
+    public void testEqualHashCodeForNonPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setTitle(TITLE);
         educationRecord.setResource(TECHNICAL_RESOURCE);
@@ -170,7 +173,7 @@ public class EducationRecordTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentSystemAdministrator() {
+    public void testNonEqualHashCodeForNonPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setTitle(TITLE);
         educationRecord.setResource(TECHNICAL_RESOURCE);

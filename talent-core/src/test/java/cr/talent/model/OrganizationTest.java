@@ -26,7 +26,7 @@ public class OrganizationTest {
     private static final String UNIQUE_IDENTIFIER2 = "54321";
 
     @Test
-    public void CoreTest(){
+    public void coreTest(){
 
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
@@ -101,7 +101,7 @@ public class OrganizationTest {
     }
 
     @Test
-    public void testEqualForPersistentProject() {
+    public void testEqualForPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setId(ID);
 
@@ -112,7 +112,7 @@ public class OrganizationTest {
     }
 
     @Test
-    public void testNonEqualForPersistentProject() {
+    public void testNonEqualForPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setId(ID);
 
@@ -123,7 +123,7 @@ public class OrganizationTest {
     }
 
     @Test
-    public void testEqualForNonPersistentProject() {
+    public void testEqualForNonPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setId(UNIQUE_IDENTIFIER);
 
@@ -134,7 +134,7 @@ public class OrganizationTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentProject() {
+    public void testNonEqualForNonPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setId(UNIQUE_IDENTIFIER);
 
@@ -147,7 +147,7 @@ public class OrganizationTest {
     //ON HASH TESTS
 
     @Test
-    public void testEqualHashCodeForPersistentProject() {
+    public void testEqualHashCodeForPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setId(ID);
 
@@ -158,7 +158,7 @@ public class OrganizationTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentProject() {
+    public void testNonEqualHashCodeForPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setId(ID);
 
@@ -169,7 +169,7 @@ public class OrganizationTest {
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentProject() {
+    public void testEqualHashCodeForNonPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setUniqueIdentifier(UNIQUE_IDENTIFIER);
 
@@ -180,7 +180,7 @@ public class OrganizationTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentProject() {
+    public void testNonEqualHashCodeForNonPersistentOrganization() {
         Organization organization1 = new Organization();
         organization1.setUniqueIdentifier(UNIQUE_IDENTIFIER);
 

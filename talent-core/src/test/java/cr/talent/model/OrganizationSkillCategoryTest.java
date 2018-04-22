@@ -28,13 +28,14 @@ public class OrganizationSkillCategoryTest {
     @Test
     public void coreTest () {
 
-        // Verify the constructor
-        OrganizationSkillCategory organizationSkillCategory = new OrganizationSkillCategory();
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
         Organization organization = mock(Organization.class);
         Set<OrganizationSkill> organizationSkills = new HashSet<>();
+
+        // Verify the constructor
+        OrganizationSkillCategory organizationSkillCategory = new OrganizationSkillCategory();
 
         // Verify the sets
         organizationSkillCategory.setId(ID);
@@ -115,8 +116,6 @@ public class OrganizationSkillCategoryTest {
 
         assertFalse(organizationSkillCategory1.equals(organizationSkillCategory2));
     }
-
-    //Se hace con el id heredado de basic entity.
 
     @Test
     public void testEqualHashCodeForPersistentOrgSkillCategory() {
