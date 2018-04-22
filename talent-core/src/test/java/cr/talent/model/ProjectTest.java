@@ -15,8 +15,8 @@ import static org.mockito.Mockito.mock;
 import org.junit.Test;
 
 /**
- * Class that allows to test the project methods to know all the different paths they could take.
- * This class contains the test of the inherited methods
+ * Class that allows to test the project methods, to know all the different paths they could take.
+ * This class contains the test of the inherited methods and attributes
  * from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Maria Jose Cubero
@@ -117,7 +117,7 @@ public class ProjectTest{
         project1.setName(NAME);
 
         Project project2 = new Project();
-        project1.setName(NAME);
+        project2.setName(NAME);
 
         assertTrue(project1.equals(project2));
     }
@@ -128,7 +128,7 @@ public class ProjectTest{
         project1.setName(NAME);
 
         Project project2 = new Project();
-        project1.setName(NAME2);
+        project2.setName(NAME2);
 
         assertFalse(project1.equals(project2));
     }
