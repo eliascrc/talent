@@ -39,7 +39,9 @@ public class TwoStepVerification extends BasicEntity{
         if ( o instanceof TwoStepVerification){
             TwoStepVerification twoStepVerification = (TwoStepVerification) o;
             result = (this.resource == null ? twoStepVerification.getResource() == null :
-                    this.resource.equals(twoStepVerification.getResource()));
+                    this.resource.equals(twoStepVerification.getResource())
+                    && this.verificationCode == null ? twoStepVerification.getVerificationCode() == null :
+                    this.verificationCode.equals(twoStepVerification.getVerificationCode()));
         }
         return result;
     }
@@ -48,6 +50,7 @@ public class TwoStepVerification extends BasicEntity{
     protected int onHashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.resource == null ? 0 : this.resource.hashCode());
+        result = prime * result + (this.verificationCode == null ? 0 : this.verificationCode.hashCode());
         return result;
     }
 

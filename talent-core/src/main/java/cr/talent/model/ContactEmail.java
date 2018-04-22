@@ -69,4 +69,8 @@ public class ContactEmail extends BasicEntity {
         result = prime * result + (this.email == null ? 0 : this.email.hashCode());
         return result;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
