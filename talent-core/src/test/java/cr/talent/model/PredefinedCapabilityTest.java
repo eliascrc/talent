@@ -110,4 +110,48 @@ public class PredefinedCapabilityTest {
         assertFalse(predefinedCapability.equals(predefinedCapability2));
     }
 
+    @Test
+    public void testEqualHashCodeForPersistentPredefinedCapability() {
+        PredefinedCapability predefinedCapability = new PredefinedCapability();
+        predefinedCapability.setId(ID);
+
+        PredefinedCapability predefinedCapability2 = new PredefinedCapability();
+        predefinedCapability2.setId(ID);
+
+        assertTrue(predefinedCapability.hashCode() == predefinedCapability2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForPersistentPredefinedCapability() {
+        PredefinedCapability predefinedCapability = new PredefinedCapability();
+        predefinedCapability.setId(ID);
+
+        PredefinedCapability predefinedCapability2 = new PredefinedCapability();
+        predefinedCapability2.setId(ID2);
+
+        assertFalse(predefinedCapability.hashCode() == predefinedCapability2.hashCode());
+    }
+
+    @Test
+    public void testEqualHashCodeForNonPersistentPredefinedCapability() {
+        PredefinedCapability predefinedCapability = new PredefinedCapability();
+        predefinedCapability.setName(NAME);
+
+        PredefinedCapability predefinedCapability2 = new PredefinedCapability();
+        predefinedCapability2.setName(NAME);
+
+        assertTrue(predefinedCapability.hashCode() == predefinedCapability2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentPredefinedCapability() {
+        PredefinedCapability predefinedCapability = new PredefinedCapability();
+        predefinedCapability.setName(NAME);
+
+        PredefinedCapability predefinedCapability2 = new PredefinedCapability();
+        predefinedCapability2.setName(NAME2);
+
+        assertFalse(predefinedCapability.hashCode() == predefinedCapability2.hashCode());
+    }
+
 }
