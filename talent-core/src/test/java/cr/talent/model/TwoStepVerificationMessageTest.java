@@ -62,7 +62,7 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
-    public void testEqualForPersistentProject() {
+    public void testEqualForPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setId(ID);
 
@@ -73,7 +73,7 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
-    public void testNonEqualForPersistentProject() {
+    public void testNonEqualForPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setId(ID);
 
@@ -84,7 +84,7 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
-    public void testEqualForNonPersistentProject() {
+    public void testEqualForNonPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setMessage(MESSAGE);
 
@@ -95,7 +95,7 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentProject() {
+    public void testNonEqualForNonPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setMessage(MESSAGE);
 
@@ -106,7 +106,7 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
-    public void testEqualHashCodeForPersistentProject() {
+    public void testEqualHashCodeForPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setId(ID);
 
@@ -117,19 +117,19 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentProject() {
+    public void testNonEqualHashCodeForPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setId(ID);
 
         TwoStepVerificationMessage twoStepVerificationMessage2 = new TwoStepVerificationMessage();
         twoStepVerificationMessage2.setId(ID2);
 
-        assertFalse(twoStepVerificationMessage.hashCode() == twoStepVerificationMessage.hashCode());
+        assertFalse(twoStepVerificationMessage.hashCode() == twoStepVerificationMessage2.hashCode());
     }
 
 
     @Test
-    public void testEqualHashCodeForNonPersistentProject() {
+    public void testEqualHashCodeForNonPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setMessage(MESSAGE);
 
@@ -140,7 +140,7 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentProject() {
+    public void testNonEqualHashCodeForNonPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setMessage(MESSAGE);
 
