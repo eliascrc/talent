@@ -14,7 +14,13 @@ import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
 
-
+/**
+ * Class that allows to test the project methods to know all the different paths they could take.
+ * This class contains the test of the inherited methods
+ * from {@link cr.talent.model.BasicEntity} class.
+ *
+ * @author Maria Jose Cubero
+ */
 public class ProjectTest{
 
     private static final String ID = "1234";
@@ -179,7 +185,7 @@ public class ProjectTest{
     }
 
     /**
-     *  Only on this class.
+     *  Only on this class. Test inherited method from {@link cr.talent.model.BasicEntity} class.
      */
     @Test
     public void testClone() {
