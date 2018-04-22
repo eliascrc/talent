@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @DiscriminatorValue(value = "PREDEFINED_CAPABILITY_LEVEL")
-public class PredefinedCapabilityLevel extends CapabilityLevel{
+public class PredefinedCapabilityLevel extends CapabilityLevel {
 
     /**
      * The capability of the capability level.
