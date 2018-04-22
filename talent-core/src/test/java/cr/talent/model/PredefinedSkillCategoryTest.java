@@ -6,18 +6,15 @@ import java.util.HashSet;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
+
 
 import org.junit.Test;
 
-import javax.naming.Name;
+
 
 /**
- * Class that allows to test the emergency contact methods to know all the different paths they could take.
+ * Class that allows to test the predefined skill category methods to know all the different paths they could take.
  *
  * @author Otto Mena Kikut
  */
@@ -30,8 +27,6 @@ public class PredefinedSkillCategoryTest {
 
     @Test
     public void coreTest() {
-
-
         PredefinedSkillCategory predefinedSkillCategory = new PredefinedSkillCategory();
 
         Date entityCreationTimestamp = new Date();
@@ -51,8 +46,6 @@ public class PredefinedSkillCategoryTest {
         assertEquals(entityVersion, predefinedSkillCategory.getEntityVersion());
         assertEquals(ID1, predefinedSkillCategory.getId());
         assertNotNull(predefinedSkillCategory.getName());
-
-
     }
 
 
