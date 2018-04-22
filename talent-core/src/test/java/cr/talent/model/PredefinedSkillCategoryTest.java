@@ -45,7 +45,7 @@ public class PredefinedSkillCategoryTest {
         assertEquals(lastUpdatedTimestamp, predefinedSkillCategory.getLastUpdatedTimestamp());
         assertEquals(entityVersion, predefinedSkillCategory.getEntityVersion());
         assertEquals(ID1, predefinedSkillCategory.getId());
-        assertNotNull(predefinedSkillCategory.getName());
+        assertNotNull(predefinedSkillCategory.getPredefinedSkills());
     }
 
 

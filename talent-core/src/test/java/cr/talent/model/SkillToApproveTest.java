@@ -47,8 +47,6 @@ public class SkillToApproveTest {
         assertEquals(lastUpdatedTimestamp, skillToApprove.getLastUpdatedTimestamp());
         assertEquals(entityVersion, skillToApprove.getEntityVersion());
         assertEquals(ID1, skillToApprove.getId());
-        assertNotNull(skillToApprove.getRequestedSkill());
-        assertNotNull(skillToApprove.getRequestingTechnicalResource());
     }
 
 

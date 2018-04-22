@@ -58,9 +58,6 @@ public class EmergencyContactTest {
         assertEquals(lastUpdatedTimestamp, emergencyContact.getLastUpdatedTimestamp());
         assertEquals(entityVersion, emergencyContact.getEntityVersion());
         assertEquals(ID1, emergencyContact.getId());
-        assertNotNull(emergencyContact.getName());
-        assertNotNull(emergencyContact.getTelephone());
-        assertNotNull(emergencyContact.getTechnicalResource());
     }
 
 

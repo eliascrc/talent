@@ -55,10 +55,9 @@ public class OrganizationCapabilityLevelTest {
         assertEquals(lastUpdatedTimestamp, organizationCapabilityLevel.getLastUpdatedTimestamp());
         assertEquals(entityVersion, organizationCapabilityLevel.getEntityVersion());
         assertEquals(ID1, organizationCapabilityLevel.getId());
-        assertNotNull(organizationCapabilityLevel.getName());
-        assertNotNull(organizationCapabilityLevel.getHierarchyPosition());
-        assertNotNull(organizationCapabilityLevel.getCapability());
-        assertNotNull(organizationCapability);
+        assertNotNull(organizationCapabilityLevel.getProjectCapability());
+        assertNotNull(organizationCapabilityLevel.getRequiredSkills());
+        assertNotNull(organizationCapabilityLevel.getResources());
     }
 
 
