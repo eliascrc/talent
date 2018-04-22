@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import org.aspectj.weaver.ast.Or;
 import org.junit.Test;
 
 import java.util.Date;
@@ -100,5 +101,94 @@ public class OrganizationTest {
         assertFalse(project1.equals(new Object()));
     }
 
+    @Test
+    public void testEqualForPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setId(ID);
+
+        Organization organization2 = new Organization();
+        organization2.setId(ID);
+
+        assertTrue(organization1.equals(organization2));
+    }
+
+    @Test
+    public void testNonEqualForPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setId(ID);
+
+        Organization organization2 = new Organization();
+        organization2.setId(ID2);
+
+        assertFalse(organization1.equals(organization2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setId(UNIQUE_IDENTIFIER);
+
+        Organization organization2 = new Organization();
+        organization2.setId(UNIQUE_IDENTIFIER);
+
+        assertTrue(organization1.equals(organization2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setId(UNIQUE_IDENTIFIER);
+
+        Organization organization2 = new Organization();
+        organization2.setId(UNIQUE_IDENTIFIER2);
+
+        assertFalse(organization1.equals(organization2));
+    }
+
+    //ON HASH TESTS
+
+    @Test
+    public void testEqualHashCodeForPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setId(ID);
+
+        Organization organization2 = new Organization();
+        organization2.setId(ID);
+
+        assertTrue(organization1.hashCode() == organization1.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setId(ID);
+
+        Organization organization2 = new Organization();
+        organization2.setId(ID2);
+
+        assertFalse(organization1.hashCode() == organization2.hashCode());
+    }
+
+    @Test
+    public void testEqualHashCodeForNonPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setUniqueIdentifier(UNIQUE_IDENTIFIER);
+
+        Organization organization2 = new Organization();
+        organization2.setUniqueIdentifier(UNIQUE_IDENTIFIER);
+
+        assertTrue(organization1.hashCode() == organization1.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentProject() {
+        Organization organization1 = new Organization();
+        organization1.setUniqueIdentifier(UNIQUE_IDENTIFIER);
+
+        Organization organization2 = new Organization();
+        organization2.setUniqueIdentifier(UNIQUE_IDENTIFIER2);
+
+        assertFalse(organization1.hashCode() == organization2.hashCode());
+    }
 
 }

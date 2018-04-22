@@ -40,7 +40,9 @@ public class TwoStepVerificationMessage extends BasicEntity{
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.message == null ? 0 : this.message.hashCode());
+        return result;
     }
 
     public String getMessage() {
