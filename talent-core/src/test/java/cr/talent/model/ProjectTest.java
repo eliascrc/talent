@@ -117,7 +117,7 @@ public class ProjectTest{
         project1.setName(NAME);
 
         Project project2 = new Project();
-        project1.setName(NAME);
+        project2.setName(NAME);
 
         assertTrue(project1.equals(project2));
     }
@@ -128,7 +128,7 @@ public class ProjectTest{
         project1.setName(NAME);
 
         Project project2 = new Project();
-        project1.setName(NAME2);
+        project2.setName(NAME2);
 
         assertFalse(project1.equals(project2));
     }
