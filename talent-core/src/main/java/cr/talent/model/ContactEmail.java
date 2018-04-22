@@ -1,9 +1,5 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  *Class that represents a contact email to contact the administrators of the Talent system.
  *
@@ -48,16 +44,19 @@ public class ContactEmail {
         this.content = content;
     }
 
+    @Override
     public boolean equals(Object o) {
         boolean result = false;
-        if ( o instanceof Image){
+        if ( o instanceof ContactEmail){
             ContactEmail contactEmail = (ContactEmail) o;
             result = (this.email == null ? contactEmail.getEmail() == null : this.email.equals(contactEmail.getEmail()));
         }
         return result;
     }
 
-    public int hashCode(int result) {
+    @Override
+    public int hashCode() {
+        int result = 1;
         final int prime = 23;
         result = prime * result + (this.email == null ? 0 : this.email.hashCode());
         return result;

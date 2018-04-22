@@ -70,7 +70,7 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testEqualForPersistentProject() {
+    public void testEqualForPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setId(ID);
 
@@ -81,7 +81,7 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testNonEqualForPersistentProject() {
+    public void testNonEqualForPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setId(ID);
 
@@ -92,7 +92,7 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testEqualForNonPersistentProject() {
+    public void testEqualForNonPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setTechnicalResource(TECHNICAL_RESOURCE);
 
@@ -103,7 +103,7 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentProject() {
+    public void testNonEqualForNonPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setTechnicalResource(TECHNICAL_RESOURCE);
 
@@ -116,7 +116,7 @@ public class CareerPathTest {
     //ON HASH TESTS.
 
     @Test
-    public void testEqualHashCodeForPersistentProject() {
+    public void testEqualHashCodeForPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setId(ID);
 
@@ -127,7 +127,7 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentProject() {
+    public void testNonEqualHashCodeForPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setId(ID);
 
@@ -138,7 +138,7 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentProject() {
+    public void testEqualHashCodeForNonPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setTechnicalResource(TECHNICAL_RESOURCE);
 
@@ -149,7 +149,7 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentProject() {
+    public void testNonEqualHashCodeForNonPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setTechnicalResource(TECHNICAL_RESOURCE);
 
