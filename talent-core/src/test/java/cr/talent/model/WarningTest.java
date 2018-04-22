@@ -13,6 +13,8 @@ import java.util.Date;
 
 /**
  * Class that allows to test the warning methods to know all the different paths they could take.
+ * This class contains the test of the inherited methods ans attributes
+ * from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Fabian Roberto Leandro
  */

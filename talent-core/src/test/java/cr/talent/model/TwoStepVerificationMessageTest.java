@@ -12,6 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Class that allows to test the TwoStepVerification methods to know all the different paths they could take.
+ *  This class contains the test of the inherited methods ans attributes
+ *  from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Daniel Montes de Oca
  */

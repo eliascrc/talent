@@ -14,6 +14,8 @@ import org.junit.Test;
 
 /**
  * Class that allows to test the skills to approve methods to know all the different paths they could take.
+ *  This class contains the test of the inherited methods ans attributes
+ *  from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Otto Mena Kikut
  */
