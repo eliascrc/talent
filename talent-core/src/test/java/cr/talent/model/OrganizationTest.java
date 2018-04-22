@@ -1,6 +1,5 @@
 package cr.talent.model;
 
-import org.aspectj.weaver.ast.Or;
 import org.junit.Test;
 
 import java.util.Date;
@@ -89,16 +88,16 @@ public class OrganizationTest {
 
     @Test
     public void testEqualForSameObject() {
-        Project project1 = new Project();
+        Organization organization = new Organization();
 
-        assertTrue(project1.equals(project1));
+        assertTrue(organization.equals(organization));
     }
 
     @Test
     public void testEqualForDifferentClass() {
-        Project project1 = new Project();
+        Organization organization = new Organization();
 
-        assertFalse(project1.equals(new Object()));
+        assertFalse(organization.equals(new Object()));
     }
 
     @Test

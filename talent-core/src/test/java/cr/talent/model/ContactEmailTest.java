@@ -31,19 +31,11 @@ public class ContactEmailTest {
         String content = "test";
 
         // Verify the sets
-        contactEmail.setId(ID);
-        contactEmail.setEntityCreationTimestamp(entityCreationTimestamp);
-        contactEmail.setLastUpdatedTimestamp(lastUpdatedTimestamp);
-        contactEmail.setEntityVersion(entityVersion);
         contactEmail.setEmail(email);
         contactEmail.setSubject(subject);
         contactEmail.setContent(content);
 
         // Verify the gets
-        assertEquals(ID, contactEmail.getId());
-        assertEquals(entityCreationTimestamp, contactEmail.getEntityCreationTimestamp());
-        assertEquals(lastUpdatedTimestamp, contactEmail.getLastUpdatedTimestamp());
-        assertEquals(entityVersion, contactEmail.getEntityVersion());
         assertEquals(email, contactEmail.getEmail());
         assertEquals(subject, contactEmail.getSubject());
         assertEquals(content, contactEmail.getContent());
