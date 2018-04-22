@@ -135,7 +135,7 @@ public class TechnicalResource extends User{
     private OrganizationCapabilityLevel organizationCapabilityLevel;
 
     /**
-     * List of the observations that that resouce has made.
+     * List of the observations that that resource has made.
      */
     @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "author")
     private Set<Kudo> madeKudo;

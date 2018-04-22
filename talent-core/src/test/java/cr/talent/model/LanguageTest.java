@@ -15,7 +15,7 @@ import static org.mockito.Mockito.mock;
 import org.junit.Test;
 
 /**
- * Class that allows to test the project methods to know all the different paths they could take.
+ * Class that allows to test the language methods to know all the different paths they could take.
  * @author Daniel Montes de Oca
  */
 public class LanguageTest {
@@ -24,8 +24,6 @@ public class LanguageTest {
     private static final String ID2 = "12345";
     private static final String LANGUAGENAME = "English";
     private static final String LANGUAGENAME2 = "Spanish";
-
-    private static final String STRING_BUILDER_OUTPUT = "[class name = %s, id = %s]";
 
     @Test
     public void coreTest() {

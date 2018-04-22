@@ -29,8 +29,6 @@ public class OrganizationCapabilityTest {
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
-        //Inheritted from Capability
-
         // Declared in OrganizationCapability
         Organization organization = mock(Organization.class);
 
@@ -41,9 +39,11 @@ public class OrganizationCapabilityTest {
         organizationCapability.setId(ID);
         organizationCapability.setEntityCreationTimestamp(entityCreationTimestamp);
         organizationCapability.setLastUpdatedTimestamp(lastUpdatedTimestamp);
+        //Inheritted from Capability
         organizationCapability.setEntityVersion(entityVersion);
         organizationCapability.setName(NAME);
         organizationCapability.setLevelHierarchy(new HashSet<>());
+        // Declared in OrganizationCapability
         organizationCapability.setOrganization(organization);
 
         // Verify the getters
@@ -69,7 +69,6 @@ public class OrganizationCapabilityTest {
         assertFalse(organizationCapability.equals(new Object()));
     }
 
-    // En los persistance se compara el ID.
     @Test
     public void testEqualForPersistentOrganizationCapability() {
         OrganizationCapability organizationCapability = new OrganizationCapability();
@@ -93,32 +92,6 @@ public class OrganizationCapabilityTest {
     }
 
     @Test
-    public void testEqualForNonPersistentOrganizationCapability() {
-        OrganizationCapability organizationCapability = new OrganizationCapability();
-        organizationCapability.setName(NAME);
-
-        OrganizationCapability organizationCapability2 = new OrganizationCapability();
-        organizationCapability2.setName(NAME);
-
-        assertTrue(organizationCapability.equals(organizationCapability2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentOrganizationCapability() {
-        OrganizationCapability organizationCapability = new OrganizationCapability();
-        organizationCapability.setName(NAME);
-
-        OrganizationCapability organizationCapability2 = new OrganizationCapability();
-        organizationCapability2.setName(NAME2);
-
-        assertFalse(organizationCapability.equals(organizationCapability2));
-    }
-
-    //ON HASH TESTS.
-
-    //Se hace con el id heredado de basic entity.
-
-    @Test
     public void testEqualHashCodeForPersistentOrganizationCapability() {
         OrganizationCapability organizationCapability = new OrganizationCapability();
         organizationCapability.setId(ID);
@@ -136,31 +109,6 @@ public class OrganizationCapabilityTest {
 
         OrganizationCapability organizationCapability2 = new OrganizationCapability();
         organizationCapability2.setId(ID2);
-
-        assertFalse(organizationCapability.hashCode() == organizationCapability2.hashCode());
-    }
-
-
-     //el non persistant se hace con los atributos del on equals.
-
-    @Test
-    public void testEqualHashCodeForNonPersistentOrganizationCapability() {
-        OrganizationCapability organizationCapability = new OrganizationCapability();
-        organizationCapability.setName(NAME);
-
-        OrganizationCapability organizationCapability2 = new OrganizationCapability();
-        organizationCapability2.setName(NAME);
-
-        assertTrue(organizationCapability.hashCode() == organizationCapability2.hashCode());
-    }
-
-    @Test
-    public void testNonEqualHashCodeForNonPersistentOrganizationCapability() {
-        OrganizationCapability organizationCapability = new OrganizationCapability();
-        organizationCapability.setName(NAME);
-
-        OrganizationCapability organizationCapability2 = new OrganizationCapability();
-        organizationCapability2.setName(NAME2);
 
         assertFalse(organizationCapability.hashCode() == organizationCapability2.hashCode());
     }
