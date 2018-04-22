@@ -40,7 +40,9 @@ public class PredefinedSkillTest {
         predefinedSkill.setEntityCreationTimestamp(entityCreationTimestamp);
         predefinedSkill.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         predefinedSkill.setEntityVersion(entityVersion);
+        // Inheritted from Skill
         predefinedSkill.setName(NAME);
+        // Declared in PredefinedSkill
         predefinedSkill.setCategory(predefinedSkillCategory);
 
         // Verify the gets
@@ -66,7 +68,6 @@ public class PredefinedSkillTest {
         assertFalse(predefinedSkill.equals(new Object()));
     }
 
-    // En los persistance se compara el ID.
     @Test
     public void testEqualForPersistentPredefinedSkill() {
         PredefinedSkill predefinedSkill = new PredefinedSkill();
@@ -90,32 +91,6 @@ public class PredefinedSkillTest {
     }
 
     @Test
-    public void testEqualForNonPersistentPredefinedSkill() {
-        PredefinedSkill predefinedSkill = new PredefinedSkill();
-        predefinedSkill.setName(NAME);
-
-        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
-        predefinedSkill2.setName(NAME);
-
-        assertTrue(predefinedSkill.equals(predefinedSkill2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentPredefinedSkill() {
-        PredefinedSkill predefinedSkill = new PredefinedSkill();
-        predefinedSkill.setName(NAME);
-
-        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
-        predefinedSkill2.setName(NAME2);
-
-        assertFalse(predefinedSkill.equals(predefinedSkill2));
-    }
-
-    //ON HASH TESTS.
-
-    //Se hace con el id heredado de basic entity.
-
-    @Test
     public void testEqualHashCodeForPersistentPredefinedSkill() {
         PredefinedSkill predefinedSkill = new PredefinedSkill();
         predefinedSkill.setId(ID);
@@ -133,31 +108,6 @@ public class PredefinedSkillTest {
 
         PredefinedSkill predefinedSkill2 = new PredefinedSkill();
         predefinedSkill2.setId(ID2);
-
-        assertFalse(predefinedSkill.hashCode() == predefinedSkill2.hashCode());
-    }
-
-
-     //el non persistant se hace con los atributos del on equals.
-
-    @Test
-    public void testEqualHashCodeForNonPersistentPredefinedSkill() {
-        PredefinedSkill predefinedSkill = new PredefinedSkill();
-        predefinedSkill.setName(NAME);
-
-        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
-        predefinedSkill2.setName(NAME);
-
-        assertTrue(predefinedSkill.hashCode() == predefinedSkill2.hashCode());
-    }
-
-    @Test
-    public void testNonEqualHashCodeForNonPersistentPredefinedSkill() {
-        PredefinedSkill predefinedSkill = new PredefinedSkill();
-        predefinedSkill.setName(NAME);
-
-        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
-        predefinedSkill2.setName(NAME2);
 
         assertFalse(predefinedSkill.hashCode() == predefinedSkill2.hashCode());
     }

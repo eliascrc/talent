@@ -73,7 +73,6 @@ public class WarningTest {
         assertFalse(warning.equals(new Object()));
     }
 
-    // En los persistance se compara el ID.
     @Test
     public void testEqualForPersistentWarning() {
         Warning warning = new Warning();
@@ -97,32 +96,6 @@ public class WarningTest {
     }
 
     @Test
-    public void testEqualForNonPersistentWarning() {
-        Warning warning = new Warning();
-        warning.setRelatedProject(RELATED_PROJECT);
-
-        Warning warning2 = new Warning();
-        warning2.setRelatedProject(RELATED_PROJECT);
-
-        assertTrue(warning.equals(warning2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentWarning() {
-        Warning warning = new Warning();
-        warning.setRelatedProject(RELATED_PROJECT);
-
-        Warning warning2 = new Warning();
-        warning2.setRelatedProject(RELATED_PROJECT2);
-
-        assertFalse(warning.equals(warning2));
-    }
-
-    //ON HASH TESTS.
-
-    //Se hace con el id heredado de basic entity.
-
-    @Test
     public void testEqualHashCodeForPersistentWarning() {
         Warning warning = new Warning();
         warning.setId(ID);
@@ -140,31 +113,6 @@ public class WarningTest {
 
         Warning warning2 = new Warning();
         warning2.setId(ID2);
-
-        assertFalse(warning.hashCode() == warning2.hashCode());
-    }
-
-
-     //el non persistant se hace con los atributos del on equals.
-
-    @Test
-    public void testEqualHashCodeForNonPersistentWarning() {
-        Warning warning = new Warning();
-        warning.setRelatedProject(RELATED_PROJECT);
-
-        Warning warning2 = new Warning();
-        warning2.setRelatedProject(RELATED_PROJECT);
-
-        assertTrue(warning.hashCode() == warning2.hashCode());
-    }
-
-    @Test
-    public void testNonEqualHashCodeForNonPersistentWarning() {
-        Warning warning = new Warning();
-        warning.setRelatedProject(RELATED_PROJECT);
-
-        Warning warning2 = new Warning();
-        warning2.setRelatedProject(RELATED_PROJECT2);
 
         assertFalse(warning.hashCode() == warning2.hashCode());
     }

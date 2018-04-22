@@ -37,21 +37,6 @@ public class HumanResourceManagerTest {
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
-        // Inheritted from TechnicalResource
-        boolean isAdministrator = true;
-        Date lastLevelAssessment = new Date();
-        Date lastPerformanceReview = new Date();
-        Image image = mock(Image.class);
-        JobPosition jobPosition = mock(JobPosition.class);
-        TechnicalPosition technicalPosition = mock(TechnicalPosition.class);
-        CareerPath careerPath = mock(CareerPath.class);
-        TechnicalManager technicalManager = mock(TechnicalManager.class);
-        Language language = mock(Language.class);
-        String timeZone = "CST";
-        int levelAssessmentTimeGap = 5;
-        OrganizationCapabilityLevel organizationCapabilityLevel = mock(OrganizationCapabilityLevel.class);
-        TwoStepVerification twoStepVerification = mock(TwoStepVerification.class);
-
         // Inheritted from User
         String firstName = "firstName";
 		String lastName = "lastName";
@@ -69,28 +54,6 @@ public class HumanResourceManagerTest {
         humanResourceManager.setEntityCreationTimestamp(entityCreationTimestamp);
         humanResourceManager.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         humanResourceManager.setEntityVersion(entityVersion);
-
-        // Inheritted from TechnicalResource
-        humanResourceManager.setAdministrator(isAdministrator);
-		humanResourceManager.setLastLevelAssessment(lastLevelAssessment);
-		humanResourceManager.setLastPerformanceReview(lastPerformanceReview);
-		humanResourceManager.setProfilePicture(image);
-		humanResourceManager.setOrganization(ORGANIZATION);
-		humanResourceManager.setEducationRecords(new HashSet());
-		humanResourceManager.setProjectPositions(new HashSet());
-		humanResourceManager.setJobPosition(jobPosition);
-		humanResourceManager.setTechnicalPosition(technicalPosition);
-		humanResourceManager.setCareerPath(careerPath);
-		humanResourceManager.setTechnicalManager(technicalManager);
-		humanResourceManager.setObservations(new HashSet());
-		humanResourceManager.setEmergencyContacts(new HashSet());
-		humanResourceManager.setLanguage(language);
-		humanResourceManager.setTimeZone(timeZone);
-		humanResourceManager.setLevelAssessmentTimeGap(levelAssessmentTimeGap);
-		humanResourceManager.setOrganizationCapabilityLevel(organizationCapabilityLevel);
-		humanResourceManager.setMadeKudo(new HashSet());
-		humanResourceManager.setSkills(new HashSet());
-		humanResourceManager.setTwoStepVerification(twoStepVerification);
 
 		// Inheritted from User
         humanResourceManager.setUsername(USERNAME) ;
@@ -110,27 +73,8 @@ public class HumanResourceManagerTest {
         assertEquals(entityCreationTimestamp, humanResourceManager.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, humanResourceManager.getLastUpdatedTimestamp());
         assertEquals(entityVersion, humanResourceManager.getEntityVersion());
-        assertEquals(humanResourceManager.isAdministrator(),isAdministrator);
-        assertEquals(humanResourceManager.getLastLevelAssessment(),lastLevelAssessment);
-        assertEquals(humanResourceManager.getLastPerformanceReview(),lastPerformanceReview);
-        assertEquals(humanResourceManager.getProfilePicture(),image);
-        assertEquals(humanResourceManager.getOrganization(),ORGANIZATION);
-        assertNotNull(humanResourceManager.getEducationRecords());
-        assertNotNull(humanResourceManager.getProjectPositions());
-        assertEquals(humanResourceManager.getJobPosition(),jobPosition);
-        assertEquals(humanResourceManager.getTechnicalPosition(),technicalPosition);
-        assertEquals(humanResourceManager.getCareerPath(),careerPath);
-        assertEquals(humanResourceManager.getTechnicalManager(),technicalManager);
-        assertNotNull(humanResourceManager.getObservations());
-        assertNotNull(humanResourceManager.getEmergencyContacts());
-        assertEquals(humanResourceManager.getLanguage(),language);
-        assertEquals(humanResourceManager.getTimeZone(),timeZone);
-        assertEquals(humanResourceManager.getLevelAssessmentTimeGap(),levelAssessmentTimeGap);
-        assertEquals(humanResourceManager.getOrganizationCapabilityLevel(),organizationCapabilityLevel);
-        assertNotNull(humanResourceManager.getMadeKudo());
-        assertNotNull(humanResourceManager.getSkills());
-        assertEquals(humanResourceManager.getTwoStepVerification(),twoStepVerification);
-        assertEquals(humanResourceManager.getUsername(),USERNAME);
+
+        // Inheritted from User
 		assertEquals(humanResourceManager.getFirstName(),firstName);
 		assertEquals(humanResourceManager.getLastName(),lastName);
 		assertEquals(humanResourceManager.getPassword(),PASSWORD);
@@ -139,6 +83,7 @@ public class HumanResourceManagerTest {
 		assertEquals(humanResourceManager.getLastLoginTimestamp(),lastLoginTimeStamp);
 		assertEquals(humanResourceManager.getStatus(),status);
 
+		// Declared in HumanResourceManager
         assertNotNull(humanResourceManager.getUncheckedEducationRecords());
     }
 
@@ -178,36 +123,6 @@ public class HumanResourceManagerTest {
     }
 
     @Test
-    public void testEqualForNonPersistentHumanResourceManager() {
-        HumanResourceManager humanResourceManager = new HumanResourceManager();
-        humanResourceManager.setUsername(USERNAME);
-        humanResourceManager.setPassword(PASSWORD);
-        humanResourceManager.setOrganization(ORGANIZATION);
-
-        HumanResourceManager humanResourceManager2 = new HumanResourceManager();
-        humanResourceManager2.setUsername(USERNAME);
-        humanResourceManager2.setPassword(PASSWORD);
-        humanResourceManager2.setOrganization(ORGANIZATION);
-
-        assertTrue(humanResourceManager.equals(humanResourceManager2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentHumanResourceManager() {
-        HumanResourceManager humanResourceManager = new HumanResourceManager();
-        humanResourceManager.setUsername(USERNAME);
-        humanResourceManager.setPassword(PASSWORD);
-        humanResourceManager.setOrganization(ORGANIZATION);
-
-        HumanResourceManager humanResourceManager2 = new HumanResourceManager();
-        humanResourceManager2.setUsername(USERNAME2);
-        humanResourceManager2.setPassword(PASSWORD2);
-        humanResourceManager2.setOrganization(ORGANIZATION2);
-
-        assertFalse(humanResourceManager.equals(humanResourceManager2));
-    }
-
-    @Test
     public void testEqualHashCodeForPersistentHumanResourceManager() {
         HumanResourceManager humanResourceManager = new HumanResourceManager();
         humanResourceManager.setId(ID);
@@ -229,34 +144,5 @@ public class HumanResourceManagerTest {
         assertFalse(humanResourceManager.hashCode() == humanResourceManager2.hashCode());
     }
 
-    @Test
-    public void testEqualHashCodeForNonPersistentHumanResourceManager() {
-        HumanResourceManager humanResourceManager = new HumanResourceManager();
-        humanResourceManager.setUsername(USERNAME);
-        humanResourceManager.setPassword(PASSWORD);
-        humanResourceManager.setOrganization(ORGANIZATION);
-
-        HumanResourceManager humanResourceManager2 = new HumanResourceManager();
-        humanResourceManager2.setUsername(USERNAME);
-        humanResourceManager2.setPassword(PASSWORD);
-        humanResourceManager2.setOrganization(ORGANIZATION);
-
-        assertTrue(humanResourceManager.hashCode() == humanResourceManager2.hashCode());
-    }
-
-    @Test
-    public void testNonEqualHashCodeForNonPersistentHumanResourceManager() {
-        HumanResourceManager humanResourceManager = new HumanResourceManager();
-        humanResourceManager.setUsername(USERNAME);
-        humanResourceManager.setPassword(PASSWORD);
-        humanResourceManager.setOrganization(ORGANIZATION);
-
-        HumanResourceManager humanResourceManager2 = new HumanResourceManager();
-        humanResourceManager2.setUsername(USERNAME2);
-        humanResourceManager2.setPassword(PASSWORD2);
-        humanResourceManager2.setOrganization(ORGANIZATION2);
-
-        assertFalse(humanResourceManager.hashCode() == humanResourceManager2.hashCode());
-    }
 }
 

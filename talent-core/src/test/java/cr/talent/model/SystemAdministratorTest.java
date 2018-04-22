@@ -112,32 +112,6 @@ public class SystemAdministratorTest {
     }
 
     @Test
-    public void testEqualForNonPersistentSystemAdministrator() {
-        SystemAdministrator systemAdministrator = new SystemAdministrator();
-        systemAdministrator.setUsername(USERNAME);
-        systemAdministrator.setPassword(PASSWORD);
-
-        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
-        systemAdministrator2.setUsername(USERNAME);
-        systemAdministrator2.setPassword(PASSWORD);
-
-        assertTrue(systemAdministrator.equals(systemAdministrator2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentSystemAdministrator() {
-        SystemAdministrator systemAdministrator = new SystemAdministrator();
-        systemAdministrator.setUsername(USERNAME);
-        systemAdministrator.setPassword(PASSWORD);
-
-        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
-        systemAdministrator2.setUsername(USERNAME2);
-        systemAdministrator2.setPassword(PASSWORD2);
-
-        assertFalse(systemAdministrator.equals(systemAdministrator2));
-    }
-
-    @Test
     public void testEqualHashCodeForPersistentSystemAdministrator() {
         SystemAdministrator systemAdministrator = new SystemAdministrator();
         systemAdministrator.setId(ID);
@@ -155,32 +129,6 @@ public class SystemAdministratorTest {
 
         SystemAdministrator systemAdministrator2 = new SystemAdministrator();
         systemAdministrator2.setId(ID2);
-
-        assertFalse(systemAdministrator.hashCode() == systemAdministrator2.hashCode());
-    }
-
-    @Test
-    public void testEqualHashCodeForNonPersistentSystemAdministrator() {
-        SystemAdministrator systemAdministrator = new SystemAdministrator();
-        systemAdministrator.setUsername(USERNAME);
-        systemAdministrator.setPassword(PASSWORD);
-
-        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
-        systemAdministrator2.setUsername(USERNAME);
-        systemAdministrator2.setPassword(PASSWORD);
-
-        assertTrue(systemAdministrator.hashCode() == systemAdministrator2.hashCode());
-    }
-
-    @Test
-    public void testNonEqualHashCodeForNonPersistentSystemAdministrator() {
-        SystemAdministrator systemAdministrator = new SystemAdministrator();
-        systemAdministrator.setUsername(USERNAME);
-        systemAdministrator.setPassword(PASSWORD);
-
-        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
-        systemAdministrator2.setUsername(USERNAME2);
-        systemAdministrator2.setPassword(PASSWORD2);
 
         assertFalse(systemAdministrator.hashCode() == systemAdministrator2.hashCode());
     }

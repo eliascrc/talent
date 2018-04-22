@@ -21,7 +21,7 @@ public abstract class Observation extends BasicEntity {
     private String description;
 
     /**
-     * Technical resource wich is receiving the observation.
+     * Technical resource which is receiving the observation.
      */
     @ManyToOne
     @JoinColumn (name = "resource_id", unique = true)
