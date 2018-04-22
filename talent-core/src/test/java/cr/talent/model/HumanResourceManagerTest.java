@@ -22,12 +22,7 @@ public class HumanResourceManagerTest {
 
     private static final String ID = "1234";
     private static final String ID2 = "12345";
-    private static final String USERNAME = "username";
-    private static final String USERNAME2 = "username2";
-    private static final String PASSWORD = "password";
-    private static final String PASSWORD2 = "password2";
-    private static final Organization ORGANIZATION = mock(Organization.class);
-    private static final Organization ORGANIZATION2 = mock(Organization.class);
+    private static final String STRING_BUILDER_OUTPUT = "[username = %s, enabled = %s, passwordNeedsChange = %s]";
 
     @Test
     public void coreTest() {
@@ -38,6 +33,8 @@ public class HumanResourceManagerTest {
         long entityVersion = 1l;
 
         // Inheritted from User
+        String username = "username";
+        String password = "password";
         String firstName = "firstName";
 		String lastName = "lastName";
         boolean enabled = true;
@@ -56,10 +53,10 @@ public class HumanResourceManagerTest {
         humanResourceManager.setEntityVersion(entityVersion);
 
 		// Inheritted from User
-        humanResourceManager.setUsername(USERNAME) ;
+        humanResourceManager.setUsername(username) ;
         humanResourceManager.setFirstName(firstName);
         humanResourceManager.setLastName(lastName);
-        humanResourceManager.setPassword(PASSWORD);
+        humanResourceManager.setPassword(password);
         humanResourceManager.setEnabled(enabled);
         humanResourceManager.setPasswordNeedsChange(passwordNeedsChange);
         humanResourceManager.setLastLoginTimestamp(lastLoginTimeStamp);
@@ -77,7 +74,7 @@ public class HumanResourceManagerTest {
         // Inheritted from User
 		assertEquals(humanResourceManager.getFirstName(),firstName);
 		assertEquals(humanResourceManager.getLastName(),lastName);
-		assertEquals(humanResourceManager.getPassword(),PASSWORD);
+		assertEquals(humanResourceManager.getPassword(),password);
 		assertEquals(humanResourceManager.isEnabled(),enabled);
 		assertEquals(humanResourceManager.getPasswordNeedsChange(),passwordNeedsChange);
 		assertEquals(humanResourceManager.getLastLoginTimestamp(),lastLoginTimeStamp);
@@ -143,6 +140,18 @@ public class HumanResourceManagerTest {
 
         assertFalse(humanResourceManager.hashCode() == humanResourceManager2.hashCode());
     }
+
+   /**
+   *  Only on this class.
+   */
+   @Test
+   public void testStringBuilder() {
+       HumanResourceManager humanResourceManager = new HumanResourceManager();
+       humanResourceManager.setUsername("username");
+
+       String expectedOutput = String.format(STRING_BUILDER_OUTPUT, humanResourceManager.getUsername(), humanResourceManager.isEnabled(), humanResourceManager.getPasswordNeedsChange());
+       assertEquals(humanResourceManager.toString(), expectedOutput);
+   }
 
 }
 

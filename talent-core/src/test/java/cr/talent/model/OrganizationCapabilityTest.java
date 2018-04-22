@@ -19,8 +19,6 @@ import static org.mockito.Mockito.mock;
 public class OrganizationCapabilityTest {
     private static final String ID = "1234";
     private static final String ID2 = "12345";
-    private static final String NAME = "NAME";
-    private static final String NAME2 = "NAME2";
 
     @Test
     public void coreTest() {
@@ -28,6 +26,9 @@ public class OrganizationCapabilityTest {
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
+
+        //Inheritted from Capability
+        String name = "NAME";
 
         // Declared in OrganizationCapability
         Organization organization = mock(Organization.class);
@@ -39,9 +40,9 @@ public class OrganizationCapabilityTest {
         organizationCapability.setId(ID);
         organizationCapability.setEntityCreationTimestamp(entityCreationTimestamp);
         organizationCapability.setLastUpdatedTimestamp(lastUpdatedTimestamp);
-        //Inheritted from Capability
         organizationCapability.setEntityVersion(entityVersion);
-        organizationCapability.setName(NAME);
+        //Inheritted from Capability
+        organizationCapability.setName(name);
         organizationCapability.setLevelHierarchy(new HashSet<>());
         // Declared in OrganizationCapability
         organizationCapability.setOrganization(organization);
@@ -50,7 +51,7 @@ public class OrganizationCapabilityTest {
         assertEquals(ID, organizationCapability.getId());
         assertEquals(entityCreationTimestamp, organizationCapability.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, organizationCapability.getLastUpdatedTimestamp());
-        assertEquals(organizationCapability.getName(),NAME);
+        assertEquals(organizationCapability.getName(),name);
         assertNotNull(organizationCapability.getLevelHierarchy());
         assertEquals(organizationCapability.getOrganization(),organization);
     }

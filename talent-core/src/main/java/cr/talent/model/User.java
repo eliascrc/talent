@@ -113,7 +113,7 @@ public abstract class User extends BasicEntity implements UserDetails {
         StringBuilder sb = new StringBuilder();
         sb.append("username = ").append(this.getUsername());
         sb.append(", enabled = ").append(this.isEnabled());
-        sb.append(", passwordNeedChange = ").append(this.getPasswordNeedsChange());
+        sb.append(", passwordNeedsChange = ").append(this.getPasswordNeedsChange());
         return sb;
     }
 
