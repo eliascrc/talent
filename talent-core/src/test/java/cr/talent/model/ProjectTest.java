@@ -16,14 +16,11 @@ import org.junit.Test;
 
 
 public class ProjectTest{
+
     private static final String ID = "1234";
-    private static final Date ENTITY_CREATION_TIMESTAMP = new Date();
-    private static final Date LAST_UPDATED_TIMESTAMP = new Date();
-    private static final long ENTITY_VERSION = 1l;
+    private static final String ID2 = "12345";
     private static final String NAME = "talent";
     private static final String NAME2 = "talent2";
-    private static final Date STARTDATE = new Date();
-    private static final Date END_DATE = new Date();
 
     private static final String STRING_BUILDER_OUTPUT = "[class name = %s, id = %s]";
 
@@ -31,6 +28,11 @@ public class ProjectTest{
     public void coreTest() {
 
         Organization organization = mock(Organization.class);
+        Date ENTITY_CREATION_TIMESTAMP = new Date();
+        Date LAST_UPDATED_TIMESTAMP = new Date();
+        long ENTITY_VERSION = 1l;
+        Date STARTDATE = new Date();
+        Date END_DATE = new Date();
 
         // Verify Constructor
         Project project = new Project();
@@ -64,16 +66,7 @@ public class ProjectTest{
         assertNotNull(project.getObservations());
     }
 
-    @Test
-    public void testEqualForPersistentProject() {
-        Project project1 = new Project();
-        project1.setId(ID);
-
-        Project project2 = new Project();
-        project2.setId(ID);
-
-        assertTrue(project1.equals(project2));
-    }
+    //ON EQUALS TESTS.
 
     @Test
     public void testEqualForSameObject() {
@@ -89,20 +82,42 @@ public class ProjectTest{
         assertFalse(project1.equals(new Object()));
     }
 
+    // En los persistance se compara el ID.
     @Test
-    public void testEqualForNonPersistentNotification() {
+    public void testEqualForPersistentProject() {
+        Project project1 = new Project();
+        project1.setId(ID);
+
+        Project project2 = new Project();
+        project2.setId(ID);
+
+        assertTrue(project1.equals(project2));
+    }
+
+    @Test
+    public void testNonEqualForPersistentProject() {
+        Project project1 = new Project();
+        project1.setId(ID);
+
+        Project project2 = new Project();
+        project2.setId(ID2);
+
+        assertFalse(project1.equals(project2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentProject() {
         Project project1 = new Project();
         project1.setName(NAME);
 
         Project project2 = new Project();
         project1.setName(NAME);
 
-        assertFalse(project1.equals(project2));
+        assertTrue(project1.equals(project2));
     }
 
-
     @Test
-    public void testNonEqualForNonPersistentNotification() {
+    public void testNonEqualForNonPersistentProject() {
         Project project1 = new Project();
         project1.setName(NAME);
 
@@ -112,8 +127,12 @@ public class ProjectTest{
         assertFalse(project1.equals(project2));
     }
 
+    //ON HASH TESTS.
+
+    //Se hace con el id heredado de basic entity.
+
     @Test
-    public void testHashCodeForPersistentProject() {
+    public void testEqualHashCodeForPersistentProject() {
         Project project1 = new Project();
         project1.setId(ID);
 
@@ -123,7 +142,45 @@ public class ProjectTest{
         assertTrue(project1.hashCode() == project2.hashCode());
     }
 
+    @Test
+    public void testNonEqualHashCodeForPersistentProject() {
+        Project project1 = new Project();
+        project1.setId(ID);
 
+        Project project2 = new Project();
+        project2.setId(ID2);
+
+        assertFalse(project1.hashCode() == project2.hashCode());
+    }
+
+
+     //el non persistant se hace con los atributos del on equals.
+
+    @Test
+    public void testEqualHashCodeForNonPersistentProject() {
+        Project project1 = new Project();
+        project1.setName(NAME);
+
+        Project project2 = new Project();
+        project2.setName(NAME);
+
+        assertTrue(project1.hashCode() == project2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentProject() {
+        Project project1 = new Project();
+        project1.setName(NAME);
+
+        Project project2 = new Project();
+        project2.setName(NAME2);
+
+        assertFalse(project1.hashCode() == project2.hashCode());
+    }
+
+    /**
+     *  Only on this class.
+     */
     @Test
     public void testClone() {
         Project project1 = new Project();
@@ -144,6 +201,9 @@ public class ProjectTest{
         }
     }
 
+    /**
+     *  Only on this class.
+     */
     @Test
     public void testStringBuilder() {
         Project project1 = new Project();
@@ -155,6 +215,9 @@ public class ProjectTest{
 
     }
 
+    /**
+     *  Only on this class.
+     */
     @Test
     public void testCompareTo() {
         Project project1 = new Project();
