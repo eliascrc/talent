@@ -28,23 +28,23 @@ public class ProjectTest{
     public void coreTest() {
 
         Organization organization = mock(Organization.class);
-        Date ENTITY_CREATION_TIMESTAMP = new Date();
-        Date LAST_UPDATED_TIMESTAMP = new Date();
-        long ENTITY_VERSION = 1l;
-        Date STARTDATE = new Date();
-        Date END_DATE = new Date();
+        Date entityCreationTimestamp = new Date();
+        Date lastUpdatedTimestamp = new Date();
+        long entityVersion = 1l;
+        Date startDate = new Date();
+        Date endDate = new Date();
 
         // Verify Constructor
         Project project = new Project();
 
         // Verify the sets
         project.setId(ID);
-        project.setEntityCreationTimestamp(ENTITY_CREATION_TIMESTAMP);
-        project.setLastUpdatedTimestamp(LAST_UPDATED_TIMESTAMP);
-        project.setEntityVersion(ENTITY_VERSION);
+        project.setEntityCreationTimestamp(entityCreationTimestamp);
+        project.setLastUpdatedTimestamp(lastUpdatedTimestamp);
+        project.setEntityVersion(entityVersion);
         project.setName(NAME);
-        project.setStartDate(STARTDATE);
-        project.setEndDate(END_DATE);
+        project.setStartDate(startDate);
+        project.setEndDate(endDate);
         project.setProjectCapabilities(new HashSet<>());
         project.setProjectManagerHistory(new HashSet<>());
         project.setState(ProjectState.UPCOMING);
@@ -53,12 +53,12 @@ public class ProjectTest{
 
         // Verify the gets
         assertEquals(ID, project.getId());
-        assertEquals(ENTITY_CREATION_TIMESTAMP, project.getEntityCreationTimestamp());
-        assertEquals(LAST_UPDATED_TIMESTAMP, project.getLastUpdatedTimestamp());
-        assertEquals(ENTITY_VERSION, project.getEntityVersion());
+        assertEquals(entityCreationTimestamp, project.getEntityCreationTimestamp());
+        assertEquals(lastUpdatedTimestamp, project.getLastUpdatedTimestamp());
+        assertEquals(entityVersion, project.getEntityVersion());
         assertEquals(NAME, project.getName());
-        assertEquals(STARTDATE, project.getStartDate());
-        assertEquals(END_DATE, project.getEndDate());
+        assertEquals(startDate, project.getStartDate());
+        assertEquals(endDate, project.getEndDate());
         assertNotNull(project.getProjectCapabilities());
         assertNotNull(project.getProjectManagerHistory());
         assertEquals(ProjectState.UPCOMING, project.getState());
