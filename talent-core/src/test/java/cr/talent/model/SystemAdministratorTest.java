@@ -1,5 +1,6 @@
 package cr.talent.model;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
@@ -28,12 +29,12 @@ public class SystemAdministratorTest {
     @Test
     public void coreTest() {
 
-        // Inheritted from BasicEntity
+        // Inherited from BasicEntity
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
-        // Inheritted from User
+        // Inherited from User
         String firstName = "firstName";
 		String lastName = "lastName";
         boolean enabled = true;
@@ -45,13 +46,13 @@ public class SystemAdministratorTest {
         SystemAdministrator systemAdministrator = new SystemAdministrator();
 
         // Verify the setters
-        // Inheritted from BasicEntity
+        // Inherited from BasicEntity
         systemAdministrator.setId(ID);
         systemAdministrator.setEntityCreationTimestamp(entityCreationTimestamp);
         systemAdministrator.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         systemAdministrator.setEntityVersion(entityVersion);
 
-		// Inheritted from User
+		// Inherited from User
         systemAdministrator.setUsername(USERNAME) ;
         systemAdministrator.setFirstName(firstName);
         systemAdministrator.setLastName(lastName);
@@ -112,6 +113,31 @@ public class SystemAdministratorTest {
     }
 
     @Test
+    public void testEqualForNonPersistentSystemAdministrator() {
+        SystemAdministrator systemAdministrator = new SystemAdministrator();
+        systemAdministrator.setUsername(USERNAME);
+        systemAdministrator.setPassword(PASSWORD);
+
+        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
+        systemAdministrator2.setUsername(USERNAME);
+        systemAdministrator2.setPassword(PASSWORD);
+
+        assertTrue(systemAdministrator.equals(systemAdministrator2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentSystemAdministrator() {
+        SystemAdministrator systemAdministrator = new SystemAdministrator();
+        systemAdministrator.setUsername(USERNAME);
+        systemAdministrator.setPassword(PASSWORD);
+
+        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
+        systemAdministrator2.setUsername(USERNAME2);
+        systemAdministrator2.setPassword(PASSWORD2);
+        Assert.assertFalse(systemAdministrator.equals(systemAdministrator2));
+    }
+
+    @Test
     public void testEqualHashCodeForPersistentSystemAdministrator() {
         SystemAdministrator systemAdministrator = new SystemAdministrator();
         systemAdministrator.setId(ID);
@@ -131,5 +157,31 @@ public class SystemAdministratorTest {
         systemAdministrator2.setId(ID2);
 
         assertFalse(systemAdministrator.hashCode() == systemAdministrator2.hashCode());
+    }
+
+    @Test
+    public void testEqualHashCodeForNonPersistentSystemAdministrator() {
+        SystemAdministrator systemAdministrator = new SystemAdministrator();
+        systemAdministrator.setUsername(USERNAME);
+        systemAdministrator.setPassword(PASSWORD);
+
+        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
+        systemAdministrator2.setUsername(USERNAME);
+        systemAdministrator2.setPassword(PASSWORD);
+
+        assertTrue(systemAdministrator.hashCode() == systemAdministrator2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentSystemAdministrator() {
+        SystemAdministrator systemAdministrator = new SystemAdministrator();
+        systemAdministrator.setUsername(USERNAME);
+        systemAdministrator.setPassword(PASSWORD);
+
+        SystemAdministrator systemAdministrator2 = new SystemAdministrator();
+        systemAdministrator2.setUsername(USERNAME2);
+        systemAdministrator2.setPassword(PASSWORD2);
+
+        Assert.assertFalse(systemAdministrator.hashCode() == systemAdministrator2.hashCode());
     }
 }

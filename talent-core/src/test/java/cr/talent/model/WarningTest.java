@@ -6,6 +6,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
@@ -96,6 +97,28 @@ public class WarningTest {
     }
 
     @Test
+    public void testEqualForNonPersistentWarning() {
+        Warning warning1 = new Warning();
+        warning1.setRelatedProject(RELATED_PROJECT);
+
+        Warning warning2 = new Warning();
+        warning2.setRelatedProject(RELATED_PROJECT);
+
+        Assert.assertTrue(warning1.equals(warning2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentWarning() {
+        Warning warning1 = new Warning();
+        warning1.setRelatedProject(RELATED_PROJECT);
+
+        Warning warning2 = new Warning();
+        warning2.setRelatedProject(RELATED_PROJECT2);
+
+        assertFalse(warning1.equals(warning2));
+    }
+
+    @Test
     public void testEqualHashCodeForPersistentWarning() {
         Warning warning = new Warning();
         warning.setId(ID);
@@ -115,5 +138,27 @@ public class WarningTest {
         warning2.setId(ID2);
 
         assertFalse(warning.hashCode() == warning2.hashCode());
+    }
+
+    @Test
+    public void testEqualHashCodeForNonPersistentWarning() {
+        Warning warning1 = new Warning();
+        warning1.setRelatedProject(RELATED_PROJECT);
+
+        Warning warning2 = new Warning();
+        warning2.setRelatedProject(RELATED_PROJECT);
+
+        Assert.assertTrue(warning1.hashCode() == warning2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentWarning() {
+        Warning warning1 = new Warning();
+        warning1.setRelatedProject(RELATED_PROJECT);
+
+        Warning warning2 = new Warning();
+        warning2.setRelatedProject(RELATED_PROJECT2);
+
+        assertFalse(warning1.hashCode() == warning2.hashCode());
     }
 }

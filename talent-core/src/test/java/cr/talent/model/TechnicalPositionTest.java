@@ -13,8 +13,6 @@ import org.junit.Test;
 
 /**
  * Class that allows to test the technicalPosition methods to know all the different paths they could take.
- * This class contains the test of the inherited methods
- * from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Josue Cubero
  */
@@ -101,7 +99,7 @@ public class TechnicalPositionTest{
     }
 
     @Test
-    public void testEqualForNonPersistentInvitation() {
+    public void testEqualForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
         technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
@@ -112,7 +110,7 @@ public class TechnicalPositionTest{
     }
 
     @Test
-    public void testNonEqualForNonPersistentInvitation() {
+    public void testNonEqualForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
         technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
@@ -147,7 +145,7 @@ public class TechnicalPositionTest{
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentinvitation() {
+    public void testEqualHashCodeForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
         technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
@@ -158,7 +156,7 @@ public class TechnicalPositionTest{
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentinvitation() {
+    public void testNonEqualHashCodeForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
         technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 

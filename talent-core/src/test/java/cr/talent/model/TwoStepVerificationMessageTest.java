@@ -12,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Class that allows to test the TwoStepVerification methods to know all the different paths they could take.
+ *
  * @author Daniel Montes de Oca
  */
 public class TwoStepVerificationMessageTest {

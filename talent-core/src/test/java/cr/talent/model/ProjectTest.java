@@ -88,7 +88,6 @@ public class ProjectTest{
         assertFalse(project1.equals(new Object()));
     }
 
-    // En los persistance se compara el ID.
     @Test
     public void testEqualForPersistentProject() {
         Project project1 = new Project();
@@ -135,8 +134,6 @@ public class ProjectTest{
 
     //ON HASH TESTS.
 
-    //Se hace con el id heredado de basic entity.
-
     @Test
     public void testEqualHashCodeForPersistentProject() {
         Project project1 = new Project();
@@ -158,9 +155,6 @@ public class ProjectTest{
 
         assertFalse(project1.hashCode() == project2.hashCode());
     }
-
-
-     //el non persistant se hace con los atributos del on equals.
 
     @Test
     public void testEqualHashCodeForNonPersistentProject() {

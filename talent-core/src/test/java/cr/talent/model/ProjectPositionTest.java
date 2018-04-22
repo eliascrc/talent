@@ -11,6 +11,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Class that allows to test the ProjectPosition methods to know all the different paths they could take.
+ *
  * @author Daniel Montes de Oca
  */
 public class ProjectPositionTest {

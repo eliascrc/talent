@@ -13,8 +13,6 @@ import org.junit.Test;
 
 /**
  * Class that allows to test the projectManagerPosition methods to know all the different paths they could take.
- * This class contains the test of the inherited methods
- * from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Josue Cubero
  */

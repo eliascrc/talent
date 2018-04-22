@@ -65,7 +65,7 @@ public class SkillToApproveTest {
     }
 
     @Test
-    public void testEqualForPersistentSkillsToApprove() {
+    public void testEqualForPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setId(ID1);
 
@@ -76,7 +76,7 @@ public class SkillToApproveTest {
     }
 
     @Test
-    public void testNonEqualForPersistentSkillsToApprove() {
+    public void testNonEqualForPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setId(ID1);
 
@@ -87,7 +87,7 @@ public class SkillToApproveTest {
     }
 
     @Test
-    public void testEqualForNonPersistentSkillsToApprove() {
+    public void testEqualForNonPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setRequestedSkill(REQUESTED_SKILL1);
         skillToApprove1.setRequestingTechnicalResource(TECHNICAL_RESOURCE1);
@@ -100,7 +100,7 @@ public class SkillToApproveTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentSkillsToApprove() {
+    public void testNonEqualForNonPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setRequestedSkill(REQUESTED_SKILL1);
         skillToApprove1.setRequestingTechnicalResource(TECHNICAL_RESOURCE1);
@@ -115,7 +115,7 @@ public class SkillToApproveTest {
 
 
     @Test
-    public void testEqualHashCodeForPersistentSkillsToApprove() {
+    public void testEqualHashCodeForPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setId(ID1);
 
@@ -126,7 +126,7 @@ public class SkillToApproveTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentSkillsToApprove() {
+    public void testNonEqualHashCodeForPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setId(ID1);
 
@@ -139,7 +139,7 @@ public class SkillToApproveTest {
 
 
     @Test
-    public void testEqualHashCodeForNonPersistentSkillsToApprove() {
+    public void testEqualHashCodeForNonPersistentSkillToApprove() {
 
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setRequestedSkill(REQUESTED_SKILL1);
@@ -154,7 +154,7 @@ public class SkillToApproveTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentSkillsToApprove() {
+    public void testNonEqualHashCodeForNonPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setRequestedSkill(REQUESTED_SKILL1);
         skillToApprove1.setRequestingTechnicalResource(TECHNICAL_RESOURCE1);

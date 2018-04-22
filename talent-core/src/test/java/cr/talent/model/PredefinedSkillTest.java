@@ -91,6 +91,28 @@ public class PredefinedSkillTest {
     }
 
     @Test
+    public void testEqualForNonPersistentPredefinedSkill() {
+        PredefinedSkill predefinedSkill = new PredefinedSkill();
+        predefinedSkill.setName(NAME);
+
+        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
+        predefinedSkill2.setName(NAME);
+
+        assertTrue(predefinedSkill.equals(predefinedSkill2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentPredefinedSkill() {
+        PredefinedSkill predefinedSkill = new PredefinedSkill();
+        predefinedSkill.setName(NAME);
+
+        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
+        predefinedSkill2.setName(NAME2);
+
+        assertFalse(predefinedSkill.equals(predefinedSkill2));
+    }
+
+    @Test
     public void testEqualHashCodeForPersistentPredefinedSkill() {
         PredefinedSkill predefinedSkill = new PredefinedSkill();
         predefinedSkill.setId(ID);
@@ -108,6 +130,28 @@ public class PredefinedSkillTest {
 
         PredefinedSkill predefinedSkill2 = new PredefinedSkill();
         predefinedSkill2.setId(ID2);
+
+        assertFalse(predefinedSkill.hashCode() == predefinedSkill2.hashCode());
+    }
+
+    @Test
+    public void testEqualHashCodeForNonPersistentPredefinedSkill() {
+        PredefinedSkill predefinedSkill = new PredefinedSkill();
+        predefinedSkill.setName(NAME);
+
+        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
+        predefinedSkill2.setName(NAME);
+
+        assertTrue(predefinedSkill.hashCode() == predefinedSkill2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentPredefinedSkill() {
+        PredefinedSkill predefinedSkill = new PredefinedSkill();
+        predefinedSkill.setName(NAME);
+
+        PredefinedSkill predefinedSkill2 = new PredefinedSkill();
+        predefinedSkill2.setName(NAME2);
 
         assertFalse(predefinedSkill.hashCode() == predefinedSkill2.hashCode());
     }
