@@ -39,8 +39,8 @@ public class HibernateSystemAdministratorDao extends HibernateCrudDao<SystemAdmi
     @Override
     @SuppressWarnings("unchecked")
     public SystemAdministrator findSysAdminByUsername(String username) {
-        String sql = "SELECT * FROM administrators WHERE username = ?";
-        Query query = super.getSessionFactory().getCurrentSession().createNativeQuery(sql).addEntity(SystemAdministrator.class).setParameter(0, username);
+        String sql = "SELECT * FROM administrator WHERE username = ?1";
+        Query query = super.getSessionFactory().getCurrentSession().createNativeQuery(sql).addEntity(SystemAdministrator.class).setParameter(1, username);
         return (SystemAdministrator) DataAccessUtils.singleResult(query.list());
     }
 }

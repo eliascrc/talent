@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 
 @Component
 @Scope("request")
-@Path("/test")
+@Path("/admin/test")
 public class HelloTestResource {
 
     @GET
