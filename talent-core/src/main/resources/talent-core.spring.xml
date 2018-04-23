@@ -20,7 +20,7 @@
         <property name="locations">
             <list>
                 <value>classpath:talent.properties</value>
-                <value>file:${user.home}/talent.properties</value>
+                <value>file:${user.home}/talent/talent.properties</value>
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>
