@@ -1,34 +1,25 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  *Class that represents a contact email to contact the administrators of the Talent system.
  *
  * @author Elías Calderón
  */
-@Entity
-@Table(name = "contact_email")
-public class ContactEmail extends BasicEntity {
+public class ContactEmail {
 
     /**
      * The email that the mail will be sent to.
      */
-    @Column(name = "email" , nullable = false)
     private String email;
 
     /**
      * The subject of the email.
      */
-    @Column (name = "subject")
     private String subject;
 
     /**
      * The email content.
      */
-    @Column (name = "content")
     private String content;
 
     public ContactEmail(){}
@@ -54,9 +45,9 @@ public class ContactEmail extends BasicEntity {
     }
 
     @Override
-    protected boolean onEquals(Object o) {
+    public boolean equals(Object o) {
         boolean result = false;
-        if ( o instanceof Image){
+        if ( o instanceof ContactEmail){
             ContactEmail contactEmail = (ContactEmail) o;
             result = (this.email == null ? contactEmail.getEmail() == null : this.email.equals(contactEmail.getEmail()));
         }
@@ -64,9 +55,14 @@ public class ContactEmail extends BasicEntity {
     }
 
     @Override
-    protected int onHashCode(int result) {
+    public int hashCode() {
+        int result = 1;
         final int prime = 23;
         result = prime * result + (this.email == null ? 0 : this.email.hashCode());
         return result;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
