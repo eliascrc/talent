@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * Class that represents a privacy policy for the Talent! system
- * It contains a file with the contents of that privacy policy, as well as a start date, end date, and a flag that
+ * It contains the contents of that privacy policy, as well as a start date, end date, and a flag that
  * tells us if it is active or not
  * @author Daniel Montes de Oca
  */
@@ -16,7 +16,7 @@ import java.util.Date;
 public class PrivacyPolicy extends BasicEntity {
 
     /**
-     * File with the contents of the privacy policy
+     * HTML with the content of the privacy policy
      */
     @Column(name = "content")
     private String content;
