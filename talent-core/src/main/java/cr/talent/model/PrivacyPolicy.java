@@ -2,6 +2,7 @@ package cr.talent.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import java.util.Date;
 
@@ -18,6 +19,7 @@ public class PrivacyPolicy extends BasicEntity {
     /**
      * HTML with the content of the privacy policy
      */
+    @Lob
     @Column(name = "content")
     private String content;
 
