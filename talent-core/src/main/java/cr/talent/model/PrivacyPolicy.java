@@ -3,7 +3,6 @@ package cr.talent.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.io.File;
 import java.util.Date;
 
 /**
@@ -19,8 +18,8 @@ public class PrivacyPolicy extends BasicEntity {
     /**
      * File with the contents of the privacy policy
      */
-    @Column(name = "privacy_policy_file")
-    private File privacyPolicyFile;
+    @Column(name = "content")
+    private String content;
 
     /**
      * The date that the privacy policy started being active
@@ -62,7 +61,7 @@ public class PrivacyPolicy extends BasicEntity {
     }
 
     public Date getStartDate() {
-        return startDate;
+        return this.startDate;
     }
 
     public void setStartDate(Date startDate) {
@@ -70,18 +69,18 @@ public class PrivacyPolicy extends BasicEntity {
     }
 
     public Date getEndDate() {
-        return endDate;
+        return this.endDate;
     }
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public boolean isActive() { return active; }
+    public boolean isActive() { return this.active; }
 
     public void setActive(boolean active) { this.active = active; }
 
-    public File getPrivacyPolicyFile() { return privacyPolicyFile; }
+    public String getContent() { return this.content; }
 
-    public void setPrivacyPolicyFile(File privacyPolicyFile) { this.privacyPolicyFile = privacyPolicyFile; }
+    public void setContent(String content) { this.content = content; }
 }
