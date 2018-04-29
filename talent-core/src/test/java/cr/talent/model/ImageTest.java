@@ -59,7 +59,9 @@ public class ImageTest {
     public void testEqualForDifferentClass() {
         Image image = new Image();
 
-        assertFalse(image.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(image.equals(kudo));
     }
 
     @Test
@@ -96,9 +98,31 @@ public class ImageTest {
     }
 
     @Test
+    public void testEqualForNonPersistentImageNullLink() {
+        Image image1 = new Image();
+
+
+        Image image2 = new Image();
+
+
+        assertTrue(image1.equals(image2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentImage() {
         Image image1 = new Image();
         image1.setLink(LINK);
+
+        Image image2 = new Image();
+        image2.setLink(LINK2);
+
+        assertFalse(image1.equals(image2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentImageNullLink() {
+        Image image1 = new Image();
+
 
         Image image2 = new Image();
         image2.setLink(LINK2);

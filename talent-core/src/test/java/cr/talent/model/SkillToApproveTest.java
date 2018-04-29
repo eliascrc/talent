@@ -63,7 +63,9 @@ public class SkillToApproveTest {
     public void testEqualForDifferentClass() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
 
-        assertFalse(skillToApprove1.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(skillToApprove1.equals(kudo));
     }
 
     @Test
@@ -102,6 +104,37 @@ public class SkillToApproveTest {
     }
 
     @Test
+    public void testEqualForNonPersistentSkillToApproveNullSkillNullResource(){
+        SkillToApprove skillToApprove1 = new SkillToApprove();
+
+        SkillToApprove skillToApprove2 = new SkillToApprove();
+
+        assertTrue(skillToApprove1.equals(skillToApprove2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentSkillToApproveNullSkill() {
+        SkillToApprove skillToApprove1 = new SkillToApprove();
+        skillToApprove1.setRequestingTechnicalResource(TECHNICAL_RESOURCE1);
+
+        SkillToApprove skillToApprove2 = new SkillToApprove();
+        skillToApprove2.setRequestingTechnicalResource(TECHNICAL_RESOURCE1);
+
+        assertTrue(skillToApprove1.equals(skillToApprove2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentSkillToApproveNullResource() {
+        SkillToApprove skillToApprove1 = new SkillToApprove();
+        skillToApprove1.setRequestedSkill(REQUESTED_SKILL1);
+
+        SkillToApprove skillToApprove2 = new SkillToApprove();
+        skillToApprove2.setRequestedSkill(REQUESTED_SKILL1);
+
+        assertTrue(skillToApprove1.equals(skillToApprove2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentSkillToApprove() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
         skillToApprove1.setRequestedSkill(REQUESTED_SKILL1);
@@ -114,7 +147,40 @@ public class SkillToApproveTest {
         assertFalse(skillToApprove1.equals(skillToApprove2));
     }
 
+    @Test
+    public void testNonEqualForNonPersistentSkillToApproveNullSkillNullResource() {
+        SkillToApprove skillToApprove1 = new SkillToApprove();
 
+        SkillToApprove skillToApprove2 = new SkillToApprove();
+        skillToApprove2.setRequestedSkill(REQUESTED_SKILL2);
+        skillToApprove2.setRequestingTechnicalResource(TECHNICAL_RESOURCE2);
+
+        assertFalse(skillToApprove1.equals(skillToApprove2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentSkillToApproveNullSkill() {
+        SkillToApprove skillToApprove1 = new SkillToApprove();
+        skillToApprove1.setRequestingTechnicalResource(TECHNICAL_RESOURCE1);
+
+        SkillToApprove skillToApprove2 = new SkillToApprove();
+        skillToApprove2.setRequestedSkill(REQUESTED_SKILL2);
+        skillToApprove2.setRequestingTechnicalResource(TECHNICAL_RESOURCE2);
+
+        assertFalse(skillToApprove1.equals(skillToApprove2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentSkillToApproveNullResource() {
+        SkillToApprove skillToApprove1 = new SkillToApprove();
+        skillToApprove1.setRequestedSkill(REQUESTED_SKILL1);
+
+        SkillToApprove skillToApprove2 = new SkillToApprove();
+        skillToApprove2.setRequestedSkill(REQUESTED_SKILL1);
+        skillToApprove2.setRequestingTechnicalResource(TECHNICAL_RESOURCE2);
+
+        assertFalse(skillToApprove1.equals(skillToApprove2));
+    }
 
     @Test
     public void testEqualHashCodeForPersistentSkillToApprove() {

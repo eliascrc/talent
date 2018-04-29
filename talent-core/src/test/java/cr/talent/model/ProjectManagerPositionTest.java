@@ -73,7 +73,9 @@ public class ProjectManagerPositionTest{
     public void testEqualForDifferentClass() {
         ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
 
-        assertFalse(projectManagerPosition1.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(projectManagerPosition1.equals(kudo));
     }
 
     @Test
@@ -112,6 +114,39 @@ public class ProjectManagerPositionTest{
     }
 
     @Test
+    public void testEqualForNonPersistentProjectManagerPositionNullProjectNullManager() {
+        ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
+
+
+        ProjectManagerPosition projectManagerPosition2 = new ProjectManagerPosition();
+
+
+        assertTrue(projectManagerPosition1.equals(projectManagerPosition2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentProjectManagerPositionNullProject() {
+        ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
+        projectManagerPosition1.setProjectManager(PROJECT_MANAGER);
+
+        ProjectManagerPosition projectManagerPosition2 = new ProjectManagerPosition();
+        projectManagerPosition2.setProjectManager(PROJECT_MANAGER);
+
+        assertTrue(projectManagerPosition1.equals(projectManagerPosition2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentProjectManagerPositionNullManager() {
+        ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
+        projectManagerPosition1.setProject(PROJECT);
+
+        ProjectManagerPosition projectManagerPosition2 = new ProjectManagerPosition();
+        projectManagerPosition2.setProject(PROJECT);
+
+        assertTrue(projectManagerPosition1.equals(projectManagerPosition2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentProjectManagerPosition() {
         ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
         projectManagerPosition1.setProject(PROJECT);
@@ -119,6 +154,41 @@ public class ProjectManagerPositionTest{
 
         ProjectManagerPosition projectManagerPosition2 = new ProjectManagerPosition();
         projectManagerPosition2.setProject(PROJECT2);
+        projectManagerPosition2.setProjectManager(PROJECT_MANAGER2);
+
+        assertFalse(projectManagerPosition1.equals(projectManagerPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectManagerPositionNullProjectNullManager() {
+        ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
+
+        ProjectManagerPosition projectManagerPosition2 = new ProjectManagerPosition();
+        projectManagerPosition2.setProject(PROJECT2);
+        projectManagerPosition2.setProjectManager(PROJECT_MANAGER2);
+
+        assertFalse(projectManagerPosition1.equals(projectManagerPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectManagerPositionNullProject() {
+        ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
+        projectManagerPosition1.setProjectManager(PROJECT_MANAGER);
+
+        ProjectManagerPosition projectManagerPosition2 = new ProjectManagerPosition();
+        projectManagerPosition2.setProject(PROJECT2);
+        projectManagerPosition2.setProjectManager(PROJECT_MANAGER2);
+
+        assertFalse(projectManagerPosition1.equals(projectManagerPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectManagerPositionNullManager() {
+        ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
+        projectManagerPosition1.setProject(PROJECT);
+
+        ProjectManagerPosition projectManagerPosition2 = new ProjectManagerPosition();
+        projectManagerPosition2.setProject(PROJECT);
         projectManagerPosition2.setProjectManager(PROJECT_MANAGER2);
 
         assertFalse(projectManagerPosition1.equals(projectManagerPosition2));

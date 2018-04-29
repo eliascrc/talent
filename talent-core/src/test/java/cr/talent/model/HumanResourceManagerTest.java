@@ -94,7 +94,9 @@ public class HumanResourceManagerTest {
     public void testEqualForDifferentClass() {
         HumanResourceManager humanResourceManager = new HumanResourceManager();
 
-        assertFalse(humanResourceManager.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(humanResourceManager.equals(kudo));
     }
 
     @Test

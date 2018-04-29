@@ -86,7 +86,9 @@ public class EducationRecordTest {
     public void testEqualForDifferentClass() {
         EducationRecord educationRecord = new EducationRecord();
 
-        assertFalse(educationRecord.equals(new Object()));
+        Kudo kudo= new Kudo();
+
+        assertFalse(educationRecord.equals(kudo));
     }
 
     @Test
@@ -100,6 +102,8 @@ public class EducationRecordTest {
         assertTrue(educationRecord.equals(educationRecord2));
     }
 
+
+
     @Test
     public void testNonEqualForPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
@@ -110,6 +114,8 @@ public class EducationRecordTest {
 
         assertFalse(educationRecord.equals(educationRecord2));
     }
+
+
 
     @Test
     public void testEqualForNonPersistentEducationRecord() {
@@ -125,10 +131,78 @@ public class EducationRecordTest {
     }
 
     @Test
+    public void testEqualForNonPersistentEducationRecordNullResource() {
+        EducationRecord educationRecord = new EducationRecord();
+        educationRecord.setTitle(TITLE);
+
+        EducationRecord educationRecord2 = new EducationRecord();
+        educationRecord2.setTitle(TITLE);
+
+
+        assertTrue(educationRecord.equals(educationRecord2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentEducationRecordNullTitle() {
+        EducationRecord educationRecord = new EducationRecord();
+        educationRecord.setResource(TECHNICAL_RESOURCE);
+
+        EducationRecord educationRecord2 = new EducationRecord();
+        educationRecord2.setResource(TECHNICAL_RESOURCE);
+
+        assertTrue(educationRecord.equals(educationRecord2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentEducationRecordNullTitleNullResource() {
+        EducationRecord educationRecord = new EducationRecord();
+
+        EducationRecord educationRecord2 = new EducationRecord();
+
+        assertTrue(educationRecord.equals(educationRecord2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentEducationRecord() {
         EducationRecord educationRecord = new EducationRecord();
         educationRecord.setTitle(TITLE);
         educationRecord.setResource(TECHNICAL_RESOURCE);
+
+        EducationRecord educationRecord2 = new EducationRecord();
+        educationRecord2.setTitle(TITLE2);
+        educationRecord2.setResource(TECHNICAL_RESOURCE2);
+
+        assertFalse(educationRecord.equals(educationRecord2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentEducationRecordNullResource() {
+        EducationRecord educationRecord = new EducationRecord();
+        educationRecord.setTitle(TITLE);
+
+        EducationRecord educationRecord2 = new EducationRecord();
+        educationRecord2.setTitle(TITLE2);
+        educationRecord2.setResource(TECHNICAL_RESOURCE2);
+
+        assertFalse(educationRecord.equals(educationRecord2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentEducationRecordNullTitle() {
+        EducationRecord educationRecord = new EducationRecord();
+        educationRecord.setResource(TECHNICAL_RESOURCE);
+
+        EducationRecord educationRecord2 = new EducationRecord();
+        educationRecord2.setTitle(TITLE2);
+        educationRecord2.setResource(TECHNICAL_RESOURCE);
+
+        assertFalse(educationRecord.equals(educationRecord2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentEducationRecordNullTitleNullResource() {
+        EducationRecord educationRecord = new EducationRecord();
+
 
         EducationRecord educationRecord2 = new EducationRecord();
         educationRecord2.setTitle(TITLE2);

@@ -71,7 +71,9 @@ public class ProjectCapabilityTest {
     public void testEqualForDifferentClass() {
         ProjectCapability projectCapability = new ProjectCapability();
 
-        assertFalse(projectCapability.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(projectCapability.equals(kudo));
     }
 
     @Test
@@ -110,6 +112,37 @@ public class ProjectCapabilityTest {
     }
 
     @Test
+    public void testEqualForNonPersistentProjectCapabilityNullProjectNullCapability(){
+        ProjectCapability projectCapability1 = new ProjectCapability();
+
+        ProjectCapability projectCapability2 = new ProjectCapability();
+
+        assertTrue(projectCapability1.equals(projectCapability2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentProjectCapabilityNullProject() {
+        ProjectCapability projectCapability1 = new ProjectCapability();
+        projectCapability1.setCapability(CAPABILITY);
+
+        ProjectCapability projectCapability2 = new ProjectCapability();
+        projectCapability2.setCapability(CAPABILITY);
+
+        assertTrue(projectCapability1.equals(projectCapability2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentProjectCapabilityNullCapability() {
+        ProjectCapability projectCapability1 = new ProjectCapability();
+        projectCapability1.setProject(PROJECT);
+
+        ProjectCapability projectCapability2 = new ProjectCapability();
+        projectCapability2.setProject(PROJECT);
+
+        assertTrue(projectCapability1.equals(projectCapability2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentProjectCapability() {
         ProjectCapability projectCapability1 = new ProjectCapability();
         projectCapability1.setProject(PROJECT);
@@ -123,7 +156,42 @@ public class ProjectCapabilityTest {
     }
 
     @Test
-    public void testEqualHashCodeForPersistentProjectCapability() {
+    public void testNonEqualForNonPersistentProjectCapabilityNullProjectNullCapability(){
+        ProjectCapability projectCapability1 = new ProjectCapability();
+
+        ProjectCapability projectCapability2 = new ProjectCapability();
+        projectCapability2.setProject(PROJECT2);
+        projectCapability2.setCapability(CAPABILITY2);
+
+        assertFalse(projectCapability1.equals(projectCapability2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectCapabilityNullProject(){
+        ProjectCapability projectCapability1 = new ProjectCapability();
+        projectCapability1.setCapability(CAPABILITY);
+
+        ProjectCapability projectCapability2 = new ProjectCapability();
+        projectCapability2.setProject(PROJECT2);
+        projectCapability2.setCapability(CAPABILITY2);
+
+        assertFalse(projectCapability1.equals(projectCapability2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectCapabilityNullCapability() {
+        ProjectCapability projectCapability1 = new ProjectCapability();
+        projectCapability1.setProject(PROJECT);
+
+        ProjectCapability projectCapability2 = new ProjectCapability();
+        projectCapability2.setProject(PROJECT);
+        projectCapability2.setCapability(CAPABILITY2);
+
+        assertFalse(projectCapability1.equals(projectCapability2));
+    }
+
+    @Test
+    public void testEqualHashCodeForPersistentProjectCapability(){
         ProjectCapability projectCapability1 = new ProjectCapability();
         projectCapability1.setId(ID);
 

@@ -30,6 +30,7 @@ public class OrganizationCapabilityLevelTest {
 
         int hierarchyPosition = 1;
         OrganizationCapability organizationCapability = mock(OrganizationCapability.class);
+        Capability capability = mock(Capability.class);
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
@@ -49,6 +50,7 @@ public class OrganizationCapabilityLevelTest {
         organizationCapabilityLevel.setEntityCreationTimestamp(entityCreationTimestamp);
         organizationCapabilityLevel.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         organizationCapabilityLevel.setId(ID1);
+        organizationCapabilityLevel.setCapability(capability);
 
         //Verify gets
         assertEquals(hierarchyPosition, organizationCapabilityLevel.getHierarchyPosition());

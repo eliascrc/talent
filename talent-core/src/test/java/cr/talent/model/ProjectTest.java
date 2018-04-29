@@ -85,8 +85,12 @@ public class ProjectTest{
     public void testEqualForDifferentClass() {
         Project project1 = new Project();
 
-        assertFalse(project1.equals(new Object()));
+        Kudo kudo= new Kudo();
+
+        assertFalse(project1.equals(kudo));
     }
+
+
 
     @Test
     public void testEqualForPersistentProject() {
@@ -98,6 +102,8 @@ public class ProjectTest{
 
         assertTrue(project1.equals(project2));
     }
+
+
 
     @Test
     public void testNonEqualForPersistentProject() {
@@ -119,6 +125,25 @@ public class ProjectTest{
         project2.setName(NAME);
 
         assertTrue(project1.equals(project2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentProjectNullName() {
+        Project project1 = new Project();
+
+        Project project2 = new Project();
+
+        assertTrue(project1.equals(project2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectNullName() {
+        Project project1 = new Project();
+
+        Project project2 = new Project();
+        project2.setName(NAME);
+
+        assertFalse(project1.equals(project2));
     }
 
     @Test

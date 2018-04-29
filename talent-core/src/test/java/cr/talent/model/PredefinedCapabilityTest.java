@@ -64,7 +64,9 @@ public class PredefinedCapabilityTest {
     public void testEqualForDifferentClass() {
         PredefinedCapability predefinedCapability = new PredefinedCapability();
 
-        assertFalse(predefinedCapability.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(predefinedCapability.equals(kudo));
     }
 
     @Test
@@ -101,9 +103,28 @@ public class PredefinedCapabilityTest {
     }
 
     @Test
+    public void testEqualForNonPersistentPredefinedCapabilityNullName() {
+        PredefinedCapability predefinedCapability = new PredefinedCapability();
+
+        PredefinedCapability predefinedCapability2 = new PredefinedCapability();
+
+        assertTrue(predefinedCapability.equals(predefinedCapability2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentPredefinedCapability() {
         PredefinedCapability predefinedCapability = new PredefinedCapability();
         predefinedCapability.setName(NAME);
+
+        PredefinedCapability predefinedCapability2 = new PredefinedCapability();
+        predefinedCapability2.setName(NAME2);
+
+        assertFalse(predefinedCapability.equals(predefinedCapability2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentPredefinedCapabilityNullName() {
+        PredefinedCapability predefinedCapability = new PredefinedCapability();
 
         PredefinedCapability predefinedCapability2 = new PredefinedCapability();
         predefinedCapability2.setName(NAME2);

@@ -73,7 +73,9 @@ public class KudoTest {
     public void testEqualForDifferentClass() {
         Kudo kudo1 = new Kudo();
 
-        assertFalse(kudo1.equals(new Object()));
+        Image image = new Image();
+
+        assertFalse(kudo1.equals(image));
     }
 
     @Test
@@ -110,9 +112,28 @@ public class KudoTest {
     }
 
     @Test
+    public void testEqualForNonPersistentKudoNullProject() {
+        Kudo kudo1 = new Kudo();
+
+        Kudo kudo2 = new Kudo();
+
+        assertTrue(kudo1.equals(kudo2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentKudo() {
         Kudo kudo1 = new Kudo();
         kudo1.setRelatedProject(RELATED_PROJECT);
+
+        Kudo kudo2 = new Kudo();
+        kudo2.setRelatedProject(RELATED_PROJECT2);
+
+        assertFalse(kudo1.equals(kudo2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentKudoNullProject() {
+        Kudo kudo1 = new Kudo();
 
         Kudo kudo2 = new Kudo();
         kudo2.setRelatedProject(RELATED_PROJECT2);

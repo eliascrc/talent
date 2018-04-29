@@ -31,6 +31,7 @@ public class PredefinedCapabilityLevelTest {
         int hierarchyPosition = 0;
         PredefinedCapability predefinedCapability = mock(PredefinedCapability.class);
 
+
         // Verify the constructor
         PredefinedCapabilityLevel predefinedCapabilityLevel = new PredefinedCapabilityLevel();
 
@@ -65,7 +66,9 @@ public class PredefinedCapabilityLevelTest {
     public void testEqualForDifferentClass() {
         PredefinedCapabilityLevel predefinedCapabilityLevel = new PredefinedCapabilityLevel();
 
-        assertFalse(predefinedCapabilityLevel.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(predefinedCapabilityLevel.equals(kudo));
     }
 
     @Test
@@ -102,9 +105,28 @@ public class PredefinedCapabilityLevelTest {
     }
 
     @Test
+    public void testEqualForNonPersistentPredefinedCapabilityLevelNullName() {
+        PredefinedCapabilityLevel predefinedCapabilityLevel1 = new PredefinedCapabilityLevel();
+
+        PredefinedCapabilityLevel predefinedCapabilityLevel2 = new PredefinedCapabilityLevel();
+
+        assertTrue(predefinedCapabilityLevel1.equals(predefinedCapabilityLevel2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentPredefinedCapabilityLevel() {
         PredefinedCapabilityLevel predefinedCapabilityLevel1 = new PredefinedCapabilityLevel();
         predefinedCapabilityLevel1.setName(NAME);
+
+        PredefinedCapabilityLevel predefinedCapabilityLevel2 = new PredefinedCapabilityLevel();
+        predefinedCapabilityLevel2.setName(NAME2);
+
+        assertFalse(predefinedCapabilityLevel1.equals(predefinedCapabilityLevel2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentPredefinedCapabilityLevelNullName() {
+        PredefinedCapabilityLevel predefinedCapabilityLevel1 = new PredefinedCapabilityLevel();
 
         PredefinedCapabilityLevel predefinedCapabilityLevel2 = new PredefinedCapabilityLevel();
         predefinedCapabilityLevel2.setName(NAME2);

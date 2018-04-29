@@ -65,7 +65,9 @@ public class TwoStepVerificationTest {
     public void testEqualForDifferentClass() {
         TwoStepVerification twoStepVerification1 = new TwoStepVerification();
 
-        assertFalse(twoStepVerification1.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(twoStepVerification1.equals(kudo));
     }
 
     @Test
@@ -104,6 +106,37 @@ public class TwoStepVerificationTest {
     }
 
     @Test
+    public void testEqualForNonPersistentTwoStepVerificationNullResourceNullCode() {
+        TwoStepVerification twoStepVerification1 = new TwoStepVerification();
+
+        TwoStepVerification twoStepVerification2 = new TwoStepVerification();
+
+        assertTrue(twoStepVerification1.equals(twoStepVerification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTwoStepVerificationNullResource() {
+        TwoStepVerification twoStepVerification1 = new TwoStepVerification();
+        twoStepVerification1.setVerificationCode(VERIFICATION_CODE1);
+
+        TwoStepVerification twoStepVerification2 = new TwoStepVerification();
+        twoStepVerification2.setVerificationCode(VERIFICATION_CODE1);
+
+        assertTrue(twoStepVerification1.equals(twoStepVerification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTwoStepVerificationNullCode() {
+        TwoStepVerification twoStepVerification1 = new TwoStepVerification();
+        twoStepVerification1.setResource(RESOURCE1);
+
+        TwoStepVerification twoStepVerification2 = new TwoStepVerification();
+        twoStepVerification2.setResource(RESOURCE1);
+
+        assertTrue(twoStepVerification1.equals(twoStepVerification2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentTwoStepVerification() {
         TwoStepVerification twoStepVerification1 = new TwoStepVerification();
         twoStepVerification1.setResource(RESOURCE1);
@@ -116,6 +149,40 @@ public class TwoStepVerificationTest {
         assertFalse(twoStepVerification1.equals(twoStepVerification2));
     }
 
+    @Test
+    public void testNonEqualForNonPersistentTwoStepVerificationNullResourceNullCode() {
+        TwoStepVerification twoStepVerification1 = new TwoStepVerification();
+
+        TwoStepVerification twoStepVerification2 = new TwoStepVerification();
+        twoStepVerification2.setResource(RESOURCE2);
+        twoStepVerification2.setVerificationCode(VERIFICATION_CODE2);
+
+        assertFalse(twoStepVerification1.equals(twoStepVerification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTwoStepVerificationNullResource() {
+        TwoStepVerification twoStepVerification1 = new TwoStepVerification();
+        twoStepVerification1.setVerificationCode(VERIFICATION_CODE1);
+
+        TwoStepVerification twoStepVerification2 = new TwoStepVerification();
+        twoStepVerification2.setResource(RESOURCE2);
+        twoStepVerification2.setVerificationCode(VERIFICATION_CODE2);
+
+        assertFalse(twoStepVerification1.equals(twoStepVerification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTwoStepVerificationNullCode() {
+        TwoStepVerification twoStepVerification1 = new TwoStepVerification();
+        twoStepVerification1.setResource(RESOURCE1);
+
+        TwoStepVerification twoStepVerification2 = new TwoStepVerification();
+        twoStepVerification2.setResource(RESOURCE1);
+        twoStepVerification2.setVerificationCode(VERIFICATION_CODE2);
+
+        assertFalse(twoStepVerification1.equals(twoStepVerification2));
+    }
 
 
     @Test

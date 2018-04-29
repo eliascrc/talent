@@ -61,7 +61,9 @@ public class TwoStepVerificationMessageTest {
     public void testEqualForDifferentClass() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
 
-        assertFalse(twoStepVerificationMessage.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(twoStepVerificationMessage.equals(kudo));
     }
 
     @Test
@@ -98,9 +100,28 @@ public class TwoStepVerificationMessageTest {
     }
 
     @Test
+    public void testEqualForNonPersistentTwoStepVerificationMessageNullMessage() {
+        TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
+
+        TwoStepVerificationMessage twoStepVerificationMessage2 = new TwoStepVerificationMessage();
+
+        assertTrue(twoStepVerificationMessage.equals(twoStepVerificationMessage2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentTwoStepVerificationMessage() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
         twoStepVerificationMessage.setMessage(MESSAGE);
+
+        TwoStepVerificationMessage twoStepVerificationMessage2 = new TwoStepVerificationMessage();
+        twoStepVerificationMessage2.setMessage(MESSAGE2);
+
+        assertFalse(twoStepVerificationMessage.equals(twoStepVerificationMessage2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTwoStepVerificationMessageNullMessage() {
+        TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
 
         TwoStepVerificationMessage twoStepVerificationMessage2 = new TwoStepVerificationMessage();
         twoStepVerificationMessage2.setMessage(MESSAGE2);

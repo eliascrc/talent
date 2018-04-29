@@ -62,7 +62,9 @@ public class LanguageTest {
     public void testEqualForDifferentClass() {
         Language language1 = new Language();
 
-        assertFalse(language1.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(language1.equals(kudo));
     }
 
     @Test
@@ -99,9 +101,28 @@ public class LanguageTest {
     }
 
     @Test
+    public void testEqualForNonPersistentLanguageNullLanguage() {
+        Language language1 = new Language();
+
+        Language language2 = new Language();
+
+        assertTrue(language1.equals(language2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentLanguage() {
         Language language1 = new Language();
         language1.setLanguageName(LANGUAGE_NAME);
+
+        Language language2 = new Language();
+        language2.setLanguageName(LANGUAGE_NAME2);
+
+        assertFalse(language1.equals(language2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentLanguageNullLanguage() {
+        Language language1 = new Language();
 
         Language language2 = new Language();
         language2.setLanguageName(LANGUAGE_NAME2);
@@ -134,10 +155,10 @@ public class LanguageTest {
     @Test
     public void testEqualHashCodeForNonPersistentLanguage() {
         Language language1 = new Language();
-        language1.setId(ID);
+        language1.setLanguageName(LANGUAGE_NAME);
 
         Language language2 = new Language();
-        language2.setId(ID);
+        language2.setLanguageName(LANGUAGE_NAME);
 
         assertTrue(language1.hashCode() == language2.hashCode());
     }
@@ -145,10 +166,10 @@ public class LanguageTest {
     @Test
     public void testNonEqualHashCodeForNonPersistentLanguage() {
         Language language1 = new Language();
-        language1.setId(ID);
+        language1.setLanguageName(LANGUAGE_NAME);
 
         Language language2 = new Language();
-        language2.setId(ID2);
+        language2.setLanguageName(LANGUAGE_NAME2);
 
         assertFalse(language1.hashCode() == language2.hashCode());
     }

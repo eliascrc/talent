@@ -70,7 +70,9 @@ public class OrganizationSkillCategoryTest {
     public void testEqualForDifferentClass() {
         OrganizationSkillCategory organizationSkillCategory = new OrganizationSkillCategory();
 
-        assertFalse(organizationSkillCategory.equals(new Object()));
+        Kudo kudo = new Kudo();
+
+        assertFalse(organizationSkillCategory.equals(kudo));
     }
 
     @Test
@@ -107,9 +109,28 @@ public class OrganizationSkillCategoryTest {
     }
 
     @Test
+    public void testEqualForNonPersistentOrgSkillCategoryNullName() {
+        OrganizationSkillCategory organizationSkillCategory1 = new OrganizationSkillCategory();
+
+        OrganizationSkillCategory organizationSkillCategory2 = new OrganizationSkillCategory();
+
+        assertTrue(organizationSkillCategory1.equals(organizationSkillCategory2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentOrgSkillCategory() {
         OrganizationSkillCategory organizationSkillCategory1 = new OrganizationSkillCategory();
         organizationSkillCategory1.setName(NAME);
+
+        OrganizationSkillCategory organizationSkillCategory2 = new OrganizationSkillCategory();
+        organizationSkillCategory2.setName(NAME2);
+
+        assertFalse(organizationSkillCategory1.equals(organizationSkillCategory2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentOrgSkillCategoryNullName() {
+        OrganizationSkillCategory organizationSkillCategory1 = new OrganizationSkillCategory();
 
         OrganizationSkillCategory organizationSkillCategory2 = new OrganizationSkillCategory();
         organizationSkillCategory2.setName(NAME2);
