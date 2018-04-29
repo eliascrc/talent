@@ -24,7 +24,7 @@ public class TermsOfService extends BasicEntity {
     /**
      * Date in which the respective Terms of Service were added to the application.
      */
-    @Column(name = "start_date", nullable = false)
+    @Column(name = "start_date")
     private Date startDate;
 
     /**
