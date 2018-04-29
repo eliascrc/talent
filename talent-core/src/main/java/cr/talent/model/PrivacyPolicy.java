@@ -26,7 +26,7 @@ public class PrivacyPolicy extends BasicEntity {
     /**
      * The date that the privacy policy started being active
      */
-    @Column(name = "start_date", nullable = false)
+    @Column(name = "start_date")
     private Date startDate;
 
     /**
