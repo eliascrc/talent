@@ -50,7 +50,7 @@ public class OrganizationCapabilityLevelTest {
         organizationCapabilityLevel.setEntityCreationTimestamp(entityCreationTimestamp);
         organizationCapabilityLevel.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         organizationCapabilityLevel.setId(ID1);
-        organizationCapabilityLevel.setCapability(capability);
+
 
         //Verify gets
         assertEquals(hierarchyPosition, organizationCapabilityLevel.getHierarchyPosition());

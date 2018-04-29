@@ -26,13 +26,6 @@ public abstract class CapabilityLevel extends BasicEntity {
     @Column (name = "hierarchy_position" , nullable = false)
     private int hierarchyPosition;
 
-    /**
-     * The parent capability of the level
-     */
-    @ManyToOne
-    @JoinColumn (name = "capability_id", nullable = false)
-    private Capability capability;
-
     public CapabilityLevel(){}
 
     @Override
@@ -68,11 +61,5 @@ public abstract class CapabilityLevel extends BasicEntity {
         this.hierarchyPosition = hierarchyPosition;
     }
 
-    public Capability getCapability() {
-        return capability;
-    }
 
-    public void setCapability(Capability capability) {
-        this.capability = capability;
-    }
 }
