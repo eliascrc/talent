@@ -30,8 +30,4 @@ public class PrivacyPolicyServiceImpl extends CrudServiceImpl<PrivacyPolicy, Str
         return privacyPolicyDao.getActivePrivacyPolicy();
     }
 
-    @Override
-    public String getActivePrivacyPolicyContent() {
-        return privacyPolicyDao.getActivePrivacyPolicyContent();
-    }
 }

@@ -48,8 +48,7 @@ public class PrivacyPolicy extends BasicEntity {
         boolean result = false;
         if ( o instanceof PrivacyPolicy){
             PrivacyPolicy privacyPolicy = (PrivacyPolicy) o;
-            result = (this.startDate == null ? privacyPolicy.getStartDate() == null : this.startDate.equals(privacyPolicy.getStartDate())
-                    && this.endDate == null ? privacyPolicy.getEndDate() == null : this.endDate.equals(privacyPolicy.getEndDate()));
+            result = (this.startDate == null ? privacyPolicy.getStartDate() == null : this.startDate.equals(privacyPolicy.getStartDate()));
         }
         return result;
     }

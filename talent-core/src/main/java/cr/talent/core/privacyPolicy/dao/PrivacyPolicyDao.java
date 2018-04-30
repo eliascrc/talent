@@ -10,7 +10,10 @@ import cr.talent.support.dao.CrudDao;
  */
 public interface PrivacyPolicyDao extends CrudDao<PrivacyPolicy, String> {
 
+    /**
+     * Retrieves the active privacy policy for the Talent! system
+     * @return the active privacy policy
+     */
     PrivacyPolicy getActivePrivacyPolicy();
-    String getActivePrivacyPolicyContent();
 
 }

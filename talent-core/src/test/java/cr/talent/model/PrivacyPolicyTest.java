@@ -69,7 +69,7 @@ public class PrivacyPolicyTest {
     public void testEqualForDifferentClass() {
         PrivacyPolicy privacyPolicy1 = new PrivacyPolicy();
 
-        assertFalse(privacyPolicy1.equals(new Object()));
+        assertFalse(privacyPolicy1.equals(new Kudo()));
     }
 
     @Test
@@ -105,6 +105,25 @@ public class PrivacyPolicyTest {
         privacyPolicy2.setEndDate(END_DATE1);
 
         assertTrue(privacyPolicy1.equals(privacyPolicy2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentPrivacyPolicyNullStartDate () {
+        PrivacyPolicy privacyPolicy1 = new PrivacyPolicy();
+
+        PrivacyPolicy privacyPolicy2 = new PrivacyPolicy();
+
+        assertTrue(privacyPolicy1.equals(privacyPolicy2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentPrivacyPolicyNullStartDate () {
+        PrivacyPolicy privacyPolicy1 = new PrivacyPolicy();
+
+        PrivacyPolicy privacyPolicy2 = new PrivacyPolicy();
+        privacyPolicy2.setStartDate(new Date());
+
+        assertFalse(privacyPolicy1.equals(privacyPolicy2));
     }
 
     @Test
@@ -169,4 +188,6 @@ public class PrivacyPolicyTest {
 
         assertFalse(privacyPolicy1.hashCode() == privacyPolicy2.hashCode());
     }
+
+
 }

@@ -24,24 +24,10 @@ public class HibernatePrivacyPolicyDao extends HibernateCrudDao<PrivacyPolicy, S
     }
 
     @Override
-    /**
-     * Retrieves the active privacy policy for the Talent! system
-     * @return the active privacy policy
-     */
     public PrivacyPolicy getActivePrivacyPolicy() {
         Query query = super.getSessionFactory().getCurrentSession()
                 .createQuery("FROM PrivacyPolicy WHERE Active = true");
         return (PrivacyPolicy) query.getSingleResult();
     }
 
-    @Override
-    /**
-     * Retrieves the content of the active privacy policy for the Talent! system
-     * @return the content in html format of the active privacy policy
-     */
-    public String getActivePrivacyPolicyContent() {
-        Query query = super.getSessionFactory().getCurrentSession()
-                .createQuery("SELECT content FROM PrivacyPolicy WHERE Active = true");
-        return (String) query.getSingleResult();
-    }
 }

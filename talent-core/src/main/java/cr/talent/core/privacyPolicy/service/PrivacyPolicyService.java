@@ -10,7 +10,10 @@ import cr.talent.support.service.CrudService;
  */
 public interface PrivacyPolicyService extends CrudService<PrivacyPolicy, String> {
 
+    /**
+     * Retrieves the active privacy policy for the Talent! system
+     * @return the active privacy policy
+     */
     PrivacyPolicy getActivePrivacyPolicy();
-    String getActivePrivacyPolicyContent();
 
 }
