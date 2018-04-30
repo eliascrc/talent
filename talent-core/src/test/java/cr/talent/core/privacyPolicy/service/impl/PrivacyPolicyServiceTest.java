@@ -4,52 +4,18 @@ import cr.talent.core.privacyPolicy.dao.PrivacyPolicyDao;
 import cr.talent.core.privacyPolicy.dao.impl.HibernatePrivacyPolicyDao;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
 import cr.talent.model.PrivacyPolicy;
-import cr.talent.support.dao.CrudDao;
-import cr.talent.support.service.CrudService;
-import cr.talent.support.service.impl.CrudServiceImpl;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.util.ReflectionUtils;
-
-import java.lang.reflect.Method;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-@ContextConfiguration
+/**
+ * Class that allows to test the PrivacyPolicyServiceImpl methods
+ *
+ * @author Daniel Montes de Oca
+ */
 public class PrivacyPolicyServiceTest {
-
-    /*
-    @Configuration
-    static class PrivacyPolicyServiceTestContextConfiguration {
-
-        @Bean
-        public PrivacyPolicyService privacyPolicyService() {
-
-            return new PrivacyPolicyServiceImpl();
-        }
-
-        @Bean
-        public PrivacyPolicyDao privacyPolicyDao() {
-            return mock(PrivacyPolicyDao.class);
-        }
-    }
-
-    @Before
-    public void setup() {
-        when(privacyPolicyDao.getActivePrivacyPolicy()).thenReturn(mock(PrivacyPolicy.class));
-    }
-
-    @Autowired
-    private PrivacyPolicyService privacyPolicyService;
-    @Autowired
-    private PrivacyPolicyDao privacyPolicyDao;
-    */
 
     @Test
     public void testCreateCall() {
