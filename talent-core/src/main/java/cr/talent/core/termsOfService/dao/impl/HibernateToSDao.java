@@ -28,30 +28,11 @@ public class HibernateToSDao extends HibernateCrudDao<TermsOfService, String> im
         setSessionFactory(sessionFactory);
     }
 
-    /**
-     * Obtains the currently active TermsOfService by performing an HQL query and specifying the active flag
-     * in it.
-     *
-     * @return The active TermsOfService.
-     */
     @Override
     public TermsOfService getActiveTermsOfService() {
         Query query = super.getSessionFactory().getCurrentSession()
                 .createQuery("FROM TermsOfService WHERE isActive = true");
         return (TermsOfService) query.getSingleResult();
-    }
-
-    /**
-     * Gets the currently active TermsOfService content by performing an HQL query and selecting only the content
-     * of the active version.
-     *
-     * @return The String which contains the content of the TermsOfService
-     */
-    @Override
-    public String getActiveTermsOfServiceContent() {
-        Query query = super.getSessionFactory().getCurrentSession()
-                .createQuery("SELECT T.termsOfServiceContent FROM TermsOfService T WHERE T.isActive = true");
-        return (String) query.getSingleResult();
     }
 
 }

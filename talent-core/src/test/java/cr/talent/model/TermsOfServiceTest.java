@@ -70,7 +70,7 @@ public class TermsOfServiceTest {
     public void testEqualForDifferentClass() {
         TermsOfService termsOfService1 = new TermsOfService();
 
-        assertFalse(termsOfService1.equals(new Object()));
+        assertFalse(termsOfService1.equals(new Image()));
     }
 
     @Test
@@ -113,6 +113,25 @@ public class TermsOfServiceTest {
 
         TermsOfService termsOfService2 = new TermsOfService();
         termsOfService2.setStartDate(START_DATE2);
+
+        assertFalse(termsOfService1.equals(termsOfService2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTermsOfServiceNullStartDate() {
+        TermsOfService termsOfService1 = new TermsOfService();
+
+        TermsOfService termsOfService2 = new TermsOfService();
+
+        assertTrue(termsOfService1.equals(termsOfService2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTermsOfServiceNullStartDate() {
+        TermsOfService termsOfService1 = new TermsOfService();
+
+        TermsOfService termsOfService2 = new TermsOfService();
+        termsOfService2.setStartDate(START_DATE);
 
         assertFalse(termsOfService1.equals(termsOfService2));
     }

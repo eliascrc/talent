@@ -10,7 +10,11 @@ import cr.talent.support.service.CrudService;
  */
 public interface ToSService extends CrudService<TermsOfService, String> {
 
+    /**
+     * Gets the currently active version of the system's Terms of Service via the data access object of the
+     * service.
+     * @return The active TermsOfService
+     */
     TermsOfService getActiveTermsOfService();
 
-    String getActiveTermsOfServiceContent();
 }

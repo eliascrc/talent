@@ -29,36 +29,9 @@ public class ToSServiceImpl extends CrudServiceImpl<TermsOfService, String> impl
         setCrudDao(this.toSDao);
     }
 
-    /**
-     * Gets the currently active version of the system's Terms of Service via the data access object of the
-     * service.
-     * @return The active TermsOfService
-     */
     @Override
     public TermsOfService getActiveTermsOfService() {
         return this.toSDao.getActiveTermsOfService();
-    }
-
-    /**
-     * Gets the currently active content of the system's Terms of Service via the data access object of the
-     * service.
-     * @return The active TermsOfService content
-     */
-    @Override
-    public String getActiveTermsOfServiceContent() {
-        return this.toSDao.getActiveTermsOfServiceContent();
-    }
-
-    /**
-     * Sets the start date of the TermsOfService being created. It then
-     * calls the data access object create() method to create it in the database.
-     * @param termsOfService
-     * @return
-     */
-    @Override
-    public String create(TermsOfService termsOfService) {
-        termsOfService.setStartDate(new Date());
-        return super.create(termsOfService);
     }
 
 }

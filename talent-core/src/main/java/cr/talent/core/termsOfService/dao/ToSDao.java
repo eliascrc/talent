@@ -10,7 +10,11 @@ import cr.talent.support.dao.CrudDao;
  */
 public interface ToSDao extends CrudDao<TermsOfService, String> {
 
+    /**
+     * Obtains the currently active TermsOfService by performing an HQL query and specifying the active flag
+     * in it.
+     *
+     * @return The active TermsOfService.
+     */
     TermsOfService getActiveTermsOfService();
-
-    String getActiveTermsOfServiceContent();
 }
