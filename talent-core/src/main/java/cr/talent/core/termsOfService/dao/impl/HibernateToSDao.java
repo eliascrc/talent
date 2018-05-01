@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
+
 /**
  * Hibernate data access object implementation of {@link ToSDao} .
  *
@@ -30,9 +32,14 @@ public class HibernateToSDao extends HibernateCrudDao<TermsOfService, String> im
 
     @Override
     public TermsOfService getActiveTermsOfService() {
-        Query query = super.getSessionFactory().getCurrentSession()
-                .createQuery("FROM TermsOfService WHERE isActive = true");
-        return (TermsOfService) query.getSingleResult();
+        TermsOfService termsOfService;
+        try {
+            Query query = super.getSessionFactory().getCurrentSession()
+                    .createQuery("FROM TermsOfService WHERE isActive = true");
+            termsOfService = (TermsOfService) query.getSingleResult();
+        } catch (NoResultException e) {
+            termsOfService = null;
+        }
+        return termsOfService;
     }
-
 }
