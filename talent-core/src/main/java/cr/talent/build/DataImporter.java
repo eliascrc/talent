@@ -2,8 +2,10 @@ package cr.talent.build;
 
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
+import cr.talent.model.TermsOfService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
 
@@ -34,7 +36,7 @@ public class DataImporter {
      * will add them to the database.
      */
     private void importData(){
-        DataParser dataParser = new DataParser("src/main/resources/DummyData.xml");
+        DataParser dataParser = new DataParser("./talent-core/src/main/resources/DummyData.xml");
         dataParser.parseData();
 
         List<Organization> organizations = dataParser.getOrganizations();
@@ -49,6 +51,13 @@ public class DataImporter {
 
         for (TechnicalResource technicalResource: technicalResources) {
             technicalResourceService.create(technicalResource);
+        }
+
+        List<TermsOfService> termsOfServiceVersions = dataParser.getTermsOfServiceVersions();
+        ToSService toSService = context.getBean(ToSService.class);
+
+        for(TermsOfService termsOfService : termsOfServiceVersions) {
+            toSService.create(termsOfService);
         }
     }
 
