@@ -369,5 +369,18 @@
 
 	</technicalResources>
 
+	<privacyPolicyVersions>
+		<privacyPolicy>
+			<isActive>true</isActive>
+			<startDate>5/10/2018</startDate>
+			<contentFile>./talent-core/src/main/resources/DummyPrivacyPolicy1.html</contentFile>
+		</privacyPolicy>
+		<privacyPolicy>
+			<isActive>false</isActive>
+			<startDate>6/8/2020</startDate>
+			<endDate>10/10/2024</endDate>
+			<contentFile>./talent-core/src/main/resources/DummyPrivacyPolicy2.html</contentFile>
+		</privacyPolicy>
+	</privacyPolicyVersions>
 
 </dummyData>
