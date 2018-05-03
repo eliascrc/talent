@@ -147,9 +147,9 @@ class DataParser extends XmlParser {
     private TermsOfService getTermsOfService(Element termsOfServiceElement) {
         TermsOfService termsOfService = new TermsOfService();
         if(super.getDateValue(termsOfServiceElement, "startDate") != null)
-        termsOfService.setStartDate(super.getDateValue(termsOfServiceElement, "startDate"));
+        	termsOfService.setStartDate(super.getDateValue(termsOfServiceElement, "startDate"));
         if(super.getDateValue(termsOfServiceElement, "endDate") != null)
-        termsOfService.setEndDate(super.getDateValue(termsOfServiceElement, "endDate"));
+        	termsOfService.setEndDate(super.getDateValue(termsOfServiceElement, "endDate"));
         termsOfService.setActive(super.getBooleanValue(termsOfServiceElement, "isActive"));
         String termsOfServiceContent = "";
         try {
