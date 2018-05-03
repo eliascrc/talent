@@ -131,7 +131,7 @@ class DataParser extends XmlParser {
     private void fillTermsOfServiceVersions() {
         Elements termsOfServiceVersionsElements = getElementOfType("termsOfServiceVersions").get(0).getChildElements();
         for (int i = 0; i < termsOfServiceVersionsElements.size(); i++){
-            TermsOfService termsOfService = getTermsOfService(termsOfServiceVersionsElements.get(i));
+            TermsOfService termsOfService = this.getTermsOfService(termsOfServiceVersionsElements.get(i));
             this.termsOfServiceVersions.add(termsOfService);
         }
     }

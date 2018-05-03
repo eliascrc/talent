@@ -27,7 +27,7 @@ public class TermsOfServiceResource {
      * TermsOfService service to obtain the currently active version terms of service.
      */
     @Autowired
-    ToSService toSService;
+    private ToSService toSService;
 
     /**
      * Gets the currently active terms of service via the TermsOfService service and returns a response with
