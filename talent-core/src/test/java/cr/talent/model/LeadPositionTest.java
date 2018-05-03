@@ -22,9 +22,9 @@ public class LeadPositionTest {
     private static final String ID = "1234";
     private static final String ID2 = "12345";
     private static final Project PROJECT = mock(Project.class);
-    private static final Lead PROJECT_MANAGER = mock(Lead.class);
+    private static final TechnicalResource LEAD = mock(TechnicalResource.class);
     private static final Project PROJECT2 = mock(Project.class);
-    private static final Lead PROJECT_MANAGER2 = mock(Lead.class);
+    private static final TechnicalResource LEAD2 = mock(TechnicalResource.class);
 
     @Test
     public void coreTest() {
@@ -46,7 +46,7 @@ public class LeadPositionTest {
         leadPosition.setEndDate(endDate);
         leadPosition.setStartDate(startDate);
         leadPosition.setProject(PROJECT);
-        leadPosition.setLead(PROJECT_MANAGER);
+        leadPosition.setLead(LEAD);
 
         // Verify the gets
         assertEquals(ID, leadPosition.getId());
@@ -56,7 +56,7 @@ public class LeadPositionTest {
         assertEquals(endDate, leadPosition.getEndDate());
         assertEquals(startDate, leadPosition.getStartDate());
         assertEquals(PROJECT, leadPosition.getProject());
-        assertEquals(PROJECT_MANAGER, leadPosition.getLead());
+        assertEquals(LEAD, leadPosition.getLead());
     }
 
     //ON EQUALS TESTS.
@@ -101,11 +101,11 @@ public class LeadPositionTest {
     public void testEqualForNonPersistentProjectManagerPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
-        leadPosition1.setLead(PROJECT_MANAGER);
+        leadPosition1.setLead(LEAD);
 
         LeadPosition leadPosition2 = new LeadPosition();
         leadPosition2.setProject(PROJECT);
-        leadPosition2.setLead(PROJECT_MANAGER);
+        leadPosition2.setLead(LEAD);
 
         assertTrue(leadPosition1.equals(leadPosition2));
     }
@@ -114,11 +114,11 @@ public class LeadPositionTest {
     public void testNonEqualForNonPersistentProjectManagerPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
-        leadPosition1.setLead(PROJECT_MANAGER);
+        leadPosition1.setLead(LEAD);
 
         LeadPosition leadPosition2 = new LeadPosition();
         leadPosition2.setProject(PROJECT2);
-        leadPosition2.setLead(PROJECT_MANAGER2);
+        leadPosition2.setLead(LEAD2);
 
         assertFalse(leadPosition1.equals(leadPosition2));
     }
@@ -151,11 +151,11 @@ public class LeadPositionTest {
     public void testEqualHashCodeForNonPersistentProjectManagerPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
-        leadPosition1.setLead(PROJECT_MANAGER);
+        leadPosition1.setLead(LEAD);
 
         LeadPosition leadPosition2 = new LeadPosition();
         leadPosition2.setProject(PROJECT);
-        leadPosition2.setLead(PROJECT_MANAGER);
+        leadPosition2.setLead(LEAD);
 
         assertTrue(leadPosition1.hashCode() == leadPosition2.hashCode());
     }
@@ -164,11 +164,11 @@ public class LeadPositionTest {
     public void testNonEqualHashCodeForNonPersistentProjectManagerPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
-        leadPosition1.setLead(PROJECT_MANAGER);
+        leadPosition1.setLead(LEAD);
 
         LeadPosition leadPosition2 = new LeadPosition();
         leadPosition2.setProject(PROJECT2);
-        leadPosition2.setLead(PROJECT_MANAGER2);
+        leadPosition2.setLead(LEAD2);
 
         assertFalse(leadPosition1.hashCode() == leadPosition2.hashCode());
     }

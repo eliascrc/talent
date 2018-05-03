@@ -15,13 +15,13 @@ import java.util.Date;
 public class ProjectPositionHolder extends BasicEntity {
 
     /**
-     * The date in which the project started
+     * The date in which the project position holder started
      */
     @Column(name = "start_date", nullable = false)
     private Date startDate;
 
     /**
-     * The date in which the project ended
+     * The date in which the project position holder ended
      */
     @Column(name = "end_date")
     private Date endDate;
@@ -36,7 +36,7 @@ public class ProjectPositionHolder extends BasicEntity {
     /**
      * Indicates if the holder resource has already being reviewed for this position
      */
-    @Column(name = "reviewed", nullable = false)
+    @Column(nullable = false)
     private boolean reviewed;
 
     /**
@@ -55,7 +55,7 @@ public class ProjectPositionHolder extends BasicEntity {
     /**
      * Indicates if the position is currently active
      */
-    @Column(name = "active")
+    @Column(nullable = false)
     private Boolean active;
 
     @Override

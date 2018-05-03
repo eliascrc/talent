@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Class that represents a Capability Level within the Talent system.
@@ -10,14 +11,13 @@ import javax.persistence.*;
  * @author María José Cubero
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "capability_level")
-public abstract class CapabilityLevel extends BasicEntity {
+public class CapabilityLevel extends BasicEntity {
 
     /**
      * The name of the capability level
      */
-    @Column (name = "name" , nullable = false)
+    @Column (nullable = false)
     private String name;
 
     /**
@@ -27,18 +27,36 @@ public abstract class CapabilityLevel extends BasicEntity {
     private int hierarchyPosition;
 
     /**
-     * The parent capability of the level
+     * The parent capability of the level.
      */
     @ManyToOne
     @JoinColumn (name = "capability_id", nullable = false)
     private Capability capability;
 
     /**
-     * The projects where the capability is in use
+     * The required skills to achieve the capability level.
+     */
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "required_capability_skills",
+            joinColumns = { @JoinColumn(name = "capability_level_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+    )
+    private Set<OrganizationSkill> requiredSkills;
+
+    /**
+     * The organization of the capability level. If it points no organization, the capability level is taken as a
+     * predefined capability level.
      */
     @ManyToOne
-    @JoinColumn (name = "project_id")
-    private Project project;
+    @JoinColumn (name = "organization_id", nullable = false)
+    private Organization organization;
+
+    /**
+     * The projects where the capability is in use
+     */
+    @ManyToMany(mappedBy = "projectCapabilities")
+    private Set<Project> projects;
 
     public CapabilityLevel(){}
 
@@ -83,11 +101,27 @@ public abstract class CapabilityLevel extends BasicEntity {
         this.capability = capability;
     }
 
-    public Project getProject() {
-        return project;
+    public Set<Project> getProject() {
+        return projects;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setProject(Set<Project> project) {
+        this.projects = project;
+    }
+
+    public Set<OrganizationSkill> getRequiredSkills() {
+        return requiredSkills;
+    }
+
+    public void setRequiredSkills(Set<OrganizationSkill> requiredSkills) {
+        this.requiredSkills = requiredSkills;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }

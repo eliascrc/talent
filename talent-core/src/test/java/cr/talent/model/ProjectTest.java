@@ -53,7 +53,6 @@ public class ProjectTest{
         project.setEndDate(endDate);
         project.setProjectCapabilities(new HashSet<>());
         project.setLeadHistory(new HashSet<>());
-        project.setState(ProjectState.UPCOMING);
         project.setOrganization(organization);
         project.setObservations(new HashSet<>());
 
@@ -67,7 +66,6 @@ public class ProjectTest{
         assertEquals(endDate, project.getEndDate());
         assertNotNull(project.getProjectCapabilities());
         assertNotNull(project.getLeadHistory());
-        assertEquals(ProjectState.UPCOMING, project.getState());
         assertEquals(organization, project.getOrganization());
         assertNotNull(project.getObservations());
     }

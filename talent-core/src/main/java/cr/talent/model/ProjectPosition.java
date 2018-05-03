@@ -23,7 +23,8 @@ public class ProjectPosition extends BasicEntity {
     private ProjectPositionStatus projectPositionStatus;
 
     /**
-     * The total hours assigned to that position
+     * The total hours assigned to that position. The sum of assigned hours of the holders must
+     * be the total hours for the position.
      */
     @Column(name = "total_hours", nullable = false)
     private int totalHours;
@@ -31,7 +32,8 @@ public class ProjectPosition extends BasicEntity {
     /**
      * The related capability of that project position
      */
-    @Column(name = "capability", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "capability_id", nullable = false)
     private CapabilityLevel capability;
 
     /**

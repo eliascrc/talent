@@ -5,22 +5,23 @@ import java.util.Date;
 
 /**
  * Class that represents a lead position within the Talent system.
- * It contains the project start date, end date, project and lead.
+ * It contains the lead's start date, end date, active flag, the project, associated lead
+ * and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
- * @author María José Cubero
+ * @author Elías Calderón
  */
 @Entity
 @Table(name = "lead_position")
 public class LeadPosition extends BasicEntity {
 
     /**
-     * Start date of the project.
+     * Start date of the lead in the position.
      */
     @Column(name = "start_date", nullable = false)
     private Date startDate;
 
     /**
-     * End date of the project.
+     * End date of the lead in the position.
      */
     @Column(name = "end_date")
     private Date endDate;
@@ -28,11 +29,11 @@ public class LeadPosition extends BasicEntity {
     /**
      * Indicates if the position is currently active.
      */
-    @Column(name = "active", nullable = false)
+    @Column(nullable = false)
     private Boolean active;
 
     /**
-     * The project of the project manager position.
+     * The project of the lead position.
      */
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
@@ -43,7 +44,7 @@ public class LeadPosition extends BasicEntity {
      */
     @ManyToOne
     @JoinColumn(name = "lead_id", nullable = false)
-    private Lead lead;
+    private TechnicalResource lead;
 
     public LeadPosition(){}
 
@@ -90,11 +91,11 @@ public class LeadPosition extends BasicEntity {
         this.project = project;
     }
 
-    public Lead getLead() {
+    public TechnicalResource getLead() {
         return lead;
     }
 
-    public void setLead(Lead lead) {
+    public void setLead(TechnicalResource lead) {
         this.lead = lead;
     }
 

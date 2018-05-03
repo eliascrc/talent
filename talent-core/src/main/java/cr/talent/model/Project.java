@@ -6,8 +6,8 @@ import java.util.Date;
 
 /**
  * Class that represents a project within the Talent system.
- * It contains the project name, dates, capabilities, project manager history, status
- * and the information inherited from {@link cr.talent.model.BasicEntity} class.
+ * It contains the project name, description, dates, links, capabilities, lead history, status, timeline,
+ * positions and capabilities and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Elías Calderón
  */
@@ -18,13 +18,13 @@ public class Project extends BasicEntity {
     /**
      * The name of the project.
      */
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
     /**
      * The description of the project.
      */
-    @Column(name = "description")
+    @Column
     private String description;
 
     /**
@@ -67,21 +67,25 @@ public class Project extends BasicEntity {
     /**
      * The state that the project currently has. It's represented by the latest event.
      */
-    @Column(name = "state")
-    @Enumerated(EnumType.STRING)
+    @OneToOne
     private ProjectEvent state;
 
     /**
      * A set with the history of project manager's throughout the life time of the project.
      */
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "lead_history")
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
     @OrderBy ("entityCreationTimestamp")
     private Set<LeadPosition> leadHistory;
 
     /**
      * A set with the capabilities of the project.
      */
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "project_capabilities",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "capability_level_id") }
+    )
     private Set<CapabilityLevel> projectCapabilities;
 
     /**

@@ -14,11 +14,11 @@ public abstract class Position extends BasicEntity {
 
     /**
      * The capability and level related to the position. The organization's capability can be found as an attribute
-     * in {@link OrganizationCapabilityLevel}
+     * in {@link cr.talent.model.CapabilityLevel}
      */
     @ManyToOne
     @JoinColumn(name = "org_capability_level_id", nullable = false)
-    private OrganizationCapabilityLevel organizationCapabilityLevel;
+    private CapabilityLevel capabilityLevel;
 
     /**
      * The technical resource that has the position
@@ -34,9 +34,9 @@ public abstract class Position extends BasicEntity {
         boolean result = false;
         if ( o instanceof Position){
             Position position = (Position) o;
-            result = (this.organizationCapabilityLevel == null ?
-                    position.getOrganizationCapabilityLevel() == null :
-                    this.organizationCapabilityLevel.equals(position.getOrganizationCapabilityLevel()));
+            result = (this.capabilityLevel == null ?
+                    position.getCapabilityLevel() == null :
+                    this.capabilityLevel.equals(position.getCapabilityLevel()));
         }
         return result;
     }
@@ -44,16 +44,16 @@ public abstract class Position extends BasicEntity {
     @Override
     protected int onHashCode(int result) {
         final int prime = 23;
-        result = prime * result + (this.organizationCapabilityLevel == null ? 0 : this.organizationCapabilityLevel.hashCode());
+        result = prime * result + (this.capabilityLevel == null ? 0 : this.capabilityLevel.hashCode());
         return result;
     }
 
-    public OrganizationCapabilityLevel getOrganizationCapabilityLevel() {
-        return organizationCapabilityLevel;
+    public CapabilityLevel getCapabilityLevel() {
+        return capabilityLevel;
     }
 
-    public void setOrganizationCapabilityLevel(OrganizationCapabilityLevel organizationCapabilityLevel) {
-        this.organizationCapabilityLevel = organizationCapabilityLevel;
+    public void setCapabilityLevel(CapabilityLevel capabilityLevel) {
+        this.capabilityLevel = capabilityLevel;
     }
 
     public TechnicalResource getTechnicalResource() {

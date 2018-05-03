@@ -33,6 +33,9 @@ public class ProjectEvent extends BasicEntity {
     @Enumerated(EnumType.STRING)
     private ProjectEventType eventType;
 
+    /**
+     * The project of the event.
+     */
     @ManyToOne
     @JoinColumn (name = "project_id", nullable = false)
     private Project project;
