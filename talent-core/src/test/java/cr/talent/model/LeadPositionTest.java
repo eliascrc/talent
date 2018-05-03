@@ -34,6 +34,7 @@ public class LeadPositionTest {
         long entityVersion = 1l;
         Date startDate = new Date();
         Date endDate = new Date();
+        Boolean active = true;
 
         // Verify Constructor
         LeadPosition leadPosition = new LeadPosition();
@@ -45,6 +46,7 @@ public class LeadPositionTest {
         leadPosition.setEntityVersion(entityVersion);
         leadPosition.setEndDate(endDate);
         leadPosition.setStartDate(startDate);
+        leadPosition.setActive(active);
         leadPosition.setProject(PROJECT);
         leadPosition.setLead(LEAD);
 
@@ -55,6 +57,7 @@ public class LeadPositionTest {
         assertEquals(entityVersion, leadPosition.getEntityVersion());
         assertEquals(endDate, leadPosition.getEndDate());
         assertEquals(startDate, leadPosition.getStartDate());
+        assertEquals(active, leadPosition.getActive());
         assertEquals(PROJECT, leadPosition.getProject());
         assertEquals(LEAD, leadPosition.getLead());
     }

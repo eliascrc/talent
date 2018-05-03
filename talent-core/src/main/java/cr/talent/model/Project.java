@@ -114,7 +114,8 @@ public class Project extends BasicEntity {
         boolean result = false;
         if ( o instanceof Project){
             Project project = (Project) o;
-            result = (this.name == null ? project.getName() == null : this.name.equals(project.getName()));
+            result = (this.name == null ? project.getName() == null : this.name.equals(project.getName())
+                    && this.organization == null ? project.getOrganization() == null : this.organization.equals(project.getOrganization()));
         }
         return result;
     }
@@ -123,6 +124,7 @@ public class Project extends BasicEntity {
     protected int onHashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        result = prime * result + (this.organization == null ? 0 : this.organization.hashCode());
         return result;
     }
 

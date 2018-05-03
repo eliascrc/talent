@@ -60,12 +60,23 @@ public class ProjectPositionHolder extends BasicEntity {
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof ProjectPositionHolder ){
+            ProjectPositionHolder projectPositionHolder = (ProjectPositionHolder) o;
+            result = (this.projectPosition == null ? projectPositionHolder.getProjectPosition() == null : this.projectPosition.equals(projectPositionHolder.getProjectPosition())
+                    && this.resource == null ? projectPositionHolder.getResource() == null : this.resource.equals(projectPositionHolder.getResource())
+                    && this.startDate == null ? projectPositionHolder.getStartDate() == null : this.startDate.equals(projectPositionHolder.getStartDate()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.projectPosition == null ? 0 : this.projectPosition.hashCode());
+        result = prime * result + (this.resource == null ? 0 : this.resource.hashCode());
+        result = prime * result + (this.startDate == null ? 0 : this.startDate.hashCode());
+        return result;
     }
 
     public Date getStartDate() {

@@ -2,6 +2,7 @@ package cr.talent.model;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -26,19 +27,26 @@ public class ProjectTest{
     private static final String ID = "1234";
     private static final String ID2 = "12345";
     private static final String NAME = "talent";
+    private static final Organization ORGANIZATION = mock(Organization.class);
     private static final String NAME2 = "talent2";
+    private static final Organization ORGANIZATION2 = mock(Organization.class);
 
     private static final String STRING_BUILDER_OUTPUT = "[class name = %s, id = %s]";
 
     @Test
     public void coreTest() {
 
-        Organization organization = mock(Organization.class);
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
+
+        String description = "A project";
         Date startDate = new Date();
         Date endDate = new Date();
+        String jiraLink = "www.jira.com";
+        String confluenceLink = "www.confluence.com";
+        String versionLink = "www.git.com";
+        ProjectEvent state = mock(ProjectEvent.class);
 
         // Verify Constructor
         Project project = new Project();
@@ -49,11 +57,18 @@ public class ProjectTest{
         project.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         project.setEntityVersion(entityVersion);
         project.setName(NAME);
+        project.setDescription(description);
         project.setStartDate(startDate);
         project.setEndDate(endDate);
-        project.setProjectCapabilities(new HashSet<>());
+        project.setJiraLink(jiraLink);
+        project.setConfluenceLink(confluenceLink);
+        project.setVersionControlLink(versionLink);
+        project.setTimeline(new HashSet<>());
+        project.setState(state);
         project.setLeadHistory(new HashSet<>());
-        project.setOrganization(organization);
+        project.setProjectCapabilities(new HashSet<>());
+        project.setProjectPositions(new HashSet<>());
+        project.setOrganization(ORGANIZATION);
         project.setObservations(new HashSet<>());
 
         // Verify the gets
@@ -62,11 +77,18 @@ public class ProjectTest{
         assertEquals(lastUpdatedTimestamp, project.getLastUpdatedTimestamp());
         assertEquals(entityVersion, project.getEntityVersion());
         assertEquals(NAME, project.getName());
+        assertEquals(description, project.getDescription());
         assertEquals(startDate, project.getStartDate());
         assertEquals(endDate, project.getEndDate());
-        assertNotNull(project.getProjectCapabilities());
+        assertEquals(jiraLink, project.getJiraLink());
+        assertEquals(confluenceLink, project.getConfluenceLink());
+        assertEquals(versionLink, project.getVersionControlLink());
+        assertNotNull(project.getTimeline());
+        assertEquals(state, project.getState());
         assertNotNull(project.getLeadHistory());
-        assertEquals(organization, project.getOrganization());
+        assertNotNull(project.getProjectCapabilities());
+        assertNotNull(project.getProjectPositions());
+        assertEquals(ORGANIZATION, project.getOrganization());
         assertNotNull(project.getObservations());
     }
 
@@ -112,9 +134,11 @@ public class ProjectTest{
     public void testEqualForNonPersistentProject() {
         Project project1 = new Project();
         project1.setName(NAME);
+        project1.setOrganization(ORGANIZATION);
 
         Project project2 = new Project();
         project2.setName(NAME);
+        project2.setOrganization(ORGANIZATION);
 
         assertTrue(project1.equals(project2));
     }
@@ -123,9 +147,11 @@ public class ProjectTest{
     public void testNonEqualForNonPersistentProject() {
         Project project1 = new Project();
         project1.setName(NAME);
+        project1.setOrganization(ORGANIZATION);
 
         Project project2 = new Project();
         project2.setName(NAME2);
+        project2.setOrganization(ORGANIZATION2);
 
         assertFalse(project1.equals(project2));
     }
@@ -158,9 +184,11 @@ public class ProjectTest{
     public void testEqualHashCodeForNonPersistentProject() {
         Project project1 = new Project();
         project1.setName(NAME);
+        project1.setOrganization(ORGANIZATION);
 
         Project project2 = new Project();
         project2.setName(NAME);
+        project2.setOrganization(ORGANIZATION);
 
         assertTrue(project1.hashCode() == project2.hashCode());
     }
@@ -169,9 +197,11 @@ public class ProjectTest{
     public void testNonEqualHashCodeForNonPersistentProject() {
         Project project1 = new Project();
         project1.setName(NAME);
+        project1.setOrganization(ORGANIZATION);
 
         Project project2 = new Project();
         project2.setName(NAME2);
+        project2.setOrganization(ORGANIZATION2);
 
         assertFalse(project1.hashCode() == project2.hashCode());
     }
@@ -194,8 +224,8 @@ public class ProjectTest{
             assertNull(basicEntity.getLastUpdatedTimestamp());
             assertEquals(basicEntity.getEntityVersion(), -1);
 
-        }catch (Exception exception){
-
+        } catch (Exception exception){
+            //Do nothing
         }
     }
 

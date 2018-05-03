@@ -40,6 +40,7 @@ public class ProjectPosition extends BasicEntity {
      * The history of position holders that the position has had.
      */
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "projectPosition")
+    @OrderBy("startDate")
     private Set<ProjectPositionHolder> holderHistory;
 
     /**
@@ -61,12 +62,21 @@ public class ProjectPosition extends BasicEntity {
 
     @Override
     protected boolean onEquals(Object o) {
-        return false;
+        boolean result = false;
+        if ( o instanceof ProjectPosition ){
+            ProjectPosition projectPosition = (ProjectPosition) o;
+            result = (this.project == null ? projectPosition.getProject() == null : this.project.equals(projectPosition.getProject())
+                    && this.capability == null ? projectPosition.getCapability() == null : this.capability.equals(projectPosition.getCapability()));
+        }
+        return result;
     }
 
     @Override
     protected int onHashCode(int result) {
-        return 0;
+        final int prime = 23;
+        result = prime * result + (this.project == null ? 0 : this.project.hashCode());
+        result = prime * result + (this.capability == null ? 0 : this.capability.hashCode());
+        return result;
     }
 
     public int getTotalHours() {
