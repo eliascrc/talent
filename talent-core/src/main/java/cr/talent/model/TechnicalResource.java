@@ -65,12 +65,6 @@ public class TechnicalResource extends User{
     private Set<EducationRecord> educationRecords;
 
     /**
-     * The list of the resource's project positions.
-     */
-    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
-    private Set<ProjectPosition> projectPositions;
-
-    /**
      * The resource's job position.
      */
     @OneToOne (mappedBy = "technicalResource")
@@ -146,6 +140,12 @@ public class TechnicalResource extends User{
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "two_step_verification_id", unique = true)
     private TwoStepVerification twoStepVerification;
+
+    /**
+     * The project positions for the resource
+     */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "resource")
+    private Set<ProjectPositionHolder> projectPositions;
 
     public TechnicalResource(){}
 
@@ -229,14 +229,6 @@ public class TechnicalResource extends User{
 
     public void setEducationRecords(Set<EducationRecord> educationRecords) {
         this.educationRecords = educationRecords;
-    }
-
-    public Set<ProjectPosition> getProjectPositions() {
-        return projectPositions;
-    }
-
-    public void setProjectPositions(Set<ProjectPosition> projectPositions) {
-        this.projectPositions = projectPositions;
     }
 
     public JobPosition getJobPosition() {
@@ -341,5 +333,13 @@ public class TechnicalResource extends User{
 
     public void setTwoStepVerification(TwoStepVerification twoStepVerification) {
         this.twoStepVerification = twoStepVerification;
+    }
+
+    public Set<ProjectPositionHolder> getProjectPositions() {
+        return projectPositions;
+    }
+
+    public void setProjectPositions(Set<ProjectPositionHolder> projectPositions) {
+        this.projectPositions = projectPositions;
     }
 }

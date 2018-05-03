@@ -33,6 +33,13 @@ public abstract class CapabilityLevel extends BasicEntity {
     @JoinColumn (name = "capability_id", nullable = false)
     private Capability capability;
 
+    /**
+     * The projects where the capability is in use
+     */
+    @ManyToOne
+    @JoinColumn (name = "project_id")
+    private Project project;
+
     public CapabilityLevel(){}
 
     @Override
@@ -74,5 +81,13 @@ public abstract class CapabilityLevel extends BasicEntity {
 
     public void setCapability(Capability capability) {
         this.capability = capability;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

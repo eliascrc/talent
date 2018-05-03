@@ -1,7 +1,6 @@
 package cr.talent.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.Date;
 
@@ -23,6 +22,12 @@ public class Project extends BasicEntity {
     private String name;
 
     /**
+     * The description of the project.
+     */
+    @Column(name = "description")
+    private String description;
+
+    /**
      * The date in which the project started.
      */
     @Column(name = "start_date")
@@ -35,24 +40,55 @@ public class Project extends BasicEntity {
     private Date endDate;
 
     /**
-     * A list with the capabilities of the project.
+     * The link to the JIRA page of the project.
+     */
+    @Column(name = "jira_link")
+    private String jiraLink;
+
+    /**
+     * The link to the Confluence page of the project.
+     */
+    @Column(name = "confluence_link")
+    private String confluenceLink;
+
+    /**
+     * The link to the Version Control page of the project.
+     */
+    @Column(name = "version_control_link")
+    private String versionControlLink;
+
+    /**
+     * The event timeline of the project
      */
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
-    private Set<ProjectCapability> projectCapabilities;
+    @OrderBy ("startDate")
+    private Set<ProjectEvent> timeline;
+
+    /**
+     * The state that the project currently has. It's represented by the latest event.
+     */
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    private ProjectEvent state;
 
     /**
      * A set with the history of project manager's throughout the life time of the project.
      */
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "lead_history")
     @OrderBy ("entityCreationTimestamp")
-    private Set<ProjectManagerPosition> projectManagerHistory;
+    private Set<LeadPosition> leadHistory;
 
     /**
-     * The state that the project currently has.
+     * A set with the capabilities of the project.
      */
-    @Column(name = "state", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private ProjectState state;
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
+    private Set<CapabilityLevel> projectCapabilities;
+
+    /**
+     * A set with the positions of the project
+     */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "project")
+    private Set<ProjectPosition> projectPositions;
 
     /**
      * The organization that the project belongs to.
@@ -110,28 +146,28 @@ public class Project extends BasicEntity {
         this.endDate = endDate;
     }
 
-    public Set<ProjectCapability> getProjectCapabilities() {
+    public Set<CapabilityLevel> getProjectCapabilities() {
         return projectCapabilities;
     }
 
-    public void setProjectCapabilities(Set<ProjectCapability> projectCapabilities) {
+    public void setProjectCapabilities(Set<CapabilityLevel> projectCapabilities) {
         this.projectCapabilities = projectCapabilities;
     }
 
-    public ProjectState getState() {
+    public ProjectEvent getState() {
         return state;
     }
 
-    public void setState(ProjectState state) {
+    public void setState(ProjectEvent state) {
         this.state = state;
     }
 
-    public Set<ProjectManagerPosition> getProjectManagerHistory() {
-        return projectManagerHistory;
+    public Set<LeadPosition> getLeadHistory() {
+        return leadHistory;
     }
 
-    public void setProjectManagerHistory(Set<ProjectManagerPosition> projectManagerHistory) {
-        this.projectManagerHistory = projectManagerHistory;
+    public void setLeadHistory(Set<LeadPosition> leadHistory) {
+        this.leadHistory = leadHistory;
     }
 
     public Organization getOrganization() {
@@ -148,5 +184,53 @@ public class Project extends BasicEntity {
 
     public void setObservations(Set<Observation> observations) {
         this.observations = observations;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getJiraLink() {
+        return jiraLink;
+    }
+
+    public void setJiraLink(String jiraLink) {
+        this.jiraLink = jiraLink;
+    }
+
+    public String getConfluenceLink() {
+        return confluenceLink;
+    }
+
+    public void setConfluenceLink(String confluenceLink) {
+        this.confluenceLink = confluenceLink;
+    }
+
+    public String getVersionControlLink() {
+        return versionControlLink;
+    }
+
+    public void setVersionControlLink(String versionControlLink) {
+        this.versionControlLink = versionControlLink;
+    }
+
+    public Set<ProjectEvent> getTimeline() {
+        return timeline;
+    }
+
+    public void setTimeline(Set<ProjectEvent> timeline) {
+        this.timeline = timeline;
+    }
+
+    public Set<ProjectPosition> getProjectPositions() {
+        return projectPositions;
+    }
+
+    public void setProjectPositions(Set<ProjectPosition> projectPositions) {
+        this.projectPositions = projectPositions;
     }
 }
