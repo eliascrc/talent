@@ -35,9 +35,7 @@ public class ProjectPositionHolderTest {
         long entityVersion = 1l;
 
         Date endDate = new Date();
-        Boolean reviewed = false;
         int assignedHours = 2;
-        Boolean active = true;
 
         // Test Constructor
         ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
@@ -47,9 +45,9 @@ public class ProjectPositionHolderTest {
         projectPositionHolder.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         projectPositionHolder.setId(ID);
         projectPositionHolder.setEndDate(endDate);
-        projectPositionHolder.setReviewed(reviewed);
+        projectPositionHolder.setReviewed(false);
         projectPositionHolder.setAssignedHours(assignedHours);
-        projectPositionHolder.setActive(active);
+        projectPositionHolder.setActive(true);
         projectPositionHolder.setProjectPosition(PROJECT_POSITION);
         projectPositionHolder.setResource(TECHNICAL_RESOURCE);
         projectPositionHolder.setStartDate(START_DATE);
@@ -58,128 +56,194 @@ public class ProjectPositionHolderTest {
         assertEquals(lastUpdatedTimestamp, projectPositionHolder.getLastUpdatedTimestamp());
         assertEquals(entityVersion, projectPositionHolder.getEntityVersion());
         assertEquals(ID, projectPositionHolder.getId());
-        assertEquals(projectPositionStatus, projectPositionHolder.getProjectPositionStatus());
-        assertEquals(totalHours, projectPositionHolder.getTotalHours());
-        assertNotNull(projectPositionHolder.getHolderHistory());
-        assertEquals(PROJECT_POSITION, projectPositionHolder.getProject());
-        assertEquals(TECHNICAL_RESOURCE, projectPositionHolder.getCapability());
+        assertEquals(endDate, projectPositionHolder.getEndDate());
+        assertFalse(projectPositionHolder.isReviewed());
+        assertEquals(assignedHours, projectPositionHolder.getAssignedHours());
+        assertTrue(projectPositionHolder.isActive());
+        assertEquals(PROJECT_POSITION, projectPositionHolder.getProjectPosition());
+        assertEquals(TECHNICAL_RESOURCE, projectPositionHolder.getResource());
+        assertEquals(START_DATE, projectPositionHolder.getStartDate());
     }
 
 
     @Test
     public void testEqualForSameObject() {
-        ProjectPosition projectPosition = new ProjectPosition();
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
 
-        assertTrue(projectPosition.equals(projectPosition));
+        assertTrue(projectPositionHolder.equals(projectPositionHolder));
     }
 
     @Test
     public void testEqualForDifferentClass() {
-        ProjectPosition projectPosition = new ProjectPosition();
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
 
-        assertFalse(projectPosition.equals(new Object()));
+        assertFalse(projectPositionHolder.equals(new Image()));
     }
 
     @Test
-    public void testEqualForPersistentSkillToApprove() {
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setId(ID);
+    public void testEqualForPersistentProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setId(ID);
 
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setId(ID);
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setId(ID);
 
-        assertTrue(projectPosition.equals(projectPosition2));
+        assertTrue(projectPositionHolder.equals(projectPositionHolder2));
     }
 
     @Test
-    public void testNonEqualForPersistentSkillToApprove() {
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setId(ID);
+    public void testNonEqualForPersistentProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setId(ID);
 
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setId(ID2);
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setId(ID2);
 
-        assertFalse(projectPosition.equals(projectPosition2));
+        assertFalse(projectPositionHolder.equals(projectPositionHolder2));
     }
 
     @Test
-    public void testEqualForNonPersistentSkillToApprove() {
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setProject(PROJECT_POSITION);
-        projectPosition.setCapability(TECHNICAL_RESOURCE);
+    public void testEqualForNonPersistentProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setProjectPosition(PROJECT_POSITION);
+        projectPositionHolder.setResource(TECHNICAL_RESOURCE);
+        projectPositionHolder.setStartDate(START_DATE);
 
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setProject(PROJECT_POSITION);
-        projectPosition2.setCapability(TECHNICAL_RESOURCE);
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setProjectPosition(PROJECT_POSITION);
+        projectPositionHolder2.setResource(TECHNICAL_RESOURCE);
+        projectPositionHolder2.setResource(TECHNICAL_RESOURCE);
+        projectPositionHolder2.setStartDate(START_DATE);
 
-        assertTrue(projectPosition.equals(projectPosition2));
+        assertTrue(projectPositionHolder.equals(projectPositionHolder2));
     }
 
     @Test
-    public void testNonEqualForNonPersistentSkillToApprove() {
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setProject(PROJECT_POSITION);
-        projectPosition.setCapability(TECHNICAL_RESOURCE);
+    public void testNonEqualForNonPersistentProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setProjectPosition(PROJECT_POSITION);
+        projectPositionHolder.setResource(TECHNICAL_RESOURCE);
+        projectPositionHolder.setStartDate(START_DATE);
 
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setProject(PROJECT_POSITION2);
-        projectPosition2.setCapability(TECHNICAL_RESOURCE2);
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setProjectPosition(PROJECT_POSITION2);
+        projectPositionHolder2.setResource(TECHNICAL_RESOURCE2);
+        projectPositionHolder.setStartDate(START_DATE2);
 
-        assertFalse(projectPosition.equals(projectPosition2));
-    }
-
-
-
-    @Test
-    public void testEqualHashCodeForPersistentSkillToApprove() {
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setId(ID);
-
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setId(ID);
-
-        assertTrue(projectPosition.hashCode() == projectPosition2.hashCode());
+        assertFalse(projectPositionHolder.equals(projectPositionHolder2));
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentSkillToApprove() {
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setId(ID);
+    public void testEqualForNonPersistentProjectPositionHolderNullValues() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
 
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setId(ID2);
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
 
-        assertFalse(projectPosition.hashCode() == projectPosition2.hashCode());
-    }
-
-
-
-    @Test
-    public void testEqualHashCodeForNonPersistentSkillToApprove() {
-
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setProject(PROJECT_POSITION);
-        projectPosition.setCapability(TECHNICAL_RESOURCE);
-
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setProject(PROJECT_POSITION);
-        projectPosition2.setCapability(TECHNICAL_RESOURCE);
-
-        assertTrue(projectPosition.hashCode() == projectPosition2.hashCode());
-
+        assertTrue(projectPositionHolder.equals(projectPositionHolder2));
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentSkillToApprove() {
-        ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setProject(PROJECT_POSITION);
-        projectPosition.setCapability(TECHNICAL_RESOURCE);
+    public void testNonEqualForNonPersistentProjectPositionHolderNullProjectPosition() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
 
-        ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setProject(PROJECT_POSITION2);
-        projectPosition2.setCapability(TECHNICAL_RESOURCE2);
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setProjectPosition(PROJECT_POSITION2);
 
-        assertFalse(projectPosition.hashCode() == projectPosition2.hashCode());
+        assertFalse(projectPositionHolder.equals(projectPositionHolder2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionHolderNullResourceFirstProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setResource(TECHNICAL_RESOURCE);
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+
+        assertFalse(projectPositionHolder.equals(projectPositionHolder2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionHolderNullResource() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setResource(TECHNICAL_RESOURCE2);
+
+        assertFalse(projectPositionHolder.equals(projectPositionHolder2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionHolderNullStartDate() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setStartDate(START_DATE2);
+
+        assertFalse(projectPositionHolder.equals(projectPositionHolder2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionHolderNullStartDateFirstProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setStartDate(START_DATE);
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+
+        assertFalse(projectPositionHolder.equals(projectPositionHolder2));
+    }
+
+    @Test
+    public void testEqualHashCodeForPersistentProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setId(ID);
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setId(ID);
+
+        assertTrue(projectPositionHolder.hashCode() == projectPositionHolder2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForPersistentProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setId(ID);
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setId(ID2);
+
+        assertFalse(projectPositionHolder.hashCode() == projectPositionHolder2.hashCode());
+    }
+
+    @Test
+    public void testEqualHashCodeForNonPersistentProjectPositionHolder() {
+
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setProjectPosition(PROJECT_POSITION);
+        projectPositionHolder.setResource(TECHNICAL_RESOURCE);
+        projectPositionHolder.setStartDate(START_DATE);
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setProjectPosition(PROJECT_POSITION);
+        projectPositionHolder2.setResource(TECHNICAL_RESOURCE);
+        projectPositionHolder2.setStartDate(START_DATE);
+
+        assertTrue(projectPositionHolder.hashCode() == projectPositionHolder2.hashCode());
+
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentProjectPositionHolder() {
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setProjectPosition(PROJECT_POSITION);
+        projectPositionHolder.setResource(TECHNICAL_RESOURCE);
+        projectPositionHolder.setStartDate(START_DATE);
+
+        ProjectPositionHolder projectPositionHolder2 = new ProjectPositionHolder();
+        projectPositionHolder2.setProjectPosition(PROJECT_POSITION2);
+        projectPositionHolder2.setResource(TECHNICAL_RESOURCE2);
+        projectPositionHolder2.setStartDate(START_DATE2);
+
+        assertFalse(projectPositionHolder.hashCode() == projectPositionHolder2.hashCode());
     }
 
 }

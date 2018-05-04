@@ -47,8 +47,8 @@ public class Capability extends BasicEntity {
         boolean result = false;
         if ( o instanceof Capability){
             Capability capability = (Capability) o;
-            result = (this.name == null ? capability.getName() == null : this.name.equals(capability.getName())
-                    && this.organization == null ? capability.getOrganization() == null : this.organization.equals(capability.getOrganization()));
+            result = ((this.name == null ? capability.getName() == null : this.name.equals(capability.getName()))
+                    && (this.organization == null ? capability.getOrganization() == null : this.organization.equals(capability.getOrganization())));
         }
         return result;
     }

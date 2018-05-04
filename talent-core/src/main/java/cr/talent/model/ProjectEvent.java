@@ -45,9 +45,9 @@ public class ProjectEvent extends BasicEntity {
         boolean result = false;
         if ( o instanceof ProjectEvent){
             ProjectEvent projectEvent = (ProjectEvent) o;
-            result = (this.startDate == null ? projectEvent.getStartDate() == null : this.startDate.equals(projectEvent.getStartDate())
-                      && this.eventType == null ? projectEvent.getEventType() == null : this.eventType.equals(projectEvent.getEventType())
-                      && this.project == null ? projectEvent.getProject() == null : this.project.equals(projectEvent.getProject()));
+            result = ((this.startDate == null ? projectEvent.getStartDate() == null : this.startDate.equals(projectEvent.getStartDate()))
+                      && (this.eventType == null ? projectEvent.getEventType() == null : this.eventType.equals(projectEvent.getEventType()))
+                      && (this.project == null ? projectEvent.getProject() == null : this.project.equals(projectEvent.getProject())));
         }
         return result;
     }

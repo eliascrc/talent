@@ -114,8 +114,8 @@ public class Project extends BasicEntity {
         boolean result = false;
         if ( o instanceof Project){
             Project project = (Project) o;
-            result = (this.name == null ? project.getName() == null : this.name.equals(project.getName())
-                    && this.organization == null ? project.getOrganization() == null : this.organization.equals(project.getOrganization()));
+            result = ((this.name == null ? project.getName() == null : this.name.equals(project.getName()))
+                    && (this.organization == null ? project.getOrganization() == null : this.organization.equals(project.getOrganization())));
         }
         return result;
     }

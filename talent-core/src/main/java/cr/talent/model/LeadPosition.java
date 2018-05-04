@@ -53,8 +53,8 @@ public class LeadPosition extends BasicEntity {
         boolean result = false;
         if ( o instanceof LeadPosition){
             LeadPosition leadPosition = (LeadPosition) o;
-            result = (this.project == null ? leadPosition.getProject() == null : this.project.equals(leadPosition.getProject())
-                    && this.lead == null ? leadPosition.getLead() == null : this.lead.equals(leadPosition.getLead()));
+            result = ((this.project == null ? leadPosition.getProject() == null : this.project.equals(leadPosition.getProject()))
+                    && (this.lead == null ? leadPosition.getLead() == null : this.lead.equals(leadPosition.getLead())));
         }
         return result;
     }

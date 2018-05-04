@@ -65,7 +65,9 @@ public class CapabilityLevel extends BasicEntity {
         boolean result = false;
         if ( o instanceof CapabilityLevel){
             CapabilityLevel capabilityLevel = (CapabilityLevel) o;
-            result = (this.name == null ? capabilityLevel.getName() == null : this.name.equals(capabilityLevel.getName()));
+            result = ((this.name == null ? capabilityLevel.getName() == null : this.name.equals(capabilityLevel.getName()))
+                    && (this.organization == null ? capabilityLevel.getOrganization() == null : this.organization.equals(capabilityLevel.getOrganization()))
+                    && (this.capability == null ? capabilityLevel.getCapability() == null : this.capability.equals(capabilityLevel.getCapability())));
         }
         return result;
     }
@@ -74,6 +76,8 @@ public class CapabilityLevel extends BasicEntity {
     protected int onHashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        result = prime * result + (this.organization == null ? 0 : this.organization.hashCode());
+        result = prime * result + (this.capability == null ? 0 : this.capability.hashCode());
         return result;
     }
 

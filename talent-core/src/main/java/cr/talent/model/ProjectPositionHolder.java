@@ -56,16 +56,16 @@ public class ProjectPositionHolder extends BasicEntity {
      * Indicates if the position is currently active
      */
     @Column(nullable = false)
-    private Boolean active;
+    private boolean active;
 
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;
         if ( o instanceof ProjectPositionHolder ){
             ProjectPositionHolder projectPositionHolder = (ProjectPositionHolder) o;
-            result = (this.projectPosition == null ? projectPositionHolder.getProjectPosition() == null : this.projectPosition.equals(projectPositionHolder.getProjectPosition())
-                    && this.resource == null ? projectPositionHolder.getResource() == null : this.resource.equals(projectPositionHolder.getResource())
-                    && this.startDate == null ? projectPositionHolder.getStartDate() == null : this.startDate.equals(projectPositionHolder.getStartDate()));
+            result = ((this.projectPosition == null ? projectPositionHolder.getProjectPosition() == null : this.projectPosition.equals(projectPositionHolder.getProjectPosition()))
+                    && (this.resource == null ? projectPositionHolder.getResource() == null : this.resource.equals(projectPositionHolder.getResource()))
+                    && (this.startDate == null ? projectPositionHolder.getStartDate() == null : this.startDate.equals(projectPositionHolder.getStartDate())));
         }
         return result;
     }
@@ -127,11 +127,11 @@ public class ProjectPositionHolder extends BasicEntity {
         this.assignedHours = assignedHours;
     }
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 }

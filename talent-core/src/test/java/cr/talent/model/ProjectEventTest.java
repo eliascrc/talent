@@ -69,11 +69,11 @@ public class ProjectEventTest {
     public void testEqualForDifferentClass() {
         ProjectEvent projectEvent = new ProjectEvent();
 
-        assertFalse(projectEvent.equals(new Object()));
+        assertFalse(projectEvent.equals(new Image()));
     }
 
     @Test
-    public void testEqualForPersistentSkillToApprove() {
+    public void testEqualForPersistentProjectEvent() {
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setId(ID);
 
@@ -84,7 +84,7 @@ public class ProjectEventTest {
     }
 
     @Test
-    public void testNonEqualForPersistentSkillToApprove() {
+    public void testNonEqualForPersistentProjectEvent() {
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setId(ID);
 
@@ -95,7 +95,7 @@ public class ProjectEventTest {
     }
 
     @Test
-    public void testEqualForNonPersistentSkillToApprove() {
+    public void testEqualForNonPersistentProjectEvent() {
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setStartDate(START_DATE);
         projectEvent.setEventType(EVENT_TYPE);
@@ -110,7 +110,7 @@ public class ProjectEventTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentSkillToApprove() {
+    public void testNonEqualForNonPersistentProjectEvent() {
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setStartDate(START_DATE);
         projectEvent.setEventType(EVENT_TYPE);
@@ -124,10 +124,67 @@ public class ProjectEventTest {
         assertFalse(projectEvent.equals(projectEvent2));
     }
 
+    @Test
+    public void testEqualForNonPersistentProjectEventNullValues() {
+        ProjectEvent projectEvent = new ProjectEvent();
 
+        ProjectEvent projectEvent2 = new ProjectEvent();
+
+        assertTrue(projectEvent.equals(projectEvent2));
+    }
 
     @Test
-    public void testEqualHashCodeForPersistentSkillToApprove() {
+    public void testNonEqualForNonPersistentProjectEventNullStartDate() {
+        ProjectEvent projectEvent = new ProjectEvent();
+
+        ProjectEvent projectEvent2 = new ProjectEvent();
+        projectEvent2.setStartDate(START_DATE2);
+
+        assertFalse(projectEvent.equals(projectEvent2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectEventNullStartDateFirstEvent() {
+        ProjectEvent projectEvent = new ProjectEvent();
+        projectEvent.setStartDate(START_DATE);
+
+        ProjectEvent projectEvent2 = new ProjectEvent();
+
+        assertFalse(projectEvent.equals(projectEvent2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectEventNullEventType() {
+        ProjectEvent projectEvent = new ProjectEvent();
+
+        ProjectEvent projectEvent2 = new ProjectEvent();
+        projectEvent2.setEventType(EVENT_TYPE2);
+
+        assertFalse(projectEvent.equals(projectEvent2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectEventNullProject() {
+        ProjectEvent projectEvent = new ProjectEvent();
+
+        ProjectEvent projectEvent2 = new ProjectEvent();
+        projectEvent2.setProject(PROJECT2);
+
+        assertFalse(projectEvent.equals(projectEvent2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectEventNullProjectFirstEvent() {
+        ProjectEvent projectEvent = new ProjectEvent();
+        projectEvent.setProject(PROJECT);
+
+        ProjectEvent projectEvent2 = new ProjectEvent();
+
+        assertFalse(projectEvent.equals(projectEvent2));
+    }
+
+    @Test
+    public void testEqualHashCodeForPersistentProjectEvent() {
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setId(ID);
 
@@ -138,7 +195,7 @@ public class ProjectEventTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentSkillToApprove() {
+    public void testNonEqualHashCodeForPersistentProjectEvent() {
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setId(ID);
 
@@ -151,7 +208,7 @@ public class ProjectEventTest {
 
 
     @Test
-    public void testEqualHashCodeForNonPersistentSkillToApprove() {
+    public void testEqualHashCodeForNonPersistentProjectEvent() {
 
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setStartDate(START_DATE);
@@ -168,7 +225,7 @@ public class ProjectEventTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentSkillToApprove() {
+    public void testNonEqualHashCodeForNonPersistentProjectEvent() {
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setStartDate(START_DATE);
         projectEvent.setEventType(EVENT_TYPE);

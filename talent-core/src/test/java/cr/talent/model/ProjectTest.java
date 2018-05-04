@@ -105,7 +105,7 @@ public class ProjectTest{
     public void testEqualForDifferentClass() {
         Project project1 = new Project();
 
-        assertFalse(project1.equals(new Object()));
+        assertFalse(project1.equals(new Image()));
     }
 
     @Test
@@ -156,7 +156,44 @@ public class ProjectTest{
         assertFalse(project1.equals(project2));
     }
 
-    //ON HASH TESTS.
+    @Test
+    public void testEqualForNonPersistentProjectNullValues() {
+        Project project = new Project();
+
+        Project project2 = new Project();
+
+        assertTrue(project.equals(project2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectNullName() {
+        Project project = new Project();
+
+        Project project2 = new Project();
+        project2.setName(NAME2);
+
+        assertFalse(project.equals(project2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectNullOrganization() {
+        Project project = new Project();
+
+        Project project2 = new Project();
+        project2.setOrganization(ORGANIZATION2);
+
+        assertFalse(project.equals(project2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectNullOrganizationFirstProject() {
+        Project project = new Project();
+        project.setOrganization(ORGANIZATION);
+
+        Project project2 = new Project();
+
+        assertFalse(project.equals(project2));
+    }
 
     @Test
     public void testEqualHashCodeForPersistentProject() {

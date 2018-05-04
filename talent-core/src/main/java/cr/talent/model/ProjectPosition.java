@@ -65,8 +65,8 @@ public class ProjectPosition extends BasicEntity {
         boolean result = false;
         if ( o instanceof ProjectPosition ){
             ProjectPosition projectPosition = (ProjectPosition) o;
-            result = (this.project == null ? projectPosition.getProject() == null : this.project.equals(projectPosition.getProject())
-                    && this.capability == null ? projectPosition.getCapability() == null : this.capability.equals(projectPosition.getCapability()));
+            result = ((this.project == null ? projectPosition.getProject() == null : this.project.equals(projectPosition.getProject()))
+                    && (this.capability == null ? projectPosition.getCapability() == null : this.capability.equals(projectPosition.getCapability())));
         }
         return result;
     }

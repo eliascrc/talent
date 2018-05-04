@@ -75,11 +75,11 @@ public class ProjectPositionTest {
     public void testEqualForDifferentClass() {
         ProjectPosition projectPosition = new ProjectPosition();
 
-        assertFalse(projectPosition.equals(new Object()));
+        assertFalse(projectPosition.equals(new Image()));
     }
 
     @Test
-    public void testEqualForPersistentSkillToApprove() {
+    public void testEqualForPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setId(ID);
 
@@ -90,7 +90,7 @@ public class ProjectPositionTest {
     }
 
     @Test
-    public void testNonEqualForPersistentSkillToApprove() {
+    public void testNonEqualForPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setId(ID);
 
@@ -101,7 +101,7 @@ public class ProjectPositionTest {
     }
 
     @Test
-    public void testEqualForNonPersistentSkillToApprove() {
+    public void testEqualForNonPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
         projectPosition.setCapability(CAPABILITY);
@@ -114,7 +114,7 @@ public class ProjectPositionTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentSkillToApprove() {
+    public void testNonEqualForNonPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
         projectPosition.setCapability(CAPABILITY);
@@ -126,10 +126,47 @@ public class ProjectPositionTest {
         assertFalse(projectPosition.equals(projectPosition2));
     }
 
+    @Test
+    public void testEqualForNonPersistentProjectPositionNullValues() {
+        ProjectPosition projectPosition = new ProjectPosition();
 
+        ProjectPosition projectPosition2 = new ProjectPosition();
+
+        assertTrue(projectPosition.equals(projectPosition2));
+    }
 
     @Test
-    public void testEqualHashCodeForPersistentSkillToApprove() {
+    public void testNonEqualForNonPersistentProjectPositionNullProject() {
+        ProjectPosition projectPosition = new ProjectPosition();
+
+        ProjectPosition projectPosition2 = new ProjectPosition();
+        projectPosition2.setProject(PROJECT2);
+
+        assertFalse(projectPosition.equals(projectPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionNullCapability() {
+        ProjectPosition projectPosition = new ProjectPosition();
+
+        ProjectPosition projectPosition2 = new ProjectPosition();
+        projectPosition2.setCapability(CAPABILITY2);
+
+        assertFalse(projectPosition.equals(projectPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionNullOrganizationFirstProjectPosition() {
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setCapability(CAPABILITY);
+
+        ProjectPosition projectPosition2 = new ProjectPosition();
+
+        assertFalse(projectPosition.equals(projectPosition2));
+    }
+
+    @Test
+    public void testEqualHashCodeForPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setId(ID);
 
@@ -140,7 +177,7 @@ public class ProjectPositionTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentSkillToApprove() {
+    public void testNonEqualHashCodeForPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setId(ID);
 
@@ -153,7 +190,7 @@ public class ProjectPositionTest {
 
 
     @Test
-    public void testEqualHashCodeForNonPersistentSkillToApprove() {
+    public void testEqualHashCodeForNonPersistentProjectPosition() {
 
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
@@ -168,7 +205,7 @@ public class ProjectPositionTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentSkillToApprove() {
+    public void testNonEqualHashCodeForNonPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
         projectPosition.setCapability(CAPABILITY);

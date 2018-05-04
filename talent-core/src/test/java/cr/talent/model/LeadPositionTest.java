@@ -75,11 +75,11 @@ public class LeadPositionTest {
     public void testEqualForDifferentClass() {
         LeadPosition leadPosition1 = new LeadPosition();
 
-        assertFalse(leadPosition1.equals(new Object()));
+        assertFalse(leadPosition1.equals(new Image()));
     }
 
     @Test
-    public void testEqualForPersistentProjectManagerPosition() {
+    public void testEqualForPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setId(ID);
 
@@ -90,7 +90,7 @@ public class LeadPositionTest {
     }
 
     @Test
-    public void testNonEqualForPersistentProjectManagerPosition() {
+    public void testNonEqualForPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setId(ID);
 
@@ -101,7 +101,7 @@ public class LeadPositionTest {
     }
 
     @Test
-    public void testEqualForNonPersistentProjectManagerPosition() {
+    public void testEqualForNonPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
         leadPosition1.setLead(LEAD);
@@ -114,7 +114,7 @@ public class LeadPositionTest {
     }
 
     @Test
-    public void testNonEqualForNonPersistentProjectManagerPosition() {
+    public void testNonEqualForNonPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
         leadPosition1.setLead(LEAD);
@@ -126,10 +126,50 @@ public class LeadPositionTest {
         assertFalse(leadPosition1.equals(leadPosition2));
     }
 
+
+    @Test
+    public void testEqualForNonPersistentLeadPositionNullValues() {
+        LeadPosition leadPosition1 = new LeadPosition();
+
+        LeadPosition leadPosition2 = new LeadPosition();
+
+        assertTrue(leadPosition1.equals(leadPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentLeadPositionNullProject() {
+        LeadPosition leadPosition1 = new LeadPosition();
+
+        LeadPosition leadPosition2 = new LeadPosition();
+        leadPosition2.setProject(PROJECT2);
+
+        assertFalse(leadPosition1.equals(leadPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentLeadPositionNullLead() {
+        LeadPosition leadPosition1 = new LeadPosition();
+
+        LeadPosition leadPosition2 = new LeadPosition();
+        leadPosition2.setLead(LEAD2);
+
+        assertFalse(leadPosition1.equals(leadPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentLeadPositionNullLeadFirstPosition() {
+        LeadPosition leadPosition1 = new LeadPosition();
+        leadPosition1.setLead(LEAD);
+
+        LeadPosition leadPosition2 = new LeadPosition();
+
+        assertFalse(leadPosition1.equals(leadPosition2));
+    }
+
     //ON HASH TESTS.
 
     @Test
-    public void testEqualHashCodeForPersistentProjectManagerPosition() {
+    public void testEqualHashCodeForPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setId(ID);
 
@@ -140,7 +180,7 @@ public class LeadPositionTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForPersistentProjectManagerPosition() {
+    public void testNonEqualHashCodeForPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setId(ID);
 
@@ -151,7 +191,7 @@ public class LeadPositionTest {
     }
 
     @Test
-    public void testEqualHashCodeForNonPersistentProjectManagerPosition() {
+    public void testEqualHashCodeForNonPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
         leadPosition1.setLead(LEAD);
@@ -164,7 +204,7 @@ public class LeadPositionTest {
     }
 
     @Test
-    public void testNonEqualHashCodeForNonPersistentProjectManagerPosition() {
+    public void testNonEqualHashCodeForNonPersistentLeadPosition() {
         LeadPosition leadPosition1 = new LeadPosition();
         leadPosition1.setProject(PROJECT);
         leadPosition1.setLead(LEAD);
