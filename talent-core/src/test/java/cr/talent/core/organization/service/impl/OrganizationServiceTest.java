@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 /**
  * Class that allows to test the {@link cr.talent.core.organization.service.impl.OrganizationServiceImpl} methods
  *
- * @author Daniel Montes de Oca
+ * @author Elías Calderón
  */
 public class OrganizationServiceTest {
 

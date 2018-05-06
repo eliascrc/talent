@@ -25,6 +25,14 @@ public class OrganizationResource {
     @Autowired
     OrganizationService organizationService;
 
+    /**
+     * Receives the request for creating a new organization. If the unique identifier is not already
+     * registered, it creates the organization successfully.
+     * @param uniqueIdentifier the organization's unique identifier
+     * @param name the organization's name
+     * @return 200 if the organization is correctly created, 400 if any of the parameters are null,
+     *          409 if an organization already has the specified unique identifier.
+     */
     @POST
     @Path("/create")
     public Response createOrganization(
