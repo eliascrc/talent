@@ -10,4 +10,6 @@ import cr.talent.support.dao.CrudDao;
  */
 public interface OrganizationDao extends CrudDao<Organization, String> {
 
+    public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier);
+
 }

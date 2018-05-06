@@ -1,6 +1,7 @@
 package cr.talent.core.organization.service;
 
 import cr.talent.model.Organization;
+import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.service.CrudService;
 
 /**
@@ -9,5 +10,7 @@ import cr.talent.support.service.CrudService;
  * @author Elías Calderón
  */
 public interface OrganizationService extends CrudService<Organization, String> {
+
+    public String createOrganization(Organization organization) throws AlreadyCreatedOrganizationException;
 
 }

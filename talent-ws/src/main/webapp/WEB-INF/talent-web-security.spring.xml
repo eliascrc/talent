@@ -11,6 +11,7 @@
     </security:authentication-manager>
 
     <security:http use-expressions="true" pattern="/**/*" auto-config="true">
+        <security:csrf disabled="true"/>
         <security:form-login login-processing-url="/ws/login" default-target-url="/ws/authenticated"
                 authentication-failure-url="/login?error" username-parameter="username"
                 password-parameter="password" />
@@ -18,6 +19,8 @@
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
         <security:intercept-url pattern="/ws/content/**/*" access="permitAll()" method="GET"/>
+        <security:intercept-url pattern="/ws/organization/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
+        <security:intercept-url pattern="/ws/project/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
