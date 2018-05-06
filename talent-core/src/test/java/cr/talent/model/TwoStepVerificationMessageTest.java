@@ -61,9 +61,9 @@ public class TwoStepVerificationMessageTest {
     public void testEqualForDifferentClass() {
         TwoStepVerificationMessage twoStepVerificationMessage = new TwoStepVerificationMessage();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(twoStepVerificationMessage.equals(kudo));
+        assertFalse(twoStepVerificationMessage.equals(date));
     }
 
     @Test

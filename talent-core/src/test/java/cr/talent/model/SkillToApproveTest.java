@@ -63,9 +63,9 @@ public class SkillToApproveTest {
     public void testEqualForDifferentClass() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(skillToApprove1.equals(kudo));
+        assertFalse(skillToApprove1.equals(date));
     }
 
     @Test

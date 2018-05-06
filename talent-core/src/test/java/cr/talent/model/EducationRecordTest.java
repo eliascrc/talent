@@ -86,9 +86,9 @@ public class EducationRecordTest {
     public void testEqualForDifferentClass() {
         EducationRecord educationRecord = new EducationRecord();
 
-        Kudo kudo= new Kudo();
+        Date date= new Date();
 
-        assertFalse(educationRecord.equals(kudo));
+        assertFalse(educationRecord.equals(date));
     }
 
     @Test

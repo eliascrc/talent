@@ -73,9 +73,9 @@ public class KudoTest {
     public void testEqualForDifferentClass() {
         Kudo kudo1 = new Kudo();
 
-        Image image = new Image();
+        Date date = new Date();
 
-        assertFalse(kudo1.equals(image));
+        assertFalse(kudo1.equals(date));
     }
 
     @Test

@@ -73,9 +73,9 @@ public class EmergencyContactTest {
     public void testEqualForDifferentClass() {
         EmergencyContact emergencyContact1 = new EmergencyContact();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(emergencyContact1.equals(kudo));
+        assertFalse(emergencyContact1.equals(date));
     }
 
     @Test

@@ -69,7 +69,9 @@ public class PrivacyPolicyTest {
     public void testEqualForDifferentClass() {
         PrivacyPolicy privacyPolicy1 = new PrivacyPolicy();
 
-        assertFalse(privacyPolicy1.equals(new Kudo()));
+        Date date = new Date();
+
+        assertFalse(privacyPolicy1.equals(date));
     }
 
     @Test

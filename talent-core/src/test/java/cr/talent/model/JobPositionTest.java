@@ -75,9 +75,9 @@ public class JobPositionTest{
     public void testEqualForDifferentClass() {
         JobPosition jobPosition1 = new JobPosition();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(jobPosition1.equals(kudo));
+        assertFalse(jobPosition1.equals(date));
     }
 
     @Test

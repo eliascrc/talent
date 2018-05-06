@@ -70,9 +70,9 @@ public class OrganizationSkillCategoryTest {
     public void testEqualForDifferentClass() {
         OrganizationSkillCategory organizationSkillCategory = new OrganizationSkillCategory();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(organizationSkillCategory.equals(kudo));
+        assertFalse(organizationSkillCategory.equals(date));
     }
 
     @Test

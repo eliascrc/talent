@@ -73,9 +73,9 @@ public class ProjectManagerPositionTest{
     public void testEqualForDifferentClass() {
         ProjectManagerPosition projectManagerPosition1 = new ProjectManagerPosition();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(projectManagerPosition1.equals(kudo));
+        assertFalse(projectManagerPosition1.equals(date));
     }
 
     @Test

@@ -85,9 +85,9 @@ public class ProjectTest{
     public void testEqualForDifferentClass() {
         Project project1 = new Project();
 
-        Kudo kudo= new Kudo();
+        Date date= new Date();
 
-        assertFalse(project1.equals(kudo));
+        assertFalse(project1.equals(date));
     }
 
 

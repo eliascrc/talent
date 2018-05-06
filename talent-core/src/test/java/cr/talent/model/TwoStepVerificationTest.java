@@ -65,9 +65,9 @@ public class TwoStepVerificationTest {
     public void testEqualForDifferentClass() {
         TwoStepVerification twoStepVerification1 = new TwoStepVerification();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(twoStepVerification1.equals(kudo));
+        assertFalse(twoStepVerification1.equals(date));
     }
 
     @Test

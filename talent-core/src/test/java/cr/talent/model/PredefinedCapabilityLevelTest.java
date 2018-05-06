@@ -66,9 +66,9 @@ public class PredefinedCapabilityLevelTest {
     public void testEqualForDifferentClass() {
         PredefinedCapabilityLevel predefinedCapabilityLevel = new PredefinedCapabilityLevel();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(predefinedCapabilityLevel.equals(kudo));
+        assertFalse(predefinedCapabilityLevel.equals(date));
     }
 
     @Test

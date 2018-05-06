@@ -71,9 +71,9 @@ public class ProjectCapabilityTest {
     public void testEqualForDifferentClass() {
         ProjectCapability projectCapability = new ProjectCapability();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(projectCapability.equals(kudo));
+        assertFalse(projectCapability.equals(date));
     }
 
     @Test

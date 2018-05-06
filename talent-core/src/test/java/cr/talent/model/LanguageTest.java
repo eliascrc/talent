@@ -62,9 +62,9 @@ public class LanguageTest {
     public void testEqualForDifferentClass() {
         Language language1 = new Language();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
-        assertFalse(language1.equals(kudo));
+        assertFalse(language1.equals(date));
     }
 
     @Test

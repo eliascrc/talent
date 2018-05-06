@@ -26,6 +26,10 @@ public abstract class CapabilityLevel extends BasicEntity {
     @Column (name = "hierarchy_position" , nullable = false)
     private int hierarchyPosition;
 
+    @ManyToOne
+    @JoinColumn(name = "capability_name", nullable = false)
+    private Capability capability;
+
     public CapabilityLevel(){}
 
     @Override

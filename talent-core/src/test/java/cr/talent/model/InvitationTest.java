@@ -77,10 +77,10 @@ public class InvitationTest{
     public void testEqualForDifferentClass() {
         Invitation invitation1 = new Invitation();
 
-        Kudo kudo = new Kudo();
+        Date date = new Date();
 
 
-        assertFalse(invitation1.equals(kudo));
+        assertFalse(invitation1.equals(date));
     }
 
     @Test

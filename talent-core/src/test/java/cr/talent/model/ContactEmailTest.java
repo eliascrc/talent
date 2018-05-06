@@ -50,9 +50,9 @@ public class ContactEmailTest {
     public void testEqualForDifferentObject() {
         ContactEmail contactEmail = new ContactEmail();
 
-        Kudo kudo= new Kudo();
+        Date date= new Date();
 
-        assertFalse(contactEmail.equals(kudo));
+        assertFalse(contactEmail.equals(date));
     }
 
     @Test
