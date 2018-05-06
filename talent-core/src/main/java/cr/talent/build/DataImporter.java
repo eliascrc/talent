@@ -34,7 +34,7 @@ public class DataImporter {
      * will add them to the database.
      */
     private void importData(){
-        DataParser dataParser = new DataParser("src/main/resources/DummyData.xml");
+        DataParser dataParser = new DataParser("./talent-core/src/main/resources/DummyData.xml");
         dataParser.parseData();
 
         List<Organization> organizations = dataParser.getOrganizations();
