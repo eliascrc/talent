@@ -51,7 +51,7 @@ public class OrganizationCapabilityResource {
             return Response.status(Response.Status.NOT_FOUND).build();
 
         Capability capability = new Capability();
-        
+
 
         return Response.ok().build();
     }
