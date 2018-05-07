@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Elías Calderón
  */
 @Entity
-@Table(name = "project_position")
+@Table(name = "project_position_holder")
 public class ProjectPositionHolder extends BasicEntity {
 
     /**
