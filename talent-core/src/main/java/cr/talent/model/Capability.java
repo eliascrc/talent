@@ -37,7 +37,7 @@ public class Capability extends BasicEntity {
      * predefined capability.
      */
     @ManyToOne
-    @JoinColumn (name = "organization_id", nullable = false)
+    @JoinColumn (name = "organization_id")
     private Organization organization;
 
     public Capability(){}
