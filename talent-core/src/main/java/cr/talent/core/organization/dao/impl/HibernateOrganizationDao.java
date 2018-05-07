@@ -25,6 +25,7 @@ public class HibernateOrganizationDao extends HibernateCrudDao<Organization, Str
         setSessionFactory(sessionFactory);
     }
 
+    @Override
     public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier) {
         String sql = "SELECT * FROM organization WHERE unique_identifier = :uniqueIdentifier";
         Query query = super.getSessionFactory().getCurrentSession().createNativeQuery(sql).addEntity(Organization.class);

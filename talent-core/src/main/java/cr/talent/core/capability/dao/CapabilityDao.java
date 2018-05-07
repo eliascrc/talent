@@ -10,5 +10,5 @@ import cr.talent.support.dao.CrudDao;
  */
 public interface CapabilityDao extends CrudDao<Capability, String> {
 
-
+    Capability getOrganizationCapabilityByName(String organizationId, String name);
 }
