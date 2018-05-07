@@ -1,33 +1,53 @@
 <html>
     <head>
         <title>Terms of Service</title>
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
     </head>
     <body>
-        <h1>Introduction</h1>
-        <p>
-            Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi tincidunt iaculis eros. Nam maximus urna
-            massa, sit amet feugiat nibh maximus eget. Fusce imperdiet, erat vel blandit hendrerit, orci massa iaculis
-            velit, sed pulvinar magna turpis in eros. Nunc at tempus dolor, nec ultrices odio. Nunc at ipsum erat. Morbi
-            maximus, urna ut ultrices posuere, magna tortor feugiat urna, eu posuere mi tortor quis sem. Phasellus
-            maximus sollicitudin ipsum sit amet tincidunt.
-        </p>
-        <h1>Services</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam eu diam in vehicula.
-            Suspendisse placerat dolor velit, in malesuada felis vestibulum in. Donec pretium enim odio,
-            nec iaculis elit egestas at. Ut ac quam ornare, lobortis felis in, eleifend ipsum. Curabitur
-            ullamcorper nisl vitae convallis faucibus. Donec congue, ipsum et mollis euismod, lacus
-            justo sollicitudin elit, at fringilla lectus lectus non lorem. Etiam ornare justo non felis
-            ultrices, a congue tellus fringilla.
-        </p>
-        <h1>Rights</h1>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam eu diam in vehicula.
-            Suspendisse placerat dolor velit, in malesuada felis vestibulum in. Donec pretium enim odio,
-            nec iaculis elit egestas at. Ut ac quam ornare, lobortis felis in, eleifend ipsum. Curabitur
-            ullamcorper nisl vitae convallis faucibus. Donec congue, ipsum et mollis euismod, lacus
-            justo sollicitudin elit, at fringilla lectus lectus non lorem. Etiam ornare justo non felis
-            ultrices, a congue tellus fringilla.
-        </p>
+        <div style="text-align: justify; font-family: 'Source Sans Pro', sans-serif;">
+            <h1>Introduction</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam eu diam in vehicula.
+                Suspendisse placerat dolor velit, in malesuada felis vestibulum in. Donec pretium enim odio,
+                nec iaculis elit egestas at. Ut ac quam ornare, lobortis felis in, eleifend ipsum. Curabitur
+                ullamcorper nisl vitae convallis faucibus. Donec congue, ipsum et mollis euismod, lacus
+                justo sollicitudin elit, at fringilla lectus lectus non lorem. Etiam ornare justo non felis
+                ultrices, a congue tellus fringilla.
+            </p>
+            <h1>Services</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam eu diam in vehicula.
+                Suspendisse placerat dolor velit, in malesuada felis vestibulum in. Donec pretium enim odio,
+                nec iaculis elit egestas at. Ut ac quam ornare, lobortis felis in, eleifend ipsum. Curabitur
+                ullamcorper nisl vitae convallis faucibus. Donec congue, ipsum et mollis euismod, lacus
+                justo sollicitudin elit, at fringilla lectus lectus non lorem. Etiam ornare justo non felis
+                ultrices, a congue tellus fringilla.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam eu diam in vehicula.
+                Suspendisse placerat dolor velit, in malesuada felis vestibulum in. Donec pretium enim odio,
+                nec iaculis elit egestas at. Ut ac quam ornare, lobortis felis in, eleifend ipsum. Curabitur
+                ullamcorper nisl vitae convallis faucibus. Donec congue, ipsum et mollis euismod, lacus
+                justo sollicitudin elit, at fringilla lectus lectus non lorem. Etiam ornare justo non felis
+                ultrices, a congue tellus fringilla.
+            </p>
+            <h1>Rights</h1>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam eu diam in vehicula.
+                Suspendisse placerat dolor velit, in malesuada felis vestibulum in. Donec pretium enim odio,
+                nec iaculis elit egestas at. Ut ac quam ornare, lobortis felis in, eleifend ipsum. Curabitur
+                ullamcorper nisl vitae convallis faucibus. Donec congue, ipsum et mollis euismod, lacus
+                justo sollicitudin elit, at fringilla lectus lectus non lorem. Etiam ornare justo non felis
+                ultrices, a congue tellus fringilla.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi aliquam eu diam in vehicula.
+                Suspendisse placerat dolor velit, in malesuada felis vestibulum in. Donec pretium enim odio,
+                nec iaculis elit egestas at. Ut ac quam ornare, lobortis felis in, eleifend ipsum. Curabitur
+                ullamcorper nisl vitae convallis faucibus. Donec congue, ipsum et mollis euismod, lacus
+                justo sollicitudin elit, at fringilla lectus lectus non lorem. Etiam ornare justo non felis
+                ultrices, a congue tellus fringilla.
+            </p>
+        </div>
     </body>
 </html>

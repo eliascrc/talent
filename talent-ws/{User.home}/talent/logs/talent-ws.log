@@ -14,3 +14,9 @@
 2018-05-05 12:19:02 WARN  FilterInvocationSecurityMetadataSourceParser:208 - Duplicate URL defined: /ws/**/*. The original attribute values will be overwritten
 2018-05-05 12:19:05 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 3000. Using 3000 as start.
 2018-05-05 12:19:07 WARN  UUIDHexGenerator:42 - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2018-05-06 12:36:38 WARN  SpringSecurityCoreVersion:78 - **** You are advised to use Spring 5.0.5.RELEASE or later with this version. You are running: 4.3.13.RELEASE
+2018-05-06 12:36:39 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 3000. Using 3000 as start.
+2018-05-06 12:36:40 WARN  UUIDHexGenerator:42 - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2018-05-07 10:18:32 WARN  SpringSecurityCoreVersion:78 - **** You are advised to use Spring 5.0.5.RELEASE or later with this version. You are running: 4.3.13.RELEASE
+2018-05-07 10:18:33 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 3000. Using 3000 as start.
+2018-05-07 10:18:33 WARN  UUIDHexGenerator:42 - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
