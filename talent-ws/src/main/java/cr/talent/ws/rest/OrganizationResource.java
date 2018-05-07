@@ -39,7 +39,8 @@ public class OrganizationResource {
             @FormParam("uniqueIdentifier") String uniqueIdentifier,
             @FormParam("name") String name) {
 
-        if (uniqueIdentifier == null || name == null)
+        if (uniqueIdentifier == null || name == null
+                || uniqueIdentifier.equals("") || name.equals(""))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         Organization organization = new Organization();

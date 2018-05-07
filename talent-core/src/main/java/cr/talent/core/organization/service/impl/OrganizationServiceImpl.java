@@ -25,6 +25,10 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         setCrudDao(this.organizationDao);
     }
 
+    public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier) {
+        return this.organizationDao.getOrganizationByUniqueIdentifier(uniqueIdentifier);
+    }
+
     public String createOrganization(Organization organization) throws AlreadyCreatedOrganizationException {
         if (this.organizationDao.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier()) != null)
             throw new AlreadyCreatedOrganizationException();

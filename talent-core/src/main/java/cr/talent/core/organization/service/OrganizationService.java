@@ -11,6 +11,7 @@ import cr.talent.support.service.CrudService;
  */
 public interface OrganizationService extends CrudService<Organization, String> {
 
+    public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier);
     public String createOrganization(Organization organization) throws AlreadyCreatedOrganizationException;
 
 }
