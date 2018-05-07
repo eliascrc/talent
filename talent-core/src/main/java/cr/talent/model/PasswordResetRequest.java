@@ -28,6 +28,12 @@ public class PasswordResetRequest extends BasicEntity {
     private String token;
 
     /**
+     * The email of the technical resource.
+     */
+    @Column(name = "email")
+    private String email;
+
+    /**
      * The flag to know if the request is still valid.
      */
     @Column(name= "is_valid")
@@ -68,6 +74,14 @@ public class PasswordResetRequest extends BasicEntity {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isValid() {

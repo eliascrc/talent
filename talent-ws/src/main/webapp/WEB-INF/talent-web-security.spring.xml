@@ -19,8 +19,8 @@
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
         <security:intercept-url pattern="/ws/content/**/*" access="permitAll()" method="GET"/>
-        <security:intercept-url pattern="/ws/forgotPassword/new/*" access="isAnonymous()" method="GET"/>
-        <security:intercept-url pattern="/ws/forgotPassword/**/*" access="isAnonymous()" method="POST"/>
+        <security:intercept-url pattern="/ws/passwordReset/new/*" access="isAnonymous()" method="GET"/>
+        <security:intercept-url pattern="/ws/passwordReset/**/*" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/resource/**/*" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login/token" access="isAnonymous()"/>

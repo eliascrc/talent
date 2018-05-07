@@ -32,4 +32,13 @@ public class HibernatePasswordResetRequestDao extends HibernateCrudDao<PasswordR
 
         return (PasswordResetRequest) DataAccessUtils.singleResult(query.list());
     }
+
+    @Override
+    public PasswordResetRequest findByEmail(String email) {
+        String hql = "FROM PasswordResetRequest WHERE email = ?1 AND isValid = '1'";
+        Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter(1, email);
+
+        return (PasswordResetRequest) DataAccessUtils.singleResult(query.list());
+    }
 }

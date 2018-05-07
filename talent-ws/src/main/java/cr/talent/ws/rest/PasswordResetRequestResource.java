@@ -16,14 +16,14 @@ import javax.ws.rs.core.Response;
 
 @Component
 @Scope("request")
-@Path("/forgotPassword")
+@Path("/passwordReset")
 public class PasswordResetRequestResource {
 
     @Autowired
     PasswordResetRequestService passwordResetRequestService;
 
     @POST
-    @Path ("/sendEmail")
+    @Path ("/forgotPassword")
     public Response forgotPassword (@FormParam("email") String email){
         if(StringUtils.isEmpty(email))
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -33,7 +33,6 @@ public class PasswordResetRequestResource {
     }
 
     @GET
-    //@Path("/token{token:.*}")
     @Path("/new/")
     public Response validateRequestToken (@QueryParam("token") String token){
         if (!this.passwordResetRequestService.isTokenValid(token))
@@ -45,14 +44,9 @@ public class PasswordResetRequestResource {
     @POST
     @Path("/reset/")
     public Response resetPassword (@QueryParam("token") String token, @FormParam("newPassword") String newPassword){
-        Response response = Response.ok().build();
-        if (StringUtils.isEmpty(newPassword))
-            response=  Response.status(Response.Status.BAD_REQUEST).build();
+        if (StringUtils.isEmpty(newPassword) || !this.passwordResetRequestService.resetPassword(token, newPassword))
+            return Response.status(Response.Status.BAD_REQUEST).build();
 
-        boolean passwordUpdated = this.passwordResetRequestService.resetPassword(token, newPassword);
-        if (!passwordUpdated){
-            response=  Response.status(Response.Status.BAD_REQUEST).build();
-        }
-        return response;
+        return Response.ok().build();
     }
 }
