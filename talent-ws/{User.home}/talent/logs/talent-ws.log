@@ -20,3 +20,9 @@
 2018-05-07 10:18:32 WARN  SpringSecurityCoreVersion:78 - **** You are advised to use Spring 5.0.5.RELEASE or later with this version. You are running: 4.3.13.RELEASE
 2018-05-07 10:18:33 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 3000. Using 3000 as start.
 2018-05-07 10:18:33 WARN  UUIDHexGenerator:42 - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2018-05-07 11:15:15 WARN  SpringSecurityCoreVersion:78 - **** You are advised to use Spring 5.0.5.RELEASE or later with this version. You are running: 4.3.13.RELEASE
+2018-05-07 11:15:16 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 3000. Using 3000 as start.
+2018-05-07 11:16:14 WARN  UUIDHexGenerator:42 - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
+2018-05-07 11:16:43 WARN  SpringSecurityCoreVersion:78 - **** You are advised to use Spring 5.0.5.RELEASE or later with this version. You are running: 4.3.13.RELEASE
+2018-05-07 11:16:44 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 3000. Using 3000 as start.
+2018-05-07 11:16:45 WARN  UUIDHexGenerator:42 - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
