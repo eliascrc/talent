@@ -34,7 +34,7 @@ public class ProjectResource {
      * If the unique identifier corresponds to an existing organization, it creates the project successfully.
      *
      * @param organizationUniqueIdentifier the organization's unique identifier
-     * @param name                         the name of the new project
+     * @param name the name of the new project
      * @return 200 if the project is correctly created, 400 if any of the parameters are null or empty strings,
      * 404 if the unique identifier does not belong to any organization.
      */
