@@ -1,9 +1,12 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.organization.service.OrganizationService;
-import cr.talent.core.project.service.ProjectService;
+import cr.talent.core.skill.service.SkillService;
 import cr.talent.model.Organization;
-import cr.talent.model.Project;
+import cr.talent.model.OrganizationSkill;
+import cr.talent.model.Skill;
+import cr.talent.support.exceptions.AlreadyCreatedOrganizationCapabilityException;
+import cr.talent.support.exceptions.NullOrganizationInOrganizationCapabilityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,33 +17,30 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with a POST endpoint that creates a new project
+ * Resource with a POST endpoint that creates a new skill
  *
  * @author Elías Calderón
  */
 @Component
 @Scope("request")
-@Path("/project")
-public class ProjectResource {
+@Path("/skill")
+public class SkillResource {
 
     @Autowired
-    ProjectService projectService;
+    SkillService skillService;
 
     @Autowired
     OrganizationService organizationService;
 
     /**
-     * Receives the request for creating a new project within an organization.
-     * If the unique identifier corresponds to an existing organization, it creates the project successfully.
-     *
-     * @param organizationUniqueIdentifier the organization's unique identifier
-     * @param name the name of the new project
-     * @return 200 if the project is correctly created, 400 if any of the parameters are null or empty strings,
-     * 404 if the unique identifier does not belong to any organization.
+     * Receives the request for creating a new skill.
+     * @param organizationUniqueIdentifier the skill's organization unique identifier
+     * @param name the skill's name
+     * @return
      */
     @POST
     @Path("/create")
-    public Response createProject(
+    public Response createOrganizationCapability(
             @FormParam("organizationUniqueIdentifier") String organizationUniqueIdentifier,
             @FormParam("name") String name) {
 
@@ -52,14 +52,11 @@ public class ProjectResource {
         if (organization == null)
             return Response.status(Response.Status.NOT_FOUND).build();
 
-        Project project = new Project();
-        project.setOrganization(organization);
-        project.setName(name);
-        this.projectService.create(project);
-
-        organization.getProjects().add(project);
-        this.organizationService.update(organization);
+        OrganizationSkill skill = new OrganizationSkill();
+        skill.setName(name);
+        this.skillService.create(skill);
 
         return Response.ok().build();
     }
+
 }

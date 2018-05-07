@@ -58,7 +58,11 @@ public class OrganizationCapabilityResource {
         capability.setOrganization(organization);
 
         try {
+
             this.capabilityService.createOrganizationCapability(capability);
+            organization.getCapabilities().add(capability);
+            this.organizationService.update(organization);
+
         } catch (NullOrganizationInOrganizationCapabilityException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } catch (AlreadyCreatedOrganizationCapabilityException e) {
