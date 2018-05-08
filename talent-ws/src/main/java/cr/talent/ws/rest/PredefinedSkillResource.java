@@ -4,8 +4,10 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.skill.service.SkillService;
 import cr.talent.model.Organization;
 import cr.talent.model.OrganizationSkill;
+import cr.talent.model.PredefinedSkill;
 import cr.talent.model.Skill;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationCapabilityException;
+import cr.talent.support.exceptions.AlreadyCreatedPredefinedSkillException;
 import cr.talent.support.exceptions.NullOrganizationInOrganizationCapabilityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,38 +25,32 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("/skill")
-public class SkillResource {
+@Path("/predefinedSkill")
+public class PredefinedSkillResource {
 
     @Autowired
     SkillService skillService;
 
-    @Autowired
-    OrganizationService organizationService;
-
     /**
-     * Receives the request for creating a new skill.
-     * @param organizationUniqueIdentifier the skill's organization unique identifier
-     * @param name the skill's name
+     * Receives the request for creating a new predefined skill.
+     * @param name the predefined skill's name
      * @return
      */
     @POST
     @Path("/create")
-    public Response createOrganizationCapability(
-            @FormParam("organizationUniqueIdentifier") String organizationUniqueIdentifier,
+    public Response createPredefinedSkill(
             @FormParam("name") String name) {
 
-        if (organizationUniqueIdentifier == null || name == null
-                || organizationUniqueIdentifier.equals("") || name.equals(""))
+        if (name == null || name.equals(""))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(organizationUniqueIdentifier);
-        if (organization == null)
-            return Response.status(Response.Status.NOT_FOUND).build();
-
-        OrganizationSkill skill = new OrganizationSkill();
+        PredefinedSkill skill = new PredefinedSkill();
         skill.setName(name);
-        this.skillService.create(skill);
+        try {
+            this.skillService.createPredefinedSkill(skill);
+        } catch (AlreadyCreatedPredefinedSkillException e) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
 
         return Response.ok().build();
     }

@@ -4,10 +4,12 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.Organization;
 import cr.talent.model.Project;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,6 +21,7 @@ import javax.ws.rs.core.Response;
  * @author Elías Calderón
  */
 @Component
+@Transactional
 @Scope("request")
 @Path("/project")
 public class ProjectResource {
@@ -57,6 +60,7 @@ public class ProjectResource {
         project.setName(name);
         this.projectService.create(project);
 
+        Hibernate.initialize(organization.getProjects());
         organization.getProjects().add(project);
         this.organizationService.update(organization);
 
