@@ -12,6 +12,12 @@ import cr.talent.support.service.CrudService;
  */
 public interface SkillService extends CrudService<Skill, String> {
 
-
+    /**
+     * Persists Predefined Skill with the respective business logic.
+     * @param predefinedSkill the skill to persist.
+     * @return the predefined skill's id.
+     * @throws AlreadyCreatedPredefinedSkillException if the predefined skill's name is already registered
+     * in the system.
+     */
     String createPredefinedSkill(PredefinedSkill predefinedSkill) throws AlreadyCreatedPredefinedSkillException;
 }

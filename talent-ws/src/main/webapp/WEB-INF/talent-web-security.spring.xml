@@ -16,14 +16,14 @@
                 authentication-failure-url="/login?error" username-parameter="username"
                 password-parameter="password" />
         <security:intercept-url pattern="/ws/admin/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')"/>
+        <security:intercept-url pattern="/ws/predefinedCapability/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')" method="POST"/>
+        <security:intercept-url pattern="/ws/predefinedSkill/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
         <security:intercept-url pattern="/ws/content/**/*" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/organization/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
-        <security:intercept-url pattern="/ws/project/**/*" access="permitAll()" method="POST"/>
-        <security:intercept-url pattern="/ws/organizationCapability/**/*" access="permitAll()" method="POST"/>
-        <security:intercept-url pattern="/ws/predefinedCapability/**/*" access="permitAll()" method="POST"/>
-        <security:intercept-url pattern="/ws/predefinedSkill/**/*" access="permitAll()" method="POST"/>
+        <security:intercept-url pattern="/ws/project/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
+        <security:intercept-url pattern="/ws/organizationCapability/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>

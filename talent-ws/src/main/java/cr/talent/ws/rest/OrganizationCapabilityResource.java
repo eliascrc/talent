@@ -25,17 +25,21 @@ import javax.ws.rs.core.Response;
 @Path("/organizationCapability")
 public class OrganizationCapabilityResource {
 
-    @Autowired
-    CapabilityService capabilityService;
+    private CapabilityService capabilityService;
+    private OrganizationService organizationService;
 
     @Autowired
-    OrganizationService organizationService;
+    public OrganizationCapabilityResource (CapabilityService capabilityService, OrganizationService organizationService) {
+        this.capabilityService = capabilityService;
+        this.organizationService = organizationService;
+    }
 
     /**
-     * Receives the request for creating a new capability.
+     * Receives the request for creating a new organization capability.
      * @param organizationUniqueIdentifier the capability's organization unique identifier
-     * @param name the organization capability's name
-     * @return 200 if the org capability is correctly created, 400 if any of the parameters are null or empty strings,
+     * @param name the capability's name
+     * @return 200 if the organization capability is correctly created,
+     *          400 if any of the parameters are null or empty strings,
      *          404 if the unique identifier does not belong to any organization,
      *          409 if the organization capability has already been created within the organization.
      */
@@ -47,7 +51,7 @@ public class OrganizationCapabilityResource {
 
         if (organizationUniqueIdentifier == null || name == null
                 || organizationUniqueIdentifier.equals("") || name.equals(""))
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(organizationUniqueIdentifier);
         if (organization == null)
@@ -58,14 +62,13 @@ public class OrganizationCapabilityResource {
         capability.setOrganization(organization);
 
         try {
-
             this.capabilityService.createOrganizationCapability(capability);
-            organization.getCapabilities().add(capability);
-            this.organizationService.update(organization);
 
         } catch (NullOrganizationInOrganizationCapabilityException e) {
+            // An organization capability should always have an organization associated
             return Response.status(Response.Status.NOT_FOUND).build();
         } catch (AlreadyCreatedOrganizationCapabilityException e) {
+            // The capability was already created within an organization, so there's a conflict
             return Response.status(Response.Status.CONFLICT).build();
         }
 

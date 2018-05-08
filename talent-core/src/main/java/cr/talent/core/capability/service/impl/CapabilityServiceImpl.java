@@ -28,6 +28,9 @@ public class CapabilityServiceImpl extends CrudServiceImpl<Capability, String> i
         setCrudDao(this.capabilityDao);
     }
 
+    /**
+     * @see cr.talent.core.capability.service.CapabilityService#createOrganizationCapability(Capability)
+     */
     @Override
     public String createOrganizationCapability(Capability organizationCapability)
             throws NullOrganizationInOrganizationCapabilityException, AlreadyCreatedOrganizationCapabilityException {
@@ -42,6 +45,9 @@ public class CapabilityServiceImpl extends CrudServiceImpl<Capability, String> i
         return this.capabilityDao.create(organizationCapability);
     }
 
+    /**
+     * @see cr.talent.core.capability.service.CapabilityService#createPredefinedCapability(Capability)
+     */
     @Override
     public String createPredefinedCapability(Capability predefinedCapability)
             throws NotNullOrganizationInPredefinedCapabilityException, AlreadyCreatedPredefinedCapabilityException {

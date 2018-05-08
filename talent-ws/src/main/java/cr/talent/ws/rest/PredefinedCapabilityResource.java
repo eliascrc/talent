@@ -23,14 +23,19 @@ import javax.ws.rs.core.Response;
 @Path("/predefinedCapability")
 public class PredefinedCapabilityResource {
 
+    private CapabilityService capabilityService;
+
     @Autowired
-    CapabilityService capabilityService;
+    public PredefinedCapabilityResource(CapabilityService capabilityService) {
+        this.capabilityService = capabilityService;
+    }
 
     /**
      * Receives the request for creating a new predefined capability.
-     * @param name the predefined capability's name
-     * @return 200 if the predefined capability is correctly created, 400 if the name is null or an empty string,
-     *          409 if the predefined capability has already been created with the specified name,
+     * @param name the predefined capability's name.
+     * @return 200 if the predefined capability is correctly created,
+     *          400 if the name is null or an empty string,
+     *          409 if there's already a predefined capability with the specified name,
      *          500 if the predefined capability's organization attribute is not null.
      */
     @POST
@@ -39,7 +44,7 @@ public class PredefinedCapabilityResource {
             @FormParam("name") String name) {
 
         if (name == null || name.equals(""))
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         Capability capability = new Capability();
         capability.setName(name);
@@ -47,8 +52,10 @@ public class PredefinedCapabilityResource {
         try {
             this.capabilityService.createPredefinedCapability(capability);
         } catch (NotNullOrganizationInPredefinedCapabilityException e) {
+            // If the capability has an organization associated there's a problem in the server
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         } catch (AlreadyCreatedPredefinedCapabilityException e) {
+            // If the capability already exists, there's a conflict
             return Response.status(Response.Status.CONFLICT).build();
         }
 

@@ -25,6 +25,9 @@ public class HibernateCapabilityDao extends HibernateCrudDao<Capability, String>
         setSessionFactory(sessionFactory);
     }
 
+    /**
+     * @see cr.talent.core.capability.dao.CapabilityDao#getOrganizationCapabilityByName(String, String)
+     */
     @Override
     public Capability getOrganizationCapabilityByName(String organizationId, String name) {
         String sql = "SELECT * FROM capability WHERE name = :name AND organization_id = :organizationId";
@@ -39,6 +42,9 @@ public class HibernateCapabilityDao extends HibernateCrudDao<Capability, String>
         return null;
     }
 
+    /**
+     * @see cr.talent.core.capability.dao.CapabilityDao#getPredefinedCapabilityByName(String)
+     */
     @Override
     public Capability getPredefinedCapabilityByName(String name) {
         String sql = "SELECT * FROM capability WHERE name = :name AND organization_id IS NULL";

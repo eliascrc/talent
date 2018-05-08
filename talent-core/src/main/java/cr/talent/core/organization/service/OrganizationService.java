@@ -11,7 +11,19 @@ import cr.talent.support.service.CrudService;
  */
 public interface OrganizationService extends CrudService<Organization, String> {
 
-    public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier);
-    public String createOrganization(Organization organization) throws AlreadyCreatedOrganizationException;
+    /**
+     * Gets an organization with a given id.
+     * @param uniqueIdentifier the organization's unique identifier
+     * @return The organization if found, null if not found.
+     */
+    Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier);
+
+    /**
+     * Persists an organization with the respective business logic.
+     * @param organization the organization to create.
+     * @return The organization's id.
+     * @throws AlreadyCreatedOrganizationException if the organization's unique identifier is already in the system.
+     */
+    String createOrganization(Organization organization) throws AlreadyCreatedOrganizationException;
 
 }

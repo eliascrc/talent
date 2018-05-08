@@ -13,7 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with a POST endpoint that creates a new skill
+ * Resource with a POST endpoint that creates a new predefined skill
  *
  * @author Elías Calderón
  */
@@ -22,14 +22,19 @@ import javax.ws.rs.core.Response;
 @Path("/predefinedSkill")
 public class PredefinedSkillResource {
 
+    private SkillService skillService;
+
     @Autowired
-    SkillService skillService;
+    public PredefinedSkillResource(SkillService skillService) {
+        this.skillService = skillService;
+    }
 
     /**
      * Receives the request for creating a new predefined skill.
-     * @param name the predefined skill's name
-     * @return 200 if the predefined skill is created correctly, 400 if the name is null or an empty string,
-     * 409 if the predefined skill name is already registered in the system.
+     * @param name the predefined skill's name.
+     * @return 200 if the predefined skill is created correctly,
+     *          400 if the name is null or an empty string,
+     *          409 if the predefined skill name is already registered in the system.
      */
     @POST
     @Path("/create")
@@ -37,10 +42,11 @@ public class PredefinedSkillResource {
             @FormParam("name") String name) {
 
         if (name == null || name.equals(""))
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         PredefinedSkill skill = new PredefinedSkill();
         skill.setName(name);
+
         try {
             this.skillService.createPredefinedSkill(skill);
         } catch (AlreadyCreatedPredefinedSkillException e) {

@@ -25,6 +25,9 @@ public class HibernateOrganizationDao extends HibernateCrudDao<Organization, Str
         setSessionFactory(sessionFactory);
     }
 
+    /**
+     * @see cr.talent.core.organization.dao.OrganizationDao#getOrganizationByUniqueIdentifier(String)
+     */
     @Override
     public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier) {
         String sql = "SELECT * FROM organization WHERE unique_identifier = :uniqueIdentifier";

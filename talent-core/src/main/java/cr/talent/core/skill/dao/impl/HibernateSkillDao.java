@@ -26,6 +26,9 @@ public class HibernateSkillDao extends HibernateCrudDao<Skill, String> implement
         setSessionFactory(sessionFactory);
     }
 
+    /**
+     * @see cr.talent.core.skill.dao.SkillDao#getPredefinedSkillByName(String)
+     */
     @Override
     public PredefinedSkill getPredefinedSkillByName(String predefinedSkillName) {
 

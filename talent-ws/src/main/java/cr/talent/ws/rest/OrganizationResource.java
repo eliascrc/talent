@@ -22,14 +22,18 @@ import javax.ws.rs.core.Response;
 @Path("/organization")
 public class OrganizationResource {
 
+    private OrganizationService organizationService;
+
     @Autowired
-    OrganizationService organizationService;
+    public OrganizationResource (OrganizationService organizationService) {
+        this.organizationService = organizationService;
+    }
 
     /**
      * Receives the request for creating a new organization. If the unique identifier is not already
      * registered, it creates the organization successfully.
-     * @param uniqueIdentifier the organization's unique identifier
-     * @param name the organization's name
+     * @param uniqueIdentifier the organization's unique identifier.
+     * @param name the organization's name.
      * @return 200 if the organization is correctly created, 400 if any of the parameters are null,
      *          409 if an organization already has the specified unique identifier.
      */
@@ -41,7 +45,7 @@ public class OrganizationResource {
 
         if (uniqueIdentifier == null || name == null
                 || uniqueIdentifier.equals("") || name.equals(""))
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         Organization organization = new Organization();
         organization.setUniqueIdentifier(uniqueIdentifier);
@@ -50,6 +54,7 @@ public class OrganizationResource {
         try {
             this.organizationService.createOrganization(organization);
         } catch (AlreadyCreatedOrganizationException e) {
+            // If the organization is already created a conflict should be returned
             return Response.status(Response.Status.CONFLICT).build();
         }
 

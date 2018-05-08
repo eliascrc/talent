@@ -11,6 +11,11 @@ import cr.talent.support.dao.CrudDao;
  */
 public interface SkillDao extends CrudDao<Skill, String> {
 
+    /**
+     * Gets a predefined skill with a given name.
+     * @param predefinedSkillName the name of the skill.
+     * @return the predefined skill if found, null if not found.
+     */
     PredefinedSkill getPredefinedSkillByName(String predefinedSkillName);
 
 }

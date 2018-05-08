@@ -26,6 +26,9 @@ public class SkillServiceImpl extends CrudServiceImpl<Skill, String> implements 
         setCrudDao(this.skillDao);
     }
 
+    /**
+     * @see cr.talent.core.skill.service.SkillService#createPredefinedSkill(PredefinedSkill)
+     */
     @Override
     public String createPredefinedSkill(PredefinedSkill predefinedSkill) throws AlreadyCreatedPredefinedSkillException {
         if (this.skillDao.getPredefinedSkillByName(predefinedSkill.getName()) != null)
