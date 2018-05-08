@@ -2,6 +2,8 @@ package cr.talent.core.capability.service;
 
 import cr.talent.model.Capability;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationCapabilityException;
+import cr.talent.support.exceptions.AlreadyCreatedPredefinedCapabilityException;
+import cr.talent.support.exceptions.NotNullOrganizationInPredefinedCapabilityException;
 import cr.talent.support.exceptions.NullOrganizationInOrganizationCapabilityException;
 import cr.talent.support.service.CrudService;
 
@@ -12,7 +14,9 @@ import cr.talent.support.service.CrudService;
  */
 public interface CapabilityService extends CrudService<Capability, String> {
 
-    String createOrganizationCapability(Capability capability)
+    String createOrganizationCapability(Capability organizationCapability)
             throws NullOrganizationInOrganizationCapabilityException, AlreadyCreatedOrganizationCapabilityException;
 
+    String createPredefinedCapability(Capability predefinedCapability)
+            throws NotNullOrganizationInPredefinedCapabilityException, AlreadyCreatedPredefinedCapabilityException;
 }

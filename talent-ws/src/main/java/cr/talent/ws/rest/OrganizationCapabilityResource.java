@@ -16,7 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with a POST endpoint that creates a new organization
+ * Resource with a POST endpoint that creates a new organization capability
  *
  * @author Elías Calderón
  */

@@ -22,6 +22,7 @@
         <security:intercept-url pattern="/ws/organization/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
         <security:intercept-url pattern="/ws/project/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/organizationCapability/**/*" access="permitAll()" method="POST"/>
+        <security:intercept-url pattern="/ws/predefinedCapability/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/predefinedSkill/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>

@@ -38,4 +38,17 @@ public class HibernateCapabilityDao extends HibernateCrudDao<Capability, String>
 
         return null;
     }
+
+    @Override
+    public Capability getPredefinedCapabilityByName(String name) {
+        String sql = "SELECT * FROM capability WHERE name = :name AND organization_id IS NULL";
+        Query query = super.getSessionFactory().getCurrentSession().createNativeQuery(sql).addEntity(Capability.class);
+        query.setParameter("name", name);
+        List<Capability> capabilityResult = (List<Capability>)query.list();
+
+        if (capabilityResult.size() > 0)
+            return DataAccessUtils.singleResult(capabilityResult);
+
+        return null;
+    }
 }
