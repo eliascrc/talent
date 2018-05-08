@@ -21,7 +21,6 @@ import javax.ws.rs.core.Response;
  * @author Elías Calderón
  */
 @Component
-@Transactional
 @Scope("request")
 @Path("/project")
 public class ProjectResource {
@@ -59,10 +58,6 @@ public class ProjectResource {
         project.setOrganization(organization);
         project.setName(name);
         this.projectService.create(project);
-
-        Hibernate.initialize(organization.getProjects());
-        organization.getProjects().add(project);
-        this.organizationService.update(organization);
 
         return Response.ok().build();
     }

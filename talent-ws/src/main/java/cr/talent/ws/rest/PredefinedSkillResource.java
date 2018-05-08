@@ -1,14 +1,8 @@
 package cr.talent.ws.rest;
 
-import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.skill.service.SkillService;
-import cr.talent.model.Organization;
-import cr.talent.model.OrganizationSkill;
 import cr.talent.model.PredefinedSkill;
-import cr.talent.model.Skill;
-import cr.talent.support.exceptions.AlreadyCreatedOrganizationCapabilityException;
 import cr.talent.support.exceptions.AlreadyCreatedPredefinedSkillException;
-import cr.talent.support.exceptions.NullOrganizationInOrganizationCapabilityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -34,7 +28,8 @@ public class PredefinedSkillResource {
     /**
      * Receives the request for creating a new predefined skill.
      * @param name the predefined skill's name
-     * @return
+     * @return 200 if the predefined skill is created correctly, 400 if the name is null or an empty string,
+     * 409 if the predefined skill name is already registered in the system.
      */
     @POST
     @Path("/create")
