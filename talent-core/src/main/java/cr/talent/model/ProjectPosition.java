@@ -2,74 +2,112 @@ package cr.talent.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Class that represents a Project position within the Talent system.
- * It contains the dates of the position, the related project, capability, a performance review flag
- * and the information inherited from {@link cr.talent.model.Position} class.
+ * It contains the status, the total hours for the position, the capability, holder history, related project and
+ * and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
- * @author María José Cubero
+ * @author Elías Calderón
  */
 @Entity
 @Table(name = "project_position")
-public class ProjectPosition extends Position {
+public class ProjectPosition extends BasicEntity {
 
     /**
-     * The date that the resource started in the project position.
+     * The status of the project position.
      */
-    @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    @Column(name = "project_position_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProjectPositionStatus projectPositionStatus;
 
     /**
-     * The date that the resource finished in the project position.
+     * The total hours assigned to that position. The sum of assigned hours of the holders must
+     * be the total hours for the position.
      */
-    @Column(name = "end_date")
-    private Date endDate;
+    @Column(name = "total_hours", nullable = false)
+    private int totalHours;
 
     /**
-     * A flag that indicates if the position has already been reviewed in past performance reviews.
-     */
-    @Column(name = "reviewed", nullable = false)
-    private boolean reviewed;
-
-    /**
-     * A reference to the specific project capability that the position occupies or occupied in the past.
+     * The related capability of that project position
      */
     @ManyToOne
-    @JoinColumn(name = "project_capability_id", nullable = false)
-    private ProjectCapability projectCapability;
+    @JoinColumn(name = "capability_id", nullable = false)
+    private CapabilityLevel capability;
+
+    /**
+     * The history of position holders that the position has had.
+     */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "projectPosition")
+    @OrderBy("startDate")
+    private Set<ProjectPositionHolder> holderHistory;
+
+    /**
+     * The project of the position
+     */
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
 
     public ProjectPosition(){}
 
-    public Date getStartDate() {
-        return startDate;
+    public ProjectPositionStatus getProjectPositionStatus() {
+        return projectPositionStatus;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setProjectPositionStatus(ProjectPositionStatus projectPositionStatus) {
+        this.projectPositionStatus = projectPositionStatus;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    @Override
+    protected boolean onEquals(Object o) {
+        boolean result = false;
+        if ( o instanceof ProjectPosition ){
+            ProjectPosition projectPosition = (ProjectPosition) o;
+            result = ((this.project == null ? projectPosition.getProject() == null : this.project.equals(projectPosition.getProject()))
+                    && (this.capability == null ? projectPosition.getCapability() == null : this.capability.equals(projectPosition.getCapability())));
+        }
+        return result;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    @Override
+    protected int onHashCode(int result) {
+        final int prime = 23;
+        result = prime * result + (this.project == null ? 0 : this.project.hashCode());
+        result = prime * result + (this.capability == null ? 0 : this.capability.hashCode());
+        return result;
     }
 
-    public boolean isReviewed() {
-        return reviewed;
+    public int getTotalHours() {
+        return totalHours;
     }
 
-    public void setReviewed(boolean reviewed) {
-        this.reviewed = reviewed;
+    public void setTotalHours(int totalHours) {
+        this.totalHours = totalHours;
     }
 
-    public ProjectCapability getProjectCapability() {
-        return projectCapability;
+    public CapabilityLevel getCapability() {
+        return capability;
     }
 
-    public void setProjectCapability(ProjectCapability projectCapability) {
-        this.projectCapability = projectCapability;
+    public void setCapability(CapabilityLevel capability) {
+        this.capability = capability;
+    }
+
+    public Set<ProjectPositionHolder> getHolderHistory() {
+        return holderHistory;
+    }
+
+    public void setHolderHistory(Set<ProjectPositionHolder> holderHistory) {
+        this.holderHistory = holderHistory;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

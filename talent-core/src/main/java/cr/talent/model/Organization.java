@@ -46,17 +46,10 @@ public class Organization extends BasicEntity {
     private OrganizationState state;
 
     /**
-     * The user authentication method that the organization's administrators select.
+     * An image with the logo of the organization.
      */
-    @Column (name = "user_authentication_method")
-    @Enumerated(value = EnumType.STRING)
-    private UserAuthenticationMethod userAuthenticationMethod;
-
-    /**
-     * The organizatio's domain
-     */
-    @Column (name = "domain")
-    private String domain;
+    @OneToOne
+    private Image logo;
 
     /**
      * The invitation's list for users to join an organization
@@ -65,10 +58,17 @@ public class Organization extends BasicEntity {
     private Set<Invitation> invitationsList;
 
     /**
-     * An image with the logo of the organization.
+     * The organization's domain
      */
-    @OneToOne
-    private Image logo;
+    @Column (name = "domain")
+    private String domain;
+
+    /**
+     * The user authentication method that the organization's administrators select.
+     */
+    @Column (name = "user_authentication_method")
+    @Enumerated(value = EnumType.STRING)
+    private UserAuthenticationMethod userAuthenticationMethod;
 
     /**
      * A list with the resources that have joined the organization.
@@ -80,7 +80,7 @@ public class Organization extends BasicEntity {
      * A list with the organization's capabilities that the administrators have selected.
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
-    private Set<OrganizationCapability> capabilities;
+    private Set<Capability> capabilities;
 
     /**
      * A list with the categories of skills that the organization has registered.
@@ -178,7 +178,7 @@ public class Organization extends BasicEntity {
         return invitationsList;
     }
 
-    public void setInvitationsList(Set invitationsList) {
+    public void setInvitationsList(Set<Invitation> invitationsList) {
         this.invitationsList = invitationsList;
     }
 
@@ -214,11 +214,11 @@ public class Organization extends BasicEntity {
         this.resources = resources;
     }
 
-    public Set<OrganizationCapability> getCapabilities() {
+    public Set<Capability> getCapabilities() {
         return capabilities;
     }
 
-    public void setCapabilities(Set<OrganizationCapability> capabilities) {
+    public void setCapabilities(Set<Capability> capabilities) {
         this.capabilities = capabilities;
     }
 

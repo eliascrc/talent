@@ -44,7 +44,7 @@ public class OrganizationSkillTest{
         organizationSkill.setCategory(organizationSkillCategory);
         organizationSkill.setResources(new HashSet<>());
         organizationSkill.setInvitations(new HashSet<>());
-        organizationSkill.setOrganizationCapabilityLevels(new HashSet<>());
+        organizationSkill.setCapabilityLevels(new HashSet<>());
         organizationSkill.setName(NAME);
 
         // Verify the gets
@@ -55,7 +55,7 @@ public class OrganizationSkillTest{
         assertEquals(organizationSkillCategory,organizationSkill.getCategory());
         assertNotNull(organizationSkill.getResources());
         assertNotNull(organizationSkill.getInvitations());
-        assertNotNull(organizationSkill.getOrganizationCapabilityLevels());
+        assertNotNull(organizationSkill.getCapabilityLevels());
         assertEquals(NAME, organizationSkill.getName());
     }
 
