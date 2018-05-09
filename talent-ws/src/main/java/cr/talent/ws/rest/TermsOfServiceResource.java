@@ -3,6 +3,7 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.model.TermsOfService;
+import cr.talent.support.exceptions.NoActiveTermsOfServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Web service to process requests for the application's terms of service.
+ * Resource with a GET endpoint to process requests for the application's terms of service.
  *
  * @author Josue Leon Sarkis
  */
@@ -33,19 +34,19 @@ public class TermsOfServiceResource {
      * Gets the currently active terms of service via the TermsOfService service and returns a response with
      * the corresponding content and status code.
      *
-     * @return Response with the corresponding http status code and the html content of the terms of service.
+     * @return 200 if it was possible to retrieve the html content of the terms of service correctly,
+     * 204 if there is no currently active terms of service content
      */
     @GET
+    @Path("/get")
     @Produces(MediaType.TEXT_HTML)
     public Response processToSRequest() {
-        Response response;
-        TermsOfService termsOfService = this.toSService.getActiveTermsOfService();
-        if (termsOfService != null) {
-            String toSContent = termsOfService.getToSContent();
-            response = Response.status(200).entity(toSContent).build();
-        } else {
-            response = Response.status(204).build();
+        try {
+            String toSContent = this.toSService.getActiveTermsOfService().getToSContent();
+            return Response.ok().entity(toSContent).build();
+
+        } catch (NoActiveTermsOfServiceException e) {
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
-        return response;
     }
 }
