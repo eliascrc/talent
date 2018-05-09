@@ -1,5 +1,6 @@
 package cr.talent.support.flexjson;
 
+import cr.talent.model.Organization;
 import flexjson.JSONSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,4 +106,26 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    public static JSONSerializer getOrganizationSerializer() {
+        JSONSerializer serializer = getBasicSerializer(); // core serializer which excludes classnames
+        List<String> excludes = new LinkedList<>(); // list which will store all excluded attributes
+        List<String> includes = new LinkedList<>(); // list which will store all included attributes
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        includes.add("uniqueIdentifier");
+        includes.add("name");
+        includes.add("logo.link");
+
+        // adds all attributes of the Organization class as excludes except those in the includes list
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", includes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("TermsOfService Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
 }
