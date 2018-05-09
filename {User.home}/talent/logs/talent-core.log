@@ -1,0 +1,2 @@
+2018-05-07 10:09:17 WARN  BasicResourcePool:220 - Bad pool size config, start 3 < min 3000. Using 3000 as start.
+2018-05-07 10:09:17 WARN  UUIDHexGenerator:42 - HHH000409: Using org.hibernate.id.UUIDHexGenerator which does not generate IETF RFC 4122 compliant UUID values; consider using org.hibernate.id.UUIDGenerator instead
