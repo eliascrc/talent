@@ -27,7 +27,6 @@ public class XmlParser {
         File file = new File(filePath);
         Builder parser = new Builder();
         Document document = null;
-        System.out.println(filePath);
         try{
             document = parser.build(file);
         }
