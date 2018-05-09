@@ -10,4 +10,11 @@ import cr.talent.support.service.CrudService;
  */
 public interface OrganizationService extends CrudService<Organization, String> {
 
+    /**
+     * Retrieves an organization with a given unique identifier
+     * @param uniqueIdentifier the unique identifier of the organization
+     * @return the organization if found, null otherwise
+     */
+    Organization getOrganizationWithUniqueId(String uniqueIdentifier);
+
 }

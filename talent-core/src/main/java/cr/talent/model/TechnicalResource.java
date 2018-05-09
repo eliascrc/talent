@@ -22,24 +22,6 @@ import java.util.Set;
 public class TechnicalResource extends User{
 
     /**
-     * Defines if the user is an administrator of the organization.
-     */
-    @Column(name = "is_administrator", nullable = false)
-    private boolean isAdministrator;
-
-    /**
-     * Specifies the date of the last level assessment result.
-     */
-    @Column(name = "last_level_assessment")
-    private Date lastLevelAssessment;
-
-    /**
-     * Specifies the date of the last performance review result.
-     */
-    @Column(name = "last_performance_review")
-    private Date lastPerformanceReview;
-
-    /**
      * The profile picture of the user.
      */
     @OneToOne
@@ -65,10 +47,10 @@ public class TechnicalResource extends User{
     private Set<EducationRecord> educationRecords;
 
     /**
-     * The list of the resource's project positions.
+     * The project positions for the resource
      */
-    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
-    private Set<ProjectPosition> projectPositions;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "resource")
+    private Set<ProjectPositionHolder> projectPositions;
 
     /**
      * The resource's job position.
@@ -103,10 +85,10 @@ public class TechnicalResource extends User{
     private Set<Observation> observations;
 
     /**
-     * The resouce's emergency contacts list.
+     * The resource's timezone setting.
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
-    private Set<EmergencyContact> emergencyContacts;
+    @Column(name = "time_zone", nullable = false)
+    private String timeZone;
 
     /**
      * The resouce's language setting.
@@ -116,10 +98,10 @@ public class TechnicalResource extends User{
     private Language language;
 
     /**
-     * The resource's timezone setting.
+     * The resouce's emergency contacts list.
      */
-    @Column(name = "time_zone", nullable = false)
-    private String timeZone;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
+    private Set<EmergencyContact> emergencyContacts;
 
     /**
      * The resource's level assessment time gap.
@@ -128,11 +110,22 @@ public class TechnicalResource extends User{
     private int levelAssessmentTimeGap;
 
     /**
-     * The resource's capability level of a capability.
+     * Specifies the date of the last level assessment result.
      */
-    @ManyToOne
-    @JoinColumn(name = "org_capability_id")
-    private OrganizationCapabilityLevel organizationCapabilityLevel;
+    @Column(name = "last_level_assessment")
+    private Date lastLevelAssessment;
+
+    /**
+     * Specifies the date of the last performance review result.
+     */
+    @Column(name = "last_performance_review")
+    private Date lastPerformanceReview;
+
+    /**
+     * Defines if the user is an administrator of the organization.
+     */
+    @Column(name = "is_administrator", nullable = false)
+    private boolean isAdministrator;
 
     /**
      * List of the observations that that resource has made.
@@ -146,6 +139,12 @@ public class TechnicalResource extends User{
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "two_step_verification_id", unique = true)
     private TwoStepVerification twoStepVerification;
+
+    /**
+     * A list with the project management positions that the Lead has occupied in the organization.
+     */
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "lead")
+    private Set<LeadPosition> leadPositions;
 
     public TechnicalResource(){}
 
@@ -231,14 +230,6 @@ public class TechnicalResource extends User{
         this.educationRecords = educationRecords;
     }
 
-    public Set<ProjectPosition> getProjectPositions() {
-        return projectPositions;
-    }
-
-    public void setProjectPositions(Set<ProjectPosition> projectPositions) {
-        this.projectPositions = projectPositions;
-    }
-
     public JobPosition getJobPosition() {
         return jobPosition;
     }
@@ -311,14 +302,6 @@ public class TechnicalResource extends User{
         this.levelAssessmentTimeGap = levelAssessmentTimeGap;
     }
 
-    public OrganizationCapabilityLevel getOrganizationCapabilityLevel() {
-        return organizationCapabilityLevel;
-    }
-
-    public void setOrganizationCapabilityLevel(OrganizationCapabilityLevel organizationCapabilityLevel) {
-        this.organizationCapabilityLevel = organizationCapabilityLevel;
-    }
-
     public Set<Kudo> getMadeKudo() {
         return madeKudo;
     }
@@ -341,5 +324,21 @@ public class TechnicalResource extends User{
 
     public void setTwoStepVerification(TwoStepVerification twoStepVerification) {
         this.twoStepVerification = twoStepVerification;
+    }
+
+    public Set<ProjectPositionHolder> getProjectPositions() {
+        return projectPositions;
+    }
+
+    public void setProjectPositions(Set<ProjectPositionHolder> projectPositions) {
+        this.projectPositions = projectPositions;
+    }
+
+    public Set<LeadPosition> getLeadPositions() {
+        return leadPositions;
+    }
+
+    public void setLeadPositions(Set<LeadPosition> leadPositions) {
+        this.leadPositions = leadPositions;
     }
 }

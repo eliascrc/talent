@@ -1,181 +1,220 @@
 package cr.talent.model;
 
+
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /**
- * Class that allows to test the ProjectPosition methods to know all the different paths they could take.
- *  This class contains the test of the inherited methods ans attributes
- *  from {@link cr.talent.model.BasicEntity} class.
+ * Class that allows to test the Project Position methods to know all the different paths they could take.
+ * This class contains the test of the inherited methods ans attributes
+ * from {@link cr.talent.model.BasicEntity} class.
  *
- * @author Daniel Montes de Oca
+ * @author Elías Calderón
  */
+
 public class ProjectPositionTest {
 
-    private static final String ID = "1234";
-    private static final String ID2 = "12345";
-    private static final OrganizationCapabilityLevel ORGANIZATION_CAPABILITY_LEVEL = mock(OrganizationCapabilityLevel.class);
-    private static final OrganizationCapabilityLevel ORGANIZATION_CAPABILITY_LEVEL2 = mock(OrganizationCapabilityLevel.class);
+    private static final Project PROJECT = mock(Project.class);
+    private static final Project PROJECT2 = mock(Project.class);
+    private static final CapabilityLevel CAPABILITY = mock(CapabilityLevel.class);
+    private static final CapabilityLevel CAPABILITY2 = mock(CapabilityLevel.class);
+    private static final String ID = "987";
+    private static final String ID2 = "654";
 
     @Test
     public void coreTest() {
-
-        // Inherited from BasicEntity
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
-        // Inherited from Position
-        OrganizationCapabilityLevel level = ORGANIZATION_CAPABILITY_LEVEL;
-        TechnicalResource resource = mock(TechnicalResource.class);
+        ProjectPositionStatus projectPositionStatus =  ProjectPositionStatus.AVAILABLE;
+        int totalHours = 5;
 
-        // From ProjectPosition
-        Date startDate = new Date();
-        Date endDate = new Date();
-        boolean reviewed = true;
-        ProjectCapability projectCapability = new ProjectCapability();
-
-        // Verify the Constructor
+        // Test Constructor
         ProjectPosition projectPosition = new ProjectPosition();
 
-        // Verify the setters
-        // Inheritted from BasicEntity
-        projectPosition.setId(ID);
+        projectPosition.setEntityVersion(entityVersion);
         projectPosition.setEntityCreationTimestamp(entityCreationTimestamp);
         projectPosition.setLastUpdatedTimestamp(lastUpdatedTimestamp);
-        projectPosition.setEntityVersion(entityVersion);
+        projectPosition.setId(ID);
+        projectPosition.setProjectPositionStatus(projectPositionStatus);
+        projectPosition.setTotalHours(totalHours);
+        projectPosition.setHolderHistory(new HashSet<>());
+        projectPosition.setProject(PROJECT);
+        projectPosition.setCapability(CAPABILITY);
 
-        // Inherited from Position
-        projectPosition.setOrganizationCapabilityLevel(level);
-        projectPosition.setTechnicalResource(resource);
-
-        // From Project Position
-        projectPosition.setStartDate(startDate);
-        projectPosition.setEndDate(endDate);
-        projectPosition.setReviewed(reviewed);
-        projectPosition.setProjectCapability(projectCapability);
-
-        // Verify the gets
-        assertEquals(ID, projectPosition.getId());
         assertEquals(entityCreationTimestamp, projectPosition.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, projectPosition.getLastUpdatedTimestamp());
         assertEquals(entityVersion, projectPosition.getEntityVersion());
-        assertEquals(startDate, projectPosition.getStartDate());
-        assertEquals(endDate, projectPosition.getEndDate());
-        assertEquals(reviewed, projectPosition.isReviewed());
-        assertEquals(ORGANIZATION_CAPABILITY_LEVEL, projectPosition.getOrganizationCapabilityLevel());
-        assertEquals(resource, projectPosition.getTechnicalResource());
-        assertEquals(projectCapability, projectPosition.getProjectCapability());
+        assertEquals(ID, projectPosition.getId());
+        assertEquals(projectPositionStatus, projectPosition.getProjectPositionStatus());
+        assertEquals(totalHours, projectPosition.getTotalHours());
+        assertNotNull(projectPosition.getHolderHistory());
+        assertEquals(PROJECT, projectPosition.getProject());
+        assertEquals(CAPABILITY, projectPosition.getCapability());
     }
+
 
     @Test
     public void testEqualForSameObject() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
+        ProjectPosition projectPosition = new ProjectPosition();
 
-        assertTrue(projectPosition1.equals(projectPosition1));
+        assertTrue(projectPosition.equals(projectPosition));
     }
 
     @Test
     public void testEqualForDifferentClass() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
+        ProjectPosition projectPosition = new ProjectPosition();
 
-        assertFalse(projectPosition1.equals(new Object()));
+        assertFalse(projectPosition.equals(new Image()));
     }
 
     @Test
     public void testEqualForPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setId(ID);
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setId(ID);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setId(ID);
 
-        assertTrue(projectPosition1.equals(projectPosition2));
+        assertTrue(projectPosition.equals(projectPosition2));
     }
 
     @Test
     public void testNonEqualForPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setId(ID);
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setId(ID);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setId(ID2);
 
-        assertFalse(projectPosition1.equals(projectPosition2));
+        assertFalse(projectPosition.equals(projectPosition2));
     }
 
     @Test
     public void testEqualForNonPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setProject(PROJECT);
+        projectPosition.setCapability(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        projectPosition2.setProject(PROJECT);
+        projectPosition2.setCapability(CAPABILITY);
 
-        assertTrue(projectPosition1.equals(projectPosition2));
+        assertTrue(projectPosition.equals(projectPosition2));
     }
 
     @Test
     public void testNonEqualForNonPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setProject(PROJECT);
+        projectPosition.setCapability(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+        projectPosition2.setProject(PROJECT2);
+        projectPosition2.setCapability(CAPABILITY2);
 
-        assertFalse(projectPosition1.equals(projectPosition2));
+        assertFalse(projectPosition.equals(projectPosition2));
     }
 
-    //ON HASH TESTS.
+    @Test
+    public void testEqualForNonPersistentProjectPositionNullValues() {
+        ProjectPosition projectPosition = new ProjectPosition();
+
+        ProjectPosition projectPosition2 = new ProjectPosition();
+
+        assertTrue(projectPosition.equals(projectPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionNullProject() {
+        ProjectPosition projectPosition = new ProjectPosition();
+
+        ProjectPosition projectPosition2 = new ProjectPosition();
+        projectPosition2.setProject(PROJECT2);
+
+        assertFalse(projectPosition.equals(projectPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionNullCapability() {
+        ProjectPosition projectPosition = new ProjectPosition();
+
+        ProjectPosition projectPosition2 = new ProjectPosition();
+        projectPosition2.setCapability(CAPABILITY2);
+
+        assertFalse(projectPosition.equals(projectPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectPositionNullOrganizationFirstProjectPosition() {
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setCapability(CAPABILITY);
+
+        ProjectPosition projectPosition2 = new ProjectPosition();
+
+        assertFalse(projectPosition.equals(projectPosition2));
+    }
 
     @Test
     public void testEqualHashCodeForPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setId(ID);
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setId(ID);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setId(ID);
 
-        assertTrue(projectPosition1.hashCode() == projectPosition2.hashCode());
+        assertTrue(projectPosition.hashCode() == projectPosition2.hashCode());
     }
 
     @Test
     public void testNonEqualHashCodeForPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setId(ID);
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setId(ID);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setId(ID2);
 
-        assertFalse(projectPosition1.hashCode() == projectPosition2.hashCode());
+        assertFalse(projectPosition.hashCode() == projectPosition2.hashCode());
     }
+
+
 
     @Test
     public void testEqualHashCodeForNonPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setProject(PROJECT);
+        projectPosition.setCapability(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        projectPosition2.setProject(PROJECT);
+        projectPosition2.setCapability(CAPABILITY);
 
-        assertTrue(projectPosition1.hashCode() == projectPosition2.hashCode());
+        assertTrue(projectPosition.hashCode() == projectPosition2.hashCode());
+
     }
 
     @Test
     public void testNonEqualHashCodeForNonPersistentProjectPosition() {
-        ProjectPosition projectPosition1 = new ProjectPosition();
-        projectPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setProject(PROJECT);
+        projectPosition.setCapability(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+        projectPosition2.setProject(PROJECT2);
+        projectPosition2.setCapability(CAPABILITY2);
 
-        assertFalse(projectPosition1.hashCode() == projectPosition2.hashCode());
+        assertFalse(projectPosition.hashCode() == projectPosition2.hashCode());
     }
 
 }

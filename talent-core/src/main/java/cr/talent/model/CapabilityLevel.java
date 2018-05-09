@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Class that represents a Capability Level within the Talent system.
@@ -10,14 +11,13 @@ import javax.persistence.*;
  * @author María José Cubero
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "capability_level")
-public abstract class CapabilityLevel extends BasicEntity {
+public class CapabilityLevel extends BasicEntity {
 
     /**
      * The name of the capability level
      */
-    @Column (name = "name" , nullable = false)
+    @Column (nullable = false)
     private String name;
 
     /**
@@ -27,11 +27,36 @@ public abstract class CapabilityLevel extends BasicEntity {
     private int hierarchyPosition;
 
     /**
-     * The parent capability of the level
+     * The parent capability of the level.
      */
     @ManyToOne
     @JoinColumn (name = "capability_id", nullable = false)
     private Capability capability;
+
+    /**
+     * The required skills to achieve the capability level.
+     */
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "required_capability_skills",
+            joinColumns = { @JoinColumn(name = "capability_level_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+    )
+    private Set<OrganizationSkill> requiredSkills;
+
+    /**
+     * The organization of the capability level. If it points no organization, the capability level is taken as a
+     * predefined capability level.
+     */
+    @ManyToOne
+    @JoinColumn (name = "organization_id", nullable = false)
+    private Organization organization;
+
+    /**
+     * The projects where the capability is in use
+     */
+    @ManyToMany(mappedBy = "projectCapabilities")
+    private Set<Project> projects;
 
     public CapabilityLevel(){}
 
@@ -40,7 +65,9 @@ public abstract class CapabilityLevel extends BasicEntity {
         boolean result = false;
         if ( o instanceof CapabilityLevel){
             CapabilityLevel capabilityLevel = (CapabilityLevel) o;
-            result = (this.name == null ? capabilityLevel.getName() == null : this.name.equals(capabilityLevel.getName()));
+            result = ((this.name == null ? capabilityLevel.getName() == null : this.name.equals(capabilityLevel.getName()))
+                    && (this.organization == null ? capabilityLevel.getOrganization() == null : this.organization.equals(capabilityLevel.getOrganization()))
+                    && (this.capability == null ? capabilityLevel.getCapability() == null : this.capability.equals(capabilityLevel.getCapability())));
         }
         return result;
     }
@@ -49,6 +76,8 @@ public abstract class CapabilityLevel extends BasicEntity {
     protected int onHashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        result = prime * result + (this.organization == null ? 0 : this.organization.hashCode());
+        result = prime * result + (this.capability == null ? 0 : this.capability.hashCode());
         return result;
     }
 
@@ -74,5 +103,29 @@ public abstract class CapabilityLevel extends BasicEntity {
 
     public void setCapability(Capability capability) {
         this.capability = capability;
+    }
+
+    public Set<Project> getProject() {
+        return projects;
+    }
+
+    public void setProject(Set<Project> project) {
+        this.projects = project;
+    }
+
+    public Set<OrganizationSkill> getRequiredSkills() {
+        return requiredSkills;
+    }
+
+    public void setRequiredSkills(Set<OrganizationSkill> requiredSkills) {
+        this.requiredSkills = requiredSkills;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }

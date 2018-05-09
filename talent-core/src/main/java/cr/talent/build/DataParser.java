@@ -19,6 +19,7 @@ class DataParser extends XmlParser {
     private List<Organization> organizations;
     private List<TechnicalResource> technicalResources;
     private List<PrivacyPolicy> privacyPolicyVersions;
+    private List<TermsOfService> termsOfServiceVersions;
 
     /**
      * The class constructor. It receives the filepath to the xml file.
@@ -32,12 +33,14 @@ class DataParser extends XmlParser {
         this.organizations = new ArrayList<Organization>();
         this.technicalResources = new ArrayList<TechnicalResource>();
         this.privacyPolicyVersions = new ArrayList<PrivacyPolicy>();
+        this.termsOfServiceVersions = new ArrayList<>();
     }
 
     void parseData() {
         this.fillOrganizations();
         this.fillTechnicalResources();
         this.fillPrivacyPolicyVersions();
+        this.fillTermsOfServiceVersions();
     }
 
 
@@ -130,14 +133,25 @@ class DataParser extends XmlParser {
      */
     private void fillPrivacyPolicyVersions() {
         Elements privacyPolicyVersionsElements = getElementOfType("privacyPolicyVersions").get(0).getChildElements();
-        for (int i = 0; i < privacyPolicyVersionsElements.size(); i++){
+        for (int i = 0; i < privacyPolicyVersionsElements.size(); i++) {
             PrivacyPolicy privacyPolicy = getPrivacyPolicy(privacyPolicyVersionsElements.get(i));
             this.privacyPolicyVersions.add(privacyPolicy);
         }
     }
 
+     /*
+     * Fills the terms of service versions list.
+     */
+    private void fillTermsOfServiceVersions() {
+        Elements termsOfServiceVersionsElements = getElementOfType("termsOfServiceVersions").get(0).getChildElements();
+        for (int i = 0; i < termsOfServiceVersionsElements.size(); i++){
+            TermsOfService termsOfService = this.getTermsOfService(termsOfServiceVersionsElements.get(i));
+            this.termsOfServiceVersions.add(termsOfService);
+        }
+    }
+
     /**
-     * Creates a TermsOfService object and sets its attributes according to the data specified in the DummyData.xml.
+     * Creates a PrivacyPolicy object and sets its attributes according to the data specified in the DummyData.xml.
      * To set the terms of service HTML content, it obtains the file which stores the content from the xml and then
      * reads it.
      *
@@ -163,6 +177,27 @@ class DataParser extends XmlParser {
         return privacyPolicy;
     }
 
+    /*
+     * @param termsOfServiceElement the node of the xml file corresponding to the specific terms of service version
+     * @return the TermsOfService created object
+     */
+    private TermsOfService getTermsOfService(Element termsOfServiceElement) {
+        TermsOfService termsOfService = new TermsOfService();
+        if(super.getDateValue(termsOfServiceElement, "startDate") != null)
+        	termsOfService.setStartDate(super.getDateValue(termsOfServiceElement, "startDate"));
+        if(super.getDateValue(termsOfServiceElement, "endDate") != null)
+        	termsOfService.setEndDate(super.getDateValue(termsOfServiceElement, "endDate"));
+        termsOfService.setActive(super.getBooleanValue(termsOfServiceElement, "isActive"));
+        String termsOfServiceContent = "";
+        try {
+            termsOfServiceContent = FileUtils.readFileToString(new File(super.getAttributeValue(termsOfServiceElement, "contentFile")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        termsOfService.setToSContent(termsOfServiceContent);
+        return termsOfService;
+    }
+
     List<Organization> getOrganizations() {
         return this.organizations;
     }
@@ -172,5 +207,9 @@ class DataParser extends XmlParser {
     }
 
     List<PrivacyPolicy> getPrivacyPolicyVersions() { return this.privacyPolicyVersions; }
+
+    public List<TermsOfService> getTermsOfServiceVersions() {
+        return termsOfServiceVersions;
+    }
 
 }

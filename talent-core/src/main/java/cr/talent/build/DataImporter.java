@@ -3,9 +3,11 @@ package cr.talent.build;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.model.Organization;
 import cr.talent.model.PrivacyPolicy;
 import cr.talent.model.TechnicalResource;
+import cr.talent.model.TermsOfService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
 
@@ -36,28 +38,36 @@ public class DataImporter {
      * will add them to the database.
      */
     private void importData(){
-        DataParser dataParser = new DataParser("talent-core/src/main/resources/DummyData.xml");
+        DataParser dataParser = new DataParser("./talent-core/src/main/resources/DummyData.xml");
         dataParser.parseData();
 
         List<Organization> organizations = dataParser.getOrganizations();
         OrganizationService organizationService = context.getBean(OrganizationService.class);
 
         for (Organization organization : organizations) {
-            organizationService.create(organization);
+            //organizationService.create(organization);
         }
 
         List<TechnicalResource> technicalResources = dataParser.getTechnicalResources();
         TechnicalResourceService technicalResourceService = context.getBean(TechnicalResourceService.class);
 
         for (TechnicalResource technicalResource: technicalResources) {
-            technicalResourceService.create(technicalResource);
+            //technicalResourceService.create(technicalResource);
         }
+
 
         List<PrivacyPolicy> privacyPolicyVersions = dataParser.getPrivacyPolicyVersions();
         PrivacyPolicyService privacyPolicyService = context.getBean(PrivacyPolicyService.class);
 
         for (PrivacyPolicy privacyPolicyVersion : privacyPolicyVersions) {
             privacyPolicyService.create(privacyPolicyVersion);
+        }
+
+        List<TermsOfService> termsOfServiceVersions = dataParser.getTermsOfServiceVersions();
+        ToSService toSService = context.getBean(ToSService.class);
+
+        for(TermsOfService termsOfService : termsOfServiceVersions) {
+            toSService.create(termsOfService);
         }
     }
 

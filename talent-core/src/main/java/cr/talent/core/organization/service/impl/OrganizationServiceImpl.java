@@ -24,4 +24,8 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         setCrudDao(this.organizationDao);
     }
 
+    @Override
+    public Organization getOrganizationWithUniqueId(String uniqueIdentifier) {
+        return organizationDao.getOrganizationWithUniqueId(uniqueIdentifier);
+    }
 }
