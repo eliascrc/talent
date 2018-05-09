@@ -23,8 +23,10 @@ public class OrganizationServiceTest {
         OrganizationDao organizationDao = mock(OrganizationDao.class);
         Organization organization = mock(Organization.class);
         OrganizationService organizationService = new OrganizationServiceImpl();
+
         ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
         organizationService.create(organization);
+
         verify(organizationDao, times(1)).create(organization);
     }
 
@@ -33,8 +35,10 @@ public class OrganizationServiceTest {
         OrganizationDao organizationDao = mock(OrganizationDao.class);
         Organization organization = mock(Organization.class);
         OrganizationService organizationService = new OrganizationServiceImpl();
+
         ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
         organizationService.remove(organization);
+
         verify(organizationDao, times(1)).remove(organization);
     }
 
@@ -43,8 +47,10 @@ public class OrganizationServiceTest {
         OrganizationDao organizationDao = mock(OrganizationDao.class);
         Organization organization = mock(Organization.class);
         OrganizationService organizationService = new OrganizationServiceImpl();
+
         ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
         organizationService.update(organization);
+
         verify(organizationDao, times(1)).update(organization);
     }
 
@@ -52,6 +58,7 @@ public class OrganizationServiceTest {
     public void testInit() {
         OrganizationService organizationService = new OrganizationServiceImpl();
         OrganizationDao organizationDao = mock(OrganizationDao.class);
+
         ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
         ReflectionTestUtils.invokeMethod(organizationService, "init");
     }

@@ -23,12 +23,8 @@ import javax.ws.rs.core.Response;
 @Path("/predefinedCapability")
 public class PredefinedCapabilityResource {
 
-    private CapabilityService capabilityService;
-
     @Autowired
-    public PredefinedCapabilityResource(CapabilityService capabilityService) {
-        this.capabilityService = capabilityService;
-    }
+    private CapabilityService capabilityService;
 
     /**
      * Receives the request for creating a new predefined capability.
@@ -50,16 +46,18 @@ public class PredefinedCapabilityResource {
         capability.setName(name);
 
         try {
+
             this.capabilityService.createPredefinedCapability(capability);
+            return Response.ok().build();
+
         } catch (NotNullOrganizationInPredefinedCapabilityException e) {
             // If the capability has an organization associated there's a problem in the server
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+
         } catch (AlreadyCreatedPredefinedCapabilityException e) {
             // If the capability already exists, there's a conflict
             return Response.status(Response.Status.CONFLICT).build();
         }
-
-        return Response.ok().build();
     }
 
 }

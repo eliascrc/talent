@@ -22,12 +22,8 @@ import javax.ws.rs.core.Response;
 @Path("/predefinedSkill")
 public class PredefinedSkillResource {
 
-    private SkillService skillService;
-
     @Autowired
-    public PredefinedSkillResource(SkillService skillService) {
-        this.skillService = skillService;
-    }
+    private SkillService skillService;
 
     /**
      * Receives the request for creating a new predefined skill.
@@ -48,12 +44,14 @@ public class PredefinedSkillResource {
         skill.setName(name);
 
         try {
+
             this.skillService.createPredefinedSkill(skill);
+            return Response.ok().build();
+
         } catch (AlreadyCreatedPredefinedSkillException e) {
             return Response.status(Response.Status.CONFLICT).build();
         }
 
-        return Response.ok().build();
     }
 
 }

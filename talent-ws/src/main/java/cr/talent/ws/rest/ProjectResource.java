@@ -23,14 +23,11 @@ import javax.ws.rs.core.Response;
 @Path("/project")
 public class ProjectResource {
 
+    @Autowired
     private ProjectService projectService;
-    private OrganizationService organizationService;
 
     @Autowired
-    public ProjectResource (ProjectService projectService, OrganizationService organizationService) {
-        this.projectService = projectService;
-        this.organizationService = organizationService;
-    }
+    private OrganizationService organizationService;
 
     /**
      * Receives the request for creating a new project within an organization.
@@ -38,7 +35,8 @@ public class ProjectResource {
      *
      * @param organizationUniqueIdentifier the organization's unique identifier.
      * @param name the name of the new project.
-     * @return 200 if the project is correctly created, 400 if any of the parameters are null or empty strings,
+     * @return 200 if the project is correctly created,
+     *          400 if any of the parameters are null or empty strings,
      *          404 if the unique identifier does not belong to any organization.
      */
     @POST

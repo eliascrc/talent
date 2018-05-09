@@ -25,14 +25,11 @@ import javax.ws.rs.core.Response;
 @Path("/organizationCapability")
 public class OrganizationCapabilityResource {
 
+    @Autowired
     private CapabilityService capabilityService;
-    private OrganizationService organizationService;
 
     @Autowired
-    public OrganizationCapabilityResource (CapabilityService capabilityService, OrganizationService organizationService) {
-        this.capabilityService = capabilityService;
-        this.organizationService = organizationService;
-    }
+    private OrganizationService organizationService;
 
     /**
      * Receives the request for creating a new organization capability.
@@ -62,17 +59,19 @@ public class OrganizationCapabilityResource {
         capability.setOrganization(organization);
 
         try {
+
             this.capabilityService.createOrganizationCapability(capability);
+            return Response.ok().build();
 
         } catch (NullOrganizationInOrganizationCapabilityException e) {
             // An organization capability should always have an organization associated
             return Response.status(Response.Status.NOT_FOUND).build();
+
         } catch (AlreadyCreatedOrganizationCapabilityException e) {
             // The capability was already created within an organization, so there's a conflict
             return Response.status(Response.Status.CONFLICT).build();
         }
 
-        return Response.ok().build();
     }
 
 }

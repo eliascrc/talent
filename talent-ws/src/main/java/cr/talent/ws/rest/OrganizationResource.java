@@ -22,12 +22,8 @@ import javax.ws.rs.core.Response;
 @Path("/organization")
 public class OrganizationResource {
 
-    private OrganizationService organizationService;
-
     @Autowired
-    public OrganizationResource (OrganizationService organizationService) {
-        this.organizationService = organizationService;
-    }
+    private OrganizationService organizationService;
 
     /**
      * Receives the request for creating a new organization. If the unique identifier is not already
@@ -52,13 +48,15 @@ public class OrganizationResource {
         organization.setName(name);
 
         try {
+
             this.organizationService.createOrganization(organization);
+            return Response.ok().build();
+
         } catch (AlreadyCreatedOrganizationException e) {
             // If the organization is already created a conflict should be returned
             return Response.status(Response.Status.CONFLICT).build();
         }
 
-        return Response.ok().build();
     }
 
 }

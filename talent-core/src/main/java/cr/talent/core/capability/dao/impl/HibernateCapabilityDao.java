@@ -30,16 +30,17 @@ public class HibernateCapabilityDao extends HibernateCrudDao<Capability, String>
      */
     @Override
     public Capability getOrganizationCapabilityByName(String organizationId, String name) {
-        String sql = "SELECT * FROM capability WHERE name = :name AND organization_id = :organizationId";
-        Query query = super.getSessionFactory().getCurrentSession().createNativeQuery(sql).addEntity(Capability.class);
+
+        Query query = super.getSessionFactory().getCurrentSession()
+                .createQuery("from Capability capability join fetch capability.organization organization " +
+                        "where capability.name = :name and organization.id = :organizationId");
+
         query.setParameter("name", name);
         query.setParameter("organizationId", organizationId);
         List<Capability> capabilityResult = (List<Capability>)query.list();
 
-        if (capabilityResult.size() > 0)
-            return DataAccessUtils.singleResult(capabilityResult);
+        return DataAccessUtils.singleResult(capabilityResult);
 
-        return null;
     }
 
     /**
@@ -47,14 +48,14 @@ public class HibernateCapabilityDao extends HibernateCrudDao<Capability, String>
      */
     @Override
     public Capability getPredefinedCapabilityByName(String name) {
-        String sql = "SELECT * FROM capability WHERE name = :name AND organization_id IS NULL";
-        Query query = super.getSessionFactory().getCurrentSession().createNativeQuery(sql).addEntity(Capability.class);
+
+        Query query = super.getSessionFactory().getCurrentSession()
+                .createQuery("from Capability where name = :name and organization is null");
+
         query.setParameter("name", name);
         List<Capability> capabilityResult = (List<Capability>)query.list();
 
-        if (capabilityResult.size() > 0)
-            return DataAccessUtils.singleResult(capabilityResult);
+        return DataAccessUtils.singleResult(capabilityResult);
 
-        return null;
     }
 }
