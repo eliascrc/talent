@@ -16,7 +16,7 @@ public class Capability extends BasicEntity {
     /**
      * The name of the capability.
      */
-    @Column (nullable = false)
+    @Column (name = "name", nullable = false)
     private String name;
 
     /**
