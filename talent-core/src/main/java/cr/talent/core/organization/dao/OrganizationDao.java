@@ -11,10 +11,10 @@ import cr.talent.support.dao.CrudDao;
 public interface OrganizationDao extends CrudDao<Organization, String> {
 
     /**
-     * Retrieves from the database an organization with a given unique identifier
-     * @param uniqueIdentifier the unique identifier of the desired organization
-     * @return the organization if found, null otherwise
+     * Gets an organization with a given id.
+     * @param uniqueIdentifier the organization's unique identifier.
+     * @return The organization if found, null if not found.
      */
-    Organization getOrganizationWithUniqueId(String uniqueIdentifier);
+    Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier);
 
 }

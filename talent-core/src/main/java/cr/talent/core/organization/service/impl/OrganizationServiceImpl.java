@@ -3,6 +3,7 @@ package cr.talent.core.organization.service.impl;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
+import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,23 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         setCrudDao(this.organizationDao);
     }
 
-    @Override
-    public Organization getOrganizationWithUniqueId(String uniqueIdentifier) {
-        return organizationDao.getOrganizationWithUniqueId(uniqueIdentifier);
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#getOrganizationByUniqueIdentifier(String)
+     */
+    public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier) {
+        return this.organizationDao.getOrganizationByUniqueIdentifier(uniqueIdentifier);
     }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#createOrganization(Organization)
+     */
+    public String createOrganization(Organization organization)
+            throws AlreadyCreatedOrganizationException {
+
+        if (this.organizationDao.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier()) != null)
+            throw new AlreadyCreatedOrganizationException();
+
+        return this.organizationDao.create(organization);
+    }
+
 }

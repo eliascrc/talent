@@ -7,9 +7,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NoResultException;
+import java.util.List;
 
 /**
  * Hibernate implementation of the {@link cr.talent.core.organization.dao.OrganizationDao}.
@@ -24,18 +25,20 @@ public class HibernateOrganizationDao extends HibernateCrudDao<Organization, Str
         setSessionFactory(sessionFactory);
     }
 
+    /**
+     * @see cr.talent.core.organization.dao.OrganizationDao#getOrganizationByUniqueIdentifier(String)
+     */
     @Override
-    public Organization getOrganizationWithUniqueId(String uniqueIdentifier) {
-        Organization queryResult;
-        try {
-            Query query = super.getSessionFactory().getCurrentSession()
-                    .createQuery("FROM Organization WHERE uniqueIdentifier = ?");
-            query.setParameter(0, uniqueIdentifier);
-            queryResult = (Organization) query.getSingleResult();
-        } catch (NoResultException nre) {
-            queryResult = null;
-        }
+    public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier) {
 
-        return queryResult;
+        Query query = super.getSessionFactory().getCurrentSession()
+                .createQuery("from Organization where uniqueIdentifier = :uniqueIdentifier");
+
+        query.setParameter("uniqueIdentifier", uniqueIdentifier);
+        List<Organization> organizationResult = (List<Organization>)query.list();
+
+        return DataAccessUtils.singleResult(organizationResult);
+
     }
+
 }

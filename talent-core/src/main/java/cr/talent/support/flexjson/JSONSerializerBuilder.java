@@ -106,6 +106,10 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    /**
+     * Creates a basic serializer that returns the unique identifier, name and logo of an organization
+     * @return
+     */
     public static JSONSerializer getOrganizationSerializer() {
         JSONSerializer serializer = getBasicSerializer(); // core serializer which excludes classnames
         List<String> excludes = new LinkedList<>(); // list which will store all excluded attributes
@@ -115,7 +119,8 @@ public class JSONSerializerBuilder {
 
         includes.add("uniqueIdentifier");
         includes.add("name");
-        includes.add("logo.link");
+        includes.add("logo");
+        includes.add("twoStepVerification");
 
         // adds all attributes of the Organization class as excludes except those in the includes list
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", includes));
@@ -123,8 +128,10 @@ public class JSONSerializerBuilder {
         // sets the added excludes to the serializer
         serializer.setExcludes(excludes);
 
+        serializer.transform(new ImageTransformer(), "logo");
+
         // logs the creation of the serializer
-        logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        logger.trace("Organization Serializer {} created", serializer.toString());
 
         return serializer;
     }
