@@ -44,7 +44,13 @@ id="WebApp_ID" version="3.0">
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/talent-ws.spring.xml /WEB-INF/talent-web-security.spring.xml classpath:talent-core.spring.xml, classpath:talent-persistence.spring.xml, classpath:talent-security.spring.xml</param-value>
+		<param-value>
+			/WEB-INF/talent-ws.spring.xml /WEB-INF/talent-web-security.spring.xml
+			classpath:talent-core.spring.xml,
+			classpath:talent-persistence.spring.xml,
+			classpath:talent-security.spring.xml,
+			classpath:talent-mail.spring.xml
+		</param-value>
 	</context-param>
 
 	<listener>

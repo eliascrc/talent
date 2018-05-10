@@ -186,6 +186,31 @@
           <version>1.2.5</version>
       </dependency>
 
+      <!-- JAVAX.EMAIL -->
+      <dependency>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+          <version>1.4.7</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context-support</artifactId>
+          <version>3.2.8.RELEASE</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.velocity</groupId>
+          <artifactId>velocity</artifactId>
+          <version>1.7</version>
+      </dependency>
+
+      <dependency>
+          <groupId>org.apache.velocity</groupId>
+          <artifactId>velocity-tools</artifactId>
+          <version>2.0</version>
+      </dependency>
+
   </dependencies>
 
     <reporting>

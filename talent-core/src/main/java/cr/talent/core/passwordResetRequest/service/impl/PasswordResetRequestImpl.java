@@ -1,5 +1,7 @@
 package cr.talent.core.passwordResetRequest.service.impl;
 
+import cr.talent.core.Email.BasicEmail.service.SendEmailService;
+import cr.talent.core.Email.PasswordResetEmail.service.PasswordResetEmailService;
 import cr.talent.core.passwordResetRequest.dao.PasswordResetRequestDao;
 import cr.talent.core.passwordResetRequest.service.PasswordResetRequestService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
@@ -31,19 +33,13 @@ public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequ
     private TechnicalResourceService technicalResourceService;
 
     @Autowired
+    private PasswordResetEmailService passwordResetEmailService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public void init() {
         setCrudDao(this.passwordResetRequestDao);
-    }
-
-    @Override
-    public boolean isTokenValid(String token){
-        PasswordResetRequest passwordResetRequest = passwordResetRequestDao.findByToken(token);
-        if (passwordResetRequest == null ){
-            return false;
-        }
-        return passwordResetRequest.isValid();
     }
 
     @Override
@@ -57,13 +53,23 @@ public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequ
             PasswordResetRequest passwordResetRequest = new PasswordResetRequest();
             passwordResetRequest.setTechnicalResource(technicalResource);
             passwordResetRequest.setEmail(technicalResource.getUsername());
-            passwordResetRequest.setToken(UUID.randomUUID().toString());
+            String token= UUID.randomUUID().toString();
+            passwordResetRequest.setToken(token);
             passwordResetRequest.setValid(true);
 
             this.create(passwordResetRequest);
 
-            // send the email.
+            this.passwordResetEmailService.sendPasswordResetMail(email, passwordResetRequest);
         }
+    }
+
+    @Override
+    public boolean isTokenValid(String token){
+        PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
+        if (passwordResetRequest == null ){
+            return false;
+        }
+        return passwordResetRequest.isValid();
     }
 
     @Override
@@ -72,7 +78,7 @@ public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequ
         try{
             SecurityUtils.validatePassword(newPassword);
             if (this.isTokenValid(token)){
-                PasswordResetRequest passwordResetRequest = passwordResetRequestDao.findByToken(token);
+                PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
                 TechnicalResource technicalResource =  passwordResetRequest.getTechnicalResource();
                 technicalResource.setPassword(this.passwordEncoder.encode(newPassword));
                 passwordResetRequest.setValid(false);

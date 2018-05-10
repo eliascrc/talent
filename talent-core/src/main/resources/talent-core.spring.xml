@@ -21,6 +21,8 @@
             <list>
                 <value>classpath:talent.properties</value>
                 <value>file:${user.home}/talent/talent.properties</value>
+                <value>classpath:/mail.properties</value>
+
             </list>
         </property>
         <property name="ignoreResourceNotFound" value="true"/>
