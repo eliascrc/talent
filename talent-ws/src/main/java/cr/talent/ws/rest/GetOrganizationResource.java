@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("/content/getOrganizationTest")
+@Path("/login/organization")
 public class GetOrganizationResource {
 
     @Autowired
