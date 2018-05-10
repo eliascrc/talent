@@ -24,6 +24,92 @@
 		</organization>
 	</organizations>
 
+	<projects>
+
+		<project>
+			<name>talent</name>
+			<description>You will never understand the relational model for this project</description>
+			<startDate>15/10/2013</startDate>
+			<endDate>15/10/2015</endDate>
+			<jiraLink>http://jira.certified.cr</jiraLink>
+			<confluenceLink>http://confluence.talent.cr/</confluenceLink>
+			<versionControlLink>http://git.talent.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>Mobile Developer,Mobile Developer,UI Designer,Java Developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Intermediate,Senior,Senior,Junior</projectCapabilityLevelNames>
+			<organization>monkey-labs</organization>
+		</project>
+
+		<project>
+			<name>Bachmann–Landau(1)</name>
+			<description>Nice notation</description>
+			<startDate>7/12/2017</startDate>
+			<endDate></endDate>
+			<jiraLink>http://jira.certified.cr</jiraLink>
+			<confluenceLink>http://confluence.talent.cr/</confluenceLink>
+			<versionControlLink>http://git.talent.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>Java Developer,UI Designer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Junior,Junior</projectCapabilityLevelNames>
+			<organization>monkey-labs</organization>
+		</project>
+
+		<project>
+			<name>Barbarossa</name>
+			<description>Most exciting operation</description>
+			<startDate></startDate>
+			<endDate></endDate>
+			<jiraLink>http://jira.certified.cr</jiraLink>
+			<confluenceLink>http://confluence.talent.cr/</confluenceLink>
+			<versionControlLink>http://git.talent.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>FE Developer,FE Developer,FE Developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Senior,Senior,Intermediate</projectCapabilityLevelNames>
+			<organization>andromeda-spiral</organization>
+		</project>
+
+		<project>
+			<name>Overlord</name>
+			<description>Most boring operation</description>
+			<startDate>1/1/2001</startDate>
+			<endDate></endDate>
+			<jiraLink>http://jira.certified.cr</jiraLink>
+			<confluenceLink>http://confluence.talent.cr/</confluenceLink>
+			<versionControlLink>http://git.talent.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>FE Developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Senior</projectCapabilityLevelNames>
+			<organization>andromeda-spiral</organization>
+		</project>
+
+	</projects>
+
+
+
+	<languages>
+
+		<language>
+			<languageName>spanish</languageName>
+		</language>
+
+		<language>
+			<languageName>english</languageName>
+		</language>
+
+		<language>
+			<languageName>german</languageName>
+		</language>
+
+		<language>
+			<languageName>esperanto</languageName>
+		</language>
+
+		<language>
+			<languageName>heptapod</languageName>
+		</language>
+
+		<language>
+			<languageName>sindarin</languageName>
+		</language>
+
+	</languages>
+
 
 	<technicalResources>
 
@@ -40,12 +126,13 @@
 			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
 			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
 
 		<technicalResource>
-			<username>antonio.jimnez@example.com</username>
+			<username>antonio.jimenez@example.com</username>
 			<firstName>Antonio</firstName>
 			<lastName>Jimenez</lastName>
 			<password>Talent.123</password>
@@ -57,6 +144,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://markinternational.info/legend-of-aang-wallpapers/219586425.html</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -74,6 +162,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://markinternational.info/legend-of-aang-wallpapers/219586425.html</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>english</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -91,6 +180,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://markinternational.info/legend-of-aang-wallpapers/219586425.html</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>english</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -108,6 +198,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>heptapod</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -125,6 +216,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>sindarin</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -142,6 +234,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>german</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -159,8 +252,27 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
 			<organization>monkey-labs</organization>
+			<language>german</language>
 			<timeZone>UTC-7</timeZone>
 			<levelAssessmentTimeGap>15</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>kendall.garcia@gmail.com</username>
+			<firstName>Kendall</firstName>
+			<lastName>Garcia</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>true</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>false</isAdministrator>
+			<lastLevelAssessment>1/1/2000</lastLevelAssessment>
+			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>heptapod</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
 
 		<technicalResource>
@@ -176,6 +288,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/kenshin-himura-rurouni-kenshin-8.84.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>english</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -193,6 +306,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/kenshin-himura-rurouni-kenshin-8.84.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -210,6 +324,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://img00.deviantart.net/4495/i/2012/043/0/6/star_wars_iii___general_grievous_by_petugee-d4pghoc.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>german</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -227,6 +342,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://static.comicvine.com/uploads/original/11123/111232121/5547213-vict3.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -244,6 +360,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://static.comicvine.com/uploads/original/11123/111232121/5547213-vict3.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -261,6 +378,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>english</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -278,6 +396,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>german</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -295,6 +414,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://img00.deviantart.net/4495/i/2012/043/0/6/star_wars_iii___general_grievous_by_petugee-d4pghoc.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -312,23 +432,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://www.john-howe.com/portfolio/gallery/data/media/22/Witch-King-port.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
-			<timeZone>UTC-6</timeZone>
-			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
-		</technicalResource>
-
-		<technicalResource>
-			<username>kendall.garcia@gmail.com</username>
-			<firstName>Kendall</firstName>
-			<lastName>Garcia</lastName>
-			<password>Talent.123</password>
-			<enabled>true</enabled>
-			<passwordNeedsChange>true</passwordNeedsChange>
-			<status>ACTIVE</status>
-			<isAdministrator>false</isAdministrator>
-			<lastLevelAssessment>1/1/2000</lastLevelAssessment>
-			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
-			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
-			<organization>monkey-labs</organization>
+			<language>english</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -346,6 +450,7 @@
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>sindarin</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -363,11 +468,521 @@
 			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
 			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
+			<language>german</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
 
 	</technicalResources>
+
+
+	<educationRecords>
+
+		<educationRecord>
+			<institution>Universidad de Costa Rica</institution>
+			<date>11/11/2011</date>
+			<title>Bachillerato en Ciencias de la Computacion e Informatica</title>
+			<resource>rosalind.franklin@example.com</resource>
+			<description>A title</description>
+		</educationRecord>
+
+		<educationRecord>
+			<institution>Universidad de Costa Rica</institution>
+			<date>11/11/2013</date>
+			<title>Maestria Academica en Computacion e Informatica</title>
+			<resource>rosalind.franklin@example.com</resource>
+			<description>A title</description>
+		</educationRecord>
+
+		<educationRecord>
+			<institution>Tecnologico de Costa Rica</institution>
+			<date>11/11/2011</date>
+			<title>Bachillerato en Ingenieria en Computacion</title>
+			<resource>keira.priestley@example.com</resource>
+			<description>A title</description>
+		</educationRecord>
+
+		<educationRecord>
+			<institution>Tecnologico de Costa Rica</institution>
+			<date>12/12/2011</date>
+			<title>Licenciatura en Ingenieria en Computadores</title>
+			<resource>andres.mata@example.com</resource>
+			<description>A title</description>
+		</educationRecord>
+
+		<educationRecord>
+			<institution>Universidad de Costa Rica</institution>
+			<date>11/11/2011</date>
+			<title>Bachillerato en Ciencias de la Computacion e Informatica</title>
+			<resource>antonio.jimenez@example.com</resource>
+			<description>A title</description>
+		</educationRecord>
+
+		<educationRecord>
+			<institution>Universidad de Costa Rica</institution>
+			<date>11/11/2011</date>
+			<title>Bachillerato en Ciencias de la Computacion e Informatica</title>
+			<resource>john.doe@example.com</resource>
+			<description>A title</description>
+		</educationRecord>
+
+	</educationRecords>
+
+
+	<capabilities>
+
+		<capability>
+			<name>Mobile Developer</name>
+			<organization>monkey-labs</organization>
+		</capability>
+
+		<capability>
+			<name>Java Developer</name>
+			<organization>monkey-labs</organization>
+		</capability>
+
+		<capability>
+			<name>UI Designer</name>
+			<organization>monkey-labs</organization>
+		</capability>
+
+		<capability>
+			<name>Mobile Developer</name>
+			<organization>andromeda-spiral</organization>
+		</capability>
+
+		<capability>
+			<name>Java Developer</name>
+			<organization>andromeda-spiral</organization>
+		</capability>
+
+		<capability>
+			<name>UI Designer</name>
+			<organization>andromeda-spiral</organization>
+		</capability>
+
+		<capability>
+			<name>FE Developer</name>
+			<organization>andromeda-spiral</organization>
+		</capability>
+
+	</capabilities>
+
+
+	<capabilityLevels>
+
+		<capabilityLevel>
+			<name>Junior</name>
+			<hierarchyPosition>1</hierarchyPosition>
+			<capability>Java Developer</capability>
+			<requiredSkills>SQL,Java</requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Intermediate</name>
+			<hierarchyPosition>2</hierarchyPosition>
+			<capability>Java Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Senior</name>
+			<hierarchyPosition>3</hierarchyPosition>
+			<capability>Java Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Junior</name>
+			<hierarchyPosition>1</hierarchyPosition>
+			<capability>Mobile Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Intermediate</name>
+			<hierarchyPosition>2</hierarchyPosition>
+			<capability>Mobile Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Senior</name>
+			<hierarchyPosition>3</hierarchyPosition>
+			<capability>Mobile Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Junior</name>
+			<hierarchyPosition>1</hierarchyPosition>
+			<capability>UI Designer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Intermediate</name>
+			<hierarchyPosition>2</hierarchyPosition>
+			<capability>UI Designer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Senior</name>
+			<hierarchyPosition>3</hierarchyPosition>
+			<capability>UI Designer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Junior</name>
+			<hierarchyPosition>1</hierarchyPosition>
+			<capability>FE Developer</capability>
+			<requiredSkills>HTML,Python</requiredSkills>
+			<organization>andromeda-spiral</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Intermediate</name>
+			<hierarchyPosition>2</hierarchyPosition>
+			<capability>FE Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>andromeda-spiral</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Senior</name>
+			<hierarchyPosition>3</hierarchyPosition>
+			<capability>FE Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>andromeda-spiral</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Junior</name>
+			<hierarchyPosition>1</hierarchyPosition>
+			<capability>Mobile Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>andromeda-spiral</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Intermediate</name>
+			<hierarchyPosition>2</hierarchyPosition>
+			<capability>Mobile Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>andromeda-spiral</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Senior</name>
+			<hierarchyPosition>3</hierarchyPosition>
+			<capability>Mobile Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>andromeda-spiral</organization>
+		</capabilityLevel>
+
+	</capabilityLevels>
+
+
+	<organizationSkillCategories>
+
+		<organizationSkillCategory>
+			<name>Frameworks</name>
+			<organization>monkey-labs</organization>
+		</organizationSkillCategory>
+
+		<organizationSkillCategory>
+			<name>Frameworks</name>
+			<organization>andromeda-spiral</organization>
+		</organizationSkillCategory>
+
+		<organizationSkillCategory>
+			<name>Programming Languages</name>
+			<organization>monkey-labs</organization>
+		</organizationSkillCategory>
+
+		<organizationSkillCategory>
+			<name>Programming Languages</name>
+			<organization>andromeda-spiral</organization>
+		</organizationSkillCategory>
+
+		<organizationSkillCategory>
+			<name>Databases</name>
+			<organization>monkey-labs</organization>
+		</organizationSkillCategory>
+
+		<organizationSkillCategory>
+			<name>Databases</name>
+			<organization>andromeda-spiral</organization>
+		</organizationSkillCategory>
+
+	</organizationSkillCategories>
+
+
+	<organizationSkills>
+
+		<organizationSkill>
+			<name>Angular</name>
+			<category>Frameworks</category>
+			<organization>monkey-labs</organization>
+			<resources>andres.mata@example.com,andrea.solano@example.com,antonio.jimenez@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Bootstrap</name>
+			<category>Frameworks</category>
+			<organization>monkey-labs</organization>
+			<resources>howard.lovecraft@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Angular</name>
+			<category>Frameworks</category>
+			<organization>andromeda-spiral</organization>
+			<resources></resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Bootstrap</name>
+			<category>Frameworks</category>
+			<organization>andromeda-spiral</organization>
+			<resources>james.moriarty@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>SQL</name>
+			<category>Databases</category>
+			<organization>monkey-labs</organization>
+			<resources>howard.lovecraft@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Mongo</name>
+			<category>Databases</category>
+			<organization>monkey-labs</organization>
+			<resources></resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>SQL</name>
+			<category>Databases</category>
+			<organization>andromeda-spiral</organization>
+			<resources>joseph.lagrange@example.com,james.moriarty@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Mongo</name>
+			<category>Databases</category>
+			<organization>andromeda-spiral</organization>
+			<resources>joseph.lagrange@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Java</name>
+			<category>Programming Languages</category>
+			<organization>monkey-labs</organization>
+			<resources></resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Python</name>
+			<category>Programming Languages</category>
+			<organization>monkey-labs</organization>
+			<resources>john.tolkien@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>HTML</name>
+			<category>Programming Languages</category>
+			<organization>monkey-labs</organization>
+			<resources>howard.lovecraft@example.com,john.tolkien@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Java</name>
+			<category>Programming Languages</category>
+			<organization>andromeda-spiral</organization>
+			<resources>sophie.germain@example.com,keira.priestley@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>Python</name>
+			<category>Programming Languages</category>
+			<organization>andromeda-spiral</organization>
+			<resources>sanes.mikkelsen@example.com</resources>
+		</organizationSkill>
+
+		<organizationSkill>
+			<name>HTML</name>
+			<category>Programming Languages</category>
+			<organization>andromeda-spiral</organization>
+			<resources>keira.priestley@example.com,sanes.mikkelsen@example.com</resources>
+		</organizationSkill>
+
+	</organizationSkills>
+
+
+	<technicalPositions>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>howard.lovecraft@example.com</technicalResource>
+			<startDate>11/11/1999</startDate>
+			<endDate>3/3/2011</endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>john.tolkien@example.com</technicalResource>
+			<startDate>11/12/2013</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>marta.martinez@example.com</technicalResource>
+			<startDate>3/3/2011</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>samus.aran@example.com</technicalResource>
+			<startDate>10/4/2016</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>hajime.saito@example.com</technicalResource>
+			<startDate>8/8/2009</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<technicalResource>sophie.germain@example.com</technicalResource>
+			<startDate>8/8/2009</startDate>
+			<endDate>8/8/2010</endDate>
+		</technicalPosition>
+
+	</technicalPositions>
+
+
+	<projectPositions>
+
+		<projectPosition>
+			<status>AVAILABLE</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>talent</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>AVAILABLE</status>
+			<totalHours>20</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>Bachmann–Landau(1)</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>AVAILABLE</status>
+			<totalHours>20</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>Barbarossa</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<project>Overlord</project>
+		</projectPosition>
+
+	</projectPositions>
+
+
+	<feedbacks>
+
+		<feedback>
+			<description>Great teamwork</description>
+			<observee>howard.lovecraft@example.com</observee>
+			<observer>john.tolkien@example.com</observer>
+			<relatedProject>talent</relatedProject>
+			<feedbackType>Kudo</feedbackType>
+		</feedback>
+
+		<feedback>
+			<description>Lots of dedication to the project</description>
+			<observee>antonio.jimenez@example.com</observee>
+			<observer>andrea.solano@example.com</observer>
+			<relatedProject>talent</relatedProject>
+			<feedbackType>Kudo</feedbackType>
+		</feedback>
+
+		<feedback>
+			<description>Iniciative person</description>
+			<observee>marta.martinez@example.com</observee>
+			<observer>maria.mena@example.com</observer>
+			<relatedProject>Bachmann–Landau(1)</relatedProject>
+			<feedbackType>Kudo</feedbackType>
+		</feedback>
+
+		<feedback>
+			<description>Didnt present in time to meetings</description>
+			<observee>samus.aran@example.com</observee>
+			<observer>friedrich.gauss@example.com</observer>
+			<relatedProject>Barbarossa</relatedProject>
+			<feedbackType>Warning</feedbackType>
+		</feedback>
+
+		<feedback>
+			<description>Bad communication</description>
+			<observee>leonhard.euler@example.com</observee>
+			<observer>joseph.lagrange@example.com</observer>
+			<relatedProject>Barbarossa</relatedProject>
+			<feedbackType>Warning</feedbackType>
+		</feedback>
+
+		<feedback>
+			<description>Ate all the pizza</description>
+			<observee>james.moriarty@example.com</observee>
+			<observer>keira.priestley@example.com</observer>
+			<relatedProject>Overlord</relatedProject>
+			<feedbackType>Warning</feedbackType>
+		</feedback>
+
+	</feedbacks>
 
 	<termsOfServiceVersions>
         <termsOfService>

@@ -5,8 +5,13 @@ import cr.talent.core.security.technicalResource.service.TechnicalResourceServic
 import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
 import cr.talent.core.capability.service.CapabilityService;
-
-
+import cr.talent.core.educationRecord.service.EducationRecordService;
+import cr.talent.core.organizationSkill.service.OrganizationSkillService;
+import cr.talent.core.organizationSkillCategory.service.OrganizationSkillCategoryService;
+import cr.talent.core.projectPosition.service.ProjectPositionService;
+import cr.talent.core.technicalPosition.service.TechnicalPositionService;
+import cr.talent.core.language.service.LanguageService;
+import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
