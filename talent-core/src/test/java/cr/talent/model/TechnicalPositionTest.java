@@ -1,7 +1,6 @@
 package cr.talent.model;
 
 import java.util.Date;
-import java.util.HashSet;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -22,8 +21,8 @@ public class TechnicalPositionTest{
 
     private static final String ID = "1234";
     private static final String ID2 = "12345";
-    private static final OrganizationCapabilityLevel ORGANIZATION_CAPABILITY_LEVEL = mock(OrganizationCapabilityLevel.class);
-    private static final OrganizationCapabilityLevel ORGANIZATION_CAPABILITY_LEVEL2 = mock(OrganizationCapabilityLevel.class);
+    private static final CapabilityLevel ORGANIZATION_CAPABILITY_LEVEL = mock(CapabilityLevel.class);
+    private static final CapabilityLevel ORGANIZATION_CAPABILITY_LEVEL2 = mock(CapabilityLevel.class);
 
     @Test
     public void coreTest() {
@@ -48,7 +47,7 @@ public class TechnicalPositionTest{
         technicalPosition.setInvitation(invitation);
         technicalPosition.setStartDate(startDate);
         technicalPosition.setEndDate(endDate);
-        technicalPosition.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        technicalPosition.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         // Verify the gets
         assertEquals(ID, technicalPosition.getId());
@@ -59,7 +58,7 @@ public class TechnicalPositionTest{
         assertEquals(invitation, technicalPosition.getInvitation());
         assertEquals(startDate, technicalPosition.getStartDate());
         assertEquals(endDate, technicalPosition.getEndDate());
-        assertEquals(ORGANIZATION_CAPABILITY_LEVEL, technicalPosition.getOrganizationCapabilityLevel());
+        assertEquals(ORGANIZATION_CAPABILITY_LEVEL, technicalPosition.getCapabilityLevel());
     }
 
     //ON EQUALS TESTS.
@@ -103,10 +102,10 @@ public class TechnicalPositionTest{
     @Test
     public void testEqualForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
-        technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        technicalPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         TechnicalPosition technicalPosition2 = new TechnicalPosition();
-        technicalPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        technicalPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         assertTrue(technicalPosition1.equals(technicalPosition2));
     }
@@ -114,10 +113,10 @@ public class TechnicalPositionTest{
     @Test
     public void testNonEqualForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
-        technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        technicalPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         TechnicalPosition technicalPosition2 = new TechnicalPosition();
-        technicalPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+        technicalPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
 
         assertFalse(technicalPosition1.equals(technicalPosition2));
     }
@@ -149,10 +148,10 @@ public class TechnicalPositionTest{
     @Test
     public void testEqualHashCodeForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
-        technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        technicalPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         TechnicalPosition technicalPosition2 = new TechnicalPosition();
-        technicalPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        technicalPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         assertTrue(technicalPosition1.hashCode() == technicalPosition2.hashCode());
     }
@@ -160,10 +159,10 @@ public class TechnicalPositionTest{
     @Test
     public void testNonEqualHashCodeForNonPersistentTechnicalPosition() {
         TechnicalPosition technicalPosition1 = new TechnicalPosition();
-        technicalPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        technicalPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         TechnicalPosition technicalPosition2 = new TechnicalPosition();
-        technicalPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+        technicalPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
 
         assertFalse(technicalPosition1.hashCode() == technicalPosition2.hashCode());
     }

@@ -42,7 +42,7 @@ public class OrganizationSkill extends Skill {
      * The organization capability levels that the organization skill belongs to.
      */
     @ManyToMany(mappedBy = "requiredSkills")
-    private Set<OrganizationCapabilityLevel> organizationCapabilityLevels;
+    private Set<CapabilityLevel> capabilityLevels;
 
     public OrganizationSkill(){}
 
@@ -70,11 +70,11 @@ public class OrganizationSkill extends Skill {
         this.invitations = invitations;
     }
 
-    public Set<OrganizationCapabilityLevel> getOrganizationCapabilityLevels() {
-        return organizationCapabilityLevels;
+    public Set<CapabilityLevel> getCapabilityLevels() {
+        return capabilityLevels;
     }
 
-    public void setOrganizationCapabilityLevels(Set<OrganizationCapabilityLevel> organizationCapabilityLevels) {
-        this.organizationCapabilityLevels = organizationCapabilityLevels;
+    public void setCapabilityLevels(Set<CapabilityLevel> capabilityLevels) {
+        this.capabilityLevels = capabilityLevels;
     }
 }

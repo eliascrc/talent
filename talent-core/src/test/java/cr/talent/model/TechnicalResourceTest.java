@@ -36,12 +36,12 @@ public class TechnicalResourceTest {
     @Test
     public void coreTest() {
 
-        // Inheritted from BasicEntity
+        // Inherited from BasicEntity
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
 
-        // Inheritted from User
+        // Inherited from User
         String firstName = "firstName";
         String lastName = "lastName";
         boolean enabled = true;
@@ -60,7 +60,6 @@ public class TechnicalResourceTest {
         Language language = mock(Language.class);
         String timeZone = "CST";
         int levelAssessmentTimeGap = 5;
-        OrganizationCapabilityLevel organizationCapabilityLevel = mock(OrganizationCapabilityLevel.class);
         TwoStepVerification twoStepVerification = mock(TwoStepVerification.class);
 
         //Verify the constructor
@@ -93,7 +92,6 @@ public class TechnicalResourceTest {
         technicalResource.setLanguage(language);
         technicalResource.setTimeZone(timeZone);
         technicalResource.setLevelAssessmentTimeGap(levelAssessmentTimeGap);
-        technicalResource.setOrganizationCapabilityLevel(organizationCapabilityLevel);
         technicalResource.setTwoStepVerification(twoStepVerification);
         technicalResource.setSkills(new HashSet<>());
         technicalResource.setEducationRecords(new HashSet<>());
@@ -132,7 +130,6 @@ public class TechnicalResourceTest {
         assertEquals(language, technicalResource.getLanguage());
         assertEquals(timeZone, technicalResource.getTimeZone());
         assertEquals(levelAssessmentTimeGap, technicalResource.getLevelAssessmentTimeGap());
-        assertEquals(organizationCapabilityLevel, technicalResource.getOrganizationCapabilityLevel());
         assertEquals(twoStepVerification, technicalResource.getTwoStepVerification());
         assertNotNull(technicalResource.getAuthorities());
         assertNotNull(technicalResource.getEducationRecords());

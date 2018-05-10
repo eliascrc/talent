@@ -1,7 +1,6 @@
 package cr.talent.model;
 
 import java.util.Date;
-import java.util.HashSet;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -22,8 +21,8 @@ public class JobPositionTest{
 
     private static final String ID = "1234";
     private static final String ID2 = "12345";
-    private static final OrganizationCapabilityLevel ORGANIZATION_CAPABILITY_LEVEL = mock(OrganizationCapabilityLevel.class);
-    private static final OrganizationCapabilityLevel ORGANIZATION_CAPABILITY_LEVEL2 = mock(OrganizationCapabilityLevel.class);
+    private static final CapabilityLevel ORGANIZATION_CAPABILITY_LEVEL = mock(CapabilityLevel.class);
+    private static final CapabilityLevel ORGANIZATION_CAPABILITY_LEVEL2 = mock(CapabilityLevel.class);
 
     @Test
     public void coreTest() {
@@ -47,7 +46,7 @@ public class JobPositionTest{
         jobPosition.setStartDate(startDate);
         jobPosition.setEndDate(endDate);
         jobPosition.setInvitation(invitation);
-        jobPosition.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        jobPosition.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
         jobPosition.setTechnicalResource(technicalResource);
 
         // Verify the gets
@@ -58,7 +57,7 @@ public class JobPositionTest{
         assertEquals(startDate, jobPosition.getStartDate());
         assertEquals(endDate, jobPosition.getEndDate());
         assertEquals(invitation, jobPosition.getInvitation());
-        assertEquals(ORGANIZATION_CAPABILITY_LEVEL, jobPosition.getOrganizationCapabilityLevel());
+        assertEquals(ORGANIZATION_CAPABILITY_LEVEL, jobPosition.getCapabilityLevel());
         assertEquals(technicalResource, jobPosition.getTechnicalResource());
     }
 
@@ -105,10 +104,10 @@ public class JobPositionTest{
     @Test
     public void testEqualForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
-        jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        jobPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         JobPosition jobPosition2 = new JobPosition();
-        jobPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        jobPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         assertTrue(jobPosition1.equals(jobPosition2));
     }
@@ -125,10 +124,10 @@ public class JobPositionTest{
     @Test
     public void testNonEqualForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
-        jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        jobPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         JobPosition jobPosition2 = new JobPosition();
-        jobPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+        jobPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
 
         assertFalse(jobPosition1.equals(jobPosition2));
     }
@@ -170,10 +169,10 @@ public class JobPositionTest{
     @Test
     public void testEqualHashCodeForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
-        jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        jobPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         JobPosition jobPosition2 = new JobPosition();
-        jobPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        jobPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         assertTrue(jobPosition1.hashCode() == jobPosition2.hashCode());
     }
@@ -181,10 +180,10 @@ public class JobPositionTest{
     @Test
     public void testNonEqualHashCodeForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
-        jobPosition1.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+        jobPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
 
         JobPosition jobPosition2 = new JobPosition();
-        jobPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+        jobPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
 
         assertFalse(jobPosition1.hashCode() == jobPosition2.hashCode());
     }
