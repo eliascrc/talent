@@ -65,9 +65,9 @@ public class TwoStepVerificationTest {
     public void testEqualForDifferentClass() {
         TwoStepVerification twoStepVerification1 = new TwoStepVerification();
 
-        Date date = new Date();
+        Image image= new Image();
 
-        assertFalse(twoStepVerification1.equals(date));
+        assertFalse(twoStepVerification1.equals(image));
     }
 
     @Test

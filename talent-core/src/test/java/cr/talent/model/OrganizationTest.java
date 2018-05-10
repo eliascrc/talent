@@ -97,9 +97,9 @@ public class OrganizationTest {
     public void testEqualForDifferentClass() {
         Organization organization = new Organization();
 
-        Date date = new Date();
+        Image image= new Image();
 
-        assertFalse(organization.equals(date));
+        assertFalse(organization.equals(image));
     }
 
     @Test

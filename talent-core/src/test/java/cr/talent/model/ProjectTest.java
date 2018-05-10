@@ -189,16 +189,6 @@ public class ProjectTest{
     }
 
     @Test
-    public void testNonEqualForNonPersistentProjectNullName() {
-        Project project = new Project();
-
-        Project project2 = new Project();
-        project2.setName(NAME2);
-
-        assertFalse(project.equals(project2));
-    }
-
-    @Test
     public void testNonEqualForNonPersistentProjectNullOrganization() {
         Project project = new Project();
 

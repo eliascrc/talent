@@ -69,9 +69,9 @@ public class PrivacyPolicyTest {
     public void testEqualForDifferentClass() {
         PrivacyPolicy privacyPolicy1 = new PrivacyPolicy();
 
-        Date date = new Date();
+        Image image= new Image();
 
-        assertFalse(privacyPolicy1.equals(date));
+        assertFalse(privacyPolicy1.equals(image));
     }
 
     @Test

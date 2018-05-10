@@ -73,9 +73,9 @@ public class EmergencyContactTest {
     public void testEqualForDifferentClass() {
         EmergencyContact emergencyContact1 = new EmergencyContact();
 
-        Date date = new Date();
+        Image image= new Image();
 
-        assertFalse(emergencyContact1.equals(date));
+        assertFalse(emergencyContact1.equals(image));
     }
 
     @Test

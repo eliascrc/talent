@@ -65,9 +65,9 @@ public class CareerPathTest {
     public void testEqualForDifferentObject() {
         CareerPath careerPath = new CareerPath();
 
-        Date date= new Date();
+        Image image= new Image();
 
-        assertFalse(careerPath.equals(date));
+        assertFalse(careerPath.equals(image));
     }
 
 

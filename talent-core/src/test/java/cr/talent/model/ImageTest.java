@@ -59,9 +59,9 @@ public class ImageTest {
     public void testEqualForDifferentClass() {
         Image image = new Image();
 
-        Date date = new Date();
+        Warning warning = new Warning();
 
-        assertFalse(image.equals(date));
+        assertFalse(image.equals(warning));
     }
 
     @Test

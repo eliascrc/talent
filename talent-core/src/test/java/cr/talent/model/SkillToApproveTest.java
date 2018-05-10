@@ -63,9 +63,9 @@ public class SkillToApproveTest {
     public void testEqualForDifferentClass() {
         SkillToApprove skillToApprove1 = new SkillToApprove();
 
-        Date date = new Date();
+        Image image= new Image();
 
-        assertFalse(skillToApprove1.equals(date));
+        assertFalse(skillToApprove1.equals(image));
     }
 
     @Test

@@ -99,6 +99,7 @@ public class TechnicalResourceTest {
         technicalResource.setObservations(new HashSet<>());
         technicalResource.setEmergencyContacts(new HashSet<>());
         technicalResource.setMadeKudo(new HashSet<>());
+        technicalResource.setLeadPositions(new HashSet<>());
 
 
         // Verify the gets
@@ -138,6 +139,7 @@ public class TechnicalResourceTest {
         assertNotNull(technicalResource.getEmergencyContacts());
         assertNotNull(technicalResource.getMadeKudo());
         assertNotNull(technicalResource.getSkills());
+        assertNotNull(technicalResource.getLeadPositions());
 
 
     }
@@ -154,8 +156,9 @@ public class TechnicalResourceTest {
     public void testEqualForDifferentClass() {
         TechnicalResource technicalResource = new TechnicalResource();
 
+        Image image= new Image();
 
-        assertFalse(technicalResource.equals(new Object()));
+        assertFalse(technicalResource.equals(image));
     }
 
     @Test

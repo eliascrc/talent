@@ -97,7 +97,13 @@ public class CapabilityLevel extends BasicEntity {
         this.hierarchyPosition = hierarchyPosition;
     }
 
+    public Capability getCapability() {
+        return capability;
+    }
 
+    public void setCapability(Capability capability) {
+        this.capability = capability;
+    }
 
     public Set<Project> getProject() {
         return projects;

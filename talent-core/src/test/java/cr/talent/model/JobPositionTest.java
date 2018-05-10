@@ -74,9 +74,9 @@ public class JobPositionTest{
     public void testEqualForDifferentClass() {
         JobPosition jobPosition1 = new JobPosition();
 
-        Date date = new Date();
+        Image image= new Image();
 
-        assertFalse(jobPosition1.equals(date));
+        assertFalse(jobPosition1.equals(image));
     }
 
     @Test
@@ -137,7 +137,7 @@ public class JobPositionTest{
         JobPosition jobPosition1 = new JobPosition();
 
         JobPosition jobPosition2 = new JobPosition();
-        jobPosition2.setOrganizationCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+        jobPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
 
         assertFalse(jobPosition1.equals(jobPosition2));
     }

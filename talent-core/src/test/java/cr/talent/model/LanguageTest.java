@@ -62,9 +62,9 @@ public class LanguageTest {
     public void testEqualForDifferentClass() {
         Language language1 = new Language();
 
-        Date date = new Date();
+        Image image= new Image();
 
-        assertFalse(language1.equals(date));
+        assertFalse(language1.equals(image));
     }
 
     @Test
