@@ -35,12 +35,18 @@ public class CapabilityServiceImpl extends CrudServiceImpl<Capability, String> i
     public String createOrganizationCapability(Capability organizationCapability)
             throws NullOrganizationInOrganizationCapabilityException, AlreadyCreatedOrganizationCapabilityException {
 
+        final String nullOrganizationInOrganizationCapabilityExceptionMsg = "An organization capability with the name " +
+                organizationCapability.getName() + " is tried to be created without a related organization.";
+        final String alreadyCreatedOrganizationCapabilityExceptionMsg = "An organization capability with the name \"" +
+                organizationCapability.getName() + "\" is already registered within the organization \""
+                + organizationCapability.getOrganization().getName() + "\"";
+
         if (organizationCapability.getOrganization() == null)
-            throw new NullOrganizationInOrganizationCapabilityException();
+            throw new NullOrganizationInOrganizationCapabilityException(nullOrganizationInOrganizationCapabilityExceptionMsg);
 
         String organizationId = organizationCapability.getOrganization().getId();
         if (this.capabilityDao.getOrganizationCapabilityByName(organizationId, organizationCapability.getName()) != null)
-            throw new AlreadyCreatedOrganizationCapabilityException();
+            throw new AlreadyCreatedOrganizationCapabilityException(alreadyCreatedOrganizationCapabilityExceptionMsg);
 
         return this.capabilityDao.create(organizationCapability);
     }
@@ -52,11 +58,16 @@ public class CapabilityServiceImpl extends CrudServiceImpl<Capability, String> i
     public String createPredefinedCapability(Capability predefinedCapability)
             throws NotNullOrganizationInPredefinedCapabilityException, AlreadyCreatedPredefinedCapabilityException {
 
+        final String notNullOrganizationInPredefinedCapabilityExceptionMsg = "A predefined capability with the name " +
+                predefinedCapability.getName() + " is tried to be created with a not null organization.";
+        final String alreadyCreatedPredefinedCapabilityExceptionMsg = "A predefined capability with the name \"" +
+                predefinedCapability.getName() + "\" is already registered within the system";
+
         if (predefinedCapability.getOrganization() != null)
-            throw new NotNullOrganizationInPredefinedCapabilityException();
+            throw new NotNullOrganizationInPredefinedCapabilityException(notNullOrganizationInPredefinedCapabilityExceptionMsg);
 
         if (this.capabilityDao.getPredefinedCapabilityByName(predefinedCapability.getName()) != null)
-            throw new AlreadyCreatedPredefinedCapabilityException();
+            throw new AlreadyCreatedPredefinedCapabilityException(alreadyCreatedPredefinedCapabilityExceptionMsg);
 
         return this.capabilityDao.create(predefinedCapability);
     }

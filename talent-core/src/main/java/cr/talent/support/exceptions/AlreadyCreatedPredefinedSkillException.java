@@ -7,4 +7,38 @@ package cr.talent.support.exceptions;
  * @author Elías Calderón
  */
 public class AlreadyCreatedPredefinedSkillException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor
+     */
+    public AlreadyCreatedPredefinedSkillException() {
+    }
+
+    /**
+     * Creates a new exception with the specified message
+     * @param message the message to display
+     */
+    public AlreadyCreatedPredefinedSkillException(String message) {
+        super(message);
+    }
+
+    /**
+     * Creates a new exception with the specified wrapped exception
+     * @param cause the cause of the exception
+     */
+    public AlreadyCreatedPredefinedSkillException(Throwable cause) {
+        super(cause);
+    }
+
+    /**
+     * Creates a new exception with the specified message and wrapped exception
+     * @param message the message to display
+     * @param cause the cause of the exception
+     */
+    public AlreadyCreatedPredefinedSkillException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

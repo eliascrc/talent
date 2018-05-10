@@ -33,8 +33,11 @@ public class SkillServiceImpl extends CrudServiceImpl<Skill, String> implements 
     public String createPredefinedSkill(PredefinedSkill predefinedSkill)
             throws AlreadyCreatedPredefinedSkillException {
 
+        final String alreadyCreatedPredefinedSkillExceptionMsg = "The predefined skill with name " +
+                predefinedSkill.getName() + " has already been created within the system.";
+
         if (this.skillDao.getPredefinedSkillByName(predefinedSkill.getName()) != null)
-            throw new AlreadyCreatedPredefinedSkillException();
+            throw new AlreadyCreatedPredefinedSkillException(alreadyCreatedPredefinedSkillExceptionMsg);
 
         return this.skillDao.create(predefinedSkill);
     }
