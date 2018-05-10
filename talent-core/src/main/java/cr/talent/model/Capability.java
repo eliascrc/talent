@@ -10,14 +10,13 @@ import java.util.Set;
  * @author Elías Calderón
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "capability")
-public abstract class Capability extends BasicEntity {
+public class Capability extends BasicEntity {
 
     /**
      * The name of the capability.
      */
-    @Column (name = "name", nullable = false)
+    @Column (nullable = false)
     private String name;
 
     /**
@@ -27,6 +26,20 @@ public abstract class Capability extends BasicEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "capability")
     private Set<CapabilityLevel> levelHierarchy;
 
+    /**
+     * The associated technologies for the respective capability
+     */
+    @ElementCollection
+    private Set<String> associatedTechnologies;
+
+    /**
+     * The organization of the capability. If it points no organization, the capability is taken as a
+     * predefined capability.
+     */
+    @ManyToOne
+    @JoinColumn (name = "organization_id")
+    private Organization organization;
+
     public Capability(){}
 
     @Override
@@ -34,7 +47,8 @@ public abstract class Capability extends BasicEntity {
         boolean result = false;
         if ( o instanceof Capability){
             Capability capability = (Capability) o;
-            result = (this.name == null ? capability.getName() == null : this.name.equals(capability.getName()));
+            result = ((this.name == null ? capability.getName() == null : this.name.equals(capability.getName()))
+                    && (this.organization == null ? capability.getOrganization() == null : this.organization.equals(capability.getOrganization())));
         }
         return result;
     }
@@ -43,6 +57,7 @@ public abstract class Capability extends BasicEntity {
     protected int onHashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        result = prime * result + (this.organization == null ? 0 : this.organization.hashCode());
         return result;
     }
 
@@ -60,5 +75,21 @@ public abstract class Capability extends BasicEntity {
 
     public void setLevelHierarchy(Set<CapabilityLevel> levelHierarchy) {
         this.levelHierarchy = levelHierarchy;
+    }
+
+    public Set<String> getAssociatedTechnologies() {
+        return associatedTechnologies;
+    }
+
+    public void setAssociatedTechnologies(Set<String> associatedTechnologies) {
+        this.associatedTechnologies = associatedTechnologies;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 }

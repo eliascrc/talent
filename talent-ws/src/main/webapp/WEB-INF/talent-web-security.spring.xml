@@ -4,29 +4,37 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security.xsd">
+		http://www.springframework.org/schema/security/spring-security.xsd"
+       default-init-method="init">
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="technicalResourceAuthenticationProvider"/>
     </security:authentication-manager>
 
-    <security:http use-expressions="true" pattern="/**/*" auto-config="true">
-        <security:csrf disabled="true"></security:csrf>
-        <security:form-login login-processing-url="/ws/login" default-target-url="/ws/authenticated"
-                authentication-failure-url="/login?error" username-parameter="username"
-                password-parameter="password" />
-        <security:intercept-url pattern="/ws/admin/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')"/>
+    <security:http use-expressions="true" pattern="/**/*" auto-config="false" entry-point-ref="customAuthEntryPoint">
+        <security:form-login login-processing-url="/ws/login" authentication-success-handler-ref="successLoginHandler"
+                             authentication-failure-handler-ref="loginFailureHandler" username-parameter="username"
+                             password-parameter="password" />
+        <security:logout logout-url="/ws/logout" success-handler-ref="logoutHandler"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
+        <security:intercept-url pattern="/ws/admin/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')"/>
         <security:intercept-url pattern="/ws/content/**/*" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/passwordReset/new/*" access="isAnonymous()" method="GET"/>
         <security:intercept-url pattern="/ws/passwordReset/**/*" access="isAnonymous()" method="POST"/>
-        <security:intercept-url pattern="/ws/resource/**/*" access="isAnonymous()" method="POST"/>
-        <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
+        <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login/token" access="isAnonymous()"/>
+        <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/authenticated" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/loggedIn" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
+        <security:access-denied-handler ref="accessDeniedHandler"/>
     </security:http>
+
+    <bean id="customAuthEntryPoint" class="cr.talent.ws.rest.support.security.CustomAuthenticationEntryPoint">
+        <property name="realmName" value="talent.cr"/>
+    </bean>
+
+    <bean id="accessDeniedHandler" class="cr.talent.ws.rest.support.security.UnauthorizedAccessHandler"/>
 
 </beans>
