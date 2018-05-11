@@ -1,5 +1,10 @@
 package cr.talent.support;
 
+import cr.talent.model.User;
+import cr.talent.support.exceptions.NoLoggedInUserException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+
 /**
  * Class which provides security utils such as validating a user's password.
  *
@@ -46,6 +51,22 @@ public class SecurityUtils {
             throw new IllegalArgumentException("Invalid password, the password should at least have a lower case letter.");
         if (noSymbol)
             throw new IllegalArgumentException("Invalid password, the password should at least have a symbol.");
+    }
+
+    /**
+     * Gets the currently logged in User via the SecurityContext which returns a principal object that can be casted
+     * to User.
+     *
+     * @return the User currently logged in or null if there's no currently logged in user
+     */
+    public static User getLoggedInUser() {
+        final String noLoggedInUser = "There is no currently loggedin user.";
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (!(principal instanceof User))
+            throw new NoLoggedInUserException(noLoggedInUser);
+
+        return (User)principal;
     }
 
 }

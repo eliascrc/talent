@@ -1,6 +1,10 @@
 package cr.talent.support.flexjson;
 
+import cr.talent.model.User;
 import flexjson.JSONSerializer;
+import flexjson.transformer.BooleanTransformer;
+import flexjson.transformer.DateTransformer;
+import flexjson.transformer.EnumTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -102,6 +106,38 @@ public class JSONSerializerBuilder {
         serializer.setExcludes(getGlobalExcludes());
 
         logger.trace("Basic Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Gets a JSONSerializer to use in order to obtain the JSON of a User's information.
+     *
+     * @return the JSONSerializer to be used to serialize User.
+     */
+    public static JSONSerializer getUserSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
+        tempIncludes.add("username");
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("enabled");
+        tempIncludes.add("passwordNeedsChange");
+        tempIncludes.add("lastLoginTimeStamp");
+        tempIncludes.add("status");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(User.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new BooleanTransformer(), "enabled", "passwordNeedsChange");
+        serializer.transform(new EnumTransformer(), "status");
+
+        // logs the creation of the serializer
+        logger.trace("TermsOfService Serializer {} created", serializer.toString());
         return serializer;
     }
 

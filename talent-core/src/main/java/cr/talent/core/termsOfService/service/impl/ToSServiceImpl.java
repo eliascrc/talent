@@ -32,8 +32,10 @@ public class ToSServiceImpl extends CrudServiceImpl<TermsOfService, String> impl
 
     @Override
     public TermsOfService getActiveTermsOfService() {
+        final String noActiveTermsOfServie = "There is no currently active terms of service content";
+
         if(this.toSDao.getActiveTermsOfService() == null)
-            throw new NoActiveTermsOfServiceException();
+            throw new NoActiveTermsOfServiceException(noActiveTermsOfServie);
 
         return this.toSDao.getActiveTermsOfService();
     }

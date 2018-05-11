@@ -1,24 +1,20 @@
 package cr.talent.support.exceptions;
 
-/**
- * A runtime exception that is thrown when the {@link cr.talent.core.termsOfService.service.ToSService} tries to
- * retrieve a Terms Of Service and there is no currently active content.
- */
-public class NoActiveTermsOfServiceException extends RuntimeException {
+public class NoLoggedInUserException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public NoActiveTermsOfServiceException() {
+    public NoLoggedInUserException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public NoActiveTermsOfServiceException(String message) {
+    public NoLoggedInUserException(String message) {
         super(message);
     }
 
@@ -26,7 +22,7 @@ public class NoActiveTermsOfServiceException extends RuntimeException {
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public NoActiveTermsOfServiceException(Throwable cause) {
+    public NoLoggedInUserException(Throwable cause) {
         super(cause);
     }
 
@@ -35,7 +31,7 @@ public class NoActiveTermsOfServiceException extends RuntimeException {
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public NoActiveTermsOfServiceException(String message, Throwable cause) {
+    public NoLoggedInUserException(String message, Throwable cause) {
         super(message, cause);
     }
 }
