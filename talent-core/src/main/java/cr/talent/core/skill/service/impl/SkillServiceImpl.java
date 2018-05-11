@@ -30,8 +30,7 @@ public class SkillServiceImpl extends CrudServiceImpl<Skill, String> implements 
      * @see cr.talent.core.skill.service.SkillService#createPredefinedSkill(PredefinedSkill)
      */
     @Override
-    public String createPredefinedSkill(PredefinedSkill predefinedSkill)
-            throws AlreadyCreatedPredefinedSkillException {
+    public String createPredefinedSkill(PredefinedSkill predefinedSkill) {
 
         final String alreadyCreatedPredefinedSkillExceptionMsg = "The predefined skill with name " +
                 predefinedSkill.getName() + " has already been created within the system.";

@@ -32,8 +32,7 @@ public class CapabilityServiceImpl extends CrudServiceImpl<Capability, String> i
      * @see cr.talent.core.capability.service.CapabilityService#createOrganizationCapability(Capability)
      */
     @Override
-    public String createOrganizationCapability(Capability organizationCapability)
-            throws NullOrganizationInOrganizationCapabilityException, AlreadyCreatedOrganizationCapabilityException {
+    public String createOrganizationCapability(Capability organizationCapability) {
 
         final String nullOrganizationInOrganizationCapabilityExceptionMsg = "An organization capability with the name " +
                 organizationCapability.getName() + " is tried to be created without a related organization.";
@@ -55,8 +54,7 @@ public class CapabilityServiceImpl extends CrudServiceImpl<Capability, String> i
      * @see cr.talent.core.capability.service.CapabilityService#createPredefinedCapability(Capability)
      */
     @Override
-    public String createPredefinedCapability(Capability predefinedCapability)
-            throws NotNullOrganizationInPredefinedCapabilityException, AlreadyCreatedPredefinedCapabilityException {
+    public String createPredefinedCapability(Capability predefinedCapability) {
 
         final String notNullOrganizationInPredefinedCapabilityExceptionMsg = "A predefined capability with the name " +
                 predefinedCapability.getName() + " is tried to be created with a not null organization.";
