@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("/organizationCapability")
+@Path("/organization/capability")
 public class OrganizationCapabilityResource {
 
     @Autowired

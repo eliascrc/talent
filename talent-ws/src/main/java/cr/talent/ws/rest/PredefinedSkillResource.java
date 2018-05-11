@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("/predefinedSkill")
+@Path("/admin/skill")
 public class PredefinedSkillResource {
 
     @Autowired

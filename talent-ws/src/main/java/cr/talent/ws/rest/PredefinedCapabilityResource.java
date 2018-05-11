@@ -20,7 +20,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("/predefinedCapability")
+@Path("/admin/capability")
 public class PredefinedCapabilityResource {
 
     @Autowired

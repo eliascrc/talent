@@ -17,8 +17,6 @@
                              password-parameter="password" />
         <security:logout logout-url="/ws/logout" success-handler-ref="logoutHandler"/>
         <security:csrf disabled="true"/>
-        <security:intercept-url pattern="/ws/predefinedCapability/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')" method="POST"/>
-        <security:intercept-url pattern="/ws/predefinedSkill/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
         <security:intercept-url pattern="/ws/admin/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')"/>
