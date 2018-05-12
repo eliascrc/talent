@@ -22,7 +22,7 @@
         <property name="acquireIncrement" value="35"/>
         <property name="minPoolSize" value="3000"/>
         <property name="maxPoolSize" value="3000"/>
-        <property name="maxIdleTime" value="30000"/>
+        <property name="maxIdleTime" value="3000"/>
     </bean>
 
 
