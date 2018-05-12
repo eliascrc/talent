@@ -27,6 +27,6 @@ public interface PasswordResetRequestService extends CrudService<PasswordResetRe
      * @param token
      * @param newPassword
      */
-    boolean resetPassword (String token, String newPassword);
+    void resetPassword (String token, String newPassword);
 
 }

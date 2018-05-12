@@ -11,7 +11,6 @@ import javax.persistence.*;
  */
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "password_reset_request")
 public class PasswordResetRequest extends BasicEntity {
 

@@ -9,8 +9,7 @@ import cr.talent.support.dao.CrudDao;
  * @author María José Cubero.
  */
 
-public interface PasswordResetRequestDao extends CrudDao<PasswordResetRequest, String>
-{
+public interface PasswordResetRequestDao extends CrudDao<PasswordResetRequest, String>{
     /**
      * Retrieves the password reset request that corresponds to a token.
      * @return the password reset request.

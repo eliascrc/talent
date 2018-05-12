@@ -35,7 +35,7 @@ public class HibernatePasswordResetRequestDao extends HibernateCrudDao<PasswordR
 
     @Override
     public PasswordResetRequest findByEmail(String email) {
-        String hql = "FROM PasswordResetRequest WHERE email = ?1 AND isValid = '1'";
+        String hql = "FROM PasswordResetRequest WHERE email = ?1 AND isValid = 'true'";
         Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter(1, email);
 

@@ -1,6 +1,5 @@
 package cr.talent.core.passwordResetRequest.service.impl;
 
-import cr.talent.core.Email.BasicEmail.service.SendEmailService;
 import cr.talent.core.Email.PasswordResetEmail.service.PasswordResetEmailService;
 import cr.talent.core.passwordResetRequest.dao.PasswordResetRequestDao;
 import cr.talent.core.passwordResetRequest.service.PasswordResetRequestService;
@@ -66,15 +65,11 @@ public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequ
     @Override
     public boolean isTokenValid(String token){
         PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
-        if (passwordResetRequest == null ){
-            return false;
-        }
-        return passwordResetRequest.isValid();
+        return passwordResetRequest != null ? passwordResetRequest.isValid() : null;
     }
 
     @Override
-    public boolean resetPassword(String token , String newPassword){
-        boolean resetPassword = false;
+    public void resetPassword(String token , String newPassword){
         try{
             SecurityUtils.validatePassword(newPassword);
             if (this.isTokenValid(token)){
@@ -82,10 +77,9 @@ public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequ
                 TechnicalResource technicalResource =  passwordResetRequest.getTechnicalResource();
                 technicalResource.setPassword(this.passwordEncoder.encode(newPassword));
                 passwordResetRequest.setValid(false);
-                resetPassword= true;
             }
         }catch (Exception e){
+            e.printStackTrace();
         }
-        return resetPassword;
     }
 }

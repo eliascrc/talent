@@ -14,5 +14,5 @@ import cr.talent.model.PasswordResetRequest;
      * @param destinationEmail
      * @param passwordResetRequest
      */
-    public void sendPasswordResetMail(String destinationEmail, PasswordResetRequest passwordResetRequest);
+    void sendPasswordResetMail(String destinationEmail, PasswordResetRequest passwordResetRequest);
 }

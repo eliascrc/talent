@@ -9,7 +9,7 @@ import java.util.Map;
  *
  * @author María José Cubero.
  */
-public interface SendEmailService {
+public interface EmailSenderService {
 
     /**
      * Sends the forgot password email to a user that requests that action.
