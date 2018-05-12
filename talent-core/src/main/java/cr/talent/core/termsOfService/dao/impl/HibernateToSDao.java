@@ -7,12 +7,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
+import java.util.List;
 
 /**
- * Hibernate data access object implementation of {@link ToSDao} .
+ * Hibernate data access object implementation of {@link cr.talent.core.termsOfService.dao.ToSDao} .
  *
  * @author Josué León Sarkis
  */
@@ -30,16 +32,15 @@ public class HibernateToSDao extends HibernateCrudDao<TermsOfService, String> im
         setSessionFactory(sessionFactory);
     }
 
+    /**
+     * @see cr.talent.core.termsOfService.dao.ToSDao#getActiveTermsOfService()
+     */
     @Override
     public TermsOfService getActiveTermsOfService() {
-        TermsOfService termsOfService;
-        try {
-            Query query = super.getSessionFactory().getCurrentSession()
-                    .createQuery("FROM TermsOfService WHERE isActive = true");
-            termsOfService = (TermsOfService) query.getSingleResult();
-        } catch (NoResultException e) {
-            termsOfService = null;
-        }
-        return termsOfService;
+        Query query = super.getSessionFactory().getCurrentSession()
+                .createQuery("FROM TermsOfService WHERE isActive = true");
+        List<TermsOfService> termsOfServiceResult = (List<TermsOfService>) query.list();
+
+        return DataAccessUtils.singleResult(termsOfServiceResult);
     }
 }

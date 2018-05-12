@@ -13,8 +13,6 @@ import java.io.IOException;
  * A custom authentication failure handler that returns a HTTP code of 401 when the authentication fails.
  *
  * @author Rodrigo A. Bartels
- * @version 1.0
- * @since 5/28/12
  */
 @Component("loginFailureHandler")
 public class BasicAuthenticationFailureHandler implements AuthenticationFailureHandler {
