@@ -1,5 +1,4 @@
 /target/
-/{User.home}/
 *.iml
 .idea/
 /{User.home}/
