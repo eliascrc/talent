@@ -1,5 +1,8 @@
 package cr.talent.support.flexjson;
 
+import cr.talent.model.Image;
+import cr.talent.model.Organization;
+import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
 import flexjson.JSONSerializer;
 import flexjson.transformer.BooleanTransformer;
@@ -114,30 +117,50 @@ public class JSONSerializerBuilder {
      *
      * @return the JSONSerializer to be used to serialize User.
      */
-    public static JSONSerializer getUserSerializer() {
+    public static JSONSerializer getTechnicalResourceSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes = new LinkedList<>();
 
         excludes.addAll(getGlobalExcludes());
 
-        tempIncludes.add("username");
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("link");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Image.class, "profilePicture", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("uniqueIdentifier");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "organization", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
-        tempIncludes.add("enabled");
-        tempIncludes.add("passwordNeedsChange");
-        tempIncludes.add("lastLoginTimeStamp");
-        tempIncludes.add("status");
+        tempIncludes.add("isAdministrator");
 
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(User.class, "", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
 
-        serializer.transform(new BooleanTransformer(), "enabled", "passwordNeedsChange");
-        serializer.transform(new EnumTransformer(), "status");
+        serializer.transform(new BooleanTransformer(), "isAdministrator");
 
         // logs the creation of the serializer
         logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * TODO
+     * @return
+     */
+    public static JSONSerializer getSystemAdministratorSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
         return serializer;
     }
 

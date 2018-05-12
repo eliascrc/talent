@@ -1,10 +1,9 @@
 package cr.talent.ws.rest;
 
+import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
 import cr.talent.support.SecurityUtils;
-import cr.talent.support.exceptions.NoLoggedInUserException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +21,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("")
+@Path("/user")
 public class AuthenticationResource {
 
     /**
@@ -34,32 +33,28 @@ public class AuthenticationResource {
     @Path("/loggedIn")
     @Produces(MediaType.TEXT_PLAIN)
     public Response isLoggedIn() {
-        try{
-            SecurityUtils.getLoggedInUser();
+        if (SecurityUtils.getLoggedInUser() != null)
             return Response.ok().entity("true").build();
 
-        } catch(NoLoggedInUserException e) {
-            return Response.ok().entity("false").build();
-        }
+        return Response.ok().entity("false").build();
     }
 
     /**
-     * Gets the currently loggedin User and serializes its information to JSON.
+     * Gets the currently logged-in User, checks whether it is a TechnicalResource or SystemAdministrator and then
+     * serializes its information to JSON.
      *
-     * @return 200 with the loggedin User information in JSON if there's a loggedin user,
-     *          204 if there is no loggedin user
+     * @return 200 with the logged-in User information in JSON if there's a logged-in user
+     * 401 if there is no authenticated user
      */
     @GET
     @Path("/authenticated")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAuthenticatedUserInformation() {
-        try{
-            User user = SecurityUtils.getLoggedInUser();
-            return Response.ok().entity(JSONSerializerBuilder.getUserSerializer().serialize(user)).build();
+        User user = SecurityUtils.getLoggedInUser();
+        if (user instanceof TechnicalResource)
+            return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSerializer().serialize(user)).build();
 
-        } catch(NoLoggedInUserException e){
-            return Response.status(Response.Status.NO_CONTENT).build();
-        }
+        return Response.ok().entity(JSONSerializerBuilder.getSystemAdministratorSerializer().serialize(user)).build();
     }
 
 }
