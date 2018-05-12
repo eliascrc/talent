@@ -1,7 +1,10 @@
 package cr.talent.support.flexjson;
 
 import cr.talent.model.Organization;
+import cr.talent.model.Image;
+import cr.talent.model.TechnicalResource;
 import flexjson.JSONSerializer;
+import flexjson.transformer.BooleanTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -135,4 +138,60 @@ public class JSONSerializerBuilder {
 
         return serializer;
     }
+
+    /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of a User's information.
+     *
+     * @return the JSONSerializer to be used to serialize User.
+     */
+    public static JSONSerializer getTechnicalResourceSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("link");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Image.class, "profilePicture", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("uniqueIdentifier");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "organization", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("isAdministrator");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new BooleanTransformer(), "isAdministrator");
+
+        // logs the creation of the serializer
+        logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * TODO implement the method to return a serializer for a SystemAdministrator, in order to obtain the JSON of its
+     * main information with its respective includes and excludes
+     *
+     * @return an instance of JSONSerializer to serialize SystemAdministrator objects
+     */
+    public static JSONSerializer getSystemAdministratorSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
+        return serializer;
+    }
+
+
 }

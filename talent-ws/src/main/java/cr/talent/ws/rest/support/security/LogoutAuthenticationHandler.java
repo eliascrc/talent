@@ -13,8 +13,6 @@ import java.io.IOException;
  * A custom logout authentication handler that returns a HTTP code of 200 when the logout is completed.
  *
  * @author Rodrigo A. Bartels
- * @version 1.0
- * @since 5/28/12
  */
 @Component("logoutHandler")
 public class LogoutAuthenticationHandler implements LogoutSuccessHandler {

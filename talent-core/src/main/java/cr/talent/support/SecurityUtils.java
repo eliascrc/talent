@@ -1,5 +1,8 @@
 package cr.talent.support;
 
+import cr.talent.model.User;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 /**
  * Class which provides security utils such as validating a user's password.
  *
@@ -10,6 +13,7 @@ public class SecurityUtils {
     /**
      * Method which validades a user's password by checking it is at least 8 characters long,
      * it has at least one: number, upper case letter, lower case letter and symbol.
+     *
      * @param password The user's password to validate
      */
     public static void validatePassword(String password) {
@@ -46,6 +50,23 @@ public class SecurityUtils {
             throw new IllegalArgumentException("Invalid password, the password should at least have a lower case letter.");
         if (noSymbol)
             throw new IllegalArgumentException("Invalid password, the password should at least have a symbol.");
+    }
+
+    /**
+     * Gets the currently logged in User via the SecurityContext which returns a principal object that can be casted
+     * to User.
+     *
+     * @return the User currently logged in or null if there's no currently logged in user
+     */
+    public static User getLoggedInUser() {
+        if (SecurityContextHolder.getContext().getAuthentication() != null) {
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+            if ((principal instanceof User))
+                return (User) principal;
+        }
+
+        return null;
     }
 
 }
