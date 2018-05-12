@@ -38,7 +38,6 @@ public class TermsOfServiceResource {
      * 204 if there is no currently active terms of service content
      */
     @GET
-    @Path("/get")
     @Produces(MediaType.TEXT_HTML)
     public Response processToSRequest() {
         try {

@@ -151,8 +151,10 @@ public class JSONSerializerBuilder {
     }
 
     /**
-     * TODO
-     * @return
+     * TODO implement the method to return a serializer for a SystemAdministrator, in order to obtain the JSON of its
+     * main information with its respective includes and excludes
+     *
+     * @return an instance of JSONSerializer to serialize SystemAdministrator objects
      */
     public static JSONSerializer getSystemAdministratorSerializer() {
         JSONSerializer serializer = getBasicSerializer();
