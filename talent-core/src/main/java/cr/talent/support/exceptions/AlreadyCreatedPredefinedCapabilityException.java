@@ -1,26 +1,26 @@
 package cr.talent.support.exceptions;
 
 /**
- * A runtime exception that is thrown when the {@link cr.talent.core.organization.service.OrganizationService}
- * tries to persist an Organization with a unique identifier that is already registered within the system.
+ * A runtime exception that is thrown when the {@link cr.talent.core.capability.service.CapabilityService}
+ * tries to persist a Predefined Capability with a name that is already registered within the system.
  *
  * @author Elías Calderón
  */
-public class AlreadyCreatedOrganizationException extends RuntimeException {
+public class AlreadyCreatedPredefinedCapabilityException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public AlreadyCreatedOrganizationException() {
+    public AlreadyCreatedPredefinedCapabilityException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public AlreadyCreatedOrganizationException(String message) {
+    public AlreadyCreatedPredefinedCapabilityException(String message) {
         super(message);
     }
 
@@ -28,7 +28,7 @@ public class AlreadyCreatedOrganizationException extends RuntimeException {
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public AlreadyCreatedOrganizationException(Throwable cause) {
+    public AlreadyCreatedPredefinedCapabilityException(Throwable cause) {
         super(cause);
     }
 
@@ -37,8 +37,9 @@ public class AlreadyCreatedOrganizationException extends RuntimeException {
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public AlreadyCreatedOrganizationException(String message, Throwable cause) {
+    public AlreadyCreatedPredefinedCapabilityException(String message, Throwable cause) {
         super(message, cause);
     }
+
 
 }

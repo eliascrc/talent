@@ -30,7 +30,7 @@ public class Organization extends BasicEntity {
      * Flag that indicates if the organization wants login with two step verification.
      */
     @Column (name = "two_step_verification")
-    private Boolean twoStepVerification;
+    private boolean twoStepVerification;
 
     /**
      * The number of total technical resources involved in the organization.
@@ -142,11 +142,11 @@ public class Organization extends BasicEntity {
         this.name = name;
     }
 
-    public Boolean getTwoStepVerification() {
+    public boolean getTwoStepVerification() {
         return twoStepVerification;
     }
 
-    public void setTwoStepVerification(Boolean twoStepVerification) {
+    public void setTwoStepVerification(boolean twoStepVerification) {
         this.twoStepVerification = twoStepVerification;
     }
 

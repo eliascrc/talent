@@ -35,11 +35,13 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     /**
      * @see cr.talent.core.organization.service.OrganizationService#createOrganization(Organization)
      */
-    public String createOrganization(Organization organization)
-            throws AlreadyCreatedOrganizationException {
+    public String createOrganization(Organization organization) {
+
+        final String alreadyCreatedOrganizationExceptionMsg = "The organization with unique identifier \"" +
+                organization.getUniqueIdentifier() + "\" has already been created within the system.";
 
         if (this.organizationDao.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier()) != null)
-            throw new AlreadyCreatedOrganizationException();
+            throw new AlreadyCreatedOrganizationException(alreadyCreatedOrganizationExceptionMsg);
 
         return this.organizationDao.create(organization);
     }

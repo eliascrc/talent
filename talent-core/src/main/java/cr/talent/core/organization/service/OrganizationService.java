@@ -22,8 +22,7 @@ public interface OrganizationService extends CrudService<Organization, String> {
      * Persists an organization with the respective business logic.
      * @param organization the organization to create.
      * @return The organization's id.
-     * @throws AlreadyCreatedOrganizationException if the organization's unique identifier is already in the system.
      */
-    String createOrganization(Organization organization) throws AlreadyCreatedOrganizationException;
+    String createOrganization(Organization organization);
 
 }
