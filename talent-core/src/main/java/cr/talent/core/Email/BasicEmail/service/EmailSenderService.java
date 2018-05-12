@@ -16,5 +16,5 @@ public interface SendEmailService {
      * @param email
      * @param model
      */
-    public void sendEmail(Email email, Map< String, Object> model);
+    void sendEmail(Email email, Map< String, Object> model);
 }

@@ -40,8 +40,13 @@ public class SendEmailImpl implements SendEmailService{
             mimeMessageHelper.setFrom(email.getFrom());
             mimeMessageHelper.setTo(email.getTo());
 
-            String templateContent= this.geContentFromTemplate(model, email.getFileName());
-            email.setContent(templateContent);
+            StringBuffer templateContent = new StringBuffer();
+            try {
+                templateContent.append(VelocityEngineUtils.mergeTemplateIntoString(this.velocityEngine, email.getFileName(), model));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            email.setContent(templateContent.toString());
 
             mimeMessageHelper.setText(email.getContent(), true);
         } catch (MessagingException e) {
@@ -49,22 +54,6 @@ public class SendEmailImpl implements SendEmailService{
         }
 
         javaMailSender.send(mimeMessageHelper.getMimeMessage());
-    }
-
-    /**
-     * Retrieves the text from the email's html file.
-     * @param model
-     * @param filename
-     * @return
-     */
-    public String geContentFromTemplate(Map <String, Object> model, String filename) {
-        StringBuffer content = new StringBuffer();
-        try {
-            content.append(VelocityEngineUtils.mergeTemplateIntoString(this.velocityEngine, filename, model));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return content.toString();
     }
 }
 
