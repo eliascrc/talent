@@ -29,8 +29,8 @@ public class LeadPosition extends BasicEntity {
     /**
      * Indicates if the position is currently active.
      */
-    @Column(nullable = false)
-    private Boolean active;
+    @Column(name = "active", nullable = false)
+    private boolean active;
 
     /**
      * The project of the lead position.
@@ -99,11 +99,11 @@ public class LeadPosition extends BasicEntity {
         this.lead = lead;
     }
 
-    public Boolean getActive() {
+    public boolean getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 }

@@ -1,5 +1,6 @@
 package cr.talent.core.skill.dao;
 
+import cr.talent.model.PredefinedSkill;
 import cr.talent.model.Skill;
 import cr.talent.support.dao.CrudDao;
 
@@ -10,5 +11,11 @@ import cr.talent.support.dao.CrudDao;
  */
 public interface SkillDao extends CrudDao<Skill, String> {
 
+    /**
+     * Gets a predefined skill with a given name.
+     * @param predefinedSkillName the name of the skill.
+     * @return the predefined skill if found, null if not found.
+     */
+    PredefinedSkill getPredefinedSkillByName(String predefinedSkillName);
 
 }
