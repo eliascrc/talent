@@ -36,6 +36,8 @@ public class ProjectPositionHolderTest {
 
         Date endDate = new Date();
         int assignedHours = 2;
+        boolean reviewed = false;
+        boolean active = true;
 
         // Test Constructor
         ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
@@ -45,9 +47,9 @@ public class ProjectPositionHolderTest {
         projectPositionHolder.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         projectPositionHolder.setId(ID);
         projectPositionHolder.setEndDate(endDate);
-        projectPositionHolder.setReviewed(false);
+        projectPositionHolder.setReviewed(reviewed);
         projectPositionHolder.setAssignedHours(assignedHours);
-        projectPositionHolder.setActive(true);
+        projectPositionHolder.setActive(active);
         projectPositionHolder.setProjectPosition(PROJECT_POSITION);
         projectPositionHolder.setResource(TECHNICAL_RESOURCE);
         projectPositionHolder.setStartDate(START_DATE);
@@ -57,9 +59,9 @@ public class ProjectPositionHolderTest {
         assertEquals(entityVersion, projectPositionHolder.getEntityVersion());
         assertEquals(ID, projectPositionHolder.getId());
         assertEquals(endDate, projectPositionHolder.getEndDate());
-        assertFalse(projectPositionHolder.isReviewed());
+        assertEquals(reviewed, projectPositionHolder.isReviewed());
         assertEquals(assignedHours, projectPositionHolder.getAssignedHours());
-        assertTrue(projectPositionHolder.isActive());
+        assertEquals(active, projectPositionHolder.isActive());
         assertEquals(PROJECT_POSITION, projectPositionHolder.getProjectPosition());
         assertEquals(TECHNICAL_RESOURCE, projectPositionHolder.getResource());
         assertEquals(START_DATE, projectPositionHolder.getStartDate());

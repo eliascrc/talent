@@ -36,7 +36,7 @@ public class ProjectPositionHolder extends BasicEntity {
     /**
      * Indicates if the holder resource has already being reviewed for this position
      */
-    @Column(nullable = false)
+    @Column(name = "reviewed", nullable = false)
     private boolean reviewed;
 
     /**
@@ -55,7 +55,7 @@ public class ProjectPositionHolder extends BasicEntity {
     /**
      * Indicates if the position is currently active
      */
-    @Column(nullable = false)
+    @Column(name = "active", nullable = false)
     private boolean active;
 
     @Override

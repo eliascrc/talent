@@ -32,7 +32,7 @@ public class OrganizationTest {
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
         String name =  "talent";
-        Boolean twoStepVerification = true;
+        boolean twoStepVerification = true;
         int totalUsers = 5;
         String domain = "talent.cr";
         Image logo = mock(Image.class);

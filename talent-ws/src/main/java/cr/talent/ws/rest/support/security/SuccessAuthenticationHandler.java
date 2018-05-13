@@ -18,8 +18,6 @@ import java.io.IOException;
  * redirect is send.
  *
  * @author Rodrigo A. Bartels
- * @version 1.0
- * @since 5/29/12
  */
 @Component("successLoginHandler")
 public class SuccessAuthenticationHandler extends SimpleUrlAuthenticationSuccessHandler {

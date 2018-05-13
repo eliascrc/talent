@@ -17,7 +17,7 @@ public class CapabilityLevel extends BasicEntity {
     /**
      * The name of the capability level
      */
-    @Column (nullable = false)
+    @Column (name = "name", nullable = false)
     private String name;
 
     /**

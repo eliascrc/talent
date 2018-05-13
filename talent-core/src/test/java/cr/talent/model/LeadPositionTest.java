@@ -4,7 +4,6 @@ import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -34,7 +33,7 @@ public class LeadPositionTest {
         long entityVersion = 1l;
         Date startDate = new Date();
         Date endDate = new Date();
-        Boolean active = true;
+        boolean active = true;
 
         // Verify Constructor
         LeadPosition leadPosition = new LeadPosition();

@@ -4,9 +4,13 @@ import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.model.Organization;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Hibernate implementation of the {@link cr.talent.core.organization.dao.OrganizationDao}.
@@ -19,6 +23,22 @@ public class HibernateOrganizationDao extends HibernateCrudDao<Organization, Str
     @Autowired
     public HibernateOrganizationDao(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
         setSessionFactory(sessionFactory);
+    }
+
+    /**
+     * @see cr.talent.core.organization.dao.OrganizationDao#getOrganizationByUniqueIdentifier(String)
+     */
+    @Override
+    public Organization getOrganizationByUniqueIdentifier(String uniqueIdentifier) {
+
+        Query query = super.getSessionFactory().getCurrentSession()
+                .createQuery("from Organization where uniqueIdentifier = :uniqueIdentifier");
+
+        query.setParameter("uniqueIdentifier", uniqueIdentifier);
+        List<Organization> organizationResult = (List<Organization>)query.list();
+
+        return DataAccessUtils.singleResult(organizationResult);
+
     }
 
 }
