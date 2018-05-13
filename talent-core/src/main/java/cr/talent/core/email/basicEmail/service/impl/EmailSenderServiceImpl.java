@@ -1,6 +1,6 @@
-package cr.talent.core.Email.BasicEmail.service.impl;
+package cr.talent.core.email.basicEmail.service.impl;
 
-import cr.talent.core.Email.BasicEmail.service.EmailSenderService;
+import cr.talent.core.email.basicEmail.service.EmailSenderService;
 import cr.talent.model.Email;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @Service("sendEmailService")
 @Transactional
-public class EmailSenderImpl implements EmailSenderService {
+public class EmailSenderServiceImpl implements EmailSenderService {
 
     @Autowired
     private JavaMailSender javaMailSender;

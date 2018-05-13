@@ -1,6 +1,6 @@
 package cr.talent.core.passwordResetRequest.service.impl;
 
-import cr.talent.core.Email.PasswordResetEmail.service.PasswordResetEmailService;
+import cr.talent.core.email.passwordResetEmail.service.PasswordResetEmailService;
 import cr.talent.core.passwordResetRequest.dao.PasswordResetRequestDao;
 import cr.talent.core.passwordResetRequest.service.PasswordResetRequestService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @Service("passwordResetRequestService")
 @Transactional
-public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequest, String> implements PasswordResetRequestService {
+public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordResetRequest, String> implements PasswordResetRequestService {
 
     @Autowired
     private PasswordResetRequestDao passwordResetRequestDao;
@@ -44,15 +44,15 @@ public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequ
     @Override
     public void createPasswordRequestReset(String email) {
         PasswordResetRequest passwordResetReq = this.passwordResetRequestDao.findByEmail(email);
-        if (passwordResetReq != null){
+        if (passwordResetReq != null) {
             passwordResetReq.setValid(false);
         }
         TechnicalResource technicalResource = this.technicalResourceService.getTechnicalResourceByUsername(email);
-        if(technicalResource != null){
+        if (technicalResource != null) {
             PasswordResetRequest passwordResetRequest = new PasswordResetRequest();
             passwordResetRequest.setTechnicalResource(technicalResource);
             passwordResetRequest.setEmail(technicalResource.getUsername());
-            String token= UUID.randomUUID().toString();
+            String token = UUID.randomUUID().toString();
             passwordResetRequest.setToken(token);
             passwordResetRequest.setValid(true);
 
@@ -63,22 +63,20 @@ public class PasswordResetRequestImpl  extends CrudServiceImpl<PasswordResetRequ
     }
 
     @Override
-    public boolean isTokenValid(String token){
+    public boolean isTokenValid(String token) {
         PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
         return passwordResetRequest != null ? passwordResetRequest.isValid() : null;
     }
 
     @Override
-    public void resetPassword(String token , String newPassword){
-        try{
+    public void resetPassword(String token, String newPassword) {
+        try {
             SecurityUtils.validatePassword(newPassword);
-            if (this.isTokenValid(token)){
-                PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
-                TechnicalResource technicalResource =  passwordResetRequest.getTechnicalResource();
-                technicalResource.setPassword(this.passwordEncoder.encode(newPassword));
-                passwordResetRequest.setValid(false);
-            }
-        }catch (Exception e){
+            PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
+            TechnicalResource technicalResource = passwordResetRequest.getTechnicalResource();
+            technicalResource.setPassword(this.passwordEncoder.encode(newPassword));
+            passwordResetRequest.setValid(false);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

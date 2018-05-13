@@ -1,4 +1,4 @@
-package cr.talent.core.Email.BasicEmail.service;
+package cr.talent.core.email.basicEmail.service;
 
 import cr.talent.model.Email;
 

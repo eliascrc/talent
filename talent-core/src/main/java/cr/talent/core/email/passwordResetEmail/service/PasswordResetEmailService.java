@@ -1,4 +1,4 @@
-package cr.talent.core.Email.PasswordResetEmail.service;
+package cr.talent.core.email.passwordResetEmail.service;
 
 import cr.talent.model.PasswordResetRequest;
 

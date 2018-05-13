@@ -38,6 +38,8 @@ public class PasswordResetRequest extends BasicEntity {
     @Column(name= "is_valid")
     private boolean isValid;
 
+    public PasswordResetRequest(){}
+
     @Override
     protected boolean onEquals(Object o) {
         boolean result = false;

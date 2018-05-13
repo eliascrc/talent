@@ -7,7 +7,6 @@ package cr.talent.model;
  *
  * @author María José Cubero
  */
-
 public class Email {
 
     /**
@@ -40,7 +39,7 @@ public class Email {
 
     @Override
     public String toString() {
-        return "Email{" +
+        return "email{" +
                 "from='" + this.getFrom() + '\'' +
                 ", to='" + this.getTo() + '\'' +
                 ", subject='" + this.getSubject() + '\'' +

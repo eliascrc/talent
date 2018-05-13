@@ -1,6 +1,7 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.passwordResetRequest.service.PasswordResetRequestService;
+import cr.talent.support.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -44,9 +45,10 @@ public class PasswordResetRequestResource {
     @POST
     @Path("/reset/")
     public Response resetPassword (@QueryParam("token") String token, @FormParam("newPassword") String newPassword){
-        if (StringUtils.isEmpty(newPassword) || !this.passwordResetRequestService.resetPassword(token, newPassword))
+        if (StringUtils.isEmpty(newPassword)|| !this.passwordResetRequestService.isTokenValid(token))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
+        this.passwordResetRequestService.resetPassword(token, newPassword);
         return Response.ok().build();
     }
 }
