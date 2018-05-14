@@ -9,6 +9,9 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -44,9 +47,9 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
     @Override
     public void createPasswordRequestReset(String email) {
         PasswordResetRequest passwordResetReq = this.passwordResetRequestDao.findByEmail(email);
-        if (passwordResetReq != null) {
+        if (passwordResetReq != null)
             passwordResetReq.setValid(false);
-        }
+
         TechnicalResource technicalResource = this.technicalResourceService.getTechnicalResourceByUsername(email);
         if (technicalResource != null) {
             PasswordResetRequest passwordResetRequest = new PasswordResetRequest();
@@ -76,8 +79,12 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
             TechnicalResource technicalResource = passwordResetRequest.getTechnicalResource();
             technicalResource.setPassword(this.passwordEncoder.encode(newPassword));
             passwordResetRequest.setValid(false);
+
+            Authentication authentication = new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
