@@ -13,8 +13,6 @@ import java.io.IOException;
  * protected resource.
  *
  * @author Rodrigo A. Bartels
- * @version 1.0
- * @since 5/28/12
  */
 public class UnauthorizedAccessHandler implements AccessDeniedHandler {
 

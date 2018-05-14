@@ -18,6 +18,7 @@ class DataParser extends XmlParser {
 
     private List<Organization> organizations;
     private List<TechnicalResource> technicalResources;
+    private List<PrivacyPolicy> privacyPolicyVersions;
     private List<TermsOfService> termsOfServiceVersions;
 
     /**
@@ -31,12 +32,14 @@ class DataParser extends XmlParser {
         super(filepath);
         this.organizations = new ArrayList<Organization>();
         this.technicalResources = new ArrayList<TechnicalResource>();
+        this.privacyPolicyVersions = new ArrayList<PrivacyPolicy>();
         this.termsOfServiceVersions = new ArrayList<>();
     }
 
     void parseData() {
         this.fillOrganizations();
         this.fillTechnicalResources();
+        this.fillPrivacyPolicyVersions();
         this.fillTermsOfServiceVersions();
     }
 
@@ -126,6 +129,17 @@ class DataParser extends XmlParser {
     }
 
     /**
+     * Fills the privacy policy versions list.
+     */
+    private void fillPrivacyPolicyVersions() {
+        Elements privacyPolicyVersionsElements = getElementOfType("privacyPolicyVersions").get(0).getChildElements();
+        for (int i = 0; i < privacyPolicyVersionsElements.size(); i++) {
+            PrivacyPolicy privacyPolicy = getPrivacyPolicy(privacyPolicyVersionsElements.get(i));
+            this.privacyPolicyVersions.add(privacyPolicy);
+        }
+    }
+
+     /*
      * Fills the terms of service versions list.
      */
     private void fillTermsOfServiceVersions() {
@@ -137,10 +151,33 @@ class DataParser extends XmlParser {
     }
 
     /**
-     * Creates a TermsOfService object and sets its attributes according to the data specified in the DummyData.xml.
+     * Creates a PrivacyPolicy object and sets its attributes according to the data specified in the DummyData.xml.
      * To set the terms of service HTML content, it obtains the file which stores the content from the xml and then
      * reads it.
      *
+     * @param privacyPolicyElement the node of the xml file corresponding to the specific terms of service version
+     * @return the PrivacyPolicy created object
+     */
+    private PrivacyPolicy getPrivacyPolicy(Element privacyPolicyElement) {
+        PrivacyPolicy privacyPolicy = new PrivacyPolicy();
+        if (privacyPolicyElement.getChildElements("startDate").size() > 0) {
+            privacyPolicy.setStartDate(super.getDateValue(privacyPolicyElement, "startDate"));
+        }
+        if (privacyPolicyElement.getChildElements("endDate").size() > 0) {
+            privacyPolicy.setEndDate(super.getDateValue(privacyPolicyElement, "endDate"));
+        }
+        privacyPolicy.setActive(super.getBooleanValue(privacyPolicyElement, "isActive"));
+        String privacyPolicyContent = "";
+        try {
+            privacyPolicyContent = FileUtils.readFileToString(new File(super.getAttributeValue(privacyPolicyElement, "contentFile")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        privacyPolicy.setContent(privacyPolicyContent);
+        return privacyPolicy;
+    }
+
+    /*
      * @param termsOfServiceElement the node of the xml file corresponding to the specific terms of service version
      * @return the TermsOfService created object
      */
@@ -169,7 +206,10 @@ class DataParser extends XmlParser {
         return this.technicalResources;
     }
 
+    List<PrivacyPolicy> getPrivacyPolicyVersions() { return this.privacyPolicyVersions; }
+
     public List<TermsOfService> getTermsOfServiceVersions() {
         return termsOfServiceVersions;
     }
+
 }

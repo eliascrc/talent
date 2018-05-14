@@ -18,13 +18,13 @@ public class Project extends BasicEntity {
     /**
      * The name of the project.
      */
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     /**
      * The description of the project.
      */
-    @Column
+    @Column(name = "description")
     private String description;
 
     /**

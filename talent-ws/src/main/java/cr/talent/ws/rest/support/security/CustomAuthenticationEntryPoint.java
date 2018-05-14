@@ -12,8 +12,6 @@ import java.io.IOException;
  * basic auth pop up in the browsers consuming the WS.
  *
  * @author Rodrigo A. Bartels
- * @version 1.0
- * @since 6/6/12
  */
 public class CustomAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
 
