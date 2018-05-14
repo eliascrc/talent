@@ -11,6 +11,8 @@
         <security:authentication-provider ref="technicalResourceAuthenticationProvider"/>
     </security:authentication-manager>
 
+    <security:http pattern="/ws/user/loggedIn" security="none"/>
+
     <security:http use-expressions="true" pattern="/**/*" auto-config="false" entry-point-ref="customAuthEntryPoint">
         <security:form-login login-processing-url="/ws/login" authentication-success-handler-ref="successLoginHandler"
                              authentication-failure-handler-ref="loginFailureHandler" username-parameter="username"
@@ -18,7 +20,6 @@
         <security:logout logout-url="/ws/logout" success-handler-ref="logoutHandler"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login/token" access="isAnonymous()"/>
-        <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/user/authenticated" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="OPTIONS"/>
