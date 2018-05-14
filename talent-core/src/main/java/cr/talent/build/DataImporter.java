@@ -63,7 +63,7 @@ public class DataImporter {
         OrganizationService organizationService = context.getBean(OrganizationService.class);
 
         for (Organization organization : organizations) {
-            //organizationService.create(organization);
+            organizationService.create(organization);
         }
 
         List<Language> languages = dataParser.getLanguages();
@@ -77,7 +77,7 @@ public class DataImporter {
         TechnicalResourceService technicalResourceService = context.getBean(TechnicalResourceService.class);
 
         for (TechnicalResource technicalResource: technicalResources) {
-            //technicalResourceService.create(technicalResource);
+            technicalResourceService.create(technicalResource);
         }
 
 
