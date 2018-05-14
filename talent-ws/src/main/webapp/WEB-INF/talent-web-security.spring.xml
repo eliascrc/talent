@@ -25,6 +25,12 @@
         <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/admin/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')"/>
         <security:intercept-url pattern="/ws/content/**/*" access="permitAll()" method="GET"/>
+        <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
+        <security:intercept-url pattern="/ws/login/token" access="isAnonymous()"/>
+        <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
+        <security:intercept-url pattern="/ws/login/organization" access="permitAll()" method="GET"/>
+        <security:intercept-url pattern="/ws/user/authenticated" access="hasAuthority('ROLE_USER')"/>
+        <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
         <security:csrf disabled="true"/>
