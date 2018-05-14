@@ -1,13 +1,10 @@
 package cr.talent.support.flexjson;
 
-import cr.talent.model.Image;
 import cr.talent.model.Organization;
+import cr.talent.model.Image;
 import cr.talent.model.TechnicalResource;
-import cr.talent.model.User;
 import flexjson.JSONSerializer;
 import flexjson.transformer.BooleanTransformer;
-import flexjson.transformer.DateTransformer;
-import flexjson.transformer.EnumTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,6 +110,36 @@ public class JSONSerializerBuilder {
     }
 
     /**
+     * Creates a basic serializer that returns the unique identifier, name and logo of an organization
+     * @return
+     */
+    public static JSONSerializer getOrganizationSerializer() {
+        JSONSerializer serializer = getBasicSerializer(); // core serializer which excludes classnames
+        List<String> excludes = new LinkedList<>(); // list which will store all excluded attributes
+        List<String> includes = new LinkedList<>(); // list which will store all included attributes
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        includes.add("uniqueIdentifier");
+        includes.add("name");
+        includes.add("logo");
+        includes.add("twoStepVerification");
+
+        // adds all attributes of the Organization class as excludes except those in the includes list
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", includes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new ImageTransformer(), "logo");
+
+        // logs the creation of the serializer
+        logger.trace("Organization Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
+
+    /*
      * Gets a JSONSerializer to use in order to obtain the JSON of a User's information.
      *
      * @return the JSONSerializer to be used to serialize User.
@@ -165,5 +192,6 @@ public class JSONSerializerBuilder {
 
         return serializer;
     }
+
 
 }

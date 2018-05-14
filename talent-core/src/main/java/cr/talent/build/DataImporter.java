@@ -1,6 +1,7 @@
 package cr.talent.build;
 
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
@@ -12,7 +13,19 @@ import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.technicalPosition.service.TechnicalPositionService;
 import cr.talent.core.language.service.LanguageService;
 import cr.talent.core.project.service.ProjectService;
-import cr.talent.model.*;
+import cr.talent.model.Organization;
+import cr.talent.model.PrivacyPolicy;
+import cr.talent.model.TechnicalResource;
+import cr.talent.model.TermsOfService;
+import cr.talent.model.EducationRecord;
+import cr.talent.model.OrganizationSkill;
+import cr.talent.model.OrganizationSkillCategory;
+import cr.talent.model.Language;
+import cr.talent.model.Capability;
+import cr.talent.model.CapabilityLevel;
+import cr.talent.model.Project;
+import cr.talent.model.TechnicalPosition;
+import cr.talent.model.ProjectPosition;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
 
@@ -50,7 +63,7 @@ public class DataImporter {
         OrganizationService organizationService = context.getBean(OrganizationService.class);
 
         for (Organization organization : organizations) {
-            organizationService.create(organization);
+            //organizationService.create(organization);
         }
 
         List<Language> languages = dataParser.getLanguages();
@@ -64,7 +77,15 @@ public class DataImporter {
         TechnicalResourceService technicalResourceService = context.getBean(TechnicalResourceService.class);
 
         for (TechnicalResource technicalResource: technicalResources) {
-            technicalResourceService.create(technicalResource);
+            //technicalResourceService.create(technicalResource);
+        }
+
+
+        List<PrivacyPolicy> privacyPolicyVersions = dataParser.getPrivacyPolicyVersions();
+        PrivacyPolicyService privacyPolicyService = context.getBean(PrivacyPolicyService.class);
+
+        for (PrivacyPolicy privacyPolicyVersion : privacyPolicyVersions) {
+            privacyPolicyService.create(privacyPolicyVersion);
         }
 
         List<TermsOfService> termsOfServiceVersions = dataParser.getTermsOfServiceVersions();
