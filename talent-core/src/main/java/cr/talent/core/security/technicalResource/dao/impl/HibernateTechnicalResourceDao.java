@@ -38,8 +38,10 @@ public class HibernateTechnicalResourceDao extends HibernateCrudDao<TechnicalRes
     @Override
     @SuppressWarnings("unchecked")
     public TechnicalResource findTechnicalResourceByUsername(String username) {
-        String sql = "SELECT * FROM technical_resource WHERE username = ?1";
-        Query query = super.getSessionFactory().getCurrentSession().createNativeQuery(sql).addEntity(TechnicalResource.class).setParameter(1, username);
+        String hql = "FROM TechnicalResource WHERE username = ?1";
+        Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter(1, username);
+
         return (TechnicalResource) DataAccessUtils.singleResult(query.list());
     }
 

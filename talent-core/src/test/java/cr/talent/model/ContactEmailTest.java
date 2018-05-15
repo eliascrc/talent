@@ -9,7 +9,7 @@ import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Class that allows to test the Contact Email methods to know all the different paths they could take.
+ * Class that allows to test the Contact email methods to know all the different paths they could take.
  *
  * @author Elías Calderón
  */

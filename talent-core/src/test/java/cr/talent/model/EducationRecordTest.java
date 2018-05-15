@@ -4,11 +4,9 @@ import org.junit.Test;
 
 import java.io.File;
 import java.util.Date;
-import java.util.HashSet;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 

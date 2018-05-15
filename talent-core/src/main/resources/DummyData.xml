@@ -96,12 +96,12 @@
 		</technicalResource>
 
 		<technicalResource>
-			<username>maria.mena@example.com</username>
+			<username>majo.qbro@gmail.com</username>
 			<firstName>Maria</firstName>
-			<lastName>Mena</lastName>
+			<lastName>Cubero</lastName>
 			<password>Talent.123</password>
-			<enabled>false</enabled>
-			<passwordNeedsChange>true</passwordNeedsChange>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
 			<status>ACTIVE</status>
 			<isAdministrator>false</isAdministrator>
 			<lastLevelAssessment>1/1/2000</lastLevelAssessment>
@@ -351,9 +351,9 @@
 		</technicalResource>
 
 		<technicalResource>
-			<username>rosalind.franklin@example.com</username>
-			<firstName>Rosalind</firstName>
-			<lastName>Franklin</lastName>
+			<username>jolesa97@gmail.com</username>
+			<firstName>Josue</firstName>
+			<lastName>Leon</lastName>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>

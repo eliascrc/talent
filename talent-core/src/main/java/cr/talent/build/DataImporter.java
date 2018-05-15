@@ -45,14 +45,14 @@ public class DataImporter {
         OrganizationService organizationService = context.getBean(OrganizationService.class);
 
         for (Organization organization : organizations) {
-            //organizationService.create(organization);
+            organizationService.create(organization);
         }
 
         List<TechnicalResource> technicalResources = dataParser.getTechnicalResources();
         TechnicalResourceService technicalResourceService = context.getBean(TechnicalResourceService.class);
 
         for (TechnicalResource technicalResource: technicalResources) {
-            //technicalResourceService.create(technicalResource);
+            technicalResourceService.create(technicalResource);
         }
 
 
