@@ -40,12 +40,37 @@ public class ContactEmailTest {
     }
 
     @Test
+    public void testEqualForSameObject() {
+        ContactEmail contactEmail = new ContactEmail();
+
+        assertTrue(contactEmail.equals(contactEmail));
+    }
+
+    @Test
+    public void testEqualForDifferentObject() {
+        ContactEmail contactEmail = new ContactEmail();
+
+        Date date= new Date();
+
+        assertFalse(contactEmail.equals(date));
+    }
+
+    @Test
     public void testEqualForNonPersistentContactEmail() {
         ContactEmail contactEmail1 = new ContactEmail();
         contactEmail1.setEmail(EMAIL);
 
         ContactEmail contactEmail2 = new ContactEmail();
         contactEmail2.setEmail(EMAIL);
+
+        assertTrue(contactEmail1.equals(contactEmail2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentContactEmailNullEmail() {
+        ContactEmail contactEmail1 = new ContactEmail();
+
+        ContactEmail contactEmail2 = new ContactEmail();
 
         assertTrue(contactEmail1.equals(contactEmail2));
     }
@@ -59,6 +84,28 @@ public class ContactEmailTest {
         contactEmail2.setEmail(EMAIL2);
 
         assertFalse(contactEmail1.equals(contactEmail2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentContactEmailNullEmail() {
+        ContactEmail contactEmail1 = new ContactEmail();
+
+
+        ContactEmail contactEmail2 = new ContactEmail();
+        contactEmail2.setEmail(EMAIL2);
+
+        assertFalse(contactEmail1.equals(contactEmail2));
+    }
+
+    @Test
+    public void testEqualHashCodeForNonPersistentContactEmailNullEmail() {
+        ContactEmail contactEmail1 = new ContactEmail();
+
+
+        ContactEmail contactEmail2 = new ContactEmail();
+        contactEmail2.setEmail(EMAIL);
+
+        assertFalse(contactEmail1.hashCode() == contactEmail2.hashCode());
     }
 
     @Test
@@ -81,6 +128,17 @@ public class ContactEmailTest {
         contactEmail2.setEmail(EMAIL2);
 
         assertFalse(contactEmail1.hashCode() == contactEmail2.hashCode());
+    }
+
+    @Test
+    public void testNonEqualHashCodeForNonPersistentContactEmailNullEmailNullEmail() {
+        ContactEmail contactEmail1 = new ContactEmail();
+
+
+        ContactEmail contactEmail2 = new ContactEmail();
+
+
+        assertTrue(contactEmail1.hashCode() == contactEmail2.hashCode());
     }
 
 }

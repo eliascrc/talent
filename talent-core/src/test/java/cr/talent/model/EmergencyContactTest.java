@@ -73,7 +73,9 @@ public class EmergencyContactTest {
     public void testEqualForDifferentClass() {
         EmergencyContact emergencyContact1 = new EmergencyContact();
 
-        assertFalse(emergencyContact1.equals(new Object()));
+        Image image= new Image();
+
+        assertFalse(emergencyContact1.equals(image));
     }
 
     @Test
@@ -112,6 +114,37 @@ public class EmergencyContactTest {
     }
 
     @Test
+    public void testEqualForNonPersistentEmergencyContactNullResourceNullEmail() {
+        EmergencyContact emergencyContact1 = new EmergencyContact();
+
+        EmergencyContact emergencyContact2 = new EmergencyContact();
+
+        assertTrue(emergencyContact1.equals(emergencyContact2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentEmergencyContactNullResource() {
+        EmergencyContact emergencyContact1 = new EmergencyContact();
+        emergencyContact1.setEmail(EMAIL1);
+
+        EmergencyContact emergencyContact2 = new EmergencyContact();
+        emergencyContact2.setEmail(EMAIL1);
+
+        assertTrue(emergencyContact1.equals(emergencyContact2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentEmergencyContactNullEmail() {
+        EmergencyContact emergencyContact1 = new EmergencyContact();
+        emergencyContact1.setTechnicalResource(RESOURCE1);
+
+        EmergencyContact emergencyContact2 = new EmergencyContact();
+        emergencyContact2.setTechnicalResource(RESOURCE1);
+
+        assertTrue(emergencyContact1.equals(emergencyContact2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentEmergencyContact() {
         EmergencyContact emergencyContact1 = new EmergencyContact();
         emergencyContact1.setTechnicalResource(RESOURCE1);
@@ -123,6 +156,43 @@ public class EmergencyContactTest {
 
         assertFalse(emergencyContact1.equals(emergencyContact2));
     }
+
+    @Test
+    public void testNonEqualForNonPersistentEmergencyContactNullEmailNullResource() {
+        EmergencyContact emergencyContact1 = new EmergencyContact();
+
+        EmergencyContact emergencyContact2 = new EmergencyContact();
+        emergencyContact2.setTechnicalResource(RESOURCE2);
+        emergencyContact2.setEmail(EMAIL2);
+
+        assertFalse(emergencyContact1.equals(emergencyContact2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentEmergencyContactNullResource() {
+        EmergencyContact emergencyContact1 = new EmergencyContact();
+        emergencyContact1.setEmail(EMAIL1);
+
+        EmergencyContact emergencyContact2 = new EmergencyContact();
+        emergencyContact2.setTechnicalResource(RESOURCE2);
+        emergencyContact2.setEmail(EMAIL2);
+
+        assertFalse(emergencyContact1.equals(emergencyContact2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentEmergencyContactNullEmail() {
+        EmergencyContact emergencyContact1 = new EmergencyContact();
+        emergencyContact1.setTechnicalResource(RESOURCE1);
+
+        EmergencyContact emergencyContact2 = new EmergencyContact();
+        emergencyContact2.setTechnicalResource(RESOURCE1);
+        emergencyContact2.setEmail(EMAIL2);
+
+        assertFalse(emergencyContact1.equals(emergencyContact2));
+    }
+
+
 
     @Test
     public void testEqualHashCodeForPersistentEmergencyContact() {

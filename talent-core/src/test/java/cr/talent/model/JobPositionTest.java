@@ -74,7 +74,9 @@ public class JobPositionTest{
     public void testEqualForDifferentClass() {
         JobPosition jobPosition1 = new JobPosition();
 
-        assertFalse(jobPosition1.equals(new Object()));
+        Image image= new Image();
+
+        assertFalse(jobPosition1.equals(image));
     }
 
     @Test
@@ -111,9 +113,28 @@ public class JobPositionTest{
     }
 
     @Test
+    public void testEqualForNonPersistentJobPositionNullCapabilityLevel() {
+        JobPosition jobPosition1 = new JobPosition();
+
+        JobPosition jobPosition2 = new JobPosition();
+
+        assertTrue(jobPosition1.equals(jobPosition2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentJobPosition() {
         JobPosition jobPosition1 = new JobPosition();
         jobPosition1.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL);
+
+        JobPosition jobPosition2 = new JobPosition();
+        jobPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);
+
+        assertFalse(jobPosition1.equals(jobPosition2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentJobPositionNullCapabilityLevel() {
+        JobPosition jobPosition1 = new JobPosition();
 
         JobPosition jobPosition2 = new JobPosition();
         jobPosition2.setCapabilityLevel(ORGANIZATION_CAPABILITY_LEVEL2);

@@ -30,7 +30,7 @@ public class CapabilityLevel extends BasicEntity {
      * The parent capability of the level.
      */
     @ManyToOne
-    @JoinColumn (name = "capability_id", nullable = false)
+    @JoinColumn(name = "capability_name", nullable = false)
     private Capability capability;
 
     /**

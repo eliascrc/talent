@@ -97,7 +97,9 @@ public class OrganizationTest {
     public void testEqualForDifferentClass() {
         Organization organization = new Organization();
 
-        assertFalse(organization.equals(new Object()));
+        Image image= new Image();
+
+        assertFalse(organization.equals(image));
     }
 
     @Test
@@ -125,10 +127,19 @@ public class OrganizationTest {
     @Test
     public void testEqualForNonPersistentOrganization() {
         Organization organization1 = new Organization();
-        organization1.setId(UNIQUE_IDENTIFIER);
+        organization1.setUniqueIdentifier(UNIQUE_IDENTIFIER);
 
         Organization organization2 = new Organization();
-        organization2.setId(UNIQUE_IDENTIFIER);
+        organization2.setUniqueIdentifier(UNIQUE_IDENTIFIER);
+
+        assertTrue(organization1.equals(organization2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentOrganizationNullIdentifier() {
+        Organization organization1 = new Organization();
+
+        Organization organization2 = new Organization();
 
         assertTrue(organization1.equals(organization2));
     }
@@ -136,10 +147,21 @@ public class OrganizationTest {
     @Test
     public void testNonEqualForNonPersistentOrganization() {
         Organization organization1 = new Organization();
-        organization1.setId(UNIQUE_IDENTIFIER);
+        organization1.setUniqueIdentifier(UNIQUE_IDENTIFIER);
 
         Organization organization2 = new Organization();
-        organization2.setId(UNIQUE_IDENTIFIER2);
+        organization2.setUniqueIdentifier(UNIQUE_IDENTIFIER2);
+
+        assertFalse(organization1.equals(organization2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentOrganizationNullIdentifier() {
+        Organization organization1 = new Organization();
+
+
+        Organization organization2 = new Organization();
+        organization2.setUniqueIdentifier(UNIQUE_IDENTIFIER2);
 
         assertFalse(organization1.equals(organization2));
     }

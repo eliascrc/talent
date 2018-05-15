@@ -77,7 +77,10 @@ public class InvitationTest{
     public void testEqualForDifferentClass() {
         Invitation invitation1 = new Invitation();
 
-        assertFalse(invitation1.equals(new Object()));
+        Image image= new Image();
+
+
+        assertFalse(invitation1.equals(image));
     }
 
     @Test
@@ -114,9 +117,28 @@ public class InvitationTest{
     }
 
     @Test
+    public void testEqualForNonPersistentInvitationNullName() {
+        Invitation invitation1 = new Invitation();
+
+        Invitation invitation2 = new Invitation();
+
+        assertTrue(invitation1.equals(invitation2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentInvitation() {
         Invitation invitation1 = new Invitation();
         invitation1.setName(NAME);
+
+        Invitation invitation2 = new Invitation();
+        invitation2.setName(NAME2);
+
+        assertFalse(invitation1.equals(invitation2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentInvitationNullName() {
+        Invitation invitation1 = new Invitation();
 
         Invitation invitation2 = new Invitation();
         invitation2.setName(NAME2);

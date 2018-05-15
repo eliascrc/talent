@@ -55,7 +55,6 @@ public class CareerPathTest {
 
     //ON EQUALS TESTS.
 
-    @Test
     public void testEqualForSameObject() {
         CareerPath careerPath = new CareerPath();
 
@@ -63,11 +62,14 @@ public class CareerPathTest {
     }
 
     @Test
-    public void testEqualForDifferentClass() {
+    public void testEqualForDifferentObject() {
         CareerPath careerPath = new CareerPath();
 
-        assertFalse(careerPath.equals(new Object()));
+        Image image= new Image();
+
+        assertFalse(careerPath.equals(image));
     }
+
 
     @Test
     public void testEqualForPersistentCareerPath() {
@@ -103,9 +105,28 @@ public class CareerPathTest {
     }
 
     @Test
+    public void testEqualForNonPersistentCareerPathNullResource() {
+        CareerPath careerPath1 = new CareerPath();
+
+        CareerPath careerPath2 = new CareerPath();
+
+        assertTrue(careerPath1.equals(careerPath2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentCareerPath() {
         CareerPath careerPath1 = new CareerPath();
         careerPath1.setTechnicalResource(TECHNICAL_RESOURCE);
+
+        CareerPath careerPath2 = new CareerPath();
+        careerPath2.setTechnicalResource(TECHNICAL_RESOURCE2);
+
+        assertFalse(careerPath1.equals(careerPath2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentCareerPathNullResource() {
+        CareerPath careerPath1 = new CareerPath();
 
         CareerPath careerPath2 = new CareerPath();
         careerPath2.setTechnicalResource(TECHNICAL_RESOURCE2);

@@ -1,13 +1,17 @@
 package cr.talent.model;
 
 import org.junit.Test;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -95,13 +99,17 @@ public class TechnicalResourceTest {
         technicalResource.setObservations(new HashSet<>());
         technicalResource.setEmergencyContacts(new HashSet<>());
         technicalResource.setMadeKudo(new HashSet<>());
+        technicalResource.setLeadPositions(new HashSet<>());
+
 
         // Verify the gets
         assertEquals(ID, technicalResource.getId());
         assertEquals(entityCreationTimestamp, technicalResource.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, technicalResource.getLastUpdatedTimestamp());
         assertEquals(entityVersion, technicalResource.getEntityVersion());
-
+        assertEquals(false, technicalResource.isAccountNonExpired());
+        assertEquals(false, technicalResource.isAccountNonLocked());
+        assertEquals(false, technicalResource.isCredentialsNonExpired());
         assertEquals(USERNAME, technicalResource.getUsername());
         assertEquals(firstName, technicalResource.getFirstName());
         assertEquals(lastName, technicalResource.getLastName());
@@ -124,12 +132,15 @@ public class TechnicalResourceTest {
         assertEquals(timeZone, technicalResource.getTimeZone());
         assertEquals(levelAssessmentTimeGap, technicalResource.getLevelAssessmentTimeGap());
         assertEquals(twoStepVerification, technicalResource.getTwoStepVerification());
+        assertNotNull(technicalResource.getAuthorities());
         assertNotNull(technicalResource.getEducationRecords());
         assertNotNull(technicalResource.getProjectPositions());
         assertNotNull(technicalResource.getObservations());
         assertNotNull(technicalResource.getEmergencyContacts());
         assertNotNull(technicalResource.getMadeKudo());
         assertNotNull(technicalResource.getSkills());
+        assertNotNull(technicalResource.getLeadPositions());
+
 
     }
 
@@ -145,7 +156,9 @@ public class TechnicalResourceTest {
     public void testEqualForDifferentClass() {
         TechnicalResource technicalResource = new TechnicalResource();
 
-        assertFalse(technicalResource.equals(new Object()));
+        Image image= new Image();
+
+        assertFalse(technicalResource.equals(image));
     }
 
     @Test
@@ -186,6 +199,88 @@ public class TechnicalResourceTest {
     }
 
     @Test
+    public void testEqualForNonPersistentTechnicalResourceNullUserNullPassNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+
+        assertTrue(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTechnicalResourceNullPassword() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setUsername(USERNAME);
+        technicalResource.setOrganization(ORGANIZATION);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME);
+        technicalResource2.setOrganization(ORGANIZATION);
+
+        assertTrue(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTechnicalResourceNullUser() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setPassword(PASSWORD);
+        technicalResource.setOrganization(ORGANIZATION);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setPassword(PASSWORD);
+        technicalResource2.setOrganization(ORGANIZATION);
+
+        assertTrue(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTechnicalResourceNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setUsername(USERNAME);
+        technicalResource.setPassword(PASSWORD);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME);
+        technicalResource2.setPassword(PASSWORD);
+
+        assertTrue(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTechnicalResourceNullUserNullPass() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setOrganization(ORGANIZATION);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setOrganization(ORGANIZATION);
+
+        assertTrue(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTechnicalResourceNullUserNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setPassword(PASSWORD);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setPassword(PASSWORD);
+
+        assertTrue(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentTechnicalResourceNullPassNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setUsername(USERNAME);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME);
+
+        assertTrue(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentTechnicalResource() {
         TechnicalResource technicalResource = new TechnicalResource();
         technicalResource.setUsername(USERNAME);
@@ -196,6 +291,104 @@ public class TechnicalResourceTest {
         technicalResource2.setUsername(USERNAME2);
         technicalResource2.setPassword(PASSWORD2);
         technicalResource2.setOrganization(ORGANIZATION2);
+
+        assertFalse(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTechnicalResourceNullUserNullPassNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME2);
+        technicalResource2.setPassword(PASSWORD2);
+        technicalResource2.setOrganization(ORGANIZATION2);
+
+        assertFalse(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTechnicalResourceNullUser() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setPassword(PASSWORD);
+        technicalResource.setOrganization(ORGANIZATION);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME2);
+        technicalResource2.setPassword(PASSWORD2);
+        technicalResource2.setOrganization(ORGANIZATION2);
+
+        assertFalse(technicalResource.equals(technicalResource2));
+    }
+
+
+
+
+    @Test
+    public void testNonEqualForNonPersistentTechnicalResourceNullUserNullPass() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setOrganization(ORGANIZATION);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME2);
+        technicalResource2.setPassword(PASSWORD2);
+        technicalResource2.setOrganization(ORGANIZATION2);
+
+        assertFalse(technicalResource.equals(technicalResource2));
+    }
+
+
+
+    @Test
+    public void testNonEqualForNonPersistentTechnicalResourceNullUserNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setPassword(PASSWORD);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME2);
+        technicalResource2.setPassword(PASSWORD2);
+        technicalResource2.setOrganization(ORGANIZATION2);
+
+        assertFalse(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTechnicalResourceNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setUsername(USERNAME);
+        technicalResource.setPassword(PASSWORD);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME);
+        technicalResource2.setPassword(PASSWORD);
+        technicalResource2.setOrganization(ORGANIZATION);
+
+        assertFalse(technicalResource.equals(technicalResource2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentTechnicalResourcesNullPassNullOrganization() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setUsername(USERNAME);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME);
+        technicalResource2.setPassword(PASSWORD);
+        technicalResource2.setOrganization(ORGANIZATION);
+
+        assertFalse(technicalResource.equals(technicalResource2));
+    }
+
+
+    @Test
+    public void testNonEqualForNonPersistentUserNullUsername() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setPassword(PASSWORD);
+
+        TechnicalResource technicalResource2 = new TechnicalResource();
+        technicalResource2.setUsername(USERNAME2);
+        technicalResource2.setPassword(PASSWORD);
+
 
         assertFalse(technicalResource.equals(technicalResource2));
     }
@@ -239,6 +432,8 @@ public class TechnicalResourceTest {
         assertTrue(technicalResource.hashCode() == technicalResource2.hashCode());
     }
 
+
+
     @Test
     public void testNonEqualHashCodeForNonPersistentTechnicalResource() {
         TechnicalResource technicalResource = new TechnicalResource();
@@ -252,5 +447,16 @@ public class TechnicalResourceTest {
         technicalResource2.setOrganization(ORGANIZATION2);
 
         assertFalse(technicalResource.hashCode() == technicalResource2.hashCode());
+    }
+
+    @Test
+    public void testGetAuthoritiesNotEnabled() {
+        TechnicalResource technicalResource = new TechnicalResource();
+        technicalResource.setEnabled(false);
+        Set<GrantedAuthority> authorities = new HashSet<>();
+
+
+        assertEquals(authorities, (technicalResource.getAuthorities()));
+
     }
 }

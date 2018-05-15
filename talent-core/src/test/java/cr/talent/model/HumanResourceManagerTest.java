@@ -94,7 +94,9 @@ public class HumanResourceManagerTest {
     public void testEqualForDifferentClass() {
         HumanResourceManager humanResourceManager = new HumanResourceManager();
 
-        assertFalse(humanResourceManager.equals(new Object()));
+        Date date = new Date();
+
+        assertFalse(humanResourceManager.equals(date));
     }
 
     @Test

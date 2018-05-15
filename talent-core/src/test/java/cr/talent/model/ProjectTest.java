@@ -108,6 +108,8 @@ public class ProjectTest{
         assertFalse(project1.equals(new Image()));
     }
 
+
+
     @Test
     public void testEqualForPersistentProject() {
         Project project1 = new Project();
@@ -118,6 +120,8 @@ public class ProjectTest{
 
         assertTrue(project1.equals(project2));
     }
+
+
 
     @Test
     public void testNonEqualForPersistentProject() {
@@ -144,6 +148,25 @@ public class ProjectTest{
     }
 
     @Test
+    public void testEqualForNonPersistentProjectNullName() {
+        Project project1 = new Project();
+
+        Project project2 = new Project();
+
+        assertTrue(project1.equals(project2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentProjectNullName() {
+        Project project1 = new Project();
+
+        Project project2 = new Project();
+        project2.setName(NAME);
+
+        assertFalse(project1.equals(project2));
+    }
+
+    @Test
     public void testNonEqualForNonPersistentProject() {
         Project project1 = new Project();
         project1.setName(NAME);
@@ -163,16 +186,6 @@ public class ProjectTest{
         Project project2 = new Project();
 
         assertTrue(project.equals(project2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentProjectNullName() {
-        Project project = new Project();
-
-        Project project2 = new Project();
-        project2.setName(NAME2);
-
-        assertFalse(project.equals(project2));
     }
 
     @Test

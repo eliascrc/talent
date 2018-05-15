@@ -4,10 +4,28 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.core.termsOfService.service.ToSService;
+import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
+import cr.talent.core.capability.service.CapabilityService;
+import cr.talent.core.educationRecord.service.EducationRecordService;
+import cr.talent.core.organizationSkill.service.OrganizationSkillService;
+import cr.talent.core.organizationSkillCategory.service.OrganizationSkillCategoryService;
+import cr.talent.core.projectPosition.service.ProjectPositionService;
+import cr.talent.core.technicalPosition.service.TechnicalPositionService;
+import cr.talent.core.language.service.LanguageService;
+import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.Organization;
 import cr.talent.model.PrivacyPolicy;
 import cr.talent.model.TechnicalResource;
 import cr.talent.model.TermsOfService;
+import cr.talent.model.EducationRecord;
+import cr.talent.model.OrganizationSkill;
+import cr.talent.model.OrganizationSkillCategory;
+import cr.talent.model.Language;
+import cr.talent.model.Capability;
+import cr.talent.model.CapabilityLevel;
+import cr.talent.model.Project;
+import cr.talent.model.TechnicalPosition;
+import cr.talent.model.ProjectPosition;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
 
@@ -48,6 +66,14 @@ public class DataImporter {
             organizationService.create(organization);
         }
 
+
+        List<Language> languages = dataParser.getLanguages();
+        LanguageService languageService = context.getBean(LanguageService.class);
+
+        for (Language language : languages){
+            languageService.create(language);
+        }
+
         List<TechnicalResource> technicalResources = dataParser.getTechnicalResources();
         TechnicalResourceService technicalResourceService = context.getBean(TechnicalResourceService.class);
 
@@ -69,6 +95,65 @@ public class DataImporter {
         for(TermsOfService termsOfService : termsOfServiceVersions) {
             toSService.create(termsOfService);
         }
+
+        List<EducationRecord> educationRecords = dataParser.getEducationRecords();
+        EducationRecordService educationRecordService = context.getBean(EducationRecordService.class);
+
+        for (EducationRecord educationRecord : educationRecords){
+            educationRecordService.create(educationRecord);
+        }
+
+
+        List<OrganizationSkillCategory> organizationSkillCategories = dataParser.getOrganizationSkillCategories();
+        OrganizationSkillCategoryService organizationSkillCategoryService = context.getBean(OrganizationSkillCategoryService.class);
+
+        for(OrganizationSkillCategory organizationSkillCategory : organizationSkillCategories){
+            organizationSkillCategoryService.create(organizationSkillCategory);
+        }
+
+        List<OrganizationSkill> organizationSkills = dataParser.getOrganizationSkills();
+        OrganizationSkillService organizationSkillService = context.getBean(OrganizationSkillService.class);
+
+        for(OrganizationSkill organizationSkill : organizationSkills){
+            organizationSkillService.create(organizationSkill);
+        }
+
+        List<Capability> capabilities = dataParser.getCapabilities();
+        CapabilityService capabilityService = context.getBean(CapabilityService.class);
+
+        for (Capability capability : capabilities){
+            capabilityService.create(capability);
+        }
+
+        List<CapabilityLevel> capabilityLevels = dataParser.getCapabilityLevels();
+        CapabilityLevelService capabilityLevelService = context.getBean(CapabilityLevelService.class);
+
+        for (CapabilityLevel capabilityLevel :  capabilityLevels){
+            capabilityLevelService.create(capabilityLevel);
+        }
+
+        List<TechnicalPosition> technicalPositions = dataParser.getTechnicalPositions();
+        TechnicalPositionService technicalPositionService = context.getBean(TechnicalPositionService.class);
+
+        for(TechnicalPosition technicalPosition : technicalPositions){
+            technicalPositionService.create(technicalPosition);
+        }
+
+
+        List<Project> projects = dataParser.getProjects();
+        ProjectService projectService = context.getBean(ProjectService.class);
+
+        for (Project project : projects) {
+            projectService.create(project);
+        }
+
+        List<ProjectPosition> projectPositions = dataParser.getProjectPositions();
+        ProjectPositionService projectPositionService = context.getBean(ProjectPositionService.class);
+
+        for (ProjectPosition projectPosition : projectPositions){
+            projectPositionService.create(projectPosition);
+        }
+
     }
 
     public static void main(String[] args) {

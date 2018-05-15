@@ -73,7 +73,9 @@ public class WarningTest {
     public void testEqualForDifferentClass() {
         Warning warning = new Warning();
 
-        assertFalse(warning.equals(new Object()));
+        Image image= new Image();
+
+        assertFalse(warning.equals(image));
     }
 
     @Test
