@@ -4,8 +4,14 @@ import cr.talent.core.email.basicEmail.service.EmailSenderService;
 import cr.talent.model.Email;
 import org.apache.velocity.app.VelocityEngine;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
@@ -18,6 +24,8 @@ import static org.mockito.Mockito.*;
  *
  * @author Maria Jose Cubero.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest( { VelocityEngineUtils.class })
 public class EmailSenderServiceTest {
 
     @Test
@@ -26,7 +34,7 @@ public class EmailSenderServiceTest {
         JavaMailSender javaMailSender = mock(JavaMailSender.class);
         VelocityEngine velocityEngine = mock(VelocityEngine.class);
         Email email = mock(Email.class);
-        Map< String, Object> model = mock(HashMap.class);
+        Map< String, Object> model = new HashMap<>();
         MimeMessage mimeMessage = mock(MimeMessage.class);
 
         ReflectionTestUtils.setField(emailSenderService, "javaMailSender", javaMailSender);
@@ -37,6 +45,9 @@ public class EmailSenderServiceTest {
         when(email.getTo()).thenReturn("to");
         when(email.getFileName()).thenReturn("fileName");
         when(email.getContent()).thenReturn("content");
+
+        PowerMockito.mockStatic(VelocityEngineUtils.class);
+        Mockito.when(VelocityEngineUtils.mergeTemplateIntoString(any(), any(), any())).thenReturn("Hello!");
 
         emailSenderService.sendEmail(email, model);
         verify(javaMailSender, times(1)).createMimeMessage();
@@ -58,6 +69,9 @@ public class EmailSenderServiceTest {
         when(email.getTo()).thenReturn("to");
         when(email.getFileName()).thenReturn("fileName");
         when(email.getContent()).thenReturn("content");
+
+        PowerMockito.mockStatic(VelocityEngineUtils.class);
+        Mockito.when(VelocityEngineUtils.mergeTemplateIntoString(any(), any(), any())).thenReturn("Hello!");
 
         emailSenderService.sendEmail(email, model);
     }

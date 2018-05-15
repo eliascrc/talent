@@ -68,13 +68,13 @@ public class OrganizationServiceTest {
         OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
         Organization organization = mock(Organization.class);
         when(organizationDao.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(null);
+        when(organizationDao.create(any())).thenReturn("1234");
 
         OrganizationService organizationService = new OrganizationServiceImpl();
         ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
-        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
 
         try {
-            assertEquals(organization.getUniqueIdentifier(), organizationService.createOrganization(organization));
+            assertEquals("1234", organizationService.createOrganization(organization));
         } catch (AlreadyCreatedOrganizationException e) {
             fail();
         }

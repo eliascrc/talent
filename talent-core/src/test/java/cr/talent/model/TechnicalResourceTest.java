@@ -107,9 +107,9 @@ public class TechnicalResourceTest {
         assertEquals(entityCreationTimestamp, technicalResource.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, technicalResource.getLastUpdatedTimestamp());
         assertEquals(entityVersion, technicalResource.getEntityVersion());
-        assertEquals(false, technicalResource.isAccountNonExpired());
-        assertEquals(false, technicalResource.isAccountNonLocked());
-        assertEquals(false, technicalResource.isCredentialsNonExpired());
+        assertEquals(true, technicalResource.isAccountNonExpired());
+        assertEquals(true, technicalResource.isAccountNonLocked());
+        assertEquals(true, technicalResource.isCredentialsNonExpired());
         assertEquals(USERNAME, technicalResource.getUsername());
         assertEquals(firstName, technicalResource.getFirstName());
         assertEquals(lastName, technicalResource.getLastName());
