@@ -48,7 +48,12 @@ public class PasswordResetRequestResource {
         if (StringUtils.isEmpty(newPassword)|| !this.passwordResetRequestService.isTokenValid(token))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        this.passwordResetRequestService.resetPassword(token, newPassword);
-        return Response.ok().build();
+        try{
+            this.passwordResetRequestService.resetPassword(token, newPassword);
+            return Response.ok().build();
+        } catch (Exception e){
+            e.printStackTrace();
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 }

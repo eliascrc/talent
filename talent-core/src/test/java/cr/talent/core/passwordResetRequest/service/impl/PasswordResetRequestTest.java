@@ -4,10 +4,6 @@ import cr.talent.core.email.passwordResetEmail.service.PasswordResetEmailService
 import cr.talent.core.passwordResetRequest.dao.PasswordResetRequestDao;
 import cr.talent.core.passwordResetRequest.dao.impl.HibernatePasswordResetRequestDao;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
-import cr.talent.core.termsOfService.dao.ToSDao;
-import cr.talent.core.termsOfService.dao.impl.HibernateToSDao;
-import cr.talent.core.termsOfService.service.ToSService;
-import cr.talent.core.termsOfService.service.impl.ToSServiceImpl;
 import cr.talent.model.PasswordResetRequest;
 import cr.talent.model.TechnicalResource;
 import org.junit.Test;
@@ -53,9 +49,9 @@ public class PasswordResetRequestTest {
         when(this.technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(technicalResource);
         when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(passwordResetRequest);
 
-        passwordResetRequestService.createPasswordRequestReset("qa.talent.cr@gmail.com");
+        passwordResetRequestService.createPasswordRequestReset(email);
 
-        verify(passwordResetRequestDao, times(1)).findByEmail("qa.talent.cr@gmail.com");
+        verify(passwordResetRequestDao, times(1)).findByEmail(email);
     }
 
     @Test
@@ -72,9 +68,9 @@ public class PasswordResetRequestTest {
         when(this.technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(technicalResource);
         when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(null);
 
-        passwordResetRequestService.createPasswordRequestReset("qa.talent.cr@gmail.com");
+        passwordResetRequestService.createPasswordRequestReset(email);
 
-        verify(passwordResetRequestDao, times(1)).findByEmail("qa.talent.cr@gmail.com");
+        verify(passwordResetRequestDao, times(1)).findByEmail(email);
     }
 
     @Test
@@ -95,7 +91,6 @@ public class PasswordResetRequestTest {
     @Test
     public void testIsTokenValidReturningNull() {
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
-        PasswordResetRequest passwordResetRequest = mock(PasswordResetRequest.class);
         String token = "token";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
@@ -122,7 +117,6 @@ public class PasswordResetRequestTest {
         when(passwordResetRequest.getTechnicalResource()).thenReturn(technicalResource);
         when(this.passwordEncoder.encode(newPassword)).thenReturn("newPassword");
         when(passwordResetRequest.isValid()).thenReturn(true);
-
 
         passwordResetRequestService.resetPassword(token, newPassword);
     }
