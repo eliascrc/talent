@@ -41,14 +41,17 @@ public class PasswordResetRequestTest {
     @Test
     public void testCreatePasswordRequestReset(){
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
+        PasswordResetRequest passwordResetRequest = new PasswordResetRequest();
         TechnicalResource technicalResource = mock(TechnicalResource.class);
+        String email = "qa.talent.cr@gmail.com";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetRequestDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "technicalResourceService", this.technicalResourceService);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetEmailService", this.passwordResetEmailService);
 
-        when(this.technicalResourceService.getTechnicalResourceByUsername("qa.talent.cr@gmail.com")).thenReturn(technicalResource);
+        when(this.technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(technicalResource);
+        when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(passwordResetRequest);
 
         passwordResetRequestService.createPasswordRequestReset("qa.talent.cr@gmail.com");
 
@@ -58,11 +61,16 @@ public class PasswordResetRequestTest {
     @Test
     public void testCreatePasswordRequestResetReturningNull(){
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
+        String email = "qa.talent.cr@gmail.com";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetRequestDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "technicalResourceService", this.technicalResourceService);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetEmailService", this.passwordResetEmailService);
+
+        when(this.technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(technicalResource);
+        when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(null);
 
         passwordResetRequestService.createPasswordRequestReset("qa.talent.cr@gmail.com");
 
@@ -88,20 +96,21 @@ public class PasswordResetRequestTest {
     public void testIsTokenValidReturningNull() {
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
         PasswordResetRequest passwordResetRequest = mock(PasswordResetRequest.class);
+        String token = "token";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetRequestDao", this.passwordResetRequestDao);
 
-        when(passwordResetRequest.isValid()).thenReturn(true);
-        when(this.passwordResetRequestDao.findByToken("")).thenReturn(passwordResetRequest);
+        when(this.passwordResetRequestDao.findByToken(token)).thenReturn(null);
 
-        passwordResetRequestService.isTokenValid("");
+        passwordResetRequestService.isTokenValid(token);
     }
 
     @Test
     public void testResetPasswordWithValidPassword() {
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
         PasswordResetRequest passwordResetRequest = mock(PasswordResetRequest.class);
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
         String token = "token";
         String newPassword = "Talent.123";
 
@@ -109,25 +118,12 @@ public class PasswordResetRequestTest {
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetRequestDao", this.passwordResetRequestDao);
 
+        when(this.passwordResetRequestDao.findByToken(token)).thenReturn(passwordResetRequest);
+        when(passwordResetRequest.getTechnicalResource()).thenReturn(technicalResource);
+        when(this.passwordEncoder.encode(newPassword)).thenReturn("newPassword");
         when(passwordResetRequest.isValid()).thenReturn(true);
+
 
         passwordResetRequestService.resetPassword(token, newPassword);
     }
-
-    @Test
-    public void testResetPasswordWithInvalidPassword() {
-        PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
-        PasswordResetRequest passwordResetRequest = mock(PasswordResetRequest.class);
-        String token = "token";
-        String newPassword = "1234";
-
-        ReflectionTestUtils.setField(passwordResetRequestService, "passwordEncoder", this.passwordEncoder);
-        ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
-        ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetRequestDao", this.passwordResetRequestDao);
-
-        when(passwordResetRequest.isValid()).thenReturn(true);
-
-        passwordResetRequestService.resetPassword(token, newPassword);
-    }
-
 }

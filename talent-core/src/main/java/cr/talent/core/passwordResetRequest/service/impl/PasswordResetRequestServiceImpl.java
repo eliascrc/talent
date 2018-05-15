@@ -68,7 +68,7 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
     @Override
     public boolean isTokenValid(String token) {
         PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
-        return passwordResetRequest != null ? passwordResetRequest.isValid() : null;
+        return (passwordResetRequest != null ? passwordResetRequest.isValid() : false);
     }
 
     @Override
