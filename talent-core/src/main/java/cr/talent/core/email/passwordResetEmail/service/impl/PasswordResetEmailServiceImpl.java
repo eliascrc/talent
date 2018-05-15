@@ -22,7 +22,7 @@ import java.util.Map;
 public class PasswordResetEmailServiceImpl implements PasswordResetEmailService{
 
     private static final String PASSWORD_RESET_SUBJECT = "TALENT Password Reset";
-    private static final String HTML_EMAIL_FILE = "forgotPassword.vm";
+    private static final String HTML_EMAIL_FILE = "templates/forgotPassword.vm";
     private static final String LINK = "http://ws.talent.cr/ws/passwordReset/new/?token=";
 
     @Value("${talent.mail.from}")
