@@ -68,23 +68,18 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
     @Override
     public boolean isTokenValid(String token) {
         PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
-        return (passwordResetRequest != null ? passwordResetRequest.isValid() : false);
+        return passwordResetRequest != null ? passwordResetRequest.isValid() : false;
     }
 
     @Override
     public void resetPassword(String token, String newPassword) {
-        try {
-            SecurityUtils.validatePassword(newPassword);
-            PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
-            TechnicalResource technicalResource = passwordResetRequest.getTechnicalResource();
-            technicalResource.setPassword(this.passwordEncoder.encode(newPassword));
-            passwordResetRequest.setValid(false);
+        SecurityUtils.validatePassword(newPassword);
+        PasswordResetRequest passwordResetRequest = this.passwordResetRequestDao.findByToken(token);
+        TechnicalResource technicalResource = passwordResetRequest.getTechnicalResource();
+        technicalResource.setPassword(this.passwordEncoder.encode(newPassword));
+        passwordResetRequest.setValid(false);
 
-            Authentication authentication = new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        Authentication authentication = new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

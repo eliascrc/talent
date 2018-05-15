@@ -21,10 +21,6 @@ import static org.mockito.Mockito.*;
  */
 public class PasswordResetEmailServiceTest {
 
-    private static final String PASSWORD_RESET_SUBJECT = "TALENT Password Reset";
-    private static final String HTML_EMAIL_FILE = "forgotPassword.vm";
-    private static final String LINK = "http://localhost:8080/talent/ws/passwordReset/new/?token=";
-
     @Test
     public void sendPasswordResetMailTest(){
         PasswordResetEmailService passwordResetEmailService = new PasswordResetEmailServiceImpl();
