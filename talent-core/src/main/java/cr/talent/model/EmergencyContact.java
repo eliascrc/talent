@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class EmergencyContact extends BasicEntity{
 
     /**
-     * Email of the emergency contact.
+     * email of the emergency contact.
      */
     @Column(name = "email")
     private String email;

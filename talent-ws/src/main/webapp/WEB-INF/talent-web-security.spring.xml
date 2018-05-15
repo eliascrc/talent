@@ -25,6 +25,8 @@
         <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/admin/**/*" access="hasAuthority('ROLE_SYSTEM_ADMINISTRATOR')"/>
         <security:intercept-url pattern="/ws/content/**/*" access="permitAll()" method="GET"/>
+        <security:intercept-url pattern="/ws/passwordReset/new/*" access="isAnonymous()" method="GET"/>
+        <security:intercept-url pattern="/ws/passwordReset/**/*" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login/token" access="isAnonymous()"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>

@@ -66,6 +66,7 @@ public class DataImporter {
             organizationService.create(organization);
         }
 
+
         List<Language> languages = dataParser.getLanguages();
         LanguageService languageService = context.getBean(LanguageService.class);
 
