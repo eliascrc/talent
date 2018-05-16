@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("/content/privacy-policy")
+@Path("/content/privacyPolicy")
 public class PrivacyPolicyResource {
 
     @Autowired
