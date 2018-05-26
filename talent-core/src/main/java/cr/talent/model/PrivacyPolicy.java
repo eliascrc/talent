@@ -1,9 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -40,12 +37,13 @@ public class PrivacyPolicy extends BasicEntity {
      */
     @Column(name = "is_active")
     private boolean isActive;
-	
-	/**
-     * Flag that specifies if the Privacy Policy version is for mobile or not.
+
+    /**
+     * The platform in which Talent is being used
      */
-    @Column(name = "for_mobile")
-    private boolean forMobile;
+    @Column (name = "platform")
+    @Enumerated(value = EnumType.STRING)
+    private Platform platform;
 
     public PrivacyPolicy() {}
 
@@ -90,12 +88,8 @@ public class PrivacyPolicy extends BasicEntity {
     public String getContent() { return this.content; }
 
     public void setContent(String content) { this.content = content; }
-	
-	public void setForMobile(boolean forMobile) {
-		this.forMobile = forMobile;
-	}
-	
-	public boolean isForMobile() {
-		return forMobile;
-	}
+
+    public Platform getPlatform() { return this.platform; }
+
+    public void setPlatform(Platform platform) { this.platform = platform; }
 }

@@ -39,12 +39,13 @@ public class TermsOfService extends BasicEntity {
      */
     @Column(name = "is_active")
     private boolean isActive;
-	
-	/**
-     * Flag that specifies if the Terms of Service version is for mobile or not.
+
+    /**
+     * The platform in which Talent is being used
      */
-    @Column(name = "for_mobile")
-    private boolean forMobile;
+    @Column (name = "platform")
+    @Enumerated(value = EnumType.STRING)
+    private Platform platform;
 
     public TermsOfService() {
     }
@@ -97,12 +98,8 @@ public class TermsOfService extends BasicEntity {
     public void setActive(boolean active) {
         isActive = active;
     }
-	
-	public void setForMobile(boolean forMobile) {
-		this.forMobile = forMobile;
-	}
-	
-	public boolean isForMobile() {
-		return forMobile;
-	}
+
+    public Platform getPlatform() { return this.platform; }
+
+    public void setPlatform(Platform platform) { this.platform = platform; }
 }
