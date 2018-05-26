@@ -39,6 +39,12 @@ public class TermsOfService extends BasicEntity {
      */
     @Column(name = "is_active")
     private boolean isActive;
+	
+	/**
+     * Flag that specifies if the Terms of Service version is for mobile or not.
+     */
+    @Column(name = "for_mobile")
+    private boolean forMobile;
 
     public TermsOfService() {
     }
@@ -91,4 +97,12 @@ public class TermsOfService extends BasicEntity {
     public void setActive(boolean active) {
         isActive = active;
     }
+	
+	public void setForMobile(boolean forMobile) {
+		this.forMobile = forMobile;
+	}
+	
+	public boolean isForMobile() {
+		return forMobile;
+	}
 }

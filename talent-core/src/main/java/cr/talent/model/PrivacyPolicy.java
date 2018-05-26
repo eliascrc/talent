@@ -38,8 +38,14 @@ public class PrivacyPolicy extends BasicEntity {
     /**
      * Whether the privacy policy is active or not
      */
-    @Column(name = "active")
-    private boolean active;
+    @Column(name = "is_active")
+    private boolean isActive;
+	
+	/**
+     * Flag that specifies if the Privacy Policy version is for mobile or not.
+     */
+    @Column(name = "for_mobile")
+    private boolean forMobile;
 
     public PrivacyPolicy() {}
 
@@ -77,11 +83,19 @@ public class PrivacyPolicy extends BasicEntity {
         this.endDate = endDate;
     }
 
-    public boolean isActive() { return this.active; }
+    public boolean isActive() { return this.isActive; }
 
-    public void setActive(boolean active) { this.active = active; }
+    public void setActive(boolean active) { this.isActive = active; }
 
     public String getContent() { return this.content; }
 
     public void setContent(String content) { this.content = content; }
+	
+	public void setForMobile(boolean forMobile) {
+		this.forMobile = forMobile;
+	}
+	
+	public boolean isForMobile() {
+		return forMobile;
+	}
 }
