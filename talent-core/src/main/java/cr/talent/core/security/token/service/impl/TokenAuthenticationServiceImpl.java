@@ -24,11 +24,7 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
     private TechnicalResourceDao technicalResourceDao;
 
     /**
-     * Method that loads the UserDetails according to the token specified.
-     *
-     * @param token String which specifies the authentication token to search for.
-     * @return The UserDetails of the user found or null if no user with that token was found.
-     * @throws UsernameNotFoundException
+     * @see cr.talent.core.security.token.service.TokenAuthenticationService#loadUserByUsername(String)
      */
     public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
         UserDetails user = this.technicalResourceDao.findByAuthenticationToken((token));
@@ -38,14 +34,4 @@ public class TokenAuthenticationServiceImpl implements TokenAuthenticationServic
         return user;
     }
 
-    /**
-     * @see cr.talent.core.security.token.service.TokenAuthenticationService#loadUserByToken(String)
-     */
-    public TechnicalResource loadUserByToken(String token) throws UsernameNotFoundException {
-        TechnicalResource user = this.technicalResourceDao.findByAuthenticationToken((token));
-        if (user == null) {
-            throw new UsernameNotFoundException("The user was not found.");
-        }
-        return user;
-    }
 }

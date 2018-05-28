@@ -7,6 +7,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,21 +41,29 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException {
-
+        Authentication authentication;
         String token = httpServletRequest.getParameter("token");
+
         if (token == null) {
             token = "";
         }
         token = token.trim();
 
-        TechnicalResource technicalResource = this.tokenAuthenticationService.loadUserByToken(token);
-        UsernamePasswordAuthenticationToken authenticationRequest = new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authenticationRequest);
+        try {
+            UserDetails userDetails = this.tokenAuthenticationService.loadUserByUsername(token);
+            UsernamePasswordAuthenticationToken authenticationRequest = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationRequest);
+            authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-            httpServletRequest.getSession().setAttribute("token", token);
+            if (authentication.isAuthenticated()) {
+                httpServletRequest.getSession().setAttribute("token", token);
+            }
+
+        } catch (UsernameNotFoundException e) {
+            authentication = null;
         }
-        return SecurityContextHolder.getContext().getAuthentication();
+
+        return authentication;
     }
 
 }

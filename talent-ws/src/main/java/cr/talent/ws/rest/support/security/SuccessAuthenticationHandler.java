@@ -40,7 +40,6 @@ public class SuccessAuthenticationHandler extends SimpleUrlAuthenticationSuccess
             response.addHeader("Access-Control-Allow-Credentials", "true");
             response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Authorization");
-            response.addHeader("token", ((User) authentication.getPrincipal()).getToken());
         } else
             super.onAuthenticationSuccess(request, response, authentication);
     }

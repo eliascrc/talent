@@ -1,6 +1,7 @@
 package cr.talent.core.security.token.service;
 
 import cr.talent.model.TechnicalResource;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -18,5 +19,6 @@ public interface TokenAuthenticationService extends UserDetailsService {
      * @return The TechnicalResource found or null if no resource with that token was found.
      * @throws UsernameNotFoundException
      */
-    TechnicalResource loadUserByToken(String token);
+    @Override
+    UserDetails loadUserByUsername(String token);
 }
