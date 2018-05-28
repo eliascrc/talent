@@ -12,6 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface TechnicalResourceService extends CrudService<TechnicalResource, String>, UserDetailsService {
 
+    /**
+     * Method that finds a User by its username via the data access object of the service.
+     * @param username String which specifies the user's username to find.
+     * @return The result of the username search in the data access object.
+     */
     TechnicalResource getTechnicalResourceByUsername(String username);
 
 }
