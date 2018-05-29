@@ -36,7 +36,7 @@
         <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
 
-        <security:custom-filter after="FORM_LOGIN_FILTER" ref="tokenAuthenticationFilter"/>
+        <security:custom-filter before="BASIC_AUTH_FILTER" ref="tokenAuthenticationFilter"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
         <security:csrf disabled="true"/>
     </security:http>
