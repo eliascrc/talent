@@ -8,9 +8,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NoResultException;
+import java.util.List;
 
 
 /**
@@ -28,16 +29,12 @@ public class HibernatePrivacyPolicyDao extends HibernateCrudDao<PrivacyPolicy, S
 
     @Override
     public PrivacyPolicy getActivePrivacyPolicy(Platform requestPlatform) {
-        PrivacyPolicy queryResult;
-        try {
-            Query query = super.getSessionFactory().getCurrentSession()
-                    .createQuery("FROM PrivacyPolicy WHERE isActive = true and platform=requestPlatform");
-            queryResult = (PrivacyPolicy) query.getSingleResult();
-        } catch (NoResultException nre) {
-            queryResult = null;
-        }
+        String platformName = requestPlatform.name();
+        Query query = super.getSessionFactory().getCurrentSession()
+                .createQuery("FROM PrivacyPolicy WHERE isActive = true and platform = '" + platformName + "'");
+        List<PrivacyPolicy> privacyPolicyResult = (List<PrivacyPolicy>) query.list();
 
-        return queryResult;
+        return DataAccessUtils.singleResult(privacyPolicyResult);
     }
 
 }

@@ -5,6 +5,8 @@ import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.model.Platform;
 import cr.talent.model.TermsOfService;
 import cr.talent.support.exceptions.NoActiveTermsOfServiceException;
+import cr.talent.ws.ContentResource;
+import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -24,7 +26,7 @@ import javax.ws.rs.core.Response;
 @Component
 @Scope("request")
 @Path("/content/termsOfService")
-public class TermsOfServiceResource {
+public class TermsOfServiceResource extends ContentResource {
 
     /**
      * TermsOfService service to obtain the currently active version terms of service.
@@ -41,20 +43,17 @@ public class TermsOfServiceResource {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public Response processToSRequest(@QueryParam("platform") String platform) {
+    public Response processToSRequest(@QueryParam("platform") String platformName) {
         try {
             String toSContent;
-            if (platform.equals("android")) {
-                toSContent = this.toSService.getActiveTermsOfService(Platform.ANDROID).getToSContent();
-            } else if(platform.equals("web")) {
-                toSContent = this.toSService.getActiveTermsOfService(Platform.WEB).getToSContent();
-            } else {
-                return Response.status(Response.Status.BAD_REQUEST).build();
-            }
-            return Response.ok().entity(toSContent).build();
+            Platform platform = super.getPlatformByName(platformName);
+            toSContent = this.toSService.getActiveTermsOfService(platform).getToSContent();
 
+            return Response.ok().entity(toSContent).build();
         } catch (NoActiveTermsOfServiceException e) {
             return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (UnsupportedPlatformException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 }
