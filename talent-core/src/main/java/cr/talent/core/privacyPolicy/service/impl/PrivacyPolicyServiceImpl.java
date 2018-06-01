@@ -2,6 +2,7 @@ package cr.talent.core.privacyPolicy.service.impl;
 
 import cr.talent.core.privacyPolicy.dao.PrivacyPolicyDao;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
+import cr.talent.model.Platform;
 import cr.talent.model.PrivacyPolicy;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class PrivacyPolicyServiceImpl extends CrudServiceImpl<PrivacyPolicy, Str
     }
 
     @Override
-    public PrivacyPolicy getActivePrivacyPolicy() {
-        return privacyPolicyDao.getActivePrivacyPolicy();
+    public PrivacyPolicy getActivePrivacyPolicy(Platform platform) {
+        return privacyPolicyDao.getActivePrivacyPolicy(platform);
     }
 
 }

@@ -1,6 +1,7 @@
 package cr.talent.core.privacyPolicy.dao.impl;
 
 import cr.talent.core.privacyPolicy.dao.PrivacyPolicyDao;
+import cr.talent.model.Platform;
 import cr.talent.model.PrivacyPolicy;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
@@ -26,11 +27,11 @@ public class HibernatePrivacyPolicyDao extends HibernateCrudDao<PrivacyPolicy, S
     }
 
     @Override
-    public PrivacyPolicy getActivePrivacyPolicy() {
+    public PrivacyPolicy getActivePrivacyPolicy(Platform requestPlatform) {
         PrivacyPolicy queryResult;
         try {
             Query query = super.getSessionFactory().getCurrentSession()
-                    .createQuery("FROM PrivacyPolicy WHERE Active = true");
+                    .createQuery("FROM PrivacyPolicy WHERE isActive = true and platform=requestPlatform");
             queryResult = (PrivacyPolicy) query.getSingleResult();
         } catch (NoResultException nre) {
             queryResult = null;

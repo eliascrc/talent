@@ -2,6 +2,7 @@ package cr.talent.ws.rest;
 
 
 import cr.talent.core.termsOfService.service.ToSService;
+import cr.talent.model.Platform;
 import cr.talent.model.TermsOfService;
 import cr.talent.support.exceptions.NoActiveTermsOfServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -39,9 +41,16 @@ public class TermsOfServiceResource {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public Response processToSRequest() {
+    public Response processToSRequest(@QueryParam("platform") String platform) {
         try {
-            String toSContent = this.toSService.getActiveTermsOfService().getToSContent();
+            String toSContent;
+            if (platform.equals("android")) {
+                toSContent = this.toSService.getActiveTermsOfService(Platform.ANDROID).getToSContent();
+            } else if(platform.equals("web")) {
+                toSContent = this.toSService.getActiveTermsOfService(Platform.WEB).getToSContent();
+            } else {
+                return Response.status(Response.Status.BAD_REQUEST).build();
+            }
             return Response.ok().entity(toSContent).build();
 
         } catch (NoActiveTermsOfServiceException e) {

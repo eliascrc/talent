@@ -1,6 +1,7 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
+import cr.talent.model.Platform;
 import cr.talent.model.PrivacyPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -32,7 +33,7 @@ public class PrivacyPolicyResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public Response getActivePrivacyPolicy() {
-        PrivacyPolicy activePrivacyPolicy = privacyPolicyService.getActivePrivacyPolicy();
+        PrivacyPolicy activePrivacyPolicy = privacyPolicyService.getActivePrivacyPolicy(Platform.ANDROID);
 
         Response response;
         if (activePrivacyPolicy == null) {
