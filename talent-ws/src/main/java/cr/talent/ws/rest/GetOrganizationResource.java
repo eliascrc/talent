@@ -47,7 +47,6 @@ public class GetOrganizationResource {
                 response = Response.status(200).entity(organizationJson).build();
             }
         }
-
         return response;
     }
 }
