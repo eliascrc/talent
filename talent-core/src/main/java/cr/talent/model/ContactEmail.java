@@ -17,11 +17,9 @@ public class ContactEmail extends BasicEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    /**
-     * The subject of the email.
-     */
-    @Column(name = "subject", nullable = false)
-    private String subject;
+    @Column(name = "issueType", nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private ContactEmailIssueType issueType;
 
     /**
      * The email content.
@@ -41,10 +39,6 @@ public class ContactEmail extends BasicEntity {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Column(name = "issueType", nullable = false)
-    @Enumerated(value = EnumType.STRING)
-    private ContactUsIssueType issueType;
-
     public ContactEmail(){}
 
     public void setEmail(String email) {
@@ -53,14 +47,6 @@ public class ContactEmail extends BasicEntity {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
     }
 
     public String getContent() {
@@ -79,9 +65,9 @@ public class ContactEmail extends BasicEntity {
 
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    public ContactUsIssueType getIssueType() { return issueType; }
+    public ContactEmailIssueType getIssueType() { return issueType; }
 
-    public void setIssueType(ContactUsIssueType issueType) { this.issueType = issueType; }
+    public void setIssueType(ContactEmailIssueType issueType) { this.issueType = issueType; }
 
     @Override
     public boolean onEquals(Object o) {

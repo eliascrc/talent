@@ -5,6 +5,6 @@ package cr.talent.model;
  *
  *  @author Fabián Roberto Leandro
  */
-public enum ContactUsIssueType {
-    AUTHENTICATION_ISSUES, ACCOUNT_CLOSING, OTHER;
+public enum ContactEmailIssueType {
+    AUTHENTICATION_ISSUES, ACCOUNT_CLOSING, OTHER
 }

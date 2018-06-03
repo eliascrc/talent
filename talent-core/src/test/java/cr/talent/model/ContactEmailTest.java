@@ -21,7 +21,7 @@ public class ContactEmailTest {
     @Test
     public void coreTest () {
 
-        String subject = "test";
+        ContactEmailIssueType issueType = ContactEmailIssueType.ACCOUNT_CLOSING;
         String content = "test";
 
         // Verify the constructor
@@ -29,12 +29,12 @@ public class ContactEmailTest {
 
         // Verify the sets
         contactEmail.setEmail(EMAIL);
-        contactEmail.setSubject(subject);
+        contactEmail.setIssueType(issueType );
         contactEmail.setContent(content);
 
         // Verify the gets
         assertEquals(EMAIL, contactEmail.getEmail());
-        assertEquals(subject, contactEmail.getSubject());
+        assertEquals(issueType , contactEmail.getIssueType());
         assertEquals(content, contactEmail.getContent());
 
     }
