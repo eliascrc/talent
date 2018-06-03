@@ -146,6 +146,18 @@ public class TechnicalResource extends User{
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "lead")
     private Set<LeadPosition> leadPositions;
 
+    /**
+     * A small description of the resource
+     */
+    @Column(name = "description")
+    private String description;
+
+    /**
+     * The previous jobs of the resource. It's used for constructing the CV.
+     */
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "technicalResource")
+    private Set<PreviousJob> previousJobs;
+
     public TechnicalResource(){}
 
     /**
@@ -340,5 +352,21 @@ public class TechnicalResource extends User{
 
     public void setLeadPositions(Set<LeadPosition> leadPositions) {
         this.leadPositions = leadPositions;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<PreviousJob> getPreviousJobs() {
+        return previousJobs;
+    }
+
+    public void setPreviousJobs(Set<PreviousJob> previousJobs) {
+        this.previousJobs = previousJobs;
     }
 }

@@ -40,6 +40,12 @@ public class EducationRecord extends BasicEntity{
     private String description;
 
     /**
+     * The level of the record.
+     */
+    @Column (name = "level")
+    private String level;
+
+    /**
      * Technical resource that has de education record.
      */
     @ManyToOne
@@ -134,5 +140,13 @@ public class EducationRecord extends BasicEntity{
 
     public void setHumanResourceManager(HumanResourceManager humanResourceManager) {
         this.humanResourceManager = humanResourceManager;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 }
