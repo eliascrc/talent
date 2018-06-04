@@ -86,7 +86,7 @@ public class Organization extends BasicEntity {
      * A list with the categories of skills that the organization has registered.
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
-    private Set<OrganizationSkillCategory> skillCategories;
+    private Set<SkillCategory> skillCategories;
 
     /**
      * A list with the projects that have been created in the organization.
@@ -222,11 +222,11 @@ public class Organization extends BasicEntity {
         this.capabilities = capabilities;
     }
 
-    public Set<OrganizationSkillCategory> getSkillCategories() {
+    public Set<SkillCategory> getSkillCategories() {
         return skillCategories;
     }
 
-    public void setSkillCategories(Set<OrganizationSkillCategory> skillCategories) {
+    public void setSkillCategories(Set<SkillCategory> skillCategories) {
         this.skillCategories = skillCategories;
     }
 

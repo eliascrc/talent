@@ -47,7 +47,7 @@ public class Invitation extends BasicEntity {
             joinColumns = { @JoinColumn(name = "invitation_id") },
             inverseJoinColumns = { @JoinColumn(name = "skill_id") }
     )
-    private Set<OrganizationSkill> skills;
+    private Set<Skill> skills;
 
     /**
      * The organization where the invitation came from.
@@ -107,11 +107,11 @@ public class Invitation extends BasicEntity {
         this.technicalPosition = technicalPosition;
     }
 
-    public Set<OrganizationSkill> getSkills() {
+    public Set<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Set<OrganizationSkill> skills) {
+    public void setSkills(Set<Skill> skills) {
         this.skills = skills;
     }
 

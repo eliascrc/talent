@@ -22,10 +22,16 @@ public class EducationRecord extends BasicEntity{
     private String institution;
 
     /**
-     * Date that the education record was given to the person.
+     * Date that the resource started the training.
      */
     @Column (name = "date")
-    private Date date;
+    private Date startDate;
+
+    /**
+     * Date that the resource ended the training.
+     */
+    @Column (name = "date")
+    private Date endDate;
 
     /**
      * Earned title in the education record.
@@ -95,11 +101,11 @@ public class EducationRecord extends BasicEntity{
     }
 
     public Date getDate() {
-        return date;
+        return startDate;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.startDate = date;
     }
 
     public String getTitle() {
@@ -148,5 +154,13 @@ public class EducationRecord extends BasicEntity{
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }

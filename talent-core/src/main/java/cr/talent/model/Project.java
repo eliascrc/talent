@@ -102,10 +102,10 @@ public class Project extends BasicEntity {
     private Organization organization;
 
     /**
-     * List of observations made in the project.
+     * List of feedback made in the project.
      */
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "relatedProject")
-    private Set<Observation> observations;
+    private Set<Feedback> resourcesFeedback;
 
     public Project () {}
 
@@ -184,12 +184,12 @@ public class Project extends BasicEntity {
         this.organization = organization;
     }
 
-    public Set<Observation> getObservations() {
-        return observations;
+    public Set<Feedback> getResourcesFeedback() {
+        return resourcesFeedback;
     }
 
-    public void setObservations(Set<Observation> observations) {
-        this.observations = observations;
+    public void setResourcesFeedback(Set<Feedback> resourcesFeedback) {
+        this.resourcesFeedback = resourcesFeedback;
     }
 
     public String getDescription() {

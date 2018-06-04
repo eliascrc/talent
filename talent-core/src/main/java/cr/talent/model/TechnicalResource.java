@@ -38,7 +38,7 @@ public class TechnicalResource extends User{
      * The list of the resource's skills.
      */
     @ManyToMany(mappedBy = "resources")
-    private Set<OrganizationSkill> skills;
+    private Set<Skill> skills;
 
     /**
      * The list of the resource's education records.
@@ -82,7 +82,7 @@ public class TechnicalResource extends User{
      * The resource's kudos and warnings.
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "observee")
-    private Set<Observation> observations;
+    private Set<Feedback> feedbackMade;
 
     /**
      * The resource's timezone setting.
@@ -128,10 +128,10 @@ public class TechnicalResource extends User{
     private boolean isAdministrator;
 
     /**
-     * List of the observations that that resource has made.
+     * List of feedback that that resource has given to others.
      */
-    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "author")
-    private Set<Kudo> madeKudo;
+    @OneToMany (cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "observer")
+    private Set<Feedback> feedbackGiven;
 
     /**
      * Technical Resouce's two step verification
@@ -155,7 +155,7 @@ public class TechnicalResource extends User{
     /**
      * The previous jobs of the resource. It's used for constructing the CV.
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "technicalResource")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "technicalResource")
     private Set<PreviousJob> previousJobs;
 
     public TechnicalResource(){}
@@ -274,12 +274,12 @@ public class TechnicalResource extends User{
         this.technicalManager = technicalManager;
     }
 
-    public Set<Observation> getObservations() {
-        return observations;
+    public Set<Feedback> getFeedbackMade() {
+        return feedbackMade;
     }
 
-    public void setObservations(Set<Observation> observations) {
-        this.observations = observations;
+    public void setFeedbackMade(Set<Feedback> feedbackMade) {
+        this.feedbackMade = feedbackMade;
     }
 
     public Set<EmergencyContact> getEmergencyContacts() {
@@ -314,19 +314,19 @@ public class TechnicalResource extends User{
         this.levelAssessmentTimeGap = levelAssessmentTimeGap;
     }
 
-    public Set<Kudo> getMadeKudo() {
-        return madeKudo;
+    public Set<Feedback> getFeedbackGiven() {
+        return feedbackGiven;
     }
 
-    public void setMadeKudo(Set<Kudo> madeKudo) {
-        this.madeKudo = madeKudo;
+    public void setFeedbackGiven(Set<Feedback> madeKudo) {
+        this.feedbackGiven = madeKudo;
     }
 
-    public Set<OrganizationSkill> getSkills() {
+    public Set<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Set<OrganizationSkill> skills) {
+    public void setSkills(Set<Skill> skills) {
         this.skills = skills;
     }
 

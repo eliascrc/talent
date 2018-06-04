@@ -2,7 +2,6 @@ package cr.talent.model;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -69,7 +68,7 @@ public class ProjectTest{
         project.setProjectCapabilities(new HashSet<>());
         project.setProjectPositions(new HashSet<>());
         project.setOrganization(ORGANIZATION);
-        project.setObservations(new HashSet<>());
+        project.setResourcesFeedback(new HashSet<>());
 
         // Verify the gets
         assertEquals(ID, project.getId());
@@ -89,7 +88,7 @@ public class ProjectTest{
         assertNotNull(project.getProjectCapabilities());
         assertNotNull(project.getProjectPositions());
         assertEquals(ORGANIZATION, project.getOrganization());
-        assertNotNull(project.getObservations());
+        assertNotNull(project.getResourcesFeedback());
     }
 
     //ON EQUALS TESTS.
