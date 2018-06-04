@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Class that represents an Education Record within the Talent system.
- * It contains the institution, date, title, description, resource, pdfFile
+ * It contains the institution, start and end date, title, description, level, resource, pdfFile
  * and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
  * @author María José Cubero

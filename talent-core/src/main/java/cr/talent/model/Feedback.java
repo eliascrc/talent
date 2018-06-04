@@ -37,13 +37,13 @@ public class Feedback extends BasicEntity {
      * The project that is related to the feedback.
      */
     @ManyToOne
-    @JoinColumn (name = "project_id")
+    @JoinColumn (name = "project_id", nullable = false)
     private Project relatedProject;
 
     /**
      * The type of feedback. Kudo or Warning.
      */
-    @Column(name = "feedback_type")
+    @Column(name = "feedback_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private FeedbackType feedbackType;
 

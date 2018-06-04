@@ -40,7 +40,7 @@ public class Skill extends BasicEntity {
     /**
      * The type of skill
      */
-    @Column(name = "skill_type")
+    @Column(name = "skill_type", nullable = false)
     @Enumerated(EnumType.STRING)
     private SkillType skillType;
 
