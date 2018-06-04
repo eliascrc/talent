@@ -3,7 +3,6 @@ package cr.talent.ws.rest;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
 import cr.talent.model.Platform;
 import cr.talent.support.exceptions.NoActivePrivacyPolicyException;
-import cr.talent.ws.ContentResource;
 import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
