@@ -18,9 +18,16 @@ public class ProfilePicture extends Image{
     /**
      * Technical resource that owns the profile picture.
      */
-    @OneToOne (mappedBy = "profilePicture")
+    @OneToOne (cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "profilePicture")
     private TechnicalResource technicalResource;
 
     public ProfilePicture (){}
 
+    public TechnicalResource getTechnicalResource() {
+        return technicalResource;
+    }
+
+    public void setTechnicalResource(TechnicalResource technicalResource) {
+        this.technicalResource = technicalResource;
+    }
 }

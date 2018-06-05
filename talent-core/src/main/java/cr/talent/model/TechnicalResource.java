@@ -25,7 +25,7 @@ public class TechnicalResource extends User{
      * The profile picture of the user.
      */
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "profile_picture_id", unique = true)
+    @JoinColumn(name = "profile_picture_id")
     private ProfilePicture profilePicture;
 
     /**

@@ -41,10 +41,14 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
         TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();
 
         ProfilePicture profilePicture = new ProfilePicture();
+        profilePicture.setTechnicalResource(technicalResource);
         this.create(profilePicture);
 
         profilePicture.setLink(link + profilePicture.getId() + ".jpg");
+        System.out.println("NOMBRE" + technicalResource.getFirstName());
         technicalResource.setProfilePicture(profilePicture);
+        System.out.println("LINK" + technicalResource.getProfilePicture().getLink());
+
         this.imageDao.uploadImage(profilePicture.getId() + ".jpg", file);
     }
 
