@@ -49,7 +49,8 @@ id="WebApp_ID" version="3.0">
 			classpath:talent-core.spring.xml,
 			classpath:talent-persistence.spring.xml,
 			classpath:talent-security.spring.xml,
-			classpath:talent-mail.spring.xml
+			classpath:talent-mail.spring.xml,
+			classpath:talent-aws.spring.xml
 		</param-value>
 	</context-param>
 
