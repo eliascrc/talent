@@ -35,6 +35,7 @@
         <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
+        <security:intercept-url pattern="/ws/signUp/**/*" access="permitAll()" method="POST"/>
         <security:csrf disabled="true"/>
     </security:http>
 
