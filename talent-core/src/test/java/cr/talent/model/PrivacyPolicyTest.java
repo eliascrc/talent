@@ -46,6 +46,7 @@ public class PrivacyPolicyTest {
         privacyPolicy.setStartDate(START_DATE1);
         privacyPolicy.setEndDate(END_DATE1);
         privacyPolicy.setActive(active);
+        privacyPolicy.setPlatform(Platform.WEB);
 
         // Verify the gets
         assertEquals(ID, privacyPolicy.getId());
@@ -56,6 +57,7 @@ public class PrivacyPolicyTest {
         assertEquals(START_DATE1, privacyPolicy.getStartDate());
         assertEquals(END_DATE1, privacyPolicy.getEndDate());
         assertEquals(active, privacyPolicy.isActive());
+        assertEquals(Platform.WEB, privacyPolicy.getPlatform());
     }
 
     @Test

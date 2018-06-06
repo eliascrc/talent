@@ -1,5 +1,6 @@
 package cr.talent.core.termsOfService.service;
 
+import cr.talent.model.Platform;
 import cr.talent.model.TermsOfService;
 import cr.talent.support.service.CrudService;
 
@@ -15,6 +16,6 @@ public interface ToSService extends CrudService<TermsOfService, String> {
      * service.
      * @return The active TermsOfService
      */
-    TermsOfService getActiveTermsOfService();
+    TermsOfService getActiveTermsOfService(Platform platform);
 
 }
