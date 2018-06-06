@@ -3,9 +3,7 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.model.Platform;
-import cr.talent.model.TermsOfService;
 import cr.talent.support.exceptions.NoActiveTermsOfServiceException;
-import cr.talent.ws.ContentResource;
 import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

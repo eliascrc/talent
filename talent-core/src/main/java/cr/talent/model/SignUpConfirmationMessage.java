@@ -16,7 +16,7 @@ public class SignUpConfirmationMessage extends BasicEntity {
     /**
      * The technical resource doing the sign up.
      */
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "technicalResource", nullable = false, unique = true)
     private TechnicalResource technicalResource;
 
     /**
@@ -61,4 +61,5 @@ public class SignUpConfirmationMessage extends BasicEntity {
     public void setTechnicalResource(TechnicalResource technicalResource) {
         this.technicalResource = technicalResource;
     }
+
 }

@@ -1,4 +1,4 @@
-package cr.talent.ws;
+package cr.talent.ws.rest;
 
 import cr.talent.model.Platform;
 import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
@@ -10,8 +10,8 @@ import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
  */
 public abstract class ContentResource {
 
-    private final String androidParameterName = "android";
-    private final String webParameterName = "web";
+    private final String ANDROID_PARAMETER_NAME = "android";
+    private final String WEB_PARAMETER_NAME = "web";
 
     /**
      * Used to get the platform based on the value given to the get parameter
@@ -19,9 +19,9 @@ public abstract class ContentResource {
      * @return The enum value of the requested platform or an exception if it does not exist
      */
     protected Platform getPlatformByName(String platformName) {
-        if (platformName.equals(androidParameterName)) {
+        if (platformName.equals(ANDROID_PARAMETER_NAME)) {
             return Platform.ANDROID;
-        } else if (platformName.equals(webParameterName)) {
+        } else if (platformName.equals(WEB_PARAMETER_NAME)) {
             return Platform.WEB;
         } else {
             throw new UnsupportedPlatformException();
