@@ -80,15 +80,8 @@ public class SignUpResource {
 
 
         try {
-            if (hadAnotherConfirmationMessage) {
-                this.technicalResourceService.update(technicalResource);
-                this.signUpConfirmationMessageService.update(signUpConfirmationMessage);
-            } else {
-                this.technicalResourceService.create(technicalResource);
-                this.signUpConfirmationMessageService.create(signUpConfirmationMessage);
-            }
-            signUpConfirmationEmailService.sendSignUpConfirmationEmail(signUpConfirmationMessage);
-        } catch (IllegalArgumentException e) {
+            signUpConfirmationMessageService.sendMessage(signUpConfirmationMessage, technicalResource, hadAnotherConfirmationMessage);
+        } catch (IllegalArgumentException e) {  // if the password is not valid
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 

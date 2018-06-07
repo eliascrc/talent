@@ -1,8 +1,11 @@
 package cr.talent.core.signUpConfirmationMessage.service.impl;
 
+import cr.talent.core.email.signUpConfirmationEmail.service.SignUpConfirmationEmailService;
+import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.core.signUpConfirmationMessage.dao.SignUpConfirmationMessageDao;
 import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
 import cr.talent.model.SignUpConfirmationMessage;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,12 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
     @Autowired
     private SignUpConfirmationMessageDao signUpConfirmationMessageDao;
 
+    @Autowired
+    private TechnicalResourceService technicalResourceService;
+
+    @Autowired
+    SignUpConfirmationEmailService signUpConfirmationEmailService;
+
     public void init() { setCrudDao(this.signUpConfirmationMessageDao); }
 
     @Override
@@ -31,6 +40,18 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
             throw new NonExistentConfirmationMessageException();
 
         return signUpConfirmation;
+    }
+
+    @Override
+    public void sendMessage(SignUpConfirmationMessage signUpConfirmationMessage, TechnicalResource technicalResource, boolean hadAnotherConfirmationMessage) {
+        if (hadAnotherConfirmationMessage) {
+            this.technicalResourceService.update(technicalResource);
+            this.update(signUpConfirmationMessage);
+        } else {
+            this.technicalResourceService.create(technicalResource);
+            this.create(signUpConfirmationMessage);
+        }
+        signUpConfirmationEmailService.sendSignUpConfirmationEmail(signUpConfirmationMessage);
     }
 
 }

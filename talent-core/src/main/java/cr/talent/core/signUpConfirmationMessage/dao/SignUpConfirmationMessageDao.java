@@ -13,6 +13,7 @@ public interface SignUpConfirmationMessageDao extends CrudDao<SignUpConfirmation
     /**
      * Retrieves an active sign up confirmation message for a specific user
      * @param username the email of the user performing the sign up
+     * @return the confirmation message if it exists for that username, null otherwise
      */
     SignUpConfirmationMessage getActiveConfirmationMessage(String username);
 
