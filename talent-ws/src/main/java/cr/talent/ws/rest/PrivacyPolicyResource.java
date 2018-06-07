@@ -1,7 +1,9 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
-import cr.talent.model.PrivacyPolicy;
+import cr.talent.model.Platform;
+import cr.talent.support.exceptions.NoActivePrivacyPolicyException;
+import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -20,7 +23,7 @@ import javax.ws.rs.core.Response;
 @Component
 @Scope("request")
 @Path("/content/privacyPolicy")
-public class PrivacyPolicyResource {
+public class PrivacyPolicyResource extends ContentResource {
 
     @Autowired
     PrivacyPolicyService privacyPolicyService;
@@ -31,18 +34,18 @@ public class PrivacyPolicyResource {
      */
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public Response getActivePrivacyPolicy() {
-        PrivacyPolicy activePrivacyPolicy = privacyPolicyService.getActivePrivacyPolicy();
+    public Response getActivePrivacyPolicy(@QueryParam("platform") String platformName) {
+        try {
+            String privacyPolicyContent;
+            Platform platform = super.getPlatformByName(platformName);
+            privacyPolicyContent = this.privacyPolicyService.getActivePrivacyPolicy(platform).getContent();
 
-        Response response;
-        if (activePrivacyPolicy == null) {
-            response = Response.status(204).build();
-        } else {
-            String privacyPolicyContent = activePrivacyPolicy.getContent();
-            response = Response.status(200).entity(privacyPolicyContent).build();
+            return Response.ok().entity(privacyPolicyContent).build();
+        } catch (NoActivePrivacyPolicyException e) {
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } catch (UnsupportedPlatformException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
-
-        return response;
     }
 
 }

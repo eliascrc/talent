@@ -64,6 +64,9 @@ public abstract class User extends BasicEntity implements UserDetails {
     @Column(name = "last_login_timestamp")
     private Date lastLoginTimestamp;
 
+    @Column(name = "token", nullable = false)
+    private String token;
+
     /**
      * The status of the user account.
      */
@@ -196,4 +199,7 @@ public abstract class User extends BasicEntity implements UserDetails {
         this.status = status;
     }
 
+    public String getToken() { return token; }
+
+    public void setToken(String token) { this.token = token; }
 }

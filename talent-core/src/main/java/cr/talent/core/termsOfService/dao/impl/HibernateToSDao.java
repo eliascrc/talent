@@ -1,6 +1,7 @@
 package cr.talent.core.termsOfService.dao.impl;
 
 import cr.talent.core.termsOfService.dao.ToSDao;
+import cr.talent.model.Platform;
 import cr.talent.model.TermsOfService;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
@@ -33,12 +34,13 @@ public class HibernateToSDao extends HibernateCrudDao<TermsOfService, String> im
     }
 
     /**
-     * @see cr.talent.core.termsOfService.dao.ToSDao#getActiveTermsOfService()
+     * @see cr.talent.core.termsOfService.dao.ToSDao#getActiveTermsOfService(Platform)
      */
     @Override
-    public TermsOfService getActiveTermsOfService() {
+    public TermsOfService getActiveTermsOfService(Platform requestPlatform) {
+        String platformName = requestPlatform.name();
         Query query = super.getSessionFactory().getCurrentSession()
-                .createQuery("FROM TermsOfService WHERE isActive = true");
+                .createQuery("FROM TermsOfService WHERE isActive = true and platform = '" + platformName + "'");
         List<TermsOfService> termsOfServiceResult = (List<TermsOfService>) query.list();
 
         return DataAccessUtils.singleResult(termsOfServiceResult);

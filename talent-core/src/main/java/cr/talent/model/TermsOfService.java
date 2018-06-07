@@ -40,6 +40,13 @@ public class TermsOfService extends BasicEntity {
     @Column(name = "is_active")
     private boolean isActive;
 
+    /**
+     * The platform in which Talent is being used
+     */
+    @Column (name = "platform")
+    @Enumerated(value = EnumType.STRING)
+    private Platform platform;
+
     public TermsOfService() {
     }
 
@@ -91,4 +98,8 @@ public class TermsOfService extends BasicEntity {
     public void setActive(boolean active) {
         isActive = active;
     }
+
+    public Platform getPlatform() { return this.platform; }
+
+    public void setPlatform(Platform platform) { this.platform = platform; }
 }
