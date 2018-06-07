@@ -1,8 +1,12 @@
 package cr.talent.ws.rest;
 
-import cr.talent.core.technicalResource.service.TechnicalResourceService;
+
+import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
+import cr.talent.model.SignUpConfirmationMessage;
 import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
+import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -20,17 +24,20 @@ import javax.ws.rs.core.Response;
  */
 @Component
 @Scope("request")
-@Path("/ws/signUp")
+@Path("/signUp")
 public class SignUpResource {
 
     @Autowired
     TechnicalResourceService technicalResourceService;
 
+    @Autowired
+    SignUpConfirmationMessageService signUpConfirmationMessageService;
+
     //The highest number that can be used for a confirmation code
     private static final int MAX_CONFIRMATION_CODE = 999999;
 
     @POST
-    @Path("/step1")
+    @Path("/stepOne")
     public Response performFirstStep(@FormParam("firstName") String firstName,
                                      @FormParam("lastName") String lastName,
                                      @FormParam("email") String email,
@@ -48,6 +55,22 @@ public class SignUpResource {
         technicalResource.setStatus(User.Status.INACTIVE);
         technicalResource.setAdministrator(true); //because they are signing up while creating an organization
         this.technicalResourceService.create(technicalResource);
+
+        int confirmationCode = (int) (MAX_CONFIRMATION_CODE * Math.random());
+        SignUpConfirmationMessage signUpConfirmationMessage;
+        try {
+            signUpConfirmationMessage = signUpConfirmationMessageService
+                    .getActiveConfirmationMessage(technicalResource.getUsername());
+            signUpConfirmationMessage.setConfirmationCode(String.valueOf(confirmationCode));
+            signUpConfirmationMessage.setTechnicalResource(technicalResource);
+            signUpConfirmationMessageService.update(signUpConfirmationMessage);
+        } catch(NonExistentConfirmationMessageException e) {
+            signUpConfirmationMessage = new SignUpConfirmationMessage();
+            signUpConfirmationMessage.setConfirmationCode(String.valueOf(confirmationCode));
+            signUpConfirmationMessage.setTechnicalResource(technicalResource);
+            signUpConfirmationMessageService.create(signUpConfirmationMessage);
+        }
+
 
         return Response.ok().build();
     }

@@ -1,7 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Class that represents a SignUpConfirmationMessage within the Talent system.
@@ -10,13 +9,15 @@ import javax.persistence.Table;
  *
  * @author Daniel Montes de Oca
  */
+@Entity
 @Table(name = "sign_up_confirmation_message")
 public class SignUpConfirmationMessage extends BasicEntity {
 
     /**
      * The technical resource doing the sign up.
      */
-    @Column(name = "technicalResource", nullable = false, unique = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "technical_resource_id", unique = true)
     private TechnicalResource technicalResource;
 
     /**

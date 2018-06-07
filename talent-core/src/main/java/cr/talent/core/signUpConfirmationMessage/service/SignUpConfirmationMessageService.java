@@ -9,4 +9,7 @@ import cr.talent.support.service.CrudService;
  * @author Daniel Montes de Oca
  */
 public interface SignUpConfirmationMessageService extends CrudService<SignUpConfirmationMessage, String> {
+
+    SignUpConfirmationMessage getActiveConfirmationMessage(String username);
+
 }
