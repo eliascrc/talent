@@ -1,5 +1,6 @@
 package cr.talent.ws.rest.support.security;
 
+import cr.talent.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -24,7 +25,7 @@ public class SuccessAuthenticationHandler extends SimpleUrlAuthenticationSuccess
 
     private static final transient Logger logger = LoggerFactory.getLogger(SuccessAuthenticationHandler.class);
 
-    private void init(){
+    private void init() {
         this.setDefaultTargetUrl("/ws/authenticated");
     }
 
@@ -33,13 +34,13 @@ public class SuccessAuthenticationHandler extends SimpleUrlAuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
 
-        if(request.getHeader("Origin") != null){
+        if (request.getHeader("Origin") != null) {
             response.setStatus(HttpServletResponse.SC_OK);
             response.addHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
             response.addHeader("Access-Control-Allow-Credentials", "true");
             response.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
             response.addHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Authorization");
-        }else
+        } else
             super.onAuthenticationSuccess(request, response, authentication);
     }
 }
