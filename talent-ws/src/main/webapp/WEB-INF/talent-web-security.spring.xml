@@ -33,7 +33,8 @@
         <security:intercept-url pattern="/ws/login/organization" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/user/authenticated" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()"/>
-        <security:intercept-url pattern="/ws/contactUs/create" access="permitAll()" method="POST"/>
+        <security:intercept-url pattern="/ws/contactUs/authenticated" access="hasAuthority('ROLE_USER')" method="POST"/>
+        <security:intercept-url pattern="/ws/contactUs/unauthenticated" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
         <security:csrf disabled="true"/>
