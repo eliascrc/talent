@@ -2,7 +2,6 @@ package cr.talent.ws.rest;
 
 
 import cr.talent.core.email.signUpConfirmationEmail.service.SignUpConfirmationEmailService;
-import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
 import cr.talent.model.SignUpConfirmationMessage;
 import cr.talent.model.TechnicalResource;
@@ -27,9 +26,6 @@ import javax.ws.rs.core.Response;
 @Scope("request")
 @Path("/signUp")
 public class SignUpResource {
-
-    @Autowired
-    TechnicalResourceService technicalResourceService;
 
     @Autowired
     SignUpConfirmationMessageService signUpConfirmationMessageService;
