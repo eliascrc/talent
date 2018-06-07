@@ -1,6 +1,7 @@
 package cr.talent.ws.rest;
 
 
+import cr.talent.core.email.signUpConfirmationEmail.service.SignUpConfirmationEmailService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
 import cr.talent.model.SignUpConfirmationMessage;
@@ -33,8 +34,14 @@ public class SignUpResource {
     @Autowired
     SignUpConfirmationMessageService signUpConfirmationMessageService;
 
+    @Autowired
+    SignUpConfirmationEmailService signUpConfirmationEmailService;
+
     //The highest number that can be used for a confirmation code
     private static final int MAX_CONFIRMATION_CODE = 999999;
+
+    //The number of digits in the confirmation code
+    private static final int DIGITS = 6;
 
     @POST
     @Path("/stepOne")
@@ -47,28 +54,42 @@ public class SignUpResource {
                 StringUtils.isEmpty(password))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        TechnicalResource technicalResource = new TechnicalResource();
+        TechnicalResource technicalResource;
+        SignUpConfirmationMessage signUpConfirmationMessage;
+        boolean hadAnotherConfirmationMessage = false;
+        int confirmationCode = (int) (MAX_CONFIRMATION_CODE * Math.random());
+        try {
+            signUpConfirmationMessage = signUpConfirmationMessageService
+                    .getActiveConfirmationMessage(email);
+            technicalResource = signUpConfirmationMessage.getTechnicalResource();
+            hadAnotherConfirmationMessage = true;
+        } catch(NonExistentConfirmationMessageException e) {
+            technicalResource = new TechnicalResource();
+            signUpConfirmationMessage = new SignUpConfirmationMessage();
+        }
+
         technicalResource.setFirstName(firstName);
         technicalResource.setLastName(lastName);
         technicalResource.setUsername(email);
         technicalResource.setPassword(password);
         technicalResource.setStatus(User.Status.INACTIVE);
         technicalResource.setAdministrator(true); //because they are signing up while creating an organization
-        this.technicalResourceService.create(technicalResource);
 
-        int confirmationCode = (int) (MAX_CONFIRMATION_CODE * Math.random());
-        SignUpConfirmationMessage signUpConfirmationMessage;
+        signUpConfirmationMessage.setConfirmationCode(String.format("%0" + DIGITS + "d", confirmationCode));
+        signUpConfirmationMessage.setTechnicalResource(technicalResource);
+
+
         try {
-            signUpConfirmationMessage = signUpConfirmationMessageService
-                    .getActiveConfirmationMessage(technicalResource.getUsername());
-            signUpConfirmationMessage.setConfirmationCode(String.valueOf(confirmationCode));
-            signUpConfirmationMessage.setTechnicalResource(technicalResource);
-            signUpConfirmationMessageService.update(signUpConfirmationMessage);
-        } catch(NonExistentConfirmationMessageException e) {
-            signUpConfirmationMessage = new SignUpConfirmationMessage();
-            signUpConfirmationMessage.setConfirmationCode(String.valueOf(confirmationCode));
-            signUpConfirmationMessage.setTechnicalResource(technicalResource);
-            signUpConfirmationMessageService.create(signUpConfirmationMessage);
+            if (hadAnotherConfirmationMessage) {
+                this.technicalResourceService.update(technicalResource);
+                this.signUpConfirmationMessageService.update(signUpConfirmationMessage);
+            } else {
+                this.technicalResourceService.create(technicalResource);
+                this.signUpConfirmationMessageService.create(signUpConfirmationMessage);
+            }
+            signUpConfirmationEmailService.sendSignUpConfirmationEmail(signUpConfirmationMessage);
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
 

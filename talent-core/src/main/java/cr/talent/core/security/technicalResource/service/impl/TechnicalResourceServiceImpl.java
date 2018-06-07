@@ -85,4 +85,21 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
 
         return super.create(technicalResource);
     }
+
+    /**
+     * Method that creates a System Administrator user by supplying the correct and necessary information
+     * to the data access object.
+     * @param technicalResource The instance of System Administrator that must be created in the data base.
+     * @return The updated user.
+     */
+    @Override
+    public void update(TechnicalResource technicalResource) {
+
+        technicalResource.setUsername(technicalResource.getUsername().toLowerCase());
+        SecurityUtils.validatePassword(technicalResource.getPassword());
+        technicalResource.setPassword(passwordEncoder.encode(technicalResource.getPassword()));
+        technicalResource.setEnabled(true);
+
+        super.update(technicalResource);
+    }
 }

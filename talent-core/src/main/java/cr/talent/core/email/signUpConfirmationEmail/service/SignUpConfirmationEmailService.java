@@ -13,9 +13,8 @@ public interface SignUpConfirmationEmailService {
 
     /**
      * Sends the sign up confirmation email to a user that requests that action.
-     * @param destinationEmail
-     * @param signUpConfirmationMessage
+     * @param signUpConfirmationMessage the confirmation message in which the email will be based on
      */
-    void sendSignUpConfirmationEmail(String destinationEmail, SignUpConfirmationMessage signUpConfirmationMessage, TechnicalResource technicalResource);
+    void sendSignUpConfirmationEmail(SignUpConfirmationMessage signUpConfirmationMessage);
 
 }

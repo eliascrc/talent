@@ -33,17 +33,19 @@ public class SignUpConfirmationEmailServiceImpl implements SignUpConfirmationEma
     private EmailSenderService emailSenderService;
 
     @Override
-    public void sendSignUpConfirmationEmail(String destinationEmail, SignUpConfirmationMessage signUpConfirmationMessage, TechnicalResource technicalResource) {
+    public void sendSignUpConfirmationEmail(SignUpConfirmationMessage signUpConfirmationMessage) {
+        TechnicalResource technicalResource = signUpConfirmationMessage.getTechnicalResource();
+
         Email email = new Email();
         email.setFrom(talentEmail);
-        email.setTo(destinationEmail);
-        email.setSubject(SIGN_UP_CONFIRMATION_SUBJECT);
+        email.setTo(technicalResource.getUsername());
+        email.setSubject(SIGN_UP_CONFIRMATION_SUBJECT + " " + signUpConfirmationMessage.getConfirmationCode());
         email.setFileName(HTML_EMAIL_FILE);
 
         Map< String, Object> model = new HashMap();
-        //model.put("firstName", technicalResource.getFirstName());
-        //model.put("lastName", passwordResetRequest.getTechnicalResource().getLastName());
-        //model.put("link", LINK + passwordResetRequest.getToken());
+        model.put("firstName", technicalResource.getFirstName());
+        model.put("lastName", technicalResource.getLastName());
+        model.put("confirmationCode", signUpConfirmationMessage.getConfirmationCode());
 
         this.emailSenderService.sendEmail(email, model);
     }
