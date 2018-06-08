@@ -409,7 +409,7 @@ ALTER TABLE `talent`.`technical_resource`
 ADD CONSTRAINT `FK_DD16B79A94EDF9A2742A00283FB85DA5`
   FOREIGN KEY (`profile_picture_id`)
   REFERENCES `talent`.`image` (`id`)
-  ON DELETE CASCADE
+  ON DELETE SET NULL
   ON UPDATE CASCADE;
 
 

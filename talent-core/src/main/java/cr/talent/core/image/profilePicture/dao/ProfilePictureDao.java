@@ -6,10 +6,10 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.support.dao.CrudDao;
 
 /**
- * Data access object for all the {@link cr.talent.model.Image} in related operations.
+ * Data access object for all the {@link cr.talent.model.ProfilePicture} in related operations.
  *
  * @author María José Cubero
  */
-public interface DatabaseImageDao extends CrudDao<ProfilePicture, String> {
+public interface ProfilePictureDao extends CrudDao<ProfilePicture, String> {
 
 }

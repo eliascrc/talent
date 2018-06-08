@@ -35,7 +35,7 @@ public class OrganizationTest {
         boolean twoStepVerification = true;
         int totalUsers = 5;
         String domain = "talent.cr";
-        Image logo = mock(Image.class);
+        OrganizationLogo logo = mock(OrganizationLogo.class);
 
         //Verify the Constructor
         Organization organization = new Organization();
@@ -97,7 +97,7 @@ public class OrganizationTest {
     public void testEqualForDifferentClass() {
         Organization organization = new Organization();
 
-        Image image= new Image();
+        OrganizationLogo image= new OrganizationLogo();
 
         assertFalse(organization.equals(image));
     }

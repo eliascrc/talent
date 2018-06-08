@@ -16,10 +16,9 @@ public interface ProfilePictureService extends CrudService<ProfilePicture, Strin
 
     /**
      * uploads the picture of the logged in user that is making the request.
-     * path to the picture that is going to be uploaded.
      * @param file
      */
-    void uploadProfilePicture(String file);
+    void uploadProfilePicture(InputStream file);
 
     /**
      * deletes the picture of the logged in user that is making the request.
@@ -27,13 +26,8 @@ public interface ProfilePictureService extends CrudService<ProfilePicture, Strin
     void deleteProfilePicture();
 
     /**
-     * gets the picture of the logged in user that is making the request.
-     */
-    void getProfilePicture(String link);
-
-    /**
      * updates the picture of the logged in user that is making the request.
      * @param file
      */
-    void updateProfilePicture(String file);
+    void updateProfilePicture(InputStream file);
 }
