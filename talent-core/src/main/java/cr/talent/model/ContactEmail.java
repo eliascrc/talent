@@ -7,7 +7,6 @@ import javax.persistence.*;
  *
  * @author María José Cubero, Elías Calderón, Fabián Roberto Leandro
  */
-@MappedSuperclass
 public class ContactEmail extends Email {
 
     /**

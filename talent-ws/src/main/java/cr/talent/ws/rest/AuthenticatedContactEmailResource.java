@@ -2,7 +2,6 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.contactUsNotification.authenticatedContactUsNotification.service.AuthenticatedContactUsNotificationService;
 import cr.talent.core.email.contactEmail.authenticatedContactEmail.service.AuthenticatedContactEmailService;
-import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +49,11 @@ public class AuthenticatedContactEmailResource {
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         // Get the logged in user
-        TechnicalResource loggedUser = (TechnicalResource) SecurityUtils.getLoggedInUser();
+        User loggedUser = (User) SecurityUtils.getLoggedInUser();
 
         // Create the notification
         AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
-        contactUsNotification.setTechnicalResource(loggedUser);
+        //contactUsNotification.setTechnicalResource(loggedUser);
         contactUsNotification.setIssue(issue);
         contactUsNotification.setIssueType(issueTypeEnum);
         // Persist the notification
@@ -62,7 +61,7 @@ public class AuthenticatedContactEmailResource {
 
         // Create the email object
         AuthenticatedContactEmail authenticatedContactEmail= new AuthenticatedContactEmail();
-        authenticatedContactEmail.setUser(loggedUser);
+        //authenticatedContactEmail.setTechnicalResource(loggedUser);
         authenticatedContactEmail.setTo(loggedUser.getUsername());
         authenticatedContactEmail.setContent(issue);
         authenticatedContactEmail.setIssueType(issueTypeEnum);

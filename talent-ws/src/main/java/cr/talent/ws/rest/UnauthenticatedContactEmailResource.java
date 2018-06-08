@@ -62,6 +62,7 @@ public class UnauthenticatedContactEmailResource {
         UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
         contactUsNotification.setFirstName(firstName);
         contactUsNotification.setLastName(lastName);
+        contactUsNotification.setEmail(email);
         contactUsNotification.setIssue(issue);
         contactUsNotification.setIssueType(issueTypeEnum);
         // Persist the notification

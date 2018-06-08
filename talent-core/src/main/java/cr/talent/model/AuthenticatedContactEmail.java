@@ -11,15 +11,15 @@ public class AuthenticatedContactEmail extends ContactEmail {
     /**
      * The user that submitted the Contact Us request.
      */
-    private User user;
+    private TechnicalResource technicalResource;
 
-    public AuthenticatedContactEmail(){ }
+    public AuthenticatedContactEmail(){}
 
-    public User getUser() {
-        return user;
+    public User getTechnicalResource() {
+        return technicalResource;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setTechnicalResource(TechnicalResource user) {
+        this.technicalResource = user;
     }
 }

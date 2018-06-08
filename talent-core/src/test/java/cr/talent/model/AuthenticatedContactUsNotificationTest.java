@@ -20,6 +20,8 @@ public class AuthenticatedContactUsNotificationTest {
     private static final TechnicalResource TECHNICAL_RESOURCE2 = mock(TechnicalResource.class);
     private static final String ISSUE = "issue1";
     private static final String ISSUE2 = "issue2";
+    private static final ContactUsIssueType ISSUE_TYPE = ContactUsIssueType.ACCOUNT_CLOSING;
+    private static final ContactUsIssueType ISSUE_TYPE2 = ContactUsIssueType.AUTHENTICATION_ISSUES;
     private static final String ID = "1234";
     private static final String ID2 = "12345";
     
@@ -85,10 +87,12 @@ public class AuthenticatedContactUsNotificationTest {
     public void testEqualForNonPersistentAuthenticatedContactUsNotification() {
         AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
         contactUsNotification.setTechnicalResource(TECHNICAL_RESOURCE);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
         contactUsNotification.setIssue(ISSUE);
 
         AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
         contactUsNotification2.setTechnicalResource(TECHNICAL_RESOURCE);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
         contactUsNotification2.setIssue(ISSUE);
         
         assertTrue(contactUsNotification.equals(contactUsNotification2));
@@ -98,10 +102,12 @@ public class AuthenticatedContactUsNotificationTest {
     public void testNonEqualForNonPersistentAuthenticatedContactUsNotification() {
         AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
         contactUsNotification.setTechnicalResource(TECHNICAL_RESOURCE);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
         contactUsNotification.setIssue(ISSUE);
 
         AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
         contactUsNotification2.setTechnicalResource(TECHNICAL_RESOURCE2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
         contactUsNotification2.setIssue(ISSUE2);
 
         assertFalse(contactUsNotification.equals(contactUsNotification2));
@@ -114,36 +120,6 @@ public class AuthenticatedContactUsNotificationTest {
         AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
 
         assertTrue(contactUsNotification.equals(contactUsNotification2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentAuthenticatedContactUsNotificationNullTechnicalResource() {
-        AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
-
-        AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
-        contactUsNotification2.setTechnicalResource(TECHNICAL_RESOURCE);
-
-        assertFalse(contactUsNotification.equals(contactUsNotification2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentAuthenticatedContactUsNotificationNullIssue() {
-        AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
-
-        AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
-        contactUsNotification2.setIssue(ISSUE);
-
-        assertFalse(contactUsNotification.equals(contactUsNotification2));
-    }
-
-    @Test
-    public void testNonEqualForNonPersistentAuthenticatedContactUsNotificationNullTechnicalResourceFirstAuthenticatedContactUsNotification() {
-        AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
-        contactUsNotification.setTechnicalResource(TECHNICAL_RESOURCE);
-
-        AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
-
-        assertFalse(contactUsNotification.equals(contactUsNotification2));
     }
 
     @Test
@@ -175,10 +151,12 @@ public class AuthenticatedContactUsNotificationTest {
 
         AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
         contactUsNotification.setTechnicalResource(TECHNICAL_RESOURCE);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
         contactUsNotification.setIssue(ISSUE);
 
         AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
         contactUsNotification2.setTechnicalResource(TECHNICAL_RESOURCE);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
         contactUsNotification2.setIssue(ISSUE);
 
         assertTrue(contactUsNotification.hashCode() == contactUsNotification2.hashCode());
@@ -189,10 +167,12 @@ public class AuthenticatedContactUsNotificationTest {
     public void testNonEqualHashCodeForNonPersistentAuthenticatedContactUsNotification() {
         AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
         contactUsNotification.setTechnicalResource(TECHNICAL_RESOURCE);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
         contactUsNotification.setIssue(ISSUE);
 
         AuthenticatedContactUsNotification contactUsNotification2 = new AuthenticatedContactUsNotification();
         contactUsNotification2.setTechnicalResource(TECHNICAL_RESOURCE2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
         contactUsNotification2.setIssue(ISSUE2);
 
         assertFalse(contactUsNotification.hashCode() == contactUsNotification2.hashCode());

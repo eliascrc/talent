@@ -12,14 +12,14 @@ import java.util.Date;
 public abstract class ContactUsNotification extends BasicEntity {
 
     @Column (name = "issue", nullable = false)
-    private String issue;
+    protected String issue;
 
     @Column (name = "issue_type", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private ContactUsIssueType issueType;
+    protected ContactUsIssueType issueType;
 
     @Column(name = "date_solved")
-    private Date dateSolved;
+    protected Date dateSolved;
 
     public ContactUsNotification() {}
 
@@ -31,9 +31,7 @@ public abstract class ContactUsNotification extends BasicEntity {
             result = (this.issue == null ? contactUsNotification.getIssue() == null :
                     this.issue.equals(contactUsNotification.getIssue())
                     && this.issueType == null ? contactUsNotification.getIssueType() == null :
-                    this.issueType.equals(contactUsNotification.getIssueType())
-                    && this.dateSolved == null ? contactUsNotification.getDateSolved() == null :
-                    this.dateSolved.equals(contactUsNotification.getDateSolved()));
+                    this.issueType.equals(contactUsNotification.getIssueType()));
         }
         return result;
     }
