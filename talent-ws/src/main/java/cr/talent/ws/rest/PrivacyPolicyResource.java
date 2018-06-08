@@ -7,6 +7,7 @@ import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -35,6 +36,9 @@ public class PrivacyPolicyResource extends ContentResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
     public Response getActivePrivacyPolicy(@QueryParam("platform") String platformName) {
+        if (StringUtils.isEmpty(platformName))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
         try {
             String privacyPolicyContent;
             Platform platform = super.getPlatformByName(platformName);
