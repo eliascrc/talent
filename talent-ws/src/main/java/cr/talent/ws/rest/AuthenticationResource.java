@@ -52,7 +52,7 @@ public class AuthenticationResource {
     public Response getAuthenticatedUserInformation() {
         User user = SecurityUtils.getLoggedInUser();
         if (user instanceof TechnicalResource)
-            return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSerializer().serialize(user)).build();
+            return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceAuthenticationSerializer().serialize(user)).build();
 
         return Response.ok().entity(JSONSerializerBuilder.getSystemAdministratorSerializer().serialize(user)).build();
     }
