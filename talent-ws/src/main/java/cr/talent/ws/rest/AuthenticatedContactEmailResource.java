@@ -49,11 +49,11 @@ public class AuthenticatedContactEmailResource {
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         // Get the logged in user
-        User loggedUser = (User) SecurityUtils.getLoggedInUser();
+        TechnicalResource loggedUser = (TechnicalResource) SecurityUtils.getLoggedInUser();
 
         // Create the notification
         AuthenticatedContactUsNotification contactUsNotification = new AuthenticatedContactUsNotification();
-        //contactUsNotification.setTechnicalResource(loggedUser);
+        contactUsNotification.setTechnicalResource(loggedUser);
         contactUsNotification.setIssue(issue);
         contactUsNotification.setIssueType(issueTypeEnum);
         // Persist the notification
@@ -61,7 +61,7 @@ public class AuthenticatedContactEmailResource {
 
         // Create the email object
         AuthenticatedContactEmail authenticatedContactEmail= new AuthenticatedContactEmail();
-        //authenticatedContactEmail.setTechnicalResource(loggedUser);
+        authenticatedContactEmail.setTechnicalResource(loggedUser);
         authenticatedContactEmail.setTo(loggedUser.getUsername());
         authenticatedContactEmail.setContent(issue);
         authenticatedContactEmail.setIssueType(issueTypeEnum);
