@@ -7,14 +7,14 @@ import java.util.Arrays;
  *
  *  @author Fabián Roberto Leandro
  */
-public enum ContactEmailIssueType {
+public enum ContactUsIssueType {
     AUTHENTICATION_ISSUES("Authentication issues"),
     ACCOUNT_CLOSING("Account closing"),
     OTHER("Other");
 
     private String issueText;
 
-    ContactEmailIssueType(String text) {
+    ContactUsIssueType(String text) {
         this.issueText = text;
     }
 
@@ -22,7 +22,11 @@ public enum ContactEmailIssueType {
         return issueText;
     }
 
-    public static boolean isValidIssueType(String issue) {
-       return  Arrays.asList(this.values()).contains(issue);
+    public static ContactUsIssueType fromString(String issueType){
+        for(ContactUsIssueType type : values() ) {
+            if(type.getIssueText().equals(issueType))
+                return type;
+        }
+       return  null;
     }
 }

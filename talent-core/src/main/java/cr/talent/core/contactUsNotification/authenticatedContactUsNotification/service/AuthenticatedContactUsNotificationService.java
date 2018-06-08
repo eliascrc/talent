@@ -10,4 +10,4 @@ import cr.talent.support.service.CrudService;
  */
 public interface AuthenticatedContactUsNotificationService extends CrudService<AuthenticatedContactUsNotification, String> {
 
-    }
+}

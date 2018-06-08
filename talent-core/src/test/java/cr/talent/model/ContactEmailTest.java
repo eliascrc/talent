@@ -21,22 +21,30 @@ public class ContactEmailTest {
     @Test
     public void coreTest () {
 
-        ContactEmailIssueType issueType = ContactEmailIssueType.ACCOUNT_CLOSING;
+        ContactUsIssueType issueType = ContactUsIssueType.ACCOUNT_CLOSING;
         String content = "test";
+        String fileName = "test";
+        String subject = "test";
+        String from = "test";
 
         // Verify the constructor
         ContactEmail contactEmail = new ContactEmail();
 
         // Verify the sets
-        contactEmail.setEmail(EMAIL);
+        contactEmail.setTo(EMAIL);
         contactEmail.setIssueType(issueType );
         contactEmail.setContent(content);
+        contactEmail.setFileName(fileName);
+        contactEmail.setFrom(from);
+        contactEmail.setSubject(subject);
 
         // Verify the gets
-        assertEquals(EMAIL, contactEmail.getEmail());
+        assertEquals(EMAIL, contactEmail.getTo());
         assertEquals(issueType , contactEmail.getIssueType());
         assertEquals(content, contactEmail.getContent());
-
+        assertEquals(fileName, contactEmail.getFileName());
+        assertEquals(from, contactEmail.getFrom());
+        assertEquals(subject, contactEmail.getSubject());
     }
 
     @Test
@@ -58,10 +66,10 @@ public class ContactEmailTest {
     @Test
     public void testEqualForNonPersistentContactEmail() {
         ContactEmail contactEmail1 = new ContactEmail();
-        contactEmail1.setEmail(EMAIL);
+        contactEmail1.setTo(EMAIL);
 
         ContactEmail contactEmail2 = new ContactEmail();
-        contactEmail2.setEmail(EMAIL);
+        contactEmail2.setTo(EMAIL);
 
         assertTrue(contactEmail1.equals(contactEmail2));
     }
@@ -78,10 +86,10 @@ public class ContactEmailTest {
     @Test
     public void testNonEqualForNonPersistentContactEmail() {
         ContactEmail contactEmail1 = new ContactEmail();
-        contactEmail1.setEmail(EMAIL);
+        contactEmail1.setTo(EMAIL);
 
         ContactEmail contactEmail2 = new ContactEmail();
-        contactEmail2.setEmail(EMAIL2);
+        contactEmail2.setTo(EMAIL2);
 
         assertFalse(contactEmail1.equals(contactEmail2));
     }
@@ -92,7 +100,7 @@ public class ContactEmailTest {
 
 
         ContactEmail contactEmail2 = new ContactEmail();
-        contactEmail2.setEmail(EMAIL2);
+        contactEmail2.setTo(EMAIL2);
 
         assertFalse(contactEmail1.equals(contactEmail2));
     }
@@ -103,7 +111,7 @@ public class ContactEmailTest {
 
 
         ContactEmail contactEmail2 = new ContactEmail();
-        contactEmail2.setEmail(EMAIL);
+        contactEmail2.setTo(EMAIL);
 
         assertFalse(contactEmail1.hashCode() == contactEmail2.hashCode());
     }
@@ -111,10 +119,10 @@ public class ContactEmailTest {
     @Test
     public void testEqualHashCodeForNonPersistentContactEmail() {
         ContactEmail contactEmail1 = new ContactEmail();
-        contactEmail1.setEmail(EMAIL);
+        contactEmail1.setTo(EMAIL);
 
         ContactEmail contactEmail2 = new ContactEmail();
-        contactEmail2.setEmail(EMAIL);
+        contactEmail2.setTo(EMAIL);
 
         assertTrue(contactEmail1.hashCode() == contactEmail2.hashCode());
     }
@@ -122,10 +130,10 @@ public class ContactEmailTest {
     @Test
     public void testNonEqualHashCodeForNonPersistentContactEmail() {
         ContactEmail contactEmail1 = new ContactEmail();
-        contactEmail1.setEmail(EMAIL);
+        contactEmail1.setTo(EMAIL);
 
         ContactEmail contactEmail2 = new ContactEmail();
-        contactEmail2.setEmail(EMAIL2);
+        contactEmail2.setTo(EMAIL2);
 
         assertFalse(contactEmail1.hashCode() == contactEmail2.hashCode());
     }
