@@ -88,9 +88,9 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     }
 
     /**
-     * Method that creates a Technical Resource user by supplying the correct and necessary information
+     * Method that updates a Technical Resource user by supplying the correct and necessary information
      * to the data access object.
-     * @param technicalResource The instance of TechnicalResource that must be created in the data base.
+     * @param technicalResource The instance of TechnicalResource that must be updated in the data base.
      */
     @Override
     public void update(TechnicalResource technicalResource) {

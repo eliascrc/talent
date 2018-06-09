@@ -33,7 +33,8 @@ public class SignUpResource {
      * @param lastName the last name of the resource performing the first step of the sign up
      * @param email the email of the resource performing the first step of the sign up
      * @param password the password of the resource performing the first step of the sign up
-     * @return
+     * @return 200 if the supplied information is valid, 400 if any of the parameters is null or empty or if the
+	 *  			password is not valid
      */
     @POST
     @Path("/stepOne")
