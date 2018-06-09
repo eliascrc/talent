@@ -2,6 +2,7 @@ package cr.talent.core.contactUsNotification.unauthenticatedContactUsNotificatio
 
 import cr.talent.core.contactUsNotification.unauthenticatedContactUsNotification.dao.UnauthenticatedContactUsNotificationDao;
 import cr.talent.core.contactUsNotification.unauthenticatedContactUsNotification.service.UnauthenticatedContactUsNotificationService;
+import cr.talent.model.UnauthenticatedContactEmail;
 import cr.talent.model.UnauthenticatedContactUsNotification;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import javax.transaction.Transactional;
 @Transactional
 public class UnauthenticatedContactUsNotificationServiceImpl extends CrudServiceImpl<UnauthenticatedContactUsNotification, String> implements UnauthenticatedContactUsNotificationService {
 
+    /**
+     * @see cr.talent.core.email.contactEmail.unauthenticatedContactEmail.service.UnauthenticatedContactEmailService#sendUnauthenticatedContactEmail(UnauthenticatedContactEmail)
+     */
     @Autowired
     private UnauthenticatedContactUsNotificationDao unauthenticatedContactUsDao;
 

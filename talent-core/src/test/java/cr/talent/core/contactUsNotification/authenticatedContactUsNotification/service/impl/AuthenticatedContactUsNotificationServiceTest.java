@@ -9,6 +9,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.mockito.Mockito.*;
 
+/**
+ * Class that allows to test the {@link cr.talent.core.contactUsNotification.authenticatedContactUsNotification.service.impl.AuthenticatedContactUsNotificationServiceImpl} methods
+ *
+ * @author Fabián Roberto Leandro
+ */
 public class AuthenticatedContactUsNotificationServiceTest {
     @Test
     public void testCreateCall() {

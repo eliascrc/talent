@@ -80,17 +80,6 @@ public class UnauthenticatedContactUsNotificationTest {
     }
 
     @Test
-    public void testNonEqualForPersistentUnauthenticatedContactUsNotification() {
-        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
-        contactUsNotification.setId(ID);
-
-        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
-        contactUsNotification2.setId(ID2);
-
-        assertFalse(contactUsNotification.equals(contactUsNotification2));
-    }
-
-    @Test
     public void testEqualForNonPersistentUnauthenticatedContactUsNotification() {
         UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
         contactUsNotification.setFirstName(FIRST_NAME);
@@ -102,11 +91,176 @@ public class UnauthenticatedContactUsNotificationTest {
         UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
         contactUsNotification2.setFirstName(FIRST_NAME);
         contactUsNotification2.setLastName(LAST_NAME);
-        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setEmail(EMAIL);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
+        contactUsNotification2.setIssue(ISSUE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullFirstName() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setLastName(LAST_NAME);
+        contactUsNotification2.setEmail(EMAIL);
         contactUsNotification2.setIssueType(ISSUE_TYPE);
         contactUsNotification2.setIssue(ISSUE);
         
         assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullLastName() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME);
+        contactUsNotification2.setEmail(EMAIL);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
+        contactUsNotification2.setIssue(ISSUE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullEmail() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME);
+        contactUsNotification2.setLastName(LAST_NAME);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
+        contactUsNotification2.setIssue(ISSUE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullIssueType() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME);
+        contactUsNotification2.setLastName(LAST_NAME);
+        contactUsNotification2.setEmail(EMAIL);
+        contactUsNotification2.setIssue(ISSUE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullIssue() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME);
+        contactUsNotification2.setLastName(LAST_NAME);
+        contactUsNotification2.setEmail(EMAIL);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullFirstNullLast() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setEmail(EMAIL);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
+        contactUsNotification2.setIssue(ISSUE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullFirstNullEmail() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setLastName(LAST_NAME);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
+        contactUsNotification2.setIssue(ISSUE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullFirstNullIssueType() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setLastName(LAST_NAME);
+        contactUsNotification2.setEmail(EMAIL);
+        contactUsNotification2.setIssue(ISSUE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullFirstNullIssue() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setLastName(LAST_NAME);
+        contactUsNotification2.setEmail(EMAIL);
+        contactUsNotification2.setIssueType(ISSUE_TYPE);
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullValues() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+
+        assertTrue(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testNonEqualForPersistentUnauthenticatedContactUsNotification() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setId(ID);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setId(ID2);
+
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
     }
 
     @Test
@@ -129,12 +283,122 @@ public class UnauthenticatedContactUsNotificationTest {
     }
 
     @Test
-    public void testEqualForNonPersistentUnauthenticatedContactUsNotificationNullValues() {
+    public void testNonEqualForNonPersistentUnauthenticatedContactUsNotificationNullFirstName() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME2);
+        contactUsNotification2.setLastName(LAST_NAME2);
+        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
+        contactUsNotification2.setIssue(ISSUE2);
+
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentUnauthenticatedContactUsNotificationNullLastName() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME2);
+        contactUsNotification2.setLastName(LAST_NAME2);
+        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
+        contactUsNotification2.setIssue(ISSUE2);
+
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentUnauthenticatedContactUsNotificationNullEmail() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME2);
+        contactUsNotification2.setLastName(LAST_NAME2);
+        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
+        contactUsNotification2.setIssue(ISSUE2);
+
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentUnauthenticatedContactUsNotificationNullIssueType() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME2);
+        contactUsNotification2.setLastName(LAST_NAME2);
+        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
+        contactUsNotification2.setIssue(ISSUE2);
+
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentUnauthenticatedContactUsNotificationNullIssue() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setFirstName(FIRST_NAME);
+        contactUsNotification.setLastName(LAST_NAME);
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME2);
+        contactUsNotification2.setLastName(LAST_NAME2);
+        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
+        contactUsNotification2.setIssue(ISSUE2);
+
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentUnauthenticatedContactUsNotificationNullFirstNullLast() {
+        UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
+        contactUsNotification.setEmail(EMAIL);
+        contactUsNotification.setIssueType(ISSUE_TYPE);
+        contactUsNotification.setIssue(ISSUE);
+
+        UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
+        contactUsNotification2.setIssue(ISSUE2);
+
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
+    }
+
+    @Test
+    public void testNonEqualForNonPersistentUnauthenticatedContactUsNotificationNullValues() {
         UnauthenticatedContactUsNotification contactUsNotification = new UnauthenticatedContactUsNotification();
 
         UnauthenticatedContactUsNotification contactUsNotification2 = new UnauthenticatedContactUsNotification();
+        contactUsNotification2.setFirstName(FIRST_NAME2);
+        contactUsNotification2.setLastName(LAST_NAME2);
+        contactUsNotification2.setEmail(EMAIL2);
+        contactUsNotification2.setIssueType(ISSUE_TYPE2);
+        contactUsNotification2.setIssue(ISSUE2);
 
-        assertTrue(contactUsNotification.equals(contactUsNotification2));
+        assertFalse(contactUsNotification.equals(contactUsNotification2));
     }
 
     @Test
@@ -158,8 +422,6 @@ public class UnauthenticatedContactUsNotificationTest {
 
         assertFalse(contactUsNotification.hashCode() == contactUsNotification2.hashCode());
     }
-
-
 
     @Test
     public void testEqualHashCodeForNonPersistentUnauthenticatedContactUsNotification() {

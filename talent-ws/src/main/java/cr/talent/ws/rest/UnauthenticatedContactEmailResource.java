@@ -66,7 +66,7 @@ public class UnauthenticatedContactEmailResource {
         contactUsNotification.setIssue(issue);
         contactUsNotification.setIssueType(issueTypeEnum);
         // Persist the notification
-        unauthenticatedContactUsNotificationService.create(contactUsNotification);
+        this.unauthenticatedContactUsNotificationService.create(contactUsNotification);
 
         // Create the email object
         UnauthenticatedContactEmail unauthenticatedContactEmail = new UnauthenticatedContactEmail();
@@ -77,7 +77,7 @@ public class UnauthenticatedContactEmailResource {
         unauthenticatedContactEmail.setIssueType(issueTypeEnum);
 
         // Send the email
-        unauthenticatedContactEmailService.sendUnauthenticatedContactEmail(unauthenticatedContactEmail);
+        this.unauthenticatedContactEmailService.sendUnauthenticatedContactEmail(unauthenticatedContactEmail);
 
         return Response.status(Response.Status.OK).build();
     }

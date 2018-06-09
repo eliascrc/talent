@@ -28,9 +28,10 @@ public class PredefinedCapabilityResource {
 
     /**
      * Receives the request for creating a new predefined capability.
-     * @return  200 if the contact email is correctly created,
-     *          400 if the json is malformed or missing information,
-     *          500 if the predefined capability's organization attribute is not null.
+     * @param name the predefined capability's name.
+     * @return 200 if the predefined capability is correctly created,
+     *         400 if the name is null or an empty string,
+     *         409 if there's already a predefined capability with the specified name,
      */
     @POST
     @Path("/create")

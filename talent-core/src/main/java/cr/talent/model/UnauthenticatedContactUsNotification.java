@@ -41,16 +41,16 @@ public class UnauthenticatedContactUsNotification extends ContactUsNotification 
         boolean result = false;
         if ( o instanceof UnauthenticatedContactUsNotification){
             UnauthenticatedContactUsNotification contactUsNotification = (UnauthenticatedContactUsNotification) o;
-            result = (this.issue == null ? contactUsNotification.getIssue() == null :
-                    this.issue.equals(contactUsNotification.getIssue())
-                    && this.issueType == null ? contactUsNotification.getIssueType() == null :
-                    this.issueType.equals(contactUsNotification.getIssueType())
-                    && this.email == null ? contactUsNotification.getEmail() == null :
-                    this.email.equals(contactUsNotification.getEmail())
-                    && this.firstName == null ? contactUsNotification.getFirstName() == null :
-                    this.firstName.equals(contactUsNotification.getFirstName())
-                    && this.lastName == null ? contactUsNotification.getLastName() == null :
-                    this.lastName.equals(contactUsNotification.getLastName()));
+            result = ((this.issue == null ? contactUsNotification.getIssue() == null :
+                    this.issue.equals(contactUsNotification.getIssue()))
+                    && (this.issueType == null ? contactUsNotification.getIssueType() == null :
+                    this.issueType.equals(contactUsNotification.getIssueType()))
+                    && (this.email == null ? contactUsNotification.getEmail() == null :
+                    this.email.equals(contactUsNotification.getEmail()))
+                    && (this.firstName == null ? contactUsNotification.getFirstName() == null :
+                    this.firstName.equals(contactUsNotification.getFirstName()))
+                    && (this.lastName == null ? contactUsNotification.getLastName() == null :
+                    this.lastName.equals(contactUsNotification.getLastName())));
         }
         return result;
     }

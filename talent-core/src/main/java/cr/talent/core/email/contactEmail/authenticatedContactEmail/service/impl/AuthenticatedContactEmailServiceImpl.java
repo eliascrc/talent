@@ -29,6 +29,9 @@ public class AuthenticatedContactEmailServiceImpl implements AuthenticatedContac
     @Autowired
     private EmailSenderService emailSenderService;
 
+    /**
+     * @see cr.talent.core.email.contactEmail.authenticatedContactEmail.service.AuthenticatedContactEmailService#sendAuthenticatedContactEmail(AuthenticatedContactEmail)
+     */
     @Override
     public void sendAuthenticatedContactEmail(AuthenticatedContactEmail authenticatedContactEmail) {
 
