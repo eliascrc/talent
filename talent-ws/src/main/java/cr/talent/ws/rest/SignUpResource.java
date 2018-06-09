@@ -3,10 +3,6 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.email.signUpConfirmationEmail.service.SignUpConfirmationEmailService;
 import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
-import cr.talent.model.SignUpConfirmationMessage;
-import cr.talent.model.TechnicalResource;
-import cr.talent.model.User;
-import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -30,15 +26,15 @@ public class SignUpResource {
     @Autowired
     SignUpConfirmationMessageService signUpConfirmationMessageService;
 
-    @Autowired
-    SignUpConfirmationEmailService signUpConfirmationEmailService;
-
-    //The highest number that can be used for a confirmation code
-    private static final int MAX_CONFIRMATION_CODE = 999999;
-
-    //The number of digits in the confirmation code
-    private static final int DIGITS = 6;
-
+    /**
+     * Creates a technical resource with the supplied information if it is valid and sends a confirmation email. If the
+     * information is not valid it returns a response with a code that reflects the problem.
+     * @param firstName the first name of the resource performing the first step of the sign up
+     * @param lastName the last name of the resource performing the first step of the sign up
+     * @param email the email of the resource performing the first step of the sign up
+     * @param password the password of the resource performing the first step of the sign up
+     * @return
+     */
     @POST
     @Path("/stepOne")
     public Response performFirstStep(@FormParam("firstName") String firstName,
@@ -50,37 +46,11 @@ public class SignUpResource {
                 StringUtils.isEmpty(password))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        TechnicalResource technicalResource;
-        SignUpConfirmationMessage signUpConfirmationMessage;
-        boolean hadAnotherConfirmationMessage = false;
-        int confirmationCode = (int) (MAX_CONFIRMATION_CODE * Math.random());
         try {
-            signUpConfirmationMessage = signUpConfirmationMessageService
-                    .getActiveConfirmationMessage(email);
-            technicalResource = signUpConfirmationMessage.getTechnicalResource();
-            hadAnotherConfirmationMessage = true;
-        } catch(NonExistentConfirmationMessageException e) {
-            technicalResource = new TechnicalResource();
-            signUpConfirmationMessage = new SignUpConfirmationMessage();
-        }
-
-        technicalResource.setFirstName(firstName);
-        technicalResource.setLastName(lastName);
-        technicalResource.setUsername(email);
-        technicalResource.setPassword(password);
-        technicalResource.setStatus(User.Status.INACTIVE);
-        technicalResource.setAdministrator(true); //because they are signing up while creating an organization
-
-        signUpConfirmationMessage.setConfirmationCode(String.format("%0" + DIGITS + "d", confirmationCode));
-        signUpConfirmationMessage.setTechnicalResource(technicalResource);
-
-
-        try {
-            signUpConfirmationMessageService.sendMessage(signUpConfirmationMessage, technicalResource, hadAnotherConfirmationMessage);
-        } catch (IllegalArgumentException e) {  // if the password is not valid
+            this.signUpConfirmationMessageService.sendMessage(firstName, lastName, email, password);
+        } catch(IllegalArgumentException e) { //if the password is not valid
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
-
 
         return Response.ok().build();
     }
