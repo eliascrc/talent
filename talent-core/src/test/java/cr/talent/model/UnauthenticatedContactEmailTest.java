@@ -4,6 +4,11 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
+/**
+ * Class that allows to test the UnauthenticatedContactEmail methods, to know all the different paths they could take.
+ *
+ * @author Fabián Roberto Leandro
+ */
 public class UnauthenticatedContactEmailTest {
     @Test
     public void coreTest () {

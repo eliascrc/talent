@@ -5,6 +5,11 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
+/**
+ * Class that allows to test the AuthenticatedContactEmail methods, to know all the different paths they could take.
+ *
+ * @author Fabián Roberto Leandro
+ */
 public class AuthenticatedContactEmailTest {
     
     @Test

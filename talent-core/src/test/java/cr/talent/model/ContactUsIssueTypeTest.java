@@ -4,6 +4,11 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
+/**
+ * Class that allows to test the ContactUsIssueType methods, to know all the different paths they could take.
+ *
+ * @author Fabián Roberto Leandro
+ */
 public class ContactUsIssueTypeTest {
 
     @Test

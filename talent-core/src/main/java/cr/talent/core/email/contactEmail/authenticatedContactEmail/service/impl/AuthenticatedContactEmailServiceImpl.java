@@ -39,7 +39,6 @@ public class AuthenticatedContactEmailServiceImpl implements AuthenticatedContac
         authenticatedContactEmail.setFileName(HTML_EMAIL_FILE);
         authenticatedContactEmail.setSubject(CONTACT_US_SUBJECT);
         authenticatedContactEmail.setFrom(talentEmail);
-
         Map< String, Object> model = new HashMap();
         model.put("firstName", authenticatedContactEmail.getTechnicalResource().getFirstName());
         model.put("lastName", authenticatedContactEmail.getTechnicalResource().getLastName());
