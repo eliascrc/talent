@@ -30,7 +30,6 @@ public class ProfilePictureResource {
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadImage(@FormDataParam("file") InputStream file) {
-        System.out.println(file);
         if (StringUtils.isEmpty(file))
             return Response.status(Response.Status.BAD_REQUEST).build();
 

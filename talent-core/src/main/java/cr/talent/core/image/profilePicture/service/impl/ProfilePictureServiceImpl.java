@@ -47,8 +47,9 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
     public void uploadProfilePicture(InputStream file){
 
         TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();
+        TechnicalResource technicalResource1= this.technicalResourceService.findById(technicalResource.getId());
 
-        if (technicalResource.getProfilePicture() != null)
+        if (technicalResource1.getProfilePicture() != null)
             this.deleteProfilePicture();
 
         ProfilePicture profilePicture = new ProfilePicture();
@@ -56,7 +57,8 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
 
         profilePicture.setLink(link + profilePicture.getId() + FILE_EXTENSION);
         technicalResource.setProfilePicture(profilePicture);
-        this.technicalResourceService.update(technicalResource);
+        technicalResource1.setProfilePicture(profilePicture);
+        this.technicalResourceService.update(technicalResource1);
 
         this.imageDao.uploadImage(profilePicture.getId() + FILE_EXTENSION, file, FOLDER);
     }
@@ -64,21 +66,16 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
     @Override
     public void deleteProfilePicture(){
         TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();
+        TechnicalResource technicalResource1 = technicalResourceService.findById(technicalResource.getId());
+        ProfilePicture profilePicture= technicalResource1.getProfilePicture();
 
-        ProfilePicture profilePicture= technicalResource.getProfilePicture();
-        this.remove(profilePicture);
+        if (profilePicture != null){
+            technicalResource1.setProfilePicture(null);
+            this.technicalResourceService.update(technicalResource1);
+            technicalResource.setProfilePicture(null);
 
-        this.imageDao.deleteImage(profilePicture.getId() + FILE_EXTENSION, FOLDER);
-    }
-
-    @Override
-    public void updateProfilePicture(InputStream file){
-        this.deleteProfilePicture();
-        this.uploadProfilePicture(file);
-
-        TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();
-        ProfilePicture profilePicture= technicalResource.getProfilePicture();
-
-        this.update(profilePicture);
+            this.remove(profilePicture);
+            this.imageDao.deleteImage(profilePicture.getId() + FILE_EXTENSION, FOLDER);
+        }
     }
 }

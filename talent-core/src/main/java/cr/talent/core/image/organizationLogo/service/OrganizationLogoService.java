@@ -16,8 +16,8 @@ import java.io.InputStream;
 public interface OrganizationLogoService extends CrudService<OrganizationLogo, String> {
 
     /**
-     * uploads the picture of the organization that is making the request.
-     * path to the picture that is going to be uploaded.
+     * uploads or updates the picture of the organization that is making the request.
+     *
      * @param file
      */
     void uploadOrganizationLogo(InputStream file);
@@ -26,10 +26,4 @@ public interface OrganizationLogoService extends CrudService<OrganizationLogo, S
      * deletes the picture of the organization that is making the request.
      */
     void deleteOrganizationLogo();
-
-    /**
-     * updates the picture of the organization that is making the request.
-     * @param file
-     */
-    void updateOrganizationLogo(InputStream file);
 }
