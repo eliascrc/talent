@@ -107,14 +107,13 @@
     <tr>
         <th>
             <p class="message-content"> Hi ${firstName} ${lastName},</p>
-            <p class="message-content"> We have received a request to reset the password. If you didn't request to change your password, ignore this email.
-                Otherwise, you can reset your password using this link:
+            <p class="message-content"> Welcome to Talent! Before you start, you must confirm your email address. If you didn’t request to join, ignore this email.
             </p>
         </th>
     </tr>
     <tr>
         <th>
-            <a target="_blank"  href="${link}" ><button class="confirm-email-button">Change password
+            <a target="_blank"  href="${link}" ><button class="confirm-email-button">Confirm email
             </button></a>
         </th>
     </tr>

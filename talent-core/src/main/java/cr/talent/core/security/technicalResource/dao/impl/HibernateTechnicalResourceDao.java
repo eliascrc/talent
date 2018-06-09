@@ -22,18 +22,16 @@ public class HibernateTechnicalResourceDao extends HibernateCrudDao<TechnicalRes
     /**
      * Constructor of the HibernateTechnicalResource data access object which sets the HibernateCrudDao's
      * session factory to obtain session instances from.
+     *
      * @param sessionFactory The SessionFactory instance which is autowired by Spring.
      */
     @Autowired
-    public HibernateTechnicalResourceDao(@Qualifier("sessionFactory") SessionFactory sessionFactory){
+    public HibernateTechnicalResourceDao(@Qualifier("sessionFactory") SessionFactory sessionFactory) {
         setSessionFactory(sessionFactory);
     }
 
     /**
-     * Finds a technical resource by its username. It first creates a SQL query and specifies the username
-     * restriction by inserting it as a parameter to the query.
-     * @param username The technical resource's username to search for.
-     * @return The TechnicalResource with the respective username.
+     * @see cr.talent.core.security.technicalResource.dao.TechnicalResourceDao#findTechnicalResourceByUsername(String)
      */
     @Override
     @SuppressWarnings("unchecked")
@@ -42,6 +40,18 @@ public class HibernateTechnicalResourceDao extends HibernateCrudDao<TechnicalRes
         Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter(1, username);
 
+        return (TechnicalResource) DataAccessUtils.singleResult(query.list());
+    }
+
+    /**
+     * @see cr.talent.core.security.technicalResource.dao.TechnicalResourceDao#findByAuthenticationToken(String)
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public TechnicalResource findByAuthenticationToken(String token) {
+        String hql = "FROM TechnicalResource WHERE token = ?1";
+        Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter(1, token);
         return (TechnicalResource) DataAccessUtils.singleResult(query.list());
     }
 

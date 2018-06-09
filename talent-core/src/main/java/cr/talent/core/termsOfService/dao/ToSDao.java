@@ -1,5 +1,6 @@
 package cr.talent.core.termsOfService.dao;
 
+import cr.talent.model.Platform;
 import cr.talent.model.TermsOfService;
 import cr.talent.support.dao.CrudDao;
 
@@ -16,5 +17,5 @@ public interface ToSDao extends CrudDao<TermsOfService, String> {
      *
      * @return The active TermsOfService.
      */
-    TermsOfService getActiveTermsOfService();
+    TermsOfService getActiveTermsOfService(Platform platform);
 }

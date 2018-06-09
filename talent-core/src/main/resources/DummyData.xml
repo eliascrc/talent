@@ -990,12 +990,21 @@
 			<isActive>true</isActive>
 			<startDate>5/10/2018</startDate>
 			<contentFile>./talent-core/src/main/resources/DummyPrivacyPolicy1.html</contentFile>
+			<platform>ANDROID</platform>
 		</privacyPolicy>
 		<privacyPolicy>
 			<isActive>false</isActive>
 			<startDate>6/8/2020</startDate>
 			<endDate>10/10/2024</endDate>
 			<contentFile>./talent-core/src/main/resources/DummyPrivacyPolicy2.html</contentFile>
+			<platform>ANDROID</platform>
+		</privacyPolicy>
+		<privacyPolicy>
+			<isActive>true</isActive>
+			<startDate>6/8/2020</startDate>
+			<endDate>10/10/2024</endDate>
+			<contentFile>./talent-core/src/main/resources/DummyWebPrivacyPolicy.html</contentFile>
+			<platform>WEB</platform>
 		</privacyPolicy>
 	</privacyPolicyVersions>
 
@@ -1005,14 +1014,23 @@
             <isActive>true</isActive>
             <startDate>5/10/2018</startDate>
             <endDate></endDate>
-            <contentFile>./talent-core/src/main/resources/termsOfServiceHTML.txt</contentFile>
+            <contentFile>./talent-core/src/main/resources/DummyTermsOfService1.html</contentFile>
+			<platform>ANDROID</platform>
         </termsOfService>
         <termsOfService>
             <isActive>false</isActive>
             <startDate>6/8/2020</startDate>
             <endDate>10/10/2024</endDate>
-            <contentFile>./talent-core/src/main/resources/termsOfServiceHTML2.txt</contentFile>
+            <contentFile>./talent-core/src/main/resources/DummyTermsOfService2.html</contentFile>
+			<platform>ANDROID</platform>
         </termsOfService>
+		<termsOfService>
+			<isActive>true</isActive>
+			<startDate>6/8/2020</startDate>
+			<endDate>10/10/2024</endDate>
+			<contentFile>./talent-core/src/main/resources/DummyWebTermsOfService.html</contentFile>
+			<platform>WEB</platform>
+		</termsOfService>
     </termsOfServiceVersions>
 
 
