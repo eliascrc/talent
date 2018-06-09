@@ -40,18 +40,12 @@ public class ProfilePictureResource {
     @POST
     @Path("/delete")
     public Response deleteImage(){
-        this.profilePictureService.deleteProfilePicture();
-        return Response.status(200).build();
-    }
-
-    @POST
-    @Path("/update")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response updateImage(@FormDataParam("file") InputStream file) {
-        if (StringUtils.isEmpty(file))
+        try{
+            this.profilePictureService.deleteProfilePicture();
+            return Response.status(200).build();
+        }catch (Exception e){
+            e.printStackTrace();
             return Response.status(Response.Status.BAD_REQUEST).build();
-
-        this.profilePictureService.updateProfilePicture(file);
-        return Response.status(200).build();
+        }
     }
 }

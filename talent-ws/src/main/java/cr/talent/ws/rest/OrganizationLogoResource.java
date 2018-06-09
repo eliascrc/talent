@@ -44,15 +44,4 @@ public class OrganizationLogoResource {
         this.organizationLogoService.deleteOrganizationLogo();
         return Response.status(200).build();
     }
-
-    @POST
-    @Path("/update")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response updateImage(@FormDataParam("file") InputStream file) {
-        if (StringUtils.isEmpty(file))
-            return Response.status(Response.Status.BAD_REQUEST).build();
-
-        this.organizationLogoService.updateOrganizationLogo(file);
-        return Response.status(200).build();
-    }
 }

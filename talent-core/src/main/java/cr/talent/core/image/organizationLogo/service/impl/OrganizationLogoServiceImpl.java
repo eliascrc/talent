@@ -3,6 +3,7 @@ package cr.talent.core.image.organizationLogo.service.impl;
 import cr.talent.core.image.dao.ImageDao;
 import cr.talent.core.image.organizationLogo.dao.OrganizationLogoDao;
 import cr.talent.core.image.organizationLogo.service.OrganizationLogoService;
+import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.Organization;
 import cr.talent.model.OrganizationLogo;
@@ -42,7 +43,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
     private TechnicalResourceService technicalResourceService;
 
     @Autowired
-    private OrganizationLogoService organizationLogoService;
+    private OrganizationService organizationService;
 
     public void init() {
         setCrudDao(this.organizationLogoDao);
@@ -54,6 +55,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
         TechnicalResource technicalResource1 = this.technicalResourceService.findById(technicalResource.getId());
 
         if (technicalResource1.isAdministrator()) {
+            Organization organization1 = technicalResource.getOrganization();
             Organization organization = technicalResource1.getOrganization();
 
             if (organization.getLogo() != null)
@@ -62,10 +64,11 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
             OrganizationLogo organizationLogo = new OrganizationLogo();
             this.create(organizationLogo);
 
-            organizationLogo.setLink(link + organizationLogo.getId() + FILE_EXTENSION);
-            technicalResource.getOrganization().setLogo(organizationLogo);
+            organizationLogo.setLink(link + FOLDER + "/" + organizationLogo.getId() + FILE_EXTENSION);
+            organization1.setLogo(organizationLogo);
             organization.setLogo(organizationLogo);
-            this.organizationLogoService.update(organizationLogo);
+            this.organizationService.update(organization);
+          //  this.technicalResourceService.update(technicalResource1);
 
             this.imageDao.uploadImage(organizationLogo.getId() + FILE_EXTENSION, file, FOLDER);
         }
@@ -74,17 +77,17 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
     @Override
     public void deleteOrganizationLogo() {
         TechnicalResource technicalResource = (TechnicalResource) SecurityUtils.getLoggedInUser();
-        TechnicalResource technicalResource1 = technicalResourceService.findById(technicalResource.getId());
+        TechnicalResource technicalResource1 = this.technicalResourceService.findById(technicalResource.getId());
+        Organization organization = technicalResource.getOrganization();
+        Organization organization1 = technicalResource1.getOrganization();
+        OrganizationLogo organizationLogo = organization1.getLogo();
 
-        Organization organization = technicalResource1.getOrganization();
-        OrganizationLogo organizationLogo = organization.getLogo();
-
-        if (technicalResource.isAdministrator() && organizationLogo != null) {
+        if (technicalResource1.isAdministrator() && organizationLogo != null) {
+            organization1.setLogo(null);
+            this.organizationService.update(organization1);
             organization.setLogo(null);
-            technicalResource.getOrganization().setLogo(null);
 
             this.remove(organizationLogo);
-            this.technicalResourceService.update(technicalResource1);
             this.imageDao.deleteImage(organizationLogo.getId() + FILE_EXTENSION, FOLDER);
         }
     }

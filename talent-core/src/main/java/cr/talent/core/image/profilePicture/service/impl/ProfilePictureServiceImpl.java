@@ -34,10 +34,10 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
     private ImageDao imageDao;
 
     @Autowired
-    private TechnicalResourceService technicalResourceService;
+    private ProfilePictureDao profilePictureDao;
 
     @Autowired
-    private ProfilePictureDao profilePictureDao;
+    private TechnicalResourceService technicalResourceService;
 
     public void init() {
         setCrudDao(this.profilePictureDao);
@@ -55,7 +55,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
         ProfilePicture profilePicture = new ProfilePicture();
         this.create(profilePicture);
 
-        profilePicture.setLink(link + profilePicture.getId() + FILE_EXTENSION);
+        profilePicture.setLink(link + FOLDER + "/" + profilePicture.getId() + FILE_EXTENSION);
         technicalResource.setProfilePicture(profilePicture);
         technicalResource1.setProfilePicture(profilePicture);
         this.technicalResourceService.update(technicalResource1);
@@ -66,7 +66,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
     @Override
     public void deleteProfilePicture(){
         TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();
-        TechnicalResource technicalResource1 = technicalResourceService.findById(technicalResource.getId());
+        TechnicalResource technicalResource1 = this.technicalResourceService.findById(technicalResource.getId());
         ProfilePicture profilePicture= technicalResource1.getProfilePicture();
 
         if (profilePicture != null){

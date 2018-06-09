@@ -18,7 +18,7 @@ public class OrganizationLogo extends Image{
     /**
      * Organization that owns the logo.
      */
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "logo")
+    @OneToOne(mappedBy = "logo")
     private Organization organization;
 
     public OrganizationLogo (){}
