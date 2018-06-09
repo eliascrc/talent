@@ -21,15 +21,4 @@ public class HibernateOrganizationLogoDao extends HibernateCrudDao<OrganizationL
         setSessionFactory(sessionFactory);
     }
 
-    public void createImage(String TechnicalResource){
-    }
-
-    public void deleteImage(){
-
-    }
-
-    public void getImage(){
-
-    }
-
 }

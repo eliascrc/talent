@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
 /**
- * Web services to manage images in Amazon S3.
+ * Web services to manage organizations logo in Amazon S3.
  *
  * @author María José Cubero
  */
@@ -41,7 +41,12 @@ public class OrganizationLogoResource {
     @POST
     @Path("/delete")
     public Response deleteImage(){
-        this.organizationLogoService.deleteOrganizationLogo();
-        return Response.status(200).build();
+        try{
+            this.organizationLogoService.deleteOrganizationLogo();
+            return Response.status(200).build();
+        }catch (Exception e){
+            e.printStackTrace();
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
     }
 }

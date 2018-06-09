@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
 /**
- * Web services to manage images in Amazon S3.
+ * Web services to manage profile pictures in Amazon S3.
  *
  * @author María José Cubero
  */

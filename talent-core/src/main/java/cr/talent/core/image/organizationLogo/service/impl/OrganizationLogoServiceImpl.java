@@ -68,7 +68,6 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
             organization1.setLogo(organizationLogo);
             organization.setLogo(organizationLogo);
             this.organizationService.update(organization);
-          //  this.technicalResourceService.update(technicalResource1);
 
             this.imageDao.uploadImage(organizationLogo.getId() + FILE_EXTENSION, file, FOLDER);
         }
@@ -78,6 +77,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
     public void deleteOrganizationLogo() {
         TechnicalResource technicalResource = (TechnicalResource) SecurityUtils.getLoggedInUser();
         TechnicalResource technicalResource1 = this.technicalResourceService.findById(technicalResource.getId());
+
         Organization organization = technicalResource.getOrganization();
         Organization organization1 = technicalResource1.getOrganization();
         OrganizationLogo organizationLogo = organization1.getLogo();

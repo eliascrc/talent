@@ -21,15 +21,4 @@ public class HibernateProfilePictureDao extends HibernateCrudDao<ProfilePicture,
         setSessionFactory(sessionFactory);
     }
 
-    public void createImage(String TechnicalResource){
-    }
-
-    public void deleteImage(){
-
-    }
-
-    public void getImage(){
-
-    }
-
 }
