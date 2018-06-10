@@ -34,6 +34,7 @@
         <security:intercept-url pattern="/ws/login/organization" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/user/authenticated" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()"/>
+        <security:intercept-url pattern="/ws/signUp/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
 
         <security:custom-filter before="BASIC_AUTH_FILTER" ref="tokenAuthenticationFilter"/>
