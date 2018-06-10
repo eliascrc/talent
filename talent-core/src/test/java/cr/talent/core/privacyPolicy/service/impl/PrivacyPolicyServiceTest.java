@@ -3,6 +3,7 @@ package cr.talent.core.privacyPolicy.service.impl;
 import cr.talent.core.privacyPolicy.dao.PrivacyPolicyDao;
 import cr.talent.core.privacyPolicy.dao.impl.HibernatePrivacyPolicyDao;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
+import cr.talent.model.Platform;
 import cr.talent.model.PrivacyPolicy;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -51,12 +52,13 @@ public class PrivacyPolicyServiceTest {
     public void testGetActive() {
         PrivacyPolicyDao privacyPolicyDao = mock(HibernatePrivacyPolicyDao.class);
         PrivacyPolicy privacyPolicy = mock(PrivacyPolicy.class);
-        when(privacyPolicyDao.getActivePrivacyPolicy()).thenReturn(privacyPolicy);
+        Platform platform = privacyPolicy.getPlatform();
+        when(privacyPolicyDao.getActivePrivacyPolicy(platform)).thenReturn(privacyPolicy);
         PrivacyPolicyService privacyPolicyService = new PrivacyPolicyServiceImpl();
         ReflectionTestUtils.setField(privacyPolicyService, "privacyPolicyDao", privacyPolicyDao);
         ReflectionTestUtils.setField(privacyPolicyService, "crudDao", privacyPolicyDao);
-        assertTrue(privacyPolicy.equals(privacyPolicyService.getActivePrivacyPolicy()));
-        verify(privacyPolicyDao, times(1)).getActivePrivacyPolicy();
+        assertTrue(privacyPolicy.equals(privacyPolicyService.getActivePrivacyPolicy(platform)));
+        verify(privacyPolicyDao, times(1)).getActivePrivacyPolicy(platform);
     }
 
     @Test

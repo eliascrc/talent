@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        th {
+            padding-bottom: 27px;
+        }
+
+        .rectangle {
+            margin-right: auto;
+            margin-left: auto;
+            width: 62%;
+            height: auto;
+            border: 2px solid #EFA42F;
+            border-radius: 8px;
+            padding-bottom: 5px;
+        }
+
+        .talent_logo {
+            height: 110px;
+            width: 129px;
+        }
+
+        .message-content {
+            margin-right: auto;
+            margin-left: auto;
+            height: 10%;
+            width: 80%;
+            color: #757575;
+            font-family: "Source Sans Pro";
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 18px;
+            text-align: justify;
+        }
+
+        .confirm-email-button {
+            height: 58px;
+            width: 175px;
+            border-radius: 8px;
+            background-color: #EFA42F;
+            box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.5);
+            border: none;
+			cursor: pointer;
+            color: #FFFFFF;
+            font-family: "Source Sans Pro";
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 18px;
+        }
+
+        .confirm-email-button:hover {
+            background-color: #FFFFFF;
+            border: 1px solid #EFA42F;
+            color: #EFA42F;
+        }
+
+        .footer {
+            margin-left: auto;
+            margin-right: auto;
+            width: 62%;
+            color: #9B9B9B;
+            font-family: "Source Sans Pro";
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+        .footer-right-text {
+            float: right;
+        }
+
+        .footer-left-text {
+            float: left;
+        }
+
+        .unsubscribe {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 850px) {
+            .footer-left-text, .footer-right-text {
+                float: none;
+                padding-top: 0px;
+            }
+
+            .footer {
+                text-align: center;
+                width: 75%;
+            }
+
+            .rectangle{
+                width: 75%;
+            }
+        }
+    </style>
+</head>
+<body>
+<table class="rectangle">
+    <tr>
+        <th>
+            <img src="http://www.talent.cr/assets/images/talent-logo.png" class="talent_logo">
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <p class="message-content"> Hi ${firstName} ${lastName},</p>
+            <p class="message-content"> Welcome to Talent! Before you start, you must confirm your email address. If you didn’t request to join, ignore this email.
+            </p>
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <a target="_blank"  href="${link}" ><button class="confirm-email-button">Confirm email
+            </button></a>
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <p class="message-content">Thanks!</p>
+            <p class="message-content"> The Talent! Team</p>
+        </th>
+    </tr>
+</table>
+<footer class="footer">
+    <p class="footer-left-text">Want to stop getting emails from Talent?
+        <a class="unsubscribe" target="_blank"  href="http://www.talent.cr/#/" >Unsubscribe</a></p>
+    <p class="footer-right-text">Talent! &copy; 2018</p>
+</footer>
+</body>
+</html>

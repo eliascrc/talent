@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cr.talent.model.TechnicalResource;
 
+import java.util.UUID;
+
 /**
  * Default implementation of the {@link TechnicalResourceService}
  *
@@ -43,9 +45,7 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     }
 
     /**
-     * Method that finds a User by its username via the data access object of the service.
-     * @param username String which specifies the user's username to find.
-     * @return The result of the username search in the data access object.
+     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#getTechnicalResourceByUsername(String)
      */
     public TechnicalResource getTechnicalResourceByUsername(String username) {
         return this.technicalResourceDao.findTechnicalResourceByUsername(username);
@@ -82,7 +82,23 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
         SecurityUtils.validatePassword(technicalResource.getPassword());
         technicalResource.setPassword(passwordEncoder.encode(technicalResource.getPassword()));
         technicalResource.setEnabled(true);
+        technicalResource.setToken(UUID.randomUUID().toString());
 
         return super.create(technicalResource);
+    }
+
+    /**
+     * Method that updates a Technical Resource user by supplying the correct and necessary information
+     * to the data access object.
+     * @param technicalResource The instance of TechnicalResource that must be updated in the data base.
+     */
+    @Override
+    public void update(TechnicalResource technicalResource) {
+
+        technicalResource.setUsername(technicalResource.getUsername().toLowerCase());
+        SecurityUtils.validatePassword(technicalResource.getPassword());
+        technicalResource.setPassword(passwordEncoder.encode(technicalResource.getPassword()));
+
+        super.update(technicalResource);
     }
 }

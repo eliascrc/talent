@@ -4,6 +4,7 @@ import cr.talent.core.termsOfService.dao.ToSDao;
 import cr.talent.core.termsOfService.dao.impl.HibernateToSDao;
 import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.core.termsOfService.service.impl.ToSServiceImpl;
+import cr.talent.model.Platform;
 import cr.talent.model.TermsOfService;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -32,10 +33,11 @@ public class ToSServiceTest {
     public void testGetActiveTermsOfService() {
         ToSDao toSDao = mock(ToSDao.class);
         TermsOfService termsOfService = mock(TermsOfService.class);
+        Platform platform = termsOfService.getPlatform();
         ToSService termsOfServiceService = new ToSServiceImpl();
         ReflectionTestUtils.setField(termsOfServiceService, "toSDao", toSDao);
-        when(toSDao.getActiveTermsOfService()).thenReturn(termsOfService);
-        TermsOfService termsOfService2 = termsOfServiceService.getActiveTermsOfService();
+        when(toSDao.getActiveTermsOfService(platform)).thenReturn(termsOfService);
+        TermsOfService termsOfService2 = termsOfServiceService.getActiveTermsOfService(platform);
         assertEquals(termsOfService, termsOfService2);
     }
 

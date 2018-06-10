@@ -1,0 +1,15 @@
+<html>
+
+<head></head>
+
+<body>
+<h1>Talent!</h1>
+<p>Dear ${firstName} ${lastName},</p>
+<p>Enter the following code to confirm your email address.</p>
+<p>${confirmationCode}</p>
+
+<p>Thanks!</p>
+
+</body>
+
+</html>

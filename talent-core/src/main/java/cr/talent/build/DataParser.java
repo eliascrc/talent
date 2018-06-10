@@ -384,6 +384,8 @@ class DataParser extends XmlParser {
             e.printStackTrace();
         }
         privacyPolicy.setContent(privacyPolicyContent);
+        privacyPolicy.setPlatform(Platform.valueOf(super.getAttributeValue(privacyPolicyElement, "platform")));
+
         return privacyPolicy;
     }
 
@@ -405,6 +407,8 @@ class DataParser extends XmlParser {
             e.printStackTrace();
         }
         termsOfService.setToSContent(termsOfServiceContent);
+        termsOfService.setPlatform(Platform.valueOf(super.getAttributeValue(termsOfServiceElement, "platform")));
+
         return termsOfService;
     }
 
