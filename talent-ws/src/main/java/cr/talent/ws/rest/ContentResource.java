@@ -10,6 +10,7 @@ import cr.talent.ws.rest.support.exceptions.UnsupportedPlatformException;
  */
 public abstract class ContentResource {
 
+
     private static final String ANDROID_PARAMETER_NAME = "android";
     private static final String WEB_PARAMETER_NAME = "web";
 

@@ -86,4 +86,19 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
 
         return super.create(technicalResource);
     }
+
+    /**
+     * Method that updates a Technical Resource user by supplying the correct and necessary information
+     * to the data access object.
+     * @param technicalResource The instance of TechnicalResource that must be updated in the data base.
+     */
+    @Override
+    public void update(TechnicalResource technicalResource) {
+
+        technicalResource.setUsername(technicalResource.getUsername().toLowerCase());
+        SecurityUtils.validatePassword(technicalResource.getPassword());
+        technicalResource.setPassword(passwordEncoder.encode(technicalResource.getPassword()));
+
+        super.update(technicalResource);
+    }
 }

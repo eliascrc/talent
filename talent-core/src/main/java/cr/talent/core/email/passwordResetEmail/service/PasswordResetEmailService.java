@@ -7,7 +7,8 @@ import cr.talent.model.PasswordResetRequest;
  * for the password reset request.
  *
  * @author María José Cubero.
- */public interface PasswordResetEmailService {
+ */
+public interface PasswordResetEmailService {
 
     /**
      * Sends the forgot password email to a user that requests that action.

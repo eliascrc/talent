@@ -30,9 +30,9 @@ public class PredefinedCapabilityResource {
      * Receives the request for creating a new predefined capability.
      * @param name the predefined capability's name.
      * @return 200 if the predefined capability is correctly created,
-     *          400 if the name is null or an empty string,
-     *          409 if there's already a predefined capability with the specified name,
-     *          500 if the predefined capability's organization attribute is not null.
+     *         400 if the name is null or an empty string,
+     *         409 if there's already a predefined capability with the specified name,
+     *         500 if the predefined capability's organization attribute is not null.
      */
     @POST
     @Path("/create")
