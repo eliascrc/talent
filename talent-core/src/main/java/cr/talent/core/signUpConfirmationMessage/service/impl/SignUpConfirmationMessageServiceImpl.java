@@ -7,6 +7,7 @@ import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessag
 import cr.talent.model.SignUpConfirmationMessage;
 import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
+import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,23 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
             this.create(signUpConfirmationMessage);
         }
         signUpConfirmationEmailService.sendSignUpConfirmationEmail(signUpConfirmationMessage);
+    }
+
+    @Override
+    public boolean confirmEmail(String code, String username) {
+        SignUpConfirmationMessage signUpConfirmationMessage = this.getActiveConfirmationMessage(username);
+        if (signUpConfirmationMessage == null)
+            throw new NonExistentConfirmationMessageException();
+
+        boolean codeMatchesConfirmationMessage = code.equals(signUpConfirmationMessage.getConfirmationCode());
+        TechnicalResource technicalResource = signUpConfirmationMessage.getTechnicalResource();
+
+        if (codeMatchesConfirmationMessage) {
+            super.remove(signUpConfirmationMessage);
+            technicalResource.setStatus(User.Status.ACTIVE);
+        }
+
+        return codeMatchesConfirmationMessage;
     }
 
 }

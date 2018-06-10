@@ -27,4 +27,13 @@ public interface SignUpConfirmationMessageService extends CrudService<SignUpConf
      * @param password the password of the resource performing the first step of the sign up
      */
     void sendMessage(String firstName, String lastName, String username, String password);
+
+    /**
+     * Tries to match the provided code to the last one that was sent to the provided email. It deletes the confirmation
+     * message and activates the user account if it matches the confirmation.
+     * @param code the code provided by the user
+     * @param username the user's email
+     * @return true if it matches the confirmation, false if not
+     */
+    boolean confirmEmail(String code, String username);
 }

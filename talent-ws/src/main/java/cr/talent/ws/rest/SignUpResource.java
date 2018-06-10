@@ -1,8 +1,7 @@
 package cr.talent.ws.rest;
 
-
-import cr.talent.core.email.signUpConfirmationEmail.service.SignUpConfirmationEmailService;
 import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
+import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -54,6 +53,30 @@ public class SignUpResource {
         }
 
         return Response.ok().build();
+    }
+
+    /**
+     * Activates a user account if the supplied code matches the one sent in the previous step for the provided email
+     * @param code the confirmation code entered by the user
+     * @param email the user's email
+     * @return 200 if the code matches the one sent in the previous step for the provided email,
+     *          409 if no confirmation message is found for the provided email or if the provided code is not correct
+     */
+    @POST
+    @Path("/stepTwo")
+    public Response performSecondStep(@FormParam("code") String code, @FormParam("email") String email) {
+        if (StringUtils.isEmpty(code) || StringUtils.isEmpty(email))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        Response response;
+        try {
+            response = signUpConfirmationMessageService.confirmEmail(code, email) ? Response.ok().build()
+                    : Response.status(Response.Status.CONFLICT).build();
+        } catch (NonExistentConfirmationMessageException e) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+
+        return response;
     }
 
 }
