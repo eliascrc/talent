@@ -2,19 +2,16 @@ package cr.talent.model;
 
 import org.junit.Test;
 
-import java.util.Date;
-
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 /**
- * Class that allows to test the Contact email methods to know all the different paths they could take.
+ * Class that allows to test the AuthenticatedContactEmail methods, to know all the different paths they could take.
  *
- * @author Elías Calderón
+ * @author Fabián Roberto Leandro
  */
-public class ContactEmailTest {
-
+public class AuthenticatedContactEmailTest {
+    
     @Test
     public void coreTest () {
 
@@ -24,9 +21,10 @@ public class ContactEmailTest {
         String subject = "subject";
         String from = "from";
         String to =  "to";
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
 
         // Verify the constructor
-        ContactEmail contactEmail = new ContactEmail();
+        AuthenticatedContactEmail contactEmail = new AuthenticatedContactEmail();
 
         // Verify the sets
         contactEmail.setTo(to);
@@ -35,6 +33,7 @@ public class ContactEmailTest {
         contactEmail.setFileName(fileName);
         contactEmail.setFrom(from);
         contactEmail.setSubject(subject);
+        contactEmail.setTechnicalResource(technicalResource);
 
         // Verify the gets
         assertEquals(to, contactEmail.getTo());
@@ -43,6 +42,6 @@ public class ContactEmailTest {
         assertEquals(fileName, contactEmail.getFileName());
         assertEquals(from, contactEmail.getFrom());
         assertEquals(subject, contactEmail.getSubject());
+        assertEquals(technicalResource, contactEmail.getTechnicalResource());
     }
-
 }
