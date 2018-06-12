@@ -1,5 +1,6 @@
 package cr.talent.ws.rest;
 
+import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import cr.talent.core.image.profilePicture.service.ProfilePictureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,13 @@ public class ProfilePictureResource {
     @Autowired
     ProfilePictureService profilePictureService;
 
+    private static int MAX_FILE_SIZE = 5242880;
+
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadImage(@FormDataParam("file") InputStream file) {
+    public Response uploadImage(@FormDataParam("file") InputStream file,
+                                @FormDataParam("file") FormDataContentDisposition fileDetail) {
         if (StringUtils.isEmpty(file))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
