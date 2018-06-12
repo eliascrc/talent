@@ -16,7 +16,7 @@ public class SignUpConfirmationMessage extends BasicEntity {
     /**
      * The technical resource doing the sign up.
      */
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name = "technical_resource_id", unique = true)
     private TechnicalResource technicalResource;
 
