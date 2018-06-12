@@ -54,7 +54,6 @@ public class SignUpResource {
         try {
             this.signUpConfirmationMessageService.sendMessage(firstName, lastName, email, password);
         } catch(IllegalArgumentException e) { //if the password is not valid
-            System.out.println("IAE");
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
