@@ -86,9 +86,7 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
             /* The password should only be encoded if the resource is being updated, because if it is being created t
             because if it is being created the create method of the service will take care of that
             */
-            System.out.println("Here " + password);
             SecurityUtils.validatePassword(password); // throws IllegalArgumentException if it is not valid
-            System.out.println("Here");
             password = this.passwordEncoder.encode(password); // the password is encoded
         }
 
