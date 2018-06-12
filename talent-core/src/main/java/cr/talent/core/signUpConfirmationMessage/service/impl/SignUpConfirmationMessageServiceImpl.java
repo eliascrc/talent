@@ -58,25 +58,17 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
 
     public void init() { setCrudDao(this.signUpConfirmationMessageDao); }
 
-    @Override
     /**
-     * @see cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService#getActiveConfirmationMessage(String)
+     * Retrieves the last confirmation message that the user has not yet confirmed if it does not exist
+     * @param username The username of the user performing the first step of the sign up
+     * @return the confirmation message if it exists for that username
      */
-    public SignUpConfirmationMessage getActiveConfirmationMessage(String username) {
+    private SignUpConfirmationMessage getActiveConfirmationMessage(String username) {
         SignUpConfirmationMessage signUpConfirmation = signUpConfirmationMessageDao.getActiveConfirmationMessage(username);
 
         return signUpConfirmation;
     }
 
-
-    /**
-     * Creates a technical resource with the supplied information if it is valid and sends a confirmation email. If the
-     * password is not valid it throws an exception with a code that reflects the problem.
-     * @param firstName the first name of the resource performing the first step of the sign up
-     * @param lastName the last name of the resource performing the first step of the sign up
-     * @param username the email of the resource performing the first step of the sign up
-     * @param password the password of the resource performing the first step of the sign up
-     */
     public void sendMessage(String firstName, String lastName, String username, String password) {
         TechnicalResource technicalResource;
         SignUpConfirmationMessage signUpConfirmationMessage;
