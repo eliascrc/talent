@@ -96,8 +96,6 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     public void update(TechnicalResource technicalResource) {
 
         technicalResource.setUsername(technicalResource.getUsername().toLowerCase());
-        SecurityUtils.validatePassword(technicalResource.getPassword());
-        technicalResource.setPassword(passwordEncoder.encode(technicalResource.getPassword()));
 
         super.update(technicalResource);
     }

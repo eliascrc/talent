@@ -12,13 +12,6 @@ import cr.talent.support.service.CrudService;
 public interface SignUpConfirmationMessageService extends CrudService<SignUpConfirmationMessage, String> {
 
     /**
-     * Retrieves the last confirmation message that the user has not yet confirmed if it does not exist
-     * @param username The username of the user performing the first step of the sign up
-     * @return the confirmation message if it exists for that username
-     */
-    SignUpConfirmationMessage getActiveConfirmationMessage(String username);
-
-    /**
      * Creates a technical resource with the supplied information if it is valid and sends a confirmation email. If the
      * password is not valid it throws an exception with a code that reflects the problem.
      * @param firstName the first name of the resource performing the first step of the sign up
@@ -27,4 +20,13 @@ public interface SignUpConfirmationMessageService extends CrudService<SignUpConf
      * @param password the password of the resource performing the first step of the sign up
      */
     void sendMessage(String firstName, String lastName, String username, String password);
+
+    /**
+     * Tries to match the provided code to the last one that was sent to the provided email. It deletes the confirmation
+     * message and activates the user account if it matches the confirmation.
+     * @param code the code provided by the user
+     * @param username the user's email
+     * @return true if it matches the confirmation, false if not
+     */
+    boolean confirmEmail(String code, String username);
 }
