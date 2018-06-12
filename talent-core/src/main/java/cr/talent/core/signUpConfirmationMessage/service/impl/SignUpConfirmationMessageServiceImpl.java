@@ -82,22 +82,29 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
         } else {
             technicalResource = signUpConfirmationMessage.getTechnicalResource();
             hadAnotherConfirmationMessage = true;
+
+            /* The password should only be encoded if the resource is being updated, because if it is being created t
+            because if it is being created the create method of the service will take care of that
+            */
+            System.out.println("Here " + password);
+            SecurityUtils.validatePassword(password); // throws IllegalArgumentException if it is not valid
+            System.out.println("Here");
+            password = this.passwordEncoder.encode(password); // the password is encoded
         }
 
-        SecurityUtils.validatePassword(password); //throws IllegalArgumentException if it is not valid
         technicalResource.setFirstName(firstName);
         technicalResource.setLastName(lastName);
         technicalResource.setUsername(username);
-        technicalResource.setPassword(this.passwordEncoder.encode(password)); // the password is encoded
+        technicalResource.setPassword(password);
         technicalResource.setStatus(User.Status.INACTIVE);
-        technicalResource.setAdministrator(true); //because they are signing up while creating an organization
+        technicalResource.setAdministrator(true); // because they are signing up while creating an organization
 
         signUpConfirmationMessage.setConfirmationCode(String.format("%0" + DIGITS + "d", confirmationCode));
         signUpConfirmationMessage.setTechnicalResource(technicalResource);
 
         if (hadAnotherConfirmationMessage) {
             this.technicalResourceService.update(technicalResource);
-            this.update(signUpConfirmationMessage);
+            super.update(signUpConfirmationMessage);
         } else {
             this.technicalResourceService.create(technicalResource);
             this.create(signUpConfirmationMessage);

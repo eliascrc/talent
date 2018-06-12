@@ -2,6 +2,7 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
 import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
+import org.apache.commons.validator.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -46,9 +47,14 @@ public class SignUpResource {
                 StringUtils.isEmpty(password))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
+        EmailValidator emailValidator = EmailValidator.getInstance();
+        if (!emailValidator.isValid(email))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
         try {
             this.signUpConfirmationMessageService.sendMessage(firstName, lastName, email, password);
         } catch(IllegalArgumentException e) { //if the password is not valid
+            System.out.println("IAE");
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
