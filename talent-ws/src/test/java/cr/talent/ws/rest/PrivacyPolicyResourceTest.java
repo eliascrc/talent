@@ -2,6 +2,10 @@ package cr.talent.ws.rest;
 import org.junit.Test;
 import static com.jayway.restassured.RestAssured.*;
 
+/**
+ * This class will test the Privacy Policy web service responses.
+ * @author Josue Cubero.
+ */
 public class PrivacyPolicyResourceTest extends FunctionalTest {
 
     @Test

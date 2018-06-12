@@ -3,6 +3,10 @@ package cr.talent.ws.rest;
 import com.jayway.restassured.RestAssured;
 import org.junit.BeforeClass;
 
+/**
+ * This class will serve as base for all tests which extend it.
+ * @author Josue Cubero.
+ */
 public class FunctionalTest {
 
     @BeforeClass

@@ -3,6 +3,10 @@ package cr.talent.ws.rest;
 import org.junit.Test;
 import static com.jayway.restassured.RestAssured.*;
 
+/**
+ * This class will test the Terms of Service web service responses.
+ * @author Josue Cubero.
+ */
 public class TermsOfServiceResourceTest extends FunctionalTest {
 
     @Test
@@ -29,7 +33,6 @@ public class TermsOfServiceResourceTest extends FunctionalTest {
     public void testAndroidTermsOfService() {
         given().queryParam("platform","android").when().get("/ws/content/termsOfService").then().statusCode(200);
     }
-
 
     //The following test was run on localhost, by setting the active PP to inactive.
     /*@Test
