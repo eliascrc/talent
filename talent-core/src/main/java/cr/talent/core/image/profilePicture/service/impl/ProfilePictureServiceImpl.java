@@ -44,6 +44,9 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
         setCrudDao(this.profilePictureDao);
     }
 
+    /**
+     * @see ProfilePictureService#uploadProfilePicture(InputStream)
+     */
     @Override
     public void uploadProfilePicture(InputStream file){
 
@@ -64,6 +67,9 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
         this.imageDao.uploadImage(profilePicture.getId() + FILE_EXTENSION, file, FOLDER);
     }
 
+    /**
+     * @see ProfilePictureService#deleteProfilePicture()
+     */
     @Override
     public void deleteProfilePicture(){
         TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();

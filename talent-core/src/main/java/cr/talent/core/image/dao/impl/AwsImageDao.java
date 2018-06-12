@@ -32,6 +32,9 @@ public class AwsImageDao implements ImageDao{
     public AwsImageDao(){
     }
 
+    /**
+     * @see cr.talent.core.image.dao.ImageDao#uploadImage(String, InputStream, String)
+     */
     @Override
     public void uploadImage(String key, InputStream file, String folder) {
         ObjectMetadata metadata = new ObjectMetadata();
@@ -41,11 +44,17 @@ public class AwsImageDao implements ImageDao{
         s3Client.putObject(new PutObjectRequest(bucketName + folder, key, file, metadata).withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
+    /**
+     * @see cr.talent.core.image.dao.ImageDao#deleteImage(String, String)
+     */
     @Override
     public void deleteImage(String key, String folder) {
         s3Client.deleteObject(bucketName + folder,key);
     }
 
+    /**
+     * @see cr.talent.core.image.dao.ImageDao#getImage(String, String)
+     */
     @Override
     public void getImage(String key, String folder) {
         s3Client.getObject(new GetObjectRequest(bucketName + folder, key));

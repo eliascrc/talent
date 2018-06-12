@@ -50,6 +50,9 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
         setCrudDao(this.organizationLogoDao);
     }
 
+    /**
+     * @see OrganizationLogoService#uploadOrganizationLogo(InputStream)
+     */
     @Override
     public void uploadOrganizationLogo(InputStream file) {
         TechnicalResource technicalResource = (TechnicalResource) SecurityUtils.getLoggedInUser();
@@ -74,6 +77,9 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
         }
     }
 
+    /**
+     * @see OrganizationLogoService#deleteOrganizationLogo()
+     */
     @Override
     public void deleteOrganizationLogo() {
         TechnicalResource technicalResource = (TechnicalResource) SecurityUtils.getLoggedInUser();
