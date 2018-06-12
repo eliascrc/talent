@@ -24,17 +24,17 @@ import java.io.InputStream;
 @Path("/profilePicture")
 public class ProfilePictureResource {
 
+    private static long MAX_FILE_SIZE = 5242880;
+
     @Autowired
     ProfilePictureService profilePictureService;
-
-    private static int MAX_FILE_SIZE = 5242880;
 
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadImage(@FormDataParam("file") InputStream file,
-                                @FormDataParam("file") FormDataContentDisposition fileDetail) {
-        if (StringUtils.isEmpty(file))
+                                @HeaderParam("content-length") long contentLength) {
+        if (StringUtils.isEmpty(file) || contentLength >= MAX_FILE_SIZE)
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         this.profilePictureService.uploadProfilePicture(file);

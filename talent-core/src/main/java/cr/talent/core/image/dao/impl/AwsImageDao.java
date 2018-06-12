@@ -21,6 +21,8 @@ import java.io.InputStream;
 @Repository("imageDao")
 public class AwsImageDao implements ImageDao{
 
+    private static String CONTENT_TYPE = "image/jpeg";
+
     @Autowired
     private AmazonS3 s3Client;
 
@@ -33,7 +35,7 @@ public class AwsImageDao implements ImageDao{
     @Override
     public void uploadImage(String key, InputStream file, String folder) {
         ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("image/jpeg");
+        metadata.setContentType(CONTENT_TYPE);
         metadata.addUserMetadata("x-amz-meta-title", "metadata");
 
         s3Client.putObject(new PutObjectRequest(bucketName + folder, key, file, metadata).withCannedAcl(CannedAccessControlList.PublicRead));

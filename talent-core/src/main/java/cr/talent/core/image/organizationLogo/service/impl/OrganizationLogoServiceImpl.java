@@ -31,6 +31,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
     private String link;
 
     private static final String FILE_EXTENSION = ".jpg";
+
     private static final String FOLDER = "/organizations-logo";
 
     @Autowired

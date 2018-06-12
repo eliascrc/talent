@@ -28,6 +28,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
     private String link;
 
     private static final String FILE_EXTENSION = ".jpg";
+
     private static final String FOLDER = "/profile-pictures";
 
     @Autowired

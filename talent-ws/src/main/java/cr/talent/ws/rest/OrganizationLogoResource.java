@@ -23,15 +23,18 @@ import java.io.InputStream;
 @Path("/organizationLogo")
 public class OrganizationLogoResource {
 
+    private static long MAX_FILE_SIZE = 5242880;
+
     @Autowired
     OrganizationLogoService organizationLogoService;
 
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadImage(@FormDataParam("file") InputStream file) {
+    public Response uploadImage(@FormDataParam("file") InputStream file,
+                                @HeaderParam("content-length") long contentLength) {
         System.out.println(file);
-        if (StringUtils.isEmpty(file))
+        if (StringUtils.isEmpty(file) || contentLength >= MAX_FILE_SIZE)
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         this.organizationLogoService.uploadOrganizationLogo(file);
