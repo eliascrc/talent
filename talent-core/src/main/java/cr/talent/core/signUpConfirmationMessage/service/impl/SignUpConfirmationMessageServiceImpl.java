@@ -25,6 +25,12 @@ import javax.transaction.Transactional;
 @Transactional
 public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUpConfirmationMessage, String> implements SignUpConfirmationMessageService {
 
+    //The highest number that can be used for a confirmation code
+    private static final int MAX_CONFIRMATION_CODE = 999999;
+
+    //The number of digits in the confirmation code
+    private static final int DIGITS = 6;
+
     /**
      * Data access object reference to perform SignUpConfirmationMessage operations.
      */
@@ -50,12 +56,6 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    //The highest number that can be used for a confirmation code
-    private static final int MAX_CONFIRMATION_CODE = 999999;
-
-    //The number of digits in the confirmation code
-    private static final int DIGITS = 6;
-
     public void init() { setCrudDao(this.signUpConfirmationMessageDao); }
 
     @Override
@@ -68,9 +68,14 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
         return signUpConfirmation;
     }
 
-    @Override
+
     /**
-     * @see cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService#sendMessage(String, String, String, String)
+     * Creates a technical resource with the supplied information if it is valid and sends a confirmation email. If the
+     * password is not valid it throws an exception with a code that reflects the problem.
+     * @param firstName the first name of the resource performing the first step of the sign up
+     * @param lastName the last name of the resource performing the first step of the sign up
+     * @param username the email of the resource performing the first step of the sign up
+     * @param password the password of the resource performing the first step of the sign up
      */
     public void sendMessage(String firstName, String lastName, String username, String password) {
         TechnicalResource technicalResource;
