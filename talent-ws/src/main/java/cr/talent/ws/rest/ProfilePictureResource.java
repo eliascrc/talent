@@ -29,6 +29,14 @@ public class ProfilePictureResource {
     @Autowired
     ProfilePictureService profilePictureService;
 
+    /**
+     * uploads the profile picture.
+     *
+     * @param file
+     * @param contentLength
+     * @return 200 if the image was uploaded.
+     * @return 400 if the image is empty or bigger than 5 MB.
+     */
     @POST
     @Path("/upload")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -41,15 +49,15 @@ public class ProfilePictureResource {
         return Response.status(200).build();
     }
 
+    /**
+     * deletes the profile picture.
+     *
+     * @return 200 when the image was deleted.
+     */
     @POST
     @Path("/delete")
     public Response deleteImage(){
-        try{
-            this.profilePictureService.deleteProfilePicture();
-            return Response.status(200).build();
-        }catch (Exception e){
-            e.printStackTrace();
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
+        this.profilePictureService.deleteProfilePicture();
+        return Response.status(200).build();
     }
 }

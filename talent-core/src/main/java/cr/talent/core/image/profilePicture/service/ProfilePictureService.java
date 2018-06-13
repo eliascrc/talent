@@ -15,13 +15,13 @@ import java.io.InputStream;
 public interface ProfilePictureService extends CrudService<ProfilePicture, String> {
 
     /**
-     * uploads or uploads the picture of the logged in user that is making the request.
+     * uploads or updates the picture of the logged in user that is making the request.
      * @param file
      */
     void uploadProfilePicture(InputStream file);
 
     /**
-     * deletes the picture of the logged in user that is making the request.
+     * deletes the picture of the loggedin user that is making the request.
      */
     void deleteProfilePicture();
 
