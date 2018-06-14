@@ -1,7 +1,6 @@
 package cr.talent.model;
 
 import javax.persistence.*;
-import java.util.*;
 
 
 /**
@@ -12,13 +11,14 @@ import java.util.*;
  * @author María José Cubero
  */
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "image")
 public class Image extends BasicEntity {
 
     /**
      * Link to get to the image.
      */
-    @Column (name = "link" , nullable = false, unique = true)
+    @Column (name = "link")
     private String link;
 
 	public Image(){}

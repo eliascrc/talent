@@ -24,8 +24,9 @@ public class TechnicalResource extends User{
     /**
      * The profile picture of the user.
      */
-    @OneToOne
-    private Image profilePicture;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "profile_picture_id")
+    private ProfilePicture profilePicture;
 
     /**
      * The organization that the resource belongs to.
@@ -206,11 +207,11 @@ public class TechnicalResource extends User{
         this.lastPerformanceReview = lastPerformanceReview;
     }
 
-    public Image getProfilePicture() {
+    public ProfilePicture getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Image profilePicture) {
+    public void setProfilePicture(ProfilePicture profilePicture) {
         this.profilePicture = profilePicture;
     }
 
