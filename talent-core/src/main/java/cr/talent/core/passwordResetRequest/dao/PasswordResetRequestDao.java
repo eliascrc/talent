@@ -20,6 +20,6 @@ public interface PasswordResetRequestDao extends CrudDao<PasswordResetRequest, S
      * Retrieves the password reset request that corresponds to a email.
      * @return the password reset request.
      */
-    PasswordResetRequest findByEmail(String email);
+    PasswordResetRequest findByEmail(String email); //TODO change this to take into account organizationIdentifier
 
 }

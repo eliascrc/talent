@@ -18,7 +18,8 @@ import java.util.Set;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "technical_resource")
+@Table(name = "technical_resource",
+        uniqueConstraints=@UniqueConstraint(columnNames={"username", "organization_id"}))
 public class TechnicalResource extends User{
 
     /**

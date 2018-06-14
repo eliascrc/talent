@@ -25,11 +25,11 @@ public class PasswordResetRequestResource {
 
     @POST
     @Path ("/forgotPassword")
-    public Response forgotPassword (@FormParam("email") String email){
-        if(StringUtils.isEmpty(email))
+    public Response forgotPassword (@FormParam("email") String email,@FormParam("organizationIdentifier") String organizationIdentifier){
+        if(StringUtils.isEmpty(email) || StringUtils.isEmpty(organizationIdentifier))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        this.passwordResetRequestService.createPasswordRequestReset(email);
+        this.passwordResetRequestService.createPasswordRequestReset(email,organizationIdentifier);
         return Response.ok().build();
     }
 

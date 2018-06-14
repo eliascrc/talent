@@ -20,9 +20,10 @@
     </bean>
 
     <bean id="technicalResourceAuthenticationProvider"
-          class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-        <property name="userDetailsService" ref="technicalResourceService"/>
-        <property name="passwordEncoder" ref="passwordEncoder"/>
+          class="cr.talent.core.security.domain.OrganizationAuthenticationProvider">
+
+        <!--<property name="technicalResourceService" ref="technicalResourceService"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>-->
     </bean>
 
     <bean id="tokenAuthenticationProvider"

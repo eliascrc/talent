@@ -5,7 +5,6 @@ import cr.talent.core.security.technicalResource.service.TechnicalResourceServic
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +21,7 @@ import java.util.UUID;
  */
 @Service("technicalResourceService")
 @Transactional
-public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResource, String> implements  TechnicalResourceService{
+public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResource, String> implements TechnicalResourceService {
 
     /**
      * Data access object reference to perform TechnicalResource operations.
@@ -40,41 +39,61 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     /**
      * Initialization method that sets the respective fields during bean instantiation.
      */
-    public void init(){
+    public void init() {
         setCrudDao(this.technicalResourceDao);
     }
 
     /**
-     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#getTechnicalResourceByUsername(String)
+     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#getTechnicalResourceByUsernameAndOrganizationIdentifier(String, String)
      */
-    public TechnicalResource getTechnicalResourceByUsername(String username) {
-        return this.technicalResourceDao.findTechnicalResourceByUsername(username);
+    public TechnicalResource getTechnicalResourceByUsernameAndOrganizationIdentifier(String username, String organizationIdentifier) {
+        return this.technicalResourceDao.findTechnicalResourceByUsernameAndOrganizationIdentifier(username, organizationIdentifier);
     }
 
     /**
      * Method that loads the UserDetails according to the username specified.
+     *
      * @param username String which specifies the user's username to search for.
      * @return The UserDetails of the user found or null if no user with that username was found.
      * @throws UsernameNotFoundException
      */
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails user = this.technicalResourceDao.findTechnicalResourceByUsername((username.toLowerCase()));
-        if(user == null) {
-            throw new UsernameNotFoundException("The user " + username + " was not found.");
+    public UserDetails loadUserByUsernameAndOrganizationIdentifier(String username, String organizationIdentifier)
+            throws UsernameNotFoundException {
+        UserDetails user = this.technicalResourceDao.findTechnicalResourceByUsernameAndOrganizationIdentifier(username.toLowerCase(), organizationIdentifier.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("The user " + username + " was not found in the "+ organizationIdentifier +" organization.");
         }
         return user;
     }
 
     /**
+     * Implemented because this class must implement UserDetails, however it is impossible to find a user by username
+     * alone, since a user may be in more than one organization
+     * Use cr.talent.core.security.technicalResource.service.impl.{@link TechnicalResourceServiceImpl#loadUserByUsernameAndOrganizationIdentifier(String, String)}
+     * instead.
+     *
+     * @param s
+     * @return
+     * @throws UsernameNotFoundException
+     */
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        throw new UsernameNotFoundException("Cannot find user by username alone.");
+    }
+
+    /**
      * Method that creates a System Administrator user by supplying the correct and necessary information
      * to the data access object.
+     *
      * @param technicalResource The instance of System Administrator that must be created in the data base.
      * @return The created user.
      */
     @Override
     public String create(TechnicalResource technicalResource) {
-        TechnicalResource foundSystemAdministrator = this.technicalResourceDao.findTechnicalResourceByUsername((technicalResource.getUsername().toLowerCase()));
-        if(foundSystemAdministrator != null) {
+        TechnicalResource foundTechnicalResource = this.technicalResourceDao.
+                findTechnicalResourceByUsernameAndOrganizationIdentifier((technicalResource.getUsername().toLowerCase()),
+                        technicalResource.getOrganization().getUniqueIdentifier().toLowerCase());
+        if (foundTechnicalResource != null) {
             throw new IllegalArgumentException("The administrator with name: " + technicalResource.getUsername() + " already exists.");
         }
 
@@ -90,6 +109,7 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     /**
      * Method that updates a Technical Resource user by supplying the correct and necessary information
      * to the data access object.
+     *
      * @param technicalResource The instance of TechnicalResource that must be updated in the data base.
      */
     @Override
@@ -99,4 +119,5 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
 
         super.update(technicalResource);
     }
+
 }

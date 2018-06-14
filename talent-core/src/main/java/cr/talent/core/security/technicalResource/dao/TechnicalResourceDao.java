@@ -16,7 +16,8 @@ public interface TechnicalResourceDao extends CrudDao<TechnicalResource, String>
      * @param username The technical resource's username to search for.
      * @return The TechnicalResource with the respective username.
      */
-    TechnicalResource findTechnicalResourceByUsername(String username);
+    TechnicalResource findTechnicalResourceByUsernameAndOrganizationIdentifier(String username,
+                                                                               String organizationIdentifier);
 
     /**
      * Finds a technical resource by its authentication token.

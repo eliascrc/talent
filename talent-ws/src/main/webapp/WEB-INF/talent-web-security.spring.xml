@@ -13,9 +13,6 @@
     </security:authentication-manager>
 
     <security:http use-expressions="true" pattern="/**/*" auto-config="false" entry-point-ref="customAuthEntryPoint">
-        <security:form-login login-processing-url="/ws/login" authentication-success-handler-ref="successLoginHandler"
-                             authentication-failure-handler-ref="loginFailureHandler" username-parameter="username"
-                             password-parameter="password" />
         <security:logout logout-url="/ws/logout" success-handler-ref="logoutHandler"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login/token" access="isAnonymous()" method="POST"/>
@@ -39,7 +36,9 @@
         <security:intercept-url pattern="/ws/signUp/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
 
+        <security:custom-filter position="FORM_LOGIN_FILTER" ref="organizationFilter"/>
         <security:custom-filter before="BASIC_AUTH_FILTER" ref="tokenAuthenticationFilter"/>
+
         <security:access-denied-handler ref="accessDeniedHandler"/>
         <security:csrf disabled="true"/>
     </security:http>
@@ -55,6 +54,21 @@
         <property name="filterProcessesUrl" value="/ws/login/token"/>
         <property name="authenticationSuccessHandler" ref="successLoginHandler"/>
         <property name="authenticationFailureHandler" ref="loginFailureHandler"/>
+    </bean>
+
+    <bean id="organizationFilter" class="cr.talent.core.security.domain.OrganizationAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="filterProcessesUrl" value="/ws/login"/>
+        <property name="authenticationSuccessHandler" ref="successLoginHandler"/>
+        <property name="authenticationFailureHandler" ref="loginFailureHandler"/>
+        <property name="passwordParameter" value="password"/>
+        <property name="usernameParameter" value="username"/>
+
+        <!--
+         <security:form-login login-processing-url="/ws/login" authentication-success-handler-ref="successLoginHandler"
+                             authentication-failure-handler-ref="loginFailureHandler" username-parameter="username"
+                             password-parameter="password" />
+        -->
     </bean>
 
 </beans>
