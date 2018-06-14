@@ -58,6 +58,12 @@ public class Organization extends BasicEntity {
     private Set<Invitation> invitationsList;
 
     /**
+     * The invitation link for users to join an organization
+     */
+    @Column(name = "invitation_link")
+    private String invitationLink;
+
+    /**
      * The organization's domain
      */
     @Column (name = "domain")
@@ -244,5 +250,13 @@ public class Organization extends BasicEntity {
 
     public void setHumanResourceManagers(Set<HumanResourceManager> humanResourceManagers) {
         this.humanResourceManagers = humanResourceManagers;
+    }
+
+    public String getInvitationLink() {
+        return invitationLink;
+    }
+
+    public void setInvitationLink(String invitationLink) {
+        this.invitationLink = invitationLink;
     }
 }

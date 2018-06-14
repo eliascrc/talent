@@ -4,10 +4,12 @@ import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
+import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.UUID;
 
 /**
  * Default implementation of the {@link cr.talent.core.organization.service.OrganizationService}
@@ -17,6 +19,9 @@ import javax.transaction.Transactional;
 @Service("organizationService")
 @Transactional
 public class OrganizationServiceImpl extends CrudServiceImpl<Organization, String> implements OrganizationService {
+
+    private static final String BASE_LINK = ".talent.cr/#/join?token=";
+    private static final String HTTP_PREFIX = "http://";
 
     @Autowired
     private OrganizationDao organizationDao;
@@ -44,6 +49,24 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
             throw new AlreadyCreatedOrganizationException(alreadyCreatedOrganizationExceptionMsg);
 
         return this.organizationDao.create(organization);
+    }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#createInviteLink(Organization)
+     */
+    @Override
+    public void createInviteLink(Organization organization) {
+
+        final String notNullInviteLinkInOrganizationExceptionMsg = "The invitation link to create in the organization is not null";
+
+        if (organization.getInvitationLink() != null) {
+            throw new NotNullInviteLinkInOrganizationException(notNullInviteLinkInOrganizationExceptionMsg);
+        }
+
+        String invitationToken = UUID.randomUUID().toString();
+        organization.setInvitationLink(HTTP_PREFIX + organization.getUniqueIdentifier() + BASE_LINK + invitationToken);
+
+        this.organizationDao.update(organization);
     }
 
 }
