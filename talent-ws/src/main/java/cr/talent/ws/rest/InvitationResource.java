@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -33,9 +34,19 @@ public class InvitationResource {
     @Autowired
     private InvitationService invitationService;
 
+    /**
+     * Receives a request to send an invitation email. If the invitations limit hasn't been reached
+     * the email is correctly sent.
+     *
+     * @param email the destination email
+     * @return 400 if the email is empty or null.
+     * 401 if the user is not the administrator of the organization.
+     * 409 if the limit of invitations has been reached.
+     * 200 if the email was correctly sent.
+     */
     @POST
     @Path("/send")
-    public Response stepFourSendInvite(@FormParam("email") String email) {
+    public Response sendInvitation(@FormParam("email") String email) {
         if(StringUtils.isEmpty(email))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
@@ -54,23 +65,54 @@ public class InvitationResource {
         return Response.ok().build();
     }
 
+    /**
+     * Receives a request for creating an invite link for an organization. If the user is the administrator
+     * the link is correctly created.
+     *
+     * @return 401 if the user is not the administrator of the organization.
+     * 200 if the link was correctly created or if it already exists. The invite link is also returned in the response.
+     */
     @POST
-    @Path("/createLink")
-    public Response stepFourCreateInviteLink() {
+    @Path("/inviteLink/create")
+    public Response createInviteLink() {
         TechnicalResource technicalResource = SecurityUtils.getLoggedInTechnicalResource();
         Organization organization = technicalResource.getOrganization();
 
         if (!technicalResource.isAdministrator())
             return Response.status(Response.Status.UNAUTHORIZED).build();
 
+        String inviteLink;
         try {
-            this.organizationService.createInviteLink(organization);
+            inviteLink = this.organizationService.createInviteLink(organization);
         } catch (NotNullInviteLinkInOrganizationException e) {
-            // If there was already an invite link for the organization then it should return an OK with the link
-            // so the catch does nothing.
+            // If there was already an invite link for the organization just get it.
+            inviteLink = organization.getInviteLink();
         }
 
-        return Response.ok().entity(organization.getInvitationLink()).build();
+        return Response.ok().entity(inviteLink).build();
+    }
+
+    /**
+     * Receives a request for getting the invite link of an organization. If the user is the administrator
+     * the link is correctly returned.
+     *
+     * @return 401 if the user is not the administrator of the organization.
+     * 204 if there is no link to return.
+     * 200 if the link was correctly created or if it already exists.
+     */
+    @GET
+    @Path("/inviteLink")
+    public Response getInviteLink() {
+        TechnicalResource technicalResource = SecurityUtils.getLoggedInTechnicalResource();
+        Organization organization = technicalResource.getOrganization();
+
+        if (!technicalResource.isAdministrator())
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+
+        if (organization.getInviteLink() == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+
+        return Response.ok().entity(organization.getInviteLink()).build();
     }
 
 }

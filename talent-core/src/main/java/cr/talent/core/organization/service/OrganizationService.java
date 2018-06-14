@@ -26,8 +26,9 @@ public interface OrganizationService extends CrudService<Organization, String> {
     String createOrganization(Organization organization);
 
     /**
-     * Creates a new invitation link for an organization.
+     * Creates a new invite link for an organization.
      * @param organization the organization to create an invite link for.
+     * @return the invite link of the organization.
      */
-    void createInviteLink(Organization organization);
+    String createInviteLink(Organization organization);
 }

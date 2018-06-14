@@ -55,18 +55,21 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
      * @see cr.talent.core.organization.service.OrganizationService#createInviteLink(Organization)
      */
     @Override
-    public void createInviteLink(Organization organization) {
+    public String createInviteLink(Organization organization) {
 
-        final String notNullInviteLinkInOrganizationExceptionMsg = "The invitation link to create in the organization is not null";
+        final String notNullInviteLinkInOrganizationExceptionMsg = "The invite link to create in the organization is not null";
 
-        if (organization.getInvitationLink() != null) {
+        if (organization.getInviteLink() != null) {
             throw new NotNullInviteLinkInOrganizationException(notNullInviteLinkInOrganizationExceptionMsg);
         }
 
         String invitationToken = UUID.randomUUID().toString();
-        organization.setInvitationLink(HTTP_PREFIX + organization.getUniqueIdentifier() + BASE_LINK + invitationToken);
+        String inviteLink = HTTP_PREFIX + organization.getUniqueIdentifier() + BASE_LINK + invitationToken;
+        organization.setInviteLink(inviteLink);
 
         this.organizationDao.update(organization);
+
+        return inviteLink;
     }
 
 }

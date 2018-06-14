@@ -40,7 +40,7 @@ public class InvitationEmailServiceImpl implements InvitationEmailService {
         email.setSubject(INVITATION_SUBJECT);
         email.setFileName(HTML_EMAIL_FILE);
 
-        Map< String, Object> model = new HashMap<>();
+        Map<String, Object> model = new HashMap<>();
         model.put("inviteLink", HTTP_PREFIX + uniqueIdentifier + BASE_LINK + invitation.getToken());
 
         this.emailSenderService.sendEmail(email, model);

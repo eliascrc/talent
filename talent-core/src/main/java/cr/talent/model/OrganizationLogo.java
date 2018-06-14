@@ -12,8 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue(value = "ORGANIZATION_LOGO")
-@Table(name = "organization_logo")
-public class OrganizationLogo extends Image{
+public class OrganizationLogo extends Image {
 
     /**
      * Organization that owns the logo.

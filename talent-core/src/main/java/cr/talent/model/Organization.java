@@ -253,11 +253,11 @@ public class Organization extends BasicEntity {
         this.humanResourceManagers = humanResourceManagers;
     }
 
-    public String getInvitationLink() {
+    public String getInviteLink() {
         return invitationLink;
     }
 
-    public void setInvitationLink(String invitationLink) {
+    public void setInviteLink(String invitationLink) {
         this.invitationLink = invitationLink;
     }
 }

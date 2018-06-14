@@ -11,7 +11,6 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Hibernate implementation of the {@link cr.talent.core.invitation.dao.InvitationDao}.

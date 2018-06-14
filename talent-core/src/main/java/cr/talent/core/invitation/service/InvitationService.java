@@ -7,7 +7,7 @@ import cr.talent.support.service.CrudService;
 /**
  * Provides business logic services related to {@link cr.talent.model.Invitation} entities.
  *
- * @author María José Cubero.
+ * @author Elias Calderon
  */
 public interface InvitationService extends CrudService<Invitation, String> {
 

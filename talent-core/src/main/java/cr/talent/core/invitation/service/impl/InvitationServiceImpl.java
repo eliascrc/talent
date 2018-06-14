@@ -3,7 +3,6 @@ package cr.talent.core.invitation.service.impl;
 import cr.talent.core.email.invitationEmail.service.InvitationEmailService;
 import cr.talent.core.invitation.dao.InvitationDao;
 import cr.talent.core.invitation.service.InvitationService;
-import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
@@ -41,15 +40,19 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
     @SuppressWarnings("unchecked")
     public void createInvitation(String email, Organization organization) {
 
-        Set<Invitation> invitations = organization.getInvitationsList();
-        if (invitations.size() >= LIMIT_OF_INVITATIONS)
-            throw new LimitOfInvitationsReachedException("The limit of invitations available for " +
-                    "the organization has been reached.");
-
         Invitation invitation = this.invitationDao.findInvitationByEmail(email);
         if (invitation != null) {
             invitation.setValid(false);
             this.update(invitation);
+        }
+        else {
+            // If the email was not already registered for an invitation, it's a brand new invitation
+            // so the system needs to check if the limit has been reached
+            Set<Invitation> invitations = organization.getInvitationsList();
+            if (invitations.size() >= LIMIT_OF_INVITATIONS) {
+                throw new LimitOfInvitationsReachedException("The limit of invitations available for " +
+                        "the organization has been reached.");
+            }
         }
 
         Invitation newInvitation = new Invitation();

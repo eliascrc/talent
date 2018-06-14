@@ -13,8 +13,8 @@ import java.util.Set;
 public interface InvitationDao extends CrudDao<Invitation, String> {
 
     /**
-     * Retrieves the password reset request that corresponds to a email.
-     * @return the password reset request.
+     * Retrieves the invitation that corresponds to a email.
+     * @return the invitation if found, null if not.
      */
     Invitation findInvitationByEmail(String email);
 
