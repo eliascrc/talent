@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Fabian Roberto Leandro
  */
 public class OrganizationFilter extends UsernamePasswordAuthenticationFilter {
-    
+
     /**
      * Overriding this method allows us to send an additional authentication attribute without changing the default
      * Spring Security implementation of {@org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter#attemptAuthentication}
