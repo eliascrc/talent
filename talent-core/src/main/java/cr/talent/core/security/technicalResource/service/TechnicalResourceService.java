@@ -24,7 +24,7 @@ public interface TechnicalResourceService extends CrudService<TechnicalResource,
     TechnicalResource getTechnicalResourceByUsernameAndOrganizationIdentifier(String username,
                                                                               String organizationIdentifier);
 
-    UserDetails loadUserByUsernameAndOrganizationIdentifier(String username, String organizationIdentifier)
+    UserDetails loadByUsernameAndOrganizationIdentifier(String username, String organizationIdentifier)
             throws UsernameNotFoundException;
 
 }

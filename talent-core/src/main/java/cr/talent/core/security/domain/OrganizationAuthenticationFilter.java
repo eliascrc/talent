@@ -28,10 +28,10 @@ public class OrganizationAuthenticationFilter extends UsernamePasswordAuthentica
     @Override
     protected void setDetails(HttpServletRequest request,
 			UsernamePasswordAuthenticationToken authRequest) {
-        /*String[] splitServerName = request.getServerName().split("\\.");
+        String[] splitServerName = request.getServerName().split("\\.");
         if(splitServerName.length == 3) {
             authRequest.setDetails(splitServerName[0]);
-        }*/
+        }
 
         authRequest.setDetails("monkey-labs");
     }

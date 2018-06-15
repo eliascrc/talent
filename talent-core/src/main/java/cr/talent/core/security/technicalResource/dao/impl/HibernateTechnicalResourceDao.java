@@ -37,7 +37,7 @@ public class HibernateTechnicalResourceDao extends HibernateCrudDao<TechnicalRes
     @SuppressWarnings("unchecked")
     public TechnicalResource findTechnicalResourceByUsernameAndOrganizationIdentifier(String username,
                                                                                       String organizationIdentifier) {
-        String hql = "FROM TechnicalResource WHERE username = ?1 AND  organization_id = ?2";
+        String hql = "FROM TechnicalResource WHERE username = ?1 AND  organization.uniqueIdentifier = ?2";
         Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter(1, username);
         query.setParameter(2, organizationIdentifier);

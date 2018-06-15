@@ -66,7 +66,7 @@ public class OrganizationAuthenticationProvider extends AbstractUserDetailsAuthe
 
         UserDetails user;
         try {
-            user = this.technicalResourceService.loadUserByUsernameAndOrganizationIdentifier(username,
+            user = this.technicalResourceService.loadByUsernameAndOrganizationIdentifier(username,
                     (String)usernamePasswordAuthenticationToken.getDetails());
         } catch (UsernameNotFoundException e) {
             throw e;
