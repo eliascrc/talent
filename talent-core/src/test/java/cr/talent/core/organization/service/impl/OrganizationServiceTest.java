@@ -6,6 +6,7 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
+import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -106,6 +107,59 @@ public class OrganizationServiceTest {
         }
 
         verify(organizationDao, times(1)).getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier());
+    }
+
+    @Test
+    public void testGetOrganizationByUniqueIdentifier() {
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+        String uniqueId = "uniqueId";
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        when(organizationDao.getOrganizationByUniqueIdentifier(uniqueId)).thenReturn(organization);
+
+        organizationService.getOrganizationByUniqueIdentifier(uniqueId);
+
+        verify(organizationDao, times(1)).getOrganizationByUniqueIdentifier(uniqueId);
+    }
+
+    @Test
+    public void testcreateInviteLinkNullInviteLink() {
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        when(organization.getInviteLink()).thenReturn(null);
+
+        organizationService.createInviteLink(organization);
+
+        verify(organizationDao, times(1)).update(organization);
+    }
+
+    @Test
+    public void testcreateInviteLinkNotNullInviteLink() {
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+        String inviteLink = "inviteLink";
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        when(organization.getInviteLink()).thenReturn(inviteLink);
+
+        try {
+            organizationService.createInviteLink(organization);
+            fail();
+        } catch (NotNullInviteLinkInOrganizationException e) {
+            // Nothing, it should throw an exception.
+        }
     }
 
     @Test
