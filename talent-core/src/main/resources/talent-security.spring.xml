@@ -20,7 +20,7 @@
     </bean>
 
     <bean id="technicalResourceAuthenticationProvider"
-          class="cr.talent.core.security.domain.OrganizationAuthenticationProvider">
+          class="cr.talent.core.security.organization.OrganizationAuthenticationProvider">
 
         <!--<property name="technicalResourceService" ref="technicalResourceService"/>
         <property name="passwordEncoder" ref="passwordEncoder"/>-->

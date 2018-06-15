@@ -1,4 +1,4 @@
-package cr.talent.core.security.domain;
+package cr.talent.core.security.organization;
 
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import org.springframework.beans.factory.annotation.Autowired;

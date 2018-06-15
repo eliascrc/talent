@@ -56,7 +56,7 @@
         <property name="authenticationFailureHandler" ref="loginFailureHandler"/>
     </bean>
 
-    <bean id="organizationFilter" class="cr.talent.core.security.domain.OrganizationAuthenticationFilter">
+    <bean id="organizationFilter" class="cr.talent.core.security.organization.OrganizationFilter">
         <property name="authenticationManager" ref="authenticationManager"/>
         <property name="filterProcessesUrl" value="/ws/login"/>
         <property name="authenticationSuccessHandler" ref="successLoginHandler"/>

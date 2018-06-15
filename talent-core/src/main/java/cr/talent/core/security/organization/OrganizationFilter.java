@@ -1,12 +1,9 @@
-package cr.talent.core.security.domain;
+package cr.talent.core.security.organization;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Filter that replaces FORM_LOGIN_FILTER in the Spring Security filter chain, in order to add the organization identifier
@@ -14,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Fabian Roberto Leandro
  */
-public class OrganizationAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class OrganizationFilter extends UsernamePasswordAuthenticationFilter {
 
     /**
      * Overriding this method allows us to send an additional authentication attribute without changing the default
@@ -32,7 +29,5 @@ public class OrganizationAuthenticationFilter extends UsernamePasswordAuthentica
         if(splitServerName.length == 3) {
             authRequest.setDetails(splitServerName[0]);
         }
-
-        authRequest.setDetails("monkey-labs");
     }
 }
