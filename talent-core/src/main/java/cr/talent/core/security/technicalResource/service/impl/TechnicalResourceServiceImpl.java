@@ -51,11 +51,7 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     }
 
     /**
-     * Method that loads the UserDetails according to the username specified.
-     *
-     * @param username String which specifies the user's username to search for.
-     * @return The UserDetails of the user found or null if no user with that username was found.
-     * @throws UsernameNotFoundException
+     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#loadByUsernameAndOrganizationIdentifier(String, String)
      */
     public UserDetails loadByUsernameAndOrganizationIdentifier(String username, String organizationIdentifier)
             throws UsernameNotFoundException {
@@ -68,7 +64,7 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
 
     /**
      * Implemented because this class must implement UserDetails, however it is impossible to find a user by username
-     * alone, since a user may be in more than one organization
+     * alone, since a user may be in more than one organization.
      * Use cr.talent.core.security.technicalResource.service.impl.{@link TechnicalResourceServiceImpl#loadByUsernameAndOrganizationIdentifier(String, String)}
      * instead.
      *

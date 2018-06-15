@@ -13,8 +13,16 @@ import org.springframework.util.StringUtils;
 
 public class OrganizationAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
+    /**
+     * Password encoder provided by spring to cipher the password to be authenticated and compare it to the password
+     * stored in the database.
+     */
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    /**
+     * Service object to retrieve a user by their username and organization identifier.
+     */
     @Autowired
     TechnicalResourceService technicalResourceService;
 
