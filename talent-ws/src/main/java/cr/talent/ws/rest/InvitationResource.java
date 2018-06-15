@@ -44,8 +44,8 @@ public class InvitationResource {
      * @param emails the destination emails
      * @return 400 if the list is empty, or if any email is empty
      * 401 if the user is not an administrator of the organization.
-     * 409 if the limit of invitations and resources has been reached or an invitation is sent to a user that is
-     * already registered in the organization.
+     * 409 with "LimitOfInvitationsReached" if the limit of invitations and resources has been reached.
+     * 409 with "AlreadyRegisteredUser" if an invitation is sent to a user that is already registered in the organization.
      * 200 if the email was correctly sent.
      */
     @POST
@@ -112,7 +112,7 @@ public class InvitationResource {
      *
      * @return 401 if the user is not the administrator of the organization.
      * 204 if there is no link to return.
-     * 200 if the link was correctly created or if it already exists.
+     * 200 if the link already exists.
      */
     @GET
     @Path("/inviteLink")
