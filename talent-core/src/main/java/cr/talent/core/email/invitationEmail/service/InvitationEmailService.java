@@ -11,9 +11,8 @@ import cr.talent.model.Invitation;
 public interface InvitationEmailService {
     /**
      * Sends the invitation email to a user that requests that action.
-     * @param destinationEmail the email to send the invitation
      * @param invitation the invitation to send
      * @param uniqueIdentifier the organization's unique identifier
      */
-    void sendInvitationEmail(String destinationEmail, Invitation invitation, String uniqueIdentifier);
+    void sendInvitationEmail(Invitation invitation, String uniqueIdentifier);
 }

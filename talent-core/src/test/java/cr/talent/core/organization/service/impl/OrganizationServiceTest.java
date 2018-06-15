@@ -3,10 +3,16 @@ package cr.talent.core.organization.service.impl;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.dao.impl.HibernateOrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -100,6 +106,22 @@ public class OrganizationServiceTest {
         }
 
         verify(organizationDao, times(1)).getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier());
+    }
+
+    @Test
+    public void testGetValidInvitations() {
+        List<Invitation> invitationList = new ArrayList<>();
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+        when(organizationDao.findValidInvitations(organization.getUniqueIdentifier())).thenReturn(invitationList);
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        organizationService.getValidInvitations(organization);
+
+        verify(organizationDao, times(1)).findValidInvitations(organization.getUniqueIdentifier());
     }
 
 }

@@ -32,11 +32,14 @@ public class InvitationEmailServiceImpl implements InvitationEmailService {
     @Autowired
     private EmailSenderService emailSenderService;
 
+    /**
+     * @see cr.talent.core.email.invitationEmail.service.InvitationEmailService#sendInvitationEmail(Invitation, String)
+     */
     @Override
-    public void sendInvitationEmail(String destinationEmail, Invitation invitation, String uniqueIdentifier) {
+    public void sendInvitationEmail(Invitation invitation, String uniqueIdentifier) {
         Email email = new Email();
         email.setFrom(talentEmail);
-        email.setTo(destinationEmail);
+        email.setTo(invitation.getEmail());
         email.setSubject(INVITATION_SUBJECT);
         email.setFileName(HTML_EMAIL_FILE);
 

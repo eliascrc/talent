@@ -25,6 +25,9 @@ public class HibernateInvitationDao extends HibernateCrudDao<Invitation, String>
         setSessionFactory(sessionFactory);
     }
 
+    /**
+     * @see cr.talent.core.invitation.dao.InvitationDao#findInvitationByEmail(String)
+     */
     @Override
     @SuppressWarnings("unchecked")
     public Invitation findInvitationByEmail(String email) {

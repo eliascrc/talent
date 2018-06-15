@@ -2,6 +2,7 @@ package cr.talent.core.organization.service.impl;
 
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
@@ -9,6 +10,9 @@ import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -70,6 +74,15 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         this.organizationDao.update(organization);
 
         return inviteLink;
+    }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#getValidInvitations(Organization)
+     */
+    @Override
+    public Set<Invitation> getValidInvitations(Organization organization) {
+        List<Invitation> invitationList = this.organizationDao.findValidInvitations(organization.getUniqueIdentifier());
+        return new HashSet<>(invitationList);
     }
 
 }

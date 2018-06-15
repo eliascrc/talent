@@ -1,8 +1,11 @@
 package cr.talent.core.organization.service;
 
+import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.service.CrudService;
+
+import java.util.Set;
 
 /**
  * Provides business logic services related to {@link cr.talent.model.Organization} entities.
@@ -31,4 +34,11 @@ public interface OrganizationService extends CrudService<Organization, String> {
      * @return the invite link of the organization.
      */
     String createInviteLink(Organization organization);
+
+    /**
+     * Gets a Set of valid invitations of the organization
+     * @param organization the organization to search for.
+     * @return a set of invitations, or an empty set if no invitations were found.
+     */
+    Set<Invitation> getValidInvitations(Organization organization);
 }

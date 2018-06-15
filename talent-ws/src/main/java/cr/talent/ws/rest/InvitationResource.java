@@ -5,21 +5,24 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
+import cr.talent.support.exceptions.AlreadyRegisteredUserException;
+import cr.talent.support.exceptions.EmptyDestinationEmailException;
 import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
 import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
- * Resource with two POST endpoints that handle the creation of invitations and invitation links.
+ * Resource with two POST endpoints that handle the creation of invitations and invitation links, and one
+ * GET endpoint that retrieves the invite link.
  *
  * @author Elias Calderon
  */
@@ -35,19 +38,20 @@ public class InvitationResource {
     private InvitationService invitationService;
 
     /**
-     * Receives a request to send an invitation email. If the invitations limit hasn't been reached
-     * the email is correctly sent.
+     * Receives a request to send an invitation email. If the invitation passes all the verifications in the service
+     * they're sent correctly.
      *
-     * @param email the destination email
-     * @return 400 if the email is empty or null.
-     * 401 if the user is not the administrator of the organization.
-     * 409 if the limit of invitations has been reached.
+     * @param emails the destination emails
+     * @return 400 if the list is empty, or if any email is empty
+     * 401 if the user is not an administrator of the organization.
+     * 409 if the limit of invitations and resources has been reached or an invitation is sent to a user that is
+     * already registered in the organization.
      * 200 if the email was correctly sent.
      */
     @POST
     @Path("/send")
-    public Response sendInvitation(@FormParam("email") String email) {
-        if(StringUtils.isEmpty(email))
+    public Response sendInvitation(@FormParam("emails") List<String> emails) {
+        if(emails.size() == 0)
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         TechnicalResource technicalResource = SecurityUtils.getLoggedInTechnicalResource();
@@ -57,9 +61,19 @@ public class InvitationResource {
             return Response.status(Response.Status.UNAUTHORIZED).build();
 
         try {
-            this.invitationService.createInvitation(email, organization);
+
+            this.invitationService.createInvitations(emails, organization);
+
         } catch (LimitOfInvitationsReachedException e) {
-            return Response.status(Response.Status.CONFLICT).build();
+            return Response.status(Response.Status.CONFLICT).
+                    entity("LimitOfInvitationsReached").build();
+
+        } catch (AlreadyRegisteredUserException e) {
+            return Response.status(Response.Status.CONFLICT).
+                    entity("AlreadyRegisteredUser").build();
+
+        } catch (EmptyDestinationEmailException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
         return Response.ok().build();
