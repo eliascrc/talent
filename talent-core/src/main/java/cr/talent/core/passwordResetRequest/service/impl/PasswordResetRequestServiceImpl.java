@@ -46,7 +46,7 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
 
     @Override
     public void createPasswordRequestReset(String email, String organizationIdentifier) {
-        PasswordResetRequest passwordResetReq = this.passwordResetRequestDao.findByEmail(email);
+        PasswordResetRequest passwordResetReq = this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email,organizationIdentifier);
         if (passwordResetReq != null)
             passwordResetReq.setValid(false);
 

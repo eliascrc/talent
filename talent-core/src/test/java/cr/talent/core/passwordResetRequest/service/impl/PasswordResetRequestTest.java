@@ -48,11 +48,11 @@ public class PasswordResetRequestTest {
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetEmailService", this.passwordResetEmailService);
 
         when(this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(technicalResource);
-        when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(passwordResetRequest);
+        when(this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(passwordResetRequest);
 
         passwordResetRequestService.createPasswordRequestReset(email,organizationIdentifier);
 
-        verify(passwordResetRequestDao, times(1)).findByEmail(email);
+        verify(passwordResetRequestDao, times(1)).findByEmailAndOrganizationIdentifier(email,organizationIdentifier);
     }
 
     @Test
@@ -68,11 +68,11 @@ public class PasswordResetRequestTest {
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetEmailService", this.passwordResetEmailService);
 
         when(this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(technicalResource);
-        when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(null);
+        when(this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(null);
 
         passwordResetRequestService.createPasswordRequestReset(email,organizationIdentifier);
 
-        verify(passwordResetRequestDao, times(1)).findByEmail(email);
+        verify(passwordResetRequestDao, times(1)).findByEmailAndOrganizationIdentifier(email,organizationIdentifier);
     }
 
     @Test
