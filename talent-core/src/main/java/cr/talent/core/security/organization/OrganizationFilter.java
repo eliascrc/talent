@@ -1,5 +1,6 @@
 package cr.talent.core.security.organization;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -12,12 +13,12 @@ import javax.servlet.http.HttpServletRequest;
  * @author Fabian Roberto Leandro
  */
 public class OrganizationFilter extends UsernamePasswordAuthenticationFilter {
-
+    
     /**
      * Overriding this method allows us to send an additional authentication attribute without changing the default
      * Spring Security implementation of {@org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter#attemptAuthentication}
      * In this case we set the organization identifier on the UsernamePasswordAuthenticationToken instance sent to
-     * out provider to be authenticated.
+     * our provider to be authenticated.
      *
      * @param request the http request to the web service
      * @param authRequest the UsernamePasswordAuthenticationToken to which we will add organization identifier as a detail
@@ -25,9 +26,7 @@ public class OrganizationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void setDetails(HttpServletRequest request,
 			UsernamePasswordAuthenticationToken authRequest) {
-        String[] splitServerName = request.getServerName().split("\\.");
-        if(splitServerName.length == 3) {
-            authRequest.setDetails(splitServerName[0]);
-        }
+        String uniqueIdentifier = request.getParameter("organizationIdentifier");
+        authRequest.setDetails(uniqueIdentifier);
     }
 }
