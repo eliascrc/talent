@@ -165,6 +165,7 @@ public class JSONSerializerBuilder {
         tempIncludes = new LinkedList<>();
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
+        tempIncludes.add("username");
         tempIncludes.add("isAdministrator");
         tempIncludes.add("token");
 

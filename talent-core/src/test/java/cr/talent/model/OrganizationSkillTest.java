@@ -43,7 +43,6 @@ public class OrganizationSkillTest{
         organizationSkill.setEntityVersion(entityVersion);
         organizationSkill.setCategory(organizationSkillCategory);
         organizationSkill.setResources(new HashSet<>());
-        organizationSkill.setInvitations(new HashSet<>());
         organizationSkill.setCapabilityLevels(new HashSet<>());
         organizationSkill.setName(NAME);
 
@@ -54,7 +53,6 @@ public class OrganizationSkillTest{
         assertEquals(entityVersion, organizationSkill.getEntityVersion());
         assertEquals(organizationSkillCategory,organizationSkill.getCategory());
         assertNotNull(organizationSkill.getResources());
-        assertNotNull(organizationSkill.getInvitations());
         assertNotNull(organizationSkill.getCapabilityLevels());
         assertEquals(NAME, organizationSkill.getName());
     }

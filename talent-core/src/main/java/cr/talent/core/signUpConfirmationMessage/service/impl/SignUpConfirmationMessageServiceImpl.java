@@ -69,7 +69,11 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
         return signUpConfirmation;
     }
 
-    public void sendMessage(String firstName, String lastName, String username, String password) {
+    /**
+     * @see cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService#sendMessage(String, String, String, String)
+     */
+    @Override
+    public TechnicalResource sendMessage(String firstName, String lastName, String username, String password) {
         TechnicalResource technicalResource;
         SignUpConfirmationMessage signUpConfirmationMessage;
         boolean hadAnotherConfirmationMessage = false;
@@ -105,15 +109,17 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
             super.update(signUpConfirmationMessage);
         } else {
             this.technicalResourceService.create(technicalResource);
-            this.create(signUpConfirmationMessage);
+            super.create(signUpConfirmationMessage);
         }
         signUpConfirmationEmailService.sendSignUpConfirmationEmail(signUpConfirmationMessage);
+
+        return technicalResource;
     }
 
-    @Override
     /**
      * @see cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService#confirmEmail(String, String)
      */
+    @Override
     public boolean confirmEmail(String code, String username) {
         SignUpConfirmationMessage signUpConfirmationMessage = this.getActiveConfirmationMessage(username);
         if (signUpConfirmationMessage == null)

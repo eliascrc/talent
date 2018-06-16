@@ -1,0 +1,15 @@
+<html>
+
+<head></head>
+
+<body>
+<h1>Talent!</h1>
+<p>Hello! You have been invited to join Talent,</p>
+<p>Enter to the following link to start the join process.</p>
+<p>${inviteLink}</p>
+
+<p>Hope to see you soon!</p>
+
+</body>
+
+</html>
