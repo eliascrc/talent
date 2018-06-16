@@ -51,7 +51,7 @@ public class TechnicalResourceTest {
         boolean isAdministrator = false;
         Date lastLevelAssessment = new Date();
         Date lastPerformanceReview = new Date();
-        Image profilePicture = mock(Image.class);
+        ProfilePicture profilePicture = mock(ProfilePicture.class);
         JobPosition jobPosition = mock(JobPosition.class);
         TechnicalPosition technicalPosition = mock(TechnicalPosition.class);
         CareerPath careerPath = mock(CareerPath.class);
@@ -155,7 +155,7 @@ public class TechnicalResourceTest {
     public void testEqualForDifferentClass() {
         TechnicalResource technicalResource = new TechnicalResource();
 
-        Image image= new Image();
+        ProfilePicture image= new ProfilePicture();
 
         assertFalse(technicalResource.equals(image));
     }

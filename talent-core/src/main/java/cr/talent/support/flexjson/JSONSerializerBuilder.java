@@ -140,6 +140,46 @@ public class JSONSerializerBuilder {
     }
 
     /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of a User's information, for the /ws/user/authenticated
+     * web service, which includes the user's login token.
+     *
+     * @return the JSONSerializer to be used to serialize User.
+     */
+    public static JSONSerializer getTechnicalResourceAuthenticationSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("link");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Image.class, "profilePicture", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("uniqueIdentifier");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "organization", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("isAdministrator");
+        tempIncludes.add("token");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new BooleanTransformer(), "isAdministrator");
+
+        // logs the creation of the serializer
+        logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /*
      * Gets a JSONSerializer to use in order to obtain the JSON of a User's information.
      *
      * @return the JSONSerializer to be used to serialize User.
@@ -165,6 +205,7 @@ public class JSONSerializerBuilder {
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("isAdministrator");
+        tempIncludes.add("profilePicture");
 
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
 

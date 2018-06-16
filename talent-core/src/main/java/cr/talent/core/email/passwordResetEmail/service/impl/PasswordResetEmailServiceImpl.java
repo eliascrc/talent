@@ -23,7 +23,7 @@ public class PasswordResetEmailServiceImpl implements PasswordResetEmailService{
 
     private static final String PASSWORD_RESET_SUBJECT = "TALENT Password Reset";
     private static final String HTML_EMAIL_FILE = "templates/forgotPassword.vm";
-    private static final String LINK = "http://www.talent.cr/reset-password?token=";
+    private static final String LINK = "http://www.talent.cr/#/reset-password?token=";
 
     @Value("${talent.mail.from}")
     private String talentEmail;

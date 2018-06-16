@@ -1,15 +1,17 @@
 package cr.talent.core.privacyPolicy.dao.impl;
 
 import cr.talent.core.privacyPolicy.dao.PrivacyPolicyDao;
+import cr.talent.model.Platform;
 import cr.talent.model.PrivacyPolicy;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NoResultException;
+import java.util.List;
 
 
 /**
@@ -26,17 +28,13 @@ public class HibernatePrivacyPolicyDao extends HibernateCrudDao<PrivacyPolicy, S
     }
 
     @Override
-    public PrivacyPolicy getActivePrivacyPolicy() {
-        PrivacyPolicy queryResult;
-        try {
-            Query query = super.getSessionFactory().getCurrentSession()
-                    .createQuery("FROM PrivacyPolicy WHERE Active = true");
-            queryResult = (PrivacyPolicy) query.getSingleResult();
-        } catch (NoResultException nre) {
-            queryResult = null;
-        }
+    public PrivacyPolicy getActivePrivacyPolicy(Platform requestPlatform) {
+        String platformName = requestPlatform.name();
+        Query query = super.getSessionFactory().getCurrentSession()
+                .createQuery("FROM PrivacyPolicy WHERE isActive = true and platform = '" + platformName + "'");
+        List<PrivacyPolicy> privacyPolicyResult = (List<PrivacyPolicy>) query.list();
 
-        return queryResult;
+        return DataAccessUtils.singleResult(privacyPolicyResult);
     }
 
 }

@@ -24,14 +24,15 @@ public class TechnicalResource extends User{
     /**
      * The profile picture of the user.
      */
-    @OneToOne
-    private Image profilePicture;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "profile_picture_id")
+    private ProfilePicture profilePicture;
 
     /**
      * The organization that the resource belongs to.
      */
     @ManyToOne
-    @JoinColumn (name = "organization_id", nullable = false)
+    @JoinColumn (name = "organization_id")
     protected Organization organization;
 
     /**
@@ -87,7 +88,7 @@ public class TechnicalResource extends User{
     /**
      * The resource's timezone setting.
      */
-    @Column(name = "time_zone", nullable = false)
+    @Column(name = "time_zone")
     private String timeZone;
 
     /**
@@ -106,7 +107,7 @@ public class TechnicalResource extends User{
     /**
      * The resource's level assessment time gap.
      */
-    @Column(name = "level_assessment_time_gap", nullable = false)
+    @Column(name = "level_assessment_time_gap")
     private int levelAssessmentTimeGap;
 
     /**
@@ -218,11 +219,11 @@ public class TechnicalResource extends User{
         this.lastPerformanceReview = lastPerformanceReview;
     }
 
-    public Image getProfilePicture() {
+    public ProfilePicture getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(Image profilePicture) {
+    public void setProfilePicture(ProfilePicture profilePicture) {
         this.profilePicture = profilePicture;
     }
 

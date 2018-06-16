@@ -1,9 +1,6 @@
 package cr.talent.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -38,8 +35,15 @@ public class PrivacyPolicy extends BasicEntity {
     /**
      * Whether the privacy policy is active or not
      */
-    @Column(name = "active")
-    private boolean active;
+    @Column(name = "is_active")
+    private boolean isActive;
+
+    /**
+     * The platform in which Talent is being used
+     */
+    @Column (name = "platform")
+    @Enumerated(value = EnumType.STRING)
+    private Platform platform;
 
     public PrivacyPolicy() {}
 
@@ -77,11 +81,15 @@ public class PrivacyPolicy extends BasicEntity {
         this.endDate = endDate;
     }
 
-    public boolean isActive() { return this.active; }
+    public boolean isActive() { return this.isActive; }
 
-    public void setActive(boolean active) { this.active = active; }
+    public void setActive(boolean active) { this.isActive = active; }
 
     public String getContent() { return this.content; }
 
     public void setContent(String content) { this.content = content; }
+
+    public Platform getPlatform() { return this.platform; }
+
+    public void setPlatform(Platform platform) { this.platform = platform; }
 }

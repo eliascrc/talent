@@ -46,6 +46,7 @@ public class TermsOfServiceTest {
         termsOfService.setEndDate(endDate);
         termsOfService.setActive(isActive);
         termsOfService.setStartDate(START_DATE);
+        termsOfService.setPlatform(Platform.ANDROID);
 
         // Verify the gets
         assertEquals(ID, termsOfService.getId());
@@ -56,6 +57,7 @@ public class TermsOfServiceTest {
         assertEquals(endDate, termsOfService.getEndDate());
         assertEquals(isActive, termsOfService.isActive());
         assertEquals(START_DATE, termsOfService.getStartDate());
+        assertEquals(Platform.ANDROID, termsOfService.getPlatform());
     }
 
     //ON EQUALS TESTS.

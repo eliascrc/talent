@@ -2,13 +2,14 @@
        xmlns:security="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security.xsd"
+		http://www.springframework.org/schema/security/spring-security-4.2.xsd"
        default-init-method="init">
 
     <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider ref="technicalResourceAuthenticationProvider"/>
+        <security:authentication-provider ref="tokenAuthenticationProvider"/>
     </security:authentication-manager>
 
     <security:http use-expressions="true" pattern="/**/*" auto-config="false" entry-point-ref="customAuthEntryPoint">
@@ -17,7 +18,7 @@
                              password-parameter="password" />
         <security:logout logout-url="/ws/logout" success-handler-ref="logoutHandler"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
-        <security:intercept-url pattern="/ws/login/token" access="isAnonymous()"/>
+        <security:intercept-url pattern="/ws/login/token" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/user/authenticated" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/**/*" access="permitAll()" method="HEAD"/>
@@ -33,7 +34,12 @@
         <security:intercept-url pattern="/ws/login/organization" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/user/authenticated" access="hasAuthority('ROLE_USER')"/>
         <security:intercept-url pattern="/ws/user/loggedIn" access="permitAll()"/>
+        <security:intercept-url pattern="/ws/contactUs/authenticated" access="hasAuthority('ROLE_USER')" method="POST"/>
+        <security:intercept-url pattern="/ws/contactUs/unauthenticated" access="permitAll()" method="POST"/>
+        <security:intercept-url pattern="/ws/signUp/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
+
+        <security:custom-filter before="BASIC_AUTH_FILTER" ref="tokenAuthenticationFilter"/>
         <security:access-denied-handler ref="accessDeniedHandler"/>
         <security:csrf disabled="true"/>
     </security:http>
@@ -43,5 +49,12 @@
     </bean>
 
     <bean id="accessDeniedHandler" class="cr.talent.ws.rest.support.security.UnauthorizedAccessHandler"/>
+
+    <bean id="tokenAuthenticationFilter" class="cr.talent.core.security.token.TokenAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="filterProcessesUrl" value="/ws/login/token"/>
+        <property name="authenticationSuccessHandler" ref="successLoginHandler"/>
+        <property name="authenticationFailureHandler" ref="loginFailureHandler"/>
+    </bean>
 
 </beans>

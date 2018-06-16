@@ -113,6 +113,205 @@
 
 	<technicalResources>
 
+		<!-- Developer accounts for testing purposes -->
+		<technicalResource>
+			<username>rodrigobartels@gmail.com</username>
+			<firstName>Rodrigo</firstName>
+			<lastName>Bartels</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>raquel.fonseca@ecci.ucr.ac.cr</username>
+			<firstName>Raquel</firstName>
+			<lastName>Fonseca</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>marianaabellan4@gmail.com</username>
+			<firstName>Mariana</firstName>
+			<lastName>Abellán</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>daniel.montesdeocab@gmail.com</username>
+			<firstName>Daniel</firstName>
+			<lastName>Montes de Oca</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>majo.qbro@gmail.com</username>
+			<firstName>María José</firstName>
+			<lastName>Cubero</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>renato.mainieri2110@gmail.com</username>
+			<firstName>Renato</firstName>
+			<lastName>Mainieri</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>eliascr98@outlook.com</username>
+			<firstName>Elías</firstName>
+			<lastName>Calderón</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>jo96cube@gmail.com</username>
+			<firstName>Josué</firstName>
+			<lastName>Cubero</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>jolesa97@gmail.com</username>
+			<firstName>Josué</firstName>
+			<lastName>León</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>roleandroflores12@gmail.com</username>
+			<firstName>Fabián Roberto</firstName>
+			<lastName>Leandro</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>Otmerk1@gmail.com</username>
+			<firstName>Otto</firstName>
+			<lastName>Mena</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>monkey-labs</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
 		<technicalResource>
 			<username>andres.mata@example.com</username>
 			<firstName>Andres</firstName>
@@ -181,24 +380,6 @@
 			<profilePicture>http://markinternational.info/legend-of-aang-wallpapers/219586425.html</profilePicture>
 			<organization>monkey-labs</organization>
 			<language>english</language>
-			<timeZone>UTC-6</timeZone>
-			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
-		</technicalResource>
-
-		<technicalResource>
-			<username>majo.qbro@gmail.com</username>
-			<firstName>Maria</firstName>
-			<lastName>Cubero</lastName>
-			<password>Talent.123</password>
-			<enabled>true</enabled>
-			<passwordNeedsChange>false</passwordNeedsChange>
-			<status>ACTIVE</status>
-			<isAdministrator>false</isAdministrator>
-			<lastLevelAssessment>1/1/2000</lastLevelAssessment>
-			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
-			<profilePicture>https://orig00.deviantart.net/380c/f/2016/039/b/9/the_dancing_rest_by_thereachiarabautista-d9r2eeh.jpg</profilePicture>
-			<organization>monkey-labs</organization>
-			<language>heptapod</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -451,24 +632,6 @@
 			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
 			<organization>andromeda-spiral</organization>
 			<language>sindarin</language>
-			<timeZone>UTC-6</timeZone>
-			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
-		</technicalResource>
-
-		<technicalResource>
-			<username>jolesa97@gmail.com</username>
-			<firstName>Josue</firstName>
-			<lastName>Leon</lastName>
-			<password>Talent.123</password>
-			<enabled>true</enabled>
-			<passwordNeedsChange>false</passwordNeedsChange>
-			<status>ACTIVE</status>
-			<isAdministrator>true</isAdministrator>
-			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
-			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
-			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
-			<organization>andromeda-spiral</organization>
-			<language>german</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
 		</technicalResource>
@@ -990,12 +1153,21 @@
 			<isActive>true</isActive>
 			<startDate>5/10/2018</startDate>
 			<contentFile>./talent-core/src/main/resources/DummyPrivacyPolicy1.html</contentFile>
+			<platform>ANDROID</platform>
 		</privacyPolicy>
 		<privacyPolicy>
 			<isActive>false</isActive>
 			<startDate>6/8/2020</startDate>
 			<endDate>10/10/2024</endDate>
 			<contentFile>./talent-core/src/main/resources/DummyPrivacyPolicy2.html</contentFile>
+			<platform>ANDROID</platform>
+		</privacyPolicy>
+		<privacyPolicy>
+			<isActive>true</isActive>
+			<startDate>6/8/2020</startDate>
+			<endDate>10/10/2024</endDate>
+			<contentFile>./talent-core/src/main/resources/DummyWebPrivacyPolicy.html</contentFile>
+			<platform>WEB</platform>
 		</privacyPolicy>
 	</privacyPolicyVersions>
 
@@ -1005,14 +1177,23 @@
             <isActive>true</isActive>
             <startDate>5/10/2018</startDate>
             <endDate></endDate>
-            <contentFile>./talent-core/src/main/resources/termsOfServiceHTML.txt</contentFile>
+            <contentFile>./talent-core/src/main/resources/DummyTermsOfService1.html</contentFile>
+			<platform>ANDROID</platform>
         </termsOfService>
         <termsOfService>
             <isActive>false</isActive>
             <startDate>6/8/2020</startDate>
             <endDate>10/10/2024</endDate>
-            <contentFile>./talent-core/src/main/resources/termsOfServiceHTML2.txt</contentFile>
+            <contentFile>./talent-core/src/main/resources/DummyTermsOfService2.html</contentFile>
+			<platform>ANDROID</platform>
         </termsOfService>
+		<termsOfService>
+			<isActive>true</isActive>
+			<startDate>6/8/2020</startDate>
+			<endDate>10/10/2024</endDate>
+			<contentFile>./talent-core/src/main/resources/DummyWebTermsOfService.html</contentFile>
+			<platform>WEB</platform>
+		</termsOfService>
     </termsOfServiceVersions>
 
 

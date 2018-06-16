@@ -2,6 +2,7 @@ package cr.talent.core.termsOfService.service.impl;
 
 import cr.talent.core.termsOfService.dao.ToSDao;
 import cr.talent.core.termsOfService.service.ToSService;
+import cr.talent.model.Platform;
 import cr.talent.model.TermsOfService;
 import cr.talent.support.exceptions.NoActiveTermsOfServiceException;
 import cr.talent.support.service.impl.CrudServiceImpl;
@@ -31,13 +32,14 @@ public class ToSServiceImpl extends CrudServiceImpl<TermsOfService, String> impl
     }
 
     @Override
-    public TermsOfService getActiveTermsOfService() {
-        final String noActiveTermsOfServie = "There is no currently active terms of service content";
+    public TermsOfService getActiveTermsOfService(Platform platform) {
+        final String noActiveTermsOfService = "There is no currently active terms of service content for the " +
+                "requested platform";
 
-        if(this.toSDao.getActiveTermsOfService() == null)
-            throw new NoActiveTermsOfServiceException(noActiveTermsOfServie);
+        if(this.toSDao.getActiveTermsOfService(platform) == null)
+            throw new NoActiveTermsOfServiceException(noActiveTermsOfService);
 
-        return this.toSDao.getActiveTermsOfService();
+        return this.toSDao.getActiveTermsOfService(platform);
     }
 
 }
