@@ -1,7 +1,9 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.apache.commons.validator.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -51,13 +53,16 @@ public class SignUpResource {
         if (!emailValidator.isValid(email))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
+        TechnicalResource technicalResource;
         try {
-            this.signUpConfirmationMessageService.sendMessage(firstName, lastName, email, password);
+            technicalResource = this.signUpConfirmationMessageService.sendMessage(firstName, lastName, email, password);
         } catch(IllegalArgumentException e) { //if the password is not valid
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        return Response.ok().build();
+        String serializedTechnicalResource = JSONSerializerBuilder.getTechnicalResourceAuthenticationSerializer()
+                .serialize(technicalResource);
+        return Response.ok().entity(serializedTechnicalResource).build();
     }
 
     /**

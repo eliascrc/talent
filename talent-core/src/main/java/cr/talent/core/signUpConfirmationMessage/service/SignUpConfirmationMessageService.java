@@ -18,8 +18,9 @@ public interface SignUpConfirmationMessageService extends CrudService<SignUpConf
      * @param lastName the last name of the resource performing the first step of the sign up
      * @param username the email of the resource performing the first step of the sign up
      * @param password the password of the resource performing the first step of the sign up
+     * @return the created or updated technical resource
      */
-    void sendMessage(String firstName, String lastName, String username, String password);
+    TechnicalResource sendMessage(String firstName, String lastName, String username, String password);
 
     /**
      * Tries to match the provided code to the last one that was sent to the provided email. It deletes the confirmation
