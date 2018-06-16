@@ -68,7 +68,7 @@ public class Project extends BasicEntity {
      * The state that the project currently has. It's represented by the latest event.
      */
     @OneToOne
-    private ProjectEvent state;
+    private ProjectEvent currentState;
 
     /**
      * A set with the history of project manager's throughout the life time of the project.
@@ -160,12 +160,12 @@ public class Project extends BasicEntity {
         this.projectCapabilities = projectCapabilities;
     }
 
-    public ProjectEvent getState() {
-        return state;
+    public ProjectEvent getcurrentState() {
+        return currentState;
     }
 
-    public void setState(ProjectEvent state) {
-        this.state = state;
+    public void setcurrentState(ProjectEvent currentState) {
+        this.currentState = currentState;
     }
 
     public Set<LeadPosition> getLeadHistory() {
