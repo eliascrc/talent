@@ -51,6 +51,13 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     }
 
     /**
+     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#getTechnicalResourceByUsername(String)
+     */
+    public TechnicalResource getTechnicalResourceByUsername(String username) {
+        return this.technicalResourceDao.findTechnicalResourceByUsername(username);
+    }
+
+    /**
      * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#loadByUsernameAndOrganizationIdentifier(String, String)
      */
     public UserDetails loadByUsernameAndOrganizationIdentifier(String username, String organizationIdentifier)

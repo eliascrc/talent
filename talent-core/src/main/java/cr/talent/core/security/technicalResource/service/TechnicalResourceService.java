@@ -25,6 +25,13 @@ public interface TechnicalResourceService extends CrudService<TechnicalResource,
     TechnicalResource getTechnicalResourceByUsernameAndOrganizationIdentifier(String username,
                                                                               String organizationIdentifier);
 
+        /**
+     * Method that finds a User by its username via the data access object of the service.
+     * @param username String which specifies the user's username to find.
+     * @return The result of the username search in the data access object.
+     */
+    TechnicalResource getTechnicalResourceByUsername(String username);
+
     /**
      * Method that finds a TechnicalResource by its username and organization identifier via the data access object of
      * the service.

@@ -46,6 +46,19 @@ public class HibernateTechnicalResourceDao extends HibernateCrudDao<TechnicalRes
     }
 
     /**
+     * @see cr.talent.core.security.technicalResource.dao.TechnicalResourceDao#findTechnicalResourceByUsername(String)
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public TechnicalResource findTechnicalResourceByUsername(String username) {
+        String hql = "FROM TechnicalResource WHERE username = ?1";
+        Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter(1, username);
+
+        return (TechnicalResource) DataAccessUtils.singleResult(query.list());
+    }
+
+    /**
      * @see cr.talent.core.security.technicalResource.dao.TechnicalResourceDao#findByAuthenticationToken(String)
      */
     @Override
