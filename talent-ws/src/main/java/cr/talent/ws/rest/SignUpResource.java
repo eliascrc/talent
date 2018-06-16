@@ -16,7 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource that handles the sign up one, two and three steps.
+ * Resource that handles the sign up one and two steps.
  *
  * @author Daniel Montes de Oca
  */
