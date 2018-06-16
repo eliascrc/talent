@@ -6,6 +6,7 @@ import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -30,26 +31,22 @@ public class OrganizationResource {
      * registered, it creates the organization successfully.
      * @param uniqueIdentifier the organization's unique identifier.
      * @param name the organization's name.
+     * @param username technical resource's username.
      * @return 200 if the organization is correctly created, 400 if any of the parameters are null,
      *          409 if an organization already has the specified unique identifier.
      */
     @POST
     @Path("/create")
     public Response createOrganization(
+            @FormParam("username") String username,
             @FormParam("uniqueIdentifier") String uniqueIdentifier,
             @FormParam("name") String name) {
 
-        if (uniqueIdentifier == null || name == null
-                || uniqueIdentifier.equals("") || name.equals(""))
+        if (StringUtils.isEmpty(uniqueIdentifier) || StringUtils.isEmpty(name) || StringUtils.isEmpty(username))
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
-        Organization organization = new Organization();
-        organization.setUniqueIdentifier(uniqueIdentifier);
-        organization.setName(name);
-
         try {
-
-            this.organizationService.createOrganization(organization);
+            this.organizationService.createOrganization(username, uniqueIdentifier, name);
             return Response.ok().build();
 
         } catch (AlreadyCreatedOrganizationException e) {

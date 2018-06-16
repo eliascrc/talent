@@ -20,9 +20,10 @@ public interface OrganizationService extends CrudService<Organization, String> {
 
     /**
      * Persists an organization with the respective business logic.
-     * @param organization the organization to create.
-     * @return The organization's id.
+     * @param username
+     * @param uniqueIdentifier
+     * @param name
      */
-    String createOrganization(Organization organization);
+    void createOrganization(String username, String uniqueIdentifier, String name);
 
 }
