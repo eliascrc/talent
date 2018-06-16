@@ -1,5 +1,6 @@
 package cr.talent.support;
 
+import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -67,6 +68,15 @@ public class SecurityUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Gets the currently logged in Technical Resource by casting the logged in user.
+     *
+     * @return the Technical Resource logged in or null if there's no currently logged in user
+     */
+    public static TechnicalResource getLoggedInTechnicalResource() {
+        return (TechnicalResource) getLoggedInUser();
     }
 
 }

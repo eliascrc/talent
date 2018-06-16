@@ -33,12 +33,6 @@ public class OrganizationSkill extends Skill {
     private Set<TechnicalResource> resources;
 
     /**
-     * A list of the invitations that include this skill.
-     */
-    @ManyToMany(mappedBy = "skills")
-    private Set<Invitation> invitations;
-
-    /**
      * The organization capability levels that the organization skill belongs to.
      */
     @ManyToMany(mappedBy = "requiredSkills")
@@ -60,14 +54,6 @@ public class OrganizationSkill extends Skill {
 
     public void setResources(Set<TechnicalResource> resources) {
         this.resources = resources;
-    }
-
-    public Set<Invitation> getInvitations() {
-        return invitations;
-    }
-
-    public void setInvitations(Set<Invitation> invitations) {
-        this.invitations = invitations;
     }
 
     public Set<CapabilityLevel> getCapabilityLevels() {

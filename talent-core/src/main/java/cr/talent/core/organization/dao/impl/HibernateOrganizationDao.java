@@ -1,6 +1,7 @@
 package cr.talent.core.organization.dao.impl;
 
 import cr.talent.core.organization.dao.OrganizationDao;
+import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
@@ -38,7 +39,20 @@ public class HibernateOrganizationDao extends HibernateCrudDao<Organization, Str
         List<Organization> organizationResult = (List<Organization>)query.list();
 
         return DataAccessUtils.singleResult(organizationResult);
+    }
 
+    /**
+     * @see cr.talent.core.organization.dao.OrganizationDao#findValidInvitations(String)
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Invitation> findValidInvitations(String uniqueIdentifier) {
+        String hql = "FROM Organization AS org INNER JOIN org.invitationsList AS invitation " +
+                "WHERE org.uniqueIdentifier = :uniqueIdentifier AND invitation.isValid = true";
+        Query query = super.getSessionFactory().getCurrentSession().createQuery(hql);
+
+        query.setParameter("uniqueIdentifier", uniqueIdentifier);
+        return (List<Invitation>)query.list();
     }
 
 }

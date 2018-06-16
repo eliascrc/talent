@@ -16,7 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with a GET endpoint that returns the active privacy policy
+ * Resource that handles the sign up one and two steps.
  *
  * @author Daniel Montes de Oca
  */
@@ -26,7 +26,7 @@ import javax.ws.rs.core.Response;
 public class SignUpResource {
 
     @Autowired
-    SignUpConfirmationMessageService signUpConfirmationMessageService;
+    private SignUpConfirmationMessageService signUpConfirmationMessageService;
 
     /**
      * Creates a technical resource with the supplied information if it is valid and sends a confirmation email. If the

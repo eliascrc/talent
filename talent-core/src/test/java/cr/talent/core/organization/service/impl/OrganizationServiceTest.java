@@ -3,14 +3,21 @@ package cr.talent.core.organization.service.impl;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.dao.impl.HibernateOrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.model.Invitation;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
+import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -111,6 +118,75 @@ public class OrganizationServiceTest {
         }
 
         verify(organizationDao, times(1)).getOrganizationByUniqueIdentifier(UNIQUE_IDENTIFIER);
+    }
+
+    @Test
+    public void testGetOrganizationByUniqueIdentifier() {
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+        String uniqueId = "uniqueId";
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        when(organizationDao.getOrganizationByUniqueIdentifier(uniqueId)).thenReturn(organization);
+
+        organizationService.getOrganizationByUniqueIdentifier(uniqueId);
+
+        verify(organizationDao, times(1)).getOrganizationByUniqueIdentifier(uniqueId);
+    }
+
+    @Test
+    public void testcreateInviteLinkNullInviteLink() {
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        when(organization.getInviteLink()).thenReturn(null);
+
+        organizationService.createInviteLink(organization);
+
+        verify(organizationDao, times(1)).update(organization);
+    }
+
+    @Test
+    public void testcreateInviteLinkNotNullInviteLink() {
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+        String inviteLink = "inviteLink";
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        when(organization.getInviteLink()).thenReturn(inviteLink);
+
+        try {
+            organizationService.createInviteLink(organization);
+            fail();
+        } catch (NotNullInviteLinkInOrganizationException e) {
+            // Nothing, it should throw an exception.
+        }
+    }
+
+    @Test
+    public void testGetValidInvitations() {
+        List<Invitation> invitationList = new ArrayList<>();
+        OrganizationDao organizationDao = mock(HibernateOrganizationDao.class);
+        Organization organization = mock(Organization.class);
+        when(organizationDao.findValidInvitations(organization.getUniqueIdentifier())).thenReturn(invitationList);
+
+        OrganizationService organizationService = new OrganizationServiceImpl();
+        ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+
+        organizationService.getValidInvitations(organization);
+
+        verify(organizationDao, times(1)).findValidInvitations(organization.getUniqueIdentifier());
     }
 
 }
