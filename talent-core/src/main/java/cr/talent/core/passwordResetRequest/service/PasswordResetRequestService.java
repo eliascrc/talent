@@ -14,7 +14,7 @@ public interface PasswordResetRequestService extends CrudService<PasswordResetRe
      *Creates an object of {@link cr.talent.model.PasswordResetRequest}
      * @param email
      */
-    void createPasswordRequestReset(String email);
+    void createPasswordRequestReset(String email, String organizationIdentifier);
 
     /**
      * Retrieves the flag to know if the token is still valid.

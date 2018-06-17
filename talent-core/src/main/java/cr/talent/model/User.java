@@ -25,7 +25,7 @@ public abstract class User extends BasicEntity implements UserDetails {
     /**
      * Username can't be empty, null or duplicated. It represents the user's email address.
      */
-    @Column(name = "username", nullable = false, unique = true)
+    @Column(name = "username", nullable = false)
     protected String username;
 
     /**

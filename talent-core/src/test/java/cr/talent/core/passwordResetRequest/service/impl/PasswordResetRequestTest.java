@@ -40,18 +40,19 @@ public class PasswordResetRequestTest {
         PasswordResetRequest passwordResetRequest = new PasswordResetRequest();
         TechnicalResource technicalResource = mock(TechnicalResource.class);
         String email = "qa.talent.cr@gmail.com";
+        String organizationIdentifier = "monkey-labs";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetRequestDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "technicalResourceService", this.technicalResourceService);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetEmailService", this.passwordResetEmailService);
 
-        when(this.technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(technicalResource);
-        when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(passwordResetRequest);
+        when(this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(technicalResource);
+        when(this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(passwordResetRequest);
 
-        passwordResetRequestService.createPasswordRequestReset(email);
+        passwordResetRequestService.createPasswordRequestReset(email,organizationIdentifier);
 
-        verify(passwordResetRequestDao, times(1)).findByEmail(email);
+        verify(passwordResetRequestDao, times(1)).findByEmailAndOrganizationIdentifier(email,organizationIdentifier);
     }
 
     @Test
@@ -59,18 +60,19 @@ public class PasswordResetRequestTest {
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
         TechnicalResource technicalResource = mock(TechnicalResource.class);
         String email = "qa.talent.cr@gmail.com";
+        String organizationIdentifier = "monkey-labs";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetRequestDao", this.passwordResetRequestDao);
         ReflectionTestUtils.setField(passwordResetRequestService, "technicalResourceService", this.technicalResourceService);
         ReflectionTestUtils.setField(passwordResetRequestService, "passwordResetEmailService", this.passwordResetEmailService);
 
-        when(this.technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(technicalResource);
-        when(this.passwordResetRequestDao.findByEmail(email)).thenReturn(null);
+        when(this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(technicalResource);
+        when(this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email,organizationIdentifier)).thenReturn(null);
 
-        passwordResetRequestService.createPasswordRequestReset(email);
+        passwordResetRequestService.createPasswordRequestReset(email,organizationIdentifier);
 
-        verify(passwordResetRequestDao, times(1)).findByEmail(email);
+        verify(passwordResetRequestDao, times(1)).findByEmailAndOrganizationIdentifier(email,organizationIdentifier);
     }
 
     @Test
