@@ -63,7 +63,6 @@ public class ProjectTest{
         project.setConfluenceLink(confluenceLink);
         project.setVersionControlLink(versionLink);
         project.setTimeline(new HashSet<>());
-        project.setState(state);
         project.setLeadHistory(new HashSet<>());
         project.setProjectCapabilities(new HashSet<>());
         project.setProjectPositions(new HashSet<>());
@@ -83,7 +82,6 @@ public class ProjectTest{
         assertEquals(confluenceLink, project.getConfluenceLink());
         assertEquals(versionLink, project.getVersionControlLink());
         assertNotNull(project.getTimeline());
-        assertEquals(state, project.getState());
         assertNotNull(project.getLeadHistory());
         assertNotNull(project.getProjectCapabilities());
         assertNotNull(project.getProjectPositions());
