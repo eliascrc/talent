@@ -1,11 +1,9 @@
 package cr.talent.model;
 
 import java.util.Date;
-import java.util.HashSet;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -22,16 +20,15 @@ public class InvitationTest{
 
     private static final String ID = "1234";
     private static final String ID2 = "12345";
-    private static final String NAME = "talent";
-    private static final String NAME2 = "talent2";
+    private static final String TOKEN = "abc123";
+    private static final String TOKEN2 = "def456";
     private static final String EMAIL = "jo96cube@gmail.com";
 
     @Test
     public void coreTest() {
 
-        JobPosition jobPosition = mock(JobPosition.class);
-        TechnicalPosition technicalPosition = mock(TechnicalPosition.class);
         Organization organization = mock(Organization.class);
+        boolean isValid = true;
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
@@ -44,24 +41,20 @@ public class InvitationTest{
         invitation.setEntityCreationTimestamp(entityCreationTimestamp);
         invitation.setLastUpdatedTimestamp(lastUpdatedTimestamp);
         invitation.setEntityVersion(entityVersion);
-        invitation.setName(NAME);
         invitation.setEmail(EMAIL);
-        invitation.setJobPosition(jobPosition);
-        invitation.setTechnicalPosition(technicalPosition);
-        invitation.setSkills(new HashSet<>());
         invitation.setOrganization(organization);
+        invitation.setToken(TOKEN);
+        invitation.setValid(isValid);
 
         // Verify the gets
         assertEquals(ID, invitation.getId());
         assertEquals(entityCreationTimestamp, invitation.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, invitation.getLastUpdatedTimestamp());
         assertEquals(entityVersion, invitation.getEntityVersion());
-        assertEquals(NAME, invitation.getName());
         assertEquals(EMAIL, invitation.getEmail());
-        assertEquals(jobPosition, invitation.getJobPosition());
-        assertEquals(technicalPosition,invitation.getTechnicalPosition());
-        assertNotNull(invitation.getSkills());
         assertEquals(organization, invitation.getOrganization());
+        assertEquals(TOKEN, invitation.getToken());
+        assertEquals(isValid, invitation.isValid());
     }
 
     //ON EQUALS TESTS.
@@ -108,16 +101,16 @@ public class InvitationTest{
     @Test
     public void testEqualForNonPersistentInvitation() {
         Invitation invitation1 = new Invitation();
-        invitation1.setName(NAME);
+        invitation1.setToken(TOKEN);
 
         Invitation invitation2 = new Invitation();
-        invitation2.setName(NAME);
+        invitation2.setToken(TOKEN);
 
         assertTrue(invitation1.equals(invitation2));
     }
 
     @Test
-    public void testEqualForNonPersistentInvitationNullName() {
+    public void testEqualForNonPersistentInvitationNullToken() {
         Invitation invitation1 = new Invitation();
 
         Invitation invitation2 = new Invitation();
@@ -128,20 +121,20 @@ public class InvitationTest{
     @Test
     public void testNonEqualForNonPersistentInvitation() {
         Invitation invitation1 = new Invitation();
-        invitation1.setName(NAME);
+        invitation1.setToken(TOKEN);
 
         Invitation invitation2 = new Invitation();
-        invitation2.setName(NAME2);
+        invitation2.setToken(TOKEN2);
 
         assertFalse(invitation1.equals(invitation2));
     }
 
     @Test
-    public void testNonEqualForNonPersistentInvitationNullName() {
+    public void testNonEqualForNonPersistentInvitationNullToken() {
         Invitation invitation1 = new Invitation();
 
         Invitation invitation2 = new Invitation();
-        invitation2.setName(NAME2);
+        invitation2.setToken(TOKEN2);
 
         assertFalse(invitation1.equals(invitation2));
     }
@@ -173,10 +166,10 @@ public class InvitationTest{
     @Test
     public void testEqualHashCodeForNonPersistentInvitation() {
         Invitation invitation1 = new Invitation();
-        invitation1.setName(NAME);
+        invitation1.setToken(TOKEN);
 
         Invitation invitation2 = new Invitation();
-        invitation2.setName(NAME);
+        invitation2.setToken(TOKEN);
 
         assertTrue(invitation1.hashCode() == invitation2.hashCode());
     }
@@ -184,10 +177,10 @@ public class InvitationTest{
     @Test
     public void testNonEqualHashCodeForNonPersistentInvitation() {
         Invitation invitation1 = new Invitation();
-        invitation1.setName(NAME);
+        invitation1.setToken(TOKEN);
 
         Invitation invitation2 = new Invitation();
-        invitation2.setName(NAME2);
+        invitation2.setToken(TOKEN2);
 
         assertFalse(invitation1.hashCode() == invitation2.hashCode());
     }

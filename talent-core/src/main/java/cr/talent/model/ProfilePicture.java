@@ -12,8 +12,7 @@ import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue(value = "PROFILE_PICTURE")
-@Table(name = "profile_picture")
-public class ProfilePicture extends Image{
+public class ProfilePicture extends Image {
 
     /**
      * Technical resource that owns the profile picture.
