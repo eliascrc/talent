@@ -26,6 +26,10 @@ public class PrivacyPolicyResourceTest extends FunctionalTest {
         given().queryParam("platform","").when().get("/ws/content/privacyPolicy").then().statusCode(400);
     }
 
+    /**
+     * This test will extract the Web Content Properties from WebContentProperties in order to comparte the HTML tags content
+     * received by the web service.
+     */
     @Test
     public void testWebPrivacyPolicy() {
         XmlPath xmlPath =
@@ -41,6 +45,10 @@ public class PrivacyPolicyResourceTest extends FunctionalTest {
 
     }
 
+    /**
+     * This test will extract the Web Content Properties from WebContentProperties in order to comparte the HTML tags content
+     * received by the web service.
+     */
     @Test
     public void testAndroidPrivacyPolicy() {
         XmlPath xmlPath =

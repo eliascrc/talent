@@ -39,6 +39,14 @@ public class AutomationResource {
     @Autowired
     OrganizationService organizationService;
 
+    /**
+     * Receives a request to return the forgot password token from a technical resource.
+     * @param email the technical resource email.
+     * @param organizationIdentifier the organization related to the technical resource token.
+     * @return 200 if the token is correctly retrieved.
+     *         400 if any of the parameters are null or empty.
+     *         404 if the technical resource does not have any password reset request on that organization.
+     */
     @POST
     @Path ("/forgotPasswordToken")
     public Response forgotPasswordToken (@FormParam("email") String email,
@@ -53,6 +61,13 @@ public class AutomationResource {
         return Response.ok().entity(token).build();
     }
 
+    /**
+     * Receives a request to return the sign up code from user completing the sign up steps.
+     * @param email the user's email.
+     * @return 200 if the code is correctly retrieved.
+     *         400 if the email is null or empty.
+     *         404 if the user is not found in the database.
+     */
     @POST
     @Path ("/signUpCode")
     public Response signUpCode (@FormParam("email") String email){
@@ -66,6 +81,13 @@ public class AutomationResource {
         return Response.ok().entity(code).build();
     }
 
+    /**
+     * Receives a request to delete a technical resource.
+     * @param email the technical resource email.
+     * @return 200 if the user is correctly deleted.
+     *         400 if the email is null or empty.
+     *         404 if the user is not found in the database.
+     */
     @POST
     @Path ("/deleteTechnicalResource")
     public Response deleteTechnicalResource (@FormParam("email") String email){
@@ -80,6 +102,13 @@ public class AutomationResource {
         return Response.ok().build();
     }
 
+    /**
+     * Receives a request to delete an organization.
+     * @param uniqueIdentifier the organization unique identifier.
+     * @return 200 if the organization is correctly deleted.
+     *         400 if the uniqueIdentifier is null or empty.
+     *         404 if the organization is not found in the database.
+     */
     @POST
     @Path ("/deleteOrganization")
     public Response deleteOrganization (@FormParam("uniqueIdentifier") String uniqueIdentifier){

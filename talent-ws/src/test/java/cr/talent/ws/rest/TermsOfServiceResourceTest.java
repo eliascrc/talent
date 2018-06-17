@@ -26,6 +26,10 @@ public class TermsOfServiceResourceTest extends FunctionalTest {
         given().queryParam("platform","").when().get("/ws/content/termsOfService").then().statusCode(400);
     }
 
+    /**
+     * This test will extract the Web Content Properties from WebContentProperties in order to comparte the HTML tags content
+     * received by the web service.
+     */
     @Test
     public void testWebTermsOfService() {
         XmlPath xmlPath =
@@ -41,6 +45,10 @@ public class TermsOfServiceResourceTest extends FunctionalTest {
 
     }
 
+    /**
+     * This test will extract the Web Content Properties from WebContentProperties in order to comparte the HTML tags content
+     * received by the web service.
+     */
     @Test
     public void testAndroidTermsOfService() {
         XmlPath xmlPath =

@@ -136,14 +136,16 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
         return codeMatchesConfirmationMessage;
     }
 
+    /**
+     * @see cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService#getCode(String)
+     */
     @Override
     public String getCode(String email) {
         SignUpConfirmationMessage signUpConfirmationMessage = this.getActiveConfirmationMessage(email);
         if (signUpConfirmationMessage == null)
             return null;
 
-        String code = signUpConfirmationMessage.getConfirmationCode();
-        return code;
+        return signUpConfirmationMessage.getConfirmationCode();
     }
 
 }

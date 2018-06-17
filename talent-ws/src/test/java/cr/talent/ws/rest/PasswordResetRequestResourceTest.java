@@ -12,7 +12,15 @@ import static com.jayway.restassured.RestAssured.given;
  */
 public class PasswordResetRequestResourceTest extends FunctionalTest {
 
-    private String token;
+    private final String email = "email";
+    private final String organizationIdentifier = "organizationIdentifier";
+    private final String forgotPasswordWebService = "/ws/passwordReset/forgotPassword";
+    private final String checkForgotPasswordTokenWebService = "/ws/passwordReset/new/";
+    private final String getForgotPasswordTokenWebService = "/ws/automation/forgotPasswordToken";
+    private final String resetPasswordWebService = "/ws/passwordReset/reset/";
+    private final String token = "token";
+    private final String newPassword = "newPassword";
+    private String forgotPasswordToken;
 
     @Test
     public void pingTest() {
@@ -23,9 +31,9 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void emptyBodyRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("email","")
-                .formParam("organizationIdentifier","")
-                .when().post("/ws/passwordReset/forgotPassword")
+                .formParam(this.email,"")
+                .formParam(this.organizationIdentifier,"")
+                .when().post(this.forgotPasswordWebService)
                 .then().statusCode(400);
     }
 
@@ -33,9 +41,9 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void emptyEmailRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("email","")
-                .formParam("organizationIdentifier","monkey-labs")
-                .when().post("/ws/passwordReset/forgotPassword")
+                .formParam(this.email,"")
+                .formParam(this.organizationIdentifier,"monkey-labs")
+                .when().post(this.forgotPasswordWebService)
                 .then().statusCode(400);
     }
 
@@ -43,9 +51,9 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void emptyUIDRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("email","jo96cube@gmail.com")
-                .formParam("organizationIdentifier","")
-                .when().post("/ws/passwordReset/forgotPassword")
+                .formParam(this.email,"jo96cube@gmail.com")
+                .formParam(this.organizationIdentifier,"")
+                .when().post(this.forgotPasswordWebService)
                 .then().statusCode(400);
     }
 
@@ -53,7 +61,7 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void nullBodyRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .when().post("/ws/passwordReset/forgotPassword")
+                .when().post(this.forgotPasswordWebService)
                 .then().statusCode(400);
     }
 
@@ -62,9 +70,9 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void validRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("email","jo96cube@gmail.com")
-                .formParam("organizationIdentifier","monkey-labs")
-                .when().post("/ws/passwordReset/forgotPassword")
+                .formParam(this.email,"jo96cube@gmail.com")
+                .formParam(this.organizationIdentifier,"monkey-labs")
+                .when().post(this.forgotPasswordWebService)
                 .then().statusCode(200);
     }
 
@@ -72,18 +80,19 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void getTokenRequestTest() {
         Response response = given()
                 .contentType(ContentType.URLENC)
-                .formParam("email","jo96cube@gmail.com")
-                .formParam("organizationIdentifier","monkey-labs")
-                .when().post("/ws/automation/forgotPasswordToken")
+                .formParam(this.email,"jo96cube@gmail.com")
+                .formParam(this.organizationIdentifier,"monkey-labs")
+                .when().post(this.getForgotPasswordTokenWebService)
                 .then().statusCode(200).extract().response();
-        this.token = response.getBody().prettyPrint();
+
+        this.forgotPasswordToken = response.getBody().prettyPrint();
     }
 
     @Test
     public void invalidTokenRequestTest() {
         given()
-                .queryParam("token","invalid-token")
-                .when().get("/ws/passwordReset/new/")
+                .queryParam(this.token,"invalid-token")
+                .when().get(this.checkForgotPasswordTokenWebService)
                 .then().statusCode(400);
     }
 
@@ -93,17 +102,17 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
         this.getTokenRequestTest();
 
         given()
-                .queryParam("token",this.token)
-                .when().get("/ws/passwordReset/new/")
+                .queryParam(this.token,this.forgotPasswordToken)
+                .when().get(this.checkForgotPasswordTokenWebService)
                 .then().statusCode(200);
     }
 
     @Test
     public void invalidTokenForPasswordResetRequestTest() {
         given()
-                .queryParam("token","invalid-token")
-                .formParam("newPassword","TaLeNt.123")
-                .when().post("/ws/passwordReset/reset/")
+                .queryParam(this.token,"invalid-token")
+                .formParam(this.newPassword,"TaLeNt.123")
+                .when().post(this.resetPasswordWebService)
                 .then().statusCode(400);
     }
 
@@ -113,9 +122,9 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
         this.getTokenRequestTest();
 
         given()
-                .queryParam("token",this.token)
-                .formParam("newPassword","TaLeNt.123")
-                .when().post("/ws/passwordReset/reset/")
+                .queryParam(this.token,this.forgotPasswordToken)
+                .formParam(this.newPassword,"TaLeNt.123")
+                .when().post(this.resetPasswordWebService)
                 .then().statusCode(200);
     }
 

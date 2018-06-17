@@ -13,13 +13,35 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * This class will automate tests for the sign up web services.
- * As this is a flow, the test will be executed in lexicographical order, using single alphabet letters as prefixes.
+ * As this is a flow, the tests will be executed in lexicographical order, using single alphabet letters as prefixes.
  * @author Josue Cubero.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SignUpResourceTest extends FunctionalTest {
 
-    private String code;
+    private final String stepOneWebService = "/ws/signUp/stepOne";
+    private final String stepTwoWebService = "/ws/signUp/stepTwo";
+    private final String getSignUpCodeWebService = "/ws/automation/signUpCode";
+    private final String stepThreeWebService = "/ws/organization/create";
+    private final String stepFourInvitationsWebService = "/ws/invitation/send";
+    private final String stepFourGetInviteLinkWebService = "/ws/invitation/inviteLink";
+    private final String stepFourCreateInviteLinkWebService = "/ws/invitation/inviteLink/create";
+    private final String deleteTechnicalResourceWebService = "/ws/automation/deleteTechnicalResource";
+    private final String deleteOrganizationWebService = "/ws/automation/deleteOrganization";
+
+    private final String firstName = "firstName";
+    private final String lastName = "lastName";
+    private final String email = "email";
+    private final String password = "password";
+    private final String code = "code";
+    private final String uniqueIdentifier = "uniqueIdentifier";
+    private final String name = "name";
+    private final String username = "username";
+    private final String termsOfServiceAccepted = "termsOfServiceAccepted";
+    private final String organizationIdentifier = "organizationIdentifier";
+    private final String emails = "emails";
+
+    private String forgotPasswordCode;
     private SessionFilter sessionFilter;
 
     public SignUpResourceTest(){
@@ -34,73 +56,73 @@ public class SignUpResourceTest extends FunctionalTest {
     @Test
     public void bNullBodyRequestTestForStepOne() {
         given()
-                .when().post("/ws/signUp/stepOne")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void cEmptyBodyRequestTestForStepOne() {
         given()
-                .formParam("firstName","")
-                .formParam("lastName","")
-                .formParam("email","")
-                .formParam("password","")
-                .when().post("/ws/signUp/stepOne")
+                .formParam(this.firstName,"")
+                .formParam(this.lastName,"")
+                .formParam(this.email,"")
+                .formParam(this.password,"")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void dEmptyFirstNameRequestTestForStepOne() {
         given()
-                .formParam("firstName","")
-                .formParam("lastName","Kiske")
-                .formParam("email","xbaseucr@gmail.com")
-                .formParam("password","Talent.123")
-                .when().post("/ws/signUp/stepOne")
+                .formParam(this.firstName,"")
+                .formParam(this.lastName,"Kiske")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .formParam(this.password,"Talent.123")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void eEmptyLastNameRequestTestForStepOne() {
         given()
-                .formParam("firstName","Michael")
-                .formParam("lastName","")
-                .formParam("email","xbaseucr@gmail.com")
-                .formParam("password","")
-                .when().post("/ws/signUp/stepOne")
+                .formParam(this.firstName,"Michael")
+                .formParam(this.lastName,"")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .formParam(this.password,"")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void fEmptyEmailRequestTestForStepOne() {
         given()
-                .formParam("firstName","Michael")
-                .formParam("lastName","Kiske")
-                .formParam("email","")
-                .formParam("password","Talent.123")
-                .when().post("/ws/signUp/stepOne")
+                .formParam(this.firstName,"Michael")
+                .formParam(this.lastName,"Kiske")
+                .formParam(this.email,"")
+                .formParam(this.password,"Talent.123")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void gEmptyPasswordRequestTestForStepOne() {
         given()
-                .formParam("firstName","Michael")
-                .formParam("lastName","Kiske")
-                .formParam("email","xbaseucr@gmail.com")
-                .formParam("password","")
-                .when().post("/ws/signUp/stepOne")
+                .formParam(this.firstName,"Michael")
+                .formParam(this.lastName,"Kiske")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .formParam(this.password,"")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void hInvalidPasswordRequestTestForStepOne() {
         given()
-                .formParam("firstName","Michael")
-                .formParam("lastName","Kiske")
-                .formParam("email","xbaseucr@gmail.com")
-                .formParam("password","invalidpassword")
-                .when().post("/ws/signUp/stepOne")
+                .formParam(this.firstName,"Michael")
+                .formParam(this.lastName,"Kiske")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .formParam(this.password,"invalidpassword")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(400);
     }
 
@@ -108,11 +130,11 @@ public class SignUpResourceTest extends FunctionalTest {
     public void iValidRequestTestForStepOne() {
 
         Response response = given()
-                .formParam("firstName","Michael")
-                .formParam("lastName","Kiske")
-                .formParam("email","xbaseucr@gmail.com")
-                .formParam("password","Talent.123")
-                .when().post("/ws/signUp/stepOne")
+                .formParam(this.firstName,"Michael")
+                .formParam(this.lastName,"Kiske")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .formParam(this.password,"Talent.123")
+                .when().post(this.stepOneWebService)
                 .then().statusCode(200).extract().response();
 
         boolean accountNonExpired = true;
@@ -139,27 +161,27 @@ public class SignUpResourceTest extends FunctionalTest {
 
         Response response = given()
                 .contentType(ContentType.URLENC)
-                .formParam("email","xbaseucr@gmail.com")
-                .when().post("/ws/automation/signUpCode")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .when().post(this.getSignUpCodeWebService)
                 .then().statusCode(200).extract().response();
 
-        this.code = response.getBody().prettyPrint();
+        this.forgotPasswordCode = response.getBody().prettyPrint();
 
     }
 
     @Test
     public void kNullBodyRequestTestForStepTwo() {
         given()
-                .when().post("/ws/signUp/stepTwo")
+                .when().post(this.stepTwoWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void lEmptyBodyRequestTestForStepTwo() {
         given()
-                .formParam("email","")
-                .formParam("code","")
-                .when().post("/ws/signUp/stepTwo")
+                .formParam(this.email,"")
+                .formParam(this.code,"")
+                .when().post(this.stepTwoWebService)
                 .then().statusCode(400);
     }
 
@@ -169,18 +191,18 @@ public class SignUpResourceTest extends FunctionalTest {
         this.jGetCodeRequestTestForStepTwo();
 
         given()
-                .formParam("email","")
-                .formParam("code",this.code)
-                .when().post("/ws/signUp/stepTwo")
+                .formParam(this.email,"")
+                .formParam(this.code,this.forgotPasswordCode)
+                .when().post(this.stepTwoWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void nEmptyCodeRequestTestForStepTwo() {
         given()
-                .formParam("email","xbaseucr@gmail.com")
-                .formParam("code","")
-                .when().post("/ws/signUp/stepTwo")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .formParam(this.code,"")
+                .when().post(this.stepTwoWebService)
                 .then().statusCode(400);
     }
 
@@ -190,9 +212,9 @@ public class SignUpResourceTest extends FunctionalTest {
         this.jGetCodeRequestTestForStepTwo();
 
         given()
-                .formParam("email","invalidemail@gmail.com")
-                .formParam("code",this.code)
-                .when().post("/ws/signUp/stepTwo")
+                .formParam(this.email,"invalidemail@gmail.com")
+                .formParam(this.code,this.forgotPasswordCode)
+                .when().post(this.stepTwoWebService)
                 .then().statusCode(409);
     }
 
@@ -202,9 +224,9 @@ public class SignUpResourceTest extends FunctionalTest {
         this.jGetCodeRequestTestForStepTwo();
 
         given()
-                .formParam("email","xbaseucr@gmail.com")
-                .formParam("code",this.code)
-                .when().post("/ws/signUp/stepTwo")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .formParam(this.code,this.forgotPasswordCode)
+                .when().post(this.stepTwoWebService)
                 .then().statusCode(200);
     }
 
@@ -212,11 +234,11 @@ public class SignUpResourceTest extends FunctionalTest {
     public void qCreateValidOrganizationRequestTestForStepThree(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","helloween-org")
-                .formParam("name","Helloween Org")
-                .formParam("username", "xbaseucr@gmail.com")
-                .formParam("termsOfServiceAccepted",true)
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"helloween-org")
+                .formParam(this.name,"Helloween Org")
+                .formParam(this.username, "xbaseucr@gmail.com")
+                .formParam(this.termsOfServiceAccepted,true)
+                .when().post(this.stepThreeWebService)
                 .then().statusCode(200);
     }
 
@@ -225,7 +247,7 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/send")
+                .post(this.stepFourInvitationsWebService)
                 .then().statusCode(401);
 
     }
@@ -235,7 +257,7 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/inviteLink/create")
+                .post(this.stepFourCreateInviteLinkWebService)
                 .then().statusCode(401);
 
     }
@@ -245,7 +267,7 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/inviteLink")
+                .post(this.stepFourGetInviteLinkWebService)
                 .then().statusCode(401);
 
     }
@@ -254,9 +276,9 @@ public class SignUpResourceTest extends FunctionalTest {
     public void uLogInUserForTests(){
 
         given()
-                .formParam("username","xbaseucr@gmail.com")
-                .formParam("password","Talent.123")
-                .formParam("organizationIdentifier","helloween-org")
+                .formParam(this.username,"xbaseucr@gmail.com")
+                .formParam(this.password,"Talent.123")
+                .formParam(this.organizationIdentifier,"helloween-org")
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
                 .post("/ws/login")
@@ -272,7 +294,7 @@ public class SignUpResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/send")
+                .post(this.stepFourInvitationsWebService)
                 .then().statusCode(400);
 
     }
@@ -284,9 +306,9 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .filter(this.sessionFilter)
-                .formParam("emails","")
+                .formParam(this.emails,"")
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/send")
+                .post(this.stepFourInvitationsWebService)
                 .then().statusCode(400);
 
     }
@@ -298,9 +320,9 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .filter(this.sessionFilter)
-                .formParam("emails","jo96guerre@gmail.com")
+                .formParam(this.emails,"jo96guerre@gmail.com")
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/send")
+                .post(this.stepFourInvitationsWebService)
                 .then().statusCode(200);
 
     }
@@ -312,19 +334,19 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .filter(this.sessionFilter)
-                .formParam("emails","example0@gmail.com")
-                .formParam("emails","example1@gmail.com")
-                .formParam("emails","example2@gmail.com")
-                .formParam("emails","example3@gmail.com")
-                .formParam("emails","example4@gmail.com")
-                .formParam("emails","example5@gmail.com")
-                .formParam("emails","example6@gmail.com")
-                .formParam("emails","example7@gmail.com")
-                .formParam("emails","example8@gmail.com")
-                .formParam("emails","example9@gmail.com")
-                .formParam("emails","example10@gmail.com")
+                .formParam(this.emails,"example0@gmail.com")
+                .formParam(this.emails,"example1@gmail.com")
+                .formParam(this.emails,"example2@gmail.com")
+                .formParam(this.emails,"example3@gmail.com")
+                .formParam(this.emails,"example4@gmail.com")
+                .formParam(this.emails,"example5@gmail.com")
+                .formParam(this.emails,"example6@gmail.com")
+                .formParam(this.emails,"example7@gmail.com")
+                .formParam(this.emails,"example8@gmail.com")
+                .formParam(this.emails,"example9@gmail.com")
+                .formParam(this.emails,"example10@gmail.com")
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/send")
+                .post(this.stepFourInvitationsWebService)
                 .then().statusCode(409);
 
     }
@@ -337,7 +359,7 @@ public class SignUpResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .get("/ws/invitation/inviteLink")
+                .get(this.stepFourGetInviteLinkWebService)
                 .then().statusCode(204);
 
     }
@@ -350,7 +372,7 @@ public class SignUpResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/inviteLink/create")
+                .post(this.stepFourCreateInviteLinkWebService)
                 .then().statusCode(200);
 
     }
@@ -363,7 +385,7 @@ public class SignUpResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .post("/ws/invitation/inviteLink")
+                .post(this.stepFourGetInviteLinkWebService)
                 .then().statusCode(405);
 
     }
@@ -376,7 +398,7 @@ public class SignUpResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .get("/ws/invitation/inviteLink")
+                .get(this.stepFourGetInviteLinkWebService)
                 .then().statusCode(200);
 
     }
@@ -386,8 +408,8 @@ public class SignUpResourceTest extends FunctionalTest {
     public void zdDeleteTechnicalResourceRequestTest() {
 
         given()
-                .formParam("email","xbaseucr@gmail.com")
-                .when().post("/ws/automation/deleteTechnicalResource")
+                .formParam(this.email,"xbaseucr@gmail.com")
+                .when().post(this.deleteTechnicalResourceWebService)
                 .then().statusCode(200);
     }
 
@@ -395,8 +417,8 @@ public class SignUpResourceTest extends FunctionalTest {
     public void zeDeleteOrganizationRequestTest() {
 
         given()
-                .formParam("uniqueIdentifier","helloween-org")
-                .when().post("/ws/automation/deleteOrganization")
+                .formParam(this.uniqueIdentifier,"helloween-org")
+                .when().post(this.deleteOrganizationWebService)
                 .then().statusCode(200);
     }
 

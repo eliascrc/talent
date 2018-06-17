@@ -13,6 +13,9 @@ import static com.jayway.restassured.RestAssured.given;
  */
 public class ProjectResourceTest extends FunctionalTest {
 
+    private final String createProjectWebService = "/ws/organization/project/create";
+    private final String name = "name";
+    private final String organizationUniqueIdentifier = "organizationUniqueIdentifier";
     private SessionFilter sessionFilter;
 
     public ProjectResourceTest(){
@@ -41,7 +44,7 @@ public class ProjectResourceTest extends FunctionalTest {
     @Test
     public void noAuthRequestTest() {
         given()
-                .when().post("/ws/organization/project/create")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(401);
     }
 
@@ -49,7 +52,7 @@ public class ProjectResourceTest extends FunctionalTest {
     public void noHeaderRequestTest() {
         given()
                 .filter(this.sessionFilter)
-                .when().post("/ws/organization/project/create")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
@@ -58,7 +61,7 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .when().post("/ws/organization/project/create")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
@@ -67,8 +70,8 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","")
-                .when().post("/ws/organization/project/create")
+                .formParam(this.name,"")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
@@ -77,8 +80,8 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","")
-                .when().post("/ws/organization/project/create")
+                .formParam(this.organizationUniqueIdentifier,"")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
@@ -87,9 +90,9 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","")
-                .formParam("organizationUniqueIdentifier","monkey-labs")
-                .when().post("/ws/organization/project/create")
+                .formParam(this.name,"")
+                .formParam(this.organizationUniqueIdentifier,"monkey-labs")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
@@ -98,9 +101,9 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","xBase")
-                .formParam("organizationUniqueIdentifier","")
-                .when().post("/ws/organization/project/create")
+                .formParam(this.name,"xBase")
+                .formParam(this.organizationUniqueIdentifier,"")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
@@ -109,9 +112,9 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","")
-                .formParam("name","")
-                .when().post("/ws/organization/project/create")
+                .formParam(this.organizationUniqueIdentifier,"")
+                .formParam(this.name,"")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
@@ -120,9 +123,9 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","congo-labs")
-                .formParam("name","xBase")
-                .when().post("/ws/organization/project/create")
+                .formParam(this.organizationUniqueIdentifier,"congo-labs")
+                .formParam(this.name,"xBase")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(404);
     }
 
@@ -131,9 +134,9 @@ public class ProjectResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","monkey-labs")
-                .formParam("name","xBase")
-                .when().post("/ws/organization/project/create")
+                .formParam(this.organizationUniqueIdentifier,"monkey-labs")
+                .formParam(this.name,"xBase")
+                .when().post(this.createProjectWebService)
                 .then().statusCode(200);
     }
 }

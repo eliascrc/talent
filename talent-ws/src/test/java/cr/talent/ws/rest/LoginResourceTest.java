@@ -14,11 +14,15 @@ import static org.hamcrest.Matchers.*;
 
 /**
  * This class will automate tests for the login, loggedIn and authenticated web services.
+ * As this is a flow, the tests will be executed in lexicographical order, using single alphabet letters as prefixes.
  * @author Josue Cubero.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class LoginResourceTest extends FunctionalTest {
 
+    private final String logInWebService = "/ws/login";
+    private final String loggedInWebService = "/ws/user/loggedIn";
+    private final String authenticatedWebService = "/ws/user/authenticated";
     private SessionFilter sessionFilter;
 
     public LoginResourceTest(){
@@ -29,7 +33,7 @@ public class LoginResourceTest extends FunctionalTest {
     public void aInValidLoggedInRequestTest(){
 
         given()
-                .get("/ws/user/loggedIn")
+                .get(this.loggedInWebService)
                 .then().statusCode(200)
                 .body(containsString("false"));
 
@@ -39,7 +43,7 @@ public class LoginResourceTest extends FunctionalTest {
     public void bInValidAuthenticatedUserRequestTest() {
 
         given()
-            .get("/ws/user/authenticated")
+            .get(this.authenticatedWebService)
             .then().statusCode(401);
     }
 
@@ -52,7 +56,7 @@ public class LoginResourceTest extends FunctionalTest {
             .formParam("organizationIdentifier","monkey-labs")
             .filter(this.sessionFilter)
             .contentType(ContentType.URLENC)
-            .post("/ws/login")
+            .post(this.logInWebService)
             .then().statusCode(302);
 
     }
@@ -64,7 +68,7 @@ public class LoginResourceTest extends FunctionalTest {
 
         given()
                 .filter(this.sessionFilter)
-                .get("/ws/user/loggedIn")
+                .get(this.loggedInWebService)
                 .then().statusCode(200)
                 .body(containsString("true"));
 
@@ -77,7 +81,7 @@ public class LoginResourceTest extends FunctionalTest {
 
         Response response = given()
                 .filter(this.sessionFilter)
-                .get("/ws/user/authenticated")
+                .get(this.authenticatedWebService)
                 .then().statusCode(200).extract().response();
 
         boolean accountNonExpired = true;

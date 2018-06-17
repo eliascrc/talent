@@ -13,6 +13,8 @@ import static com.jayway.restassured.RestAssured.given;
  */
 public class PredefinedCapabilityResourceTest extends FunctionalTest {
 
+    private final String createPredefinedCapabilityWebService = "/talent/ws/admin/capability/create";
+    private final String name = "name";
     private SessionFilter sessionFilter;
 
     public PredefinedCapabilityResourceTest(){
@@ -51,7 +53,7 @@ public class PredefinedCapabilityResourceTest extends FunctionalTest {
     @Test
     public void noAuthRequestTest() {
         given()
-                .when().post("/ws/admin/capability/create")
+                .when().post(this.createPredefinedCapabilityWebService)
                 .then().statusCode(401);
     }*/
 
@@ -59,7 +61,7 @@ public class PredefinedCapabilityResourceTest extends FunctionalTest {
     public void noHeaderRequestTest() {
         given()
                 //.filter(this.sessionFilter)
-                .when().post("/talent/ws/admin/capability/create")
+                .when().post(this.createPredefinedCapabilityWebService)
                 .then().statusCode(400);
     }
 
@@ -68,7 +70,7 @@ public class PredefinedCapabilityResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .when().post("/talent/ws/admin/capability/create")
+                .when().post(this.createPredefinedCapabilityWebService)
                 .then().statusCode(400);
     }
 
@@ -77,8 +79,8 @@ public class PredefinedCapabilityResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","")
-                .when().post("/talent/ws/admin/capability/create")
+                .formParam(this.name,"")
+                .when().post(this.createPredefinedCapabilityWebService)
                 .then().statusCode(400);
     }
 
@@ -87,8 +89,8 @@ public class PredefinedCapabilityResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","Mobile Developer")
-                .when().post("/talent/ws/admin/capability/create")
+                .formParam(this.name,"Mobile Developer")
+                .when().post(this.createPredefinedCapabilityWebService)
                 .then().statusCode(409);
     }*/
 
@@ -97,8 +99,8 @@ public class PredefinedCapabilityResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name",".NET Developer")
-                .when().post("/talent/ws/admin/capability/create")
+                .formParam(this.name,".NET Developer")
+                .when().post(this.createPredefinedCapabilityWebService)
                 .then().statusCode(200);
     }*/
 }

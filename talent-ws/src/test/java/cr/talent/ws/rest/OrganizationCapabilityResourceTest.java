@@ -13,6 +13,10 @@ import static com.jayway.restassured.RestAssured.given;
  */
 public class OrganizationCapabilityResourceTest extends FunctionalTest {
 
+    private final String createOrganizationWebService = "/ws/organization/capability/create";
+    private final String logInWebService = "/ws/login";
+    private final String organizationUniqueIdentifier = "organizationUniqueIdentifier";
+    private final String name = "name";
     private SessionFilter sessionFilter;
 
     public OrganizationCapabilityResourceTest(){
@@ -28,7 +32,7 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
                 .formParam("organizationIdentifier","monkey-labs")
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .post("/ws/login")
+                .post(this.logInWebService)
                 .then().statusCode(302);
 
     }
@@ -41,7 +45,7 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
     @Test
     public void noAuthRequestTest() {
         given()
-                .when().post("/ws/organization/capability/create")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(401);
     }
 
@@ -49,7 +53,7 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
     public void noHeaderRequestTest() {
         given()
                 .filter(this.sessionFilter)
-                .when().post("/ws/organization/capability/create")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -58,7 +62,7 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .when().post("/ws/organization/capability/create")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -67,8 +71,8 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.name,"")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -77,8 +81,8 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.organizationUniqueIdentifier,"")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -87,9 +91,9 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","")
-                .formParam("organizationUniqueIdentifier","monkey-labs")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.name,"")
+                .formParam(this.organizationUniqueIdentifier,"monkey-labs")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -98,9 +102,9 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","Apache Hive Data Analyst")
-                .formParam("organizationUniqueIdentifier","")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.name,"Apache Hive Data Analyst")
+                .formParam(this.organizationUniqueIdentifier,"")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -109,9 +113,9 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","")
-                .formParam("name","")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.organizationUniqueIdentifier,"")
+                .formParam(this.name,"")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -120,9 +124,9 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","congo-labs")
-                .formParam("name","Apache Hive Data Analyst")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.organizationUniqueIdentifier,"congo-labs")
+                .formParam(this.name,"Apache Hive Data Analyst")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(404);
     }
 
@@ -131,20 +135,21 @@ public class OrganizationCapabilityResourceTest extends FunctionalTest {
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","monkey-labs")
-                .formParam("name","Mobile Developer")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.organizationUniqueIdentifier,"monkey-labs")
+                .formParam(this.name,"Mobile Developer")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(409);
     }
 
+    //This test is commented because once it creates the capability, the next executions will result in a conflict, such as the previous test.
     /*@Test
     public void createCapabilityRequestTest(){
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("organizationUniqueIdentifier","monkey-labs")
-                .formParam("name","QA Analyst")
-                .when().post("/ws/organization/capability/create")
+                .formParam(this.organizationUniqueIdentifier,"monkey-labs")
+                .formParam(this.name,"QA Analyst")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(200);
     }*/
 }

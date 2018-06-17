@@ -11,6 +11,11 @@ import static com.jayway.restassured.RestAssured.given;
  */
 public class OrganizationResourceTest extends FunctionalTest {
 
+    private final String createOrganizationWebService = "/ws/organization/create";
+    private final String uniqueIdentifier = "uniqueIdentifier";
+    private final String name = "name";
+    private final String username = "username";
+    private final String termsOfServiceAccepted = "termsOfServiceAccepted";
 
     @Test
     public void pingTest() {
@@ -20,7 +25,7 @@ public class OrganizationResourceTest extends FunctionalTest {
     @Test
     public void noHeaderRequestTest() {
         given()
-                .when().post("/ws/organization/create")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -28,7 +33,7 @@ public class OrganizationResourceTest extends FunctionalTest {
     public void nullBodyRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .when().post("/ws/organization/create")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -36,11 +41,11 @@ public class OrganizationResourceTest extends FunctionalTest {
     public void emptyNameRequestTest(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","congo-labs")
-                .formParam("name","")
-                .formParam("username", "john.tolkien@example.com")
-                .formParam("termsOfServiceAccepted",true)
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"congo-labs")
+                .formParam(this.name,"")
+                .formParam(this.username, "john.tolkien@example.com")
+                .formParam(this.termsOfServiceAccepted,true)
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -48,11 +53,11 @@ public class OrganizationResourceTest extends FunctionalTest {
     public void emptyUIDRequestTest(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","")
-                .formParam("name","Congo Labs")
-                .formParam("username", "john.tolkien@example.com")
-                .formParam("termsOfServiceAccepted",true)
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"")
+                .formParam(this.name,"Congo Labs")
+                .formParam(this.username, "john.tolkien@example.com")
+                .formParam(this.termsOfServiceAccepted,true)
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -60,11 +65,11 @@ public class OrganizationResourceTest extends FunctionalTest {
     public void emptyUsernameRequestTest(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","congo-labs")
-                .formParam("name","Congo Labs")
-                .formParam("username", "")
-                .formParam("termsOfServiceAccepted",true)
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"congo-labs")
+                .formParam(this.name,"Congo Labs")
+                .formParam(this.username, "")
+                .formParam(this.termsOfServiceAccepted,true)
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -72,11 +77,11 @@ public class OrganizationResourceTest extends FunctionalTest {
     public void noToSAcceptedRequestTest(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","congo-labs")
-                .formParam("name","Congo Labs")
-                .formParam("username", "john.tolkien@example.com")
-                .formParam("termsOfServiceAccepted","")
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"congo-labs")
+                .formParam(this.name,"Congo Labs")
+                .formParam(this.username, "john.tolkien@example.com")
+                .formParam(this.termsOfServiceAccepted,"")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -84,11 +89,11 @@ public class OrganizationResourceTest extends FunctionalTest {
     public void emptyParamsRequestTest(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","")
-                .formParam("name","")
-                .formParam("username", "")
-                .formParam("termsOfServiceAccepted","")
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"")
+                .formParam(this.name,"")
+                .formParam(this.username, "")
+                .formParam(this.termsOfServiceAccepted,"")
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(400);
     }
 
@@ -96,23 +101,24 @@ public class OrganizationResourceTest extends FunctionalTest {
     public void existingOrganizationRequestTest(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","monkey-labs")
-                .formParam("name","Monkey Labs")
-                .formParam("username", "john.tolkien@example.com")
-                .formParam("termsOfServiceAccepted",true)
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"monkey-labs")
+                .formParam(this.name,"Monkey Labs")
+                .formParam(this.username, "john.tolkien@example.com")
+                .formParam(this.termsOfServiceAccepted,true)
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(409);
     }
 
+    //This test is commented because once it creates the organization, the next executions will result in a conflict, such as the previous test.
     /*@Test
     public void createValidOrganizationRequestTest(){
         given()
                 .contentType(ContentType.URLENC)
-                .formParam("uniqueIdentifier","mainieris-company")
-                .formParam("name","Mainieri´s company")
-                .formParam("username", "john.tolkien@example.com")
-                .formParam("termsOfServiceAccepted",true)
-                .when().post("/ws/organization/create")
+                .formParam(this.uniqueIdentifier,"mainieris-company")
+                .formParam(this.name,"Mainieri´s company")
+                .formParam(this.username, "john.tolkien@example.com")
+                .formParam(this.termsOfServiceAccepted,true)
+                .when().post(this.createOrganizationWebService)
                 .then().statusCode(200);
     }*/
 

@@ -14,6 +14,8 @@ import static com.jayway.restassured.RestAssured.given;
  */
 public class PredefinedSkillResourceTest extends FunctionalTest {
 
+    private final String createPredefinedSkillWebService = "/talent/ws/admin/skill/create";
+    private final String name = "name";
     private SessionFilter sessionFilter;
 
     public PredefinedSkillResourceTest(){
@@ -49,7 +51,7 @@ public class PredefinedSkillResourceTest extends FunctionalTest {
     @Test
     public void noAuthRequestTest() {
         given()
-                .when().post("/talent/ws/admin/skill/create")
+                .when().post(this.createPredefinedSkillWebService)
                 .then().statusCode(401);
     }*/
 
@@ -57,7 +59,7 @@ public class PredefinedSkillResourceTest extends FunctionalTest {
     public void noHeaderRequestTest() {
         given()
                 //.filter(this.sessionFilter)
-                .when().post("/talent/ws/admin/skill/create")
+                .when().post(this.createPredefinedSkillWebService)
                 .then().statusCode(400);
     }
 
@@ -66,7 +68,7 @@ public class PredefinedSkillResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .when().post("/talent/ws/admin/skill/create")
+                .when().post(this.createPredefinedSkillWebService)
                 .then().statusCode(400);
     }
 
@@ -75,8 +77,8 @@ public class PredefinedSkillResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","")
-                .when().post("/talent/ws/admin/skill/create")
+                .formParam(this.name,"")
+                .when().post(this.createPredefinedSkillWebService)
                 .then().statusCode(400);
     }
 
@@ -85,8 +87,8 @@ public class PredefinedSkillResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name","Apache Hive")
-                .when().post("/talent/ws/admin/skill/create")
+                .formParam(this.name,"Apache Hive")
+                .when().post(this.createPredefinedSkillWebService)
                 .then().statusCode(409);
     }*/
 
@@ -95,8 +97,8 @@ public class PredefinedSkillResourceTest extends FunctionalTest {
         given()
                 //.filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam("name",".NET Developer")
-                .when().post("/talent/ws/admin/skill/create")
+                .formParam(this.name,".NET Developer")
+                .when().post(this.createPredefinedSkillWebService)
                 .then().statusCode(200);
     }*/
 }

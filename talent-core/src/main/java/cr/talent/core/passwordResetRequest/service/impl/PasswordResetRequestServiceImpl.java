@@ -84,6 +84,9 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
+    /**
+     * @see cr.talent.core.passwordResetRequest.service.PasswordResetRequestService#getToken(String, String)
+     */
     @Override
     public String getToken(String email, String organizationIdentifier) {
         PasswordResetRequest passwordResetReq =

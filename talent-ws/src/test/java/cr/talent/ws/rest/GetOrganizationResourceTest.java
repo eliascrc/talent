@@ -12,6 +12,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class GetOrganizationResourceTest extends FunctionalTest {
 
+    private final String getOrganizationWebService = "/ws/login/organization";
+    private final String uniqueIdentifier = "uniqueIdentifier";
+
     @Test
     public void pingTest() {
         given().when().get("/").then().statusCode(200);
@@ -20,23 +23,23 @@ public class GetOrganizationResourceTest extends FunctionalTest {
     @Test
     public void nullBodyRequestTest() {
         given()
-                .when().get("/ws/login/organization")
+                .when().get(this.getOrganizationWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void emptyUIDRequestTest(){
         given()
-                .queryParam("uniqueIdentifier","")
-                .when().get("/ws/login/organization")
+                .queryParam(this.uniqueIdentifier,"")
+                .when().get(this.getOrganizationWebService)
                 .then().statusCode(400);
     }
 
     @Test
     public void invalidOrganizationRequestTest(){
         given()
-                .queryParam("uniqueIdentifier","congo-labs")
-                .when().get("/ws/login/organization")
+                .queryParam(this.uniqueIdentifier,"congo-labs")
+                .when().get(this.getOrganizationWebService)
                 .then().statusCode(404);
     }
 
@@ -44,8 +47,8 @@ public class GetOrganizationResourceTest extends FunctionalTest {
     public void validOrganizationRequestTest(){
 
         JsonPath jsonPath = given()
-                .queryParam("uniqueIdentifier","monkey-labs")
-                .when().get("/ws/login/organization")
+                .queryParam(this.uniqueIdentifier,"monkey-labs")
+                .when().get(this.getOrganizationWebService)
                 .then().extract().response().jsonPath();
 
 
