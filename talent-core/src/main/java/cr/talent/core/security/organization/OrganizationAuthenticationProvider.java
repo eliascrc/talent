@@ -11,6 +11,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 
+/**
+ * Custom authentication provider that retrieves a TechnicalResource from the DB based on their username and
+ * organization, and verifies that the password entered matches the password in the DB.
+ *
+ * @author Fabian Roberto Leandro
+ */
 public class OrganizationAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     /**

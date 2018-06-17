@@ -93,11 +93,18 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
      */
     @Override
     public String create(TechnicalResource technicalResource) {
-        TechnicalResource foundTechnicalResource = this.technicalResourceDao.
-                findTechnicalResourceByUsernameAndOrganizationIdentifier((technicalResource.getUsername().toLowerCase()),
-                        technicalResource.getOrganization().getUniqueIdentifier().toLowerCase());
+
+        TechnicalResource foundTechnicalResource;
+        if(technicalResource.getOrganization() != null) {
+            foundTechnicalResource = this.technicalResourceDao.
+                    findTechnicalResourceByUsernameAndOrganizationIdentifier((technicalResource.getUsername().toLowerCase()),
+                            technicalResource.getOrganization().getUniqueIdentifier().toLowerCase());
+        } else {
+            foundTechnicalResource = this.technicalResourceDao.
+                    findTechnicalResourceByUsername((technicalResource.getUsername().toLowerCase()));
+        }
         if (foundTechnicalResource != null) {
-            throw new IllegalArgumentException("The administrator with name: " + technicalResource.getUsername() + " already exists.");
+            throw new IllegalArgumentException("The technical resource with name: " + technicalResource.getUsername() + " already exists.");
         }
 
         technicalResource.setUsername(technicalResource.getUsername().toLowerCase());
