@@ -29,4 +29,11 @@ public interface PasswordResetRequestService extends CrudService<PasswordResetRe
      */
     void resetPassword (String token, String newPassword);
 
+    /**
+     * Returns the reset request token for a given email.
+     * @param email the email.
+     * @return the token.
+     */
+    String getToken (String email, String organizationIdentifier);
+
 }

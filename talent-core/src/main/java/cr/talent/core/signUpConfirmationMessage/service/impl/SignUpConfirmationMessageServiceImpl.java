@@ -136,4 +136,14 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
         return codeMatchesConfirmationMessage;
     }
 
+    @Override
+    public String getCode(String email) {
+        SignUpConfirmationMessage signUpConfirmationMessage = this.getActiveConfirmationMessage(email);
+        if (signUpConfirmationMessage == null)
+            return null;
+
+        String code = signUpConfirmationMessage.getConfirmationCode();
+        return code;
+    }
+
 }

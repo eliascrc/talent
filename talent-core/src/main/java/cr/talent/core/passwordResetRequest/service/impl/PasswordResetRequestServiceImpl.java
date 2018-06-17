@@ -83,4 +83,14 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
         Authentication authentication = new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+    @Override
+    public String getToken(String email, String organizationIdentifier) {
+        PasswordResetRequest passwordResetReq =
+                this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email, organizationIdentifier);
+        if(passwordResetReq == null)
+            return null;
+
+        return passwordResetReq.getToken();
+    }
 }
