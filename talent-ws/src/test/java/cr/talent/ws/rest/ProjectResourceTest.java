@@ -26,7 +26,7 @@ public class ProjectResourceTest extends FunctionalTest {
     public void logInUserForTests(){
 
         given()
-                .formParam("username","jo96cube@gmail.com")
+                .formParam("username","daniel.montesdeocab@gmail.com")
                 .formParam("password","Talent.123")
                 .formParam("organizationIdentifier","monkey-labs")
                 .filter(this.sessionFilter)
