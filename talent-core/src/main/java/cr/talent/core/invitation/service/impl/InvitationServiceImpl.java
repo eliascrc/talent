@@ -90,7 +90,8 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
 
             }
 
-            if (this.technicalResourceService.getTechnicalResourceByUsername(email) != null)
+            if (this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
+                    email, organization.getUniqueIdentifier()) != null)
                 throw new AlreadyRegisteredUserException(alreadyRegisteredUserMsg);
 
             Invitation newInvitation = new Invitation();
