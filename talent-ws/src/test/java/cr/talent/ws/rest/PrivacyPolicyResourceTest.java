@@ -1,9 +1,12 @@
 package cr.talent.ws.rest;
+
+import com.jayway.restassured.path.xml.XmlPath;
 import org.junit.Test;
 import static com.jayway.restassured.RestAssured.*;
+import static org.junit.Assert.assertEquals;
 
 /**
- * This class will test the Privacy Policy web service responses.
+ * This class will automate tests for the Privacy Policy web service responses.
  * @author Josue Cubero.
  */
 public class PrivacyPolicyResourceTest extends FunctionalTest {
@@ -23,14 +26,45 @@ public class PrivacyPolicyResourceTest extends FunctionalTest {
         given().queryParam("platform","").when().get("/ws/content/privacyPolicy").then().statusCode(400);
     }
 
+    /**
+     * This test will extract the Web Content Properties from WebContentProperties in order to comparte the HTML tags content
+     * received by the web service.
+     */
     @Test
     public void testWebPrivacyPolicy() {
-        given().queryParam("platform","web").when().get("/ws/content/privacyPolicy").then().statusCode(200);
+        XmlPath xmlPath =
+                given().queryParam("platform","web").when()
+                        .get("/ws/content/privacyPolicy").then().statusCode(200).extract().response().htmlPath();
+
+        assertEquals(xmlPath.get("html.head.style"),
+                WebContentProperties.WEB_PRIVACY_POLICY_HEAD_STYLE);
+        assertEquals(xmlPath.get("html.head.title"),
+                WebContentProperties.PRIVACY_POLICY_HEAD_TITLE);
+        assertEquals(xmlPath.get("html.body.p"),
+                WebContentProperties.WEB_PRIVACY_POLICY_BODY_TEXT);
+
     }
 
+    /**
+     * This test will extract the Web Content Properties from WebContentProperties in order to comparte the HTML tags content
+     * received by the web service.
+     */
     @Test
     public void testAndroidPrivacyPolicy() {
-        given().queryParam("platform","android").when().get("/ws/content/privacyPolicy").then().statusCode(200);
+        XmlPath xmlPath =
+                given().queryParam("platform","android").when()
+                        .get("/ws/content/privacyPolicy").then().statusCode(200).extract().response().htmlPath();
+
+        assertEquals(xmlPath.get("html.head.title"),
+                WebContentProperties.PRIVACY_POLICY_HEAD_TITLE);
+        assertEquals(xmlPath.get("html.body.div.h3[0]"),
+                WebContentProperties.MOBILE_PRIVACY_POLICY_BODY_DIV_H3_0);
+        assertEquals(xmlPath.get("html.body.div.h3[1]"),
+                WebContentProperties.MOBILE_PRIVACY_POLICY_BODY_DIV_H3_1);
+        assertEquals(xmlPath.get("html.body.div.p[0]"),
+                WebContentProperties.MOBILE_PRIVACY_POLICY_BODY_DIV_P_0);
+        assertEquals(xmlPath.get("html.body.div.p[1]"),
+                WebContentProperties.MOBILE_PRIVACY_POLICY_BODY_DIV_P_1);
     }
 
     //The following test was run on localhost, by setting the active ToS to inactive.

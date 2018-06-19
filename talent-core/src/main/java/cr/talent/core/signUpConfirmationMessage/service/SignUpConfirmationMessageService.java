@@ -30,4 +30,11 @@ public interface SignUpConfirmationMessageService extends CrudService<SignUpConf
      * @return true if it matches the confirmation, false if not
      */
     boolean confirmEmail(String code, String username);
+
+    /**
+     * Gets the confirmation code for a given email.
+     * @param email the provided email.
+     * @return the sign up code.
+     */
+    String getCode(String email);
 }

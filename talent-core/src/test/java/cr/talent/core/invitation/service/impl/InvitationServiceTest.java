@@ -247,7 +247,8 @@ public class InvitationServiceTest {
 
         for (String email : emails) {
             when(invitationDao.findInvitationByEmail(email)).thenReturn(null);
-            when(technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(mock(TechnicalResource.class));
+            when(technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
+                    email, organization.getUniqueIdentifier())).thenReturn(mock(TechnicalResource.class));
         }
 
         try {
