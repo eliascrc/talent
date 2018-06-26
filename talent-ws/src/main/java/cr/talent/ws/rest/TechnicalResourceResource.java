@@ -32,8 +32,10 @@ public class TechnicalResourceResource {
     TechnicalResourceService technicalResourceService;
 
     /**
-     * GET endpoint that returns the active privacy policy
-     * @return a 200 response with the active privacy policy, 204 code if there is none
+     * GET endpoint that returns the basic information of a technical resource
+     * @return a 200 response with a json with the resource's information,
+     *          404 code if there is no technical resource was found with that username
+     *          400 if the parameter is empty or if the user requesting the log in does not belong to an organization
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
