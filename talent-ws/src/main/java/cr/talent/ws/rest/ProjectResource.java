@@ -4,6 +4,8 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.Organization;
 import cr.talent.model.Project;
+import cr.talent.support.SecurityUtils;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,9 +16,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with a POST endpoint that creates a new project
+ * Resource with two POST endpoints that create a new project and retrieve a project information.
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Josue Cubero
  */
 @Component
 @Scope("request")
@@ -59,5 +61,33 @@ public class ProjectResource {
         this.projectService.create(project);
 
         return Response.ok().build();
+    }
+
+    /**
+     * Receives the request for creating a new project within an organization.
+     * If the unique identifier corresponds to an existing organization, it creates the project successfully.
+     *
+     * @param projectId the project id.
+     * @return  200 if the project information is correctly retrieved and JSON with project information,
+     *          400 if the parameter is null or empty,
+     *          404 if the id does not belong to any project,
+     *          401 if no user is logged in.
+     */
+    @POST
+    @Path("/get")
+    public Response createProject(
+            @FormParam("projectId") String projectId) {
+
+        if (projectId == null || projectId.equals(""))
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
+
+        if(SecurityUtils.getLoggedInUser() == null)
+            return Response.status(Response.Status.UNAUTHORIZED).build(); //User must be logged in
+
+        Project project = this.projectService.findById(projectId);
+        if (project == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        return Response.ok().entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(project)).build();
     }
 }
