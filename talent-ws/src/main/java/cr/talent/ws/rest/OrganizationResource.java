@@ -3,6 +3,8 @@ package cr.talent.ws.rest;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
+import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
+import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -54,7 +56,12 @@ public class OrganizationResource {
 
         } catch (AlreadyCreatedOrganizationException e) {
             // If the organization is already created a conflict should be returned
-            return Response.status(Response.Status.CONFLICT).build();
+            return Response.status(Response.Status.CONFLICT).
+                    entity("AlreadyCreatedOrganization").build();
+        } catch (NonExistentUserWithNullOrganization e){
+            //If the user with the username does not have a null organization where the new organization can be assigned
+            return Response.status(Response.Status.CONFLICT).
+                    entity("NonExistentUserWithNullOrganization").build();
         }
     }
 
