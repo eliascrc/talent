@@ -14,7 +14,7 @@ public interface PasswordResetRequestService extends CrudService<PasswordResetRe
      *Creates an object of {@link cr.talent.model.PasswordResetRequest}
      * @param email
      */
-    void createPasswordRequestReset(String email);
+    void createPasswordRequestReset(String email, String organizationIdentifier);
 
     /**
      * Retrieves the flag to know if the token is still valid.
@@ -28,5 +28,12 @@ public interface PasswordResetRequestService extends CrudService<PasswordResetRe
      * @param newPassword
      */
     void resetPassword (String token, String newPassword);
+
+    /**
+     * Returns the reset request token for a given user email.
+     * @param email the email received.
+     * @return the forgot password token for that given email.
+     */
+    String getToken (String email, String organizationIdentifier);
 
 }

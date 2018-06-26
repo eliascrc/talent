@@ -1,7 +1,6 @@
 package cr.talent.model;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Class that represents an invitation to join the Talent system.
@@ -15,39 +14,22 @@ import java.util.Set;
 public class Invitation extends BasicEntity {
 
     /**
-     * The name of the person receiving the invitation.
-     */
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    /**
      * The email of the person that is going to receive the invitation.
      */
     @Column (name = "email", nullable = false)
     private String email;
 
     /**
-     * The job position of the person that is going to join the organization.
+     * The security token to put in the URL.
      */
-    @OneToOne (mappedBy = "invitation")
-    private JobPosition jobPosition;
+    @Column(name = "token")
+    private String token;
 
     /**
-     * The technical position of the person that is going to join the organization.
+     * Indicates if the invitation is valid
      */
-    @OneToOne (mappedBy = "invitation")
-    private TechnicalPosition technicalPosition;
-
-    /**
-     * The list of skills of the person that is going to join the organization.
-     */
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "invitation_skill",
-            joinColumns = { @JoinColumn(name = "invitation_id") },
-            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
-    )
-    private Set<OrganizationSkill> skills;
+    @Column(name = "is_valid")
+    private boolean isValid;
 
     /**
      * The organization where the invitation came from.
@@ -63,7 +45,7 @@ public class Invitation extends BasicEntity {
         boolean result = false;
         if ( o instanceof Invitation){
             Invitation invitation = (Invitation) o;
-            result = (this.name == null ? invitation.getName() == null : this.name.equals(invitation.getName()));
+            result = (this.token == null ? invitation.getToken() == null : this.token.equals(invitation.getToken()));
         }
         return result;
     }
@@ -71,16 +53,8 @@ public class Invitation extends BasicEntity {
     @Override
     protected int onHashCode(int result) {
         final int prime = 23;
-        result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        result = prime * result + (this.token == null ? 0 : this.token.hashCode());
         return result;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -91,35 +65,27 @@ public class Invitation extends BasicEntity {
         this.email = email;
     }
 
-    public JobPosition getJobPosition() {
-        return jobPosition;
-    }
-
-    public void setJobPosition(JobPosition jobPosition) {
-        this.jobPosition = jobPosition;
-    }
-
-    public TechnicalPosition getTechnicalPosition() {
-        return technicalPosition;
-    }
-
-    public void setTechnicalPosition(TechnicalPosition technicalPosition) {
-        this.technicalPosition = technicalPosition;
-    }
-
-    public Set<OrganizationSkill> getSkills() {
-        return skills;
-    }
-
-    public void setSkills(Set<OrganizationSkill> skills) {
-        this.skills = skills;
-    }
-
     public Organization getOrganization() {
         return organization;
     }
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
     }
 }

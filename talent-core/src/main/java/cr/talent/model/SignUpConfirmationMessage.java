@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * Class that represents a SignUpConfirmationMessage within the Talent system.
  * It contains the technical resource doing the sign up and the code to confirm that they are in fact doing the process.
- * {@link cr.talent.model.BasicEntity} class.
+ * It also contains the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Daniel Montes de Oca
  */
@@ -16,7 +16,7 @@ public class SignUpConfirmationMessage extends BasicEntity {
     /**
      * The technical resource doing the sign up.
      */
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name = "technical_resource_id", unique = true)
     private TechnicalResource technicalResource;
 

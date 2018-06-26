@@ -45,12 +45,13 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
     }
 
     @Override
-    public void createPasswordRequestReset(String email) {
-        PasswordResetRequest passwordResetReq = this.passwordResetRequestDao.findByEmail(email);
+    public void createPasswordRequestReset(String email, String organizationIdentifier) {
+        PasswordResetRequest passwordResetReq = this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email,organizationIdentifier);
         if (passwordResetReq != null)
             passwordResetReq.setValid(false);
 
-        TechnicalResource technicalResource = this.technicalResourceService.getTechnicalResourceByUsername(email);
+        TechnicalResource technicalResource = this.technicalResourceService.
+                getTechnicalResourceByUsernameAndOrganizationIdentifier(email, organizationIdentifier);
         if (technicalResource != null) {
             PasswordResetRequest passwordResetRequest = new PasswordResetRequest();
             passwordResetRequest.setTechnicalResource(technicalResource);
@@ -81,5 +82,18 @@ public class PasswordResetRequestServiceImpl extends CrudServiceImpl<PasswordRes
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    /**
+     * @see cr.talent.core.passwordResetRequest.service.PasswordResetRequestService#getToken(String, String)
+     */
+    @Override
+    public String getToken(String email, String organizationIdentifier) {
+        PasswordResetRequest passwordResetReq =
+                this.passwordResetRequestDao.findByEmailAndOrganizationIdentifier(email, organizationIdentifier);
+        if(passwordResetReq == null)
+            return null;
+
+        return passwordResetReq.getToken();
     }
 }

@@ -48,14 +48,21 @@ public class Organization extends BasicEntity {
     /**
      * An image with the logo of the organization.
      */
-    @OneToOne
-    private Image logo;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "organization_logo_id")
+    private OrganizationLogo logo;
 
     /**
      * The invitation's list for users to join an organization
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
     private Set<Invitation> invitationsList;
+
+    /**
+     * The invitation link for users to join an organization
+     */
+    @Column(name = "invitation_link")
+    private String invitationLink;
 
     /**
      * The organization's domain
@@ -198,11 +205,11 @@ public class Organization extends BasicEntity {
         this.userAuthenticationMethod = userAuthenticationMethod;
     }
 
-    public Image getLogo() {
+    public OrganizationLogo getLogo() {
         return logo;
     }
 
-    public void setLogo(Image logo) {
+    public void setLogo(OrganizationLogo logo) {
         this.logo = logo;
     }
 
@@ -244,5 +251,13 @@ public class Organization extends BasicEntity {
 
     public void setHumanResourceManagers(Set<HumanResourceManager> humanResourceManagers) {
         this.humanResourceManagers = humanResourceManagers;
+    }
+
+    public String getInviteLink() {
+        return invitationLink;
+    }
+
+    public void setInviteLink(String invitationLink) {
+        this.invitationLink = invitationLink;
     }
 }

@@ -25,17 +25,4 @@ public class SignUpConfirmationMessageServiceTest {
         ReflectionTestUtils.invokeMethod(signUpConfirmationMessageService, "init");
     }
 
-    @Test
-    public void testGetActive() {
-        SignUpConfirmationMessageDao signUpConfirmationMessageDao = mock(HibernateSignUpConfirmationMessageDao.class);
-        SignUpConfirmationMessage signUpConfirmationMessage = mock(SignUpConfirmationMessage.class);
-        String email = "email";
-        when(signUpConfirmationMessageDao.getActiveConfirmationMessage(email)).thenReturn(signUpConfirmationMessage);
-        SignUpConfirmationMessageService signUpConfirmationMessageService = new SignUpConfirmationMessageServiceImpl();
-        ReflectionTestUtils.setField(signUpConfirmationMessageService, "signUpConfirmationMessageDao", signUpConfirmationMessageDao);
-        ReflectionTestUtils.setField(signUpConfirmationMessageService, "crudDao", signUpConfirmationMessageDao);
-        assertTrue(signUpConfirmationMessage.equals(signUpConfirmationMessageService.getActiveConfirmationMessage(email)));
-        verify(signUpConfirmationMessageDao, times(1)).getActiveConfirmationMessage(email);
-    }
-
 }

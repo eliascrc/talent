@@ -12,18 +12,29 @@ import cr.talent.support.service.CrudService;
 public interface SignUpConfirmationMessageService extends CrudService<SignUpConfirmationMessage, String> {
 
     /**
-     * Retrieves the last confirmation message that the user has not yet confirmed if it does not exist
-     * @param username The username of the user performing the first step of the sign up
-     * @return the confirmation message if it exists for that username
+     * Creates a technical resource with the supplied information if it is valid and sends a confirmation email. If the
+     * password is not valid it throws an exception with a code that reflects the problem.
+     * @param firstName the first name of the resource performing the first step of the sign up
+     * @param lastName the last name of the resource performing the first step of the sign up
+     * @param username the email of the resource performing the first step of the sign up
+     * @param password the password of the resource performing the first step of the sign up
+     * @return the created or updated technical resource
      */
-    SignUpConfirmationMessage getActiveConfirmationMessage(String username);
+    TechnicalResource sendMessage(String firstName, String lastName, String username, String password);
 
     /**
-     * Creates a new confirmation message or edits the existent if there was one before that and sends it, and it
-     * does the same with the technical resource
-     * @param signUpConfirmationMessage the confirmation message that will be sent
-     * @param technicalResource the technical resource that will be saved and will receive the email
-     * @param hadAnotherConfirmationMessage whether or not there was a confirmation message already for that email
+     * Tries to match the provided code to the last one that was sent to the provided email. It deletes the confirmation
+     * message and activates the user account if it matches the confirmation.
+     * @param code the code provided by the user
+     * @param username the user's email
+     * @return true if it matches the confirmation, false if not
      */
-    void sendMessage(SignUpConfirmationMessage signUpConfirmationMessage, TechnicalResource technicalResource, boolean hadAnotherConfirmationMessage);
+    boolean confirmEmail(String code, String username);
+
+    /**
+     * Gets the confirmation code for a given email.
+     * @param email the provided email.
+     * @return the sign up code.
+     */
+    String getCode(String email);
 }
