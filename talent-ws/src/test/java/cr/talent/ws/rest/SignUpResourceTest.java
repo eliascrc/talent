@@ -240,7 +240,6 @@ public class SignUpResourceTest extends FunctionalTest {
                 .formParam(this.termsOfServiceAccepted,true)
                 .when().post(this.stepThreeWebService)
                 .then().statusCode(200);
-
     }
 
     @Test
