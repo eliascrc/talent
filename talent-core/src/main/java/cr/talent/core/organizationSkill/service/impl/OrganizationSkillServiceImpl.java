@@ -42,7 +42,8 @@ public class OrganizationSkillServiceImpl extends CrudServiceImpl<OrganizationSk
     @Override
     public void assignSkillToTechnicalResource(List<String> skills, Organization organization, TechnicalResource technicalResource) {
         final String nonExistentSkillMsg = "One or more skills are non existent.";
-        final String alreadyAssignedSkillMsg = "One or more skills are already assigned to the technical resource.";
+        final String alreadyAssignedSkillMsg = "One or more skills are already assigned to "+ technicalResource.getFirstName() + " " +
+             technicalResource.getLastName() + ".";
         final String emptySkillMsg = "One or more skills are empty.";
 
         List<OrganizationSkill> skillsToAssign = new ArrayList<>();

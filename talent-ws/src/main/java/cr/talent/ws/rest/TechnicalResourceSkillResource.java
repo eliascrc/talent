@@ -46,7 +46,7 @@ public class TechnicalResourceSkillResource {
     @Path("/assign")
     public Response assignSkills(@FormParam("skills") List<String> skills) {
 
-        if(skills.size() == 0)
+        if(skills.isEmpty())
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         TechnicalResource lazySessionTechnicalResource = SecurityUtils.getLoggedInTechnicalResource();
@@ -64,7 +64,8 @@ public class TechnicalResourceSkillResource {
         try {
             this.organizationSkillService.assignSkillToTechnicalResource(skills, organization, technicalResource);
         } catch (NonExistentSkillException e) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND).
+                    entity("NonExistentSkill").build();
         } catch (AlreadyAssignedSkillException e) {
             return Response.status(Response.Status.CONFLICT).
                     entity("AlreadyAssignedSkill").build();
