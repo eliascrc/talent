@@ -53,19 +53,19 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
      * @see cr.talent.core.organization.service.OrganizationService#createOrganization(String, String, String)
      */
     public void createOrganization(String username, String uniqueIdentifier, String name) {
-        final String AlreadyCreatedOrganizationExceptionMsg = "The organization with unique identifier \"" +
+        final String alreadyCreatedOrganizationExceptionMsg = "The organization with unique identifier \"" +
                 uniqueIdentifier + "\" has already been created within the system.";
 
         if (this.organizationDao.getOrganizationByUniqueIdentifier(uniqueIdentifier) != null)
-            throw new AlreadyCreatedOrganizationException(AlreadyCreatedOrganizationExceptionMsg);
+            throw new AlreadyCreatedOrganizationException(alreadyCreatedOrganizationExceptionMsg);
 
         TechnicalResource technicalResource = this.technicalResourceService.getTechnicalResourceByUsernameWithNullOrganization(username);
 
-        final String NonExistentUserWithNullOrganizationMsg = "The user " + username +
+        final String nonExistentUserWithNullOrganizationMsg = "The user " + username +
                 " does not have a null organization, and the organization he has can not be overwritten.";
 
         if (technicalResource == null){
-            throw  new NonExistentUserWithNullOrganization(NonExistentUserWithNullOrganizationMsg);
+            throw  new NonExistentUserWithNullOrganization(nonExistentUserWithNullOrganizationMsg);
         }
 
         if (technicalResource.getStatus().equals(User.Status.ACTIVE)){
