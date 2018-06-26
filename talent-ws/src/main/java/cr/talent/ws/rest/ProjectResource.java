@@ -64,11 +64,10 @@ public class ProjectResource {
     }
 
     /**
-     * Receives the request for creating a new project within an organization.
-     * If the unique identifier corresponds to an existing organization, it creates the project successfully.
+     * Receives the request for retrieving a project's information.
      *
-     * @param projectId the project id.
-     * @return  200 if the project information is correctly retrieved and JSON with project information,
+     * @param projectId the project's id.
+     * @return  200 if the project's information is correctly retrieved in JSON format,
      *          400 if the parameter is null or empty,
      *          404 if the id does not belong to any project,
      *          401 if no user is logged in.
