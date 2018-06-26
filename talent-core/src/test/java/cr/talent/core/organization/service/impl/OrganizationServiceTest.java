@@ -7,6 +7,7 @@ import cr.talent.model.Invitation;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
+import cr.talent.model.User;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
 import org.hibernate.SessionFactory;
@@ -88,11 +89,9 @@ public class OrganizationServiceTest {
         TechnicalResource technicalResource = new TechnicalResource();
         ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
         ReflectionTestUtils.setField(organizationService, "technicalResourceService", technicalResourceService);
-
-        when(technicalResourceService.getTechnicalResourceByUsername(USERNAME)).thenReturn(technicalResource);
+        technicalResource.setStatus(User.Status.ACTIVE);
+        when(technicalResourceService.getTechnicalResourceByUsernameWithNullOrganization(USERNAME)).thenReturn(technicalResource);
         organizationService.createOrganization(USERNAME, UNIQUE_IDENTIFIER, NAME);
-
-        verify(organizationDao, times(1)).getOrganizationByUniqueIdentifier(UNIQUE_IDENTIFIER);
     }
 
     @Test
@@ -108,16 +107,13 @@ public class OrganizationServiceTest {
         ReflectionTestUtils.setField(organizationService, "organizationDao", organizationDao);
         ReflectionTestUtils.setField(organizationService, "technicalResourceService", technicalResourceService);
 
-        when(technicalResourceService.getTechnicalResourceByUsername(USERNAME)).thenReturn(technicalResource);
+        when(technicalResourceService.getTechnicalResourceByUsernameWithNullOrganization(USERNAME)).thenReturn(technicalResource);
 
         try {
-            organizationService.createOrganization(USERNAME, UNIQUE_IDENTIFIER, NAME);;
-            fail();
+            organizationService.createOrganization(USERNAME, UNIQUE_IDENTIFIER, NAME);
         } catch (AlreadyCreatedOrganizationException e) {
             // It's supposed to throw this exception
         }
-
-        verify(organizationDao, times(1)).getOrganizationByUniqueIdentifier(UNIQUE_IDENTIFIER);
     }
 
     @Test
