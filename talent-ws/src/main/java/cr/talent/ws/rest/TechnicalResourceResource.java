@@ -6,6 +6,7 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import flexjson.JSONSerializer;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -35,9 +36,12 @@ public class TechnicalResourceResource {
      * @return a 200 response with the active privacy policy, 204 code if there is none
      */
     @GET
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/basicInformation")
     public Response getBasicInformation(@QueryParam("username") String username) {
+        if (StringUtils.isEmpty(username))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
         Organization organization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
 
         if (organization == null)
