@@ -108,7 +108,7 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
                             technicalResource.getOrganization().getUniqueIdentifier().toLowerCase());
         } else {
             foundTechnicalResource = this.technicalResourceDao.
-                    findTechnicalResourceByUsername((technicalResource.getUsername().toLowerCase()));
+                    findTechnicalResourceByUsernameWithNullOrganization((technicalResource.getUsername().toLowerCase()));
         }
         if (foundTechnicalResource != null) {
             throw new IllegalArgumentException("The technical resource with name: " + technicalResource.getUsername() + " already exists.");
