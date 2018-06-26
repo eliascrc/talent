@@ -74,7 +74,7 @@ public class ProjectResource {
      */
     @POST
     @Path("/get")
-    public Response createProject(
+    public Response getProject(
             @FormParam("projectId") String projectId) {
 
         if (projectId == null || projectId.equals(""))
