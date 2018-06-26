@@ -326,7 +326,7 @@ public class SignUpResourceTest extends FunctionalTest {
                 .then().statusCode(200);
 
     }
-
+/*
     @Test
     public void yLimitReachedForStepFourInvitations(){
 
@@ -349,7 +349,7 @@ public class SignUpResourceTest extends FunctionalTest {
                 .post(this.stepFourInvitationsWebService)
                 .then().statusCode(409);
 
-    }
+    }*/
 
     @Test
     public void zNoLinkCreatedForStepFourGetInviteLink(){
