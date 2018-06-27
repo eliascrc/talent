@@ -1,20 +1,24 @@
 package cr.talent.ws.rest;
 
+
 import cr.talent.core.organizationSkill.service.OrganizationSkillService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.Organization;
+import cr.talent.model.OrganizationSkill;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.*;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
+import org.springframework.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Resource with one POST endpoint that handles the assign of skills to a technical resource.
@@ -74,5 +78,30 @@ public class TechnicalResourceSkillResource {
         }
 
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/get")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSkills(
+            @QueryParam("technicalResource") String technicalResourceEmail,
+            @QueryParam("organizationIdentifier") String organizationIdentifier){
+
+        if(StringUtils.isEmpty(organizationIdentifier)||StringUtils.isEmpty(technicalResourceEmail))
+            return Response.status(Response.Status.BAD_REQUEST).build(); // The request is malformed
+
+        TechnicalResource technicalResource =
+                this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
+                        technicalResourceEmail,organizationIdentifier);
+
+        if(technicalResource==null)
+            return Response.status(Response.Status.NOT_FOUND).build(); // The technical resource was not found
+
+        Set<OrganizationSkill> assignedSkills = technicalResource.getSkills();
+        if(assignedSkills.isEmpty())
+            return Response.status(Response.Status.NO_CONTENT).build(); // The resource has no assigned skills
+
+        String organizationJson = JSONSerializerBuilder.getOrganizationSerializer().serialize(assignedSkills);
+        return Response.status(200).entity(organizationJson).build();
     }
 }
