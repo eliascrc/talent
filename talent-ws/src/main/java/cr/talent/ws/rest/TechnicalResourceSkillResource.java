@@ -80,6 +80,17 @@ public class TechnicalResourceSkillResource {
         return Response.ok().build();
     }
 
+    /**
+     * Receives a request to obtain a a technical resource's skills.
+     *
+     * @param technicalResourceEmail the email (username) of the resource whose skills will be returned.
+     * @param organizationIdentifier the unique identifier of the user's organization
+     * @return 400 if the list is empty, or if any skill is empty
+     *         409 with "SkillAlreadyAssigned" if one or more skills have been assigned to the technical resource.
+     *         404 with "NonExistentSkill" if one or more skills are non existent.
+     *         401 if no user is logged in.
+     *         200 if the skills were correctly assigned.
+     */
     @GET
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
