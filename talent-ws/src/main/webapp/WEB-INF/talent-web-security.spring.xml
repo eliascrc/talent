@@ -37,6 +37,8 @@
         <security:intercept-url pattern="/ws/signUp/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/organization/create" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/technicalResource/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
+        <security:intercept-url pattern="/ws/acceptInvitation/validate/*" access="isAnonymous()" method="GET"/>
+        <security:intercept-url pattern="/ws/acceptInvitation/**/*" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
 
         <security:custom-filter position="FORM_LOGIN_FILTER" ref="organizationFilter"/>

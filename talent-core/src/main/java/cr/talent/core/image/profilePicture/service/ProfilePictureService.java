@@ -2,8 +2,6 @@ package cr.talent.core.image.profilePicture.service;
 
 import cr.talent.model.ProfilePicture;
 import cr.talent.support.service.CrudService;
-import cr.talent.support.service.impl.CrudServiceImpl;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 
@@ -16,7 +14,7 @@ public interface ProfilePictureService extends CrudService<ProfilePicture, Strin
 
     /**
      * uploads or updates the picture of the logged in user that is making the request.
-     * @param file
+     * @param file the file to be uploaded.
      */
     void uploadProfilePicture(InputStream file);
 
