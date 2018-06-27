@@ -22,6 +22,18 @@
 			<logo>https://i.imgur.com/hp5r8ua.png</logo>
 			<domain>andromeda.cr</domain>
 		</organization>
+
+		<organization>
+			<uniqueIdentifier>gorilla-logic</uniqueIdentifier>
+			<name>Gorilla Logic</name>
+			<twoStepVerification>true</twoStepVerification>
+			<totalUsers>0</totalUsers>
+			<state>ENABLED</state>
+			<userAuthenticationMethod>DOMAIN</userAuthenticationMethod>
+			<logo></logo>
+			<domain>gorillalogic.cr</domain>
+		</organization>
+
 	</organizations>
 
 	<projects>
@@ -30,12 +42,12 @@
 			<name>talent</name>
 			<description>You will never understand the relational model for this project</description>
 			<startDate>15/10/2013</startDate>
-			<endDate>15/10/2015</endDate>
+			<endDate></endDate>
 			<jiraLink>http://jira.certified.cr</jiraLink>
 			<confluenceLink>http://confluence.talent.cr/</confluenceLink>
 			<versionControlLink>http://git.talent.cr:7990</versionControlLink>
-			<projectCapabilityLevelCapabilities>Mobile Developer,Mobile Developer,UI Designer,Java Developer</projectCapabilityLevelCapabilities>
-			<projectCapabilityLevelNames>Intermediate,Senior,Senior,Junior</projectCapabilityLevelNames>
+			<projectCapabilityLevelCapabilities>Mobile Developer,Mobile Developer,Mobile Developer,UI Designer,UI Designer,UI Designer,Java Developer,Java Developer,Java Developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Junior,Intermediate,Senior,Junior,Intermediate,Senior,Junior,Intermediate,Senior</projectCapabilityLevelNames>
 			<organization>monkey-labs</organization>
 		</project>
 
@@ -76,6 +88,32 @@
 			<projectCapabilityLevelCapabilities>FE Developer</projectCapabilityLevelCapabilities>
 			<projectCapabilityLevelNames>Senior</projectCapabilityLevelNames>
 			<organization>andromeda-spiral</organization>
+		</project>
+
+		<project>
+			<name>Finish Line</name>
+			<description>Sports stuff</description>
+			<startDate>7/12/2010</startDate>
+			<endDate>2/7/2015</endDate>
+			<jiraLink>http://jira.gorilla.cr</jiraLink>
+			<confluenceLink>http://confluence.gorilla.cr/</confluenceLink>
+			<versionControlLink>http://git.gorilla.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>Java Developer,Java Developer,UI Designer,UI Designer,FE developer,FE developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Junior,Junior,Intermediate,Intermediate,Senior,Senior</projectCapabilityLevelNames>
+			<organization>gorilla-logic</organization>
+		</project>
+
+		<project>
+			<name>Digital Globe</name>
+			<description>Weather stuff</description>
+			<startDate>2/7/2015</startDate>
+			<endDate></endDate>
+			<jiraLink>http://jira.gorilla.cr</jiraLink>
+			<confluenceLink>http://confluence.gorilla.cr/</confluenceLink>
+			<versionControlLink>http://git.gorilla.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>Java Developer,Java Developer,UI Designer,UI Designer,FE developer,FE developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Junior,Junior,Intermediate,Intermediate,Senior,Senior</projectCapabilityLevelNames>
+			<organization>gorilla-logic</organization>
 		</project>
 
 	</projects>
@@ -126,7 +164,7 @@
 			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
 			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
 			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
-			<organization>monkey-labs</organization>
+			<organization>gorilla-logic</organization>
 			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
@@ -144,7 +182,115 @@
 			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
 			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
 			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
-			<organization>monkey-labs</organization>
+			<organization>gorilla-logic</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>randomdude@gmail.com</username>
+			<firstName>Random</firstName>
+			<lastName>Dude</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>gorilla-logic</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>frontend@gmail.com</username>
+			<firstName>Front</firstName>
+			<lastName>End</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>gorilla-logic</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>backend@gmail.com</username>
+			<firstName>Back</firstName>
+			<lastName>End</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>gorilla-logic</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>glorysheppard@gmail.com</username>
+			<firstName>Gloria</firstName>
+			<lastName>Sheppard</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>gorilla-logic</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>aturing@gmail.com</username>
+			<firstName>Alan</firstName>
+			<lastName>Turing</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>gorilla-logic</organization>
+			<language>spanish</language>
+			<timeZone>UTC-6</timeZone>
+			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
+		</technicalResource>
+
+		<technicalResource>
+			<username>wildo@gmail.com</username>
+			<firstName>Oscar</firstName>
+			<lastName>Wilde</lastName>
+			<password>Talent.123</password>
+			<enabled>true</enabled>
+			<passwordNeedsChange>false</passwordNeedsChange>
+			<status>ACTIVE</status>
+			<isAdministrator>true</isAdministrator>
+			<lastLevelAssessment>7/4/2000</lastLevelAssessment>
+			<lastPerformanceReview>6/3/2000</lastPerformanceReview>
+			<profilePicture>https://pmdvod.nationalgeographic.com/NG_Video/96/31/smpost_1515614349963.jpg</profilePicture>
+			<organization>gorilla-logic</organization>
 			<language>spanish</language>
 			<timeZone>UTC-6</timeZone>
 			<levelAssessmentTimeGap>12</levelAssessmentTimeGap>
@@ -710,6 +856,11 @@
 		</capability>
 
 		<capability>
+			<name>FE Developer</name>
+			<organization>monkey-labs</organization>
+		</capability>
+
+		<capability>
 			<name>Mobile Developer</name>
 			<organization>andromeda-spiral</organization>
 		</capability>
@@ -727,6 +878,26 @@
 		<capability>
 			<name>FE Developer</name>
 			<organization>andromeda-spiral</organization>
+		</capability>
+
+		<capability>
+			<name>Mobile Developer</name>
+			<organization>gorilla-logic</organization>
+		</capability>
+
+		<capability>
+			<name>Java Developer</name>
+			<organization>gorilla-logic</organization>
+		</capability>
+
+		<capability>
+			<name>UI Designer</name>
+			<organization>gorilla-logic</organization>
+		</capability>
+
+		<capability>
+			<name>FE Developer</name>
+			<organization>gorilla-logic</organization>
 		</capability>
 
 	</capabilities>
@@ -802,6 +973,30 @@
 			<name>Senior</name>
 			<hierarchyPosition>3</hierarchyPosition>
 			<capability>UI Designer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Junior</name>
+			<hierarchyPosition>1</hierarchyPosition>
+			<capability>FE Developer</capability>
+			<requiredSkills>HTML,Python</requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Intermediate</name>
+			<hierarchyPosition>2</hierarchyPosition>
+			<capability>FE Developer</capability>
+			<requiredSkills></requiredSkills>
+			<organization>monkey-labs</organization>
+		</capabilityLevel>
+
+		<capabilityLevel>
+			<name>Senior</name>
+			<hierarchyPosition>3</hierarchyPosition>
+			<capability>FE Developer</capability>
 			<requiredSkills></requiredSkills>
 			<organization>monkey-labs</organization>
 		</capabilityLevel>
@@ -1066,6 +1261,60 @@
 		</projectPosition>
 
 		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>talent</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>talent</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>talent</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>talent</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>talent</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<project>talent</project>
+		</projectPosition>
+
+		<projectPosition>
 			<status>AVAILABLE</status>
 			<totalHours>20</totalHours>
 			<capabilityLevelName>Junior</capabilityLevelName>
@@ -1075,7 +1324,7 @@
 		</projectPosition>
 
 		<projectPosition>
-			<status>AVAILABLE</status>
+			<status>TAKEN</status>
 			<totalHours>20</totalHours>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
@@ -1093,6 +1342,132 @@
 		</projectPosition>
 
 	</projectPositions>
+
+
+	<projectPositionHolders>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate></endDate>
+			<project>talent</project>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>howard.lovecraft@example.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>talent</project>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>marianaabellan4@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate></endDate>
+			<project>talent</project>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>kendall.garcia@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate></endDate>
+			<project>talent</project>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>kendall.garcia@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>false</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>3/7/2016</endDate>
+			<project>talent</project>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>john.tolkien@example.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>false</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2016</startDate>
+			<endDate>2/2/2017</endDate>
+			<project>talent</project>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>andrea.solano@example.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2017</startDate>
+			<endDate></endDate>
+			<project>talent</project>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>john.tolkien@example.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>false</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2012</startDate>
+			<endDate>3/7/2016</endDate>
+			<project>Overlord</project>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<technicalResource>sophie.germain@example.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>3/8/2016</startDate>
+			<endDate></endDate>
+			<project>Overlord</project>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<technicalResource>leonhard.euler@example.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>20</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>3/8/2016</startDate>
+			<endDate></endDate>
+			<project>Barbarossa</project>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>friedrich.gauss@example.com</technicalResource>
+		</projectPositionHolder>
+
+	</projectPositionHolders>
 
 
 	<feedbacks>

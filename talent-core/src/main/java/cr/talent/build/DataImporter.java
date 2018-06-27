@@ -10,22 +10,11 @@ import cr.talent.core.educationRecord.service.EducationRecordService;
 import cr.talent.core.organizationSkill.service.OrganizationSkillService;
 import cr.talent.core.organizationSkillCategory.service.OrganizationSkillCategoryService;
 import cr.talent.core.projectPosition.service.ProjectPositionService;
+import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.core.technicalPosition.service.TechnicalPositionService;
 import cr.talent.core.language.service.LanguageService;
 import cr.talent.core.project.service.ProjectService;
-import cr.talent.model.Organization;
-import cr.talent.model.PrivacyPolicy;
-import cr.talent.model.TechnicalResource;
-import cr.talent.model.TermsOfService;
-import cr.talent.model.EducationRecord;
-import cr.talent.model.OrganizationSkill;
-import cr.talent.model.OrganizationSkillCategory;
-import cr.talent.model.Language;
-import cr.talent.model.Capability;
-import cr.talent.model.CapabilityLevel;
-import cr.talent.model.Project;
-import cr.talent.model.TechnicalPosition;
-import cr.talent.model.ProjectPosition;
+import cr.talent.model.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
 
@@ -152,6 +141,13 @@ public class DataImporter {
 
         for (ProjectPosition projectPosition : projectPositions){
             projectPositionService.create(projectPosition);
+        }
+
+        List<ProjectPositionHolder> projectPositionHolders = dataParser.getProjectPositionHolders();
+        ProjectPositionHolderService projectPositionHolderService = context.getBean(ProjectPositionHolderService.class);
+
+        for (ProjectPositionHolder projectPositionHolder : projectPositionHolders){
+            projectPositionHolderService.create(projectPositionHolder);
         }
 
     }

@@ -30,6 +30,7 @@ class DataParser extends XmlParser {
     private List<CapabilityLevel> capabilityLevels;
     private List<ProjectPosition> projectPositions;
     private List<TechnicalPosition> technicalPositions;
+    private List<ProjectPositionHolder> projectPositionHolders;
     //private List<Feedback> feedbacks;
 
     /**
@@ -54,6 +55,7 @@ class DataParser extends XmlParser {
         this.capabilityLevels = new ArrayList<CapabilityLevel>();
         this.projectPositions = new ArrayList<ProjectPosition>();
         this.technicalPositions = new ArrayList<TechnicalPosition>();
+        this.projectPositionHolders = new ArrayList<ProjectPositionHolder>();
     }
 
     void parseData() {
@@ -68,6 +70,7 @@ class DataParser extends XmlParser {
         this.fillProjectPositions();
         this.fillPrivacyPolicyVersions();
         this.fillTermsOfServiceVersions();
+        this.fillProjectPositionHolders();
 
     }
 
@@ -309,6 +312,36 @@ class DataParser extends XmlParser {
         this.linkProjectPositionToCapabilityLevel(projectPosition, getAttributeValue(projectPositionElement, "capabilityLevelName"), getAttributeValue(projectPositionElement, "capabilityLevelOrganization"), getAttributeValue(projectPositionElement, "capabilityLevelCapability"));
 
         return projectPosition;
+    }
+
+    /**
+     * Fill the projectPositionHolders list
+     */
+    private void fillProjectPositionHolders() {
+        Elements projectPositionHolderElements = getElementOfType("projectPositionHolders").get(0).getChildElements();
+        for (int i = 0; i <projectPositionHolderElements.size(); i++){
+            ProjectPositionHolder projectPositionHolder = getProjectPositionHolder(projectPositionHolderElements.get(i));
+            this.projectPositionHolders.add(projectPositionHolder);
+        }
+    }
+
+    /**
+     * This method creates a Project object and sets its attributes according to the text in the xml
+     *
+     * @param projectPositionHolderElement the node of the xml file corresponding to the specific project.
+     * @return a projectPositionHolder with all of its attributes already set.
+     */
+    private ProjectPositionHolder getProjectPositionHolder(Element projectPositionHolderElement){
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setActive(getBooleanValue(projectPositionHolderElement, "active"));
+        projectPositionHolder.setAssignedHours(getIntValue(projectPositionHolderElement, "assignedHours"));
+        projectPositionHolder.setReviewed(getBooleanValue(projectPositionHolderElement, "reviewed"));
+        projectPositionHolder.setStartDate(getDateValue(projectPositionHolderElement, "startDate"));
+        projectPositionHolder.setEndDate(getDateValue(projectPositionHolderElement, "endDate"));
+        this.linkProjectPositionHolderToProjectPosition(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "project"), getAttributeValue(projectPositionHolderElement, "capabilityLevelName"), getAttributeValue(projectPositionHolderElement, "capabilityLevelCapability"));
+        this.linkProjectPositionHolderToTechnicalResource(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "technicalResource"));
+
+        return projectPositionHolder;
     }
 
     /**
@@ -722,7 +755,7 @@ class DataParser extends XmlParser {
         }
     }
 
-    /**This method will the project attribute to the projectPosition object.
+    /**This method will set the project attribute to the projectPosition object.
      *
      * @param projectPosition the projectPosition which must be linked with the respective project.
      * @param projectName the name of the project to which the projectPosition will be linked.
@@ -791,6 +824,52 @@ class DataParser extends XmlParser {
         }
     }
 
+    /**This method will set the projectPosition attribute to the projectPositionHolder object.
+     *
+     * @param projectPositionHolder the projectPosition which must be linked with the respective projectPosition.
+     * @param projectName the name of the project of projectPosition that will be linked to the projectPositionHolder.
+     * @param capabilityLevelName the capabilityLevel of the projectPosition that will be linked to the projectPositionHolder
+     * @param capabilityLevelCapability the capability of the capabilityLevel of the projectPosition that will be linked to the projectPositionHolder
+     * */
+
+    private void linkProjectPositionHolderToProjectPosition(ProjectPositionHolder projectPositionHolder, String projectName, String capabilityLevelName, String capabilityLevelCapability){
+        ProjectPosition projectPosition = null;
+        for (ProjectPosition projectPositionIterator : this.projectPositions){
+            if(projectPositionIterator.getProject().getName().equals(projectName)
+                    && projectPositionIterator.getCapability().getCapability().getName().equals(capabilityLevelCapability)
+                    && projectPositionIterator.getCapability().getName().equals(capabilityLevelName)) {
+
+
+                projectPosition = projectPositionIterator;
+                break;
+            }
+        }
+        assert projectPosition!= null;
+
+        projectPositionHolder.setProjectPosition(projectPosition);
+    }
+
+    /**This method will set the projectPosition attribute to the projectPositionHolder object.
+     *
+     * @param projectPositionHolder the projectPosition which must be linked with the respective technicalResource.
+     * @param technicalResourceUsername the username of the technicalResource that will be linked with the projectPosition.
+     * */
+
+    private void linkProjectPositionHolderToTechnicalResource(ProjectPositionHolder projectPositionHolder, String technicalResourceUsername){
+        TechnicalResource technicalResource = null;
+
+        for (TechnicalResource technicalResourceIterator : this.technicalResources){
+            if(technicalResourceIterator.getUsername().equals(technicalResourceUsername)) {
+
+                technicalResource = technicalResourceIterator;
+                break;
+            }
+        }
+        assert technicalResource!= null;
+
+        projectPositionHolder.setResource(technicalResource);
+    }
+
     List<Organization> getOrganizations() {
         return this.organizations;
     }
@@ -835,6 +914,10 @@ class DataParser extends XmlParser {
 
     List<ProjectPosition> getProjectPositions() {
         return this.projectPositions;
+    }
+
+    List<ProjectPositionHolder> getProjectPositionHolders(){
+        return this.projectPositionHolders;
     }
 
     List<TechnicalPosition> getTechnicalPositions() {
