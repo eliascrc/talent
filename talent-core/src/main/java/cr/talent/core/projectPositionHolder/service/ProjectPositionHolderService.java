@@ -5,6 +5,8 @@ import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.service.CrudService;
 
+import java.util.Date;
+
 /**
  * Provides business logic services related to {@link cr.talent.model.ProjectPositionHolder} entities.
  *
@@ -18,6 +20,7 @@ public interface ProjectPositionHolderService extends CrudService<ProjectPositio
      * @param assignee The resource that is assigned the project position
      * @param projectPosition the project position that is assigned to the resource
      */
-    void assignProjectPosition(TechnicalResource assigner, TechnicalResource assignee, ProjectPosition projectPosition);
+    void assignProjectPosition(TechnicalResource assigner, TechnicalResource assignee, ProjectPosition projectPosition,
+                               Date startDate, int assignedHours, boolean active);
 
 }

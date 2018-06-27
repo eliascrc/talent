@@ -1,13 +1,17 @@
 package cr.talent.core.projectPositionHolder.service.impl;
 
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
+import cr.talent.model.LeadPosition;
 import cr.talent.model.ProjectPosition;
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
+import cr.talent.support.exceptions.NotProjectLeadException;
+import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 
 /**
  * Hibernate implementation of the {@link cr.talent.core.projectPositionHolder.dao.ProjectPositionHolderDao}.
@@ -19,12 +23,34 @@ import javax.transaction.Transactional;
 public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPositionHolder, String> implements ProjectPositionHolderService {
 
     /**
-     * @see cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService#assignProjectPosition(TechnicalResource, TechnicalResource, ProjectPosition)
+     * @see cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService#assignProjectPosition(TechnicalResource, TechnicalResource, ProjectPosition, Date, int, boolean)
      */
     @Override
     public void assignProjectPosition(TechnicalResource assigner, TechnicalResource assignee,
-                                      ProjectPosition projectPosition){
+                                      ProjectPosition projectPosition, Date startDate, int assignedHours,
+                                      boolean active){
+        if (!projectPosition.getProject().getOrganization().equals(assigner.getOrganization())) {
+            throw new ProjectPositionOfAnotherOrganizationException();
+        }
 
+        TechnicalResource projectLead = null;
+
+        for (LeadPosition leadPosition : projectPosition.getProject().getLeadHistory()) { //finds the project lead
+            if (leadPosition.getActive())
+                projectLead = leadPosition.getLead();
+        }
+
+        if (!assigner.equals(projectLead))
+            throw new NotProjectLeadException();
+
+        ProjectPositionHolder projectPositionHolder = new ProjectPositionHolder();
+        projectPositionHolder.setAssignedHours(assignedHours);
+        projectPositionHolder.setReviewed(false);
+        projectPositionHolder.setActive(active);
+        projectPositionHolder.setResource(assignee);
+        projectPositionHolder.setStartDate(startDate);
+
+        super.create(projectPositionHolder);
     }
 
 }
