@@ -101,7 +101,7 @@ public class TechnicalResourceSkillResource {
         if(assignedSkills.isEmpty())
             return Response.status(Response.Status.NO_CONTENT).build(); // The resource has no assigned skills
 
-        String organizationJson = JSONSerializerBuilder.getOrganizationSerializer().serialize(assignedSkills);
+        String organizationJson = JSONSerializerBuilder.getOrganizationSkillSerializer().serialize(assignedSkills);
         return Response.status(200).entity(organizationJson).build();
     }
 }

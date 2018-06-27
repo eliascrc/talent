@@ -186,7 +186,7 @@ public class JSONSerializerBuilder {
     public static JSONSerializer getTechnicalResourceSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
-        List<String> tempIncludes = new LinkedList<>();
+        List<String> tempIncludes;
 
         excludes.addAll(getGlobalExcludes());
 
@@ -220,10 +220,10 @@ public class JSONSerializerBuilder {
     }
 
     /**
-     * Creates a basic serializer that returns name and skill category of every Skill in a Set<Skill>
-     * @return
+     * Creates a basic serializer that returns the category and skill of an OrganizationSkillCategory
+     * @return the JSONSerializer to be used to serialize a OrganizationSkill
      */
-    public static JSONSerializer getOrganizationSkillSet() {
+    public static JSONSerializer getOrganizationSkillSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes = new LinkedList<>();
@@ -245,7 +245,7 @@ public class JSONSerializerBuilder {
         serializer.setExcludes(excludes);
 
         // logs the creation of the serializer
-        logger.trace("Set<OrganizationSkill> Serializer {} created", serializer.toString());
+        logger.trace("OrganizationSkill Serializer {} created", serializer.toString());
 
         return serializer;
     }
