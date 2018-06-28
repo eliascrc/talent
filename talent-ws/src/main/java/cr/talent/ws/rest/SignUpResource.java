@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 /**
  * Resource that handles the sign up one and two steps.
  *
- * @author Daniel Montes de Oca
+ * @author Daniel Montes de Oca, Josue Cubero
  */
 @Component
 @Scope("request")
@@ -33,6 +33,7 @@ public class SignUpResource {
      * information is not valid it returns a response with a code that reflects the problem.
      * @param firstName the first name of the resource performing the first step of the sign up
      * @param lastName the last name of the resource performing the first step of the sign up
+     * @param nickname the nickname of the resource performing the first step of the sign up
      * @param email the email of the resource performing the first step of the sign up
      * @param password the password of the resource performing the first step of the sign up
      * @return 200 if the supplied information is valid, 400 if any of the parameters is null or empty or if the
@@ -42,11 +43,12 @@ public class SignUpResource {
     @Path("/stepOne")
     public Response performFirstStep(@FormParam("firstName") String firstName,
                                      @FormParam("lastName") String lastName,
+                                     @FormParam("nickname") String nickname,
                                      @FormParam("email") String email,
                                      @FormParam("password") String password) {
 
         if (StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName) || StringUtils.isEmpty(email) ||
-                StringUtils.isEmpty(password))
+                StringUtils.isEmpty(password) || StringUtils.isEmpty(nickname))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         EmailValidator emailValidator = EmailValidator.getInstance();
@@ -55,7 +57,7 @@ public class SignUpResource {
 
         TechnicalResource technicalResource;
         try {
-            technicalResource = this.signUpConfirmationMessageService.sendMessage(firstName, lastName, email, password);
+            technicalResource = this.signUpConfirmationMessageService.sendMessage(firstName, lastName, nickname, email, password);
         } catch(IllegalArgumentException e) { //if the password is not valid
             return Response.status(Response.Status.BAD_REQUEST).build();
         }

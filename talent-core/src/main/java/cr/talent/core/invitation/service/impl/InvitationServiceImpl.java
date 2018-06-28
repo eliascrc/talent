@@ -7,11 +7,17 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
+import cr.talent.model.TechnicalResource;
+import cr.talent.model.User;
 import cr.talent.support.exceptions.AlreadyRegisteredUserException;
 import cr.talent.support.exceptions.EmptyDestinationEmailException;
+import cr.talent.support.exceptions.InvalidInvitationException;
 import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -24,7 +30,7 @@ import java.util.UUID;
 /**
  * Default implementation of the {@link cr.talent.core.invitation.service.InvitationService}
  *
- * @author Elias Calderon
+ * @author Elias Calderon, Josue Cubero
  */
 
 @Service("invitationService")
@@ -47,6 +53,7 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
 
     @Autowired
     private InvitationEmailService invitationEmailService;
+
 
     public void init() {
         setCrudDao(this.invitationDao);
@@ -111,6 +118,49 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         for (Invitation invitationToSend : invitationsToSend) {
             this.invitationEmailService.sendInvitationEmail(invitationToSend, organization.getUniqueIdentifier());
         }
+    }
+
+    /**
+     * @see cr.talent.core.invitation.service.InvitationService#isTokenValid(String)
+     */
+    @Override
+    public boolean isTokenValid(String token) {
+        Invitation invitation = this.invitationDao.findInvitationByToken(token);
+        return invitation != null && invitation.isValid();
+    }
+
+    /**
+     * @see cr.talent.core.invitation.service.InvitationService#acceptInvite(String, String, String)
+     */
+    @Override
+    public TechnicalResource acceptInvite(String nickname, String password, String token) {
+        final String invalidInvitationExceptionMsg = "The invitation is invalid.";
+
+        Invitation invitation = this.invitationDao.findInvitationByToken(token); // get the invitation
+
+        if(!this.isTokenValid(token))
+            throw new InvalidInvitationException(invalidInvitationExceptionMsg);
+
+        TechnicalResource technicalResource = new TechnicalResource(); // build the technical resource
+        technicalResource.setFirstName("Name"); //should be changed on TAL-471 PR
+        technicalResource.setLastName("LastName"); //should be changed on TAL-471 PR
+        technicalResource.setNickname(nickname);
+        technicalResource.setUsername(invitation.getEmail());
+        technicalResource.setPassword(password);
+        technicalResource.setStatus(User.Status.ACTIVE);
+        technicalResource.setAdministrator(false); // because they are signing up while creating an organization
+        technicalResource.setOrganization(invitation.getOrganization());
+
+        this.technicalResourceService.create(technicalResource);
+
+        invitation.setValid(false); // invalidate the invitation
+        this.update(invitation);
+
+        Authentication authentication =
+                new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication); // log the new technical resource
+
+        return technicalResource;
     }
 
 }
