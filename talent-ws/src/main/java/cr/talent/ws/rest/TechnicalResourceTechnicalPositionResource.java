@@ -36,11 +36,19 @@ public class TechnicalResourceTechnicalPositionResource {
      * Receives a request to assign a technical position to a technical resource.
      *
      * @param capabilityLevel      the technical position to be assigned.
+     * @param capabilityLevel the technical resource to be assigned the position.
      * @param technicalResourceEmail the technical resource to be assigned the position.
-     * @return 400 if the either parameter is null or empty
-     * 409 with "TechnicalPositionAlreadyAssigned" if the technical position has already been assigned to the technical resource.
-     * 404 with "NonExistentCapabilityException" if the technical position is non existent.
+     * @param technicalResourceEmail the technical resource to be assigned the position.
+     *
+     * @return 400 if the either string parameter is null or empty, or if startDate is not a valid date.
      * 401 if no user is logged in.
+     * 404 with "NonExistentTechnicalRespurce" if the specified technical resource does not exist within the logged user's organization.
+     * 404 with "NonExistentCapability" if the specified capability does not exist within the logged user's organization.
+     * 404 with "NonExistentCapabilityLevel" if the specified capability level does not exist within the specified capability.
+     * 409 with "AlreadyAssignedTechnicalPosition" if the technical position has already been assigned to the technical
+     *      resource.
+     * 409 with "UserDoesNotHaveRequiredSkills" if the technical resource does not have assigned the skills required by
+     *      the specified CapabilityLevel.
      * 200 if the technical position was correctly assigned.
      */
     @POST
