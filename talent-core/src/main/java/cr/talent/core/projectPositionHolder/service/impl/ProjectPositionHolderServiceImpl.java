@@ -1,5 +1,6 @@
 package cr.talent.core.projectPositionHolder.service.impl;
 
+import cr.talent.core.projectPositionHolder.dao.ProjectPositionHolderDao;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.model.LeadPosition;
 import cr.talent.model.ProjectPosition;
@@ -8,6 +9,7 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
 import cr.talent.support.service.impl.CrudServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +23,13 @@ import java.util.Date;
 @Service("projectPositionHolderService")
 @Transactional
 public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPositionHolder, String> implements ProjectPositionHolderService {
+
+    @Autowired
+    private ProjectPositionHolderDao projectPositionHolderDao;
+
+    public void init() {
+        setCrudDao(this.projectPositionHolderDao);
+    }
 
     /**
      * @see cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService#assignProjectPosition(TechnicalResource, TechnicalResource, ProjectPosition, Date, int, boolean)
@@ -49,6 +58,7 @@ public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPos
         projectPositionHolder.setActive(active);
         projectPositionHolder.setResource(assignee);
         projectPositionHolder.setStartDate(startDate);
+        projectPositionHolder.setProjectPosition(projectPosition);
 
         super.create(projectPositionHolder);
     }

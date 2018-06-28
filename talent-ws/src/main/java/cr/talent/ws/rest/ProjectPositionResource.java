@@ -11,11 +11,14 @@ import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationExceptio
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.crypto.Data;
+import java.text.*;
 import java.util.Date;
 
 /**
@@ -50,13 +53,14 @@ public class ProjectPositionResource {
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Path("/assign")
-    public Response assignProjectPosition(@QueryParam("username") String username,
-                                          @QueryParam("projectPositionId") String projectPositionId,
-                                          @QueryParam("startDate") Date startDate,
-                                          @QueryParam("assignedHours") int assignedHours,
-                                          @QueryParam("active") boolean active) {
+    public Response assignProjectPosition(@FormParam("username") String username,
+                                          @FormParam("projectPositionId") String projectPositionId,
+                                          @FormParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
+                                          @FormParam("assignedHours") int assignedHours,
+                                          @FormParam("active") boolean active) {
+        System.out.println(startDate);
 
-        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(projectPositionId) || startDate != null)
+        if (StringUtils.isEmpty(username) || StringUtils.isEmpty(projectPositionId) || startDate == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         ProjectPosition projectPosition = projectPositionService.findById(projectPositionId);
