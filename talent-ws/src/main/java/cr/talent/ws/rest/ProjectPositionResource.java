@@ -11,10 +11,8 @@ import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
 import cr.talent.core.project.service.ProjectService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -41,15 +39,23 @@ public class ProjectPositionResource {
     CapabilityLevelService capabilityLevelService;
 
 
-
     /**
+     *
+     * @param projectId The id of the project that will have the new project position.
+     * @param capabilityLevelId The id of the capability level of the new project position.
+     * @param totalHours The hours that the project position will have assigned.
+     * @return 400 if a parameter was left empty or if the id was of a project of another organization
+     *         403 if the logged in user lacks the permissions to create the project position
+     *         404 if no project or capability level with that id was found
+     *         409 if the project has no active lead
+     *         200 if the project position was created correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Path("/create")
-    public Response createProjectPosition(@QueryParam("projectId") String projectId,
-                                          @QueryParam("capabilityLevelId") String capabilityLevelId,
-                                          @QueryParam("totalHours") String totalHours) {
+    public Response createProjectPosition(@FormParam("projectId") String projectId,
+                                          @FormParam("capabilityLevelId") String capabilityLevelId,
+                                          @FormParam("totalHours") String totalHours) {
 
         if (StringUtils.isEmpty(projectId) || StringUtils.isEmpty(capabilityLevelId))
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -70,11 +76,11 @@ public class ProjectPositionResource {
             this.projectPositionService.createProjectPosition(assigner, project, capabilityLevel, totalHoursInt);
             return Response.ok().build();
         } catch (NotProjectLeadException e) {
-            return Response.status(Response.Status.FORBIDDEN).build();
+            return Response.status(Response.Status.FORBIDDEN).entity("The user creating the project is not the project lead").build();
         } catch (ProjectWithoutLeadException e) {
-            return Response.status(Response.Status.CONFLICT).build();
+            return Response.status(Response.Status.CONFLICT).entity("The project has no lead").build();
         } catch (ProjectOfAnotherOrganizationException e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("The capability level and the project do not match").build();
         }
     }
 

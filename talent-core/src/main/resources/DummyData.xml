@@ -194,6 +194,7 @@
 			<username>randomdude@gmail.com</username>
 			<firstName>Random</firstName>
 			<lastName>Dude</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -212,6 +213,7 @@
 			<username>frontend@gmail.com</username>
 			<firstName>Front</firstName>
 			<lastName>End</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -230,6 +232,7 @@
 			<username>backend@gmail.com</username>
 			<firstName>Back</firstName>
 			<lastName>End</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -248,6 +251,7 @@
 			<username>glorysheppard@gmail.com</username>
 			<firstName>Gloria</firstName>
 			<lastName>Sheppard</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -266,6 +270,7 @@
 			<username>aturing@gmail.com</username>
 			<firstName>Alan</firstName>
 			<lastName>Turing</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -284,6 +289,7 @@
 			<username>wildo@gmail.com</username>
 			<firstName>Oscar</firstName>
 			<lastName>Wilde</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
