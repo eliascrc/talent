@@ -20,6 +20,7 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     private final String resetPasswordWebService = "/ws/passwordReset/reset/";
     private final String token = "token";
     private final String newPassword = "newPassword";
+    private final String testEmail = "kendall.garcia@gmail.com";
     private String forgotPasswordToken;
 
     @Test
@@ -51,7 +52,7 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void emptyUIDRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .formParam(this.email,"jo96cube@gmail.com")
+                .formParam(this.email,this.testEmail)
                 .formParam(this.organizationIdentifier,"")
                 .when().post(this.forgotPasswordWebService)
                 .then().statusCode(400);
@@ -70,7 +71,7 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void validRequestTest() {
         given()
                 .contentType(ContentType.URLENC)
-                .formParam(this.email,"jo96cube@gmail.com")
+                .formParam(this.email,this.testEmail)
                 .formParam(this.organizationIdentifier,"monkey-labs")
                 .when().post(this.forgotPasswordWebService)
                 .then().statusCode(200);
@@ -80,7 +81,7 @@ public class PasswordResetRequestResourceTest extends FunctionalTest {
     public void getTokenRequestTest() {
         Response response = given()
                 .contentType(ContentType.URLENC)
-                .formParam(this.email,"jo96cube@gmail.com")
+                .formParam(this.email,this.testEmail)
                 .formParam(this.organizationIdentifier,"monkey-labs")
                 .when().post(this.getForgotPasswordTokenWebService)
                 .then().statusCode(200).extract().response();

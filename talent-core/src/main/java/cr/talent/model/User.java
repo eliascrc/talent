@@ -29,6 +29,12 @@ public abstract class User extends BasicEntity implements UserDetails {
     protected String username;
 
     /**
+     * The user's nickname.
+     */
+    @Column(name = "nickname", nullable = false)
+    protected String nickname;
+
+    /**
      * The user's first name.
      */
     @Column(name = "first_name", nullable = false)
@@ -142,6 +148,10 @@ public abstract class User extends BasicEntity implements UserDetails {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getNickname() { return nickname; }
+
+    public void setNickname(String nickname) { this.nickname = nickname; }
 
     public String getFirstName() {
         return firstName;
