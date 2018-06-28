@@ -70,10 +70,10 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
     }
 
     /**
-     * @see cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService#sendMessage(String, String, String, String)
+     * @see cr.talent.core.signUpConfirmationMessage.service.SignUpConfirmationMessageService#sendMessage(String, String, String, String, String)
      */
     @Override
-    public TechnicalResource sendMessage(String firstName, String lastName, String username, String password) {
+    public TechnicalResource sendMessage(String firstName, String lastName, String nickname, String username, String password) {
         TechnicalResource technicalResource;
         SignUpConfirmationMessage signUpConfirmationMessage;
         boolean hadAnotherConfirmationMessage = false;
@@ -96,6 +96,7 @@ public class SignUpConfirmationMessageServiceImpl extends CrudServiceImpl<SignUp
 
         technicalResource.setFirstName(firstName);
         technicalResource.setLastName(lastName);
+        technicalResource.setNickname(nickname);
         technicalResource.setUsername(username);
         technicalResource.setPassword(password);
         technicalResource.setStatus(User.Status.INACTIVE);

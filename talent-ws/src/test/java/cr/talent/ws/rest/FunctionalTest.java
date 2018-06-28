@@ -28,7 +28,7 @@ public class FunctionalTest {
         if(baseHost==null){
             //comment baseHosts based on local or dev server tests.
             baseHost = "http://ws.talent.cr";
-            //baseHost = "http://localhost";
+            //baseHost = "http://localhost/talent";
         }
         RestAssured.baseURI = baseHost;
 

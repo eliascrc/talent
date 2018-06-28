@@ -132,6 +132,7 @@ class DataParser extends XmlParser {
         this.linkTechnicalResourceToOrganization(technicalResource, super.getAttributeValue(technicalResourceElement, "organization"));
         technicalResource.setTimeZone(super.getAttributeValue(technicalResourceElement, "timeZone"));
         technicalResource.setLevelAssessmentTimeGap(super.getIntValue(technicalResourceElement, "levelAssessmentTimeGap"));
+        technicalResource.setNickname(super.getAttributeValue(technicalResourceElement,"nickname"));
 
         return technicalResource;
     }
