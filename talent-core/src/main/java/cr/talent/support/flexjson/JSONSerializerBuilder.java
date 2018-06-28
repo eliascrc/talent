@@ -163,6 +163,7 @@ public class JSONSerializerBuilder {
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "organization", tempIncludes));
 
         tempIncludes = new LinkedList<>();
+        tempIncludes.add("nickname");
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("username");

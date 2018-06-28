@@ -64,8 +64,8 @@ public class AcceptInviteResource {
 
             TechnicalResource technicalResource = this.invitationService.acceptInvite(nickname, password, token);
 
-            String serializedTechnicalResource = JSONSerializerBuilder.getTechnicalResourceAuthenticationSerializer()
-                    .serialize(technicalResource);
+            String serializedTechnicalResource =
+                    JSONSerializerBuilder.getTechnicalResourceSerializer().serialize(technicalResource);
 
             return Response.ok().entity(serializedTechnicalResource).build();
 

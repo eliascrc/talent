@@ -144,6 +144,7 @@ public class SignUpResourceTest extends FunctionalTest {
         boolean credentialsNonExpired = true;
         String firstName = "Michael";
         String lastName = "Kiske";
+        String nickname = "Michi";
         String organization = null;
         String username = "xbaseucr@gmail.com";
 
@@ -154,6 +155,7 @@ public class SignUpResourceTest extends FunctionalTest {
         assertEquals(jsonPath.get("credentialsNonExpired"),credentialsNonExpired);
         assertEquals(jsonPath.get("firstName"),firstName);
         assertEquals(jsonPath.get("lastName"),lastName);
+        assertEquals(jsonPath.get("nickname"),nickname);
         assertEquals(jsonPath.get("organization"),organization);
         assertEquals(jsonPath.get("username"),username);
     }
