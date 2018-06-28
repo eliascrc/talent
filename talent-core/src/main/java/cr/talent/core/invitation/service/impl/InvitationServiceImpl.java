@@ -128,16 +128,17 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
     }
 
     /**
-     * @see cr.talent.core.invitation.service.InvitationService#acceptInvite(String, String, String, String)
+     * @see cr.talent.core.invitation.service.InvitationService#acceptInvite(String, String, String)
      */
     @Override
-    public TechnicalResource acceptInvite(String firstName, String lastName, String password, String token) {
+    public TechnicalResource acceptInvite(String nickname, String password, String token) {
 
         Invitation invitation = this.invitationDao.findInvitationByToken(token); // get the invitation
 
         TechnicalResource technicalResource = new TechnicalResource(); // build the technical resource
-        technicalResource.setFirstName(firstName);
-        technicalResource.setLastName(lastName);
+        technicalResource.setFirstName("Name"); //should be changed on TAL-471 PR
+        technicalResource.setLastName("LastName"); //should be changed on TAL-471 PR
+        technicalResource.setNickname(nickname);
         technicalResource.setUsername(invitation.getEmail());
         technicalResource.setPassword(password);
         technicalResource.setStatus(User.Status.ACTIVE);

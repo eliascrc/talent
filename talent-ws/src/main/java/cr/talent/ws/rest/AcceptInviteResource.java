@@ -44,8 +44,7 @@ public class AcceptInviteResource {
     /**
      * Creates a technical resource based on an invitation that was sent and validated.
      *
-     * @param firstName the first name of the resource performing the invitation acceptance.
-     * @param lastName the last name of the resource performing the invitation acceptance.
+     * @param nickname the nickname of the resource performing the invitation acceptance.
      * @param password the password of the resource performing the invitation acceptance.
      * @param token the invitation token of the resource performing the invitation acceptance.
      * @return 200 if the supplied information is valid, 400 if any of the parameters is null or empty or if the
@@ -53,19 +52,17 @@ public class AcceptInviteResource {
      */
     @POST
     @Path("/accept/")
-    public Response performFirstStep(@FormParam("firstName") String firstName,
-                                     @FormParam("lastName") String lastName,
+    public Response performFirstStep(@FormParam("nickname") String nickname,
                                      @FormParam("password") String password,
                                      @QueryParam("token") String token) {
 
-        if (StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName)
-                || StringUtils.isEmpty(password) || StringUtils.isEmpty(token))
+        if (StringUtils.isEmpty(nickname) || StringUtils.isEmpty(password) || StringUtils.isEmpty(token))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         if (!this.invitationService.isTokenValid(token))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        TechnicalResource technicalResource = this.invitationService.acceptInvite(firstName, lastName, password, token);
+        TechnicalResource technicalResource = this.invitationService.acceptInvite(nickname, password, token);
 
         String serializedTechnicalResource = JSONSerializerBuilder.getTechnicalResourceAuthenticationSerializer()
                 .serialize(technicalResource);

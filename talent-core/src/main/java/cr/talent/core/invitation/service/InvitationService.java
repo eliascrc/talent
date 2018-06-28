@@ -30,12 +30,11 @@ public interface InvitationService extends CrudService<Invitation, String> {
 
     /**
      * Creates a technical resource that accepted an invitation from {@link cr.talent.model.Invitation}.
-     * @param firstName the technical resource first name.
-     * @param lastName the technical resource last name.
+     * @param nickname the technical resource nickname.
      * @param password the technical resource password.
      * @param token the invitation token.
      * @return the newly created technical resource.
      */
-    TechnicalResource acceptInvite(String firstName, String lastName, String password, String token);
+    TechnicalResource acceptInvite(String nickname, String password, String token);
 
 }

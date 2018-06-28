@@ -16,11 +16,12 @@ public interface SignUpConfirmationMessageService extends CrudService<SignUpConf
      * password is not valid it throws an exception with a code that reflects the problem.
      * @param firstName the first name of the resource performing the first step of the sign up
      * @param lastName the last name of the resource performing the first step of the sign up
+     * @param nickname the nickname of the resource performing the first step of the sign up
      * @param username the email of the resource performing the first step of the sign up
      * @param password the password of the resource performing the first step of the sign up
      * @return the created or updated technical resource
      */
-    TechnicalResource sendMessage(String firstName, String lastName, String username, String password);
+    TechnicalResource sendMessage(String firstName, String lastName, String nickname, String username, String password);
 
     /**
      * Tries to match the provided code to the last one that was sent to the provided email. It deletes the confirmation
