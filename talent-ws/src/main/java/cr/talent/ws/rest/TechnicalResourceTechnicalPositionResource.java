@@ -44,7 +44,6 @@ public class TechnicalResourceTechnicalPositionResource {
      * 200 if the technical position was correctly assigned.
      */
     @POST
-    @Produces(MediaType.TEXT_HTML)
     @Path("/assign")
     public Response assignProjectPosition(@FormParam("capability") String capability,
                                           @FormParam("capabilityLevel") String capabilityLevel,

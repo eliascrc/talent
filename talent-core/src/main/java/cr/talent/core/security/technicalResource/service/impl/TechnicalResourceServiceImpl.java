@@ -38,10 +38,15 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     @Autowired
     private TechnicalResourceDao technicalResourceDao;
 
-
+    /**
+     * Service to perform TechnicalPosition operations, including its business logic.
+     */
     @Autowired
     private TechnicalPositionService technicalPositionService;
 
+    /**
+     * Service to perform CareerPath operations, including its business logic.
+     */
     @Autowired
     private CareerPathService careerPathService;
 
