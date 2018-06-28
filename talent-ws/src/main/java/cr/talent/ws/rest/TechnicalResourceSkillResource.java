@@ -84,7 +84,6 @@ public class TechnicalResourceSkillResource {
      * Receives a request to obtain a a technical resource's skills.
      *
      * @param technicalResourceEmail the email (username) of the resource whose skills will be returned.
-     * @param organizationIdentifier the unique identifier of the user's organization
      * @return 400 if the the received skills are either null or empty
      *         404 if the specified technical resource does not exist within the specified organization
      *         204 if the specified technical resource has no assigned skills
@@ -94,15 +93,15 @@ public class TechnicalResourceSkillResource {
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSkills(
-            @QueryParam("technicalResource") String technicalResourceEmail,
-            @QueryParam("organizationIdentifier") String organizationIdentifier){
+            @QueryParam("technicalResource") String technicalResourceEmail){
 
-        if(StringUtils.isEmpty(organizationIdentifier)||StringUtils.isEmpty(technicalResourceEmail))
+        if(StringUtils.isEmpty(technicalResourceEmail))
             return Response.status(Response.Status.BAD_REQUEST).build(); // The request is malformed
 
         TechnicalResource technicalResource =
                 this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
-                        technicalResourceEmail,organizationIdentifier);
+                        technicalResourceEmail,
+                        SecurityUtils.getLoggedInTechnicalResource().getOrganization().getUniqueIdentifier());
 
         if(technicalResource==null)
             return Response.status(Response.Status.NOT_FOUND).build(); // The technical resource was not found
