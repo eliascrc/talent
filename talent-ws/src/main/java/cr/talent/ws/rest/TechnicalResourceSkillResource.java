@@ -84,8 +84,8 @@ public class TechnicalResourceSkillResource {
      * Receives a request to obtain a a technical resource's skills.
      *
      * @param technicalResourceEmail the email (username) of the resource whose skills will be returned.
-     * @return 400 if the the received skills are either null or empty
-     *         404 if the specified technical resource does not exist within the specified organization
+     * @return 400 if the received string is either empty or null
+     *         404 if the specified technical resource does not exist within the logged user's organization
      *         204 if the specified technical resource has no assigned skills
      *         200 if the skills are returned successfully
      */
