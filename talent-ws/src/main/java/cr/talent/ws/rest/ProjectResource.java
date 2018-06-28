@@ -4,9 +4,12 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.Organization;
 import cr.talent.model.Project;
+import cr.talent.support.SecurityUtils;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -14,9 +17,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with a POST endpoint that creates a new project
+ * Resource with two POST endpoints that create a new project and retrieve a project information.
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Josue Cubero
  */
 @Component
 @Scope("request")
@@ -45,8 +48,7 @@ public class ProjectResource {
             @FormParam("organizationUniqueIdentifier") String organizationUniqueIdentifier,
             @FormParam("name") String name) {
 
-        if (organizationUniqueIdentifier == null || name == null
-                || organizationUniqueIdentifier.equals("") || name.equals(""))
+        if (StringUtils.isEmpty(organizationUniqueIdentifier) || StringUtils.isEmpty(name))
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(organizationUniqueIdentifier);
@@ -59,5 +61,30 @@ public class ProjectResource {
         this.projectService.create(project);
 
         return Response.ok().build();
+    }
+
+    /**
+     * Receives the request for retrieving a project's information.
+     *
+     * @param projectId the project's id.
+     * @return  200 if the project's information is correctly retrieved in JSON format,
+     *          400 if the parameter is null or empty,
+     *          404 if the id does not belong to any project,
+     *          401 if no user is logged in.
+     */
+    @POST
+    @Path("/get")
+    public Response getProject(
+            @FormParam("projectId") String projectId) {
+
+        if (StringUtils.isEmpty(projectId))
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
+
+
+        Project project = this.projectService.findById(projectId);
+        if (project == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        return Response.ok().entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(project)).build();
     }
 }
