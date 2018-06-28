@@ -205,16 +205,18 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
         // Verify that the user has the skills required to hold the position to be assigned
         Set<OrganizationSkill> technicalResourceSkills = technicalResource.getSkills();
         Set<OrganizationSkill> requiredSkills = foundCapabilityLevel.getRequiredSkills();
+
+        // If the required skills are null or empty, the user automatically has the required skills.
+        // Otherwise, if the user's skills are null or do not contain the required skills, throw the exception.
         if (requiredSkills != null && !requiredSkills.isEmpty()
                 && (technicalResourceSkills == null || !technicalResourceSkills.containsAll(requiredSkills)))
             throw new UserDoesNotHaveRequiredSkillsException(userDoesNotHaveRequiredSkillsMessage);
 
         // Persist the career path in case the user does not have one
-        CareerPath careerPath;
-        if ((careerPath = technicalResource.getCareerPath()) == null) {
+        CareerPath careerPath = technicalResource.getCareerPath();
+        if (careerPath == null) {
             // User has never had an assigned position, create their career path
             careerPath = new CareerPath();
-            careerPath.setTechnicalResource(technicalResource);
             this.careerPathService.create(careerPath);
 
             // Update the resource with a reference to their newly created career path

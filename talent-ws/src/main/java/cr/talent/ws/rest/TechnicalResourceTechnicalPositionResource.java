@@ -65,19 +65,16 @@ public class TechnicalResourceTechnicalPositionResource {
         // Get the lazy-loaded logged in user
         TechnicalResource loggedTechnicalResource = SecurityUtils.getLoggedInTechnicalResource();
 
-        if (loggedTechnicalResource == null)
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-
-        TechnicalResource asignee =
+        TechnicalResource assignee =
                 this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
                         technicalResourceEmail, loggedTechnicalResource.getOrganization().getUniqueIdentifier());
 
-        if(asignee==null)
+        if(assignee==null)
             return Response.status(Response.Status.NOT_FOUND).entity("NonExistentTechnicalResource").build();
 
         try {
             this.technicalResourceService
-                    .assignTechnicalPositionToTechnicalResource(capability, capabilityLevel, asignee.getOrganization(), asignee, startDate);
+                    .assignTechnicalPositionToTechnicalResource(capability, capabilityLevel, assignee.getOrganization(), assignee, startDate);
         } catch (NonExistentCapabilityException e) {
             return Response.status(Response.Status.NOT_FOUND).
                     entity("NonExistentCapability").build();

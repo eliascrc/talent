@@ -68,8 +68,6 @@ public interface TechnicalResourceService extends CrudService<TechnicalResource,
      * @param startDate         the date that the technical resource was/will be assigned the technical position
      */
     void assignTechnicalPositionToTechnicalResource(String capability, String capabilityLevel,
-                                                    Organization organization, TechnicalResource technicalResource, Date startDate)
-            throws NonExistentCapabilityException,NonExistentCapabilityLevelException,
-            AlreadyAssignedTechnicalPositionException,UserDoesNotHaveRequiredSkillsException;
+                                                    Organization organization, TechnicalResource technicalResource, Date startDate);
 
 }
