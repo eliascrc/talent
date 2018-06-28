@@ -85,11 +85,10 @@ public class TechnicalResourceSkillResource {
      *
      * @param technicalResourceEmail the email (username) of the resource whose skills will be returned.
      * @param organizationIdentifier the unique identifier of the user's organization
-     * @return 400 if the list is empty, or if any skill is empty
-     *         409 with "SkillAlreadyAssigned" if one or more skills have been assigned to the technical resource.
-     *         404 with "NonExistentSkill" if one or more skills are non existent.
-     *         401 if no user is logged in.
-     *         200 if the skills were correctly assigned.
+     * @return 400 if the the recived skills are either null or empty
+     *         404 if the specified technical resource does not exist within the specified organization
+     *         204 if the specified technical resource has no assigned skills
+     *         200 if the skills are returned successfully
      */
     @GET
     @Path("/get")

@@ -239,7 +239,7 @@ public class JSONSerializerBuilder {
         tempIncludes.add("name");
 
         // Excludes all attributes of OrganizationSkill except its name
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(OrganizationSkill.class, "", tempIncludes));
 
         // sets the added excludes to the serializer
         serializer.setExcludes(excludes);
