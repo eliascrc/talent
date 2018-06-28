@@ -25,6 +25,7 @@
         <security:intercept-url pattern="/ws/content/**/*" access="permitAll()" method="GET"/>
         <security:intercept-url pattern="/ws/passwordReset/new/*" access="isAnonymous()" method="GET"/>
         <security:intercept-url pattern="/ws/passwordReset/**/*" access="isAnonymous()" method="POST"/>
+        <security:intercept-url pattern="/ws/automation/**/*" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/resource" access="isAnonymous()" method="POST"/>
         <security:intercept-url pattern="/ws/login/token" access="isAnonymous()"/>
         <security:intercept-url pattern="/ws/login" access="isAnonymous()" method="POST"/>
@@ -35,6 +36,7 @@
         <security:intercept-url pattern="/ws/contactUs/unauthenticated" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/signUp/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/organization/create" access="permitAll()" method="POST"/>
+        <security:intercept-url pattern="/ws/technicalResource/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
         <security:intercept-url pattern="/ws/**/*" access="hasAuthority('ROLE_USER')"/>
 
         <security:custom-filter position="FORM_LOGIN_FILTER" ref="organizationFilter"/>

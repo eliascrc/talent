@@ -74,4 +74,16 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <filter-class>cr.talent.support.hibernate.CustomHibernateSessionFilter</filter-class>
+        <init-param>
+            <param-name>sessionFactoryBeanName</param-name>
+            <param-value>sessionFactory</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <url-pattern>/ws/*</url-pattern>
+    </filter-mapping>
 </web-app>
