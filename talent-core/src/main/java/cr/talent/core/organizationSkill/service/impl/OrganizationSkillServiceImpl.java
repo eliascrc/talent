@@ -46,15 +46,15 @@ public class OrganizationSkillServiceImpl extends CrudServiceImpl<Skill, String>
              technicalResource.getLastName() + ".";
         final String emptySkillMsg = "One or more skills are empty.";
 
-        List<OrganizationSkill> skillsToAssign = new ArrayList<>();
+        List<Skill> skillsToAssign = new ArrayList<>();
 
-        Set<OrganizationSkill> technicalResourceSkills = technicalResource.getSkills();
-        Set<OrganizationSkillCategory> organizationSkillCategories = organization.getSkillCategories();
+        Set<Skill> technicalResourceSkills = technicalResource.getSkills();
+        Set<SkillCategory> organizationSkillCategories = organization.getSkillCategories();
 
-        OrganizationSkillCategory organizationSkillCategory;
-        Set<OrganizationSkill> organizationSkills;
+        SkillCategory organizationSkillCategory;
+        Set<Skill> organizationSkills;
         boolean keepSearching;
-        OrganizationSkill skill = null;
+        Skill skill = null;
 
         for (String skillName : skills) {
 
@@ -63,14 +63,14 @@ public class OrganizationSkillServiceImpl extends CrudServiceImpl<Skill, String>
             if (StringUtils.isEmpty(skillName))
                 throw new EmptySkillException(emptySkillMsg);
 
-            Iterator<OrganizationSkillCategory> iterator = organizationSkillCategories.iterator();
+            Iterator<SkillCategory> iterator = organizationSkillCategories.iterator();
 
             while(iterator.hasNext() && keepSearching) {
 
                 organizationSkillCategory = iterator.next();
-                organizationSkills = organizationSkillCategory.getOrganizationSkills();
+                organizationSkills = organizationSkillCategory.getSkills();
 
-                Iterator<OrganizationSkill> iterator1 = organizationSkills.iterator();
+                Iterator<Skill> iterator1 = organizationSkills.iterator();
 
                 while(iterator1.hasNext() && keepSearching) {
 
@@ -98,7 +98,7 @@ public class OrganizationSkillServiceImpl extends CrudServiceImpl<Skill, String>
 
         }
 
-        for(OrganizationSkill organizationSkill: skillsToAssign){
+        for(Skill organizationSkill: skillsToAssign){
             organizationSkill.getResources().add(technicalResource);
             this.organizationSkillDao.update(organizationSkill);
         }

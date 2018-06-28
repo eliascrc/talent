@@ -24,13 +24,13 @@ public class EducationRecord extends BasicEntity{
     /**
      * Date that the resource started the training.
      */
-    @Column (name = "date")
+    @Column (name = "startDate")
     private Date startDate;
 
     /**
      * Date that the resource ended the training.
      */
-    @Column (name = "date")
+    @Column (name = "endDate")
     private Date endDate;
 
     /**
