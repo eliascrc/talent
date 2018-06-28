@@ -118,6 +118,7 @@
 			<username>rodrigobartels@gmail.com</username>
 			<firstName>Rodrigo</firstName>
 			<lastName>Bartels</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -136,6 +137,7 @@
 			<username>raquel.fonseca@ecci.ucr.ac.cr</username>
 			<firstName>Raquel</firstName>
 			<lastName>Fonseca</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -153,6 +155,7 @@
 		<technicalResource>
 			<username>marianaabellan4@gmail.com</username>
 			<firstName>Mariana</firstName>
+			<nickname>Some nickname</nickname>
 			<lastName>Abellán</lastName>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
@@ -172,6 +175,7 @@
 			<username>daniel.montesdeocab@gmail.com</username>
 			<firstName>Daniel</firstName>
 			<lastName>Montes de Oca</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -190,6 +194,7 @@
 			<username>majo.qbro@gmail.com</username>
 			<firstName>María José</firstName>
 			<lastName>Cubero</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -208,6 +213,7 @@
 			<username>renato.mainieri2110@gmail.com</username>
 			<firstName>Renato</firstName>
 			<lastName>Mainieri</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -226,6 +232,7 @@
 			<username>eliascr98@outlook.com</username>
 			<firstName>Elías</firstName>
 			<lastName>Calderón</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -244,6 +251,7 @@
 			<username>jo96cube@gmail.com</username>
 			<firstName>Josué</firstName>
 			<lastName>Cubero</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -262,6 +270,7 @@
 			<username>jolesa97@gmail.com</username>
 			<firstName>Josué</firstName>
 			<lastName>León</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -280,6 +289,7 @@
 			<username>roleandroflores12@gmail.com</username>
 			<firstName>Fabián Roberto</firstName>
 			<lastName>Leandro</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -298,6 +308,7 @@
 			<username>Otmerk1@gmail.com</username>
 			<firstName>Otto</firstName>
 			<lastName>Mena</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -316,6 +327,7 @@
 			<username>andres.mata@example.com</username>
 			<firstName>Andres</firstName>
 			<lastName>Mata</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -334,6 +346,7 @@
 			<username>antonio.jimenez@example.com</username>
 			<firstName>Antonio</firstName>
 			<lastName>Jimenez</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -352,6 +365,7 @@
 			<username>andrea.solano@example.com</username>
 			<firstName>Andrea</firstName>
 			<lastName>Solano</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -370,6 +384,7 @@
 			<username>john.doe@example.com</username>
 			<firstName>John</firstName>
 			<lastName>Doe</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -388,6 +403,7 @@
 			<username>marta.martinez@example.com</username>
 			<firstName>Marta</firstName>
 			<lastName>Martinez</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>true</passwordNeedsChange>
@@ -406,6 +422,7 @@
 			<username>john.tolkien@example.com</username>
 			<firstName>John</firstName>
 			<lastName>Tolkien</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -424,6 +441,7 @@
 			<username>howard.lovecraft@example.com</username>
 			<firstName>Howard</firstName>
 			<lastName>Lovecraft</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -442,6 +460,7 @@
 			<username>kendall.garcia@gmail.com</username>
 			<firstName>Kendall</firstName>
 			<lastName>Garcia</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>true</passwordNeedsChange>
@@ -460,11 +479,12 @@
 			<username>samus.aran@example.com</username>
 			<firstName>Samus</firstName>
 			<lastName>Aran</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
 			<status>ACTIVE</status>
-			<isAdministrator>fakse</isAdministrator>
+			<isAdministrator>false</isAdministrator>
 			<lastLevelAssessment>1/1/2000</lastLevelAssessment>
 			<lastPerformanceReview>1/1/2000</lastPerformanceReview>
 			<profilePicture>http://statici.behindthevoiceactors.com/behindthevoiceactors/_img/chars/kenshin-himura-rurouni-kenshin-8.84.jpg</profilePicture>
@@ -478,6 +498,7 @@
 			<username>friedrich.gauss@example.com</username>
 			<firstName>Friedrich</firstName>
 			<lastName>Gauss</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -496,6 +517,7 @@
 			<username>leonhard.euler@example.com</username>
 			<firstName>Leonhard</firstName>
 			<lastName>Euler</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>false</enabled>
 			<passwordNeedsChange>true</passwordNeedsChange>
@@ -514,6 +536,7 @@
 			<username>joseph.lagrange@example.com</username>
 			<firstName>Joseph</firstName>
 			<lastName>Lagrange</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -532,6 +555,7 @@
 			<username>james.moriarty@example.com</username>
 			<firstName>James</firstName>
 			<lastName>Moriarty</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>true</passwordNeedsChange>
@@ -550,6 +574,7 @@
 			<username>keira.priestley@example.com</username>
 			<firstName>Keira</firstName>
 			<lastName>Priestley</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -568,6 +593,7 @@
 			<username>sanes.mikkelsen@example.com</username>
 			<firstName>Sanes</firstName>
 			<lastName>Mikkelsen</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>false</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -586,6 +612,7 @@
 			<username>sophie.germain@example.com</username>
 			<firstName>Sophie</firstName>
 			<lastName>Germain</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -604,6 +631,7 @@
 			<username>hajime.saito@example.com</username>
 			<firstName>Hajime</firstName>
 			<lastName>Saito</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -622,6 +650,7 @@
 			<username>pedro.perez@gmail.com</username>
 			<firstName>Pedro</firstName>
 			<lastName>Perez</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>true</passwordNeedsChange>

@@ -18,4 +18,10 @@ public interface InvitationDao extends CrudDao<Invitation, String> {
      */
     Invitation findInvitationByEmail(String email);
 
+    /**
+     * Retrieves the invitation that corresponds to a token.
+     * @return the invitation if found, null if not.
+     */
+    Invitation findInvitationByToken(String token);
+
 }
