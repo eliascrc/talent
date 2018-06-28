@@ -1,5 +1,6 @@
 package cr.talent.core.projectPositionHolder.service.impl;
 
+import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.projectPositionHolder.dao.ProjectPositionHolderDao;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.model.*;
@@ -22,6 +23,7 @@ public class ProjectPositionHolderServiceTest {
     @Test
     public void testAssignProjectPositionCall() {
         ProjectPositionHolderDao projectPositionHolderDao = mock(ProjectPositionHolderDao.class);
+        ProjectPositionService projectPositionService = mock(ProjectPositionService.class);
         ProjectPosition projectPosition = mock(ProjectPosition.class);
         TechnicalResource assigner = mock(TechnicalResource.class);
         TechnicalResource assignee = mock(TechnicalResource.class);
@@ -51,6 +53,7 @@ public class ProjectPositionHolderServiceTest {
         projectPositionHolder.setProjectPosition(projectPosition);
 
         ReflectionTestUtils.setField(projectPositionHolderService, "crudDao", projectPositionHolderDao);
+        ReflectionTestUtils.setField(projectPositionHolderService, "projectPositionService", projectPositionService);
         projectPositionHolderService.assignProjectPosition(assigner, assignee, projectPosition, startDate, assignedHours, active);
         verify(projectPositionHolderDao, times(1)).create(projectPositionHolder);
     }

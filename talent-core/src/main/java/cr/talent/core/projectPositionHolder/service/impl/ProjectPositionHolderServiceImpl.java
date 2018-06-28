@@ -1,11 +1,9 @@
 package cr.talent.core.projectPositionHolder.service.impl;
 
+import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.projectPositionHolder.dao.ProjectPositionHolderDao;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
-import cr.talent.model.LeadPosition;
-import cr.talent.model.ProjectPosition;
-import cr.talent.model.ProjectPositionHolder;
-import cr.talent.model.TechnicalResource;
+import cr.talent.model.*;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
@@ -27,6 +25,9 @@ public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPos
 
     @Autowired
     private ProjectPositionHolderDao projectPositionHolderDao;
+
+    @Autowired
+    private ProjectPositionService projectPositionService;
 
     public void init() {
         setCrudDao(this.projectPositionHolderDao);
@@ -63,7 +64,10 @@ public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPos
         projectPositionHolder.setResource(assignee);
         projectPositionHolder.setStartDate(startDate);
         projectPositionHolder.setProjectPosition(projectPosition);
+        System.out.println(projectPosition);
+        projectPosition.setProjectPositionStatus(ProjectPositionStatus.TAKEN);
 
+        projectPositionService.update(projectPosition);
         super.create(projectPositionHolder);
     }
 
