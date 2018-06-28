@@ -35,10 +35,10 @@ public class TechnicalResourceTechnicalPositionResource {
     /**
      * Receives a request to assign a technical position to a technical resource.
      *
-     * @param capabilityLevel      the technical position to be assigned.
-     * @param capabilityLevel the technical resource to be assigned the position.
+     * @param capabilityLevel the capability that has the capability level to be assigned.
+     * @param capabilityLevel the capability level to be associated with the assigned technical position.
      * @param technicalResourceEmail the technical resource to be assigned the position.
-     * @param technicalResourceEmail the technical resource to be assigned the position.
+     * @param startDate the date the technical resource will be/was given the technical position.
      *
      * @return 400 if the either string parameter is null or empty, or if startDate is not a valid date.
      * 401 if no user is logged in.
