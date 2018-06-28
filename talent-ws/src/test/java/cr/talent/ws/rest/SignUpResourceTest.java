@@ -31,6 +31,7 @@ public class SignUpResourceTest extends FunctionalTest {
 
     private final String firstName = "firstName";
     private final String lastName = "lastName";
+    private final String nickname = "nickname";
     private final String email = "email";
     private final String password = "password";
     private final String code = "code";
@@ -132,6 +133,7 @@ public class SignUpResourceTest extends FunctionalTest {
         Response response = given()
                 .formParam(this.firstName,"Michael")
                 .formParam(this.lastName,"Kiske")
+                .formParam(this.nickname,"Michi")
                 .formParam(this.email,"xbaseucr@gmail.com")
                 .formParam(this.password,"Talent.123")
                 .when().post(this.stepOneWebService)
@@ -142,6 +144,7 @@ public class SignUpResourceTest extends FunctionalTest {
         boolean credentialsNonExpired = true;
         String firstName = "Michael";
         String lastName = "Kiske";
+        String nickname = "Michi";
         String organization = null;
         String username = "xbaseucr@gmail.com";
 
@@ -152,6 +155,7 @@ public class SignUpResourceTest extends FunctionalTest {
         assertEquals(jsonPath.get("credentialsNonExpired"),credentialsNonExpired);
         assertEquals(jsonPath.get("firstName"),firstName);
         assertEquals(jsonPath.get("lastName"),lastName);
+        assertEquals(jsonPath.get("nickname"),nickname);
         assertEquals(jsonPath.get("organization"),organization);
         assertEquals(jsonPath.get("username"),username);
     }
