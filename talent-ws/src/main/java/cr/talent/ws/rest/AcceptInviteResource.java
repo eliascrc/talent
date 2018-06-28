@@ -2,6 +2,7 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.invitation.service.InvitationService;
 import cr.talent.model.TechnicalResource;
+import cr.talent.support.exceptions.InvalidInvitationException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -33,7 +34,7 @@ public class AcceptInviteResource {
      *         400 if the token is invalid or not found.
      */
     @GET
-    @Path("/validate/")
+    @Path("/validate")
     public Response validateRequestToken (@QueryParam("token") String token){
         if (StringUtils.isEmpty(token) || !this.invitationService.isTokenValid(token))
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -51,7 +52,7 @@ public class AcceptInviteResource {
      *  			password is not valid.
      */
     @POST
-    @Path("/accept/")
+    @Path("/accept")
     public Response performFirstStep(@FormParam("nickname") String nickname,
                                      @FormParam("password") String password,
                                      @QueryParam("token") String token) {
@@ -59,15 +60,21 @@ public class AcceptInviteResource {
         if (StringUtils.isEmpty(nickname) || StringUtils.isEmpty(password) || StringUtils.isEmpty(token))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        if (!this.invitationService.isTokenValid(token))
+        try {
+
+            TechnicalResource technicalResource = this.invitationService.acceptInvite(nickname, password, token);
+
+            String serializedTechnicalResource = JSONSerializerBuilder.getTechnicalResourceAuthenticationSerializer()
+                    .serialize(technicalResource);
+
+            return Response.ok().entity(serializedTechnicalResource).build();
+
+        } catch (InvalidInvitationException e) {
+
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        TechnicalResource technicalResource = this.invitationService.acceptInvite(nickname, password, token);
-
-        String serializedTechnicalResource = JSONSerializerBuilder.getTechnicalResourceAuthenticationSerializer()
-                .serialize(technicalResource);
-
-        return Response.ok().entity(serializedTechnicalResource).build();
+        }
 
     }
+
 }

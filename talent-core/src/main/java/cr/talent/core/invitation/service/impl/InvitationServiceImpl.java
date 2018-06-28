@@ -11,6 +11,7 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
 import cr.talent.support.exceptions.AlreadyRegisteredUserException;
 import cr.talent.support.exceptions.EmptyDestinationEmailException;
+import cr.talent.support.exceptions.InvalidInvitationException;
 import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,7 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
 
     @Autowired
     private InvitationEmailService invitationEmailService;
+
 
     public void init() {
         setCrudDao(this.invitationDao);
@@ -132,8 +134,12 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
      */
     @Override
     public TechnicalResource acceptInvite(String nickname, String password, String token) {
+        final String invalidInvitationExceptionMsg = "The invitation is invalid.";
 
         Invitation invitation = this.invitationDao.findInvitationByToken(token); // get the invitation
+
+        if(!this.isTokenValid(token))
+            throw new InvalidInvitationException(invalidInvitationExceptionMsg);
 
         TechnicalResource technicalResource = new TechnicalResource(); // build the technical resource
         technicalResource.setFirstName("Name"); //should be changed on TAL-471 PR
@@ -148,7 +154,7 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         this.technicalResourceService.create(technicalResource);
 
         invitation.setValid(false); // invalidate the invitation
-        this.invitationDao.update(invitation);
+        this.update(invitation);
 
         Authentication authentication =
                 new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());

@@ -9,6 +9,7 @@ import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -47,8 +48,7 @@ public class ProjectResource {
             @FormParam("organizationUniqueIdentifier") String organizationUniqueIdentifier,
             @FormParam("name") String name) {
 
-        if (organizationUniqueIdentifier == null || name == null
-                || organizationUniqueIdentifier.equals("") || name.equals(""))
+        if (StringUtils.isEmpty(organizationUniqueIdentifier) || StringUtils.isEmpty(name))
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(organizationUniqueIdentifier);
@@ -77,11 +77,9 @@ public class ProjectResource {
     public Response getProject(
             @FormParam("projectId") String projectId) {
 
-        if (projectId == null || projectId.equals(""))
+        if (StringUtils.isEmpty(projectId))
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
-        if(SecurityUtils.getLoggedInUser() == null)
-            return Response.status(Response.Status.UNAUTHORIZED).build(); //User must be logged in
 
         Project project = this.projectService.findById(projectId);
         if (project == null)
