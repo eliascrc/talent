@@ -1,25 +1,26 @@
 package cr.talent.support.exceptions;
 
 /**
- * A runtime exception that is thrown when a user is assigned a technical position they currently hold.
+ * A runtime exception that is thrown when a technical resource does not have the required skills for the capability
+ * level in the technical position they are trying to be assigned.
  *
  * @author Fabián Roberto Leandro
  */
-public class AlreadyAssignedTechnicalPositionException extends RuntimeException {
+public class UserDoesNotHaveRequiredSkillsException extends RuntimeException {
     
-    private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public AlreadyAssignedTechnicalPositionException() {
+    public UserDoesNotHaveRequiredSkillsException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public AlreadyAssignedTechnicalPositionException(String message) {
+    public UserDoesNotHaveRequiredSkillsException(String message) {
         super(message);
     }
 
@@ -27,7 +28,7 @@ public class AlreadyAssignedTechnicalPositionException extends RuntimeException 
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public AlreadyAssignedTechnicalPositionException(Throwable cause) {
+    public UserDoesNotHaveRequiredSkillsException(Throwable cause) {
         super(cause);
     }
 
@@ -36,7 +37,7 @@ public class AlreadyAssignedTechnicalPositionException extends RuntimeException 
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public AlreadyAssignedTechnicalPositionException(String message, Throwable cause) {
+    public UserDoesNotHaveRequiredSkillsException(String message, Throwable cause) {
         super(message, cause);
     }
 }

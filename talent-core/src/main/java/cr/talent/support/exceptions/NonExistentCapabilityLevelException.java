@@ -1,25 +1,26 @@
 package cr.talent.support.exceptions;
 
 /**
- * A runtime exception that is thrown when a user is assigned a technical position they currently hold.
+ * A runtime exception that is thrown when a technical position is attempted to be created with a cabaility level that
+ * does not exist within a capability within the relevant organization.
  *
  * @author Fabián Roberto Leandro
  */
-public class AlreadyAssignedTechnicalPositionException extends RuntimeException {
+public class NonExistentCapabilityLevelException extends RuntimeException {
     
-    private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public AlreadyAssignedTechnicalPositionException() {
+    public NonExistentCapabilityLevelException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public AlreadyAssignedTechnicalPositionException(String message) {
+    public NonExistentCapabilityLevelException(String message) {
         super(message);
     }
 
@@ -27,7 +28,7 @@ public class AlreadyAssignedTechnicalPositionException extends RuntimeException 
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public AlreadyAssignedTechnicalPositionException(Throwable cause) {
+    public NonExistentCapabilityLevelException(Throwable cause) {
         super(cause);
     }
 
@@ -36,7 +37,7 @@ public class AlreadyAssignedTechnicalPositionException extends RuntimeException 
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public AlreadyAssignedTechnicalPositionException(String message, Throwable cause) {
+    public NonExistentCapabilityLevelException(String message, Throwable cause) {
         super(message, cause);
     }
 }

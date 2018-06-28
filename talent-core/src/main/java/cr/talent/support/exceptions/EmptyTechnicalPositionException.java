@@ -1,5 +1,10 @@
 package cr.talent.support.exceptions;
 
+/**
+ * A runtime exception that is thrown when a user is assigned a technical position with no capability level.
+ *
+ * @author Fabián Roberto Leandro
+ */
 public class EmptyTechnicalPositionException extends RuntimeException {
     
     private static final long serialVersionUID = 1L;

@@ -1,20 +1,26 @@
 package cr.talent.support.exceptions;
 
-public class NonExistentTechnicalPosition extends RuntimeException {
+/**
+ * A runtime exception that is thrown when a capability level is attempted to be created within a cabaility that
+ * does not exist in the relevant organization.
+ *
+ * @author Fabián Roberto Leandro
+ */
+public class NonExistentCapabilityException extends RuntimeException {
     
         private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public NonExistentTechnicalPosition() {
+    public NonExistentCapabilityException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public NonExistentTechnicalPosition(String message) {
+    public NonExistentCapabilityException(String message) {
         super(message);
     }
 
@@ -22,7 +28,7 @@ public class NonExistentTechnicalPosition extends RuntimeException {
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public NonExistentTechnicalPosition(Throwable cause) {
+    public NonExistentCapabilityException(Throwable cause) {
         super(cause);
     }
 
@@ -31,7 +37,7 @@ public class NonExistentTechnicalPosition extends RuntimeException {
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public NonExistentTechnicalPosition(String message, Throwable cause) {
+    public NonExistentCapabilityException(String message, Throwable cause) {
         super(message, cause);
     }
 }
