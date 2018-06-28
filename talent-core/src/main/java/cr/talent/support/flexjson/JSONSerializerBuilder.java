@@ -207,6 +207,8 @@ public class JSONSerializerBuilder {
         tempIncludes.add("lastName");
         tempIncludes.add("isAdministrator");
         tempIncludes.add("profilePicture");
+        tempIncludes.add("technicalPosition");
+        tempIncludes.add("username");
 
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
 
