@@ -8,6 +8,7 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
+import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -44,10 +45,11 @@ public class ProjectPositionResource {
      * Endpoint for assigning project positions to technical resources
      * @param username the technical resource's username
      * @param projectPositionId the identifier of the project position
-     * @return  400 if a parameter was left empty or if the id was of a project position of another organization or if
-     *              there is no technical resource with the assignee's username
+     * @return  400 if a parameter was left empty or if the id was of a project position of another organization
      *          403 if the logged in user lacks the permissions to assign the project position
-     *          404 if no project position with that id was found
+     *          404 if no project position with that id was found or if there is no technical resource with the assignee's
+     *          username
+     *          409 if the project has no active lead
      *          200 if the project position was assigned correctly
      */
     @POST
@@ -58,7 +60,6 @@ public class ProjectPositionResource {
                                           @FormParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
                                           @FormParam("assignedHours") int assignedHours,
                                           @FormParam("active") boolean active) {
-        System.out.println(startDate);
 
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(projectPositionId) || startDate == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -85,6 +86,8 @@ public class ProjectPositionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         } catch (ProjectPositionOfAnotherOrganizationException e) {
             return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).build();
         }
     }
 

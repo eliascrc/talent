@@ -8,6 +8,7 @@ import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
+import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,9 @@ public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPos
             if (leadPosition.getActive())
                 projectLead = leadPosition.getLead();
         }
+
+        if (projectLead == null)
+            throw new ProjectWithoutLeadException();
 
         if (!assigner.equals(projectLead))
             throw new NotProjectLeadException();
