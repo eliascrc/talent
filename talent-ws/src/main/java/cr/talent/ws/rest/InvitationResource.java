@@ -12,13 +12,13 @@ import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * Resource with two POST endpoints that handle the creation of invitations and invitation links, and one
@@ -41,17 +41,17 @@ public class InvitationResource {
      * Receives a request to send an invitation email. If the invitation passes all the verifications in the service
      * they're sent correctly.
      *
-     * @param emails the destination emails
-     * @return 400 if the list is empty, or if any email is empty
+     * @param invitations the invitations JSON in String format.
+     * @return 400 if the invitations are empty or null.
      * 401 if the user is not an administrator of the organization.
      * 409 with "LimitOfInvitationsReached" if the limit of invitations and resources has been reached.
      * 409 with "AlreadyRegisteredUser" if an invitation is sent to a user that is already registered in the organization.
-     * 200 if the email was correctly sent.
+     * 200 if the emails were correctly sent.
      */
     @POST
     @Path("/send")
-    public Response sendInvitation(@FormParam("emails") List<String> emails) {
-        if(emails.size() == 0)
+    public Response sendInvitation(@FormParam("invitations") String invitations) {
+        if(StringUtils.isEmpty(invitations))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         TechnicalResource technicalResource = SecurityUtils.getLoggedInTechnicalResource();
@@ -62,7 +62,7 @@ public class InvitationResource {
 
         try {
 
-            this.invitationService.createInvitations(emails, organization);
+            this.invitationService.createInvitations(invitations, organization);
 
         } catch (LimitOfInvitationsReachedException e) {
             return Response.status(Response.Status.CONFLICT).

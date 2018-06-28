@@ -317,7 +317,7 @@ public class SignUpResourceTest extends FunctionalTest {
 
     }
 
-    @Test
+    /*@Test
     public void xValidRequestForStepFourInvitations(){
 
         this.uLogInUserForTests();
@@ -330,7 +330,7 @@ public class SignUpResourceTest extends FunctionalTest {
                 .then().statusCode(200);
 
     }
-/*
+
     @Test
     public void yLimitReachedForStepFourInvitations(){
 
