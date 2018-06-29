@@ -116,4 +116,8 @@ public class Invitation extends BasicEntity {
     public void setValid(boolean valid) {
         isValid = valid;
     }
+
+    public OrganizationLogo getLogo(){
+        return this.organization.getLogo();
+    }
 }

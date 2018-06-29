@@ -24,9 +24,9 @@ public interface InvitationService extends CrudService<Invitation, String> {
     /**
      * Validates if a token from {@link cr.talent.model.Invitation} is still active.
      * @param token the token to be validated.
-     * @return true if it is valid, false if not.
+     * @return the invitation instance.
      */
-    boolean isTokenValid(String token);
+    Invitation isTokenValid(String token);
 
     /**
      * Creates a technical resource that accepted an invitation from {@link cr.talent.model.Invitation}.

@@ -156,9 +156,11 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
      * @see cr.talent.core.invitation.service.InvitationService#isTokenValid(String)
      */
     @Override
-    public boolean isTokenValid(String token) {
+    public Invitation isTokenValid(String token) {
         Invitation invitation = this.invitationDao.findInvitationByToken(token);
-        return invitation != null && invitation.isValid();
+        if(invitation == null || !invitation.isValid())
+            invitation = null;
+        return invitation;
     }
 
     /**
