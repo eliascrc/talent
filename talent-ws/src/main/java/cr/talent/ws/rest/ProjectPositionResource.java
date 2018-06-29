@@ -6,6 +6,7 @@ import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.support.exceptions.ProjectOfAnotherOrganizationException;
+import cr.talent.support.exceptions.ProjectPositionAlreadyExistsException;;
 import cr.talent.model.Project;
 import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
@@ -47,7 +48,7 @@ public class ProjectPositionResource {
      * @return 400 if a parameter was left empty or if the id was of a project of another organization
      *         403 if the logged in user lacks the permissions to create the project position
      *         404 if no project or capability level with that id was found
-     *         409 if the project has no active lead
+     *         409 if the project has no active lead or if the project position already exists (same project and capabilityLevel)
      *         200 if the project position was created correctly
      */
     @POST
@@ -76,11 +77,13 @@ public class ProjectPositionResource {
             this.projectPositionService.createProjectPosition(assigner, project, capabilityLevel, totalHoursInt);
             return Response.ok().build();
         } catch (NotProjectLeadException e) {
-            return Response.status(Response.Status.FORBIDDEN).entity("The user creating the project is not the project lead").build();
+            return Response.status(Response.Status.FORBIDDEN).entity("The user creating the project is not the project lead.").build();
         } catch (ProjectWithoutLeadException e) {
-            return Response.status(Response.Status.CONFLICT).entity("The project has no lead").build();
+            return Response.status(Response.Status.CONFLICT).entity("The project has no lead.").build();
         } catch (ProjectOfAnotherOrganizationException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("The capability level and the project do not match").build();
+            return Response.status(Response.Status.BAD_REQUEST).entity("The capability level and the project do not match.").build();
+        } catch (ProjectPositionAlreadyExistsException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project position already exists.").build();
         }
     }
 

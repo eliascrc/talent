@@ -6,6 +6,8 @@ import cr.talent.model.*;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import cr.talent.support.exceptions.ProjectOfAnotherOrganizationException;
+import cr.talent.support.exceptions.ProjectPositionAlreadyExistsException;
+import cr.talent.support.exceptions.NotProjectLeadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -45,12 +47,20 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         if (projectLead == null)
             throw new ProjectWithoutLeadException();
 
+        if (!assigner.equals(projectLead))
+            throw new NotProjectLeadException();;
+
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setTotalHours(totalHours);
         projectPosition.setProject(project);
         projectPosition.setCapability(capabilityLevel);
         projectPosition.setProjectPositionStatus(ProjectPositionStatus.AVAILABLE); //No one is assigned to it, so it can not be TAKEN, and to set its status as CLOSED, one should use the delete webservice.
 
+        for (ProjectPosition projectPositionIterator : project.getProjectPositions()){
+            if (projectPositionIterator.equals(projectPosition)){
+                throw new ProjectPositionAlreadyExistsException();
+            }
+        }
         super.create(projectPosition);
     }
 }
