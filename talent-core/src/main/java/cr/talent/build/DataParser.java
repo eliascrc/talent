@@ -766,7 +766,7 @@ class DataParser extends XmlParser {
         }
         assert  capabilityLevel != null;
 
-        projectPosition.setCapability(capabilityLevel);
+        projectPosition.setCapabilityLevel(capabilityLevel);
     }
 
     /**This method will set the projectCapabilities attribute to the project object.

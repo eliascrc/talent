@@ -4,11 +4,13 @@ import cr.talent.core.security.technicalResource.service.TechnicalResourceServic
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
@@ -31,7 +33,7 @@ public class ProjectPositionResource {
     /**
      * Endpoint to obtain a technical resource's project position from their username and a project
      */
-    @POST
+    @GET
     @Path("/get")
     public Response getProjectPosition(@QueryParam("technicalResource") String technicalResourceEmail,
                                        @QueryParam("project") String projectName) {
@@ -50,7 +52,9 @@ public class ProjectPositionResource {
         if (projectPositionHolders != null)
             for (ProjectPositionHolder projectPositionHolder : projectPositionHolders) {
                 if (projectPositionHolder.getProjectPosition().getProject().getName().equals(projectName)) {
-                    // TODO Serialize into json and return here
+                    return Response.status(Response.Status.OK)
+                            .entity(JSONSerializerBuilder.getProjectPositionHolderSerializer().serialize(projectPositionHolder))
+                            .build();
                 }
             }
 

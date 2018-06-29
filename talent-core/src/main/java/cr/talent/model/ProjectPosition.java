@@ -1,12 +1,11 @@
 package cr.talent.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 /**
  * Class that represents a Project position within the Talent system.
- * It contains the status, the total hours for the position, the capability, holder history, related project and
+ * It contains the status, the total hours for the position, the capabilityLevel, holder history, related project and
  * and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
  * @author Elías Calderón
@@ -30,11 +29,11 @@ public class ProjectPosition extends BasicEntity {
     private int totalHours;
 
     /**
-     * The related capability of that project position
+     * The related capabilityLevel of that project position
      */
     @ManyToOne
     @JoinColumn(name = "capability_id", nullable = false)
-    private CapabilityLevel capability;
+    private CapabilityLevel capabilityLevel;
 
     /**
      * The history of position holders that the position has had.
@@ -66,7 +65,7 @@ public class ProjectPosition extends BasicEntity {
         if ( o instanceof ProjectPosition ){
             ProjectPosition projectPosition = (ProjectPosition) o;
             result = ((this.project == null ? projectPosition.getProject() == null : this.project.equals(projectPosition.getProject()))
-                    && (this.capability == null ? projectPosition.getCapability() == null : this.capability.equals(projectPosition.getCapability())));
+                    && (this.capabilityLevel == null ? projectPosition.getCapabilityLevel() == null : this.capabilityLevel.equals(projectPosition.getCapabilityLevel())));
         }
         return result;
     }
@@ -75,7 +74,7 @@ public class ProjectPosition extends BasicEntity {
     protected int onHashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.project == null ? 0 : this.project.hashCode());
-        result = prime * result + (this.capability == null ? 0 : this.capability.hashCode());
+        result = prime * result + (this.capabilityLevel == null ? 0 : this.capabilityLevel.hashCode());
         return result;
     }
 
@@ -87,12 +86,12 @@ public class ProjectPosition extends BasicEntity {
         this.totalHours = totalHours;
     }
 
-    public CapabilityLevel getCapability() {
-        return capability;
+    public CapabilityLevel getCapabilityLevel() {
+        return capabilityLevel;
     }
 
-    public void setCapability(CapabilityLevel capability) {
-        this.capability = capability;
+    public void setCapabilityLevel(CapabilityLevel capability) {
+        this.capabilityLevel = capability;
     }
 
     public Set<ProjectPositionHolder> getHolderHistory() {

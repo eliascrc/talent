@@ -1,6 +1,7 @@
 package cr.talent.support.flexjson;
 
 import cr.talent.model.*;
+import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 import flexjson.transformer.BooleanTransformer;
 import org.slf4j.Logger;
@@ -248,6 +249,57 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("Set<OrganizationSkill> Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
+
+    /**
+     * Gets a JSONSerializer to use in order to obtain the JSON of a ProjectPosition.
+     *
+     * @return the JSONSerializer to be used to serialize ProjectPosition.
+     */
+    public static JSONSerializer getProjectPositionHolderSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
+        // Exclude all attributes of capability except name
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capability", tempIncludes));
+
+        // Exclude all attributes of capabilityLevel except name, hierarchyPosition and capability
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("hierarchyPosition");
+        tempIncludes.add("capability");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "capabilityLevel", tempIncludes));
+
+        // Exclude all attributes of projectPosition except projectPositionStatus, totalHours and capabilityLevel
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("projectPositionStatus");
+        tempIncludes.add("totalHours");
+        tempIncludes.add("capabilityLevel");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPosition.class, "projectPosition", tempIncludes));
+
+        // Exclude all attributes of projectPositionHolder except startDate, endDate, reviewed, assignedHours,
+        // active and projectPosition
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("startDate");
+        tempIncludes.add("endDate");
+        tempIncludes.add("reviewed");
+        tempIncludes.add("assignedHours");
+        tempIncludes.add("active");
+        tempIncludes.add("projectPosition");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPositionHolder.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new BooleanTransformer(), "reviewed","active");
+
+        // logs the creation of the serializer
+        logger.trace("ProjectPositionHolder Serializer {} created", serializer.toString());
 
         return serializer;
     }
