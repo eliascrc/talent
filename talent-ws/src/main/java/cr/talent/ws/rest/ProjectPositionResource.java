@@ -32,6 +32,14 @@ public class ProjectPositionResource {
 
     /**
      * Endpoint to obtain a technical resource's project position from their username and a project
+     * @param technicalResourceEmail the email (username) of the technical resource whose projeect position will be returned
+     * @param projectName the name of the project from which the position will be returned
+     * @return 400 either string is null or empty
+     *         404 with NonExistentTechnicalResource if specified technical resource does not exist within the
+     *          logged user's organization
+     *         404 with TechnicalResourceHasNoPositionInProject with the specified technical resource does not have a
+     *          position in the specified project
+     *         200 if the project position is returned successfully
      */
     @GET
     @Path("/get")
