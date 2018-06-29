@@ -20,8 +20,6 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.crypto.Data;
-import java.text.*;
 import java.util.Date;
 
 /**
@@ -48,9 +46,10 @@ public class ProjectPositionResource {
      * @param username the technical resource's username
      * @param projectPositionId the identifier of the project position
      * @return  400 if a parameter was left empty or if the id was of a project position of another organization
+     *              or if the end date is not valid
      *          403 if the logged in user lacks the permissions to assign the project position
-     *          404 if no project position with that id was found or if there is no technical resource with the assignee's
-     *          username
+     *          404 if no project position with that id was not found or if there is no technical resource with the
+     *          assignee's username
      *          409 if the project has no active lead
      *          200 if the project position was assigned correctly
      */
@@ -97,13 +96,18 @@ public class ProjectPositionResource {
      * Used for unassigning a project position of a technical resource
      * @param projectPositionHolderId the id of the project position that will be unassigned
      * @param endDate the date that the resource stopped working on the project position
-     * @return
+     * @return 400 if a parameter was left empty or if the id was of a project position of another organization
+     *              or if the start date is not valid
+     *          403 if the logged in user lacks the permissions to unassign the project position
+     *          404 if no project position holder with that id was not found
+     *          409 if the project has no active lead
+     *          200 if the project position was unassigned correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Path("/unassign")
     public Response unassignProjectPosition(@FormParam("projectPositionHolderId") String projectPositionHolderId,
-                                            @FormParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+                                            @FormParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
 
         if (StringUtils.isEmpty(projectPositionHolderId) || endDate == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
