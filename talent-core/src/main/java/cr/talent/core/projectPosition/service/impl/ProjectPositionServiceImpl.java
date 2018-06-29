@@ -48,7 +48,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
             throw new ProjectWithoutLeadException();
 
         if (!assigner.equals(projectLead))
-            throw new NotProjectLeadException();;
+            throw new NotProjectLeadException();
 
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setTotalHours(totalHours);
