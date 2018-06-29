@@ -23,4 +23,12 @@ public interface ProjectPositionHolderService extends CrudService<ProjectPositio
     void assignProjectPosition(TechnicalResource assigner, TechnicalResource assignee, ProjectPosition projectPosition,
                                Date startDate, int assignedHours, boolean active);
 
+    /**
+     * Used to unassign a project position of a technical resource
+     * @param projectPositionHolder the instance of the project position that will be modified
+     * @param unassigner the technical resource unassigning the project position, they must be the project lead
+     * @param endDate the date the resource finished working on that project position
+     */
+    void unassignProjectPosition(ProjectPositionHolder projectPositionHolder, TechnicalResource unassigner, Date endDate);
+
 }
