@@ -1283,6 +1283,55 @@
 
 	</technicalPositions>
 
+	<leadPositions>
+
+		<leadPosition>
+			<active>true</active>
+			<startDate>15/10/2013</startDate>
+			<endDate></endDate>
+			<project>talent</project>
+			<organization>monkey-labs</organization>
+			<username>jolesa97@gmail.com</username>
+		</leadPosition>
+
+		<leadPosition>
+			<active>true</active>
+			<startDate>7/12/2017</startDate>
+			<endDate>7/12/2018</endDate>
+			<project>Bachmann–Landau(1)</project>
+			<organization>monkey-labs</organization>
+			<username>eliascr98@outlook.com</username>
+		</leadPosition>
+
+		<leadPosition>
+			<active>true</active>
+			<startDate>1/1/2001</startDate>
+			<endDate>1/1/2009</endDate>
+			<project>Overlord</project>
+			<organization>andromeda-spiral</organization>
+			<username>sanes.mikkelsen@example.com</username>
+		</leadPosition>
+
+		<leadPosition>
+			<active>true</active>
+			<startDate>7/12/2010</startDate>
+			<endDate>2/7/2015</endDate>
+			<project>Finish Line</project>
+			<organization>gorilla-logic</organization>
+			<username>wildo@gmail.com</username>
+		</leadPosition>
+
+		<leadPosition>
+			<active>true</active>
+			<startDate>2/7/2015</startDate>
+			<endDate></endDate>
+			<project>Digital Globe</project>
+			<organization>gorilla-logic</organization>
+			<username>glorysheppard@gmail.com</username>
+		</leadPosition>
+
+	</leadPositions>
+
 
 	<projectPositions>
 

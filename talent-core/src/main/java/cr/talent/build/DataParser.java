@@ -31,6 +31,7 @@ class DataParser extends XmlParser {
     private List<ProjectPosition> projectPositions;
     private List<TechnicalPosition> technicalPositions;
     private List<ProjectPositionHolder> projectPositionHolders;
+    private List<LeadPosition> leadPositions;
     //private List<Feedback> feedbacks;
 
     /**
@@ -56,6 +57,7 @@ class DataParser extends XmlParser {
         this.projectPositions = new ArrayList<ProjectPosition>();
         this.technicalPositions = new ArrayList<TechnicalPosition>();
         this.projectPositionHolders = new ArrayList<ProjectPositionHolder>();
+        this.leadPositions = new ArrayList<LeadPosition>();
     }
 
     void parseData() {
@@ -71,6 +73,7 @@ class DataParser extends XmlParser {
         this.fillPrivacyPolicyVersions();
         this.fillTermsOfServiceVersions();
         this.fillProjectPositionHolders();
+        this.fillLeadPositions();
 
     }
 
@@ -327,9 +330,9 @@ class DataParser extends XmlParser {
     }
 
     /**
-     * This method creates a Project object and sets its attributes according to the text in the xml
+     * This method creates a ProjectPositionHolder object and sets its attributes according to the text in the xml
      *
-     * @param projectPositionHolderElement the node of the xml file corresponding to the specific project.
+     * @param projectPositionHolderElement the node of the xml file corresponding to the specific projectPositionHolder.
      * @return a projectPositionHolder with all of its attributes already set.
      */
     private ProjectPositionHolder getProjectPositionHolder(Element projectPositionHolderElement){
@@ -344,6 +347,34 @@ class DataParser extends XmlParser {
 
         return projectPositionHolder;
     }
+
+    /**
+     * Fill the leadPositions list
+     */
+    private void fillLeadPositions() {
+        Elements leadPositionElements = getElementOfType("leadPositions").get(0).getChildElements();
+        for (int i = 0; i <leadPositionElements.size(); i++){
+            LeadPosition leadPosition = getLeadPosition(leadPositionElements.get(i));
+            this.leadPositions.add(leadPosition);
+        }
+    }
+
+    /**
+     * This method creates a LeadPosition object and sets its attributes according to the text in the xml
+     *
+     * @param leadPositionElement the node of the xml file corresponding to the specific leadPosition.
+     * @return a leadPosition with all of its attributes already set.
+     */
+    private LeadPosition getLeadPosition(Element leadPositionElement){
+        LeadPosition leadPosition = new LeadPosition();
+        leadPosition.setActive(getBooleanValue(leadPositionElement, "active"));
+        leadPosition.setStartDate(getDateValue(leadPositionElement, "startDate"));
+        leadPosition.setEndDate(getDateValue(leadPositionElement, "endDate"));
+        this.linkLeadPositionToProject(leadPosition, getAttributeValue(leadPositionElement, "project"), getAttributeValue(leadPositionElement, "organization"));
+        this.linkLeadPositionToTechnicalResource(leadPosition, getAttributeValue(leadPositionElement, "username"));
+        return leadPosition;
+    }
+
 
     /**
      * Fill the languages list
@@ -852,7 +883,7 @@ class DataParser extends XmlParser {
 
     /**This method will set the projectPosition attribute to the projectPositionHolder object.
      *
-     * @param projectPositionHolder the projectPosition which must be linked with the respective technicalResource.
+     * @param projectPositionHolder the projectPositionHolder which must be linked with the respective technicalResource.
      * @param technicalResourceUsername the username of the technicalResource that will be linked with the projectPosition.
      * */
 
@@ -871,6 +902,46 @@ class DataParser extends XmlParser {
         projectPositionHolder.setResource(technicalResource);
     }
 
+    /**This method will set the project attribute to the leadPosition object.
+     *
+     * @param leadPosition the object that will be linked to the project.
+     * @param projectName the name of the project to which the leadPosition will be linked.
+     * @param organizationUniqueIdentifier the unique identifier of the organization to which the project belongs.
+     */
+    private void linkLeadPositionToProject (LeadPosition leadPosition, String projectName, String organizationUniqueIdentifier){
+        Project project = null;
+        for (Project projectIterator : this.projects){
+            if(projectIterator.getName().equals(projectName)
+                    && projectIterator.getOrganization().getUniqueIdentifier().equals(organizationUniqueIdentifier)){
+
+                project = projectIterator;
+                break;
+            }
+        }
+        assert project != null;
+
+        leadPosition.setProject(project);
+    }
+
+    /**This method will set the technicalResource attribute to the leadPosition object.
+     *
+     * @param leadPosition the object that will be linked to the technicalResource.
+     * @param username the name of the technicalPosition that will be linked to the leadPosition.
+     */
+    private void linkLeadPositionToTechnicalResource (LeadPosition leadPosition, String username) {
+        TechnicalResource technicalResource = null;
+        for (TechnicalResource technicalResourceIterator : this.technicalResources){
+            if (technicalResourceIterator.getUsername().equals(username)){
+
+                technicalResource = technicalResourceIterator;
+                break;
+            }
+        }
+        assert  technicalResource != null;
+
+        leadPosition.setLead(technicalResource);
+    }
+
     List<Organization> getOrganizations() {
         return this.organizations;
     }
@@ -881,7 +952,7 @@ class DataParser extends XmlParser {
 
     List<PrivacyPolicy> getPrivacyPolicyVersions() { return this.privacyPolicyVersions; }
 
-    public List<TermsOfService> getTermsOfServiceVersions() {
+    List<TermsOfService> getTermsOfServiceVersions() {
         return termsOfServiceVersions;
     }
 
@@ -923,5 +994,9 @@ class DataParser extends XmlParser {
 
     List<TechnicalPosition> getTechnicalPositions() {
         return this.technicalPositions;
+    }
+
+    List<LeadPosition> getLeadPositions() {
+        return this.leadPositions;
     }
 }
