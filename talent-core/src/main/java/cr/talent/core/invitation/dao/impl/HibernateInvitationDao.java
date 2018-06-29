@@ -40,4 +40,19 @@ public class HibernateInvitationDao extends HibernateCrudDao<Invitation, String>
         return DataAccessUtils.singleResult(invitationResult);
     }
 
+    /**
+     * @see cr.talent.core.invitation.dao.InvitationDao#findInvitationByToken(String)
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public Invitation findInvitationByToken(String token) {
+        String hql = "FROM Invitation WHERE token = :token";
+        Query query = super.getSessionFactory().getCurrentSession().createQuery(hql);
+
+        query.setParameter("token", token);
+        List<Invitation> invitationResult = (List<Invitation>)query.list();
+
+        return DataAccessUtils.singleResult(invitationResult);
+    }
+
 }
