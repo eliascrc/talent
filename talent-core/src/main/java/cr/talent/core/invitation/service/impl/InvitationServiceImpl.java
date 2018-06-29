@@ -148,7 +148,7 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
 
         //Sends the invitations until all of them are validated and stored.
         for (Invitation invitationToSend : invitationsToSend) {
-            this.invitationEmailService.sendInvitationEmail(invitationToSend, organization.getUniqueIdentifier());
+            this.invitationEmailService.sendInvitationEmail(invitationToSend);
         }
     }
 

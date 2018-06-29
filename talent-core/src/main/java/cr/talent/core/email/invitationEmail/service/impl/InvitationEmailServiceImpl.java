@@ -24,7 +24,8 @@ public class InvitationEmailServiceImpl implements InvitationEmailService {
     private static final String INVITATION_SUBJECT = "Talent Invitation";
     private static final String HTML_EMAIL_FILE = "templates/inviteEmail.vm";
     private static final String HTTP_PREFIX = "http://";
-    private static final String BASE_LINK = ".talent.cr/join?token=";
+    private static final String TALENT_PAGE = "www.talent.cr/#/";
+    private static final String ACCEPT_INVITE_LINK = "accept-invite?token=";
 
     @Value("${talent.mail.from}")
     private String talentEmail;
@@ -33,10 +34,10 @@ public class InvitationEmailServiceImpl implements InvitationEmailService {
     private EmailSenderService emailSenderService;
 
     /**
-     * @see cr.talent.core.email.invitationEmail.service.InvitationEmailService#sendInvitationEmail(Invitation, String)
+     * @see cr.talent.core.email.invitationEmail.service.InvitationEmailService#sendInvitationEmail(Invitation)
      */
     @Override
-    public void sendInvitationEmail(Invitation invitation, String uniqueIdentifier) {
+    public void sendInvitationEmail(Invitation invitation) {
         Email email = new Email();
         email.setFrom(talentEmail);
         email.setTo(invitation.getEmail());
@@ -44,7 +45,7 @@ public class InvitationEmailServiceImpl implements InvitationEmailService {
         email.setFileName(HTML_EMAIL_FILE);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("inviteLink", HTTP_PREFIX + uniqueIdentifier + BASE_LINK + invitation.getToken());
+        model.put("inviteLink", HTTP_PREFIX + TALENT_PAGE + ACCEPT_INVITE_LINK + invitation.getToken());
         model.put("firstName", invitation.getFirstName());
         model.put("lastName", invitation.getLastName());
         model.put("organization", invitation.getOrganization().getName());
