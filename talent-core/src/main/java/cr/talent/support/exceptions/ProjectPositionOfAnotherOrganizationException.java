@@ -2,25 +2,25 @@ package cr.talent.support.exceptions;
 
 /**
  * A runtime exception that is thrown when the {@link cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService}
- * notices that someone that is not the lead of a project tries to assign project positions in that project
+ * notices that a technical resource tried to assign a project position of an organization that they do not belong
  *
  * @author Daniel Montes de Oca
  */
-public class NotProjectLeadException extends RuntimeException {
+public class ProjectPositionOfAnotherOrganizationException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public NotProjectLeadException() {
+    public ProjectPositionOfAnotherOrganizationException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public NotProjectLeadException(String message) {
+    public ProjectPositionOfAnotherOrganizationException(String message) {
         super(message);
     }
 
@@ -28,7 +28,7 @@ public class NotProjectLeadException extends RuntimeException {
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public NotProjectLeadException(Throwable cause) {
+    public ProjectPositionOfAnotherOrganizationException(Throwable cause) {
         super(cause);
     }
 
@@ -37,8 +37,8 @@ public class NotProjectLeadException extends RuntimeException {
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public NotProjectLeadException(String message, Throwable cause) {
+    public ProjectPositionOfAnotherOrganizationException(String message, Throwable cause) {
         super(message, cause);
     }
-}
 
+}
