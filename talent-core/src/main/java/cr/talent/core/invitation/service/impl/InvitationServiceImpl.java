@@ -11,9 +11,11 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
 import cr.talent.support.exceptions.AlreadyRegisteredUserException;
 import cr.talent.support.exceptions.EmptyDestinationEmailException;
+import cr.talent.support.exceptions.InvalidJSONException;
 import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -68,19 +70,38 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         final String invitationLimitReachedMsg = "The limit of invitations available for the organization has been reached.";
         final String alreadyRegisteredUserMsg = "The email for the invitation is already registered in the organization.";
         final String emptyDestinationEmailMsg = "One of the emails passed to the service is empty.";
+        final String invalidJSONExceptionMsg = "The provided email is invalid.";
 
         List<Invitation> invitationsToSend = new ArrayList<>();
+        JSONObject invitationsJSON;
+        JSONArray invitationsList;
 
-        JSONObject invitationsJSON = new JSONObject(invitations);
-        JSONArray invitationsList = invitationsJSON.getJSONArray("invitations");
+        try {
+            invitationsJSON = new JSONObject(invitations);
+            invitationsList = invitationsJSON.getJSONArray("invitations");
+        } catch (JSONException e){
+            throw new InvalidJSONException(invalidJSONExceptionMsg);
+        }
+
         int invitationsListSize = invitationsList.length();
+
+        if(invitationsListSize == 0)
+            throw new InvalidJSONException(invalidJSONExceptionMsg);
+
         String email, firstName, lastName;
 
         for (int i = 0; i < invitationsListSize; i++) {
 
-            email = invitationsList.getJSONObject(i).getString("email");
-            firstName = invitationsList.getJSONObject(i).getString("firstName");
-            lastName = invitationsList.getJSONObject(i).getString("lastName");
+            try {
+                email = invitationsList.getJSONObject(i).getString("email");
+                firstName = invitationsList.getJSONObject(i).getString("firstName");
+                lastName = invitationsList.getJSONObject(i).getString("lastName");
+            } catch (JSONException e){
+                throw new InvalidJSONException(invalidJSONExceptionMsg);
+            }
+
+            if(StringUtils.isEmpty(email) || StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName))
+                throw new InvalidJSONException(invalidJSONExceptionMsg);
 
             if (StringUtils.isEmpty(email) || StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName)) {
                 throw new EmptyDestinationEmailException(emptyDestinationEmailMsg);

@@ -45,6 +45,8 @@ public class InvitationEmailServiceImpl implements InvitationEmailService {
 
         Map<String, Object> model = new HashMap<>();
         model.put("inviteLink", HTTP_PREFIX + uniqueIdentifier + BASE_LINK + invitation.getToken());
+        model.put("firstName", invitation.getFirstName());
+        model.put("lastName", invitation.getLastName());
 
         this.emailSenderService.sendEmail(email, model);
     }

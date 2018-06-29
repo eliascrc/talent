@@ -5,10 +5,7 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
-import cr.talent.support.exceptions.AlreadyRegisteredUserException;
-import cr.talent.support.exceptions.EmptyDestinationEmailException;
-import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
-import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
+import cr.talent.support.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -65,15 +62,16 @@ public class InvitationResource {
             this.invitationService.createInvitations(invitations, organization);
 
         } catch (LimitOfInvitationsReachedException e) {
-            return Response.status(Response.Status.CONFLICT).
-                    entity("LimitOfInvitationsReached").build();
+            return Response.status(Response.Status.CONFLICT).entity("LimitOfInvitationsReached").build();
 
         } catch (AlreadyRegisteredUserException e) {
-            return Response.status(Response.Status.CONFLICT).
-                    entity("AlreadyRegisteredUser").build();
+            return Response.status(Response.Status.CONFLICT).entity("AlreadyRegisteredUser").build();
 
         } catch (EmptyDestinationEmailException e) {
             return Response.status(Response.Status.BAD_REQUEST).build();
+
+        } catch (InvalidJSONException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity("InvalidJSONException").build();
         }
 
         return Response.ok().build();
