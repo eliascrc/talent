@@ -40,7 +40,7 @@ public class SignUpResourceTest extends FunctionalTest {
     private final String username = "username";
     private final String termsOfServiceAccepted = "termsOfServiceAccepted";
     private final String organizationIdentifier = "organizationIdentifier";
-    private final String emails = "emails";
+    private final String invitations = "invitations";
 
     private String forgotPasswordCode;
     private SessionFilter sessionFilter;
@@ -310,7 +310,7 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .filter(this.sessionFilter)
-                .formParam(this.emails,"")
+                .formParam(this.invitations,"")
                 .contentType(ContentType.URLENC)
                 .post(this.stepFourInvitationsWebService)
                 .then().statusCode(400);

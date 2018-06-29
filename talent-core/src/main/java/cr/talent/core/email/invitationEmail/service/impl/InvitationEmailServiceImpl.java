@@ -47,6 +47,7 @@ public class InvitationEmailServiceImpl implements InvitationEmailService {
         model.put("inviteLink", HTTP_PREFIX + uniqueIdentifier + BASE_LINK + invitation.getToken());
         model.put("firstName", invitation.getFirstName());
         model.put("lastName", invitation.getLastName());
+        model.put("organization", invitation.getOrganization().getName());
 
         this.emailSenderService.sendEmail(email, model);
     }
