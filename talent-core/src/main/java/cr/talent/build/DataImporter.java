@@ -12,6 +12,7 @@ import cr.talent.core.organizationSkillCategory.service.OrganizationSkillCategor
 import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.core.technicalPosition.service.TechnicalPositionService;
+import cr.talent.core.leadPosition.service.LeadPositionService;
 import cr.talent.core.language.service.LanguageService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.*;
@@ -150,6 +151,12 @@ public class DataImporter {
             projectPositionHolderService.create(projectPositionHolder);
         }
 
+        List<LeadPosition> leadPositions = dataParser.getLeadPositions();
+        LeadPositionService leadPositionService = context.getBean(LeadPositionService.class);
+
+        for (LeadPosition leadPosition : leadPositions) {
+            leadPositionService.create(leadPosition);
+        }
     }
 
     public static void main(String[] args) {
