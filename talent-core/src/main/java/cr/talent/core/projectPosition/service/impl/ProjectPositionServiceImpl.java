@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 /**
- * Default implementation of the {@link ProjectPositionService}.
+ * Default implementation of the {@link cr.talent.core.projectPosition.service.ProjectPositionService}.
  *
  * @author Elías Calderón
  */

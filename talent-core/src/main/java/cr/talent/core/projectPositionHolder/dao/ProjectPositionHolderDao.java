@@ -9,5 +9,4 @@ import cr.talent.support.dao.CrudDao;
  * @author Daniel Montes de Oca
  */
 public interface ProjectPositionHolderDao extends CrudDao<ProjectPositionHolder, String> {
-
 }
