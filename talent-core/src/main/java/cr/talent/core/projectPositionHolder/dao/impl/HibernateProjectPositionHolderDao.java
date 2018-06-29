@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Hibernate implementation of the {@link cr.talent.core.projectPositionHolder.dao.ProjectPositionHolderDao}.
  *
- * @author Elías Calderón
+ * @author Daniel Montes de Oca
  */
 @Repository("projectPositionHolderDao")
 public class HibernateProjectPositionHolderDao extends HibernateCrudDao<ProjectPositionHolder, String> implements ProjectPositionHolderDao {
