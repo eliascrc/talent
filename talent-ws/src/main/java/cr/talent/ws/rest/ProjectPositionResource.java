@@ -91,4 +91,36 @@ public class ProjectPositionResource {
         }
     }
 
+    /**Endpoint for deleting a project position
+     *
+     * @param projectPositionId
+     * @return 400 if a parameter was left empty
+     *         403 if the logged in user lacks the permissions to delete the project position
+     *         404 if no project position with that id was found
+     *         409 if the project has no active lead
+     *         200 if the project position was deleted correctly
+     */
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/delete")
+    public Response deleteProjectPosition(@FormParam("projectPositionId") String projectPositionId) {
+
+        if (StringUtils.isEmpty(projectPositionId))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        ProjectPosition projectPosition = projectPositionService.findById(projectPositionId);
+        if (projectPosition == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("Project position not found").build();
+
+        TechnicalResource lead = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            this.projectPositionService.deleteProjectPosition(lead, projectPosition);
+            return Response.ok().build();
+        } catch (NotProjectLeadException e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+    }
 }
