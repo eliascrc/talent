@@ -7,10 +7,7 @@ import cr.talent.model.ProjectPosition;
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
-import cr.talent.support.exceptions.NotProjectLeadException;
-import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
-import cr.talent.support.exceptions.ProjectWithoutLeadException;
-import cr.talent.support.exceptions.StartDateBeforeEndDateException;
+import cr.talent.support.exceptions.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -100,7 +97,7 @@ public class ProjectPositionResource {
      *              or if the start date is not valid
      *          403 if the logged in user lacks the permissions to unassign the project position
      *          404 if no project position holder with that id was not found
-     *          409 if the project has no active lead
+     *          409 if the project has no active lead or if the provided end date is before the start date
      *          200 if the project position was unassigned correctly
      */
     @POST
@@ -129,6 +126,46 @@ public class ProjectPositionResource {
             return Response.status(Response.Status.CONFLICT).entity("The project has no active lead").build();
         } catch (StartDateBeforeEndDateException e) {
             return Response.status(Response.Status.CONFLICT).entity("End date is before the start date").build();
+        }
+
+    }
+
+    /**
+     * Used for unassigning a project position of a technical resource
+     * @param projectPositionHolderId the id of the project position that will be unassigned
+     * @return  400 if a parameter was left empty or if the id was of a project position of another organization
+     *              or if the start date is not valid
+     *          403 if the logged in user lacks the permissions to unassign the project position
+     *          404 if no project position holder with that id was not found
+     *          409 if the project has no active lead
+     *          200 if the project position was unassigned correctly
+     */
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/unassignBeforeStart")
+    public Response unassignBeforeProjectStart(@FormParam("projectPositionHolderId") String projectPositionHolderId,
+                                               @FormParam("currentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date currentDate) {
+
+        if (StringUtils.isEmpty(projectPositionHolderId) || currentDate == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        ProjectPositionHolder projectPositionHolder = projectPositionHolderService.findById(projectPositionHolderId);
+        if (projectPositionHolder == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        TechnicalResource unassigner = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            projectPositionHolderService.unassignProjectPositionBeforeProjectStart(projectPositionHolder, unassigner, currentDate);
+            return Response.ok().build();
+        } catch (NotProjectLeadException e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        } catch (ProjectPositionOfAnotherOrganizationException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project has no active lead").build();
+        } catch (ProjectAlreadyStartedException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project already started").build();
         }
 
     }
