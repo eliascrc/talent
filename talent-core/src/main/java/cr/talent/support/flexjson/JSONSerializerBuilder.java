@@ -163,6 +163,7 @@ public class JSONSerializerBuilder {
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "organization", tempIncludes));
 
         tempIncludes = new LinkedList<>();
+        tempIncludes.add("nickname");
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("username");
@@ -203,10 +204,13 @@ public class JSONSerializerBuilder {
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "organization", tempIncludes));
 
         tempIncludes = new LinkedList<>();
+        tempIncludes.add("nickname");
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("isAdministrator");
         tempIncludes.add("profilePicture");
+        tempIncludes.add("technicalPosition");
+        tempIncludes.add("username");
 
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
 
@@ -235,5 +239,39 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of a project information, for the /ws/organization/project/get web service.
+     *
+     * @return the JSONSerializer to be used to serialize the project information.
+     */
+    public static JSONSerializer getProjectInformationSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+
+        tempIncludes.add("id");
+        tempIncludes.add("entityCreationTimestamp");
+        tempIncludes.add("lastUpdatedTimestamp");
+        tempIncludes.add("entityVersion");
+        tempIncludes.add("name");
+        tempIncludes.add("description");
+        tempIncludes.add("startDate");
+
+        excludes.add("state");
+        excludes.add("organization");
+
+        tempIncludes.add("endDate");
+        tempIncludes.add("jiraLink");
+        tempIncludes.add("confluenceLink");
+        tempIncludes.add("versionControlLink");
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Project Serializer {} created", serializer.toString());
+        return serializer;
+    }
 
 }

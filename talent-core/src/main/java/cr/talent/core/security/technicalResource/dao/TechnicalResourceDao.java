@@ -20,6 +20,14 @@ public interface TechnicalResourceDao extends CrudDao<TechnicalResource, String>
                                                                                String organizationIdentifier);
 
     /**
+     * Finds a technical resource that has a null organization.
+     *
+     * @param username The technical resource's username to search for.
+     * @return The TechnicalResource with the respective username.
+     */
+    TechnicalResource findTechnicalResourceByUsernameWithNullOrganization(String username);
+
+    /**
      * Finds a technical resource by its username.
      *
      * @param username The technical resource's username to search for.
