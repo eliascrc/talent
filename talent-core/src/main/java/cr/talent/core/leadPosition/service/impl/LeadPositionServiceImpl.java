@@ -6,13 +6,15 @@ import cr.talent.model.LeadPosition;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 
 /**
  * Default implementation of the {@link LeadPositionService}.
  *
- * @author Elías Calderón
- */
+ * @author Josue Cubero.
+ **/
+
 @Service("leadPositionService")
 @Transactional
 public class LeadPositionServiceImpl extends CrudServiceImpl<LeadPosition, String> implements LeadPositionService {

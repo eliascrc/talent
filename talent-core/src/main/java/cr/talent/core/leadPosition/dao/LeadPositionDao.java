@@ -6,7 +6,7 @@ import cr.talent.support.dao.CrudDao;
 /**
  * Data access object for all the {@link cr.talent.model.LeadPosition} related operations.
  *
- * @author Elías Calderón
+ * @author Josue Cubero
  */
 public interface LeadPositionDao extends CrudDao<LeadPosition, String> {
 

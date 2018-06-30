@@ -4,9 +4,9 @@ import cr.talent.model.LeadPosition;
 import cr.talent.support.service.CrudService;
 
 /**
- * Provides business logic services related to {@link cr.talent.model.LeadPosition} entities.
+ * Provides business logic services related to {@link LeadPosition} entities.
  *
- * @author Elías Calderón
+ * @author Josue Cubero.
  */
 public interface LeadPositionService extends CrudService<LeadPosition, String> {
 
