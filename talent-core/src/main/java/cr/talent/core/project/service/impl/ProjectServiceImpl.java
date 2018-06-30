@@ -6,6 +6,7 @@ import cr.talent.model.Project;
 import cr.talent.model.ProjectEvent;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.service.impl.CrudServiceImpl;
+import cr.talent.core.projectEvent.service.ProjectEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -26,11 +27,15 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
     @Autowired
     private ProjectDao projectDao;
 
+    @Autowired
+    private ProjectEventService projectEventService;
+
     public void init() {
         setCrudDao(this.projectDao);
     }
 
     public void changeProjectState(Project project, String status, TechnicalResource lead){
+
 
         project.getcurrentState().setEndDate(new Date());
         ProjectEvent projectEvent = new ProjectEvent();
@@ -40,6 +45,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         project.setTimeline(projectTimeline);
         project.setcurrentState(projectEvent);
 
+        projectEventService.create(projectEvent);
         super.update(project);
     }
 
