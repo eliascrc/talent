@@ -52,7 +52,7 @@ public class LoginResourceTest extends FunctionalTest {
 
        given()
             .formParam("username","jo96cube@gmail.com")
-            .formParam("password","TaLeNt.123")
+            .formParam("password","Talent.123")
             .formParam("organizationIdentifier","monkey-labs")
             .filter(this.sessionFilter)
             .contentType(ContentType.URLENC)

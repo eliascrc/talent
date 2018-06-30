@@ -8,6 +8,7 @@ import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.*;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
+import flexjson.JSONSerializer;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,6 +24,8 @@ import java.util.Set;
 /**
  * Resource that handles operations related to project positions
  *
+ * @author Fabián Roberto Leandro
+ * @author Daniel Montes de Oca
  * @author Daniel Montes de Oca, Fabián Roberto Leandro
  */
 @Component
@@ -177,4 +180,43 @@ public class ProjectPositionResource {
 
     }
 
+    /**
+     * Endpoint to obtain a technical resource's project position from their username and a project
+     * @param technicalResourceEmail the email (username) of the technical resource whose project position will be returned
+     * @param projectId the unique identifier of the project from which the position will be returned, inherited from BasicEntity
+     * @return 400 either string is null or empty
+     *         404 with NonExistentTechnicalResource if specified technical resource does not exist within the
+     *          logged user's organization
+     *         404 with TechnicalResourceHasNoPositionInProject with the specified technical resource does not have a
+     *          position in the specified project
+     *         200 if the project position is returned successfully
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/get")
+    public Response getProjectPosition(@QueryParam("technicalResource") String technicalResourceEmail,
+                                       @QueryParam("projectId") String projectId) {
+        if (StringUtils.isEmpty(technicalResourceEmail) || StringUtils.isEmpty(projectId))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        // Get the desired user using the received email and the logged in user's organization
+        TechnicalResource technicalResource = technicalResourceService
+                .getTechnicalResourceByUsernameAndOrganizationIdentifier(technicalResourceEmail,
+                        SecurityUtils.getLoggedInTechnicalResource().getOrganization().getUniqueIdentifier());
+        if (technicalResource == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("NonExistentTechnicalResource").build();
+
+        // Get the project from the received id
+        Project project = projectService.findById(projectId);
+        if(project == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("NonExistentProject").build();
+
+        ProjectPositionHolder projectPositionHolder = this.projectPositionHolderService
+                .getProjectPositionByProjectAndTechnicalResource(project,technicalResource);
+
+        if(projectPositionHolder == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("ProjectPositionIsNotAssignedToResource").build();
+
+        return Response.status(Response.Status.OK).entity(JSONSerializerBuilder.getProjectPositionHolderSerializer().serialize(projectPositionHolder)).build();
+    }
 }
