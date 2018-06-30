@@ -238,7 +238,7 @@ public class JSONSerializerBuilder {
         // Excludes all attributes of the SkillCategory class except its name
         tempIncludes.add("name");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(SkillCategory.class, "category", tempIncludes));
-
+        
         // Excludes all attributes of Skill except its name, category and skillType
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
