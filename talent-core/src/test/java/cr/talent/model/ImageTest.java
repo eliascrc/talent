@@ -59,9 +59,9 @@ public class ImageTest {
     public void testEqualForDifferentClass() {
         Image image = new Image();
 
-        Warning warning = new Warning();
+        Feedback feedback = new Feedback();
 
-        assertFalse(image.equals(warning));
+        assertFalse(image.equals(feedback));
     }
 
     @Test

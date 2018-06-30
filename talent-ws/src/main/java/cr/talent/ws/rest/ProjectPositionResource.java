@@ -4,11 +4,10 @@ import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.ProjectPosition;
+import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
-import cr.talent.support.exceptions.NotProjectLeadException;
-import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
-import cr.talent.support.exceptions.ProjectWithoutLeadException;
+import cr.talent.support.exceptions.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.crypto.Data;
-import java.text.*;
 import java.util.Date;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.ProjectPositionHolder;
@@ -63,9 +60,10 @@ public class ProjectPositionResource {
      * @param username the technical resource's username
      * @param projectPositionId the identifier of the project position
      * @return  400 if a parameter was left empty or if the id was of a project position of another organization
+     *              or if the end date is not valid
      *          403 if the logged in user lacks the permissions to assign the project position
-     *          404 if no project position with that id was found or if there is no technical resource with the assignee's
-     *          username
+     *          404 if no project position with that id was not found or if there is no technical resource with the
+     *          assignee's username
      *          409 if the project has no active lead
      *          200 if the project position was assigned correctly
      */
@@ -106,6 +104,87 @@ public class ProjectPositionResource {
         } catch (ProjectWithoutLeadException e) {
             return Response.status(Response.Status.CONFLICT).build();
         }
+    }
+
+    /**
+     * Used for unassigning a project position of a technical resource
+     * @param projectPositionHolderId the id of the project position that will be unassigned
+     * @param endDate the date that the resource stopped working on the project position
+     * @return 400 if a parameter was left empty or if the id was of a project position of another organization
+     *              or if the start date is not valid
+     *          403 if the logged in user lacks the permissions to unassign the project position
+     *          404 if no project position holder with that id was not found
+     *          409 if the project has no active lead or if the provided end date is before the start date
+     *          200 if the project position was unassigned correctly
+     */
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/unassign")
+    public Response unassignProjectPosition(@FormParam("projectPositionHolderId") String projectPositionHolderId,
+                                            @FormParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
+
+        if (StringUtils.isEmpty(projectPositionHolderId) || endDate == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        ProjectPositionHolder projectPositionHolder = projectPositionHolderService.findById(projectPositionHolderId);
+        if (projectPositionHolder == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        TechnicalResource unassigner = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            projectPositionHolderService.unassignProjectPosition(projectPositionHolder, unassigner, endDate);
+            return Response.ok().build();
+        } catch (NotProjectLeadException e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        } catch (ProjectPositionOfAnotherOrganizationException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project has no active lead").build();
+        } catch (StartDateBeforeEndDateException e) {
+            return Response.status(Response.Status.CONFLICT).entity("End date is before the start date").build();
+        }
+
+    }
+
+    /**
+     * Used for unassigning a project position of a technical resource
+     * @param projectPositionHolderId the id of the project position that will be unassigned
+     * @return  400 if a parameter was left empty or if the id was of a project position of another organization
+     *              or if the start date is not valid
+     *          403 if the logged in user lacks the permissions to unassign the project position
+     *          404 if no project position holder with that id was not found
+     *          409 if the project has no active lead
+     *          200 if the project position was unassigned correctly
+     */
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/unassignBeforeStart")
+    public Response unassignBeforeProjectStart(@FormParam("projectPositionHolderId") String projectPositionHolderId,
+                                               @FormParam("currentDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date currentDate) {
+
+        if (StringUtils.isEmpty(projectPositionHolderId) || currentDate == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        ProjectPositionHolder projectPositionHolder = projectPositionHolderService.findById(projectPositionHolderId);
+        if (projectPositionHolder == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        TechnicalResource unassigner = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            projectPositionHolderService.unassignProjectPositionBeforeProjectStart(projectPositionHolder, unassigner, currentDate);
+            return Response.ok().build();
+        } catch (NotProjectLeadException e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
+        } catch (ProjectPositionOfAnotherOrganizationException e) {
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project has no active lead").build();
+        } catch (ProjectAlreadyStartedException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project already started").build();
+        }
+
     }
 
     TechnicalResourceService technicalResourceService;

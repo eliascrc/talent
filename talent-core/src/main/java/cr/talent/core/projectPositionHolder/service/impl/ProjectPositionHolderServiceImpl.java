@@ -4,9 +4,7 @@ import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.projectPositionHolder.dao.ProjectPositionHolderDao;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.model.*;
-import cr.talent.support.exceptions.NotProjectLeadException;
-import cr.talent.support.exceptions.ProjectPositionOfAnotherOrganizationException;
-import cr.talent.support.exceptions.ProjectWithoutLeadException;
+import cr.talent.support.exceptions.*;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,11 +62,70 @@ public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPos
         projectPositionHolder.setResource(assignee);
         projectPositionHolder.setStartDate(startDate);
         projectPositionHolder.setProjectPosition(projectPosition);
-        System.out.println(projectPosition);
         projectPosition.setProjectPositionStatus(ProjectPositionStatus.TAKEN);
 
         projectPositionService.update(projectPosition);
         super.create(projectPositionHolder);
+    }
+
+    /**
+     * @see cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService#unassignProjectPosition(ProjectPositionHolder, TechnicalResource, Date)
+     */
+    @Override
+    public void unassignProjectPosition(ProjectPositionHolder projectPositionHolder, TechnicalResource unassigner, Date endDate) {
+        ProjectPosition projectPosition = projectPositionHolder.getProjectPosition();
+        if (!projectPosition.getProject().getOrganization().equals(unassigner.getOrganization())) {
+            throw new ProjectPositionOfAnotherOrganizationException();
+        }
+
+        TechnicalResource projectLead = null;
+        Project project = projectPosition.getProject();
+        for (LeadPosition leadPosition : project.getLeadHistory()) { //finds the project lead
+            if (leadPosition.getActive())
+                projectLead = leadPosition.getLead();
+        }
+
+        if (projectLead == null)
+            throw new ProjectWithoutLeadException();
+
+        if (!unassigner.equals(projectLead))
+            throw new NotProjectLeadException();
+
+        if (endDate.before(projectPositionHolder.getStartDate()))
+            throw new StartDateBeforeEndDateException();
+
+        projectPositionHolder.setEndDate(endDate);
+
+        super.update(projectPositionHolder);
+    }
+
+    /**
+     * @see cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService#unassignProjectPositionBeforeProjectStart(ProjectPositionHolder, TechnicalResource, Date)
+     */
+    @Override
+    public void unassignProjectPositionBeforeProjectStart(ProjectPositionHolder projectPositionHolder, TechnicalResource unassigner, Date currentDate) {
+        ProjectPosition projectPosition = projectPositionHolder.getProjectPosition();
+        if (!projectPosition.getProject().getOrganization().equals(unassigner.getOrganization())) {
+            throw new ProjectPositionOfAnotherOrganizationException();
+        }
+
+        TechnicalResource projectLead = null;
+        Project project = projectPosition.getProject();
+        for (LeadPosition leadPosition : project.getLeadHistory()) { //finds the project lead
+            if (leadPosition.getActive())
+                projectLead = leadPosition.getLead();
+        }
+
+        if (projectLead == null)
+            throw new ProjectWithoutLeadException();
+
+        if (!unassigner.equals(projectLead))
+            throw new NotProjectLeadException();
+
+        if (project.getStartDate() != null && currentDate.after(project.getStartDate()))
+            throw new ProjectAlreadyStartedException();
+
+        super.remove(projectPositionHolder);
     }
 
 }
