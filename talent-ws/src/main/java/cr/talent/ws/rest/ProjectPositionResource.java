@@ -193,7 +193,6 @@ public class ProjectPositionResource {
         if (StringUtils.isEmpty(projectId))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        // Get the logged user to know what organization's project to get the positions from
         Project project = projectService.findById(projectId);
 
         // Check if project exists
