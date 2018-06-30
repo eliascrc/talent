@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author Josue Cubero
  */
 @Repository("leadPositionDao")
-public class HibernateLeadPositionDao extends HibernateCrudDao<LeadPosition, String> implements LeadPositionDao {
+public class HibernateLeadPositionDao extends HibernateCrudDao<LeadPosition, String> implements cr.talent.core.leadPosition.dao.LeadPositionDao {
 
     @Autowired
     public HibernateLeadPositionDao(@Qualifier("sessionFactory")SessionFactory sessionFactory) {

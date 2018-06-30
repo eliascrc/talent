@@ -13,7 +13,8 @@ import javax.transaction.Transactional;
  * Default implementation of the {@link LeadPositionService}.
  *
  * @author Josue Cubero.
- */
+ **/
+
 @Service("leadPositionService")
 @Transactional
 public class LeadPositionServiceImpl extends CrudServiceImpl<LeadPosition, String> implements LeadPositionService {
