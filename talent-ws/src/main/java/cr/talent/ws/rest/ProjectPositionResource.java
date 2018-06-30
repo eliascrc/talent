@@ -8,6 +8,7 @@ import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.*;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
+import flexjson.JSONSerializer;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -202,20 +203,20 @@ public class ProjectPositionResource {
         TechnicalResource technicalResource = technicalResourceService
                 .getTechnicalResourceByUsernameAndOrganizationIdentifier(technicalResourceEmail,
                         SecurityUtils.getLoggedInTechnicalResource().getOrganization().getUniqueIdentifier());
-
         if (technicalResource == null)
             return Response.status(Response.Status.NOT_FOUND).entity("NonExistentTechnicalResource").build();
 
-        Set<ProjectPositionHolder> projectPositionHolders = technicalResource.getProjectPositions();
-        if (projectPositionHolders != null)
-            for (ProjectPositionHolder projectPositionHolder : projectPositionHolders) {
-                if (projectPositionHolder.getProjectPosition().getProject().getId().equals(projectId)) {
-                    return Response.status(Response.Status.OK)
-                            .entity(JSONSerializerBuilder.getProjectPositionHolderSerializer().serialize(projectPositionHolder))
-                            .build();
-                }
-            }
+        // Get the project from the received id
+        Project project = projectService.findById(projectId);
+        if(project == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("NonExistentProject").build();
 
-        return Response.status(Response.Status.NOT_FOUND).entity("TechnicalResourceHasNoPositionInProject").build();
+        ProjectPositionHolder projectPositionHolder = this.projectPositionHolderService
+                .getProjectPositionByProjectAndTechnicalResource(project,technicalResource);
+
+        if(projectPositionHolder == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("ProjectPositionIsNotAssignedToResource").build();
+
+        return Response.status(Response.Status.OK).entity(JSONSerializerBuilder.getProjectPositionHolderSerializer().serialize(projectPositionHolder)).build();
     }
 }

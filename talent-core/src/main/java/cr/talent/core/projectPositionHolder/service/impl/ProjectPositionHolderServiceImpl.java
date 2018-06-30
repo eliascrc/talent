@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Hibernate implementation of the {@link cr.talent.core.projectPositionHolder.dao.ProjectPositionHolderDao}.
@@ -126,6 +127,20 @@ public class ProjectPositionHolderServiceImpl extends CrudServiceImpl<ProjectPos
             throw new ProjectAlreadyStartedException();
 
         super.remove(projectPositionHolder);
+    }
+
+    /**
+     * @see cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService#getProjectPositionByProjectAndTechnicalResource(Project, TechnicalResource)
+     */
+    @Override
+    public ProjectPositionHolder getProjectPositionByProjectAndTechnicalResource(Project project, TechnicalResource technicalResource) {
+        Set<ProjectPositionHolder> projectPositionHolders = technicalResource.getProjectPositions();
+        if (projectPositionHolders != null) for (ProjectPositionHolder projectPositionHolder : projectPositionHolders) {
+            if (projectPositionHolder.getProjectPosition().getProject().equals(project)) {
+                return projectPositionHolder;
+            }
+        }
+        return null;
     }
 
 }
