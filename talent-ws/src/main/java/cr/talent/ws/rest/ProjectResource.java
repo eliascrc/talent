@@ -4,7 +4,10 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.Organization;
 import cr.talent.model.Project;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
+import cr.talent.support.exceptions.NotProjectLeadException;
+import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -88,6 +91,17 @@ public class ProjectResource {
         return Response.ok().entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(project)).build();
     }
 
+    /**This endpoint receives a request to change a project status, it sets the endDate of the actual projectEvent and
+     * creates a new projectEvent representing the new projec status.
+     *
+     * @param projectId the id of the project that will have its status changed.
+     * @param newProjectStatus the new status of the project.
+     * @return 400 if a parameter was left empty
+     *         403 if the logged in user lacks the permissions to change the project state
+     *         404 if no project with that id was found
+     *         409 if the project has no active lead or if the project already is in that state.
+     *         200 if the project state was succesfully changed.
+     */
     @POST
     @Path("/changeStatus")
     public Response changeProjectStatus(
@@ -107,7 +121,15 @@ public class ProjectResource {
             return Response.status(Response.Status.CONFLICT).entity("The status sent in the body is already the status of the project.").build();
         }
 
-        this.projectService.update(project);
+        TechnicalResource assigner = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            this.projectService.changeProjectState(project, newProjectStatus, assigner);
+        } catch (NotProjectLeadException e) {
+            return Response.status(Response.Status.FORBIDDEN).entity("The user creating the project is not the project lead.").build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project has no lead.").build();
+        }
 
         return Response.ok().build();
     }
