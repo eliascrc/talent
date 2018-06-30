@@ -189,7 +189,7 @@ public class ProjectPositionResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getHistory")
-    public Response getHistory(@QueryParam("project") String projectId) {
+    public Response getHistory(@QueryParam("projectId") String projectId) {
         if (StringUtils.isEmpty(projectId))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
