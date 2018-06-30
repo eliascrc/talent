@@ -12,6 +12,7 @@ import java.util.Set;
 import static org.mockito.Mockito.*;
 
 public class ProjectPositionServiceTest {
+    
     @Test
     public void testCreateProjectPositionCall() {
 
