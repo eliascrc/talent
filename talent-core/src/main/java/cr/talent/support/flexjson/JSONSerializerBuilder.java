@@ -255,6 +255,12 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    /**
+     * Creates a basic serializer that returns every project position in a project, along with each project's position
+     * holders over time.
+     *
+     * @return the JSONSerializer to be used to serialize a OrganizationSkill
+     */
     public static JSONSerializer getProjectPositionSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
