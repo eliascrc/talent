@@ -225,7 +225,7 @@ public class JSONSerializerBuilder {
      * Creates a basic serializer that returns the category and skill of an OrganizationSkillCategory
      * @return the JSONSerializer to be used to serialize a OrganizationSkill
      */
-    public static JSONSerializer getOrganizationSkillSerializer() {
+    public static JSONSerializer getSkillSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes = new LinkedList<>();
