@@ -32,6 +32,8 @@ public class InvitationTest{
         Date entityCreationTimestamp = new Date();
         Date lastUpdatedTimestamp = new Date();
         long entityVersion = 1l;
+        String firstName = "Josue";
+        String lastName = "Cubero";
 
         // Verify Constructor
         Invitation invitation = new Invitation();
@@ -45,6 +47,8 @@ public class InvitationTest{
         invitation.setOrganization(organization);
         invitation.setToken(TOKEN);
         invitation.setValid(isValid);
+        invitation.setFirstName(firstName);
+        invitation.setLastName(lastName);
 
         // Verify the gets
         assertEquals(ID, invitation.getId());
@@ -55,6 +59,8 @@ public class InvitationTest{
         assertEquals(organization, invitation.getOrganization());
         assertEquals(TOKEN, invitation.getToken());
         assertEquals(isValid, invitation.isValid());
+        assertEquals(firstName, invitation.getFirstName());
+        assertEquals(lastName, invitation.getLastName());
     }
 
     //ON EQUALS TESTS.
