@@ -33,6 +33,7 @@ class DataParser extends XmlParser {
     private List<ProjectPositionHolder> projectPositionHolders;
     private List<LeadPosition> leadPositions;
     private List<Feedback> feedbacks;
+    private List<HumanResourceManager> humanResourceManagers;
 
     /**
      * The class constructor. It receives the filepath to the xml file.
@@ -43,22 +44,23 @@ class DataParser extends XmlParser {
      */
     DataParser(String filepath) {
         super(filepath);
-        this.organizations = new ArrayList<Organization>();
-        this.technicalResources = new ArrayList<TechnicalResource>();
-        this.privacyPolicyVersions = new ArrayList<PrivacyPolicy>();
+        this.organizations = new ArrayList<>();
+        this.technicalResources = new ArrayList<>();
+        this.privacyPolicyVersions = new ArrayList<>();
         this.termsOfServiceVersions = new ArrayList<>();
-        this.languages = new ArrayList<Language>();
-        this.educationRecords = new ArrayList<EducationRecord>();
-        this.projects = new ArrayList<Project>();
-        this.skills = new ArrayList<Skill>();
-        this.skillCategories = new ArrayList<SkillCategory>();
-        this.capabilities = new ArrayList<Capability>();
-        this.capabilityLevels = new ArrayList<CapabilityLevel>();
-        this.projectPositions = new ArrayList<ProjectPosition>();
-        this.technicalPositions = new ArrayList<TechnicalPosition>();
-        this.projectPositionHolders = new ArrayList<ProjectPositionHolder>();
-        this.leadPositions = new ArrayList<LeadPosition>();
-        this.feedbacks = new ArrayList<Feedback>();
+        this.languages = new ArrayList<>();
+        this.educationRecords = new ArrayList<>();
+        this.projects = new ArrayList<>();
+        this.skills = new ArrayList<>();
+        this.skillCategories = new ArrayList<>();
+        this.capabilities = new ArrayList<>();
+        this.capabilityLevels = new ArrayList<>();
+        this.projectPositions = new ArrayList<>();
+        this.technicalPositions = new ArrayList<>();
+        this.projectPositionHolders = new ArrayList<>();
+        this.leadPositions = new ArrayList<>();
+        this.feedbacks = new ArrayList<>();
+        this.humanResourceManagers = new ArrayList<>();
     }
 
     void parseData() {
@@ -76,7 +78,8 @@ class DataParser extends XmlParser {
         this.fillProjectPositionHolders();
         this.fillLeadPositions();
         this.fillFeedbacks();
-        //this.fillEducationRecords();
+        this.fillHumanResourceManagers();
+        this.fillEducationRecords();
         //this.fillTechnicalPosition();
 
     }
@@ -145,6 +148,41 @@ class DataParser extends XmlParser {
         technicalResource.setNickname(super.getAttributeValue(technicalResourceElement,"nickname"));
 
         return technicalResource;
+    }
+
+    /**
+     * Fill the humanResourceManagers List.
+     */
+    private void fillHumanResourceManagers () {
+        Elements humanResourceManagerElements = getElementOfType("humanResourceManagers").get(0).getChildElements();
+        for (int i = 0; i < humanResourceManagerElements.size(); i++) {
+            HumanResourceManager humanResourceManager = getHumanResourceManager(humanResourceManagerElements.get(i));
+            this.humanResourceManagers.add(humanResourceManager);
+        }
+    }
+
+    /**This method creates a humanResourceManager and sets its attributes according to the text in the xml file.
+     *
+     * @param humanResourceManagerElement the node of the xml file corresponding to the specific technical resource.
+     * @return a humanResourceManager with all of its attributes already set
+     */
+    private HumanResourceManager getHumanResourceManager(Element humanResourceManagerElement) {
+        HumanResourceManager humanResourceManager = new HumanResourceManager();
+        humanResourceManager.setUsername(super.getAttributeValue(humanResourceManagerElement, "username"));
+        humanResourceManager.setFirstName(super.getAttributeValue(humanResourceManagerElement, "firstName"));
+        humanResourceManager.setLastName(super.getAttributeValue(humanResourceManagerElement, "lastName"));
+        humanResourceManager.setPassword(super.getAttributeValue(humanResourceManagerElement, "password"));
+        humanResourceManager.setEnabled(super.getBooleanValue(humanResourceManagerElement, "enabled"));
+        humanResourceManager.setPasswordNeedsChange(super.getBooleanValue(humanResourceManagerElement, "passwordNeedsChange"));
+        humanResourceManager.setStatus(User.Status.valueOf(super.getAttributeValue(humanResourceManagerElement, "status")));
+        humanResourceManager.setAdministrator(super.getBooleanValue(humanResourceManagerElement, "isAdministrator"));
+        humanResourceManager.setLastLevelAssessment(super.getDateValue(humanResourceManagerElement, "lastLevelAssessment"));
+        humanResourceManager.setLastPerformanceReview(super.getDateValue(humanResourceManagerElement, "lastPerformanceReview"));
+        this.linkHumanResourceManagerToOrganization(humanResourceManager, super.getAttributeValue(humanResourceManagerElement, "organization"));
+        humanResourceManager.setTimeZone(super.getAttributeValue(humanResourceManagerElement, "timeZone"));
+        humanResourceManager.setLevelAssessmentTimeGap(super.getIntValue(humanResourceManagerElement, "levelAssessmentTimeGap"));
+        humanResourceManager.setNickname(super.getAttributeValue(humanResourceManagerElement,"nickname"));
+        return humanResourceManager;
     }
 
     /**
@@ -530,6 +568,7 @@ class DataParser extends XmlParser {
         educationRecord.setDescription(super.getAttributeValue(educationRecordElement, "description"));
 
         this.linkEducationRecordToTechnicalResource(educationRecord, super.getAttributeValue(educationRecordElement, "resource"));
+        this.linkEducationRecordToHumanResourceManager(educationRecord, super.getAttributeValue(educationRecordElement, "humanResourceManager"));
 
         return educationRecord;
     }
@@ -582,6 +621,25 @@ class DataParser extends XmlParser {
         assert organization != null;
 
         technicalResource.setOrganization(organization);
+        organization.setTotalUsers(organization.getTotalUsers() + 1);
+    }
+
+    /**This method sets the organization attribute to the humanResourceManager object.
+     *
+     * @param humanResourceManager the technical resource object which must be linked to respective organization
+     * @param organizationUniqueIdentifier the unique identifier of the organization to which the technical resource will be linked.
+     */
+    private void linkHumanResourceManagerToOrganization(HumanResourceManager humanResourceManager, String organizationUniqueIdentifier) {
+        Organization organization = null;
+
+        for (Organization organizationIterator : this.organizations) {
+            if (organizationIterator.getUniqueIdentifier().equals(organizationUniqueIdentifier)) {
+                organization = organizationIterator;
+                break;
+            }
+        }
+
+        humanResourceManager.setOrganization(organization);
         organization.setTotalUsers(organization.getTotalUsers() + 1);
     }
 
@@ -738,6 +796,25 @@ class DataParser extends XmlParser {
         assert technicalResource != null;
 
         educationRecord.setResource(technicalResource);
+    }
+
+    /**This method sets the HumanResourceManager attribute to the educationRecord object.
+     *
+     * @param educationRecord the educationRecord object which must be linked to the respective humanResourceManager.
+     * @param humanResourceManagerUsername the username of the humanResourceManager to which the educationRecord will be linked.
+     */
+    private void linkEducationRecordToHumanResourceManager(EducationRecord educationRecord, String humanResourceManagerUsername){
+        HumanResourceManager humanResourceManager = null;
+
+        for (HumanResourceManager humanResourceManagerIterator : this.humanResourceManagers) {
+            if (humanResourceManagerIterator.getUsername().equals(humanResourceManagerUsername)){
+                humanResourceManager = humanResourceManagerIterator;
+                break;
+            }
+        }
+        assert humanResourceManager != null;
+
+        educationRecord.setHumanResourceManager(humanResourceManager);
     }
 
     /**This method sets the TechnicalResource attribute to the technicalPosition object
@@ -1010,7 +1087,6 @@ class DataParser extends XmlParser {
             if (technicalResourceIterator.getUsername().equals(observer)){
 
                 technicalResource = technicalResourceIterator;
-                System.out.println(technicalResource.getUsername());
             }
         }
 
@@ -1100,5 +1176,9 @@ class DataParser extends XmlParser {
 
     List<Feedback> getFeedbacks() {
         return this.feedbacks;
+    }
+
+    List<HumanResourceManager> getHumanResourceManagers(){
+        return this.humanResourceManagers;
     }
 }

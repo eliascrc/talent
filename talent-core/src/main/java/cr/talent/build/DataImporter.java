@@ -16,6 +16,7 @@ import cr.talent.core.leadPosition.service.LeadPositionService;
 import cr.talent.core.language.service.LanguageService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.core.feedback.service.FeedbackService;
+import cr.talent.core.security.humanResourceManager.service.HumanResourceManagerService;
 import cr.talent.model.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
@@ -72,6 +73,12 @@ public class DataImporter {
             technicalResourceService.create(technicalResource);
         }
 
+        List<HumanResourceManager> humanResourceManagers = dataParser.getHumanResourceManagers();
+        HumanResourceManagerService humanResourceManagerService = context.getBean(HumanResourceManagerService.class);
+
+        for (HumanResourceManager humanResourceManager: humanResourceManagers) {
+            humanResourceManagerService.create(humanResourceManager);
+        }
 
         List<PrivacyPolicy> privacyPolicyVersions = dataParser.getPrivacyPolicyVersions();
         PrivacyPolicyService privacyPolicyService = context.getBean(PrivacyPolicyService.class);
