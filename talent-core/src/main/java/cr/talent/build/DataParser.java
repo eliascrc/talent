@@ -24,15 +24,16 @@ class DataParser extends XmlParser {
     private List<Language> languages;
     private List<EducationRecord> educationRecords;
     private List<Project> projects;
-    private List<OrganizationSkill> organizationSkills;
-    private List<OrganizationSkillCategory> organizationSkillCategories;
+    private List<Skill> skills;
+    private List<SkillCategory> skillCategories;
     private List<Capability> capabilities;
     private List<CapabilityLevel> capabilityLevels;
     private List<ProjectPosition> projectPositions;
     private List<TechnicalPosition> technicalPositions;
     private List<ProjectPositionHolder> projectPositionHolders;
     private List<LeadPosition> leadPositions;
-    //private List<Feedback> feedbacks;
+    private List<Feedback> feedbacks;
+    private List<HumanResourceManager> humanResourceManagers;
 
     /**
      * The class constructor. It receives the filepath to the xml file.
@@ -43,29 +44,31 @@ class DataParser extends XmlParser {
      */
     DataParser(String filepath) {
         super(filepath);
-        this.organizations = new ArrayList<Organization>();
-        this.technicalResources = new ArrayList<TechnicalResource>();
-        this.privacyPolicyVersions = new ArrayList<PrivacyPolicy>();
+        this.organizations = new ArrayList<>();
+        this.technicalResources = new ArrayList<>();
+        this.privacyPolicyVersions = new ArrayList<>();
         this.termsOfServiceVersions = new ArrayList<>();
-        this.languages = new ArrayList<Language>();
-        this.educationRecords = new ArrayList<EducationRecord>();
-        this.projects = new ArrayList<Project>();
-        this.organizationSkills = new ArrayList<OrganizationSkill>();
-        this.organizationSkillCategories = new ArrayList<OrganizationSkillCategory>();
-        this.capabilities = new ArrayList<Capability>();
-        this.capabilityLevels = new ArrayList<CapabilityLevel>();
-        this.projectPositions = new ArrayList<ProjectPosition>();
-        this.technicalPositions = new ArrayList<TechnicalPosition>();
-        this.projectPositionHolders = new ArrayList<ProjectPositionHolder>();
-        this.leadPositions = new ArrayList<LeadPosition>();
+        this.languages = new ArrayList<>();
+        this.educationRecords = new ArrayList<>();
+        this.projects = new ArrayList<>();
+        this.skills = new ArrayList<>();
+        this.skillCategories = new ArrayList<>();
+        this.capabilities = new ArrayList<>();
+        this.capabilityLevels = new ArrayList<>();
+        this.projectPositions = new ArrayList<>();
+        this.technicalPositions = new ArrayList<>();
+        this.projectPositionHolders = new ArrayList<>();
+        this.leadPositions = new ArrayList<>();
+        this.feedbacks = new ArrayList<>();
+        this.humanResourceManagers = new ArrayList<>();
     }
 
     void parseData() {
         this.fillOrganizations();
         this.fillLanguages();
         this.fillTechnicalResources();
-        this.fillOrganizationSkillCategories();
-        this.fillOrganizationSkills();
+        this.fillSkillCategories();
+        this.fillSkills();
         this.fillCapabilities();
         this.fillCapabilityLevels();
         this.fillProjects();
@@ -74,6 +77,10 @@ class DataParser extends XmlParser {
         this.fillTermsOfServiceVersions();
         this.fillProjectPositionHolders();
         this.fillLeadPositions();
+        this.fillFeedbacks();
+        this.fillHumanResourceManagers();
+        this.fillEducationRecords();
+        //this.fillTechnicalPosition();
 
     }
 
@@ -144,58 +151,93 @@ class DataParser extends XmlParser {
     }
 
     /**
-     * Fill the organizationSkillCategories List.
+     * Fill the humanResourceManagers List.
      */
-    private void fillOrganizationSkillCategories() {
-        Elements organizationSkillCategoryElements = getElementOfType("organizationSkillCategories").get(0).getChildElements();
-        for (int i = 0; i < organizationSkillCategoryElements.size(); i++){
-            OrganizationSkillCategory organizationSkillCategory = getOrganizationSkillCategory(organizationSkillCategoryElements.get(i));
-            this.organizationSkillCategories.add(organizationSkillCategory);
+    private void fillHumanResourceManagers () {
+        Elements humanResourceManagerElements = getElementOfType("humanResourceManagers").get(0).getChildElements();
+        for (int i = 0; i < humanResourceManagerElements.size(); i++) {
+            HumanResourceManager humanResourceManager = getHumanResourceManager(humanResourceManagerElements.get(i));
+            this.humanResourceManagers.add(humanResourceManager);
+        }
+    }
+
+    /**This method creates a humanResourceManager and sets its attributes according to the text in the xml file.
+     *
+     * @param humanResourceManagerElement the node of the xml file corresponding to the specific technical resource.
+     * @return a humanResourceManager with all of its attributes already set
+     */
+    private HumanResourceManager getHumanResourceManager(Element humanResourceManagerElement) {
+        HumanResourceManager humanResourceManager = new HumanResourceManager();
+        humanResourceManager.setUsername(super.getAttributeValue(humanResourceManagerElement, "username"));
+        humanResourceManager.setFirstName(super.getAttributeValue(humanResourceManagerElement, "firstName"));
+        humanResourceManager.setLastName(super.getAttributeValue(humanResourceManagerElement, "lastName"));
+        humanResourceManager.setPassword(super.getAttributeValue(humanResourceManagerElement, "password"));
+        humanResourceManager.setEnabled(super.getBooleanValue(humanResourceManagerElement, "enabled"));
+        humanResourceManager.setPasswordNeedsChange(super.getBooleanValue(humanResourceManagerElement, "passwordNeedsChange"));
+        humanResourceManager.setStatus(User.Status.valueOf(super.getAttributeValue(humanResourceManagerElement, "status")));
+        humanResourceManager.setAdministrator(super.getBooleanValue(humanResourceManagerElement, "isAdministrator"));
+        humanResourceManager.setLastLevelAssessment(super.getDateValue(humanResourceManagerElement, "lastLevelAssessment"));
+        humanResourceManager.setLastPerformanceReview(super.getDateValue(humanResourceManagerElement, "lastPerformanceReview"));
+        this.linkHumanResourceManagerToOrganization(humanResourceManager, super.getAttributeValue(humanResourceManagerElement, "organization"));
+        humanResourceManager.setTimeZone(super.getAttributeValue(humanResourceManagerElement, "timeZone"));
+        humanResourceManager.setLevelAssessmentTimeGap(super.getIntValue(humanResourceManagerElement, "levelAssessmentTimeGap"));
+        humanResourceManager.setNickname(super.getAttributeValue(humanResourceManagerElement,"nickname"));
+        return humanResourceManager;
+    }
+
+    /**
+     * Fill the skillCategories List.
+     */
+    private void fillSkillCategories() {
+        Elements skillCategoryElements = getElementOfType("skillCategories").get(0).getChildElements();
+        for (int i = 0; i < skillCategoryElements.size(); i++){
+            SkillCategory skillCategory = getSkillCategory(skillCategoryElements.get(i));
+            this.skillCategories.add(skillCategory);
         }
     }
 
     /**
-     * This method creates an OrganizationSkillCategory object and sets its attributes according to the text in the xml
+     * This method creates an SkillCategory object and sets its attributes according to the text in the xml
      *
-     * @param organizationSkillCategoryElement the node of the xml file corresponding to the specific organizationSkillCategory.
-     * @return an organizationSkillCategory object with all of its attributes already set.
+     * @param skillCategoryElement the node of the xml file corresponding to the specific skillCategory.
+     * @return an skillCategory object with all of its attributes already set.
      */
-    private OrganizationSkillCategory getOrganizationSkillCategory(Element organizationSkillCategoryElement){
-        OrganizationSkillCategory organizationSkillCategory = new OrganizationSkillCategory();
-        organizationSkillCategory.setName(super.getAttributeValue(organizationSkillCategoryElement, "name"));
+    private SkillCategory getSkillCategory(Element skillCategoryElement){
+        SkillCategory skillCategory = new SkillCategory();
+        skillCategory.setName(super.getAttributeValue(skillCategoryElement, "name"));
 
-        this.linkOrganizationSkillCategoryToOrganization(organizationSkillCategory, super.getAttributeValue(organizationSkillCategoryElement, "organization"));
+        this.linkSkillCategoryToOrganization(skillCategory, super.getAttributeValue(skillCategoryElement, "organization"));
 
-        return organizationSkillCategory;
+        return skillCategory;
     }
 
     /**
-     * Fill the organizationSkills List.
+     * Fill the skills List.
      */
-    private void fillOrganizationSkills() {
-        Elements organizationSkillElements = getElementOfType("organizationSkills").get(0).getChildElements();
-        for (int i = 0; i < organizationSkillElements.size(); i++){
-            OrganizationSkill organizationSkill = getOrganizationSkill(organizationSkillElements.get(i));
-            this.organizationSkills.add(organizationSkill);
+    private void fillSkills() {
+        Elements skillElements = getElementOfType("skills").get(0).getChildElements();
+        for (int i = 0; i < skillElements.size(); i++){
+            Skill skill = getSkill(skillElements.get(i));
+            this.skills.add(skill);
         }
     }
 
     /**
-     * This method creates an OrganizationSkill object and sets its attributes according to the text in the xml
+     * This method creates an Skill object and sets its attributes according to the text in the xml
      *
-     * @param organizationSkillElement the node of the xml file corresponding to the specific organizationSkill.
-     * @return an organizationSkill object with all of its attributes already set.
+     * @param skillElement the node of the xml file corresponding to the specific skill.
+     * @return an skill object with all of its attributes already set.
      */
-    private OrganizationSkill getOrganizationSkill(Element organizationSkillElement){
-        OrganizationSkill organizationSkill = new OrganizationSkill();
-        organizationSkill.setName(super.getAttributeValue(organizationSkillElement, "name"));
+    private Skill getSkill(Element skillElement){
+        Skill skill = new Skill();
+        skill.setName(super.getAttributeValue(skillElement, "name"));
+        skill.setSkillType(SkillType.valueOf(super.getAttributeValue(skillElement, "skillType")));
+        skill.setResources(new HashSet<>());
 
-        organizationSkill.setResources(new HashSet<>());
+        this.linkSkillToTechnicalResources(skill, super.getAttributeValue(skillElement,"resources"));
+        this.linkSkillToSkillCategory(skill, super.getAttributeValue(skillElement, "category"), super.getAttributeValue(skillElement, "organization"));
 
-        this.linkOrganizationSkillToTechnicalResources(organizationSkill, super.getAttributeValue(organizationSkillElement,"resources"));
-        this.linkOrganizationSkillToOrganizationSkillCategory(organizationSkill, super.getAttributeValue(organizationSkillElement, "category"), super.getAttributeValue(organizationSkillElement, "organization"));
-
-        return organizationSkill;
+        return skill;
     }
 
     /**
@@ -342,7 +384,7 @@ class DataParser extends XmlParser {
         projectPositionHolder.setReviewed(getBooleanValue(projectPositionHolderElement, "reviewed"));
         projectPositionHolder.setStartDate(getDateValue(projectPositionHolderElement, "startDate"));
         projectPositionHolder.setEndDate(getDateValue(projectPositionHolderElement, "endDate"));
-        this.linkProjectPositionHolderToProjectPosition(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "project"), getAttributeValue(projectPositionHolderElement, "capabilityLevelName"), getAttributeValue(projectPositionHolderElement, "capabilityLevelCapability"));
+        this.linkProjectPositionHolderToProjectPosition(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "project"), getAttributeValue(projectPositionHolderElement, "capabilityLevelName"), getAttributeValue(projectPositionHolderElement, "capabilityLevelCapability"), getAttributeValue(projectPositionHolderElement, "organization"));
         this.linkProjectPositionHolderToTechnicalResource(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "technicalResource"));
 
         return projectPositionHolder;
@@ -400,7 +442,32 @@ class DataParser extends XmlParser {
         return language;
     }
 
+    /**
+     * Fill the feedbacks list
+     */
+    private void fillFeedbacks(){
+        Elements feedbacksElements = getElementOfType("feedbacks").get(0).getChildElements();
+        for(int i = 0; i < feedbacksElements.size(); i++){
+            Feedback feedback = getFeedback(feedbacksElements.get(i));
+            this.feedbacks.add(feedback);
+        }
+    }
 
+    /**This method creates a feedback object and sets its attributes according to the text in the xml file.
+     *
+     * @param feedbackElement the node of the xml file corresponding to the specific language.
+     * @return a feedback object with all of its attributes already set.
+     */
+    private Feedback getFeedback(Element feedbackElement){
+        Feedback feedback = new Feedback();
+        feedback.setDescription(getAttributeValue(feedbackElement, "description"));
+        feedback.setFeedbackType(FeedbackType.valueOf(getAttributeValue(feedbackElement, "feedbackType")));
+        this.linkFeedbackToObservee (feedback, getAttributeValue(feedbackElement, "observee"));
+        this.linkFeedbackToObserver (feedback, getAttributeValue(feedbackElement, "observer"));
+        this.linkFeedbackToProject  (feedback, getAttributeValue(feedbackElement, "relatedProject"), getAttributeValue(feedbackElement, "organization"));
+
+        return feedback;
+    }
 
 
     /**
@@ -454,7 +521,7 @@ class DataParser extends XmlParser {
         return privacyPolicy;
     }
 
-    /*
+    /**
      * @param termsOfServiceElement the node of the xml file corresponding to the specific terms of service version
      * @return the TermsOfService created object
      */
@@ -501,6 +568,7 @@ class DataParser extends XmlParser {
         educationRecord.setDescription(super.getAttributeValue(educationRecordElement, "description"));
 
         this.linkEducationRecordToTechnicalResource(educationRecord, super.getAttributeValue(educationRecordElement, "resource"));
+        this.linkEducationRecordToHumanResourceManager(educationRecord, super.getAttributeValue(educationRecordElement, "humanResourceManager"));
 
         return educationRecord;
     }
@@ -534,6 +602,8 @@ class DataParser extends XmlParser {
         return technicalPosition;
     }
 
+
+
     /**This method sets the organization attribute to the technical resource object.
      *
      * @param technicalResource the technical resource object which must be linked to respective organization
@@ -554,12 +624,31 @@ class DataParser extends XmlParser {
         organization.setTotalUsers(organization.getTotalUsers() + 1);
     }
 
-    /**This method sets the organization attribute to the organizationSkillCategory object.
+    /**This method sets the organization attribute to the humanResourceManager object.
      *
-     * @param organizationSkillCategory the organizationSkillCategory which must be linked to the respective organization.
-     * @param organizationUniqueIdentifier the unique identifier of the organization to which the organizationSkillCategory will be linked.
+     * @param humanResourceManager the technical resource object which must be linked to respective organization
+     * @param organizationUniqueIdentifier the unique identifier of the organization to which the technical resource will be linked.
      */
-    private void linkOrganizationSkillCategoryToOrganization (OrganizationSkillCategory organizationSkillCategory, String organizationUniqueIdentifier){
+    private void linkHumanResourceManagerToOrganization(HumanResourceManager humanResourceManager, String organizationUniqueIdentifier) {
+        Organization organization = null;
+
+        for (Organization organizationIterator : this.organizations) {
+            if (organizationIterator.getUniqueIdentifier().equals(organizationUniqueIdentifier)) {
+                organization = organizationIterator;
+                break;
+            }
+        }
+
+        humanResourceManager.setOrganization(organization);
+        organization.setTotalUsers(organization.getTotalUsers() + 1);
+    }
+
+    /**This method sets the organization attribute to the skillCategory object.
+     *
+     * @param skillCategory the skillCategory which must be linked to the respective organization.
+     * @param organizationUniqueIdentifier the unique identifier of the organization to which the skillCategory will be linked.
+     */
+    private void linkSkillCategoryToOrganization (SkillCategory skillCategory, String organizationUniqueIdentifier){
         Organization organization = null;
 
         for (Organization organizationIterator : this.organizations) {
@@ -570,41 +659,46 @@ class DataParser extends XmlParser {
         }
         assert organization != null;
 
-        organizationSkillCategory.setOrganization(organization);
+        skillCategory.setOrganization(organization);
     }
 
-    private void linkOrganizationSkillToTechnicalResources (OrganizationSkill organizationSkill, String technicalResourcesNames){
+    /**This method sets the technicalResource attribute to the skill object.
+     *
+     * @param skill the skill which must be linked to the technicalResource.
+     * @param technicalResourcesNames the names of the technical resources which will be linked to the skill.
+     */
+    private void linkSkillToTechnicalResources (Skill skill, String technicalResourcesNames){
         String[] technicalResourceName = technicalResourcesNames.split(",");
 
         for(TechnicalResource technicalResourceIterator : this.technicalResources){
             for(int i = 0; i < technicalResourceName.length; i++){
                 if(technicalResourceIterator.getUsername().equals(technicalResourceName[i])){
 
-                    organizationSkill.getResources().add(technicalResourceIterator);
+                    skill.getResources().add(technicalResourceIterator);
                 }
             }
         }
     }
 
-    /**This method sets the organizationSkillCategory attribute to the organizationSkill object.
+    /**This method sets the skillCategory attribute to the skill object.
      *
-     * @param organizationSkill the organizationSkill which must be linked to the respective organizationSkillCategory.
-     * @param organizationSkillCategoryName the name of the organizationSkillCategory to which the organizationSkill will be linked.
-     * @param organizationUniqueIdentifier the unique identifier of the organization to which the organizationSkill will be linked.
+     * @param skill the skill which must be linked to the respective sillCategory.
+     * @param skillCategoryName the name of the organizationSkillCategory to which the skill will be linked.
+     * @param organizationUniqueIdentifier the unique identifier of the organization to which the skill will be linked.
      */
-    private void linkOrganizationSkillToOrganizationSkillCategory (OrganizationSkill organizationSkill,String organizationSkillCategoryName, String organizationUniqueIdentifier){
-        OrganizationSkillCategory organizationSkillCategory = null;
+    private void linkSkillToSkillCategory (Skill skill,String skillCategoryName, String organizationUniqueIdentifier){
+        SkillCategory skillCategory = null;
 
-        for (OrganizationSkillCategory organizationSkillCategoryIterator : this.organizationSkillCategories) {
-            if (organizationSkillCategoryIterator.getName().equals(organizationSkillCategoryName)
-                    && organizationSkillCategoryIterator.getOrganization().getUniqueIdentifier().equals(organizationUniqueIdentifier)){
-                organizationSkillCategory = organizationSkillCategoryIterator;
+        for (SkillCategory skillCategoryIterator : this.skillCategories) {
+            if (skillCategoryIterator.getName().equals(skillCategoryName)
+                    && skillCategoryIterator.getOrganization().getUniqueIdentifier().equals(organizationUniqueIdentifier)){
+                skillCategory = skillCategoryIterator;
                 break;
             }
         }
-        assert organizationSkillCategory != null;
+        assert skillCategory != null;
 
-        organizationSkill.setCategory(organizationSkillCategory);
+        skill.setCategory(skillCategory);
     }
 
     /**This method sets the organization attribute to the capability object.
@@ -704,6 +798,25 @@ class DataParser extends XmlParser {
         educationRecord.setResource(technicalResource);
     }
 
+    /**This method sets the HumanResourceManager attribute to the educationRecord object.
+     *
+     * @param educationRecord the educationRecord object which must be linked to the respective humanResourceManager.
+     * @param humanResourceManagerUsername the username of the humanResourceManager to which the educationRecord will be linked.
+     */
+    private void linkEducationRecordToHumanResourceManager(EducationRecord educationRecord, String humanResourceManagerUsername){
+        HumanResourceManager humanResourceManager = null;
+
+        for (HumanResourceManager humanResourceManagerIterator : this.humanResourceManagers) {
+            if (humanResourceManagerIterator.getUsername().equals(humanResourceManagerUsername)){
+                humanResourceManager = humanResourceManagerIterator;
+                break;
+            }
+        }
+        assert humanResourceManager != null;
+
+        educationRecord.setHumanResourceManager(humanResourceManager);
+    }
+
     /**This method sets the TechnicalResource attribute to the technicalPosition object
      *
      * @param technicalPosition the technicalPosition which must be linked to the respective technicalResource.
@@ -776,12 +889,12 @@ class DataParser extends XmlParser {
 
         String[] skills = requiredSkillsNames.split(",");
 
-        for (OrganizationSkill organizationSkillIterator : this.organizationSkills){
+        for (Skill skillIterator : this.skills){
             for (int i = 0; i < skills.length; i++){
-                if(organizationSkillIterator.getName().equals(skills[i])
-                        && organizationSkillIterator.getCategory().getOrganization().getUniqueIdentifier().equals(organizationUniqueIdentifier)){
+                if(skillIterator.getName().equals(skills[i])
+                        && skillIterator.getCategory().getOrganization().getUniqueIdentifier().equals(organizationUniqueIdentifier)){
 
-                    capabilityLevel.getRequiredSkills().add(organizationSkillIterator);
+                    capabilityLevel.getRequiredSkills().add(skillIterator);
                 }
             }
         }
@@ -864,12 +977,13 @@ class DataParser extends XmlParser {
      * @param capabilityLevelCapability the capability of the capabilityLevel of the projectPosition that will be linked to the projectPositionHolder
      * */
 
-    private void linkProjectPositionHolderToProjectPosition(ProjectPositionHolder projectPositionHolder, String projectName, String capabilityLevelName, String capabilityLevelCapability){
+    private void linkProjectPositionHolderToProjectPosition(ProjectPositionHolder projectPositionHolder, String projectName, String capabilityLevelName, String capabilityLevelCapability, String organization){
         ProjectPosition projectPosition = null;
         for (ProjectPosition projectPositionIterator : this.projectPositions){
             if(projectPositionIterator.getProject().getName().equals(projectName)
                     && projectPositionIterator.getCapability().getCapability().getName().equals(capabilityLevelCapability)
-                    && projectPositionIterator.getCapability().getName().equals(capabilityLevelName)) {
+                    && projectPositionIterator.getCapability().getName().equals(capabilityLevelName)
+                    && projectPositionIterator.getProject().getOrganization().getUniqueIdentifier().equals(organization)) {
 
 
                 projectPosition = projectPositionIterator;
@@ -942,6 +1056,66 @@ class DataParser extends XmlParser {
         leadPosition.setLead(technicalResource);
     }
 
+    /**This method will set the observee attribute to the feedback object.
+     *
+     * @param feedback the object that will be linked to the observee.
+     * @param observee the name of the technical resource that will be linked to the feedback.
+     */
+    private void linkFeedbackToObservee (Feedback feedback, String observee){
+        TechnicalResource technicalResource = null;
+        for (TechnicalResource technicalResourceIterator : this.technicalResources){
+            if (technicalResourceIterator.getUsername().equals(observee)){
+
+                technicalResource = technicalResourceIterator;
+            }
+        }
+
+        assert technicalResource != null;
+
+        feedback.setObservee(technicalResource);
+    }
+
+
+    /**This method will set the observer attribute to the feedback object.
+     *
+     * @param feedback the object that will be linked to the observer.
+     * @param observer the name of the technical resource that will be linked to the feedback.
+     */
+    private void linkFeedbackToObserver (Feedback feedback, String observer){
+        TechnicalResource technicalResource = null;
+        for (TechnicalResource technicalResourceIterator : this.technicalResources){
+            if (technicalResourceIterator.getUsername().equals(observer)){
+
+                technicalResource = technicalResourceIterator;
+            }
+        }
+
+        assert technicalResource != null;
+
+        feedback.setObserver(technicalResource);
+    }
+
+    /**This method will set the realtedProject attribute to the feedback object.
+     *
+     * @param feedback the object that will be linked to the observer.
+     * @param relatedProject the name of the project that will be linked to the observer.
+     * @param organization the name of the organization to which the project belongs.
+     */
+    private void linkFeedbackToProject (Feedback feedback, String relatedProject, String organization){
+        Project project = null;
+        for (Project projectIterator : this.projects){
+            if (projectIterator.getName().equals(relatedProject)
+                    && projectIterator.getOrganization().getUniqueIdentifier().equals(organization)){
+
+                project = projectIterator;
+            }
+        }
+
+        assert  project != null;
+
+        feedback.setRelatedProject(project);
+    }
+
     List<Organization> getOrganizations() {
         return this.organizations;
     }
@@ -964,12 +1138,12 @@ class DataParser extends XmlParser {
         return this.projects;
     }
 
-    List<OrganizationSkillCategory> getOrganizationSkillCategories() {
-        return this.organizationSkillCategories;
+    List<SkillCategory> getSkillCategories() {
+        return this.skillCategories;
     }
 
-    List<OrganizationSkill> getOrganizationSkills(){
-        return this.organizationSkills;
+    List<Skill> getSkills(){
+        return this.skills;
     }
 
     List<Capability> getCapabilities(){
@@ -998,5 +1172,13 @@ class DataParser extends XmlParser {
 
     List<LeadPosition> getLeadPositions() {
         return this.leadPositions;
+    }
+
+    List<Feedback> getFeedbacks() {
+        return this.feedbacks;
+    }
+
+    List<HumanResourceManager> getHumanResourceManagers(){
+        return this.humanResourceManagers;
     }
 }

@@ -20,4 +20,5 @@ public class HibernateProjectPositionDao extends HibernateCrudDao<ProjectPositio
     public HibernateProjectPositionDao(@Qualifier("sessionFactory")SessionFactory sessionFactory) {
         setSessionFactory(sessionFactory);
     }
+
 }

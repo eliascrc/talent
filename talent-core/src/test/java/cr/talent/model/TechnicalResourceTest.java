@@ -2,7 +2,6 @@ package cr.talent.model;
 
 import org.junit.Test;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -96,9 +95,9 @@ public class TechnicalResourceTest {
         technicalResource.setSkills(new HashSet<>());
         technicalResource.setEducationRecords(new HashSet<>());
         technicalResource.setProjectPositions(new HashSet<>());
-        technicalResource.setObservations(new HashSet<>());
+        technicalResource.setFeedbackMade(new HashSet<>());
         technicalResource.setEmergencyContacts(new HashSet<>());
-        technicalResource.setMadeKudo(new HashSet<>());
+        technicalResource.setFeedbackGiven(new HashSet<>());
         technicalResource.setLeadPositions(new HashSet<>());
 
 
@@ -135,9 +134,9 @@ public class TechnicalResourceTest {
         assertNotNull(technicalResource.getAuthorities());
         assertNotNull(technicalResource.getEducationRecords());
         assertNotNull(technicalResource.getProjectPositions());
-        assertNotNull(technicalResource.getObservations());
+        assertNotNull(technicalResource.getFeedbackMade());
         assertNotNull(technicalResource.getEmergencyContacts());
-        assertNotNull(technicalResource.getMadeKudo());
+        assertNotNull(technicalResource.getFeedbackGiven());
         assertNotNull(technicalResource.getSkills());
         assertNotNull(technicalResource.getLeadPositions());
 

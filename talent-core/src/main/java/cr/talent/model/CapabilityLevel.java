@@ -42,7 +42,7 @@ public class CapabilityLevel extends BasicEntity {
             joinColumns = { @JoinColumn(name = "capability_level_id") },
             inverseJoinColumns = { @JoinColumn(name = "skill_id") }
     )
-    private Set<OrganizationSkill> requiredSkills;
+    private Set<Skill> requiredSkills;
 
     /**
      * The organization of the capability level. If it points no organization, the capability level is taken as a
@@ -113,11 +113,11 @@ public class CapabilityLevel extends BasicEntity {
         this.projects = project;
     }
 
-    public Set<OrganizationSkill> getRequiredSkills() {
+    public Set<Skill> getRequiredSkills() {
         return requiredSkills;
     }
 
-    public void setRequiredSkills(Set<OrganizationSkill> requiredSkills) {
+    public void setRequiredSkills(Set<Skill> requiredSkills) {
         this.requiredSkills = requiredSkills;
     }
 
