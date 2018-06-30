@@ -4,6 +4,7 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.core.skill.service.SkillService;
+import cr.talent.core.skillCategory.service.SkillCategoryService;
 import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
 import cr.talent.core.capability.service.CapabilityService;
@@ -14,6 +15,7 @@ import cr.talent.core.technicalPosition.service.TechnicalPositionService;
 import cr.talent.core.leadPosition.service.LeadPositionService;
 import cr.talent.core.language.service.LanguageService;
 import cr.talent.core.project.service.ProjectService;
+import cr.talent.core.feedback.service.FeedbackService;
 import cr.talent.model.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
@@ -92,21 +94,18 @@ public class DataImporter {
             educationRecordService.create(educationRecord);
         }
 
-        // Need approval before creating the services.
-        /*
-        List<SkillCategory> organizationSkillCategories = dataParser.getOrganizationSkillCategories();
-        SkillCategoryService organizationSkillCategoryService = context.getBean(OrganizationSkillCategoryService.class);
+        List<SkillCategory> skillCategories = dataParser.getSkillCategories();
+        SkillCategoryService skillCategoryService = context.getBean(SkillCategoryService.class);
 
-        for(OrganizationSkillCategory organizationSkillCategory : organizationSkillCategories){
-            organizationSkillCategoryService.create(organizationSkillCategory);
+        for(SkillCategory skillCategory : skillCategories){
+            skillCategoryService.create(skillCategory);
         }
-        */
 
-        List<Skill> organizationSkills = dataParser.getOrganizationSkills();
-        SkillService organizationSkillService = context.getBean(SkillService.class);
+        List<Skill> skills = dataParser.getSkills();
+        SkillService skillService = context.getBean(SkillService.class);
 
-        for(Skill organizationSkill : organizationSkills){
-            organizationSkillService.create(organizationSkill);
+        for(Skill skill : skills){
+            skillService.create(skill);
         }
 
         List<Capability> capabilities = dataParser.getCapabilities();
@@ -157,6 +156,13 @@ public class DataImporter {
 
         for (LeadPosition leadPosition : leadPositions) {
             leadPositionService.create(leadPosition);
+        }
+
+        List<Feedback> feedbacks = dataParser.getFeedbacks();
+        FeedbackService feedbackService = context.getBean(FeedbackService.class);
+
+        for (Feedback feedback : feedbacks){
+            feedbackService.create(feedback);
         }
     }
 

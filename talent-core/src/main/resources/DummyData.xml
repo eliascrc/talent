@@ -194,6 +194,7 @@
 			<username>randomdude@gmail.com</username>
 			<firstName>Random</firstName>
 			<lastName>Dude</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -212,6 +213,7 @@
 			<username>frontend@gmail.com</username>
 			<firstName>Front</firstName>
 			<lastName>End</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -230,6 +232,7 @@
 			<username>backend@gmail.com</username>
 			<firstName>Back</firstName>
 			<lastName>End</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -248,6 +251,7 @@
 			<username>glorysheppard@gmail.com</username>
 			<firstName>Gloria</firstName>
 			<lastName>Sheppard</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -266,6 +270,7 @@
 			<username>aturing@gmail.com</username>
 			<firstName>Alan</firstName>
 			<lastName>Turing</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -284,6 +289,7 @@
 			<username>wildo@gmail.com</username>
 			<firstName>Oscar</firstName>
 			<lastName>Wilde</lastName>
+			<nickname>Some nickname</nickname>
 			<password>Talent.123</password>
 			<enabled>true</enabled>
 			<passwordNeedsChange>false</passwordNeedsChange>
@@ -1081,142 +1087,169 @@
 	</capabilityLevels>
 
 
-	<organizationSkillCategories>
+	<skillCategories>
 
-		<organizationSkillCategory>
+		<skillCategory>
 			<name>Frameworks</name>
 			<organization>monkey-labs</organization>
-		</organizationSkillCategory>
+		</skillCategory>
 
-		<organizationSkillCategory>
+		<skillCategory>
 			<name>Frameworks</name>
 			<organization>andromeda-spiral</organization>
-		</organizationSkillCategory>
+		</skillCategory>
 
-		<organizationSkillCategory>
+		<skillCategory>
 			<name>Programming Languages</name>
 			<organization>monkey-labs</organization>
-		</organizationSkillCategory>
+		</skillCategory>
 
-		<organizationSkillCategory>
+		<skillCategory>
+			<name>Social</name>
+			<organization>monkey-labs</organization>
+		</skillCategory>
+
+		<skillCategory>
 			<name>Programming Languages</name>
 			<organization>andromeda-spiral</organization>
-		</organizationSkillCategory>
+		</skillCategory>
 
-		<organizationSkillCategory>
+		<skillCategory>
 			<name>Databases</name>
 			<organization>monkey-labs</organization>
-		</organizationSkillCategory>
+		</skillCategory>
 
-		<organizationSkillCategory>
+		<skillCategory>
 			<name>Databases</name>
 			<organization>andromeda-spiral</organization>
-		</organizationSkillCategory>
+		</skillCategory>
 
-	</organizationSkillCategories>
+	</skillCategories>
 
 
-	<organizationSkills>
+	<skills>
 
-		<organizationSkill>
-			<name>Angular</name>
-			<category>Frameworks</category>
+		<skill>
+			<name>Communication</name>
+			<category>Social</category>
 			<organization>monkey-labs</organization>
+			<skillType>SOFT</skillType>
 			<resources>andres.mata@example.com,andrea.solano@example.com,antonio.jimenez@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
+			<name>Angular</name>
+			<category>Frameworks</category>
+			<organization>monkey-labs</organization>
+			<skillType>TECHNICAL</skillType>
+			<resources>andres.mata@example.com,andrea.solano@example.com,antonio.jimenez@example.com</resources>
+		</skill>
+
+		<skill>
 			<name>Bootstrap</name>
 			<category>Frameworks</category>
 			<organization>monkey-labs</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>howard.lovecraft@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Angular</name>
 			<category>Frameworks</category>
 			<organization>andromeda-spiral</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources></resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Bootstrap</name>
 			<category>Frameworks</category>
 			<organization>andromeda-spiral</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>james.moriarty@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>SQL</name>
 			<category>Databases</category>
 			<organization>monkey-labs</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>howard.lovecraft@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Mongo</name>
 			<category>Databases</category>
 			<organization>monkey-labs</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources></resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>SQL</name>
 			<category>Databases</category>
 			<organization>andromeda-spiral</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>joseph.lagrange@example.com,james.moriarty@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Mongo</name>
 			<category>Databases</category>
 			<organization>andromeda-spiral</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>joseph.lagrange@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Java</name>
 			<category>Programming Languages</category>
 			<organization>monkey-labs</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources></resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Python</name>
 			<category>Programming Languages</category>
 			<organization>monkey-labs</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>john.tolkien@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>HTML</name>
 			<category>Programming Languages</category>
 			<organization>monkey-labs</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>howard.lovecraft@example.com,john.tolkien@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Java</name>
 			<category>Programming Languages</category>
 			<organization>andromeda-spiral</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>sophie.germain@example.com,keira.priestley@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>Python</name>
 			<category>Programming Languages</category>
 			<organization>andromeda-spiral</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>sanes.mikkelsen@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-		<organizationSkill>
+		<skill>
 			<name>HTML</name>
 			<category>Programming Languages</category>
 			<organization>andromeda-spiral</organization>
+			<skillType>TECHNICAL</skillType>
 			<resources>keira.priestley@example.com,sanes.mikkelsen@example.com</resources>
-		</organizationSkill>
+		</skill>
 
-	</organizationSkills>
+	</skills>
 
 
 	<technicalPositions>
@@ -1555,7 +1588,8 @@
 			<observee>howard.lovecraft@example.com</observee>
 			<observer>john.tolkien@example.com</observer>
 			<relatedProject>talent</relatedProject>
-			<feedbackType>Kudo</feedbackType>
+			<organization>monkey-labs</organization>
+			<feedbackType>KUDO</feedbackType>
 		</feedback>
 
 		<feedback>
@@ -1563,15 +1597,26 @@
 			<observee>antonio.jimenez@example.com</observee>
 			<observer>andrea.solano@example.com</observer>
 			<relatedProject>talent</relatedProject>
-			<feedbackType>Kudo</feedbackType>
+			<organization>monkey-labs</organization>
+			<feedbackType>KUDO</feedbackType>
+		</feedback>
+
+		<feedback>
+			<description>Too much dedication to the project</description>
+			<observee>antonio.jimenez@example.com</observee>
+			<observer>andrea.solano@example.com</observer>
+			<relatedProject>talent</relatedProject>
+			<organization>monkey-labs</organization>
+			<feedbackType>WARNING</feedbackType>
 		</feedback>
 
 		<feedback>
 			<description>Iniciative person</description>
 			<observee>marta.martinez@example.com</observee>
-			<observer>maria.mena@example.com</observer>
+			<observer>antonio.jimenez@example.com</observer>
 			<relatedProject>Bachmann–Landau(1)</relatedProject>
-			<feedbackType>Kudo</feedbackType>
+			<organization>monkey-labs</organization>
+			<feedbackType>KUDO</feedbackType>
 		</feedback>
 
 		<feedback>
@@ -1579,7 +1624,8 @@
 			<observee>samus.aran@example.com</observee>
 			<observer>friedrich.gauss@example.com</observer>
 			<relatedProject>Barbarossa</relatedProject>
-			<feedbackType>Warning</feedbackType>
+			<organization>andromeda-spiral</organization>
+			<feedbackType>WARNING</feedbackType>
 		</feedback>
 
 		<feedback>
@@ -1587,7 +1633,8 @@
 			<observee>leonhard.euler@example.com</observee>
 			<observer>joseph.lagrange@example.com</observer>
 			<relatedProject>Barbarossa</relatedProject>
-			<feedbackType>Warning</feedbackType>
+			<organization>andromeda-spiral</organization>
+			<feedbackType>WARNING</feedbackType>
 		</feedback>
 
 		<feedback>
@@ -1595,7 +1642,8 @@
 			<observee>james.moriarty@example.com</observee>
 			<observer>keira.priestley@example.com</observer>
 			<relatedProject>Overlord</relatedProject>
-			<feedbackType>Warning</feedbackType>
+			<organization>andromeda-spiral</organization>
+			<feedbackType>WARNING</feedbackType>
 		</feedback>
 
 	</feedbacks>
