@@ -267,14 +267,14 @@ public class JSONSerializerBuilder {
 
         // Exclude all attributes of capability except name
         tempIncludes.add("name");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capability", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "projectPosition.capabilityLevel.capability", tempIncludes));
 
         // Exclude all attributes of capabilityLevel except name, hierarchyPosition and capability
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
         tempIncludes.add("hierarchyPosition");
         tempIncludes.add("capability");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "capabilityLevel", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "projectPosition.capabilityLevel", tempIncludes));
 
         // Exclude all attributes of projectPosition except projectPositionStatus, totalHours and capabilityLevel
         tempIncludes = new LinkedList<>();
