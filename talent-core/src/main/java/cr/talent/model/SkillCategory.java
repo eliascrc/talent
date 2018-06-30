@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Class that represents a category for a set of skills within the Talent system.
@@ -10,15 +11,27 @@ import javax.persistence.*;
  * @author María José Cubero
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "skill_category")
-public abstract class SkillCategory extends BasicEntity {
+public class SkillCategory extends BasicEntity {
 
     /**
      * The name of the skill category.
      */
     @Column(name = "name", nullable = false)
     private String name;
+
+    /**
+     * The organization to whom the category belongs. If it's null the category is a predefined one in the system.
+     */
+    @ManyToOne
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
+    /**
+     * The skills that belong to the category.
+     */
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "category")
+    private Set<Skill> skills;
 
     public SkillCategory(){}
 
@@ -27,7 +40,8 @@ public abstract class SkillCategory extends BasicEntity {
         boolean result = false;
         if ( o instanceof SkillCategory){
             SkillCategory skillCategory = (SkillCategory) o;
-            result = (this.name == null ? skillCategory.getName() == null : this.name.equals(skillCategory.getName()));
+            result = (this.name == null ? skillCategory.getName() == null : this.name.equals(skillCategory.getName()))
+                    && (this.organization == null ? skillCategory.getOrganization() == null : this.organization.equals(skillCategory.getOrganization()));
         }
         return result;
     }
@@ -36,6 +50,7 @@ public abstract class SkillCategory extends BasicEntity {
     protected int onHashCode(int result) {
         final int prime = 23;
         result = prime * result + (this.name == null ? 0 : this.name.hashCode());
+        result = prime * result + (this.organization == null ? 0 : this.organization.hashCode());
         return result;
     }
 
@@ -47,4 +62,19 @@ public abstract class SkillCategory extends BasicEntity {
         this.name = name;
     }
 
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
 }

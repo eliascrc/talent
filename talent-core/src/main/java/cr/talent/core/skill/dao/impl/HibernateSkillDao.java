@@ -1,7 +1,7 @@
 package cr.talent.core.skill.dao.impl;
 
 import cr.talent.core.skill.dao.SkillDao;
-import cr.talent.model.PredefinedSkill;
+import cr.talent.model.Skill;
 import cr.talent.model.Skill;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
@@ -30,13 +30,13 @@ public class HibernateSkillDao extends HibernateCrudDao<Skill, String> implement
      * @see cr.talent.core.skill.dao.SkillDao#getPredefinedSkillByName(String)
      */
     @Override
-    public PredefinedSkill getPredefinedSkillByName(String predefinedSkillName) {
+    public Skill getPredefinedSkillByName(String predefinedSkillName) {
 
         Query query = super.getSessionFactory().getCurrentSession()
                 .createQuery("from PredefinedSkill where name = :predefinedSkillName");
 
         query.setParameter("predefinedSkillName", predefinedSkillName);
-        List<PredefinedSkill> predefinedSkillResult = (List<PredefinedSkill>)query.list();
+        List<Skill> predefinedSkillResult = (List<Skill>)query.list();
 
         return DataAccessUtils.singleResult(predefinedSkillResult);
 

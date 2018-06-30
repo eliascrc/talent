@@ -1,7 +1,7 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.skill.service.SkillService;
-import cr.talent.model.PredefinedSkill;
+import cr.talent.model.Skill;
 import cr.talent.support.exceptions.AlreadyCreatedPredefinedSkillException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -40,7 +40,7 @@ public class PredefinedSkillResource {
         if (name == null || name.equals(""))
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
-        PredefinedSkill skill = new PredefinedSkill();
+        Skill skill = new Skill();
         skill.setName(name);
 
         try {
