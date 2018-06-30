@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.HashSet;
 
@@ -34,6 +35,7 @@ class DataParser extends XmlParser {
     private List<LeadPosition> leadPositions;
     private List<Feedback> feedbacks;
     private List<HumanResourceManager> humanResourceManagers;
+    private List<ProjectEvent> projectEvents;
 
     /**
      * The class constructor. It receives the filepath to the xml file.
@@ -61,6 +63,7 @@ class DataParser extends XmlParser {
         this.leadPositions = new ArrayList<>();
         this.feedbacks = new ArrayList<>();
         this.humanResourceManagers = new ArrayList<>();
+        this.projectEvents = new ArrayList<>();
     }
 
     void parseData() {
@@ -80,6 +83,7 @@ class DataParser extends XmlParser {
         this.fillFeedbacks();
         this.fillHumanResourceManagers();
         this.fillEducationRecords();
+        this.fillProjectEvents();
         //this.fillTechnicalPosition();
 
     }
@@ -323,13 +327,39 @@ class DataParser extends XmlParser {
         project.setJiraLink(super.getAttributeValue(projectElement, "jiraLink"));
         project.setConfluenceLink(super.getAttributeValue(projectElement, "confluenceLink"));
         project.setVersionControlLink(super.getAttributeValue(projectElement, "versionControlLink"));
-
         project.setProjectCapabilities(new HashSet<>());
+        project.setTimeline(new HashSet<>());
 
         this.linkProjectToCapabilityLevels(project, super.getAttributeValue(projectElement, "projectCapabilityLevelNames"),super.getAttributeValue(projectElement, "organization"), super.getAttributeValue(projectElement, "projectCapabilityLevelCapabilities"));
         this.linkProjectToOrganization(project, super.getAttributeValue(projectElement, "organization"));
 
         return project;
+    }
+
+    /**
+     * Fill the projectEvents list
+     */
+    private void fillProjectEvents() {
+        Elements projectEventElements = getElementOfType("projectEvents").get(0).getChildElements();
+        for (int i = 0; i <projectEventElements.size(); i++){
+            ProjectEvent projectEvent = getProjectEvent(projectEventElements.get(i));
+            this.projectEvents.add(projectEvent);
+        }
+    }
+
+    /**This method creates a ProjectEvent object and assings all of its attrbutes.
+     *
+     * @param projectEventElement the node of the xml file corresponding to the specific projectEvent.
+     * @return a projectEvent with all of its attributes assigned
+     */
+    private ProjectEvent getProjectEvent(Element projectEventElement) {
+        ProjectEvent projectEvent = new ProjectEvent();
+        projectEvent.setStartDate(getDateValue(projectEventElement, "startDate"));
+        projectEvent.setEndDate(getDateValue(projectEventElement, "endDate"));
+        projectEvent.setEventType(ProjectEventType.valueOf(getAttributeValue(projectEventElement, "eventType")));
+        this.linkProjectEventToProject(projectEvent, getAttributeValue(projectEventElement, "project"), getAttributeValue(projectEventElement, "organization"));
+
+        return projectEvent;
     }
 
     /**
@@ -481,7 +511,7 @@ class DataParser extends XmlParser {
         }
     }
 
-     /*
+    /*
      * Fills the terms of service versions list.
      */
     private void fillTermsOfServiceVersions() {
@@ -528,9 +558,9 @@ class DataParser extends XmlParser {
     private TermsOfService getTermsOfService(Element termsOfServiceElement) {
         TermsOfService termsOfService = new TermsOfService();
         if(super.getDateValue(termsOfServiceElement, "startDate") != null)
-        	termsOfService.setStartDate(super.getDateValue(termsOfServiceElement, "startDate"));
+            termsOfService.setStartDate(super.getDateValue(termsOfServiceElement, "startDate"));
         if(super.getDateValue(termsOfServiceElement, "endDate") != null)
-        	termsOfService.setEndDate(super.getDateValue(termsOfServiceElement, "endDate"));
+            termsOfService.setEndDate(super.getDateValue(termsOfServiceElement, "endDate"));
         termsOfService.setActive(super.getBooleanValue(termsOfServiceElement, "isActive"));
         String termsOfServiceContent = "";
         try {
@@ -1095,6 +1125,21 @@ class DataParser extends XmlParser {
         feedback.setObserver(technicalResource);
     }
 
+    private void linkProjectEventToProject (ProjectEvent projectEvent, String projectName, String organization){
+        Project project = null;
+        for(Project projectIterator : this.projects){
+            if(projectIterator.getName().equals(projectName)
+                    &&projectIterator.getOrganization().getUniqueIdentifier().equals(organization)){
+
+                project = projectIterator;
+            }
+        }
+
+        assert  project != null;
+
+        projectEvent.setProject(project);
+    }
+
     /**This method will set the realtedProject attribute to the feedback object.
      *
      * @param feedback the object that will be linked to the observer.
@@ -1180,5 +1225,9 @@ class DataParser extends XmlParser {
 
     List<HumanResourceManager> getHumanResourceManagers(){
         return this.humanResourceManagers;
+    }
+
+    List<ProjectEvent> getProjectEvents(){
+        return this.projectEvents;
     }
 }
