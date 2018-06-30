@@ -8,15 +8,14 @@ import cr.talent.core.security.technicalResource.service.TechnicalResourceServic
 import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
+
 import cr.talent.support.exceptions.AlreadyRegisteredUserException;
-import cr.talent.support.exceptions.EmptyDestinationEmailException;
+import cr.talent.support.exceptions.InvalidJSONException;
 import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.fail;
@@ -25,7 +24,7 @@ import static org.mockito.Mockito.*;
 /**
  * Class that allows to test the {@link cr.talent.core.invitation.service.impl.InvitationServiceImpl} methods
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Josue Cubero.
  */
 public class InvitationServiceTest {
 
@@ -76,57 +75,26 @@ public class InvitationServiceTest {
 
     @Test
     public void testCreateInvitationsNotNullInvitation () {
-        InvitationService invitationService = new InvitationServiceImpl();
-        InvitationDao invitationDao = mock(InvitationDao.class);
-        TechnicalResourceService technicalResourceService = mock(TechnicalResourceService.class);
-        InvitationEmailService invitationEmailService = mock(InvitationEmailService.class);
-        Organization organization = mock(Organization.class);
-        String uniqueId = "testId";
-        Set<TechnicalResource> technicalResourceSet = new HashSet<>();
-        technicalResourceSet.add(mock(TechnicalResource.class));
 
-        when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
-        when(organization.getResources()).thenReturn(technicalResourceSet);
-
-        ReflectionTestUtils.setField(invitationService, "crudDao", invitationDao);
-        ReflectionTestUtils.setField(invitationService, "invitationDao", invitationDao);
-        ReflectionTestUtils.setField(invitationService, "technicalResourceService", technicalResourceService);
-        ReflectionTestUtils.setField(invitationService, "invitationEmailService", invitationEmailService);
-
-        List<String> emails = new ArrayList<>();
-        emails.add("email1");
-        emails.add("email2");
-
-        Invitation invitation = mock(Invitation.class);
-        for (String email : emails) {
-            when(invitationDao.findInvitationByEmail(email)).thenReturn(invitation);
-            when(technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(null);
-        }
-
-        invitationService.createInvitations(emails, organization);
-
-        verify(invitationDao, times(2)).update(invitation);
-
-    }
-
-    @Test
-    public void testCreateInvitationsNullInvitation () {
         InvitationService invitationService = new InvitationServiceImpl();
         InvitationDao invitationDao = mock(InvitationDao.class);
         TechnicalResourceService technicalResourceService = mock(TechnicalResourceService.class);
         InvitationEmailService invitationEmailService = mock(InvitationEmailService.class);
         OrganizationService organizationService = mock(OrganizationService.class);
         Organization organization = mock(Organization.class);
-        String uniqueId = "testId";
         Set<TechnicalResource> technicalResourceSet = new HashSet<>();
         technicalResourceSet.add(mock(TechnicalResource.class));
-        Set<Invitation> invitationSet = new HashSet<>();
-        invitationSet.add(mock(Invitation.class));
+        Invitation invitation = mock(Invitation.class);
+        String uniqueId = "testId";
 
         when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
-        when(organizationService.getValidInvitations(organization)).thenReturn(invitationSet);
+        // this findInvitationByEmail will be done manually (and not iterating the JSON) because otherwise we'll have to test if
+        // JSON is valid in here and that should be on the serviceImpl.
+        when(invitationDao.findInvitationByEmail("jo96guerre@gmail.com")).thenReturn(invitation);
+        when(invitationDao.findInvitationByEmail("jo96cube@hotmail.com")).thenReturn(invitation);
+        when(invitationDao.findInvitationByEmail("xbaseucr@gmail.com")).thenReturn(invitation);
 
         ReflectionTestUtils.setField(invitationService, "crudDao", invitationDao);
         ReflectionTestUtils.setField(invitationService, "invitationDao", invitationDao);
@@ -134,60 +102,96 @@ public class InvitationServiceTest {
         ReflectionTestUtils.setField(invitationService, "invitationEmailService", invitationEmailService);
         ReflectionTestUtils.setField(invitationService, "organizationService", organizationService);
 
-        List<String> emails = new ArrayList<>();
-        emails.add("email1");
-        emails.add("email2");
+        String invitations = "{\"invitations\":[{\"email\":\"jo96guerre@gmail.com\",\"firstName\":\"Joaquin\",\"lastName\":\"Guerrero\",\"token\":\"token\",\"isValid\":true}," +
+                                               "{\"email\":\"jo96cube@hotmail.com\",\"firstName\":\"Josue\",\"lastName\":\"Cubero\",\"token\":\"toke\",\"isValid\":false}," +
+                                               "{\"email\":\"xbaseucr@gmail.com\",\"firstName\":\"Michael\",\"lastName\":\"Kiske\",\"token\":\"token222\",\"isValid\":true}" +
+                              "]}";
+        invitationService.createInvitations(invitations, organization);
 
-        Invitation invitation = mock(Invitation.class);
-        for (String email : emails) {
-            when(invitationDao.findInvitationByEmail(email)).thenReturn(null);
-            when(technicalResourceService.getTechnicalResourceByUsername(email)).thenReturn(null);
-        }
-
-        invitationService.createInvitations(emails, organization);
-
-        verify(invitationDao, times(0)).update(invitation);
-
+        verify(invitationDao, times(3)).update(invitation);
     }
 
     @Test
-    public void testCreateInvitationsEmptyEmail () {
-        InvitationService invitationService = new InvitationServiceImpl();
-        InvitationDao invitationDao = mock(InvitationDao.class);
-        TechnicalResourceService technicalResourceService = mock(TechnicalResourceService.class);
-        InvitationEmailService invitationEmailService = mock(InvitationEmailService.class);
-        Organization organization = mock(Organization.class);
+    public void testCreateInvitationsNullInvitation () {
 
-        ReflectionTestUtils.setField(invitationService, "crudDao", invitationDao);
-        ReflectionTestUtils.setField(invitationService, "invitationDao", invitationDao);
-        ReflectionTestUtils.setField(invitationService, "technicalResourceService", technicalResourceService);
-        ReflectionTestUtils.setField(invitationService, "invitationEmailService", invitationEmailService);
-
-        List<String> emails = new ArrayList<>();
-        emails.add("");
-
-        try {
-            invitationService.createInvitations(emails, organization);
-            fail();
-        } catch (EmptyDestinationEmailException e) {
-            // It's supposed to throw this exception
-        }
-
-    }
-
-    @Test
-    public void testCreateInvitationsLimitReached () {
         InvitationService invitationService = new InvitationServiceImpl();
         InvitationDao invitationDao = mock(InvitationDao.class);
         TechnicalResourceService technicalResourceService = mock(TechnicalResourceService.class);
         InvitationEmailService invitationEmailService = mock(InvitationEmailService.class);
         OrganizationService organizationService = mock(OrganizationService.class);
         Organization organization = mock(Organization.class);
-        String uniqueId = "testId";
         Set<TechnicalResource> technicalResourceSet = new HashSet<>();
+        technicalResourceSet.add(mock(TechnicalResource.class));
+        String uniqueId = "testId";
+
+        when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
+        when(organization.getResources()).thenReturn(technicalResourceSet);
+        when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
+
+        ReflectionTestUtils.setField(invitationService, "crudDao", invitationDao);
+        ReflectionTestUtils.setField(invitationService, "invitationDao", invitationDao);
+        ReflectionTestUtils.setField(invitationService, "technicalResourceService", technicalResourceService);
+        ReflectionTestUtils.setField(invitationService, "invitationEmailService", invitationEmailService);
+        ReflectionTestUtils.setField(invitationService, "organizationService", organizationService);
+
+        String invitations = null;
+        try {
+            invitationService.createInvitations(invitations, organization);
+            fail();
+        } catch (InvalidJSONException e){
+            // this is the exception that should be thrown.
+        }
+    }
+
+    @Test
+    public void testCreateInvitationsEmptyInvitation () {
+
+        InvitationService invitationService = new InvitationServiceImpl();
+        InvitationDao invitationDao = mock(InvitationDao.class);
+        TechnicalResourceService technicalResourceService = mock(TechnicalResourceService.class);
+        InvitationEmailService invitationEmailService = mock(InvitationEmailService.class);
+        OrganizationService organizationService = mock(OrganizationService.class);
+        Organization organization = mock(Organization.class);
+        Set<TechnicalResource> technicalResourceSet = new HashSet<>();
+        technicalResourceSet.add(mock(TechnicalResource.class));
+        String uniqueId = "testId";
+
+        when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
+        when(organization.getResources()).thenReturn(technicalResourceSet);
+        when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
+
+        ReflectionTestUtils.setField(invitationService, "crudDao", invitationDao);
+        ReflectionTestUtils.setField(invitationService, "invitationDao", invitationDao);
+        ReflectionTestUtils.setField(invitationService, "technicalResourceService", technicalResourceService);
+        ReflectionTestUtils.setField(invitationService, "invitationEmailService", invitationEmailService);
+        ReflectionTestUtils.setField(invitationService, "organizationService", organizationService);
+
+        String invitations = "";
+        try {
+            invitationService.createInvitations(invitations, organization);
+            fail();
+        } catch (InvalidJSONException e){
+            // this is the exception that should be thrown.
+        }
+
+    }
+
+    @Test
+    public void testCreateInvitationsLimitReachedInvitation () {
+
+        InvitationService invitationService = new InvitationServiceImpl();
+        InvitationDao invitationDao = mock(InvitationDao.class);
+        TechnicalResourceService technicalResourceService = mock(TechnicalResourceService.class);
+        InvitationEmailService invitationEmailService = mock(InvitationEmailService.class);
+        OrganizationService organizationService = mock(OrganizationService.class);
+        Organization organization = mock(Organization.class);
+        Set<TechnicalResource> technicalResourceSet = new HashSet<>();
+        technicalResourceSet.add(mock(TechnicalResource.class));
+        String uniqueId = "testId";
+
         Set<Invitation> invitationSet = new HashSet<>();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             technicalResourceSet.add(mock(TechnicalResource.class));
             invitationSet.add(mock(Invitation.class));
         }
@@ -196,6 +200,11 @@ public class InvitationServiceTest {
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
         when(organizationService.getValidInvitations(organization)).thenReturn(invitationSet);
+        // this findInvitationByEmail will be done manually (and not iterating the JSON) because otherwise we'll have to test if
+        // JSON is valid in here and that should be on the serviceImpl.
+        when(invitationDao.findInvitationByEmail("jo96guerre@gmail.com")).thenReturn(null);
+        when(invitationDao.findInvitationByEmail("jo96cube@hotmail.com")).thenReturn(null);
+        when(invitationDao.findInvitationByEmail("xbaseucr@gmail.com")).thenReturn(null);
 
         ReflectionTestUtils.setField(invitationService, "crudDao", invitationDao);
         ReflectionTestUtils.setField(invitationService, "invitationDao", invitationDao);
@@ -203,20 +212,17 @@ public class InvitationServiceTest {
         ReflectionTestUtils.setField(invitationService, "invitationEmailService", invitationEmailService);
         ReflectionTestUtils.setField(invitationService, "organizationService", organizationService);
 
-        List<String> emails = new ArrayList<>();
-        emails.add("email1");
-
-        for (String email : emails) {
-            when(invitationDao.findInvitationByEmail(email)).thenReturn(null);
-        }
+        String invitations = "{\"invitations\":[{\"email\":\"jo96guerre@gmail.com\",\"firstName\":\"Joaquin\",\"lastName\":\"Guerrero\",\"token\":\"token\",\"isValid\":true}," +
+                "{\"email\":\"jo96cube@hotmail.com\",\"firstName\":\"Josue\",\"lastName\":\"Cubero\",\"token\":\"toke\",\"isValid\":false}," +
+                "{\"email\":\"xbaseucr@gmail.com\",\"firstName\":\"Michael\",\"lastName\":\"Kiske\",\"token\":\"token222\",\"isValid\":true}" +
+                "]}";
 
         try {
-            invitationService.createInvitations(emails, organization);
+            invitationService.createInvitations(invitations, organization);
             fail();
-        } catch (LimitOfInvitationsReachedException e) {
-            // It's supposed to throw this exception
+        } catch (LimitOfInvitationsReachedException e){
+            // this exception should be thrown.
         }
-
     }
 
     @Test
@@ -235,6 +241,13 @@ public class InvitationServiceTest {
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
         when(organizationService.getValidInvitations(organization)).thenReturn(invitationSet);
+        // this findInvitationByEmail will be done manually (and not iterating the JSON) because otherwise we'll have to test if
+        // JSON is valid in here and that should be on the serviceImpl.
+        when(invitationDao.findInvitationByEmail("jo96guerre@gmail.com")).thenReturn(null);
+        when(invitationDao.findInvitationByEmail("jo96cube@hotmail.com")).thenReturn(null);
+        when(invitationDao.findInvitationByEmail("xbaseucr@gmail.com")).thenReturn(null);
+        when(technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier("jo96guerre@gmail.com",
+                organization.getUniqueIdentifier())).thenReturn(mock(TechnicalResource.class));
 
         ReflectionTestUtils.setField(invitationService, "crudDao", invitationDao);
         ReflectionTestUtils.setField(invitationService, "invitationDao", invitationDao);
@@ -242,17 +255,13 @@ public class InvitationServiceTest {
         ReflectionTestUtils.setField(invitationService, "invitationEmailService", invitationEmailService);
         ReflectionTestUtils.setField(invitationService, "organizationService", organizationService);
 
-        List<String> emails = new ArrayList<>();
-        emails.add("email1");
-
-        for (String email : emails) {
-            when(invitationDao.findInvitationByEmail(email)).thenReturn(null);
-            when(technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
-                    email, organization.getUniqueIdentifier())).thenReturn(mock(TechnicalResource.class));
-        }
+        String invitations = "{\"invitations\":[{\"email\":\"jo96guerre@gmail.com\",\"firstName\":\"Joaquin\",\"lastName\":\"Guerrero\",\"token\":\"token\",\"isValid\":true}," +
+                "{\"email\":\"jo96cube@hotmail.com\",\"firstName\":\"Josue\",\"lastName\":\"Cubero\",\"token\":\"toke\",\"isValid\":false}," +
+                "{\"email\":\"xbaseucr@gmail.com\",\"firstName\":\"Michael\",\"lastName\":\"Kiske\",\"token\":\"token222\",\"isValid\":true}" +
+                "]}";
 
         try {
-            invitationService.createInvitations(emails, organization);
+            invitationService.createInvitations(invitations, organization);
             fail();
         } catch (AlreadyRegisteredUserException e) {
             // It's supposed to throw this exception
