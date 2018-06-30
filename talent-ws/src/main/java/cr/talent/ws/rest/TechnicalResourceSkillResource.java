@@ -4,7 +4,7 @@ package cr.talent.ws.rest;
 import cr.talent.core.organizationSkill.service.OrganizationSkillService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.model.Organization;
-import cr.talent.model.OrganizationSkill;
+import cr.talent.model.Skill;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.*;
@@ -23,7 +23,7 @@ import java.util.Set;
 /**
  * Resource with one POST endpoint that handles the assign of skills to a technical resource.
  *
- * @author Josue Cubero
+ * @author Josue Cubero, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
@@ -106,11 +106,10 @@ public class TechnicalResourceSkillResource {
         if(technicalResource==null)
             return Response.status(Response.Status.NOT_FOUND).build(); // The technical resource was not found
 
-        Set<OrganizationSkill> assignedSkills = technicalResource.getSkills();
+        Set<Skill> assignedSkills = technicalResource.getSkills();
         if(assignedSkills.isEmpty())
             return Response.status(Response.Status.NO_CONTENT).build(); // The resource has no assigned skills
 
-        String organizationJson = JSONSerializerBuilder.getOrganizationSkillSerializer().serialize(assignedSkills);
-        return Response.status(200).entity(organizationJson).build();
+        return Response.status(Response.Status.OK).entity(JSONSerializerBuilder.getSkillSerializer().serialize(assignedSkills)).build();
     }
 }
