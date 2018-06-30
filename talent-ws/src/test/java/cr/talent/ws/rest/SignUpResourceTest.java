@@ -40,7 +40,7 @@ public class SignUpResourceTest extends FunctionalTest {
     private final String username = "username";
     private final String termsOfServiceAccepted = "termsOfServiceAccepted";
     private final String organizationIdentifier = "organizationIdentifier";
-    private final String emails = "emails";
+    private final String invitations = "invitations";
 
     private String forgotPasswordCode;
     private SessionFilter sessionFilter;
@@ -310,7 +310,7 @@ public class SignUpResourceTest extends FunctionalTest {
 
         given()
                 .filter(this.sessionFilter)
-                .formParam(this.emails,"")
+                .formParam(this.invitations,"")
                 .contentType(ContentType.URLENC)
                 .post(this.stepFourInvitationsWebService)
                 .then().statusCode(400);
@@ -322,15 +322,20 @@ public class SignUpResourceTest extends FunctionalTest {
 
         this.uLogInUserForTests();
 
+        String invitations = "{\"invitations\":[{\"email\":\"jo96guerre@gmail.com\",\"firstName\":\"Joaquin\",\"lastName\":\"Guerrero\",\"token\":\"token\",\"isValid\":true}," +
+                "{\"email\":\"jo96cube@hotmail.com\",\"firstName\":\"Josue\",\"lastName\":\"Cubero\",\"token\":\"toke\",\"isValid\":false}" +
+                "]}";
+
         given()
                 .filter(this.sessionFilter)
-                .formParam(this.emails,"jo96guerre@gmail.com")
+                .formParam(this.invitations,invitations)
                 .contentType(ContentType.URLENC)
                 .post(this.stepFourInvitationsWebService)
                 .then().statusCode(200);
 
     }
-/*
+
+    /*
     @Test
     public void yLimitReachedForStepFourInvitations(){
 

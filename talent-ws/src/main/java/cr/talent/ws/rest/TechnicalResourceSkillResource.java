@@ -24,7 +24,7 @@ import java.util.Set;
 /**
  * Resource with one POST endpoint that handles the assign of skills to a technical resource.
  *
- * @author Josue Cubero
+ * @author Josue Cubero, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
@@ -111,7 +111,6 @@ public class TechnicalResourceSkillResource {
         if(assignedSkills.isEmpty())
             return Response.status(Response.Status.NO_CONTENT).build(); // The resource has no assigned skills
 
-        String organizationJson = JSONSerializerBuilder.getOrganizationSkillSerializer().serialize(assignedSkills);
-        return Response.status(200).entity(organizationJson).build();
+        return Response.status(Response.Status.OK).entity(JSONSerializerBuilder.getSkillSerializer().serialize(assignedSkills)).build();
     }
 }
