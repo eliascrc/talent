@@ -281,6 +281,10 @@ public class JSONSerializerBuilder {
         // Exclude all attributes of the ProjectPositionHolder holderHistory attribute in ProjectPosition except resource
         tempIncludes = new LinkedList<>();
         tempIncludes.add("resource");
+        tempIncludes.add("assignedHours");
+        tempIncludes.add("active");
+        tempIncludes.add("startDate");
+        tempIncludes.add("endDate");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPositionHolder.class, "holderHistory", tempIncludes));
 
         // Exclude all attributes of the Capability capability attribute in CapabilityLevel except name and capability
