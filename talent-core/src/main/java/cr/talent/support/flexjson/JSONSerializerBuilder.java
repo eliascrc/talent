@@ -22,12 +22,13 @@ public class JSONSerializerBuilder {
 
     private static final List<String> GLOBAL_INCLUDES = new LinkedList<>();
 
-    static{
+    static {
         GLOBAL_INCLUDES.add("id");
         GLOBAL_INCLUDES.add("entityCreationTimestamp");
         GLOBAL_INCLUDES.add("lastUpdatedTimestamp");
         GLOBAL_INCLUDES.add("entityVersion");
     }
+
     /**
      * Returns a list of paths to be excluded when creating a JSON serializer.
      * This list should be used for all JSON serializers created for the
@@ -64,7 +65,7 @@ public class JSONSerializerBuilder {
         for (Field field : fields) {
             String fieldName = field.getName();
 
-            if(!GLOBAL_INCLUDES.contains(fieldName) && (include == null || !include.contains(fieldName))) {
+            if (!GLOBAL_INCLUDES.contains(fieldName) && (include == null || !include.contains(fieldName))) {
                 excludes.add(prefix + fieldName);
             }
         }
@@ -109,6 +110,7 @@ public class JSONSerializerBuilder {
 
     /**
      * Creates a basic serializer that returns the unique identifier, name and logo of an organization
+     *
      * @return
      */
     public static JSONSerializer getOrganizationSerializer() {
@@ -223,9 +225,10 @@ public class JSONSerializerBuilder {
 
     /**
      * Creates a basic serializer that returns the category and skill of an OrganizationSkillCategory
+     *
      * @return the JSONSerializer to be used to serialize a OrganizationSkill
      */
-    public static JSONSerializer getOrganizationSkillSerializer() {
+    public static JSONSerializer getSkillSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes = new LinkedList<>();
@@ -248,6 +251,53 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("OrganizationSkill Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
+
+    public static JSONSerializer getProjectPositionSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+
+        // Exclude all attributes of the TechnicalResource resource attribute in ProjectPositionHolder except
+        // firstName, lastName and profilePicture
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("profilePicture");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "holderHistory.resource", tempIncludes));
+
+        // Exclude all attributes of the ProjectPositionHolder holderHistory attribute in ProjectPosition except resource
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("resource");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPositionHolder.class, "holderHistory", tempIncludes));
+
+        // Exclude all attributes of the Capability capability attribute in CapabilityLevel except name and capability
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capability.capability", tempIncludes));
+
+        // Exclude all attributes of the CapabilityLevel capability attribute in ProjectPosition except name and capability
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("capability");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "capability", tempIncludes));
+
+        // Exclude all attributes of ProjectPosition except capability and holderHistory
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("capability");
+        tempIncludes.add("holderHistory");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPosition.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+        serializer.transform(new ImageTransformer(), "holderHistory.resource.profilePicture");
+
+        // logs the creation of the serializer
+        logger.trace("ProjectPosition Serializer {} created", serializer.toString());
 
         return serializer;
     }

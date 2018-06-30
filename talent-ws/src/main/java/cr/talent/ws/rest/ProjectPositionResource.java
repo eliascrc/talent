@@ -7,6 +7,7 @@ import cr.talent.core.security.technicalResource.service.TechnicalResourceServic
 import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.*;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +23,7 @@ import java.util.Set;
 /**
  * Resource that handles operations related to project positions
  *
- * @author Daniel Montes de Oca
+ * @author Daniel Montes de Oca, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
@@ -176,9 +177,19 @@ public class ProjectPositionResource {
 
     }
 
+    /**
+     * Returns every position in the project, along with each position's capability and holder history.
+     * @param projectId the unique identifier of the Project entity, inherited from BasicEntity
+     * @return 400 if the string is either null or empty
+     *         404 if the project does not exist
+     *         403 if the project exists but is not in the logged user's organization
+     *         204 if the project has no positions
+     *         200 of the information is returned successfully
+     */
     @GET
-    @Path("/getProjectPositionsHistory")
-    public Response getProjectPositionsHistory(@QueryParam("project") String projectId) {
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/getHistory")
+    public Response getHistory(@QueryParam("project") String projectId) {
         if (StringUtils.isEmpty(projectId))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
@@ -191,14 +202,15 @@ public class ProjectPositionResource {
 
         // Check if user is authorized to get the information (they should be in the organization as the project)
         if (!project.getOrganization().equals(SecurityUtils.getLoggedInTechnicalResource().getOrganization()))
-            return Response.status(Response.Status.UNAUTHORIZED).build();
+            return Response.status(Response.Status.FORBIDDEN).build();
 
         // Check if there is any content to return
         Set<ProjectPosition> projectPositions = project.getProjectPositions();
         if (projectPositions == null || projectPositions.isEmpty())
             return Response.status(Response.Status.NO_CONTENT).build();
 
-        return Response.status(Response.Status.OK).entity("").build();
+        return Response.status(Response.Status.OK)
+                .entity(JSONSerializerBuilder.getProjectPositionSerializer().serialize(projectPositions)).build();
     }
 
 }
