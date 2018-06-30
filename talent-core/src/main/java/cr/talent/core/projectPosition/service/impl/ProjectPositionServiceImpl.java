@@ -38,7 +38,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         final String noActiveTechnicalResourceProjectsMsg = technicalResource.getFirstName() + " " + technicalResource.getLastName()
                 + " does not have any active project";
 
-        if(technicalResource.getProjectPositions().isEmpty()) //ask first for effiency reasons
+        if(technicalResource.getProjectPositions().isEmpty()) //ask first for efficiency reasons
             throw new NoActiveTechnicalResourceProjectException(noActiveTechnicalResourceProjectsMsg);
 
         Set<ProjectPositionHolder> projectPositionHolders = technicalResource.getProjectPositions();

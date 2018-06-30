@@ -47,14 +47,11 @@ public class TechnicalResourceProjectResource {
                         lazySessionTechnicalResource.getUsername(),
                         lazySessionTechnicalResource.getOrganization().getUniqueIdentifier());
 
-        if(technicalResource == null)
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-
         try {
-            return Response.ok().entity(this.projectPositionService.getTechnicalResourceActiveProjects(technicalResource)).build();
+            String serializedList = this.projectPositionService.getTechnicalResourceActiveProjects(technicalResource);
+            return Response.ok().entity(serializedList).build();
         } catch (NoActiveTechnicalResourceProjectException e) {
-            return Response.status(Response.Status.NO_CONTENT).
-                    entity(e.getMessage()).build();
+            return Response.status(Response.Status.NO_CONTENT).build();
         }
     }
 }
