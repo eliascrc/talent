@@ -177,39 +177,4 @@ public class ProjectPositionResource {
 
     }
 
-    /**
-     * Returns every position in the project, along with each position's capability and holder history.
-     * @param projectId the unique identifier of the Project entity, inherited from BasicEntity
-     * @return 400 if the string is either null or empty
-     *         404 if the project does not exist
-     *         403 if the project exists but is not in the logged user's organization
-     *         204 if the project has no positions
-     *         200 of the information is returned successfully
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/getHistory")
-    public Response getHistory(@QueryParam("projectId") String projectId) {
-        if (StringUtils.isEmpty(projectId))
-            return Response.status(Response.Status.BAD_REQUEST).build();
-
-        Project project = projectService.findById(projectId);
-
-        // Check if project exists
-        if (project == null)
-            return Response.status(Response.Status.NOT_FOUND).entity("Project not found.").build();
-
-        // Check if user is authorized to get the information (they should be in the organization as the project)
-        if (!project.getOrganization().equals(SecurityUtils.getLoggedInTechnicalResource().getOrganization()))
-            return Response.status(Response.Status.FORBIDDEN).build();
-
-        // Check if there is any content to return
-        Set<ProjectPosition> projectPositions = project.getProjectPositions();
-        if (projectPositions == null || projectPositions.isEmpty())
-            return Response.status(Response.Status.NO_CONTENT).build();
-
-        return Response.status(Response.Status.OK)
-                .entity(JSONSerializerBuilder.getProjectPositionSerializer().serialize(projectPositions)).build();
-    }
-
 }
