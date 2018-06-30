@@ -3,8 +3,8 @@ package cr.talent.core.organizationSkill.service.impl;
 import cr.talent.core.organizationSkill.dao.OrganizationSkillDao;
 import cr.talent.core.organizationSkill.service.OrganizationSkillService;
 import cr.talent.model.Organization;
-import cr.talent.model.OrganizationSkill;
-import cr.talent.model.OrganizationSkillCategory;
+import cr.talent.model.Skill;
+import cr.talent.model.SkillCategory;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.AlreadyAssignedSkillException;
 import cr.talent.support.exceptions.EmptySkillException;
@@ -27,7 +27,7 @@ import java.util.Set;
  */
 @Service("organizationSkillService")
 @Transactional
-public class OrganizationSkillServiceImpl extends CrudServiceImpl<OrganizationSkill, String> implements OrganizationSkillService {
+public class OrganizationSkillServiceImpl extends CrudServiceImpl<Skill, String> implements OrganizationSkillService {
 
     @Autowired
     private OrganizationSkillDao organizationSkillDao;
@@ -46,15 +46,15 @@ public class OrganizationSkillServiceImpl extends CrudServiceImpl<OrganizationSk
              technicalResource.getLastName() + ".";
         final String emptySkillMsg = "One or more skills are empty.";
 
-        List<OrganizationSkill> skillsToAssign = new ArrayList<>();
+        List<Skill> skillsToAssign = new ArrayList<>();
 
-        Set<OrganizationSkill> technicalResourceSkills = technicalResource.getSkills();
-        Set<OrganizationSkillCategory> organizationSkillCategories = organization.getSkillCategories();
+        Set<Skill> technicalResourceSkills = technicalResource.getSkills();
+        Set<SkillCategory> organizationSkillCategories = organization.getSkillCategories();
 
-        OrganizationSkillCategory organizationSkillCategory;
-        Set<OrganizationSkill> organizationSkills;
+        SkillCategory organizationSkillCategory;
+        Set<Skill> organizationSkills;
         boolean keepSearching;
-        OrganizationSkill skill = null;
+        Skill skill = null;
 
         for (String skillName : skills) {
 
@@ -63,14 +63,14 @@ public class OrganizationSkillServiceImpl extends CrudServiceImpl<OrganizationSk
             if (StringUtils.isEmpty(skillName))
                 throw new EmptySkillException(emptySkillMsg);
 
-            Iterator<OrganizationSkillCategory> iterator = organizationSkillCategories.iterator();
+            Iterator<SkillCategory> iterator = organizationSkillCategories.iterator();
 
             while(iterator.hasNext() && keepSearching) {
 
                 organizationSkillCategory = iterator.next();
-                organizationSkills = organizationSkillCategory.getOrganizationSkills();
+                organizationSkills = organizationSkillCategory.getSkills();
 
-                Iterator<OrganizationSkill> iterator1 = organizationSkills.iterator();
+                Iterator<Skill> iterator1 = organizationSkills.iterator();
 
                 while(iterator1.hasNext() && keepSearching) {
 
@@ -98,7 +98,7 @@ public class OrganizationSkillServiceImpl extends CrudServiceImpl<OrganizationSk
 
         }
 
-        for(OrganizationSkill organizationSkill: skillsToAssign){
+        for(Skill organizationSkill: skillsToAssign){
             organizationSkill.getResources().add(technicalResource);
             this.organizationSkillDao.update(organizationSkill);
         }

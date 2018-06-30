@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
@@ -22,7 +23,8 @@
         <!--JDBC properties -->
         <jdbc.schema>talent</jdbc.schema>
         <jdbc.base.url>jdbc:mysql://${jdbc.host}:3306/${jdbc.schema}</jdbc.base.url>
-        <jdbc.url>${jdbc.base.url}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</jdbc.url>
+        <jdbc.url>${jdbc.base.url}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
+        </jdbc.url>
         <jdbc.base.url.noschema>jdbc:mysql://${jdbc.host}:3306</jdbc.base.url.noschema>
         <jdbc.username>talent</jdbc.username>
         <jdbc.password>aRandomPassword</jdbc.password>

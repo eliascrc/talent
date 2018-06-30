@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 /**
  * Class that allows to test the {@link cr.talent.core.email.invitationEmail.service.InvitationEmailService} methods
  *
- * @author Elias Calderon
+ * @author Elias Calderon, Josue Cubero
  */
 public class InvitationEmailTest {
 
@@ -25,12 +25,17 @@ public class InvitationEmailTest {
         InvitationEmailService invitationEmailService = new InvitationEmailServiceImpl();
         EmailSenderService emailSenderService = mock(EmailSenderService.class);
         Invitation invitation = mock(Invitation.class);
+        Organization organization = mock(Organization.class);
         String talentEmail = "qa.talent.cr@gmail.com";
+        String organizationName = "monkey-labs";
 
         ReflectionTestUtils.setField(invitationEmailService, "emailSenderService", emailSenderService);
         ReflectionTestUtils.setField(invitationEmailService, "talentEmail", talentEmail);
 
         when(invitation.getEmail()).thenReturn(talentEmail);
+        when(organization.getName()).thenReturn(organizationName);
+        when(invitation.getOrganization()).thenReturn(organization);
+
         invitationEmailService.sendInvitationEmail(invitation);
     }
 

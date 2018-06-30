@@ -317,20 +317,25 @@ public class SignUpResourceTest extends FunctionalTest {
 
     }
 
-    /*@Test
+    @Test
     public void xValidRequestForStepFourInvitations(){
 
         this.uLogInUserForTests();
 
+        String invitations = "{\"invitations\":[{\"email\":\"jo96guerre@gmail.com\",\"firstName\":\"Joaquin\",\"lastName\":\"Guerrero\",\"token\":\"token\",\"isValid\":true}," +
+                "{\"email\":\"jo96cube@hotmail.com\",\"firstName\":\"Josue\",\"lastName\":\"Cubero\",\"token\":\"toke\",\"isValid\":false}" +
+                "]}";
+
         given()
                 .filter(this.sessionFilter)
-                .formParam(this.emails,"jo96guerre@gmail.com")
+                .formParam(this.invitations,invitations)
                 .contentType(ContentType.URLENC)
                 .post(this.stepFourInvitationsWebService)
                 .then().statusCode(200);
 
     }
 
+    /*
     @Test
     public void yLimitReachedForStepFourInvitations(){
 

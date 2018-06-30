@@ -2,7 +2,7 @@ package cr.talent.core.skill.service.impl;
 
 import cr.talent.core.skill.dao.SkillDao;
 import cr.talent.core.skill.service.SkillService;
-import cr.talent.model.PredefinedSkill;
+import cr.talent.model.Skill;
 import cr.talent.model.Skill;
 import cr.talent.support.exceptions.AlreadyCreatedPredefinedSkillException;
 import cr.talent.support.service.impl.CrudServiceImpl;
@@ -27,10 +27,10 @@ public class SkillServiceImpl extends CrudServiceImpl<Skill, String> implements 
     }
 
     /**
-     * @see cr.talent.core.skill.service.SkillService#createPredefinedSkill(PredefinedSkill)
+     * @see cr.talent.core.skill.service.SkillService#createPredefinedSkill(Skill)
      */
     @Override
-    public String createPredefinedSkill(PredefinedSkill predefinedSkill) {
+    public String createPredefinedSkill(Skill predefinedSkill) {
 
         final String alreadyCreatedPredefinedSkillExceptionMsg = "The predefined skill with name " +
                 predefinedSkill.getName() + " has already been created within the system.";

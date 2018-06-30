@@ -70,7 +70,8 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         final String invitationLimitReachedMsg = "The limit of invitations available for the organization has been reached.";
         final String alreadyRegisteredUserMsg = "The email for the invitation is already registered in the organization.";
         final String emptyDestinationEmailMsg = "One of the emails passed to the service is empty.";
-        final String invalidJSONExceptionMsg = "The provided email is invalid.";
+        final String invalidJSONExceptionMsg = "The provided JSON is invalid.";
+        final String noContentInJSONExceptionMsg = "The provided JSON does not have any content.";
 
         List<Invitation> invitationsToSend = new ArrayList<>();
         JSONObject invitationsJSON;
@@ -79,14 +80,14 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         try {
             invitationsJSON = new JSONObject(invitations);
             invitationsList = invitationsJSON.getJSONArray("invitations");
-        } catch (JSONException e){
+        } catch (Exception e){
             throw new InvalidJSONException(invalidJSONExceptionMsg);
         }
 
         int invitationsListSize = invitationsList.length();
 
         if(invitationsListSize == 0)
-            throw new InvalidJSONException(invalidJSONExceptionMsg);
+            throw new InvalidJSONException(noContentInJSONExceptionMsg);
 
         String email, firstName, lastName;
 
@@ -100,10 +101,10 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
                 throw new InvalidJSONException(invalidJSONExceptionMsg);
             }
 
-            if(StringUtils.isEmpty(email) || StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName))
+            if(StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName))
                 throw new InvalidJSONException(invalidJSONExceptionMsg);
 
-            if (StringUtils.isEmpty(email) || StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName)) {
+            if (StringUtils.isEmpty(email)) {
                 throw new EmptyDestinationEmailException(emptyDestinationEmailMsg);
             }
 
