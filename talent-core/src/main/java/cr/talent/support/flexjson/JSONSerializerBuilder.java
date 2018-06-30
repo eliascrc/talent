@@ -311,7 +311,7 @@ public class JSONSerializerBuilder {
      * Creates a basic serializer that returns every project position in a project, along with each project's position
      * holders over time.
      *
-     * @return the JSONSerializer to be used to serialize a ProjectPosition
+     * @return the JSONSerializer to be used to serialize a ProjectPosition object
      */
     public static JSONSerializer getProjectPositionSerializer() {
         JSONSerializer serializer = getBasicSerializer();
