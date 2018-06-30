@@ -68,7 +68,7 @@ public class Project extends BasicEntity {
      * The state that the project currently has. It's represented by the latest event.
      */
     @OneToOne
-    private ProjectEvent state;
+    private ProjectEvent currentState;
 
     /**
      * A set with the history of project manager's throughout the life time of the project.
@@ -102,10 +102,10 @@ public class Project extends BasicEntity {
     private Organization organization;
 
     /**
-     * List of observations made in the project.
+     * List of feedback made in the project.
      */
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "relatedProject")
-    private Set<Observation> observations;
+    private Set<Feedback> resourcesFeedback;
 
     public Project () {}
 
@@ -160,12 +160,12 @@ public class Project extends BasicEntity {
         this.projectCapabilities = projectCapabilities;
     }
 
-    public ProjectEvent getState() {
-        return state;
+    public ProjectEvent getcurrentState() {
+        return currentState;
     }
 
-    public void setState(ProjectEvent state) {
-        this.state = state;
+    public void setcurrentState(ProjectEvent currentState) {
+        this.currentState = currentState;
     }
 
     public Set<LeadPosition> getLeadHistory() {
@@ -184,12 +184,12 @@ public class Project extends BasicEntity {
         this.organization = organization;
     }
 
-    public Set<Observation> getObservations() {
-        return observations;
+    public Set<Feedback> getResourcesFeedback() {
+        return resourcesFeedback;
     }
 
-    public void setObservations(Set<Observation> observations) {
-        this.observations = observations;
+    public void setResourcesFeedback(Set<Feedback> resourcesFeedback) {
+        this.resourcesFeedback = resourcesFeedback;
     }
 
     public String getDescription() {

@@ -24,8 +24,8 @@ class DataParser extends XmlParser {
     private List<Language> languages;
     private List<EducationRecord> educationRecords;
     private List<Project> projects;
-    private List<OrganizationSkill> organizationSkills;
-    private List<OrganizationSkillCategory> organizationSkillCategories;
+    private List<Skill> organizationSkills;
+    private List<SkillCategory> organizationSkillCategories;
     private List<Capability> capabilities;
     private List<CapabilityLevel> capabilityLevels;
     private List<ProjectPosition> projectPositions;
@@ -50,8 +50,8 @@ class DataParser extends XmlParser {
         this.languages = new ArrayList<Language>();
         this.educationRecords = new ArrayList<EducationRecord>();
         this.projects = new ArrayList<Project>();
-        this.organizationSkills = new ArrayList<OrganizationSkill>();
-        this.organizationSkillCategories = new ArrayList<OrganizationSkillCategory>();
+        this.organizationSkills = new ArrayList<Skill>();
+        this.organizationSkillCategories = new ArrayList<SkillCategory>();
         this.capabilities = new ArrayList<Capability>();
         this.capabilityLevels = new ArrayList<CapabilityLevel>();
         this.projectPositions = new ArrayList<ProjectPosition>();
@@ -149,7 +149,7 @@ class DataParser extends XmlParser {
     private void fillOrganizationSkillCategories() {
         Elements organizationSkillCategoryElements = getElementOfType("organizationSkillCategories").get(0).getChildElements();
         for (int i = 0; i < organizationSkillCategoryElements.size(); i++){
-            OrganizationSkillCategory organizationSkillCategory = getOrganizationSkillCategory(organizationSkillCategoryElements.get(i));
+            SkillCategory organizationSkillCategory = getOrganizationSkillCategory(organizationSkillCategoryElements.get(i));
             this.organizationSkillCategories.add(organizationSkillCategory);
         }
     }
@@ -160,8 +160,8 @@ class DataParser extends XmlParser {
      * @param organizationSkillCategoryElement the node of the xml file corresponding to the specific organizationSkillCategory.
      * @return an organizationSkillCategory object with all of its attributes already set.
      */
-    private OrganizationSkillCategory getOrganizationSkillCategory(Element organizationSkillCategoryElement){
-        OrganizationSkillCategory organizationSkillCategory = new OrganizationSkillCategory();
+    private SkillCategory getOrganizationSkillCategory(Element organizationSkillCategoryElement){
+        SkillCategory organizationSkillCategory = new SkillCategory();
         organizationSkillCategory.setName(super.getAttributeValue(organizationSkillCategoryElement, "name"));
 
         this.linkOrganizationSkillCategoryToOrganization(organizationSkillCategory, super.getAttributeValue(organizationSkillCategoryElement, "organization"));
@@ -175,7 +175,7 @@ class DataParser extends XmlParser {
     private void fillOrganizationSkills() {
         Elements organizationSkillElements = getElementOfType("organizationSkills").get(0).getChildElements();
         for (int i = 0; i < organizationSkillElements.size(); i++){
-            OrganizationSkill organizationSkill = getOrganizationSkill(organizationSkillElements.get(i));
+            Skill organizationSkill = getOrganizationSkill(organizationSkillElements.get(i));
             this.organizationSkills.add(organizationSkill);
         }
     }
@@ -186,8 +186,8 @@ class DataParser extends XmlParser {
      * @param organizationSkillElement the node of the xml file corresponding to the specific organizationSkill.
      * @return an organizationSkill object with all of its attributes already set.
      */
-    private OrganizationSkill getOrganizationSkill(Element organizationSkillElement){
-        OrganizationSkill organizationSkill = new OrganizationSkill();
+    private Skill getOrganizationSkill(Element organizationSkillElement){
+        Skill organizationSkill = new Skill();
         organizationSkill.setName(super.getAttributeValue(organizationSkillElement, "name"));
 
         organizationSkill.setResources(new HashSet<>());
@@ -559,7 +559,7 @@ class DataParser extends XmlParser {
      * @param organizationSkillCategory the organizationSkillCategory which must be linked to the respective organization.
      * @param organizationUniqueIdentifier the unique identifier of the organization to which the organizationSkillCategory will be linked.
      */
-    private void linkOrganizationSkillCategoryToOrganization (OrganizationSkillCategory organizationSkillCategory, String organizationUniqueIdentifier){
+    private void linkOrganizationSkillCategoryToOrganization (SkillCategory organizationSkillCategory, String organizationUniqueIdentifier){
         Organization organization = null;
 
         for (Organization organizationIterator : this.organizations) {
@@ -573,7 +573,7 @@ class DataParser extends XmlParser {
         organizationSkillCategory.setOrganization(organization);
     }
 
-    private void linkOrganizationSkillToTechnicalResources (OrganizationSkill organizationSkill, String technicalResourcesNames){
+    private void linkOrganizationSkillToTechnicalResources (Skill organizationSkill, String technicalResourcesNames){
         String[] technicalResourceName = technicalResourcesNames.split(",");
 
         for(TechnicalResource technicalResourceIterator : this.technicalResources){
@@ -592,10 +592,10 @@ class DataParser extends XmlParser {
      * @param organizationSkillCategoryName the name of the organizationSkillCategory to which the organizationSkill will be linked.
      * @param organizationUniqueIdentifier the unique identifier of the organization to which the organizationSkill will be linked.
      */
-    private void linkOrganizationSkillToOrganizationSkillCategory (OrganizationSkill organizationSkill,String organizationSkillCategoryName, String organizationUniqueIdentifier){
-        OrganizationSkillCategory organizationSkillCategory = null;
+    private void linkOrganizationSkillToOrganizationSkillCategory (Skill organizationSkill,String organizationSkillCategoryName, String organizationUniqueIdentifier){
+        SkillCategory organizationSkillCategory = null;
 
-        for (OrganizationSkillCategory organizationSkillCategoryIterator : this.organizationSkillCategories) {
+        for (SkillCategory organizationSkillCategoryIterator : this.organizationSkillCategories) {
             if (organizationSkillCategoryIterator.getName().equals(organizationSkillCategoryName)
                     && organizationSkillCategoryIterator.getOrganization().getUniqueIdentifier().equals(organizationUniqueIdentifier)){
                 organizationSkillCategory = organizationSkillCategoryIterator;
@@ -776,7 +776,7 @@ class DataParser extends XmlParser {
 
         String[] skills = requiredSkillsNames.split(",");
 
-        for (OrganizationSkill organizationSkillIterator : this.organizationSkills){
+        for (Skill organizationSkillIterator : this.organizationSkills){
             for (int i = 0; i < skills.length; i++){
                 if(organizationSkillIterator.getName().equals(skills[i])
                         && organizationSkillIterator.getCategory().getOrganization().getUniqueIdentifier().equals(organizationUniqueIdentifier)){
@@ -964,11 +964,11 @@ class DataParser extends XmlParser {
         return this.projects;
     }
 
-    List<OrganizationSkillCategory> getOrganizationSkillCategories() {
+    List<SkillCategory> getOrganizationSkillCategories() {
         return this.organizationSkillCategories;
     }
 
-    List<OrganizationSkill> getOrganizationSkills(){
+    List<Skill> getOrganizationSkills(){
         return this.organizationSkills;
     }
 

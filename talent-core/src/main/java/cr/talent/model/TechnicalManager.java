@@ -7,13 +7,13 @@ import java.util.Set;
 /**
  * Class that represents a Technical Manager within the Talent system, it contains a list of the resources
  * under its charge and a list to check the uncheckedSkills. It also
- * contains the information inherited from {@link cr.talent.model.TechnicalResourceManager} class.
+ * contains the information inherited from {@link cr.talent.model.TechnicalResource} class.
  *
  * @author María José Cubero
  */
 @Entity
 @DiscriminatorValue(value = "TECHNICAL_MANAGER")
-public class TechnicalManager extends TechnicalResourceManager {
+public class TechnicalManager extends TechnicalResource {
 
     /**
      * A map with the list of skills that each resource is requesting

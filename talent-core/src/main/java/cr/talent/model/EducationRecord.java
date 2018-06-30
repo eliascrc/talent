@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Class that represents an Education Record within the Talent system.
- * It contains the institution, date, title, description, resource, pdfFile
+ * It contains the institution, start and end date, title, description, level, resource, pdfFile
  * and the information inherited from {@link cr.talent.model.BasicEntity} class.
  *
  * @author María José Cubero
@@ -22,10 +22,16 @@ public class EducationRecord extends BasicEntity{
     private String institution;
 
     /**
-     * Date that the education record was given to the person.
+     * Date that the resource started the training.
      */
-    @Column (name = "date")
-    private Date date;
+    @Column (name = "startDate")
+    private Date startDate;
+
+    /**
+     * Date that the resource ended the training.
+     */
+    @Column (name = "endDate")
+    private Date endDate;
 
     /**
      * Earned title in the education record.
@@ -38,6 +44,12 @@ public class EducationRecord extends BasicEntity{
      */
     @Column (name = "description")
     private String description;
+
+    /**
+     * The level of the record.
+     */
+    @Column (name = "level")
+    private String level;
 
     /**
      * Technical resource that has de education record.
@@ -89,11 +101,11 @@ public class EducationRecord extends BasicEntity{
     }
 
     public Date getDate() {
-        return date;
+        return startDate;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.startDate = date;
     }
 
     public String getTitle() {
@@ -134,5 +146,21 @@ public class EducationRecord extends BasicEntity{
 
     public void setHumanResourceManager(HumanResourceManager humanResourceManager) {
         this.humanResourceManager = humanResourceManager;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
