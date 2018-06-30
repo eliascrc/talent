@@ -1,11 +1,10 @@
 package cr.talent.ws.rest;
 
+import cr.talent.core.project.service.ProjectService;
 import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
-import cr.talent.model.ProjectPosition;
-import cr.talent.model.ProjectPositionHolder;
-import cr.talent.model.TechnicalResource;
+import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.*;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
@@ -26,6 +25,7 @@ import java.util.Set;
  *
  * @author Fabián Roberto Leandro
  * @author Daniel Montes de Oca
+ * @author Daniel Montes de Oca, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
@@ -41,17 +41,21 @@ public class ProjectPositionResource {
     @Autowired
     TechnicalResourceService technicalResourceService;
 
+    @Autowired
+    ProjectService projectService;
+
     /**
      * Endpoint for assigning project positions to technical resources
-     * @param username the technical resource's username
+     *
+     * @param username          the technical resource's username
      * @param projectPositionId the identifier of the project position
-     * @return  400 if a parameter was left empty or if the id was of a project position of another organization
-     *              or if the end date is not valid
-     *          403 if the logged in user lacks the permissions to assign the project position
-     *          404 if no project position with that id was not found or if there is no technical resource with the
-     *          assignee's username
-     *          409 if the project has no active lead
-     *          200 if the project position was assigned correctly
+     * @return 400 if a parameter was left empty or if the id was of a project position of another organization
+     * or if the end date is not valid
+     * 403 if the logged in user lacks the permissions to assign the project position
+     * 404 if no project position with that id was not found or if there is no technical resource with the
+     * assignee's username
+     * 409 if the project has no active lead
+     * 200 if the project position was assigned correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
@@ -94,14 +98,15 @@ public class ProjectPositionResource {
 
     /**
      * Used for unassigning a project position of a technical resource
+     *
      * @param projectPositionHolderId the id of the project position that will be unassigned
-     * @param endDate the date that the resource stopped working on the project position
+     * @param endDate                 the date that the resource stopped working on the project position
      * @return 400 if a parameter was left empty or if the id was of a project position of another organization
-     *              or if the start date is not valid
-     *          403 if the logged in user lacks the permissions to unassign the project position
-     *          404 if no project position holder with that id was not found
-     *          409 if the project has no active lead or if the provided end date is before the start date
-     *          200 if the project position was unassigned correctly
+     * or if the start date is not valid
+     * 403 if the logged in user lacks the permissions to unassign the project position
+     * 404 if no project position holder with that id was not found
+     * 409 if the project has no active lead or if the provided end date is before the start date
+     * 200 if the project position was unassigned correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
@@ -135,13 +140,14 @@ public class ProjectPositionResource {
 
     /**
      * Used for unassigning a project position of a technical resource
+     *
      * @param projectPositionHolderId the id of the project position that will be unassigned
-     * @return  400 if a parameter was left empty or if the id was of a project position of another organization
-     *              or if the start date is not valid
-     *          403 if the logged in user lacks the permissions to unassign the project position
-     *          404 if no project position holder with that id was not found
-     *          409 if the project has no active lead
-     *          200 if the project position was unassigned correctly
+     * @return 400 if a parameter was left empty or if the id was of a project position of another organization
+     * or if the start date is not valid
+     * 403 if the logged in user lacks the permissions to unassign the project position
+     * 404 if no project position holder with that id was not found
+     * 409 if the project has no active lead
+     * 200 if the project position was unassigned correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)

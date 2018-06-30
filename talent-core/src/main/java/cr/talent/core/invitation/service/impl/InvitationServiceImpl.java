@@ -11,9 +11,12 @@ import cr.talent.model.TechnicalResource;
 import cr.talent.model.User;
 import cr.talent.support.exceptions.AlreadyRegisteredUserException;
 import cr.talent.support.exceptions.EmptyDestinationEmailException;
-import cr.talent.support.exceptions.InvalidInvitationException;
+import cr.talent.support.exceptions.InvalidJSONException;
 import cr.talent.support.exceptions.LimitOfInvitationsReachedException;
 import cr.talent.support.service.impl.CrudServiceImpl;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,24 +57,52 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
     @Autowired
     private InvitationEmailService invitationEmailService;
 
-
     public void init() {
         setCrudDao(this.invitationDao);
     }
 
     /**
-     * @see cr.talent.core.invitation.service.InvitationService#createInvitations(List, Organization)
+     * @see cr.talent.core.invitation.service.InvitationService#createInvitations(String, Organization)
      */
     @Override
     @SuppressWarnings("unchecked")
-    public void createInvitations(List<String> emails, Organization organization) {
+    public void createInvitations(String invitations, Organization organization) {
         final String invitationLimitReachedMsg = "The limit of invitations available for the organization has been reached.";
         final String alreadyRegisteredUserMsg = "The email for the invitation is already registered in the organization.";
         final String emptyDestinationEmailMsg = "One of the emails passed to the service is empty.";
+        final String invalidJSONExceptionMsg = "The provided JSON is invalid.";
+        final String noContentInJSONExceptionMsg = "The provided JSON does not have any content.";
 
         List<Invitation> invitationsToSend = new ArrayList<>();
+        JSONObject invitationsJSON;
+        JSONArray invitationsList;
 
-        for (String email : emails) {
+        try {
+            invitationsJSON = new JSONObject(invitations);
+            invitationsList = invitationsJSON.getJSONArray("invitations");
+        } catch (Exception e){
+            throw new InvalidJSONException(invalidJSONExceptionMsg);
+        }
+
+        int invitationsListSize = invitationsList.length();
+
+        if(invitationsListSize == 0)
+            throw new InvalidJSONException(noContentInJSONExceptionMsg);
+
+        String email, firstName, lastName;
+
+        for (int i = 0; i < invitationsListSize; i++) {
+
+            try {
+                email = invitationsList.getJSONObject(i).getString("email");
+                firstName = invitationsList.getJSONObject(i).getString("firstName");
+                lastName = invitationsList.getJSONObject(i).getString("lastName");
+            } catch (JSONException e){
+                throw new InvalidJSONException(invalidJSONExceptionMsg);
+            }
+
+            if(StringUtils.isEmpty(firstName) || StringUtils.isEmpty(lastName))
+                throw new InvalidJSONException(invalidJSONExceptionMsg);
 
             if (StringUtils.isEmpty(email)) {
                 throw new EmptyDestinationEmailException(emptyDestinationEmailMsg);
@@ -89,8 +120,8 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
                 // Get the appropriate instantiation of organization from the service
                 organization = this.organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier());
 
-                Set<Invitation> invitations = this.organizationService.getValidInvitations(organization);
-                int totalInvitationsAndResources = invitations.size() + organization.getResources().size();
+                Set<Invitation> organizationInvitations = this.organizationService.getValidInvitations(organization);
+                int totalInvitationsAndResources = organizationInvitations.size() + organization.getResources().size();
 
                 if (totalInvitationsAndResources >= LIMIT_OF_INVITATIONS)
                     throw new LimitOfInvitationsReachedException(invitationLimitReachedMsg);
@@ -104,6 +135,8 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
             Invitation newInvitation = new Invitation();
             newInvitation.setOrganization(organization);
             newInvitation.setEmail(email);
+            newInvitation.setFirstName(firstName);
+            newInvitation.setLastName(lastName);
 
             String token = UUID.randomUUID().toString();
             newInvitation.setToken(token);
@@ -116,7 +149,7 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
 
         //Sends the invitations until all of them are validated and stored.
         for (Invitation invitationToSend : invitationsToSend) {
-            this.invitationEmailService.sendInvitationEmail(invitationToSend, organization.getUniqueIdentifier());
+            this.invitationEmailService.sendInvitationEmail(invitationToSend);
         }
     }
 
@@ -124,9 +157,11 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
      * @see cr.talent.core.invitation.service.InvitationService#isTokenValid(String)
      */
     @Override
-    public boolean isTokenValid(String token) {
+    public Invitation isTokenValid(String token) {
         Invitation invitation = this.invitationDao.findInvitationByToken(token);
-        return invitation != null && invitation.isValid();
+        if(invitation == null || !invitation.isValid())
+            invitation = null;
+        return invitation;
     }
 
     /**
@@ -134,18 +169,14 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
      */
     @Override
     public TechnicalResource acceptInvite(String nickname, String password, String token) {
-        final String invalidInvitationExceptionMsg = "The invitation is invalid.";
 
         Invitation invitation = this.invitationDao.findInvitationByToken(token); // get the invitation
 
-        if(!this.isTokenValid(token))
-            throw new InvalidInvitationException(invalidInvitationExceptionMsg);
-
         TechnicalResource technicalResource = new TechnicalResource(); // build the technical resource
-        technicalResource.setFirstName("Name"); //should be changed on TAL-471 PR
-        technicalResource.setLastName("LastName"); //should be changed on TAL-471 PR
-        technicalResource.setNickname(nickname);
+        technicalResource.setFirstName(invitation.getFirstName());
+        technicalResource.setLastName(invitation.getLastName());
         technicalResource.setUsername(invitation.getEmail());
+        technicalResource.setNickname(nickname);
         technicalResource.setPassword(password);
         technicalResource.setStatus(User.Status.ACTIVE);
         technicalResource.setAdministrator(false); // because they are signing up while creating an organization
@@ -154,7 +185,7 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         this.technicalResourceService.create(technicalResource);
 
         invitation.setValid(false); // invalidate the invitation
-        this.update(invitation);
+        this.invitationDao.update(invitation);
 
         Authentication authentication =
                 new UsernamePasswordAuthenticationToken(technicalResource, null, technicalResource.getAuthorities());
