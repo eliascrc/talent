@@ -129,7 +129,7 @@ public class ProjectResourceTest extends FunctionalTest {
                 .then().statusCode(404);
     }
 
-    @Test
+    /*@Test
     public void createProjectRequestTest(){
         given()
                 .filter(this.sessionFilter)
@@ -138,5 +138,5 @@ public class ProjectResourceTest extends FunctionalTest {
                 .formParam(this.name,"xBase")
                 .when().post(this.createProjectWebService)
                 .then().statusCode(200);
-    }
+    }*/
 }

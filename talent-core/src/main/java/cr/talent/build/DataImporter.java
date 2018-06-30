@@ -3,29 +3,22 @@ package cr.talent.build;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.privacyPolicy.service.PrivacyPolicyService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+import cr.talent.core.skill.service.SkillService;
+import cr.talent.core.skillCategory.service.SkillCategoryService;
 import cr.talent.core.termsOfService.service.ToSService;
 import cr.talent.core.capabilityLevel.service.CapabilityLevelService;
 import cr.talent.core.capability.service.CapabilityService;
 import cr.talent.core.educationRecord.service.EducationRecordService;
-import cr.talent.core.organizationSkill.service.OrganizationSkillService;
-import cr.talent.core.organizationSkillCategory.service.OrganizationSkillCategoryService;
 import cr.talent.core.projectPosition.service.ProjectPositionService;
+import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.core.technicalPosition.service.TechnicalPositionService;
+import cr.talent.core.leadPosition.service.LeadPositionService;
 import cr.talent.core.language.service.LanguageService;
 import cr.talent.core.project.service.ProjectService;
-import cr.talent.model.Organization;
-import cr.talent.model.PrivacyPolicy;
-import cr.talent.model.TechnicalResource;
-import cr.talent.model.TermsOfService;
-import cr.talent.model.EducationRecord;
-import cr.talent.model.OrganizationSkill;
-import cr.talent.model.OrganizationSkillCategory;
-import cr.talent.model.Language;
-import cr.talent.model.Capability;
-import cr.talent.model.CapabilityLevel;
-import cr.talent.model.Project;
-import cr.talent.model.TechnicalPosition;
-import cr.talent.model.ProjectPosition;
+import cr.talent.core.feedback.service.FeedbackService;
+import cr.talent.core.projectEvent.service.ProjectEventService;
+import cr.talent.core.security.humanResourceManager.service.HumanResourceManagerService;
+import cr.talent.model.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.util.List;
 
@@ -81,6 +74,12 @@ public class DataImporter {
             technicalResourceService.create(technicalResource);
         }
 
+        List<HumanResourceManager> humanResourceManagers = dataParser.getHumanResourceManagers();
+        HumanResourceManagerService humanResourceManagerService = context.getBean(HumanResourceManagerService.class);
+
+        for (HumanResourceManager humanResourceManager: humanResourceManagers) {
+            humanResourceManagerService.create(humanResourceManager);
+        }
 
         List<PrivacyPolicy> privacyPolicyVersions = dataParser.getPrivacyPolicyVersions();
         PrivacyPolicyService privacyPolicyService = context.getBean(PrivacyPolicyService.class);
@@ -103,19 +102,18 @@ public class DataImporter {
             educationRecordService.create(educationRecord);
         }
 
+        List<SkillCategory> skillCategories = dataParser.getSkillCategories();
+        SkillCategoryService skillCategoryService = context.getBean(SkillCategoryService.class);
 
-        List<OrganizationSkillCategory> organizationSkillCategories = dataParser.getOrganizationSkillCategories();
-        OrganizationSkillCategoryService organizationSkillCategoryService = context.getBean(OrganizationSkillCategoryService.class);
-
-        for(OrganizationSkillCategory organizationSkillCategory : organizationSkillCategories){
-            organizationSkillCategoryService.create(organizationSkillCategory);
+        for(SkillCategory skillCategory : skillCategories){
+            skillCategoryService.create(skillCategory);
         }
 
-        List<OrganizationSkill> organizationSkills = dataParser.getOrganizationSkills();
-        OrganizationSkillService organizationSkillService = context.getBean(OrganizationSkillService.class);
+        List<Skill> skills = dataParser.getSkills();
+        SkillService skillService = context.getBean(SkillService.class);
 
-        for(OrganizationSkill organizationSkill : organizationSkills){
-            organizationSkillService.create(organizationSkill);
+        for(Skill skill : skills){
+            skillService.create(skill);
         }
 
         List<Capability> capabilities = dataParser.getCapabilities();
@@ -147,6 +145,20 @@ public class DataImporter {
             projectService.create(project);
         }
 
+        List<ProjectEvent> projectEvents = dataParser.getProjectEvents();
+        ProjectEventService projectEventService = context.getBean(ProjectEventService.class);
+
+        for (ProjectEvent projectEvent : projectEvents){
+            projectEventService.create(projectEvent);
+            for(Project project : projects)
+            {
+                if (project.getName().equals(projectEvent.getProject().getName())){
+                    project.setcurrentState(projectEvent);
+                    projectService.update(project);
+                }
+            }
+        }
+
         List<ProjectPosition> projectPositions = dataParser.getProjectPositions();
         ProjectPositionService projectPositionService = context.getBean(ProjectPositionService.class);
 
@@ -154,6 +166,26 @@ public class DataImporter {
             projectPositionService.create(projectPosition);
         }
 
+        List<ProjectPositionHolder> projectPositionHolders = dataParser.getProjectPositionHolders();
+        ProjectPositionHolderService projectPositionHolderService = context.getBean(ProjectPositionHolderService.class);
+
+        for (ProjectPositionHolder projectPositionHolder : projectPositionHolders){
+            projectPositionHolderService.create(projectPositionHolder);
+        }
+
+        List<LeadPosition> leadPositions = dataParser.getLeadPositions();
+        LeadPositionService leadPositionService = context.getBean(LeadPositionService.class);
+
+        for (LeadPosition leadPosition : leadPositions) {
+            leadPositionService.create(leadPosition);
+        }
+
+        List<Feedback> feedbacks = dataParser.getFeedbacks();
+        FeedbackService feedbackService = context.getBean(FeedbackService.class);
+
+        for (Feedback feedback : feedbacks){
+            feedbackService.create(feedback);
+        }
     }
 
     public static void main(String[] args) {
