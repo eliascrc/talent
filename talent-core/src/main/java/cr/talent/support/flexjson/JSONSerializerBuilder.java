@@ -1,8 +1,6 @@
 package cr.talent.support.flexjson;
 
-import cr.talent.model.Organization;
-import cr.talent.model.Image;
-import cr.talent.model.TechnicalResource;
+import cr.talent.model.*;
 import flexjson.JSONSerializer;
 import flexjson.transformer.BooleanTransformer;
 import org.slf4j.Logger;
@@ -189,7 +187,7 @@ public class JSONSerializerBuilder {
     public static JSONSerializer getTechnicalResourceSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
-        List<String> tempIncludes = new LinkedList<>();
+        List<String> tempIncludes;
 
         excludes.addAll(getGlobalExcludes());
 
@@ -220,6 +218,37 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a basic serializer that returns the category and skill of an OrganizationSkillCategory
+     * @return the JSONSerializer to be used to serialize a OrganizationSkill
+     */
+    public static JSONSerializer getOrganizationSkillSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        tempIncludes.add("name");
+
+        // Excludes all attributes of the OrganizationSkillCategory class except its name
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(OrganizationSkillCategory.class, "category", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+
+        // Excludes all attributes of OrganizationSkill except its name
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(OrganizationSkill.class, "", tempIncludes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("OrganizationSkill Serializer {} created", serializer.toString());
+
         return serializer;
     }
 
