@@ -1369,6 +1369,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1378,6 +1379,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1387,6 +1389,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1396,6 +1399,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1405,6 +1409,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1414,6 +1419,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1423,6 +1429,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1432,6 +1439,7 @@
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<project>Bachmann–Landau(1)</project>
+			<organization>monkey-labs</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1441,6 +1449,7 @@
 			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
 			<project>Barbarossa</project>
+			<organization>andromeda-spiral</organization>
 		</projectPosition>
 
 		<projectPosition>
@@ -1450,6 +1459,7 @@
 			<capabilityLevelOrganization>andromeda-spiral</capabilityLevelOrganization>
 			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
 			<project>Overlord</project>
+			<organization>andromeda-spiral</organization>
 		</projectPosition>
 
 	</projectPositions>
@@ -1464,6 +1474,7 @@
 			<startDate>2/2/2014</startDate>
 			<endDate></endDate>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 			<capabilityLevelName>Intermediate</capabilityLevelName>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
 			<technicalResource>howard.lovecraft@example.com</technicalResource>
@@ -1476,6 +1487,7 @@
 			<startDate>2/2/2014</startDate>
 			<endDate>2/2/2018</endDate>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
 			<technicalResource>marianaabellan4@gmail.com</technicalResource>
@@ -1489,6 +1501,7 @@
 			<startDate>2/2/2014</startDate>
 			<endDate></endDate>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
 			<technicalResource>kendall.garcia@gmail.com</technicalResource>
@@ -1501,6 +1514,7 @@
 			<startDate>2/2/2014</startDate>
 			<endDate></endDate>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<technicalResource>kendall.garcia@gmail.com</technicalResource>
@@ -1513,6 +1527,7 @@
 			<startDate>2/2/2014</startDate>
 			<endDate>3/7/2016</endDate>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<technicalResource>john.tolkien@example.com</technicalResource>
@@ -1525,6 +1540,7 @@
 			<startDate>2/2/2016</startDate>
 			<endDate>2/2/2017</endDate>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<technicalResource>andrea.solano@example.com</technicalResource>
@@ -1537,6 +1553,7 @@
 			<startDate>2/2/2017</startDate>
 			<endDate></endDate>
 			<project>talent</project>
+			<organization>monkey-labs</organization>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
 			<technicalResource>john.tolkien@example.com</technicalResource>
@@ -1549,6 +1566,7 @@
 			<startDate>2/2/2012</startDate>
 			<endDate>3/7/2016</endDate>
 			<project>Overlord</project>
+			<organization>andromeda-spiral</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
 			<technicalResource>sophie.germain@example.com</technicalResource>
@@ -1561,6 +1579,7 @@
 			<startDate>3/8/2016</startDate>
 			<endDate></endDate>
 			<project>Overlord</project>
+			<organization>andromeda-spiral</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
 			<technicalResource>leonhard.euler@example.com</technicalResource>
@@ -1573,6 +1592,7 @@
 			<startDate>3/8/2016</startDate>
 			<endDate></endDate>
 			<project>Barbarossa</project>
+			<organization>andromeda-spiral</organization>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
 			<technicalResource>friedrich.gauss@example.com</technicalResource>

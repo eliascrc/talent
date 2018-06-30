@@ -346,7 +346,7 @@ class DataParser extends XmlParser {
         projectPositionHolder.setReviewed(getBooleanValue(projectPositionHolderElement, "reviewed"));
         projectPositionHolder.setStartDate(getDateValue(projectPositionHolderElement, "startDate"));
         projectPositionHolder.setEndDate(getDateValue(projectPositionHolderElement, "endDate"));
-        this.linkProjectPositionHolderToProjectPosition(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "project"), getAttributeValue(projectPositionHolderElement, "capabilityLevelName"), getAttributeValue(projectPositionHolderElement, "capabilityLevelCapability"));
+        this.linkProjectPositionHolderToProjectPosition(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "project"), getAttributeValue(projectPositionHolderElement, "capabilityLevelName"), getAttributeValue(projectPositionHolderElement, "capabilityLevelCapability"), getAttributeValue(projectPositionHolderElement, "organization"));
         this.linkProjectPositionHolderToTechnicalResource(projectPositionHolder, getAttributeValue(projectPositionHolderElement, "technicalResource"));
 
         return projectPositionHolder;
@@ -900,12 +900,13 @@ class DataParser extends XmlParser {
      * @param capabilityLevelCapability the capability of the capabilityLevel of the projectPosition that will be linked to the projectPositionHolder
      * */
 
-    private void linkProjectPositionHolderToProjectPosition(ProjectPositionHolder projectPositionHolder, String projectName, String capabilityLevelName, String capabilityLevelCapability){
+    private void linkProjectPositionHolderToProjectPosition(ProjectPositionHolder projectPositionHolder, String projectName, String capabilityLevelName, String capabilityLevelCapability, String organization){
         ProjectPosition projectPosition = null;
         for (ProjectPosition projectPositionIterator : this.projectPositions){
             if(projectPositionIterator.getProject().getName().equals(projectName)
                     && projectPositionIterator.getCapability().getCapability().getName().equals(capabilityLevelCapability)
-                    && projectPositionIterator.getCapability().getName().equals(capabilityLevelName)) {
+                    && projectPositionIterator.getCapability().getName().equals(capabilityLevelName)
+                    && projectPositionIterator.getProject().getOrganization().getUniqueIdentifier().equals(organization)) {
 
 
                 projectPosition = projectPositionIterator;
