@@ -1,8 +1,6 @@
 package cr.talent.support.flexjson;
 
-import cr.talent.model.Organization;
-import cr.talent.model.Image;
-import cr.talent.model.TechnicalResource;
+import cr.talent.model.*;
 import flexjson.JSONSerializer;
 import flexjson.transformer.BooleanTransformer;
 import org.slf4j.Logger;
@@ -189,7 +187,7 @@ public class JSONSerializerBuilder {
     public static JSONSerializer getTechnicalResourceSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
-        List<String> tempIncludes = new LinkedList<>();
+        List<String> tempIncludes;
 
         excludes.addAll(getGlobalExcludes());
 
@@ -220,6 +218,38 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a basic serializer that returns the category and skill of an OrganizationSkillCategory
+     * @return the JSONSerializer to be used to serialize a OrganizationSkill
+     */
+    public static JSONSerializer getSkillSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        // Excludes all attributes of the SkillCategory class except its name
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(SkillCategory.class, "category", tempIncludes));
+        
+        // Excludes all attributes of Skill except its name, category and skillType
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("category");
+        tempIncludes.add("skillType");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "", tempIncludes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("OrganizationSkill Serializer {} created", serializer.toString());
+
         return serializer;
     }
 
@@ -271,6 +301,39 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("Project Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a basic serializer that returns the first name, last name and organization logo for an invitation
+     * @return a JSON of the invitation model.
+     */
+    public static JSONSerializer getInvitationSerializer() {
+        JSONSerializer serializer = getBasicSerializer(); // core serializer which excludes classnames
+        List<String> excludes = new LinkedList<>(); // list which will store all excluded attributes
+        List<String> includes = new LinkedList<>(); // list which will store all included attributes
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        includes.add("firstName");
+        includes.add("lastName");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Invitation.class, "", includes));
+
+        includes = new LinkedList<>();
+        includes.add("logo");
+
+        // adds all attributes of the Organization class as excludes except those in the includes list
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", includes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        serializer.transform(new ImageTransformer(), "logo");
+
+        // logs the creation of the serializer
+        logger.trace("Invitation Serializer {} created", serializer.toString());
+
         return serializer;
     }
 
