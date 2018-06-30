@@ -1,6 +1,7 @@
 package cr.talent.core.project.service;
 
 import cr.talent.model.Project;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.service.CrudService;
 
 /**
@@ -10,5 +11,6 @@ import cr.talent.support.service.CrudService;
  */
 public interface ProjectService extends CrudService<Project, String> {
 
+    void changeProjectState(Project project, String status, TechnicalResource lead);
 
 }

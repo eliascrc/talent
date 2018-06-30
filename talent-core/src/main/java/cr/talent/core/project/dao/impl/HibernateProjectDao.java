@@ -2,6 +2,7 @@ package cr.talent.core.project.dao.impl;
 
 import cr.talent.core.project.dao.ProjectDao;
 import cr.talent.model.Project;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.dao.impl.HibernateCrudDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
