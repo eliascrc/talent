@@ -14,6 +14,7 @@ import static org.mockito.Mockito.*;
 public class ProjectPositionServiceTest {
     @Test
     public void testCreateProjectPositionCall() {
+
         ProjectPositionDao projectPositionDao = mock(ProjectPositionDao.class);
         TechnicalResource assigner = mock(TechnicalResource.class);
         Organization organization = mock(Organization.class);
@@ -24,6 +25,7 @@ public class ProjectPositionServiceTest {
         leadHistory.add(leadPosition);
         int totalHours = 1;
         boolean active = true;
+
         when(assigner.getOrganization()).thenReturn(organization);
         when(project.getLeadHistory()).thenReturn(leadHistory);
         when(project.getOrganization()).thenReturn(organization);

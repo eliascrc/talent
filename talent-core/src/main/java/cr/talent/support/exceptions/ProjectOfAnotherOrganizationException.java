@@ -1,5 +1,11 @@
 package cr.talent.support.exceptions;
 
+/**
+ * A runtime exception that is thrown when the {@link cr.talent.core.projectPosition.service.ProjectPositionService}
+ * notices when a project does not match with the capabilityLevel
+ *
+ * @author Otto Mena Kikut
+ */
 public class ProjectOfAnotherOrganizationException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;

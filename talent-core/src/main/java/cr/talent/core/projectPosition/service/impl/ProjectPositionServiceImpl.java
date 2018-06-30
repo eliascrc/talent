@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
 /**
  * Default implementation of the {@link cr.talent.core.projectPosition.service.ProjectPositionService}.
  *
- * @author Elías Calderón && Otto Mena
+ * @author Elías Calderón, Otto Mena
  */
 @Service("projectPositionService")
 @Transactional
