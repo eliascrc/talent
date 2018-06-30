@@ -232,16 +232,16 @@ public class JSONSerializerBuilder {
 
         excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
 
+        // Excludes all attributes of the SkillCategory class except its name
         tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(SkillCategory.class, "category", tempIncludes));
 
-        // Excludes all attributes of the OrganizationSkillCategory class except its name
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(OrganizationSkillCategory.class, "category", tempIncludes));
-
+        // Excludes all attributes of Skill except its name, category and skillType
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
-
-        // Excludes all attributes of OrganizationSkill except its name
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(OrganizationSkill.class, "", tempIncludes));
+        tempIncludes.add("category");
+        tempIncludes.add("skillType");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "", tempIncludes));
 
         // sets the added excludes to the serializer
         serializer.setExcludes(excludes);
