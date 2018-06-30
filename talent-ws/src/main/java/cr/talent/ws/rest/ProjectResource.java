@@ -87,4 +87,26 @@ public class ProjectResource {
 
         return Response.ok().entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(project)).build();
     }
+
+    @POST
+    @Path("/changeStatus")
+    public Response changeProjectStatus(
+            @FormParam("projectId") String projectId,
+            @FormParam("newProjectStatus") String newProjectStatus){
+
+        if (StringUtils.isEmpty(projectId) || StringUtils.isEmpty(newProjectStatus))
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
+
+        Project project = this.projectService.findById(projectId);
+        if (project == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("No project with this Id was found.").build();
+
+        if(project.getcurrentState().getEventType().equals(newProjectStatus)){
+            return Response.status(Response.Status.CONFLICT).entity("The status sent in the body is already the status of the project.").build();
+        }
+        this.projectService.update(project);
+
+        return Response.ok().build();
+    }
+
 }
