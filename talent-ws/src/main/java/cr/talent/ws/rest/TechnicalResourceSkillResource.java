@@ -1,8 +1,9 @@
 package cr.talent.ws.rest;
 
 
-import cr.talent.core.organizationSkill.service.OrganizationSkillService;
+
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+import cr.talent.core.skill.service.SkillService;
 import cr.talent.model.Organization;
 import cr.talent.model.Skill;
 import cr.talent.model.TechnicalResource;
@@ -31,7 +32,7 @@ import java.util.Set;
 public class TechnicalResourceSkillResource {
 
     @Autowired
-    OrganizationSkillService organizationSkillService;
+    SkillService skillService;
 
     @Autowired
     TechnicalResourceService technicalResourceService;
@@ -66,7 +67,7 @@ public class TechnicalResourceSkillResource {
         Organization organization = technicalResource.getOrganization();
 
         try {
-            this.organizationSkillService.assignSkillToTechnicalResource(skills, organization, technicalResource);
+            this.skillService.assignSkillToTechnicalResource(skills, organization, technicalResource);
         } catch (NonExistentSkillException e) {
             return Response.status(Response.Status.NOT_FOUND).
                     entity("NonExistentSkill").build();
