@@ -311,7 +311,7 @@ public class JSONSerializerBuilder {
      * Creates a basic serializer that returns every project position in a project, along with each project's position
      * holders over time.
      *
-     * @return the JSONSerializer to be used to serialize a OrganizationSkill
+     * @return the JSONSerializer to be used to serialize a ProjectPosition
      */
     public static JSONSerializer getProjectPositionSerializer() {
         JSONSerializer serializer = getBasicSerializer();
@@ -339,15 +339,15 @@ public class JSONSerializerBuilder {
         tempIncludes.add("name");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capability.capability", tempIncludes));
 
-        // Exclude all attributes of the CapabilityLevel capability attribute in ProjectPosition except name and capability
+        // Exclude all attributes of the CapabilityLevel capabilityLevel attribute in ProjectPosition except name and capability
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
         tempIncludes.add("capability");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "capability", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "capabilityLevel", tempIncludes));
 
-        // Exclude all attributes of ProjectPosition except capability and holderHistory
+        // Exclude all attributes of ProjectPosition except capabilityLevel and holderHistory
         tempIncludes = new LinkedList<>();
-        tempIncludes.add("capability");
+        tempIncludes.add("capabilityLevel");
         tempIncludes.add("holderHistory");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPosition.class, "", tempIncludes));
 

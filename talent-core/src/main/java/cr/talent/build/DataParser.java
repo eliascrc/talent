@@ -1011,8 +1011,8 @@ class DataParser extends XmlParser {
         ProjectPosition projectPosition = null;
         for (ProjectPosition projectPositionIterator : this.projectPositions){
             if(projectPositionIterator.getProject().getName().equals(projectName)
-                    && projectPositionIterator.getCapability().getCapability().getName().equals(capabilityLevelCapability)
-                    && projectPositionIterator.getCapability().getName().equals(capabilityLevelName)
+                    && projectPositionIterator.getCapabilityLevel().getCapability().getName().equals(capabilityLevelCapability)
+                    && projectPositionIterator.getCapabilityLevel().getName().equals(capabilityLevelName)
                     && projectPositionIterator.getProject().getOrganization().getUniqueIdentifier().equals(organization)) {
 
 
