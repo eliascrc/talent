@@ -1,5 +1,6 @@
 package cr.talent.core.projectPositionHolder.service;
 
+import cr.talent.model.Project;
 import cr.talent.model.ProjectPosition;
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
@@ -38,5 +39,14 @@ public interface ProjectPositionHolderService extends CrudService<ProjectPositio
      * @param currentDate the date in which the unassigning is happening
      */
     void unassignProjectPositionBeforeProjectStart(ProjectPositionHolder projectPositionHolder, TechnicalResource unassigner, Date currentDate);
+
+    /**
+     * Provides the business logic to obtain a ProjectPositionHolder given a Project and a TechnicalResource.
+     *
+     * @param project the project where the position exists
+     * @param technicalResource the technical resource that holds the position
+     * @return
+     */
+    ProjectPositionHolder getProjectPositionByProjectAndTechnicalResource(Project project, TechnicalResource technicalResource);
 
 }

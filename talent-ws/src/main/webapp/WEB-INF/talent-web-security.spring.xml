@@ -36,8 +36,10 @@
         <security:intercept-url pattern="/ws/contactUs/unauthenticated" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/signUp/**/*" access="permitAll()" method="POST"/>
         <security:intercept-url pattern="/ws/organization/create" access="permitAll()" method="POST"/>
+        <security:intercept-url pattern="/ws/organization/project/getHistory" access="hasAuthority('ROLE_USER')" method="GET"/>
         <security:intercept-url pattern="/ws/technicalResource/skill/assign" access="hasAuthority('ROLE_USER')" method="POST"/>
         <security:intercept-url pattern="/ws/technicalResource/skill/get" access="hasAuthority('ROLE_USER')" method="GET"/>
+        <security:intercept-url pattern="/ws/projectPosition/get" access="hasAuthority('ROLE_USER')" method="GET"/>
         <security:intercept-url pattern="/ws/technicalResource/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
         <security:intercept-url pattern="/ws/projectPosition/**/*" access="hasAuthority('ROLE_USER')" method="POST"/>
         <security:intercept-url pattern="/ws/acceptInvitation/validate/*" access="permitAll()" method="GET"/>

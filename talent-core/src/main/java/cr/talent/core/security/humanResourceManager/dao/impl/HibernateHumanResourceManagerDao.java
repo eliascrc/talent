@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Hibernate implementation of the {@link cr.talent.core.security.humanResourceManager.dao.HumanResourceManagerDao}.
  *
- * @author Elías Calderón
+ * @author Otto Mena
  */
 @Repository("humanResourceManagerDao")
 public class HibernateHumanResourceManagerDao extends HibernateCrudDao<HumanResourceManager, String> implements HumanResourceManagerDao {
