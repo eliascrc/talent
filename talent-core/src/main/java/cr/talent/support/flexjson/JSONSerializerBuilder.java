@@ -327,6 +327,7 @@ public class JSONSerializerBuilder {
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("profilePicture");
+        tempIncludes.add("username");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "holderHistory.resource", tempIncludes));
 
         // Exclude all attributes of the ProjectPositionHolder holderHistory attribute in ProjectPosition except resource
