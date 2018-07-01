@@ -5,6 +5,8 @@ import com.jayway.restassured.http.ContentType;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static com.jayway.restassured.RestAssured.given;
 
 /**
@@ -15,7 +17,9 @@ public class ProjectResourceTest extends FunctionalTest {
 
     private final String createProjectWebService = "/ws/organization/project/create";
     private final String name = "name";
-    private final String organizationUniqueIdentifier = "organizationUniqueIdentifier";
+    private final String startDate = "startDate";
+    private final String projectLead = "projectLead";
+    private final String description = "description";
     private SessionFilter sessionFilter;
 
     public ProjectResourceTest(){
@@ -76,67 +80,76 @@ public class ProjectResourceTest extends FunctionalTest {
     }
 
     @Test
-    public void onlyEmptyUIDRequestTest(){
+    public void onlyNullStartDateTest(){
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam(this.organizationUniqueIdentifier,"")
+                .formParam(this.startDate,(Object)null)
                 .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
     @Test
-    public void emptyNameRequestTest(){
+    public void onlyEmptyProjectLeadTest(){
+        given()
+                .filter(this.sessionFilter)
+                .contentType(ContentType.URLENC)
+                .formParam(this.projectLead,"")
+                .when().post(this.createProjectWebService)
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void onlyEmptyDescriptionTest(){
+        given()
+                .filter(this.sessionFilter)
+                .contentType(ContentType.URLENC)
+                .formParam(this.description,"")
+                .when().post(this.createProjectWebService)
+                .then().statusCode(400);
+    }
+
+    @Test
+    public void nullStartDateRequestTest(){
+        given()
+                .filter(this.sessionFilter)
+                .contentType(ContentType.URLENC)
+                .formParam(this.name,"name")
+                .formParam(this.startDate,(Object)null)
+                .formParam(this.description,"description")
+                .when().post(this.createProjectWebService)
+                .then().statusCode(400);
+    }
+
+
+    @Test
+    public void emptyNullParamsRequestTest(){
+
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
                 .formParam(this.name,"")
-                .formParam(this.organizationUniqueIdentifier,"monkey-labs")
+                .formParam(this.startDate,(Object)null)
+                .formParam(this.projectLead,"")
+                .formParam(this.description,"")
                 .when().post(this.createProjectWebService)
                 .then().statusCode(400);
     }
 
-    @Test
-    public void emptyUIDRequestTest(){
-        given()
-                .filter(this.sessionFilter)
-                .contentType(ContentType.URLENC)
-                .formParam(this.name,"xBase")
-                .formParam(this.organizationUniqueIdentifier,"")
-                .when().post(this.createProjectWebService)
-                .then().statusCode(400);
-    }
-
-    @Test
-    public void emptyParamsRequestTest(){
-        given()
-                .filter(this.sessionFilter)
-                .contentType(ContentType.URLENC)
-                .formParam(this.organizationUniqueIdentifier,"")
-                .formParam(this.name,"")
-                .when().post(this.createProjectWebService)
-                .then().statusCode(400);
-    }
 
     /*@Test
-    public void invalidOrganizationRequestTest(){
-        given()
-                .filter(this.sessionFilter)
-                .contentType(ContentType.URLENC)
-                .formParam(this.organizationUniqueIdentifier,"congo-labs")
-                .formParam(this.name,"xBase")
-                .when().post(this.createProjectWebService)
-                .then().statusCode(404);
-    }
+    public void emptyProjectLeadRequestTest(){
 
-    @Test
-    public void createProjectRequestTest(){
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
-                .formParam(this.organizationUniqueIdentifier,"monkey-labs")
-                .formParam(this.name,"xBase")
+                .formParam(this.name,"name")
+                .formParam(this.startDate,new Date())
+                .formParam(this.projectLead,"")
+                .formParam(this.description,"description")
                 .when().post(this.createProjectWebService)
-                .then().statusCode(200);
+                .then().statusCode(200);//projectLead is optional
     }*/
+
+
 }
