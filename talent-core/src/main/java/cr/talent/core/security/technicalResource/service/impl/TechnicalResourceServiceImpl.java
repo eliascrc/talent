@@ -203,8 +203,8 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
             throw new AlreadyAssignedTechnicalPositionException(alreadyAssignedTechnicalPositionMessage);
 
         // Verify that the user has the skills required to hold the position to be assigned
-        Set<OrganizationSkill> technicalResourceSkills = technicalResource.getSkills();
-        Set<OrganizationSkill> requiredSkills = foundCapabilityLevel.getRequiredSkills();
+        Set<Skill> technicalResourceSkills = technicalResource.getSkills();
+        Set<Skill> requiredSkills = foundCapabilityLevel.getRequiredSkills();
 
         // If the required skills are null or empty, the user automatically has the required skills.
         // Otherwise, if the user's skills are null or do not contain the required skills, throw the exception.
