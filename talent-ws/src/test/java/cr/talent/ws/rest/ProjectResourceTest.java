@@ -118,7 +118,7 @@ public class ProjectResourceTest extends FunctionalTest {
                 .then().statusCode(400);
     }
 
-    @Test
+    /*@Test
     public void invalidOrganizationRequestTest(){
         given()
                 .filter(this.sessionFilter)
@@ -129,7 +129,7 @@ public class ProjectResourceTest extends FunctionalTest {
                 .then().statusCode(404);
     }
 
-    /*@Test
+    @Test
     public void createProjectRequestTest(){
         given()
                 .filter(this.sessionFilter)
