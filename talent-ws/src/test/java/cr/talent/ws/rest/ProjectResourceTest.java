@@ -122,9 +122,9 @@ public class ProjectResourceTest extends FunctionalTest {
     }
 
 
-
     @Test
     public void emptyNullParamsRequestTest(){
+
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)
@@ -136,9 +136,10 @@ public class ProjectResourceTest extends FunctionalTest {
                 .then().statusCode(400);
     }
 
-    /*
-    @Test
+
+    /*@Test
     public void emptyProjectLeadRequestTest(){
+
         given()
                 .filter(this.sessionFilter)
                 .contentType(ContentType.URLENC)

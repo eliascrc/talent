@@ -1,6 +1,7 @@
 package cr.talent.core.projectPosition.service;
 
 import cr.talent.model.ProjectPosition;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.service.CrudService;
 
 /**
@@ -11,4 +12,9 @@ import cr.talent.support.service.CrudService;
 public interface ProjectPositionService extends CrudService<ProjectPosition, String> {
 
 
+    /**
+     * Queries a list of {@link cr.talent.model.Project} for a technical resource..
+     * @param technicalResource the technical resource.
+     */
+    String getTechnicalResourceActiveProjects(TechnicalResource technicalResource);
 }

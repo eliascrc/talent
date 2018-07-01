@@ -382,6 +382,45 @@ public class JSONSerializerBuilder {
     }
 
     /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of a User's active projects information, for the /ws/technicalResource
+     * /project/get web service.
+     *
+     * @return the JSONSerializer to be used to serialize the project list.
+     */
+    public static JSONSerializer getTechnicalResourceActiveProjectsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes.add("name");
+        tempIncludes.add("uniqueIdentifier");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("state");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("description");
+        tempIncludes.add("startDate");
+        tempIncludes.add("endDate");
+        tempIncludes.add("jiraLink");
+        tempIncludes.add("confluenceLink");
+        tempIncludes.add("versionControlLink");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Project list Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /*
      * Gets a JSONSerializer to use in order to obtain the JSON of a project information, for the /ws/organization/project/get web service.
      *
      * @return the JSONSerializer to be used to serialize the project information.

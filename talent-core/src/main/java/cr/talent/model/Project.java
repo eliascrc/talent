@@ -239,4 +239,16 @@ public class Project extends BasicEntity {
     public void setProjectPositions(Set<ProjectPosition> projectPositions) {
         this.projectPositions = projectPositions;
     }
+
+    public String getOrganizationName(){
+        return this.organization.getName();
+    }
+
+    public String getOrganizationUniqueIdentifier(){
+        return this.organization.getUniqueIdentifier();
+    }
+
+    public String getState(){
+        return this.currentState.getEventType().toString();
+    }
 }
