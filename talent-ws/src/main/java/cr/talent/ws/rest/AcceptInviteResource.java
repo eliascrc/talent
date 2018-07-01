@@ -1,6 +1,7 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.invitation.service.InvitationService;
+import cr.talent.model.Invitation;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.InvalidInvitationException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -30,16 +32,24 @@ public class AcceptInviteResource {
      * Receives a request for validating an invite link token
      *
      * @param token the invite link token.
-     * @return 200 if the token is still valid.
+     * @return 200 if the token is still valid and Invitation JSON.
      *         400 if the token is invalid or not found.
      */
     @GET
     @Path("/validate")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response validateRequestToken (@QueryParam("token") String token){
-        if (StringUtils.isEmpty(token) || !this.invitationService.isTokenValid(token))
+        if (StringUtils.isEmpty(token))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
-        return Response.ok().build();
+        Invitation invitation = this.invitationService.isTokenValid(token);
+        if(invitation == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        String serializedInvitation =
+                JSONSerializerBuilder.getInvitationSerializer().serialize(invitation);
+
+        return Response.ok().entity(serializedInvitation).build();
     }
 
     /**

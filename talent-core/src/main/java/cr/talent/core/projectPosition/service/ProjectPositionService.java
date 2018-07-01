@@ -13,6 +13,7 @@ import cr.talent.support.service.CrudService;
  */
 public interface ProjectPositionService extends CrudService<ProjectPosition, String> {
 
+<<<<<<< HEAD
     /**
      *Used to create a new project position
      *
@@ -22,4 +23,12 @@ public interface ProjectPositionService extends CrudService<ProjectPosition, Str
      * @param totalHours The hours that the project position will have assigned.
      */
     void createProjectPosition(TechnicalResource assigner, Project project, CapabilityLevel capabilityLevel, int totalHours);
+=======
+
+    /**
+     * Queries a list of {@link cr.talent.model.Project} for a technical resource..
+     * @param technicalResource the technical resource.
+     */
+    String getTechnicalResourceActiveProjects(TechnicalResource technicalResource);
+>>>>>>> 2d351e987724fc6e98937556944b5a9f8862879c
 }

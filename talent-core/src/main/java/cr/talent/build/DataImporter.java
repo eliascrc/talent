@@ -16,6 +16,7 @@ import cr.talent.core.leadPosition.service.LeadPositionService;
 import cr.talent.core.language.service.LanguageService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.core.feedback.service.FeedbackService;
+import cr.talent.core.projectEvent.service.ProjectEventService;
 import cr.talent.core.security.humanResourceManager.service.HumanResourceManagerService;
 import cr.talent.model.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -142,6 +143,20 @@ public class DataImporter {
 
         for (Project project : projects) {
             projectService.create(project);
+        }
+
+        List<ProjectEvent> projectEvents = dataParser.getProjectEvents();
+        ProjectEventService projectEventService = context.getBean(ProjectEventService.class);
+
+        for (ProjectEvent projectEvent : projectEvents){
+            projectEventService.create(projectEvent);
+            for(Project project : projects)
+            {
+                if (project.getName().equals(projectEvent.getProject().getName())){
+                    project.setcurrentState(projectEvent);
+                    projectService.update(project);
+                }
+            }
         }
 
         List<ProjectPosition> projectPositions = dataParser.getProjectPositions();
