@@ -327,6 +327,7 @@ public class JSONSerializerBuilder {
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("profilePicture");
+        tempIncludes.add("username");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "holderHistory.resource", tempIncludes));
 
         // Exclude all attributes of the ProjectPositionHolder holderHistory attribute in ProjectPosition except resource
@@ -341,7 +342,7 @@ public class JSONSerializerBuilder {
         // Exclude all attributes of the Capability capability attribute in CapabilityLevel except name and capability
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capability.capability", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capabilityLevel.capability", tempIncludes));
 
         // Exclude all attributes of the CapabilityLevel capabilityLevel attribute in ProjectPosition except name and capability
         tempIncludes = new LinkedList<>();
