@@ -342,7 +342,7 @@ public class JSONSerializerBuilder {
         // Exclude all attributes of the Capability capability attribute in CapabilityLevel except name and capability
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capability.capability", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capabilityLevel.capability", tempIncludes));
 
         // Exclude all attributes of the CapabilityLevel capabilityLevel attribute in ProjectPosition except name and capability
         tempIncludes = new LinkedList<>();
