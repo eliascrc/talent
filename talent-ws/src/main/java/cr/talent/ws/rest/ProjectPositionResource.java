@@ -1,13 +1,14 @@
 package cr.talent.ws.rest;
 
+import cr.talent.core.project.service.ProjectService;
 import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
-import cr.talent.model.ProjectPosition;
-import cr.talent.model.ProjectPositionHolder;
-import cr.talent.model.TechnicalResource;
+import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.*;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
+import flexjson.JSONSerializer;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -18,11 +19,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Resource that handles operations related to project positions
  *
- * @author Daniel Montes de Oca
+ * @author Daniel Montes de Oca, Otto Mena, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
@@ -38,17 +40,21 @@ public class ProjectPositionResource {
     @Autowired
     TechnicalResourceService technicalResourceService;
 
+    @Autowired
+    ProjectService projectService;
+
     /**
      * Endpoint for assigning project positions to technical resources
-     * @param username the technical resource's username
+     *
+     * @param username          the technical resource's username
      * @param projectPositionId the identifier of the project position
-     * @return  400 if a parameter was left empty or if the id was of a project position of another organization
-     *              or if the end date is not valid
-     *          403 if the logged in user lacks the permissions to assign the project position
-     *          404 if no project position with that id was not found or if there is no technical resource with the
-     *          assignee's username
-     *          409 if the project has no active lead
-     *          200 if the project position was assigned correctly
+     * @return 400 if a parameter was left empty or if the id was of a project position of another organization
+     * or if the end date is not valid
+     * 403 if the logged in user lacks the permissions to assign the project position
+     * 404 if no project position with that id was not found or if there is no technical resource with the
+     * assignee's username
+     * 409 if the project has no active lead
+     * 200 if the project position was assigned correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
@@ -91,7 +97,7 @@ public class ProjectPositionResource {
 
     /**Endpoint for deleting a project position
      *
-     * @param projectPositionId
+     * @param projectPositionId the id of the position to be deleted
      * @return 400 if a parameter was left empty
      *         403 if the logged in user lacks the permissions to delete the project position
      *         404 if no project position with that id was found
@@ -123,14 +129,15 @@ public class ProjectPositionResource {
     }
     /**
      * Used for unassigning a project position of a technical resource
+     *
      * @param projectPositionHolderId the id of the project position that will be unassigned
-     * @param endDate the date that the resource stopped working on the project position
+     * @param endDate                 the date that the resource stopped working on the project position
      * @return 400 if a parameter was left empty or if the id was of a project position of another organization
-     *              or if the start date is not valid
-     *          403 if the logged in user lacks the permissions to unassign the project position
-     *          404 if no project position holder with that id was not found
-     *          409 if the project has no active lead or if the provided end date is before the start date
-     *          200 if the project position was unassigned correctly
+     * or if the start date is not valid
+     * 403 if the logged in user lacks the permissions to unassign the project position
+     * 404 if no project position holder with that id was not found
+     * 409 if the project has no active lead or if the provided end date is before the start date
+     * 200 if the project position was unassigned correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
@@ -164,13 +171,14 @@ public class ProjectPositionResource {
 
     /**
      * Used for unassigning a project position of a technical resource
+     *
      * @param projectPositionHolderId the id of the project position that will be unassigned
-     * @return  400 if a parameter was left empty or if the id was of a project position of another organization
-     *              or if the start date is not valid
-     *          403 if the logged in user lacks the permissions to unassign the project position
-     *          404 if no project position holder with that id was not found
-     *          409 if the project has no active lead
-     *          200 if the project position was unassigned correctly
+     * @return 400 if a parameter was left empty or if the id was of a project position of another organization
+     * or if the start date is not valid
+     * 403 if the logged in user lacks the permissions to unassign the project position
+     * 404 if no project position holder with that id was not found
+     * 409 if the project has no active lead
+     * 200 if the project position was unassigned correctly
      */
     @POST
     @Produces(MediaType.TEXT_HTML)
@@ -201,5 +209,44 @@ public class ProjectPositionResource {
         }
 
     }
-    
+
+    /**
+     * Endpoint to obtain a technical resource's project position from their username and a project
+     * @param technicalResourceEmail the email (username) of the technical resource whose project position will be returned
+     * @param projectId the unique identifier of the project from which the position will be returned, inherited from BasicEntity
+     * @return 400 either string is null or empty
+     *         404 with NonExistentTechnicalResource if specified technical resource does not exist within the
+     *          logged user's organization
+     *         404 with TechnicalResourceHasNoPositionInProject with the specified technical resource does not have a
+     *          position in the specified project
+     *         200 if the project position is returned successfully
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/get")
+    public Response getProjectPosition(@QueryParam("technicalResource") String technicalResourceEmail,
+                                       @QueryParam("projectId") String projectId) {
+        if (StringUtils.isEmpty(technicalResourceEmail) || StringUtils.isEmpty(projectId))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        // Get the desired user using the received email and the logged in user's organization
+        TechnicalResource technicalResource = technicalResourceService
+                .getTechnicalResourceByUsernameAndOrganizationIdentifier(technicalResourceEmail,
+                        SecurityUtils.getLoggedInTechnicalResource().getOrganization().getUniqueIdentifier());
+        if (technicalResource == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("NonExistentTechnicalResource").build();
+
+        // Get the project from the received id
+        Project project = projectService.findById(projectId);
+        if(project == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("NonExistentProject").build();
+
+        ProjectPositionHolder projectPositionHolder = this.projectPositionHolderService
+                .getProjectPositionByProjectAndTechnicalResource(project,technicalResource);
+
+        if(projectPositionHolder == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("ProjectPositionIsNotAssignedToResource").build();
+
+        return Response.status(Response.Status.OK).entity(JSONSerializerBuilder.getProjectPositionHolderSerializer().serialize(projectPositionHolder)).build();
+    }
 }

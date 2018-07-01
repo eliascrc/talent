@@ -19,4 +19,10 @@ public interface ProjectPositionService extends CrudService<ProjectPosition, Str
      * @param projectPosition the project position that will be deleted
      */
     void deleteProjectPosition(TechnicalResource lead, ProjectPosition projectPosition);
+
+    /**
+     * Queries a list of {@link cr.talent.model.Project} for a technical resource..
+     * @param technicalResource the technical resource.
+     */
+    String getTechnicalResourceActiveProjects(TechnicalResource technicalResource);
 }

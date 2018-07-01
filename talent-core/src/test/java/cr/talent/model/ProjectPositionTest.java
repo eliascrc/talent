@@ -49,7 +49,7 @@ public class ProjectPositionTest {
         projectPosition.setTotalHours(totalHours);
         projectPosition.setHolderHistory(new HashSet<>());
         projectPosition.setProject(PROJECT);
-        projectPosition.setCapability(CAPABILITY);
+        projectPosition.setCapabilityLevel(CAPABILITY);
 
         assertEquals(entityCreationTimestamp, projectPosition.getEntityCreationTimestamp());
         assertEquals(lastUpdatedTimestamp, projectPosition.getLastUpdatedTimestamp());
@@ -59,7 +59,7 @@ public class ProjectPositionTest {
         assertEquals(totalHours, projectPosition.getTotalHours());
         assertNotNull(projectPosition.getHolderHistory());
         assertEquals(PROJECT, projectPosition.getProject());
-        assertEquals(CAPABILITY, projectPosition.getCapability());
+        assertEquals(CAPABILITY, projectPosition.getCapabilityLevel());
     }
 
 
@@ -103,11 +103,11 @@ public class ProjectPositionTest {
     public void testEqualForNonPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
-        projectPosition.setCapability(CAPABILITY);
+        projectPosition.setCapabilityLevel(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setProject(PROJECT);
-        projectPosition2.setCapability(CAPABILITY);
+        projectPosition2.setCapabilityLevel(CAPABILITY);
 
         assertTrue(projectPosition.equals(projectPosition2));
     }
@@ -116,11 +116,11 @@ public class ProjectPositionTest {
     public void testNonEqualForNonPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
-        projectPosition.setCapability(CAPABILITY);
+        projectPosition.setCapabilityLevel(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setProject(PROJECT2);
-        projectPosition2.setCapability(CAPABILITY2);
+        projectPosition2.setCapabilityLevel(CAPABILITY2);
 
         assertFalse(projectPosition.equals(projectPosition2));
     }
@@ -149,7 +149,7 @@ public class ProjectPositionTest {
         ProjectPosition projectPosition = new ProjectPosition();
 
         ProjectPosition projectPosition2 = new ProjectPosition();
-        projectPosition2.setCapability(CAPABILITY2);
+        projectPosition2.setCapabilityLevel(CAPABILITY2);
 
         assertFalse(projectPosition.equals(projectPosition2));
     }
@@ -157,7 +157,7 @@ public class ProjectPositionTest {
     @Test
     public void testNonEqualForNonPersistentProjectPositionNullOrganizationFirstProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
-        projectPosition.setCapability(CAPABILITY);
+        projectPosition.setCapabilityLevel(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
 
@@ -193,11 +193,11 @@ public class ProjectPositionTest {
 
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
-        projectPosition.setCapability(CAPABILITY);
+        projectPosition.setCapabilityLevel(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setProject(PROJECT);
-        projectPosition2.setCapability(CAPABILITY);
+        projectPosition2.setCapabilityLevel(CAPABILITY);
 
         assertTrue(projectPosition.hashCode() == projectPosition2.hashCode());
 
@@ -207,11 +207,11 @@ public class ProjectPositionTest {
     public void testNonEqualHashCodeForNonPersistentProjectPosition() {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setProject(PROJECT);
-        projectPosition.setCapability(CAPABILITY);
+        projectPosition.setCapabilityLevel(CAPABILITY);
 
         ProjectPosition projectPosition2 = new ProjectPosition();
         projectPosition2.setProject(PROJECT2);
-        projectPosition2.setCapability(CAPABILITY2);
+        projectPosition2.setCapabilityLevel(CAPABILITY2);
 
         assertFalse(projectPosition.hashCode() == projectPosition2.hashCode());
     }
