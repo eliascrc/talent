@@ -164,7 +164,7 @@ public class TechnicalResourceServiceTest {
         ReflectionTestUtils.setField(technicalResourceService, "careerPathService", careerPathService);
 
         CapabilityLevel capabilityLevel = new CapabilityLevel();
-        OrganizationSkill requiredSkill = new OrganizationSkill();
+        Skill requiredSkill = new Skill();
         requiredSkill.setName(REQUIRED_SKILL_NAME);
         capabilityLevel.setRequiredSkills(new HashSet<>(Arrays.asList(requiredSkill)));
         capabilityLevel.setName(CAPABILITY_LEVEL_NAME);
