@@ -6,7 +6,7 @@ import cr.talent.support.service.CrudService;
 /**
  * Provides business logic services related to {@link cr.talent.model.ProjectEvent} entities.
  *
- * @author Elías Calderón
+ * @author Otto Mena
  */
 public interface ProjectEventService extends CrudService<ProjectEvent, String> {
 
