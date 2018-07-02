@@ -2,14 +2,13 @@ package cr.talent.core.feedback.service.impl;
 
 import cr.talent.core.feedback.dao.FeedbackDao;
 import cr.talent.core.feedback.service.FeedbackService;
-import cr.talent.model.Feedback;
-import cr.talent.model.FeedbackType;
-import cr.talent.model.Project;
-import cr.talent.model.TechnicalResource;
+import cr.talent.model.*;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Default implementation of the {@link cr.talent.core.feedback.service.FeedbackService}.
@@ -31,13 +30,52 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
      * @see cr.talent.core.feedback.service.FeedbackService#createKudo(TechnicalResource, TechnicalResource, Project, String)
      */
     @Override
-    public void createKudo(TechnicalResource observer, TechnicalResource observee, Project project, String description) {
-        Feedback kudo = new Feedback();
-        kudo.setFeedbackType(FeedbackType.KUDO);
-        kudo.setObserver(observer);
-        kudo.setObservee(observee);
-        kudo.setRelatedProject(project);
-        kudo.setDescription(description);
-        this.create(kudo);
+    public boolean createKudo(TechnicalResource observer, TechnicalResource observee, Project project, String description) {
+
+        boolean isObserverRelatedToProject = false;
+        boolean isObserveeRelatedToProject = false;
+
+        // iterate through the positions to find out if the resources are related to the project.
+        Iterator<ProjectPosition> projectPositionIterator = project.getProjectPositions().iterator();
+        ProjectPosition projectPosition;
+        ProjectPositionHolder projectPositionHolder;
+        while(projectPositionIterator.hasNext()){
+            projectPosition = projectPositionIterator.next();
+            Iterator<ProjectPositionHolder> projectPositionHolderIterator = projectPosition.getHolderHistory().iterator();
+            while(projectPositionHolderIterator.hasNext()){
+                projectPositionHolder = projectPositionHolderIterator.next();
+                if (projectPositionHolder.getResource().equals(observee)) {
+                    isObserveeRelatedToProject = true;
+                } else if(projectPositionHolder.getResource().equals(observer)){
+                    isObserverRelatedToProject = true;
+                }
+            }
+        }
+
+        // iterate though lead positions
+        Iterator<LeadPosition> leadPositionIterator = project.getLeadHistory().iterator();
+        LeadPosition leadPosition;
+        while(leadPositionIterator.hasNext()){
+            leadPosition = leadPositionIterator.next();
+            if (leadPosition.getLead().equals(observee)) {
+                isObserveeRelatedToProject = true;
+            } else if(leadPosition.getLead().equals(observer)){
+                isObserverRelatedToProject = true;
+            }
+        }
+
+        if(isObserveeRelatedToProject && isObserverRelatedToProject) {
+
+            Feedback kudo = new Feedback();
+            kudo.setFeedbackType(FeedbackType.KUDO);
+            kudo.setObserver(observer);
+            kudo.setObservee(observee);
+            kudo.setRelatedProject(project);
+            kudo.setDescription(description);
+            this.create(kudo);
+
+        }
+
+        return isObserveeRelatedToProject && isObserverRelatedToProject;
     }
 }

@@ -19,6 +19,8 @@ public interface FeedbackService extends CrudService<Feedback, String> {
      * @param observee the technical resource receiving the kudo.
      * @param project the related project.
      * @param description the description of the kudo.
+     *
+     * @return a boolean on true if both resources were related to the project or on false if not.
      */
-    void createKudo(TechnicalResource observer, TechnicalResource observee, Project project, String description);
+    boolean createKudo(TechnicalResource observer, TechnicalResource observee, Project project, String description);
 }

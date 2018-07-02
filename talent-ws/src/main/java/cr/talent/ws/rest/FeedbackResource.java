@@ -43,6 +43,7 @@ public class FeedbackResource {
      *         401 if the user is not authenticated,
      *         400 if any of the parameters are null or empty strings,
      *         404 if the observee or the related project don't not exist.
+     *         409 if one or both resources are not related to the project.
      */
     @POST
     @Path("/create/kudo")
@@ -61,7 +62,8 @@ public class FeedbackResource {
         if(observee == null || project == null)
             return Response.status(Response.Status.NOT_FOUND).build(); //The observee and the related project should exist
 
-        this.feedbackService.createKudo(observer, observee, project, description);
+        if(!this.feedbackService.createKudo(observer, observee, project, description))
+            return Response.status(Response.Status.CONFLICT).build(); //The observee or the observer were not related to the project
 
         return Response.ok().build();
     }
