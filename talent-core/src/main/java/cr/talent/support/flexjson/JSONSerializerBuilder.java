@@ -421,7 +421,7 @@ public class JSONSerializerBuilder {
     }
 
     /*
-     * Gets a JSONSerializer to use in order to obtain the JSON of a project information, for the /ws/organization/project/get web service.
+     * Gets a JSONSerializer to use in order to obtain the JSON of a project basic information.
      *
      * @return the JSONSerializer to be used to serialize the project information.
      */
@@ -431,22 +431,20 @@ public class JSONSerializerBuilder {
         List<String> tempIncludes = new LinkedList<>();
 
         excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
 
-        tempIncludes.add("id");
-        tempIncludes.add("entityCreationTimestamp");
-        tempIncludes.add("lastUpdatedTimestamp");
-        tempIncludes.add("entityVersion");
+        tempIncludes.add("state");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
         tempIncludes.add("description");
         tempIncludes.add("startDate");
-
-        excludes.add("state");
-        excludes.add("organization");
-
         tempIncludes.add("endDate");
         tempIncludes.add("jiraLink");
         tempIncludes.add("confluenceLink");
         tempIncludes.add("versionControlLink");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
 

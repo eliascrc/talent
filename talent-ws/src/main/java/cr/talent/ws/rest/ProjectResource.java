@@ -1,10 +1,13 @@
 package cr.talent.ws.rest;
 
+import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.project.service.ProjectService;
+import cr.talent.model.Organization;
 import cr.talent.model.Project;
 import cr.talent.model.TechnicalResource;
 import cr.talent.model.ProjectPosition;
 import cr.talent.support.SecurityUtils;
+import cr.talent.support.exceptions.NoActiveProjectException;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.support.exceptions.StartDateBeforeEndDateException;
@@ -34,6 +37,9 @@ public class ProjectResource {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private OrganizationService organizationService;
 
     /**
      * Receives the request for creating a new project within an organization.
@@ -160,4 +166,28 @@ public class ProjectResource {
         return Response.status(Response.Status.OK)
                 .entity(JSONSerializerBuilder.getProjectPositionSerializer().serialize(projectPositions)).build();
     }
+
+    /**
+     * Returns every project within the organization.
+     *
+     * @return 401 if no user is logged in.
+     * 204 if there are no projects.
+     * 200 if the information is returned successfully in JSON format.
+     */
+    @GET
+    @Path("/getProjects")
+    public Response getProjects() {
+
+        TechnicalResource technicalResource = SecurityUtils.getLoggedInTechnicalResource();
+        // organization is queried like this because of lazy init.
+        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(technicalResource.getOrganization().getUniqueIdentifier());
+        Set<Project> projects = organization.getProjects();
+
+        if(projects == null || projects.isEmpty())
+            return Response.status(Response.Status.NO_CONTENT).build();
+
+        return Response.status(Response.Status.OK)
+                .entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(projects)).build();
+    }
+
 }
