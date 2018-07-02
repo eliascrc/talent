@@ -110,7 +110,6 @@ public class ProjectResource {
         if (project == null)
             return Response.status(Response.Status.NOT_FOUND).entity("No project with this Id was found.").build();
 
-        System.out.println(project.getcurrentState().getEventType().name());
         if (project.getcurrentState().getEventType().name().equals(newProjectStatus))
         {
             return Response.status(Response.Status.CONFLICT).entity("The status sent in the body is already the status of the project.").build();
