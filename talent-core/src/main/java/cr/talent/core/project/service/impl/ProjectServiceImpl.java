@@ -1,26 +1,34 @@
 package cr.talent.core.project.service.impl;
 
 import cr.talent.core.leadPosition.dao.LeadPositionDao;
-import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.project.dao.ProjectDao;
 import cr.talent.core.project.service.ProjectService;
+import cr.talent.model.*;
+import cr.talent.support.exceptions.NotProjectLeadException;
+import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+
 import cr.talent.model.*;
 import cr.talent.support.exceptions.NoActiveProjectException;
+import cr.talent.support.exceptions.StartDateBeforeEndDateException;
 import cr.talent.support.service.impl.CrudServiceImpl;
+import cr.talent.core.projectEvent.service.ProjectEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+
 
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+
+
 /**
  * Default implementation of the {@link cr.talent.core.project.service.ProjectService}.
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Otto Mena
  */
 @Service("projectService")
 @Transactional
@@ -30,18 +38,55 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
     private ProjectDao projectDao;
 
     @Autowired
+    private ProjectEventService projectEventService;
+
+    @Autowired
     private LeadPositionDao leadPositionDao;
 
     @Autowired
     private TechnicalResourceService technicalResourceService;
+
 
     public void init() {
         setCrudDao(this.projectDao);
     }
 
     /**
-     * @see cr.talent.core.project.service.ProjectService#createProject(String, Date, String, String, TechnicalResource)
+     * @see cr.talent.core.project.service.impl.ProjectServiceImpl#changeProjectState(Project, String, TechnicalResource, Date)-
      */
+    @Override
+    public void changeProjectState(Project project, String status, TechnicalResource lead, Date newStateDate) {
+
+        TechnicalResource projectLead = null;
+
+        for (LeadPosition leadPosition : project.getLeadHistory()) { //finds the project lead
+            if (leadPosition.getActive())
+                projectLead = leadPosition.getLead();
+        }
+
+        if (projectLead == null)
+            throw new ProjectWithoutLeadException();
+
+        if (!lead.equals(projectLead))
+            throw new NotProjectLeadException();
+
+        if(newStateDate.before(project.getcurrentState().getStartDate())){
+            throw new StartDateBeforeEndDateException();
+        }
+        project.getcurrentState().setEndDate(newStateDate);
+        ProjectEvent projectEvent = new ProjectEvent();
+        projectEvent.setStartDate(newStateDate);
+        projectEvent.setEventType(ProjectEventType.valueOf(status));
+        projectEvent.setProject(project);
+        Set<ProjectEvent> projectTimeline = project.getTimeline();
+        projectTimeline.add(projectEvent);
+        project.setTimeline(projectTimeline);
+        project.setcurrentState(projectEvent);
+
+        projectEventService.create(projectEvent);
+        super.update(project);
+    }
+
     @Override
     public Project createProject(String name, Date startDate, String projectLead, String description, TechnicalResource technicalResource) {
 
@@ -61,7 +106,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         TechnicalResource projectLeader = this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
                 projectLead, technicalResource.getOrganization().getUniqueIdentifier());
 
-        if(projectLeader == null) {
+        if (projectLeader == null) {
             leadPosition.setLead(technicalResource);
         } else {
             leadPosition.setLead(projectLeader);
@@ -105,3 +150,4 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         return activeProjects;
     }
 }
+

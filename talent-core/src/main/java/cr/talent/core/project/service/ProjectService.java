@@ -11,9 +11,20 @@ import java.util.Set;
 /**
  * Provides business logic services related to {@link cr.talent.model.Project} entities.
  *
- * @author Elías Calderón, Josue Cubero
+ * @author Elías Calderón, Otto Mena, Josue Cubero
+ *
  */
 public interface ProjectService extends CrudService<Project, String> {
+
+    /**This method assigns the newStateDate to the current state of the project, then it creates a new projectSate
+     * and sets it to the project as its current.
+     *
+     * @param project the project that will have its state changed.
+     * @param status the new state of the project.
+     * @param lead the lead of the project attempting to change it state.
+     * @param newStateDate the endDate for the old projectState and the startDate for the new projectState
+     */
+    void changeProjectState(Project project, String status, TechnicalResource lead, Date newStateDate);
 
     /**
      * Creates a new project.
