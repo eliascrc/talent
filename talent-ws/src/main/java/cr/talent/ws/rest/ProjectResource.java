@@ -193,6 +193,6 @@ public class ProjectResource {
         }
 
         return Response.status(Response.Status.OK)
-                .entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(projects)).build();
+                .entity(JSONSerializerBuilder.getProjectInformationWithTRSerializer().serialize(projects)).build();
     }
 }

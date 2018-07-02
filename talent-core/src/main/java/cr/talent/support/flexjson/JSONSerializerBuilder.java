@@ -417,11 +417,11 @@ public class JSONSerializerBuilder {
     }
 
     /*
-     * Gets a JSONSerializer to use in order to obtain the JSON of a project information, for the /ws/organization/project/get web service.
+     * Gets a JSONSerializer to use in order to obtain the JSON of a project information with its TRs.
      *
      * @return the JSONSerializer to be used to serialize the project information.
      */
-    public static JSONSerializer getProjectInformationSerializer() {
+    public static JSONSerializer getProjectInformationWithTRSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes = new LinkedList<>();
@@ -446,6 +446,39 @@ public class JSONSerializerBuilder {
         tempIncludes.add("username");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "leadHistory.lead", tempIncludes));
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(LeadPosition.class, "leadHistory", new LinkedList<>()));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("description");
+        tempIncludes.add("startDate");
+        tempIncludes.add("endDate");
+        tempIncludes.add("jiraLink");
+        tempIncludes.add("confluenceLink");
+        tempIncludes.add("versionControlLink");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Project Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of a project basic information.
+     *
+     * @return the JSONSerializer to be used to serialize the project information.
+     */
+    public static JSONSerializer getProjectInformationSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes.add("state");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
 
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
