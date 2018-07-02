@@ -83,7 +83,7 @@ public class ProjectPositionResource {
                                           @FormParam("capabilityLevelId") String capabilityLevelId,
                                           @FormParam("totalHours") String totalHours) {
 
-        if (StringUtils.isEmpty(projectId) || StringUtils.isEmpty(capabilityLevelId))
+        if (StringUtils.isEmpty(projectId) || StringUtils.isEmpty(capabilityLevelId) || StringUtils.isEmpty(totalHours))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         Project project = projectService.findById(projectId);
@@ -96,7 +96,12 @@ public class ProjectPositionResource {
 
         TechnicalResource assigner = SecurityUtils.getLoggedInTechnicalResource();
 
-        int totalHoursInt = Integer.parseInt(totalHours);
+        int totalHoursInt;
+        try {
+            totalHoursInt = Integer.parseInt(totalHours);
+        } catch (NumberFormatException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("The parameter totalHours not in correct format.").build();
+        }
 
         try {
             this.projectPositionService.createProjectPosition(assigner, project, capabilityLevel, totalHoursInt);

@@ -9,7 +9,7 @@ import cr.talent.support.service.CrudService;
 /**
  * Provides business logic services related to {@link cr.talent.model.ProjectPosition} entities.
  *
- * @author Elías Calderón & Otto Mena
+ * @author Elías Calderón, Otto Mena, Josue Cubero
  */
 public interface ProjectPositionService extends CrudService<ProjectPosition, String> {
 
