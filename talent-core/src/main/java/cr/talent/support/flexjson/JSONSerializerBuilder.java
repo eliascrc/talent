@@ -429,10 +429,6 @@ public class JSONSerializerBuilder {
         excludes.addAll(getGlobalExcludes());
         excludes.add("*.class");
 
-        tempIncludes.add("state");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
-
-        tempIncludes = new LinkedList<>();
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("username");
