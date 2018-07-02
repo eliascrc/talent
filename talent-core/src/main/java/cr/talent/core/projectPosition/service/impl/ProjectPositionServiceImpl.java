@@ -4,11 +4,15 @@ import cr.talent.core.projectPosition.dao.ProjectPositionDao;
 import cr.talent.core.projectPosition.service.ProjectPositionService;
 import cr.talent.model.*;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
+import cr.talent.model.Project;
+import cr.talent.model.ProjectPosition;
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.NoActiveTechnicalResourceProjectException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import cr.talent.support.service.impl.CrudServiceImpl;
+import cr.talent.support.exceptions.ProjectOfAnotherOrganizationException;
+import cr.talent.support.exceptions.ProjectPositionAlreadyExistsException;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +22,7 @@ import java.util.*;
 /**
  * Default implementation of the {@link cr.talent.core.projectPosition.service.ProjectPositionService}.
  *
- * @author Elías Calderón, Josue Cubero, Otto Mena
+ * @author Elías Calderón, Otto Mena, Josue Cubero
  */
 @Service("projectPositionService")
 @Transactional
@@ -32,6 +36,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
     }
 
     /**
+     *
      *@see cr.talent.core.projectPosition.service.ProjectPositionService#deleteProjectPosition(TechnicalResource, ProjectPosition)-
      */
     public void deleteProjectPosition(TechnicalResource deleter, ProjectPosition projectPosition) {
@@ -48,11 +53,47 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         if (!deleter.equals(projectLead))
             throw new NotProjectLeadException();
 
-        super.remove(projectPosition);
+        projectPositionDao.remove(projectPosition);
     }
 
     /**
      *
+     * @see cr.talent.core.projectPosition.service.ProjectPositionService#createProjectPosition(TechnicalResource, Project, CapabilityLevel, int)-
+     */
+    @Override
+    public void createProjectPosition(TechnicalResource assigner, Project project, CapabilityLevel capabilityLevel, int totalHours) {
+        if (!project.getOrganization().equals(capabilityLevel.getOrganization())) {
+            throw new ProjectOfAnotherOrganizationException();
+        }
+
+        TechnicalResource projectLead = null;
+
+        for (LeadPosition leadPosition : project.getLeadHistory()) {
+            if (leadPosition.getActive())
+                projectLead = leadPosition.getLead();
+        }
+
+        if (projectLead == null)
+            throw new ProjectWithoutLeadException();
+
+            if (!assigner.equals(projectLead))
+                throw new NotProjectLeadException();
+
+            ProjectPosition projectPosition = new ProjectPosition();
+            projectPosition.setTotalHours(totalHours);
+            projectPosition.setProject(project);
+            projectPosition.setCapabilityLevel(capabilityLevel);
+            projectPosition.setProjectPositionStatus(ProjectPositionStatus.AVAILABLE); //No one is assigned to it, so it can not be TAKEN, and to set its status as CLOSED, one should use the delete webservice.
+
+            for (ProjectPosition projectPositionIterator : project.getProjectPositions()) {
+                if (projectPositionIterator.equals(projectPosition)) {
+                    throw new ProjectPositionAlreadyExistsException();
+                }
+            }
+            projectPositionDao.create(projectPosition);
+        }
+
+     /**
      * @see cr.talent.core.projectPosition.service.ProjectPositionService#getTechnicalResourceActiveProjects(TechnicalResource)
      */
     @Override
@@ -84,6 +125,5 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         }
 
         return JSONSerializerBuilder.getTechnicalResourceActiveProjectsSerializer().serialize(projects);
-
     }
 }

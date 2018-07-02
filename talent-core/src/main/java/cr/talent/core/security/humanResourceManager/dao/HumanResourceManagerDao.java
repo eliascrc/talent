@@ -7,7 +7,7 @@ import cr.talent.support.dao.CrudDao;
 /**
  * Data access object for all the {@link cr.talent.model.HumanResourceManager} related operations.
  *
- * @author Elías Calderón
+ * @author Otto Mena
  */
 public interface HumanResourceManagerDao extends CrudDao<HumanResourceManager, String> {
 

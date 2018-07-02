@@ -35,6 +35,7 @@ public class ProjectPositionHolderServiceTest {
         leadHistory.add(leadPosition);
         int assignedHours = 1;
         boolean active = true;
+
         when(projectPosition.getProject()).thenReturn(project);
         when(projectPosition.getProject().getOrganization()).thenReturn(organization);
         when(assigner.getOrganization()).thenReturn(organization);
