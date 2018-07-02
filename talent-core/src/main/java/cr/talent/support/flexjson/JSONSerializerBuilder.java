@@ -400,10 +400,6 @@ public class JSONSerializerBuilder {
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", tempIncludes));
 
         tempIncludes = new LinkedList<>();
-        tempIncludes.add("state");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
-
-        tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
         tempIncludes.add("description");
         tempIncludes.add("startDate");
@@ -431,22 +427,35 @@ public class JSONSerializerBuilder {
         List<String> tempIncludes = new LinkedList<>();
 
         excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
 
-        tempIncludes.add("id");
-        tempIncludes.add("entityCreationTimestamp");
-        tempIncludes.add("lastUpdatedTimestamp");
-        tempIncludes.add("entityVersion");
+        tempIncludes.add("state");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("username");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "projectPositions.holderHistory.resource", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPositionHolder.class, "projectPositions.holderHistory", new LinkedList<>()));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectPosition.class, "projectPositions", new LinkedList<>()));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("username");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "leadHistory.lead", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(LeadPosition.class, "leadHistory", new LinkedList<>()));
+
+        tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
         tempIncludes.add("description");
         tempIncludes.add("startDate");
-
-        excludes.add("state");
-        excludes.add("organization");
-
         tempIncludes.add("endDate");
         tempIncludes.add("jiraLink");
         tempIncludes.add("confluenceLink");
         tempIncludes.add("versionControlLink");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
 

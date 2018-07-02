@@ -6,7 +6,7 @@ import cr.talent.model.Project;
 import cr.talent.model.ProjectPosition;
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
-import cr.talent.support.exceptions.NoActiveTechnicalResourceProjectException;
+import cr.talent.support.exceptions.NoActiveProjectException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
                 + " does not have any active project";
 
         if(technicalResource.getProjectPositions().isEmpty()) //ask first for efficiency reasons
-            throw new NoActiveTechnicalResourceProjectException(noActiveTechnicalResourceProjectsMsg);
+            throw new NoActiveProjectException(noActiveTechnicalResourceProjectsMsg);
 
         Set<ProjectPositionHolder> projectPositionHolders = technicalResource.getProjectPositions();
         List<ProjectPositionHolder> activeProjectPositionHolders = new ArrayList<>();
@@ -54,7 +54,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         }
 
         if(activeProjectPositionHolders.isEmpty()) //ask again after the iteration
-            throw new NoActiveTechnicalResourceProjectException(noActiveTechnicalResourceProjectsMsg);
+            throw new NoActiveProjectException(noActiveTechnicalResourceProjectsMsg);
 
         List<Project> projects = new ArrayList<>();
         for (ProjectPositionHolder activeProjectPositionHolder : activeProjectPositionHolders) {

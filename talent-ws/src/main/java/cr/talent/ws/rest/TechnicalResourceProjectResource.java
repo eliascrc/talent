@@ -65,7 +65,7 @@ public class TechnicalResourceProjectResource {
         try {
             String serializedList = this.projectPositionService.getTechnicalResourceActiveProjects(technicalResource);
             return Response.ok().entity(serializedList).build();
-        } catch (NoActiveTechnicalResourceProjectException e) {
+        } catch (NoActiveProjectException e) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
     }
