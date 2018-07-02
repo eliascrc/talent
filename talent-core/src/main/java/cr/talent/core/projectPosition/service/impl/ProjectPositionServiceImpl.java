@@ -76,22 +76,22 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         if (projectLead == null)
             throw new ProjectWithoutLeadException();
 
-            if (!assigner.equals(projectLead))
-                throw new NotProjectLeadException();
+        if (!assigner.equals(projectLead))
+            throw new NotProjectLeadException();
 
-            ProjectPosition projectPosition = new ProjectPosition();
-            projectPosition.setTotalHours(totalHours);
-            projectPosition.setProject(project);
-            projectPosition.setCapabilityLevel(capabilityLevel);
-            projectPosition.setProjectPositionStatus(ProjectPositionStatus.AVAILABLE); //No one is assigned to it, so it can not be TAKEN, and to set its status as CLOSED, one should use the delete webservice.
+        ProjectPosition projectPosition = new ProjectPosition();
+        projectPosition.setTotalHours(totalHours);
+        projectPosition.setProject(project);
+        projectPosition.setCapabilityLevel(capabilityLevel);
+        projectPosition.setProjectPositionStatus(ProjectPositionStatus.AVAILABLE); //No one is assigned to it, so it can not be TAKEN, and to set its status as CLOSED, one should use the delete webservice.
 
-            for (ProjectPosition projectPositionIterator : project.getProjectPositions()) {
-                if (projectPositionIterator.equals(projectPosition)) {
-                    throw new ProjectPositionAlreadyExistsException();
-                }
+        for (ProjectPosition projectPositionIterator : project.getProjectPositions()) {
+            if (projectPositionIterator.equals(projectPosition)) {
+                throw new ProjectPositionAlreadyExistsException();
             }
-            projectPositionDao.create(projectPosition);
         }
+        super.create(projectPosition);
+    }
 
      /**
      * @see cr.talent.core.projectPosition.service.ProjectPositionService#getTechnicalResourceActiveProjects(TechnicalResource)

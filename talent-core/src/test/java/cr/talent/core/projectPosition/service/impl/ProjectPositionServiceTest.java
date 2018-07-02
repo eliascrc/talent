@@ -34,13 +34,13 @@ public class ProjectPositionServiceTest {
         when(leadPosition.getLead()).thenReturn(assigner);
         when(leadPosition.getActive()).thenReturn(true);
 
-        ProjectPositionService projectPositionService = new ProjectPositionServiceImpl();
 
+        ProjectPositionService projectPositionService = new ProjectPositionServiceImpl();
+        ReflectionTestUtils.setField(projectPositionService, "crudDao", projectPositionDao);
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setTotalHours(totalHours);
         projectPosition.setProject(project);
-        projectPosition.setCapability(capabilityLevel);
-
+        projectPosition.setCapabilityLevel(capabilityLevel);
         ReflectionTestUtils.setField(projectPositionService, "crudDao", projectPositionDao);
         projectPositionService.createProjectPosition(assigner, project, capabilityLevel, totalHours);
         verify(projectPositionDao, times(1)).create(projectPosition);
