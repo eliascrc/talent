@@ -13,6 +13,13 @@ import cr.talent.support.service.CrudService;
  */
 public interface ProjectPositionService extends CrudService<ProjectPosition, String> {
 
+    /**Used to delete a project position
+     *
+     * @param lead the user that is deleting the project position.
+     * @param projectPosition the project position that will be deleted
+     */
+    void deleteProjectPosition(TechnicalResource lead, ProjectPosition projectPosition);
+
     /**
      *Used to create a new project position
      *

@@ -42,7 +42,7 @@ import java.util.Set;
 /**
  * Resource that handles operations related to project positions
  *
- * @author Daniel Montes de Oca, Otto Mena Kikut, Fabían Roberto Leandro
+ * @author Daniel Montes de Oca, Otto Mena, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
@@ -107,7 +107,7 @@ public class ProjectPositionResource {
             this.projectPositionService.createProjectPosition(assigner, project, capabilityLevel, totalHoursInt);
             return Response.ok().build();
         } catch (NotProjectLeadException e) {
-            return Response.status(Response.Status.FORBIDDEN).entity("The user creating the project is not the project lead.").build();
+            return Response.status(Response.Status.FORBIDDEN).entity("The user creating the project position is not the project lead.").build();
         } catch (ProjectWithoutLeadException e) {
             return Response.status(Response.Status.CONFLICT).entity("The project has no lead.").build();
         } catch (ProjectOfAnotherOrganizationException e) {
@@ -165,6 +165,39 @@ public class ProjectPositionResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         } catch (ProjectPositionOfAnotherOrganizationException e) {
             return Response.status(Response.Status.BAD_REQUEST).build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+    }
+
+    /**Endpoint for deleting a project position
+     *
+     * @param projectPositionId the id of the position to be deleted
+     * @return 400 if a parameter was left empty
+     *         403 if the logged in user lacks the permissions to delete the project position
+     *         404 if no project position with that id was found
+     *         409 if the project has no active lead
+     *         200 if the project position was deleted correctly
+     */
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Path("/delete")
+    public Response deleteProjectPosition(@FormParam("projectPositionId") String projectPositionId) {
+
+        if (StringUtils.isEmpty(projectPositionId))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        ProjectPosition projectPosition = projectPositionService.findById(projectPositionId);
+        if (projectPosition == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("Project position not found").build();
+
+        TechnicalResource lead = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            this.projectPositionService.deleteProjectPosition(lead, projectPosition);
+            return Response.ok().build();
+        } catch (NotProjectLeadException e) {
+            return Response.status(Response.Status.FORBIDDEN).build();
         } catch (ProjectWithoutLeadException e) {
             return Response.status(Response.Status.CONFLICT).build();
         }

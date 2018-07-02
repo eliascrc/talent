@@ -36,6 +36,28 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
     }
 
     /**
+     *
+     *@see cr.talent.core.projectPosition.service.ProjectPositionService#deleteProjectPosition(TechnicalResource, ProjectPosition)-
+     */
+    public void deleteProjectPosition(TechnicalResource deleter, ProjectPosition projectPosition) {
+        TechnicalResource projectLead = null;
+
+        for (LeadPosition leadPosition : projectPosition.getProject().getLeadHistory()) { //finds the project lead
+            if (leadPosition.getActive())
+                projectLead = leadPosition.getLead();
+        }
+
+        if (projectLead == null)
+            throw new ProjectWithoutLeadException();
+
+        if (!deleter.equals(projectLead))
+            throw new NotProjectLeadException();
+
+        projectPositionDao.remove(projectPosition);
+    }
+
+    /**
+     *
      * @see cr.talent.core.projectPosition.service.ProjectPositionService#createProjectPosition(TechnicalResource, Project, CapabilityLevel, int)-
      */
     @Override
@@ -46,7 +68,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
 
         TechnicalResource projectLead = null;
 
-        for (LeadPosition leadPosition : project.getLeadHistory()) { //finds the project lead
+        for (LeadPosition leadPosition : project.getLeadHistory()) {
             if (leadPosition.getActive())
                 projectLead = leadPosition.getLead();
         }
@@ -103,6 +125,5 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         }
 
         return JSONSerializerBuilder.getTechnicalResourceActiveProjectsSerializer().serialize(projects);
-
     }
 }
