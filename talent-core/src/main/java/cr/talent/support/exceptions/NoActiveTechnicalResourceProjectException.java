@@ -1,26 +1,24 @@
 package cr.talent.support.exceptions;
 
 /**
- * A runtime exception that is thrown when the {@link cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService}
- * notices that someone that is not the lead of a project tries to assign project positions in that project
- *
- * @author Daniel Montes de Oca
+ * A runtime exception that is thrown when the {@link cr.talent.core.project.service.ProjectService} tries to
+ * retrieve a Privacy Policy and there is no currently active content.
  */
-public class NotProjectLeadException extends RuntimeException {
+public class NoActiveTechnicalResourceProjectException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public NotProjectLeadException() {
+    public NoActiveTechnicalResourceProjectException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public NotProjectLeadException(String message) {
+    public NoActiveTechnicalResourceProjectException(String message) {
         super(message);
     }
 
@@ -28,7 +26,7 @@ public class NotProjectLeadException extends RuntimeException {
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public NotProjectLeadException(Throwable cause) {
+    public NoActiveTechnicalResourceProjectException(Throwable cause) {
         super(cause);
     }
 
@@ -37,8 +35,7 @@ public class NotProjectLeadException extends RuntimeException {
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public NotProjectLeadException(String message, Throwable cause) {
+    public NoActiveTechnicalResourceProjectException(String message, Throwable cause) {
         super(message, cause);
     }
 }
-

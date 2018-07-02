@@ -327,6 +327,7 @@ public class JSONSerializerBuilder {
         tempIncludes.add("firstName");
         tempIncludes.add("lastName");
         tempIncludes.add("profilePicture");
+        tempIncludes.add("username");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "holderHistory.resource", tempIncludes));
 
         // Exclude all attributes of the ProjectPositionHolder holderHistory attribute in ProjectPosition except resource
@@ -341,7 +342,7 @@ public class JSONSerializerBuilder {
         // Exclude all attributes of the Capability capability attribute in CapabilityLevel except name and capability
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capability.capability", tempIncludes));
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "capabilityLevel.capability", tempIncludes));
 
         // Exclude all attributes of the CapabilityLevel capabilityLevel attribute in ProjectPosition except name and capability
         tempIncludes = new LinkedList<>();
@@ -377,6 +378,45 @@ public class JSONSerializerBuilder {
 
         excludes.addAll(getGlobalExcludes());
 
+        return serializer;
+    }
+
+    /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of a User's active projects information, for the /ws/technicalResource
+     * /project/get web service.
+     *
+     * @return the JSONSerializer to be used to serialize the project list.
+     */
+    public static JSONSerializer getTechnicalResourceActiveProjectsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes.add("name");
+        tempIncludes.add("uniqueIdentifier");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("state");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("description");
+        tempIncludes.add("startDate");
+        tempIncludes.add("endDate");
+        tempIncludes.add("jiraLink");
+        tempIncludes.add("confluenceLink");
+        tempIncludes.add("versionControlLink");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Project list Serializer {} created", serializer.toString());
         return serializer;
     }
 

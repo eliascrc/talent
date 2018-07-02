@@ -39,7 +39,7 @@
 	<projects>
 
 		<project>
-			<name>talent</name>
+			<name>Talent!</name>
 			<description>You will never understand the relational model for this project</description>
 			<startDate>15/10/2013</startDate>
 			<endDate></endDate>
@@ -125,7 +125,7 @@
 			<startDate>15/10/2013</startDate>
 			<endDate></endDate>
 			<eventType>ON_HOLD</eventType>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 		</projectEvent>
 
@@ -133,7 +133,7 @@
 			<startDate>15/12/2013</startDate>
 			<endDate></endDate>
 			<eventType>ON_HOLD</eventType>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 		</projectEvent>
 
@@ -1487,7 +1487,7 @@
 			<active>true</active>
 			<startDate>15/10/2013</startDate>
 			<endDate></endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<username>jolesa97@gmail.com</username>
 		</leadPosition>
@@ -1539,7 +1539,7 @@
 			<capabilityLevelName>Intermediate</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
-			<project>talent</project>
+			<project>Talent!</project>
 		</projectPosition>
 
 		<projectPosition>
@@ -1548,7 +1548,7 @@
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
-			<project>talent</project>
+			<project>Talent!</project>
 		</projectPosition>
 
 		<projectPosition>
@@ -1557,7 +1557,7 @@
 			<capabilityLevelName>Intermediate</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
-			<project>talent</project>
+			<project>Talent!</project>
 		</projectPosition>
 
 		<projectPosition>
@@ -1566,7 +1566,7 @@
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
-			<project>talent</project>
+			<project>Talent!</project>
 		</projectPosition>
 
 		<projectPosition>
@@ -1575,7 +1575,7 @@
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
-			<project>talent</project>
+			<project>Talent!</project>
 		</projectPosition>
 
 		<projectPosition>
@@ -1584,7 +1584,7 @@
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
-			<project>talent</project>
+			<project>Talent!</project>
 		</projectPosition>
 
 		<projectPosition>
@@ -1593,7 +1593,7 @@
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
 			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
-			<project>talent</project>
+			<project>Talent!</project>
 		</projectPosition>
 
 		<projectPosition>
@@ -1634,7 +1634,7 @@
 			<reviewed>false</reviewed>
 			<startDate>2/2/2014</startDate>
 			<endDate></endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<capabilityLevelName>Intermediate</capabilityLevelName>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
@@ -1647,13 +1647,142 @@
 			<reviewed>false</reviewed>
 			<startDate>2/2/2014</startDate>
 			<endDate>2/2/2018</endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
 			<technicalResource>marianaabellan4@gmail.com</technicalResource>
 		</projectPositionHolder>
 
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>jo96cube@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>jolesa97@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>rodrigobartels@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>raquel.fonseca@ecci.ucr.ac.cr</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>daniel.montesdeocab@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>majo.qbro@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>renato.mainieri2110@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>eliascr98@outlook.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>roleandroflores12@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Talent!</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>Otmerk1@gmail.com</technicalResource>
+		</projectPositionHolder>
 
 		<projectPositionHolder>
 			<active>true</active>
@@ -1661,7 +1790,7 @@
 			<reviewed>false</reviewed>
 			<startDate>2/2/2014</startDate>
 			<endDate></endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
@@ -1674,7 +1803,7 @@
 			<reviewed>false</reviewed>
 			<startDate>2/2/2014</startDate>
 			<endDate></endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
@@ -1687,7 +1816,7 @@
 			<reviewed>false</reviewed>
 			<startDate>2/2/2014</startDate>
 			<endDate>3/7/2016</endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
@@ -1700,7 +1829,7 @@
 			<reviewed>false</reviewed>
 			<startDate>2/2/2016</startDate>
 			<endDate>2/2/2017</endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
@@ -1713,7 +1842,7 @@
 			<reviewed>false</reviewed>
 			<startDate>2/2/2017</startDate>
 			<endDate></endDate>
-			<project>talent</project>
+			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
@@ -1768,7 +1897,7 @@
 			<description>Great teamwork</description>
 			<observee>howard.lovecraft@example.com</observee>
 			<observer>john.tolkien@example.com</observer>
-			<relatedProject>talent</relatedProject>
+			<relatedProject>Talent!</relatedProject>
 			<organization>monkey-labs</organization>
 			<feedbackType>KUDO</feedbackType>
 		</feedback>
@@ -1777,7 +1906,7 @@
 			<description>Lots of dedication to the project</description>
 			<observee>antonio.jimenez@example.com</observee>
 			<observer>andrea.solano@example.com</observer>
-			<relatedProject>talent</relatedProject>
+			<relatedProject>Talent!</relatedProject>
 			<organization>monkey-labs</organization>
 			<feedbackType>KUDO</feedbackType>
 		</feedback>
@@ -1786,7 +1915,7 @@
 			<description>Too much dedication to the project</description>
 			<observee>antonio.jimenez@example.com</observee>
 			<observer>andrea.solano@example.com</observer>
-			<relatedProject>talent</relatedProject>
+			<relatedProject>Talent!</relatedProject>
 			<organization>monkey-labs</organization>
 			<feedbackType>WARNING</feedbackType>
 		</feedback>
