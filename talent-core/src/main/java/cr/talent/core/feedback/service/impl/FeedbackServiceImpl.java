@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Default implementation of the {@link cr.talent.core.feedback.service.FeedbackService}.
@@ -34,6 +33,7 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
 
         boolean isObserverRelatedToProject = false;
         boolean isObserveeRelatedToProject = false;
+        boolean isObserverAnAdministrator = observer.isAdministrator();
 
         // iterate through the positions to find out if the resources are related to the project.
         Iterator<ProjectPosition> projectPositionIterator = project.getProjectPositions().iterator();
@@ -64,7 +64,7 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
             }
         }
 
-        if(isObserveeRelatedToProject && isObserverRelatedToProject) {
+        if(isObserveeRelatedToProject && (isObserverRelatedToProject || isObserverAnAdministrator)) {
 
             Feedback kudo = new Feedback();
             kudo.setFeedbackType(FeedbackType.KUDO);
@@ -76,6 +76,6 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
 
         }
 
-        return isObserveeRelatedToProject && isObserverRelatedToProject;
+        return isObserveeRelatedToProject && (isObserverRelatedToProject || isObserverAnAdministrator);
     }
 }
