@@ -222,5 +222,3 @@ public class ProjectResource {
     }
 
 }
-
-}

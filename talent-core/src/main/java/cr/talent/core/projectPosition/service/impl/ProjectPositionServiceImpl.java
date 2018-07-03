@@ -8,11 +8,9 @@ import cr.talent.model.Project;
 import cr.talent.model.ProjectPosition;
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
+
 import cr.talent.support.exceptions.NoActiveProjectException;
-<<<<<<< HEAD
-=======
 import cr.talent.support.exceptions.NoTechnicalResourceProjectException;
->>>>>>> 9b393b70132b89e049f76734c7cdb0a7ba3caa04
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import cr.talent.support.exceptions.ProjectOfAnotherOrganizationException;
@@ -97,7 +95,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         super.create(projectPosition);
     }
 
-     /**
+    /**
      * @see cr.talent.core.projectPosition.service.ProjectPositionService#getTechnicalResourceProjects(TechnicalResource)
      */
     @Override
@@ -107,20 +105,12 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
 
         if(technicalResource.getProjectPositions().isEmpty()) //ask first for efficiency reasons
             throw new NoActiveProjectException(noActiveTechnicalResourceProjectsMsg);
-<<<<<<< HEAD
-=======
 
->>>>>>> 9b393b70132b89e049f76734c7cdb0a7ba3caa04
 
         Set<ProjectPositionHolder> projectPositionHolders = technicalResource.getProjectPositions();
 
-<<<<<<< HEAD
-        if(activeProjectPositionHolders.isEmpty()) //ask again after the iteration
-            throw new NoActiveProjectException(noActiveTechnicalResourceProjectsMsg);
-=======
         if(projectPositionHolders.isEmpty()) //ask again after the iteration
             throw new NoTechnicalResourceProjectException(noActiveTechnicalResourceProjectsMsg);
->>>>>>> 9b393b70132b89e049f76734c7cdb0a7ba3caa04
 
         Set<Project> projects = new HashSet<>();
         for (ProjectPositionHolder activeProjectPositionHolder : projectPositionHolders) {
