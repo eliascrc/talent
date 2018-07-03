@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * Default implementation of the {@link cr.talent.core.security.humanResourceManager.service.HumanResourceManagerService}
  *
- * @author Elías Calderón
+ * @author Otto Mena
  */
 @Service("humanResourceManagerService")
 @Transactional

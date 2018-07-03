@@ -5,6 +5,9 @@ import cr.talent.model.Project;
 import cr.talent.model.TechnicalResource;
 import cr.talent.model.ProjectPosition;
 import cr.talent.support.SecurityUtils;
+import cr.talent.support.exceptions.NotProjectLeadException;
+import cr.talent.support.exceptions.ProjectWithoutLeadException;
+import cr.talent.support.exceptions.StartDateBeforeEndDateException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -81,18 +84,62 @@ public class ProjectResource {
         return Response.ok().entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(project)).build();
     }
 
+    /**This endpoint receives a request to change a project status, it sets the endDate of the actual projectEvent and
+     * creates a new projectEvent representing the new projec status.
+     *
+     * @param projectId the id of the project that will have its status changed.
+     * @param startDate the start date of the new projectEvent
+     * @param newProjectStatus the new status of the project.
+     * @return 400 if a parameter was left empty
+     *         403 if the logged in user lacks the permissions to change the project state
+     *         404 if no project with that id was found
+     *         409 if the project has no active lead or if the project already is in that state.
+     *         200 if the project state was succesfully changed.
+     */
+    @POST
+    @Path("/changeStatus")
+    public Response changeProjectStatus(
+            @FormParam("projectId") String projectId,
+            @FormParam("newProjectStatus") String newProjectStatus,
+            @FormParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate){
+
+        if (StringUtils.isEmpty(projectId) || StringUtils.isEmpty(newProjectStatus) || startDate == null)
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
+
+        Project project = this.projectService.findById(projectId);
+        if (project == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("No project with this Id was found.").build();
+
+        if (project.getcurrentState().getEventType().name().equals(newProjectStatus))
+        {
+            return Response.status(Response.Status.CONFLICT).entity("The status sent in the body is already the status of the project.").build();
+        }
+
+        TechnicalResource assigner = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            this.projectService.changeProjectState(project, newProjectStatus, assigner, startDate);
+        } catch (NotProjectLeadException e) {
+            return Response.status(Response.Status.FORBIDDEN).entity("The user creating the project is not the project lead.").build();
+        } catch (ProjectWithoutLeadException e) {
+            return Response.status(Response.Status.CONFLICT).entity("The project has no lead.").build();
+        } catch (StartDateBeforeEndDateException e){
+            return Response.status(Response.Status.CONFLICT).entity("The new date is before the startDate of the current projectEvent").build();
+        }
+
+        return Response.ok().build();
+    }
+
     /**
      * Returns every position in the project, along with each position's capability and holder history.
      *
      * @param projectId the unique identifier of the Project entity, inherited from BasicEntity
      * @return 400 if the string is either null or empty
-     * 404 if the project does not exist
-     * 403 if the project exists but is not in the logged user's organization
+     * 404 if the project does not exist in the logged user's organization
      * 204 if the project has no positions
      * 200 of the information is returned successfully
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("/getHistory")
     public Response getHistory(@QueryParam("projectId") String projectId) {
         if (org.apache.commons.lang.StringUtils.isEmpty(projectId))
@@ -101,12 +148,8 @@ public class ProjectResource {
         Project project = projectService.findById(projectId);
 
         // Check if project exists
-        if (project == null)
+        if (project == null || !project.getOrganization().equals(SecurityUtils.getLoggedInTechnicalResource().getOrganization()))
             return Response.status(Response.Status.NOT_FOUND).entity("Project not found.").build();
-
-        // Check if user is authorized to get the information (they should be in the organization as the project)
-        if (!project.getOrganization().equals(SecurityUtils.getLoggedInTechnicalResource().getOrganization()))
-            return Response.status(Response.Status.FORBIDDEN).build();
 
         // Check if there is any content to return
         Set<ProjectPosition> projectPositions = project.getProjectPositions();

@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 /**
  * Default implementation of the {@link cr.talent.core.projectEvent.service.ProjectEventService}.
  *
- * @author Elías Calderón
+ * @author Otto Mena
  */
 @Service("projectEventService")
 @Transactional

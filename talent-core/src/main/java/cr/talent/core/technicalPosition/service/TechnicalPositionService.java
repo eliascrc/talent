@@ -10,5 +10,4 @@ import cr.talent.support.service.CrudService;
  */
 public interface TechnicalPositionService extends CrudService<TechnicalPosition, String> {
 
-
 }
