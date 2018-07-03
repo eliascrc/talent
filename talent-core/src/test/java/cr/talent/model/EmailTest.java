@@ -14,8 +14,8 @@ public class EmailTest {
     @Test
     public void coreTest () {
 
-        String to = "qa.talent.cr@gmail.com";
-        String from = "qa.talent.cr@gmail.com";
+        String to = "qa.talent.ni@gmail.com";
+        String from = "qa.talent.ni@gmail.com";
         String subject = "test";
         String content = "test";
         String fileName = "test";

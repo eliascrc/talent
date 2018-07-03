@@ -26,7 +26,7 @@ public class InvitationEmailTest {
         EmailSenderService emailSenderService = mock(EmailSenderService.class);
         Invitation invitation = mock(Invitation.class);
         Organization organization = mock(Organization.class);
-        String talentEmail = "qa.talent.cr@gmail.com";
+        String talentEmail = "qa.talent.ni@gmail.com";
         String organizationName = "monkey-labs";
 
         ReflectionTestUtils.setField(invitationEmailService, "emailSenderService", emailSenderService);

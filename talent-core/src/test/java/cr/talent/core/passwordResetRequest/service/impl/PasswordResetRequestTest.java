@@ -39,7 +39,7 @@ public class PasswordResetRequestTest {
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
         PasswordResetRequest passwordResetRequest = new PasswordResetRequest();
         TechnicalResource technicalResource = mock(TechnicalResource.class);
-        String email = "qa.talent.cr@gmail.com";
+        String email = "qa.talent.ni@gmail.com";
         String organizationIdentifier = "monkey-labs";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);
@@ -59,7 +59,7 @@ public class PasswordResetRequestTest {
     public void testCreatePasswordRequestResetReturningNull(){
         PasswordResetRequestServiceImpl passwordResetRequestService = new PasswordResetRequestServiceImpl();
         TechnicalResource technicalResource = mock(TechnicalResource.class);
-        String email = "qa.talent.cr@gmail.com";
+        String email = "qa.talent.ni@gmail.com";
         String organizationIdentifier = "monkey-labs";
 
         ReflectionTestUtils.setField(passwordResetRequestService, "crudDao", this.passwordResetRequestDao);

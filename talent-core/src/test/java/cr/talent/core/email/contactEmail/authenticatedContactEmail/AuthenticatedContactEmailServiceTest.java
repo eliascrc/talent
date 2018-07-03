@@ -31,7 +31,7 @@ public class AuthenticatedContactEmailServiceTest {
         EmailSenderService emailSenderService = mock(EmailSenderService.class);
 
         TechnicalResource technicalResource = mock(TechnicalResource.class);
-        String talentEmail = "qa.talent.cr@gmail.com";
+        String talentEmail = "qa.talent.ni@gmail.com";
 
         ReflectionTestUtils.setField(contactEmailService, "emailSenderService", emailSenderService);
         ReflectionTestUtils.setField(contactEmailService, "talentEmail", talentEmail);
