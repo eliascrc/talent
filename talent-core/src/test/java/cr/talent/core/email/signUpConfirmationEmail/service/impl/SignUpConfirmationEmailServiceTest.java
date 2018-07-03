@@ -26,7 +26,7 @@ public class SignUpConfirmationEmailServiceTest {
         EmailSenderService emailSenderService = mock(EmailSenderService.class);
         SignUpConfirmationMessage signUpConfirmationMessage = mock(SignUpConfirmationMessage.class);
         TechnicalResource technicalResource = mock(TechnicalResource.class);
-        String talentEmail = "qa.talent.cr@gmail.com";
+        String talentEmail = "talent.cr.service@gmail.com";
 
         ReflectionTestUtils.setField(signUpConfirmationEmailService, "emailSenderService", emailSenderService);
         ReflectionTestUtils.setField(signUpConfirmationEmailService, "talentEmail", talentEmail);

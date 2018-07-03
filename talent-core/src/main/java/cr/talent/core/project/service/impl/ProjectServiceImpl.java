@@ -8,9 +8,9 @@ import cr.talent.model.*;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
-import cr.talent.model.LeadPosition;
-import cr.talent.model.Project;
-import cr.talent.model.TechnicalResource;
+
+import cr.talent.model.*;
+import cr.talent.support.exceptions.NoActiveProjectException;
 import cr.talent.support.exceptions.StartDateBeforeEndDateException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import cr.talent.core.projectEvent.service.ProjectEventService;
@@ -21,6 +21,7 @@ import javax.transaction.Transactional;
 
 import java.sql.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 
@@ -121,6 +122,33 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         projectDao.update(project);
 
         return project;
+    }
+
+    /**
+     * @see cr.talent.core.project.service.ProjectService#getActiveProjects(Organization)
+     */
+    @Override
+    public Set<Project> getActiveProjects(Organization organization) {
+        final String noActiveProjectMsg = "The organization does not have any active projects";
+
+        Set<Project> allProjects = organization.getProjects();
+        Set<Project> activeProjects = new HashSet<>();
+
+        //iterate project list
+        Iterator<Project> projectIterator = allProjects.iterator();
+        Project project;
+        while(projectIterator.hasNext()){ // iterate projectPositionHolders for active ones
+            project = projectIterator.next();
+            if(project.getState().equals(ProjectEventType.START.toString())){
+                // this to string is because its reusing the getState method from project, necessary for JSON serializer.
+                activeProjects.add(project);
+            }
+        }
+
+        if (activeProjects.isEmpty()) // if set is empty, throw exception that will make a 204 response on the ws.
+            throw new NoActiveProjectException(noActiveProjectMsg);
+
+        return activeProjects;
     }
 }
 
