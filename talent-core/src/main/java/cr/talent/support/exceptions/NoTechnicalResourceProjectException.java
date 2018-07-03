@@ -4,21 +4,21 @@ package cr.talent.support.exceptions;
  * A runtime exception that is thrown when the {@link cr.talent.core.project.service.ProjectService} tries to
  * retrieve a Privacy Policy and there is no currently active content.
  */
-public class NoActiveTechnicalResourceProjectException extends RuntimeException {
+public class NoTechnicalResourceProjectException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public NoActiveTechnicalResourceProjectException() {
+    public NoTechnicalResourceProjectException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public NoActiveTechnicalResourceProjectException(String message) {
+    public NoTechnicalResourceProjectException(String message) {
         super(message);
     }
 
@@ -26,7 +26,7 @@ public class NoActiveTechnicalResourceProjectException extends RuntimeException 
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public NoActiveTechnicalResourceProjectException(Throwable cause) {
+    public NoTechnicalResourceProjectException(Throwable cause) {
         super(cause);
     }
 
@@ -35,7 +35,7 @@ public class NoActiveTechnicalResourceProjectException extends RuntimeException 
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public NoActiveTechnicalResourceProjectException(String message, Throwable cause) {
+    public NoTechnicalResourceProjectException(String message, Throwable cause) {
         super(message, cause);
     }
 }

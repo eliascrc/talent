@@ -387,21 +387,13 @@ public class JSONSerializerBuilder {
      *
      * @return the JSONSerializer to be used to serialize the project list.
      */
-    public static JSONSerializer getTechnicalResourceActiveProjectsSerializer() {
+    public static JSONSerializer getTechnicalResourceProjectsSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes = new LinkedList<>();
 
         excludes.addAll(getGlobalExcludes());
         excludes.add("*.class");
-
-        tempIncludes.add("name");
-        tempIncludes.add("uniqueIdentifier");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Organization.class, "", tempIncludes));
-
-        tempIncludes = new LinkedList<>();
-        tempIncludes.add("state");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
 
         tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
