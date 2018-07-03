@@ -16,10 +16,11 @@ public interface InvitationService extends CrudService<Invitation, String> {
 
     /**
      * Persists a list of {@link cr.talent.model.Invitation}.
+     * @param technicalResource the technical resource making the invitation.
      * @param invitations the invitations JSON of the resources to invite
      * @param organization the organization to relate the invitations with.
      */
-    void createInvitations(String invitations, Organization organization);
+    void createInvitations(TechnicalResource technicalResource, String invitations, Organization organization);
 
     /**
      * Validates if a token from {@link cr.talent.model.Invitation} is still active.
