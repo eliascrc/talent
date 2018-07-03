@@ -47,8 +47,10 @@ public class InvitationTest{
         invitation.setOrganization(organization);
         invitation.setToken(TOKEN);
         invitation.setValid(isValid);
-        invitation.setFirstName(firstName);
-        invitation.setLastName(lastName);
+        invitation.setInvitedResourceFirstName(firstName);
+        invitation.setInvitedResourceLastName(lastName);
+        invitation.setInviterResourceFirstName(firstName);
+        invitation.setInviterResourceLastName(lastName);
 
         // Verify the gets
         assertEquals(ID, invitation.getId());
@@ -59,8 +61,11 @@ public class InvitationTest{
         assertEquals(organization, invitation.getOrganization());
         assertEquals(TOKEN, invitation.getToken());
         assertEquals(isValid, invitation.isValid());
-        assertEquals(firstName, invitation.getFirstName());
-        assertEquals(lastName, invitation.getLastName());
+        assertEquals(firstName, invitation.getInvitedResourceFirstName());
+        assertEquals(firstName, invitation.getInviterResourceFirstName());
+        assertEquals(lastName, invitation.getInvitedResourceLastName());
+        assertEquals(lastName, invitation.getInviterResourceLastName());
+
     }
 
     //ON EQUALS TESTS.
