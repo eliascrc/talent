@@ -59,7 +59,7 @@ public class InvitationResource {
 
         try {
 
-            this.invitationService.createInvitations(invitations, organization);
+            this.invitationService.createInvitations(technicalResource, invitations, organization);
 
         } catch (LimitOfInvitationsReachedException e) {
             return Response.status(Response.Status.CONFLICT).entity("LimitOfInvitationsReached").build();
