@@ -9,11 +9,9 @@ import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 
-import cr.talent.model.*;
 import cr.talent.support.exceptions.NoActiveProjectException;
 import cr.talent.support.exceptions.StartDateBeforeEndDateException;
 import cr.talent.support.service.impl.CrudServiceImpl;
-import cr.talent.core.projectEvent.service.ProjectEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;

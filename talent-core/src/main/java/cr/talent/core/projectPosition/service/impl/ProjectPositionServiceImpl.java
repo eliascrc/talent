@@ -8,6 +8,7 @@ import cr.talent.model.Project;
 import cr.talent.model.ProjectPosition;
 import cr.talent.model.ProjectPositionHolder;
 import cr.talent.model.TechnicalResource;
+
 import cr.talent.support.exceptions.NoActiveProjectException;
 import cr.talent.support.exceptions.NoTechnicalResourceProjectException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
@@ -94,7 +95,7 @@ public class ProjectPositionServiceImpl extends CrudServiceImpl<ProjectPosition,
         super.create(projectPosition);
     }
 
-     /**
+    /**
      * @see cr.talent.core.projectPosition.service.ProjectPositionService#getTechnicalResourceProjects(TechnicalResource)
      */
     @Override

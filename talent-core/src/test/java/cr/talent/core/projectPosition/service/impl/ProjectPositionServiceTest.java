@@ -39,7 +39,7 @@ public class ProjectPositionServiceTest {
         ProjectPosition projectPosition = new ProjectPosition();
         projectPosition.setTotalHours(totalHours);
         projectPosition.setProject(project);
-        projectPosition.setCapability(capabilityLevel);
+        projectPosition.setCapabilityLevel(capabilityLevel);
 
         ReflectionTestUtils.setField(projectPositionService, "crudDao", projectPositionDao);
         projectPositionService.createProjectPosition(assigner, project, capabilityLevel, totalHours);
