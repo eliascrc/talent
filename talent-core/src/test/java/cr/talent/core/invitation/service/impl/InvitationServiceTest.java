@@ -85,8 +85,13 @@ public class InvitationServiceTest {
         Set<TechnicalResource> technicalResourceSet = new HashSet<>();
         technicalResourceSet.add(mock(TechnicalResource.class));
         Invitation invitation = mock(Invitation.class);
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
         String uniqueId = "testId";
+        String firstName = "Josue";
+        String lastName = "Cubero";
 
+        when(technicalResource.getFirstName()).thenReturn(firstName);
+        when(technicalResource.getLastName()).thenReturn(lastName);
         when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
@@ -106,7 +111,7 @@ public class InvitationServiceTest {
                                                "{\"email\":\"jo96cube@hotmail.com\",\"firstName\":\"Josue\",\"lastName\":\"Cubero\",\"token\":\"toke\",\"isValid\":false}," +
                                                "{\"email\":\"xbaseucr@gmail.com\",\"firstName\":\"Michael\",\"lastName\":\"Kiske\",\"token\":\"token222\",\"isValid\":true}" +
                               "]}";
-        invitationService.createInvitations(invitations, organization);
+        invitationService.createInvitations(technicalResource, invitations, organization);
 
         verify(invitationDao, times(3)).update(invitation);
     }
@@ -122,8 +127,13 @@ public class InvitationServiceTest {
         Organization organization = mock(Organization.class);
         Set<TechnicalResource> technicalResourceSet = new HashSet<>();
         technicalResourceSet.add(mock(TechnicalResource.class));
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
         String uniqueId = "testId";
+        String firstName = "Josue";
+        String lastName = "Cubero";
 
+        when(technicalResource.getFirstName()).thenReturn(firstName);
+        when(technicalResource.getLastName()).thenReturn(lastName);
         when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
@@ -136,7 +146,7 @@ public class InvitationServiceTest {
 
         String invitations = null;
         try {
-            invitationService.createInvitations(invitations, organization);
+            invitationService.createInvitations(technicalResource, invitations, organization);
             fail();
         } catch (InvalidJSONException e){
             // this is the exception that should be thrown.
@@ -154,8 +164,13 @@ public class InvitationServiceTest {
         Organization organization = mock(Organization.class);
         Set<TechnicalResource> technicalResourceSet = new HashSet<>();
         technicalResourceSet.add(mock(TechnicalResource.class));
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
         String uniqueId = "testId";
+        String firstName = "Josue";
+        String lastName = "Cubero";
 
+        when(technicalResource.getFirstName()).thenReturn(firstName);
+        when(technicalResource.getLastName()).thenReturn(lastName);
         when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
@@ -168,7 +183,7 @@ public class InvitationServiceTest {
 
         String invitations = "";
         try {
-            invitationService.createInvitations(invitations, organization);
+            invitationService.createInvitations(technicalResource, invitations, organization);
             fail();
         } catch (InvalidJSONException e){
             // this is the exception that should be thrown.
@@ -187,7 +202,10 @@ public class InvitationServiceTest {
         Organization organization = mock(Organization.class);
         Set<TechnicalResource> technicalResourceSet = new HashSet<>();
         technicalResourceSet.add(mock(TechnicalResource.class));
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
         String uniqueId = "testId";
+        String firstName = "Josue";
+        String lastName = "Cubero";
 
         Set<Invitation> invitationSet = new HashSet<>();
 
@@ -196,6 +214,8 @@ public class InvitationServiceTest {
             invitationSet.add(mock(Invitation.class));
         }
 
+        when(technicalResource.getFirstName()).thenReturn(firstName);
+        when(technicalResource.getLastName()).thenReturn(lastName);
         when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
@@ -218,7 +238,7 @@ public class InvitationServiceTest {
                 "]}";
 
         try {
-            invitationService.createInvitations(invitations, organization);
+            invitationService.createInvitations(technicalResource, invitations, organization);
             fail();
         } catch (LimitOfInvitationsReachedException e){
             // this exception should be thrown.
@@ -233,10 +253,16 @@ public class InvitationServiceTest {
         InvitationEmailService invitationEmailService = mock(InvitationEmailService.class);
         OrganizationService organizationService = mock(OrganizationService.class);
         Organization organization = mock(Organization.class);
+        TechnicalResource technicalResource = mock(TechnicalResource.class);
         String uniqueId = "testId";
+        String firstName = "Josue";
+        String lastName = "Cubero";
+
         Set<TechnicalResource> technicalResourceSet = new HashSet<>();
         Set<Invitation> invitationSet = new HashSet<>();
 
+        when(technicalResource.getFirstName()).thenReturn(firstName);
+        when(technicalResource.getLastName()).thenReturn(lastName);
         when(organization.getUniqueIdentifier()).thenReturn(uniqueId);
         when(organization.getResources()).thenReturn(technicalResourceSet);
         when(organizationService.getOrganizationByUniqueIdentifier(organization.getUniqueIdentifier())).thenReturn(organization);
@@ -261,7 +287,7 @@ public class InvitationServiceTest {
                 "]}";
 
         try {
-            invitationService.createInvitations(invitations, organization);
+            invitationService.createInvitations(technicalResource, invitations, organization);
             fail();
         } catch (AlreadyRegisteredUserException e) {
             // It's supposed to throw this exception
