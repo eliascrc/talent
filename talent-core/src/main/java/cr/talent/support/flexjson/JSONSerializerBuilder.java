@@ -257,6 +257,31 @@ public class JSONSerializerBuilder {
     }
 
     /**
+     * Creates a basic serializer that returns a set of project skills.
+     *
+     * @return the JSONSerializer to be used to serialize a Skill.
+     */
+    public static JSONSerializer getProjectSkillsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        // Excludes all attributes of the SkillCategory class except its name
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "", tempIncludes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("ProjectSkill Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
+
+    /**
      * Gets a JSONSerializer to use in order to obtain the JSON of a ProjectPosition.
      *
      * @return the JSONSerializer to be used to serialize ProjectPosition.

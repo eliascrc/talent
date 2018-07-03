@@ -1,15 +1,17 @@
 package cr.talent.core.project.service;
 
 import cr.talent.model.Project;
+import cr.talent.model.Skill;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.service.CrudService;
 
 import java.sql.Date;
+import java.util.Set;
 
 /**
  * Provides business logic services related to {@link cr.talent.model.Project} entities.
  *
- * @author Elías Calderón, Otto Mena
+ * @author Elías Calderón, Otto Mena, Josué Cubero
  */
 public interface ProjectService extends CrudService<Project, String> {
 
@@ -34,5 +36,13 @@ public interface ProjectService extends CrudService<Project, String> {
      * @return the created project.
      */
     Project createProject(String name, Date startDate, String projectLead, String description, TechnicalResource technicalResource);
+
+    /**
+     * Gets a project skills.
+     *
+     * @param project the project.
+     * @return the created project.
+     */
+    Set<Skill> getSkills(Project project);
 
 }

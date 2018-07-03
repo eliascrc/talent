@@ -13,22 +13,19 @@ import cr.talent.model.Project;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.StartDateBeforeEndDateException;
 import cr.talent.support.service.impl.CrudServiceImpl;
-import cr.talent.core.projectEvent.service.ProjectEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
 
 
 /**
  * Default implementation of the {@link cr.talent.core.project.service.ProjectService}.
  *
- * @author Elías Calderón, Otto Mena
+ * @author Elías Calderón, Otto Mena, Josue Cubero
  */
 @Service("projectService")
 @Transactional
@@ -121,6 +118,18 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         projectDao.update(project);
 
         return project;
+    }
+
+    /**
+     * @see cr.talent.core.project.service.impl.ProjectServiceImpl#getSkills(Project)
+     */
+    @Override
+    public Set<Skill> getSkills(Project project) {
+        Set<Skill> skills = new HashSet<>();
+        for (CapabilityLevel capabilityLevel : project.getProjectCapabilities()) {
+            skills.addAll(capabilityLevel.getRequiredSkills());
+        }
+        return skills;
     }
 }
 
