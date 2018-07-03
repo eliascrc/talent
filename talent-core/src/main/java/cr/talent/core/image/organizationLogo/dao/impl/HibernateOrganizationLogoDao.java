@@ -27,18 +27,17 @@ public class HibernateOrganizationLogoDao extends HibernateCrudDao<OrganizationL
     }
 
     /**
-     * @see cr.talent.core.organization.dao.OrganizationDao#getOrganizationByUniqueIdentifier(String)
+     * @see cr.talent.core.image.organizationLogo.dao.OrganizationLogoDao#findLogoByLink(String)
      */
     @Override
     public OrganizationLogo findLogoByLink(String link) {
-
         Query query = super.getSessionFactory().getCurrentSession()
                 .createQuery("from OrganizationLogo where link = :link");
 
         query.setParameter("link", link);
-        List<OrganizationLogo> organizationResult = (List<OrganizationLogo>)query.list();
+        List<OrganizationLogo> logoResult = (List<OrganizationLogo>)query.list();
 
-        return DataAccessUtils.singleResult(organizationResult);
+        return DataAccessUtils.singleResult(logoResult);
     }
 
 }

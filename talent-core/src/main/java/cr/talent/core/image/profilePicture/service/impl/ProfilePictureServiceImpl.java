@@ -31,6 +31,8 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
 
     private static final String FOLDER = "/profile-pictures";
 
+    private static final String defaultProfilePictureLink = "https://s3.amazonaws.com/talent.cr-bucket/profile-pictures/default_profile_picture.jpg";
+
     @Autowired
     private ImageDao imageDao;
 
@@ -53,7 +55,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
         TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();
         TechnicalResource technicalResource1= this.technicalResourceService.findById(technicalResource.getId());
 
-        if (technicalResource1.getProfilePicture() != null)
+        if (technicalResource1.getProfilePicture() != null && !technicalResource1.getProfilePicture().getLink().equals(defaultProfilePictureLink))
             this.deleteProfilePicture();
 
         ProfilePicture profilePicture = new ProfilePicture();
@@ -68,7 +70,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
     }
 
     /**
-     * @see ProfilePictureService#deleteProfilePicture()
+     * @see cr.talent.core.image.profilePicture.service.ProfilePictureService#deleteProfilePicture()
      */
     @Override
     public void deleteProfilePicture(){
@@ -77,12 +79,28 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
         ProfilePicture profilePicture= technicalResource1.getProfilePicture();
 
         if (profilePicture != null){
-            technicalResource1.setProfilePicture(null);
+            this.setDefaultProfilePicture(technicalResource1);
             this.technicalResourceService.update(technicalResource1);
             technicalResource.setProfilePicture(null);
 
-            this.remove(profilePicture);
-            this.imageDao.deleteImage(profilePicture.getId() + FILE_EXTENSION, FOLDER);
+            if (!profilePicture.getLink().equals(defaultProfilePictureLink)) { // deletes the profile picture if it is not the default one
+                this.remove(profilePicture);
+                this.imageDao.deleteImage(profilePicture.getId() + FILE_EXTENSION, FOLDER);
+            }
         }
+    }
+
+    /**
+     * @see cr.talent.core.image.profilePicture.service.ProfilePictureService#setDefaultProfilePicture(TechnicalResource)
+     */
+    @Override
+    public void setDefaultProfilePicture(TechnicalResource technicalResource) {
+        ProfilePicture defaultProfilePicture = this.profilePictureDao.findProfilePictureByLink(defaultProfilePictureLink);
+        if (defaultProfilePicture == null) {
+            defaultProfilePicture = new ProfilePicture();
+            defaultProfilePicture.setLink(defaultProfilePictureLink);
+            super.create(defaultProfilePicture);
+        }
+        technicalResource.setProfilePicture(defaultProfilePicture);
     }
 }

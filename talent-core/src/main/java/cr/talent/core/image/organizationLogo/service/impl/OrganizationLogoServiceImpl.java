@@ -96,7 +96,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
             this.organizationService.update(organization1);
             organization.setLogo(null);
 
-            if (!organizationLogo.getLink().equals(defaultLogoLink)) { // delete the logo if it is not the default one
+            if (!organizationLogo.getLink().equals(defaultLogoLink)) { // deletes the logo if it is not the default one
                 this.remove(organizationLogo);
                 this.imageDao.deleteImage(organizationLogo.getId() + FILE_EXTENSION, FOLDER);
             }
