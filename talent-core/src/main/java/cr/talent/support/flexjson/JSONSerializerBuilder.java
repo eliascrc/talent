@@ -458,8 +458,8 @@ public class JSONSerializerBuilder {
 
         excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
 
-        includes.add("firstName");
-        includes.add("lastName");
+        includes.add("invitedResourceFirstName");
+        includes.add("invitedResourceLastName");
 
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Invitation.class, "", includes));
 
