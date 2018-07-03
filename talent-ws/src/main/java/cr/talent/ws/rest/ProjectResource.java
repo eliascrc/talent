@@ -114,12 +114,15 @@ public class ProjectResource {
         if (StringUtils.isEmpty(projectId) || StringUtils.isEmpty(newProjectStatus) || startDate == null)
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
+        if(!(newProjectStatus.equals("ON_HOLD") || newProjectStatus.equals("START") || newProjectStatus.equals("END"))){
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid status.").build();
+        }
+
         Project project = this.projectService.findById(projectId);
         if (project == null)
             return Response.status(Response.Status.NOT_FOUND).entity("No project with this Id was found.").build();
 
-
-        if (project.getcurrentState().getEventType().equals(newProjectStatus))
+        if (project.getcurrentState().getEventType().name().equals(newProjectStatus))
         {
             return Response.status(Response.Status.CONFLICT).entity("The status sent in the body is already the status of the project.").build();
         }

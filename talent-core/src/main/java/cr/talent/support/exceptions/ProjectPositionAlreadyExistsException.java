@@ -1,26 +1,26 @@
 package cr.talent.support.exceptions;
 
 /**
- * A runtime exception that is thrown when the {@link cr.talent.core.projectPositionHolder.service.ProjectPositionHolderService}
- * notices that someone that is not the lead of a project tries to assign project positions in that project
+ * A runtime exception that is thrown when the {@link cr.talent.core.projectPosition.service.impl.ProjectPositionServiceImpl}
+ * tries to create a project that already exists.
  *
- * @author Daniel Montes de Oca
+ * @author Otto Mena Kikut
  */
-public class NotProjectLeadException extends RuntimeException {
+public class ProjectPositionAlreadyExistsException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * Default constructor
      */
-    public NotProjectLeadException() {
+    public ProjectPositionAlreadyExistsException() {
     }
 
     /**
      * Creates a new exception with the specified message
      * @param message the message to display
      */
-    public NotProjectLeadException(String message) {
+    public ProjectPositionAlreadyExistsException(String message) {
         super(message);
     }
 
@@ -28,7 +28,7 @@ public class NotProjectLeadException extends RuntimeException {
      * Creates a new exception with the specified wrapped exception
      * @param cause the cause of the exception
      */
-    public NotProjectLeadException(Throwable cause) {
+    public ProjectPositionAlreadyExistsException(Throwable cause) {
         super(cause);
     }
 
@@ -37,8 +37,9 @@ public class NotProjectLeadException extends RuntimeException {
      * @param message the message to display
      * @param cause the cause of the exception
      */
-    public NotProjectLeadException(String message, Throwable cause) {
+    public ProjectPositionAlreadyExistsException(String message, Throwable cause) {
         super(message, cause);
     }
-}
 
+
+}

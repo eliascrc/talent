@@ -3,6 +3,7 @@ package cr.talent.core.project.service.impl;
 import cr.talent.core.leadPosition.dao.LeadPositionDao;
 import cr.talent.core.project.dao.ProjectDao;
 import cr.talent.core.project.service.ProjectService;
+import cr.talent.core.projectEvent.dao.ProjectEventDao;
 import cr.talent.model.*;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
@@ -38,7 +39,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
     private ProjectDao projectDao;
 
     @Autowired
-    private ProjectEventService projectEventService;
+    private ProjectEventDao projectEventDao;
 
     @Autowired
     private LeadPositionDao leadPositionDao;
@@ -83,8 +84,8 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         project.setTimeline(projectTimeline);
         project.setcurrentState(projectEvent);
 
-        projectEventService.create(projectEvent);
-        super.update(project);
+        this.projectEventDao.create(projectEvent);
+        projectDao.update(project);
     }
 
     @Override
@@ -95,7 +96,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         project.setOrganization(technicalResource.getOrganization());
         project.setStartDate(startDate);
         project.setDescription(description);
-        this.create(project);
+        projectDao.create(project);
 
         LeadPosition leadPosition = new LeadPosition();
         leadPosition.setStartDate(startDate);
@@ -118,7 +119,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         leadPositions.add(leadPosition);
 
         project.setLeadHistory(leadPositions);
-        this.update(project);
+        projectDao.update(project);
 
         return project;
     }

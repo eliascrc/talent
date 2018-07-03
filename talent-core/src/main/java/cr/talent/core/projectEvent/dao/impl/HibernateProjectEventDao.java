@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Hibernate implementation of the {@link cr.talent.core.projectEvent.dao.ProjectEventDao}.
  *
- * @author Elías Calderón
+ * @author Otto Mena
  */
 @Repository("projectEventDao")
 public class HibernateProjectEventDao extends HibernateCrudDao<ProjectEvent, String> implements ProjectEventDao {

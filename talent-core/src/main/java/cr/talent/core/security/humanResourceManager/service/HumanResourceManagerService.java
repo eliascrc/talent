@@ -7,7 +7,7 @@ import cr.talent.support.service.CrudService;
 /**
  * Provides business logic services related to {@link cr.talent.model.HumanResourceManager} entities.
  *
- * @author Elías Calderón
+ * @author Otto Mena
  */
 public interface HumanResourceManagerService extends CrudService<HumanResourceManager, String> {
 
