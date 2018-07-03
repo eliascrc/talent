@@ -17,7 +17,7 @@ public class ProfilePicture extends Image {
     /**
      * Technical resource that owns the profile picture.
      */
-    @OneToOne (mappedBy = "profilePicture")
+    @OneToMany(mappedBy = "profilePicture")
     private TechnicalResource technicalResource;
 
     public ProfilePicture (){}
