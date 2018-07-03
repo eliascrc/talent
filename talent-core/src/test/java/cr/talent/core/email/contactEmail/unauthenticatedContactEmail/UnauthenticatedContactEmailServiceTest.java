@@ -28,7 +28,7 @@ public class UnauthenticatedContactEmailServiceTest {
 
         EmailSenderService emailSenderService = mock(EmailSenderService.class);
 
-        String talentEmail = "qa.talent.cr@gmail.com";
+        String talentEmail = "talent.cr.service@gmail.com";
         ContactUsIssueType issueType = ContactUsIssueType.ACCOUNT_CLOSING;
 
         ReflectionTestUtils.setField(contactEmailService, "emailSenderService", emailSenderService);
