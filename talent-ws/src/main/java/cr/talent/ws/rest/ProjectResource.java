@@ -1,14 +1,20 @@
 package cr.talent.ws.rest;
 
+import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.project.service.ProjectService;
+import cr.talent.model.Organization;
 import cr.talent.model.Project;
 import cr.talent.model.TechnicalResource;
 import cr.talent.model.ProjectPosition;
+
 import cr.talent.support.SecurityUtils;
+
+import cr.talent.support.exceptions.NoActiveProjectException;
 import cr.talent.support.exceptions.NotProjectLeadException;
 import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.support.exceptions.StartDateBeforeEndDateException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,7 +22,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.sql.Date;
@@ -34,6 +39,9 @@ public class ProjectResource {
 
     @Autowired
     private ProjectService projectService;
+
+    @Autowired
+    private OrganizationService organizationService;
 
     /**
      * Receives the request for creating a new project within an organization.
@@ -162,5 +170,32 @@ public class ProjectResource {
 
         return Response.status(Response.Status.OK)
                 .entity(JSONSerializerBuilder.getProjectPositionSerializer().serialize(projectPositions)).build();
+    }
+
+
+    /**
+     * Returns every active project within the organization.
+     *
+     * @return 401 if no user is logged in.
+     * 204 if there are no active projects.
+     * 200 of the information is returned successfully in JSON format.
+     */
+    @GET
+    @Path("/getActiveProjects")
+    public Response getActiveProjects() {
+
+        TechnicalResource technicalResource = SecurityUtils.getLoggedInTechnicalResource();
+        // organization is queried like this because of lazy init.
+        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(technicalResource.getOrganization().getUniqueIdentifier());
+        Set<Project> projects;
+
+        try {
+            projects = this.projectService.getActiveProjects(organization);
+        } catch (NoActiveProjectException e) {
+            return Response.status(Response.Status.NO_CONTENT).build();
+        }
+
+        return Response.status(Response.Status.OK)
+                .entity(JSONSerializerBuilder.getProjectInformationWithTRSerializer().serialize(projects)).build();
     }
 }
