@@ -519,4 +519,29 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    /**
+     * Creates a basic serializer that returns the SkillCategory in JSON format.
+     *
+     * @return the JSONSerializer to be used to serialize a SkillCategory
+     */
+    public static JSONSerializer getSkillCategorySerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        // Excludes all attributes of the SkillCategory class except its name
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(SkillCategory.class, "", tempIncludes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("SkillCategory Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
+
 }
