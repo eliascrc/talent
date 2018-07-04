@@ -1,6 +1,7 @@
 package cr.talent.core.security.technicalResource.service.impl;
 
 import cr.talent.core.careerPath.service.CareerPathService;
+import cr.talent.core.image.profilePicture.service.ProfilePictureService;
 import cr.talent.core.security.technicalResource.dao.TechnicalResourceDao;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.core.technicalPosition.service.TechnicalPositionService;
@@ -50,6 +51,8 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
     @Autowired
     private CareerPathService careerPathService;
 
+    @Autowired
+    private ProfilePictureService profilePictureService;
 
     /**
      * Password encoder provided by spring to cipher a user's password and store it in the database so that it can
@@ -141,6 +144,7 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
         technicalResource.setPassword(passwordEncoder.encode(technicalResource.getPassword()));
         technicalResource.setEnabled(true);
         technicalResource.setToken(UUID.randomUUID().toString());
+        this.profilePictureService.setDefaultProfilePicture(technicalResource);
 
         return super.create(technicalResource);
     }

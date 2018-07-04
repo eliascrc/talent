@@ -1,5 +1,6 @@
 package cr.talent.core.image.organizationLogo.service;
 
+import cr.talent.model.Organization;
 import cr.talent.model.OrganizationLogo;
 import cr.talent.model.ProfilePicture;
 import cr.talent.support.service.CrudService;
@@ -26,4 +27,10 @@ public interface OrganizationLogoService extends CrudService<OrganizationLogo, S
      * deletes the picture of the organization that is making the request.
      */
     void deleteOrganizationLogo();
+
+    /**
+     * Changes an organization to use the default logo
+     * @param organization the organization that will have its logo modified
+     */
+    void setDefaultLogo(Organization organization);
 }
