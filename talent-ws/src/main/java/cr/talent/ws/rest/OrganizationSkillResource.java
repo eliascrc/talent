@@ -41,7 +41,7 @@ public class OrganizationSkillResource {
      * @param skillType the skill type.
      * @return 200 and skill JSON information if the skill is correctly created, 400 if any of the parameters are null,
      * 404 if the skillCategoryId does not correspond to any skill category within the organization, 409 if the skill is
-     * already created on that category skill, 400 if one or more parameters are null, empty or invalid.
+     * already created on that category skill.
      */
     @POST
     @Path("/create")
