@@ -83,7 +83,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
             this.technicalResourceService.update(technicalResource1);
             technicalResource.setProfilePicture(null);
 
-            if (!profilePicture.getLink().equals(DEFAULT_PROFILE_PICTURE_LINK)) { // deletes the profile picture if it is not the default one
+            if (!profilePicture.getLink().equals(this.DEFAULT_PROFILE_PICTURE_LINK)) { // deletes the profile picture if it is not the default one
                 this.remove(profilePicture);
                 this.imageDao.deleteImage(profilePicture.getId() + FILE_EXTENSION, FOLDER);
             }
@@ -95,10 +95,10 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
      */
     @Override
     public void setDefaultProfilePicture(TechnicalResource technicalResource) {
-        ProfilePicture defaultProfilePicture = this.profilePictureDao.findProfilePictureByLink(DEFAULT_PROFILE_PICTURE_LINK);
+        ProfilePicture defaultProfilePicture = this.profilePictureDao.findProfilePictureByLink(this.DEFAULT_PROFILE_PICTURE_LINK);
         if (defaultProfilePicture == null) { // creates the default profile picture in the database if it wasn't already in there
             defaultProfilePicture = new ProfilePicture();
-            defaultProfilePicture.setLink(DEFAULT_PROFILE_PICTURE_LINK);
+            defaultProfilePicture.setLink(this.DEFAULT_PROFILE_PICTURE_LINK);
             super.create(defaultProfilePicture);
         }
         technicalResource.setProfilePicture(defaultProfilePicture);

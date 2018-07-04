@@ -64,7 +64,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
             Organization organization1 = technicalResource.getOrganization();
             Organization organization = technicalResource1.getOrganization();
 
-            if (organization.getLogo() != null && !organization.getLogo().getLink().equals(DEFAULT_LOGO_LINK))
+            if (organization.getLogo() != null && !organization.getLogo().getLink().equals(this.DEFAULT_LOGO_LINK))
                     this.deleteOrganizationLogo(); // deletes the logo if it was not the default one
 
             OrganizationLogo organizationLogo = new OrganizationLogo();
@@ -96,7 +96,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
             this.organizationService.update(organization1);
             organization.setLogo(null);
 
-            if (!organizationLogo.getLink().equals(DEFAULT_LOGO_LINK)) { // deletes the logo if it is not the default one
+            if (!organizationLogo.getLink().equals(this.DEFAULT_LOGO_LINK)) { // deletes the logo if it is not the default one
                 this.remove(organizationLogo);
                 this.imageDao.deleteImage(organizationLogo.getId() + FILE_EXTENSION, FOLDER);
             }
@@ -109,10 +109,10 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
      */
     @Override
     public void setDefaultLogo(Organization organization) {
-        OrganizationLogo defaultLogo = this.organizationLogoDao.findLogoByLink(DEFAULT_LOGO_LINK);
+        OrganizationLogo defaultLogo = this.organizationLogoDao.findLogoByLink(this.DEFAULT_LOGO_LINK);
         if (defaultLogo == null) { // creates the default logo in the database if it wasn't already in there
             defaultLogo = new OrganizationLogo();
-            defaultLogo.setLink(DEFAULT_LOGO_LINK);
+            defaultLogo.setLink(this.DEFAULT_LOGO_LINK);
             super.create(defaultLogo);
         }
         organization.setLogo(defaultLogo);
