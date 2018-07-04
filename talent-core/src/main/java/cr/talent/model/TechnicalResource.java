@@ -25,7 +25,7 @@ public class TechnicalResource extends User{
     /**
      * The profile picture of the user.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "profile_picture_id")
     private ProfilePicture profilePicture;
 

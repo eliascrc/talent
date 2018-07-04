@@ -48,7 +48,7 @@ public class Organization extends BasicEntity {
     /**
      * An image with the logo of the organization.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "organization_logo_id")
     private OrganizationLogo logo;
 
