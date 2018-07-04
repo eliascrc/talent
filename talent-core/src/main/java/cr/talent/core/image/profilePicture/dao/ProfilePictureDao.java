@@ -13,9 +13,9 @@ import cr.talent.support.dao.CrudDao;
 public interface ProfilePictureDao extends CrudDao<ProfilePicture, String> {
 
     /**
-     * Finds an organization logo with a given link
+     * Finds a profile picture with a given link
      * @param link the link of the profile picture
-     * @return the organization logo with the given link
+     * @return the profile picture with the given link
      */
     ProfilePicture findProfilePictureByLink(String link);
 
