@@ -31,7 +31,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
 
     private static final String FOLDER = "/profile-pictures";
 
-    private static final String defaultProfilePictureLink = "https://s3.amazonaws.com/talent.cr-bucket/profile-pictures/default_profile_picture.jpg";
+    private static final String DEFAULT_PROFILE_PICTURE_LINK = "https://s3.amazonaws.com/talent.cr-bucket/profile-pictures/default_profile_picture.jpg";
 
     @Autowired
     private ImageDao imageDao;
@@ -55,7 +55,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
         TechnicalResource technicalResource= (TechnicalResource) SecurityUtils.getLoggedInUser();
         TechnicalResource technicalResource1= this.technicalResourceService.findById(technicalResource.getId());
 
-        if (technicalResource1.getProfilePicture() != null && !technicalResource1.getProfilePicture().getLink().equals(defaultProfilePictureLink))
+        if (technicalResource1.getProfilePicture() != null && !technicalResource1.getProfilePicture().getLink().equals(DEFAULT_PROFILE_PICTURE_LINK))
             this.deleteProfilePicture();
 
         ProfilePicture profilePicture = new ProfilePicture();
@@ -83,7 +83,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
             this.technicalResourceService.update(technicalResource1);
             technicalResource.setProfilePicture(null);
 
-            if (!profilePicture.getLink().equals(defaultProfilePictureLink)) { // deletes the profile picture if it is not the default one
+            if (!profilePicture.getLink().equals(DEFAULT_PROFILE_PICTURE_LINK)) { // deletes the profile picture if it is not the default one
                 this.remove(profilePicture);
                 this.imageDao.deleteImage(profilePicture.getId() + FILE_EXTENSION, FOLDER);
             }
@@ -95,10 +95,10 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
      */
     @Override
     public void setDefaultProfilePicture(TechnicalResource technicalResource) {
-        ProfilePicture defaultProfilePicture = this.profilePictureDao.findProfilePictureByLink(defaultProfilePictureLink);
+        ProfilePicture defaultProfilePicture = this.profilePictureDao.findProfilePictureByLink(DEFAULT_PROFILE_PICTURE_LINK);
         if (defaultProfilePicture == null) { // creates the default profile picture in the database if it wasn't already in there
             defaultProfilePicture = new ProfilePicture();
-            defaultProfilePicture.setLink(defaultProfilePictureLink);
+            defaultProfilePicture.setLink(DEFAULT_PROFILE_PICTURE_LINK);
             super.create(defaultProfilePicture);
         }
         technicalResource.setProfilePicture(defaultProfilePicture);

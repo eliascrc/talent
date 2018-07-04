@@ -34,7 +34,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
 
     private static final String FOLDER = "/organizations-logo";
 
-    private static final String defaultLogoLink = "https://s3.amazonaws.com/talent.cr-bucket/organizations-logo/default_logo.jpg";
+    private static final String DEFAULT_LOGO_LINK = "https://s3.amazonaws.com/talent.cr-bucket/organizations-logo/default_logo.jpg";
 
     @Autowired
     private ImageDao imageDao;
@@ -64,7 +64,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
             Organization organization1 = technicalResource.getOrganization();
             Organization organization = technicalResource1.getOrganization();
 
-            if (organization.getLogo() != null && !organization.getLogo().getLink().equals(defaultLogoLink))
+            if (organization.getLogo() != null && !organization.getLogo().getLink().equals(DEFAULT_LOGO_LINK))
                     this.deleteOrganizationLogo(); // deletes the logo if it was not the default one
 
             OrganizationLogo organizationLogo = new OrganizationLogo();
@@ -96,7 +96,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
             this.organizationService.update(organization1);
             organization.setLogo(null);
 
-            if (!organizationLogo.getLink().equals(defaultLogoLink)) { // deletes the logo if it is not the default one
+            if (!organizationLogo.getLink().equals(DEFAULT_LOGO_LINK)) { // deletes the logo if it is not the default one
                 this.remove(organizationLogo);
                 this.imageDao.deleteImage(organizationLogo.getId() + FILE_EXTENSION, FOLDER);
             }
@@ -109,10 +109,10 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
      */
     @Override
     public void setDefaultLogo(Organization organization) {
-        OrganizationLogo defaultLogo = this.organizationLogoDao.findLogoByLink(defaultLogoLink);
+        OrganizationLogo defaultLogo = this.organizationLogoDao.findLogoByLink(DEFAULT_LOGO_LINK);
         if (defaultLogo == null) { // creates the default logo in the database if it wasn't already in there
             defaultLogo = new OrganizationLogo();
-            defaultLogo.setLink(defaultLogoLink);
+            defaultLogo.setLink(DEFAULT_LOGO_LINK);
             super.create(defaultLogo);
         }
         organization.setLogo(defaultLogo);
