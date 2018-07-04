@@ -34,5 +34,5 @@ public interface ProjectPositionService extends CrudService<ProjectPosition, Str
      * Queries a list of {@link cr.talent.model.Project} for a technical resource..
      * @param technicalResource the technical resource.
      */
-    String getTechnicalResourceActiveProjects(TechnicalResource technicalResource);
+    String getTechnicalResourceProjects(TechnicalResource technicalResource);
 }

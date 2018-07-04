@@ -32,7 +32,7 @@ public class TechnicalResourceProjectResource {
     TechnicalResourceService technicalResourceService;
 
     /**
-     * Receives a request to query the active projects of a technical resource.
+     * Receives a request to query the projects of a technical resource.
      *
      * @param username an optional parameter to query another technical resource project list.
      *
@@ -42,7 +42,7 @@ public class TechnicalResourceProjectResource {
      */
     @GET
     @Path("/get")
-    public Response getActiveProjects(@QueryParam("username") String username) {
+    public Response getProjects(@QueryParam("username") String username) {
 
         TechnicalResource lazySessionTechnicalResource = SecurityUtils.getLoggedInTechnicalResource();
         TechnicalResource technicalResource;
@@ -63,9 +63,9 @@ public class TechnicalResourceProjectResource {
         }
 
         try {
-            String serializedList = this.projectPositionService.getTechnicalResourceActiveProjects(technicalResource);
+            String serializedList = this.projectPositionService.getTechnicalResourceProjects(technicalResource);
             return Response.ok().entity(serializedList).build();
-        } catch (NoActiveTechnicalResourceProjectException e) {
+        } catch (NoActiveProjectException e) {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
     }

@@ -132,7 +132,7 @@
 		<projectEvent>
 			<startDate>15/12/2013</startDate>
 			<endDate></endDate>
-			<eventType>ON_HOLD</eventType>
+			<eventType>START</eventType>
 			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 		</projectEvent>
