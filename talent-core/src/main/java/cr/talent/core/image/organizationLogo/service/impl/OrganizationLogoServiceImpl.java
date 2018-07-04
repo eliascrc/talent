@@ -110,7 +110,7 @@ public class OrganizationLogoServiceImpl extends CrudServiceImpl<OrganizationLog
     @Override
     public void setDefaultLogo(Organization organization) {
         OrganizationLogo defaultLogo = this.organizationLogoDao.findLogoByLink(defaultLogoLink);
-        if (defaultLogo == null) {
+        if (defaultLogo == null) { // creates the default logo in the database if it wasn't already in there
             defaultLogo = new OrganizationLogo();
             defaultLogo.setLink(defaultLogoLink);
             super.create(defaultLogo);

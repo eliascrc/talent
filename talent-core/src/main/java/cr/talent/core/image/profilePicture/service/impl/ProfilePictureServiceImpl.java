@@ -96,7 +96,7 @@ public class ProfilePictureServiceImpl extends CrudServiceImpl<ProfilePicture, S
     @Override
     public void setDefaultProfilePicture(TechnicalResource technicalResource) {
         ProfilePicture defaultProfilePicture = this.profilePictureDao.findProfilePictureByLink(defaultProfilePictureLink);
-        if (defaultProfilePicture == null) {
+        if (defaultProfilePicture == null) { // creates the default profile picture in the database if it wasn't already in there
             defaultProfilePicture = new ProfilePicture();
             defaultProfilePicture.setLink(defaultProfilePictureLink);
             super.create(defaultProfilePicture);
