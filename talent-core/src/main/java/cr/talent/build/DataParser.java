@@ -84,7 +84,7 @@ class DataParser extends XmlParser {
         this.fillHumanResourceManagers();
         this.fillEducationRecords();
         this.fillProjectEvents();
-        //this.fillTechnicalPosition();
+        this.fillTechnicalPosition();
 
     }
 
@@ -624,7 +624,6 @@ class DataParser extends XmlParser {
         TechnicalPosition technicalPosition = new TechnicalPosition();
         technicalPosition.setStartDate(super.getDateValue(technicalPositionElement, "startDate"));
         technicalPosition.setEndDate(super.getDateValue(technicalPositionElement, "endDate"));
-        technicalPosition.setCareerPath(new CareerPath());
 
         this.linkTechnicalPositionToTechnicalResource(technicalPosition, super.getAttributeValue(technicalPositionElement,"technicalResource"));
         this.linkTechnicalPositionToCapabilityLevel(technicalPosition, super.getAttributeValue(technicalPositionElement, "capabilityLevelName"), super.getAttributeValue(technicalPositionElement, "capabilityLevelOrganization"), super.getAttributeValue(technicalPositionElement, "capabilityLevelCapability"));
