@@ -1,5 +1,6 @@
 package cr.talent.core.organization.service.impl;
 
+import cr.talent.core.image.organizationLogo.service.OrganizationLogoService;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.skill.dao.SkillDao;
@@ -39,6 +40,8 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
 
     @Autowired
     private SkillCategoryDao skillCategoryDao;
+
+    private OrganizationLogoService organizationLogoService;
 
     public void init() {
         setCrudDao(this.organizationDao);
@@ -147,6 +150,18 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         this.skillCategoryDao.update(skillCategory);
 
         return skill;
+    }
+
+    /**
+     * Used to create an organization, sets the organization's logo as the default logo
+     *
+     * @param organization the organization that is being created
+     * @return the created organization
+     */
+    @Override
+    public String create(Organization organization) {
+        this.organizationLogoService.setDefaultLogo(organization);
+        return super.create(organization);
     }
 
 }

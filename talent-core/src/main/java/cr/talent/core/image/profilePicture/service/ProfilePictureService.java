@@ -1,6 +1,7 @@
 package cr.talent.core.image.profilePicture.service;
 
 import cr.talent.model.ProfilePicture;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.service.CrudService;
 
 import java.io.InputStream;
@@ -22,5 +23,11 @@ public interface ProfilePictureService extends CrudService<ProfilePicture, Strin
      * deletes the picture of the loggedin user that is making the request.
      */
     void deleteProfilePicture();
+
+    /**
+     * Changes a technical resource to use the default profile picture
+     * @param technicalResource the technical resource that will have its profile picture modified
+     */
+    void setDefaultProfilePicture(TechnicalResource technicalResource);
 
 }
