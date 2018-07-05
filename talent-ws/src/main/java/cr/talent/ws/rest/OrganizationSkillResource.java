@@ -58,8 +58,7 @@ public class OrganizationSkillResource {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
 
-        SkillCategory skillCategory =
-                this.skillCategoryService.findById(skillCategoryId);
+        SkillCategory skillCategory = this.skillCategoryService.findById(skillCategoryId);
 
         if(skillCategory == null)
             return Response.status(Response.Status.NOT_FOUND).build();

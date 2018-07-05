@@ -116,7 +116,14 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         Set<LeadPosition> leadPositions = new HashSet<>();
         leadPositions.add(leadPosition);
 
+        ProjectEvent projectEvent = new ProjectEvent();
+        projectEvent.setStartDate(startDate);
+        projectEvent.setEventType(ProjectEventType.ON_HOLD);
+        projectEvent.setProject(project);
+        this.projectEventDao.create(projectEvent);
+
         project.setLeadHistory(leadPositions);
+        project.setcurrentState(projectEvent);
         projectDao.update(project);
 
         return project;

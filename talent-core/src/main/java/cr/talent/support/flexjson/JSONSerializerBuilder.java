@@ -469,10 +469,6 @@ public class JSONSerializerBuilder {
         excludes.addAll(getGlobalExcludes());
         excludes.add("*.class");
 
-        tempIncludes.add("state");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(ProjectEvent.class, "", tempIncludes));
-
-        tempIncludes = new LinkedList<>();
         tempIncludes.add("name");
         tempIncludes.add("description");
         tempIncludes.add("startDate");
@@ -480,6 +476,7 @@ public class JSONSerializerBuilder {
         tempIncludes.add("jiraLink");
         tempIncludes.add("confluenceLink");
         tempIncludes.add("versionControlLink");
+        tempIncludes.add("state");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
