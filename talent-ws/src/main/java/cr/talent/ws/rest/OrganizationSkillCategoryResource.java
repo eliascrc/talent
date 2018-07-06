@@ -15,7 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource with a POST endpoint that manages an organization skillCategorys.
+ * Resource with a POST endpoint that manages an organization skillCategories.
  *
  * @author Otto Mena
  */
@@ -36,8 +36,8 @@ public class OrganizationSkillCategoryResource {
      * @param skillCategoryId the skillCategory's name.
      * @return 200 if the organization skillCategory is correctly deleted,
      *          400 if any of the parameters are null or empty strings,
-     *          404 if the unique identifier does not belong to any organization,
-     *          409 if the organization skillCategory has already been created within the organization.
+     *          404 if the unique identifier does not belong to any organization, or the skill category does not exist,
+     *          or the skill category does not belong to the organization.
      */
     @POST
     @Path("/delete")
@@ -63,7 +63,6 @@ public class OrganizationSkillCategoryResource {
             return Response.ok().build();
 
         } catch (SkillCategoryOfAnotherOrganizationException e) {
-            // An organization skillCategory should always have an organization associated
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
