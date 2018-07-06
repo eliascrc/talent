@@ -25,6 +25,7 @@ public class SignUpConfirmationEmailServiceTest {
         SignUpConfirmationEmailService signUpConfirmationEmailService = new SignUpConfirmationEmailServiceImpl();
         EmailSenderService emailSenderService = mock(EmailSenderService.class);
         SignUpConfirmationMessage signUpConfirmationMessage = mock(SignUpConfirmationMessage.class);
+        when(signUpConfirmationMessage.getConfirmationCode()).thenReturn("000000");
         TechnicalResource technicalResource = mock(TechnicalResource.class);
         String talentEmail = "talent.cr.service@gmail.com";
 
