@@ -2,17 +2,17 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
+import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
 import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 /**
@@ -63,6 +63,24 @@ public class OrganizationResource {
             return Response.status(Response.Status.CONFLICT).
                     entity("NonExistentUserWithNullOrganization").build();
         }
+    }
+
+    /**
+     *  Receives the request for getting the basic information for the organization of the logged in user.
+     *
+     * @return 200 if the organization is correctly returned,
+     *  403 if the user has no organization associated.
+     */
+    @GET
+    @Path("/get")
+    public Response getOrganizationBasicInformation() {
+
+        Organization organization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
+
+        if (organization == null)
+            return Response.status(Response.Status.FORBIDDEN).build();
+
+        return Response.ok().entity(JSONSerializerBuilder.getOrganizationSerializer().serialize(organization)).build();
     }
 
 }

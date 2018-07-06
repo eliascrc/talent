@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Class that represents an organization logo within the Talent system.
@@ -17,16 +18,16 @@ public class OrganizationLogo extends Image {
     /**
      * Organization that owns the logo.
      */
-    @OneToOne(mappedBy = "logo")
-    private Organization organization;
+    @OneToMany(mappedBy = "logo")
+    private Set<Organization> organizations;
 
     public OrganizationLogo (){}
 
-    public Organization getOrganization() {
-        return organization;
+    public Set<Organization> getOrganization() {
+        return organizations;
     }
 
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
+    public void setOrganization(Set<Organization> organizations) {
+        this.organizations = organizations;
     }
 }

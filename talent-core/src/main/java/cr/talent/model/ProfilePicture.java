@@ -1,6 +1,7 @@
 package cr.talent.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Class that represents an profile picture within the Talent system.
@@ -17,16 +18,16 @@ public class ProfilePicture extends Image {
     /**
      * Technical resource that owns the profile picture.
      */
-    @OneToOne (mappedBy = "profilePicture")
-    private TechnicalResource technicalResource;
+    @OneToMany(mappedBy = "profilePicture")
+    private Set<TechnicalResource> technicalResources;
 
     public ProfilePicture (){}
 
-    public TechnicalResource getTechnicalResource() {
-        return technicalResource;
+    public Set<TechnicalResource> getTechnicalResource() {
+        return technicalResources;
     }
 
-    public void setTechnicalResource(TechnicalResource technicalResource) {
-        this.technicalResource = technicalResource;
+    public void setTechnicalResource(Set<TechnicalResource> technicalResources) {
+        this.technicalResources = technicalResources;
     }
 }

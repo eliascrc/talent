@@ -132,7 +132,7 @@
 		<projectEvent>
 			<startDate>15/12/2013</startDate>
 			<endDate></endDate>
-			<eventType>ON_HOLD</eventType>
+			<eventType>START</eventType>
 			<project>Talent!</project>
 			<organization>monkey-labs</organization>
 		</projectEvent>
@@ -1477,6 +1477,87 @@
 			<technicalResource>sophie.germain@example.com</technicalResource>
 			<startDate>8/8/2009</startDate>
 			<endDate>8/8/2010</endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
+			<technicalResource>marianaabellan4@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<technicalResource>renato.mainieri2110@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<technicalResource>eliascr98@outlook.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<technicalResource>majo.qbro@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>FE Developer</capabilityLevelCapability>
+			<technicalResource>jolesa97@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>Otmerk1@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>jo96cube@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>roleandroflores12@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
+		</technicalPosition>
+
+		<technicalPosition>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>daniel.montesdeocab@gmail.com</technicalResource>
+			<startDate>8/8/2015</startDate>
+			<endDate></endDate>
 		</technicalPosition>
 
 	</technicalPositions>

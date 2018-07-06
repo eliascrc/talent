@@ -1,5 +1,6 @@
 package cr.talent.core.organization.service.impl;
 
+import cr.talent.core.image.organizationLogo.service.OrganizationLogoService;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.dao.impl.HibernateOrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
@@ -38,9 +39,11 @@ public class OrganizationServiceTest {
     public void testCreateCall() {
         OrganizationDao organizationDao = mock(OrganizationDao.class);
         Organization organization = mock(Organization.class);
+        OrganizationLogoService organizationLogoService = mock(OrganizationLogoService.class);
         OrganizationService organizationService = new OrganizationServiceImpl();
 
         ReflectionTestUtils.setField(organizationService, "crudDao", organizationDao);
+        ReflectionTestUtils.setField(organizationService, "organizationLogoService", organizationLogoService);
         organizationService.create(organization);
 
         verify(organizationDao, times(1)).create(organization);

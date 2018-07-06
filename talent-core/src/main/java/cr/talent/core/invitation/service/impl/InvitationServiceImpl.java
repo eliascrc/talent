@@ -62,11 +62,11 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
     }
 
     /**
-     * @see cr.talent.core.invitation.service.InvitationService#createInvitations(String, Organization)
+     * @see cr.talent.core.invitation.service.InvitationService#createInvitations(TechnicalResource, String, Organization)
      */
     @Override
     @SuppressWarnings("unchecked")
-    public void createInvitations(String invitations, Organization organization) {
+    public void createInvitations(TechnicalResource technicalResource, String invitations, Organization organization) {
         final String invitationLimitReachedMsg = "The limit of invitations available for the organization has been reached.";
         final String alreadyRegisteredUserMsg = "The email for the invitation is already registered in the organization.";
         final String emptyDestinationEmailMsg = "One of the emails passed to the service is empty.";
@@ -134,8 +134,10 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
             Invitation newInvitation = new Invitation();
             newInvitation.setOrganization(organization);
             newInvitation.setEmail(email);
-            newInvitation.setFirstName(firstName);
-            newInvitation.setLastName(lastName);
+            newInvitation.setInvitedResourceFirstName(firstName);
+            newInvitation.setInvitedResourceLastName(lastName);
+            newInvitation.setInviterResourceFirstName(technicalResource.getFirstName());
+            newInvitation.setInviterResourceLastName(technicalResource.getLastName());
 
             String token = UUID.randomUUID().toString();
             newInvitation.setToken(token);
@@ -172,8 +174,8 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         Invitation invitation = this.invitationDao.findInvitationByToken(token); // get the invitation
 
         TechnicalResource technicalResource = new TechnicalResource(); // build the technical resource
-        technicalResource.setFirstName(invitation.getFirstName());
-        technicalResource.setLastName(invitation.getLastName());
+        technicalResource.setFirstName(invitation.getInvitedResourceFirstName());
+        technicalResource.setLastName(invitation.getInvitedResourceLastName());
         technicalResource.setUsername(invitation.getEmail());
         technicalResource.setNickname(nickname);
         technicalResource.setPassword(password);
