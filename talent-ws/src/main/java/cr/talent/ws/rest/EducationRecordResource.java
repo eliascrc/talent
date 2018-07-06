@@ -5,6 +5,7 @@ import cr.talent.core.security.technicalResource.service.TechnicalResourceServic
 import cr.talent.model.EducationRecord;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -35,11 +36,11 @@ public class EducationRecordResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEducationRecords(@QueryParam("technicalResourceId") String technicalResourceId) {
-        TechnicalResource loggedInUser = SecurityUtils.getLoggedInTechnicalResource();
+        TechnicalResource loggedInTechnicalResource = SecurityUtils.getLoggedInTechnicalResource();
 
         TechnicalResource technicalResource = technicalResourceService.findById(technicalResourceId);
 
-        if (technicalResource == null)
+        if (technicalResource == null || !technicalResource.getOrganization().equals(loggedInTechnicalResource.getOrganization()))
             return Response.status(Response.Status.NOT_FOUND).build();
 
 
@@ -48,8 +49,8 @@ public class EducationRecordResource {
         if (educationRecords == null || educationRecords.size() == 0)
             return Response.noContent().build();
 
-
-        return null;
+        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceEducationRecordsSerializer()
+                        .serialize(educationRecords)).build();
     }
 
 }
