@@ -24,7 +24,7 @@ import java.util.Set;
  */
 @Component
 @Scope("request")
-@Path("/educationRecord")
+@Path("technicalResource/educationRecord")
 public class EducationRecordResource {
 
     @Autowired
@@ -33,7 +33,16 @@ public class EducationRecordResource {
     @Autowired
     TechnicalResourceService technicalResourceService;
 
+    /**
+     * Endpoint that returns the information of a technical resource regarding education records
+     *
+     * @param technicalResourceId the id of the technical resource of whom we want their education records
+     * @return  404 if the resource was not found or if they belong to another organization
+     *          204 if the resource has no education records
+     *          200 and a JSON with the education records information of the resource if the request is successful
+     */
     @GET
+    @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getEducationRecords(@QueryParam("technicalResourceId") String technicalResourceId) {
         TechnicalResource loggedInTechnicalResource = SecurityUtils.getLoggedInTechnicalResource();
@@ -46,7 +55,7 @@ public class EducationRecordResource {
 
         Set<EducationRecord> educationRecords = technicalResource.getEducationRecords();
 
-        if (educationRecords == null || educationRecords.size() == 0)
+        if (educationRecords == null || educationRecords.isEmpty())
             return Response.noContent().build();
 
         return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceEducationRecordsSerializer()

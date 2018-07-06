@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Builder class that holds several static factory methods for creating JSONSerializers with different include & exclude
@@ -520,15 +517,14 @@ public class JSONSerializerBuilder {
     }
 
     /*
-     * Gets a JSONSerializer to use in order to obtain the JSON of a User's active projects information, for the /ws/technicalResource
-     * /project/get web service.
+     * Gets a JSONSerializer to use in order to obtain the JSON of a User's education records
      *
      * @return the JSONSerializer to be used to serialize the project list.
      */
     public static JSONSerializer getTechnicalResourceEducationRecordsSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
-        List<String> tempIncludes = new LinkedList<>();
+        List<String> tempIncludes;
 
         excludes.addAll(getGlobalExcludes());
         excludes.add("*.class");
@@ -540,6 +536,7 @@ public class JSONSerializerBuilder {
         tempIncludes.add("title");
         tempIncludes.add("description");
 
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(EducationRecord.class, "", tempIncludes));
         serializer.setExcludes(excludes);
 
         // logs the creation of the serializer
