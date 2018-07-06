@@ -39,13 +39,15 @@ public class SignUpConfirmationEmailServiceImpl implements SignUpConfirmationEma
         Email email = new Email();
         email.setFrom(talentEmail);
         email.setTo(technicalResource.getUsername());
-        email.setSubject(SIGN_UP_CONFIRMATION_SUBJECT + " " + signUpConfirmationMessage.getConfirmationCode());
+        String confirmationEmail = signUpConfirmationMessage.getConfirmationCode();
+        confirmationEmail = confirmationEmail.substring(0, 3) + "-" + confirmationEmail.substring(3, 6);
+        email.setSubject(SIGN_UP_CONFIRMATION_SUBJECT + " " + confirmationEmail);
         email.setFileName(HTML_EMAIL_FILE);
 
-        Map< String, Object> model = new HashMap();
+        Map<String, Object> model = new HashMap();
         model.put("firstName", technicalResource.getFirstName());
         model.put("lastName", technicalResource.getLastName());
-        model.put("confirmationCode", signUpConfirmationMessage.getConfirmationCode());
+        model.put("confirmationCode", confirmationEmail);
 
         this.emailSenderService.sendEmail(email, model);
     }
