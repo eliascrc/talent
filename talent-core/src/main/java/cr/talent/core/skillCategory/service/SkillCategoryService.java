@@ -1,5 +1,6 @@
 package cr.talent.core.skillCategory.service;
 
+import cr.talent.model.Organization;
 import cr.talent.model.SkillCategory;
 import cr.talent.support.service.CrudService;
 
@@ -9,4 +10,11 @@ import cr.talent.support.service.CrudService;
  * @author Otto Mena
  */
 public interface SkillCategoryService extends CrudService<SkillCategory, String> {
+
+    /**Used to delete the skill category of an organization.
+     *
+     * @param organization the instance of the organization from which the skill category skill be deleted.
+     * @param skillCategory the instance of the skill category that will be deleted from the organization.
+     */
+    void deleteOrganizationSkillCategory (Organization organization, SkillCategory skillCategory);
 }
