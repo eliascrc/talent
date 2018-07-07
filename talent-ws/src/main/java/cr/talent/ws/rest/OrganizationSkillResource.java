@@ -2,10 +2,7 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.skillCategory.service.SkillCategoryService;
-import cr.talent.model.Skill;
-import cr.talent.model.SkillCategory;
-import cr.talent.model.SkillType;
-import cr.talent.model.TechnicalResource;
+import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedSkillException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
@@ -15,7 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Set;
 
 /**
  * Resource with a POST endpoint that creates a new skill for an organization.
@@ -73,4 +72,25 @@ public class OrganizationSkillResource {
         }
     }
 
+    /**
+     * Endpoint for retrieving the skills of the currently logged in technical resource
+     *
+     * @return a JSON with the organization's skills organized by skill category
+     */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("get")
+    public Response getOrganizationSkills() {
+        Organization organization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
+        if (organization == null)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        Set<SkillCategory> organizationSkillCategories = organization.getSkillCategories();
+        if (organizationSkillCategories == null || organizationSkillCategories.isEmpty())
+            return Response.noContent().build();
+
+
+
+        return null;
+    }
 }
