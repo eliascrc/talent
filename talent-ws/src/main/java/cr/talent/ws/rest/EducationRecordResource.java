@@ -53,7 +53,7 @@ public class EducationRecordResource {
             return Response.status(Response.Status.NOT_FOUND).build();
 
 
-        Set<EducationRecord> educationRecords = technicalResource.getEducationRecords();
+        Set<EducationRecord> educationRecords = this.educationRecordService.getEducationRecords(technicalResource);
 
         if (educationRecords == null || educationRecords.isEmpty())
             return Response.noContent().build();
