@@ -86,7 +86,7 @@ public class TechnicalResourceResource {
     }
 
     /**
-     * Post endpoint for editing the basic information of a technical resource
+     * Post endpoint used by organization administrators for editing the basic information of a technical resource
      * @param technicalResourceId the identifier of the technical resource
      * @param firstName the new first name for the technical resource
      * @param lastName the new last name for the technical resource
@@ -96,7 +96,7 @@ public class TechnicalResourceResource {
      *              an organization
      *          403 if the resource is not the administrator of the organization
      *          404 if no resource was found with the provided identifier or if the resource that was found belongs to
-     *              another organization
+     *              another organization (not found is used for security reasons)
      *          200 and a JSON with the user information if the request was successful
      */
     @POST
@@ -121,6 +121,7 @@ public class TechnicalResourceResource {
 
         TechnicalResource technicalResource = technicalResourceService.findById(technicalResourceId);
 
+        // Not found is returned if no technical resource was found or the one that was found belongs to another organization
         if (technicalResource == null || !loggedInTechnicalResource.getOrganization().equals(technicalResource.getOrganization()))
             return Response.status(Response.Status.NOT_FOUND).build();
 
