@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Builder class that holds several static factory methods for creating JSONSerializers with different include & exclude
@@ -252,6 +249,31 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("OrganizationSkill Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
+
+    /**
+     * Creates a basic serializer that returns a set of project skills.
+     *
+     * @return the JSONSerializer to be used to serialize a Skill.
+     */
+    public static JSONSerializer getProjectSkillsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        // Excludes all attributes of the SkillCategory class except its name
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "", tempIncludes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("ProjectSkill Serializer {} created", serializer.toString());
 
         return serializer;
     }
@@ -516,6 +538,34 @@ public class JSONSerializerBuilder {
         // logs the creation of the serializer
         logger.trace("Invitation Serializer {} created", serializer.toString());
 
+        return serializer;
+    }
+
+    /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of a User's education records
+     *
+     * @return the JSONSerializer to be used to serialize the project list.
+     */
+    public static JSONSerializer getTechnicalResourceEducationRecordsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("institution");
+        tempIncludes.add("startDate");
+        tempIncludes.add("endDate");
+        tempIncludes.add("title");
+        tempIncludes.add("description");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(EducationRecord.class, "", tempIncludes));
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Education record list Serializer {} created", serializer.toString());
         return serializer;
     }
 
