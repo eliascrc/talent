@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Resource that handles the retrieval of information related to technical resources.
+ * Resource that handles the requests related to technical resources.
  *
  * @author Daniel Montes de Oca
  */
