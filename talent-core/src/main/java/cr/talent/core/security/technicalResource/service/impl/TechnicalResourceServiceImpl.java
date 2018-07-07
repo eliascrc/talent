@@ -235,4 +235,15 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
         this.technicalPositionService.create(positionToBeAssigned);
     }
 
+    /**
+     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#editBasicInformation(TechnicalResource, String, String, String)
+     */
+    @Override
+    public void editBasicInformation(TechnicalResource technicalResource, String firstName, String lastName, String nickname) {
+        technicalResource.setFirstName(firstName);
+        technicalResource.setLastName(lastName);
+        technicalResource.setNickname(nickname);
+
+        this.update(technicalResource);
+    }
 }
