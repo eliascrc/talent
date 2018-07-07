@@ -4,6 +4,7 @@ import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.project.service.ProjectService;
 import cr.talent.model.Organization;
 import cr.talent.model.Project;
+import cr.talent.model.Skill;
 import cr.talent.model.TechnicalResource;
 import cr.talent.model.ProjectPosition;
 
@@ -170,6 +171,36 @@ public class ProjectResource {
 
         return Response.status(Response.Status.OK)
                 .entity(JSONSerializerBuilder.getProjectPositionSerializer().serialize(projectPositions)).build();
+    }
+
+    /**
+     * Returns every skill in the project.
+     *
+     * @param projectId the unique identifier of the Project entity, inherited from BasicEntity
+     * @return 400 if the string is either null or empty.
+     * 404 if the project does not exist in the logged user's organization.
+     * 204 if the project has no skills
+     * 200 of the information is returned successfully in JSON format.
+     */
+    @GET
+    @Path("/getSkills")
+    public Response getSkills(@QueryParam("projectId") String projectId) {
+        if (StringUtils.isEmpty(projectId))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        Project project = projectService.findById(projectId);
+
+        // Check if project exists
+        if (project == null || !project.getOrganization().equals(SecurityUtils.getLoggedInTechnicalResource().getOrganization()))
+            return Response.status(Response.Status.NOT_FOUND).entity("Project not found.").build();
+
+        // Check if there is any content to return
+        Set<Skill> skills = this.projectService.getSkills(project);
+        if (skills == null || skills.isEmpty())
+            return Response.status(Response.Status.NO_CONTENT).build();
+
+        return Response.status(Response.Status.OK)
+                .entity(JSONSerializerBuilder.getProjectSkillsSerializer().serialize(skills)).build();
     }
 
     /**
