@@ -31,7 +31,7 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
     @Override
     public boolean createWarning(TechnicalResource observer, TechnicalResource observee, Project project, String description) {
 
-        boolean isObserverRelatedToProject = false;
+        boolean isObserverAProjectLead = false;
         boolean isObserveeRelatedToProject = false;
         boolean isObserverAnAdministrator = observer.isAdministrator();
 
@@ -58,11 +58,11 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
             if (leadPosition.getLead().equals(observee)) {
                 isObserveeRelatedToProject = true;
             } else if(leadPosition.getLead().equals(observer)){
-                isObserverRelatedToProject = true;
+                isObserverAProjectLead = true;
             }
         }
 
-        if(isObserveeRelatedToProject && (isObserverRelatedToProject || isObserverAnAdministrator)) {
+        if(isObserveeRelatedToProject && (isObserverAProjectLead || isObserverAnAdministrator)) {
 
             Feedback warning = new Feedback();
             warning.setFeedbackType(FeedbackType.WARNING);
@@ -74,6 +74,6 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
 
         }
 
-        return isObserveeRelatedToProject && (isObserverRelatedToProject || isObserverAnAdministrator);
+        return isObserveeRelatedToProject && (isObserverAProjectLead || isObserverAnAdministrator);
     }
 }
