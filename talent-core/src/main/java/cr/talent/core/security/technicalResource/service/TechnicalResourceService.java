@@ -70,4 +70,12 @@ public interface TechnicalResourceService extends CrudService<TechnicalResource,
     void assignTechnicalPositionToTechnicalResource(String capability, String capabilityLevel,
                                                     Organization organization, TechnicalResource technicalResource, Date startDate);
 
+    /**
+     * Used to update the basic information of a technical resource
+     * @param technicalResource the technical resource that will have their information edited
+     * @param firstName the new first name for the technical resource
+     * @param lastName the new last name for the technical resource
+     * @param nickname the new nickname for the technical resource
+     */
+    void editBasicInformation(TechnicalResource technicalResource, String firstName, String lastName, String nickname);
 }

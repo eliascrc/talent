@@ -33,7 +33,7 @@ public class PasswordResetRequestTest {
         long entityVersion = 1l;
 
         // Inherited from User
-        String email = "qa.talent.cr@gmail.com";
+        String email = "talent.cr.service@gmail.com";
         boolean isValid = true;
 
         //Verify the constructor

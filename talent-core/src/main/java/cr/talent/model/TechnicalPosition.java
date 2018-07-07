@@ -29,7 +29,7 @@ public class TechnicalPosition extends Position {
      * The career path where it belongs.
      */
     @ManyToOne
-    @JoinColumn(name = "career_path_id", nullable = false)
+    @JoinColumn(name = "career_path_id")
     private CareerPath careerPath;
 
     /**

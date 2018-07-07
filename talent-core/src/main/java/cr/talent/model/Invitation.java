@@ -22,14 +22,26 @@ public class Invitation extends BasicEntity {
     /**
      * The first name of the person that is going to receive the invitation.
      */
-    @Column (name = "first_name", nullable = false)
-    private String firstName;
+    @Column (name = "invited_resource_first_name", nullable = false)
+    private String invitedResourceFirstName;
 
     /**
      * The last name of the person that is going to receive the invitation.
      */
-    @Column (name = "last_name", nullable = false)
-    private String lastName;
+    @Column (name = "invited_resource_last_name", nullable = false)
+    private String invitedResourceLastName;
+
+    /**
+     * The first name of the person that is making the invitation.
+     */
+    @Column (name = "inviter_resource_first_name", nullable = false)
+    private String inviterResourceFirstName;
+
+    /**
+     * The last name of the person that is making the invitation.
+     */
+    @Column (name = "inviter_resource_last_name", nullable = false)
+    private String inviterResourceLastName;
 
     /**
      * The security token to put in the URL.
@@ -77,20 +89,36 @@ public class Invitation extends BasicEntity {
         this.email = email;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getInvitedResourceFirstName() {
+        return invitedResourceFirstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setInvitedResourceFirstName(String invitedResourceFirstName) {
+        this.invitedResourceFirstName = invitedResourceFirstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getInvitedResourceLastName() {
+        return invitedResourceLastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setInvitedResourceLastName(String invitedResourceLastName) {
+        this.invitedResourceLastName = invitedResourceLastName;
+    }
+
+    public String getInviterResourceFirstName() {
+        return inviterResourceFirstName;
+    }
+
+    public void setInviterResourceFirstName(String inviterResourceFirstName) {
+        this.inviterResourceFirstName = inviterResourceFirstName;
+    }
+
+    public String getInviterResourceLastName() {
+        return inviterResourceLastName;
+    }
+
+    public void setInviterResourceLastName(String inviterResourceLastName) {
+        this.inviterResourceLastName = inviterResourceLastName;
     }
 
     public Organization getOrganization() {

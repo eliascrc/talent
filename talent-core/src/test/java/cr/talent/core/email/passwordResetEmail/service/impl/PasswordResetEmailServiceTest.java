@@ -27,7 +27,7 @@ public class PasswordResetEmailServiceTest {
         EmailSenderService emailSenderService = mock(EmailSenderService.class);
         PasswordResetRequest passwordResetRequest = mock(PasswordResetRequest.class);
         TechnicalResource technicalResource = mock(TechnicalResource.class);
-        String talentEmail = "qa.talent.cr@gmail.com";
+        String talentEmail = "talent.cr.service@gmail.com";
 
         ReflectionTestUtils.setField(passwordResetEmailService, "emailSenderService", emailSenderService);
         ReflectionTestUtils.setField(passwordResetEmailService, "talentEmail", talentEmail);

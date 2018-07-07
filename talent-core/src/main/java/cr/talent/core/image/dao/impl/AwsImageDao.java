@@ -23,7 +23,10 @@ public class AwsImageDao implements ImageDao{
 
     private static String CONTENT_TYPE = "image/jpeg";
 
-    @Autowired
+    /**
+     * Required is set to false so that the data importer can run without this dependency
+     */
+    @Autowired(required = false)
     private AmazonS3 s3Client;
 
     @Value("${talent.s3.bucket}")

@@ -10,4 +10,11 @@ import cr.talent.support.dao.CrudDao;
  */
 public interface OrganizationLogoDao extends CrudDao<OrganizationLogo, String> {
 
+    /**
+     * Finds an organization logo with a given link
+     * @param link the link of the organization logo
+     * @return the organization logo with the given link
+     */
+    OrganizationLogo findLogoByLink(String link);
+
 }
