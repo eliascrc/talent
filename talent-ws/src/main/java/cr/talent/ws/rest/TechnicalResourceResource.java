@@ -160,12 +160,20 @@ public class TechnicalResourceResource {
     }
 
     /**
-     * TODO documentation
+     * Returns a JSON representation of the received username's received feedback. Kudos are always returned, warnings
+     * are only returned if the user is looking at their own feedback or the observer is the lead of the warning's
+     * related project.
+     *
+     * @param technicalResourceEmail the email of the resource whose feedback will be returned
+     * @return 400 if the parameter is null or empty
+     *         404 if a user with that username could not be found
+     *         204 if the requested user has no feedback
+     *         200 if the JSON is sent correctly
      */
-    @POST
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/basicInformation/feedback/get")
-    public Response getFeedback(@FormParam("technicalResource") String technicalResourceEmail) {
+    @Path("/receivedFeedback/get")
+    public Response getFeedback(@QueryParam("technicalResource") String technicalResourceEmail) {
         if (StringUtils.isEmpty(technicalResourceEmail))
             return Response.status(Response.Status.BAD_REQUEST).build();
 
@@ -175,13 +183,18 @@ public class TechnicalResourceResource {
         TechnicalResource observee = this.technicalResourceService
                 .getTechnicalResourceByUsernameAndOrganizationIdentifier(technicalResourceEmail,
                         loggedInUser.getOrganization().getUniqueIdentifier());
+        if(observee == null)
+            return Response.status(Response.Status.NOT_FOUND).entity("Could not find technical resource "+technicalResourceEmail).build();
 
-        // Get the user making the request from security utils
+        // Get the user making the request from security utils, cannot be null
         TechnicalResource observer = this.technicalResourceService
                 .getTechnicalResourceByUsernameAndOrganizationIdentifier(loggedInUser.getUsername(),
                         loggedInUser.getOrganization().getUniqueIdentifier());
 
         Set<Feedback> feedback = this.technicalResourceService.getFeedback(observer,observee);
+
+        if(feedback==null || feedback.isEmpty())
+            return Response.status(Response.Status.NO_CONTENT).entity(technicalResourceEmail+" has not received any feedback.").build();
 
         String serializedFeedback = JSONSerializerBuilder.getFeedbackSerializer()
                 .serialize(feedback);

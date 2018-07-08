@@ -248,6 +248,8 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
      * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#getFeedback(TechnicalResource, TechnicalResource)
      */
     public Set<Feedback> getFeedback(TechnicalResource observer, TechnicalResource observee) {
+        if(observee.getReceivedFeedback().isEmpty())
+            return null;
 
         // If the user is looking at their own project, return all the feedback
         if (observer.equals(observee))
