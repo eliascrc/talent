@@ -571,7 +571,7 @@ public class JSONSerializerBuilder {
 
     /**
      * Creates a serializer that returns the id, firstName, lastName, technical position and profile picture in order to
-     * search them,
+     * search them.
      * @return
      */
     public static JSONSerializer getTechnicalResourceSearchSerializer() {

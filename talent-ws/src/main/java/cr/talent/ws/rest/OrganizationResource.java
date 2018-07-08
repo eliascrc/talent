@@ -85,9 +85,9 @@ public class OrganizationResource {
     }
 
     /**
-     * Returns the idr, first name, last name , technical position (name of capability and capability level) and profile
+     * Returns the id, first name, last name , technical position (name of capability and capability level) and profile
      * picture link of every resource in the logged user's organization.
-     * 
+     *
      * @return 200 with a json representation of the information above
      */
     @GET
