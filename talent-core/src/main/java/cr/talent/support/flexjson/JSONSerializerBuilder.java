@@ -619,7 +619,7 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
-    public static JSONSerializer getFeedbackSeriazlizer {
+    public static JSONSerializer getFeedbackSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes;
@@ -627,18 +627,16 @@ public class JSONSerializerBuilder {
         excludes.addAll(getGlobalExcludes());
         excludes.add("*.class");
 
+        // Exclude every attribute but description and feedback type
         tempIncludes = new LinkedList<>();
         tempIncludes.add("description");
         tempIncludes.add("feedbackType");
-        tempIncludes.add("endDate");
-        tempIncludes.add("title");
-        tempIncludes.add("description");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Feedback.class, "", tempIncludes));
 
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(EducationRecord.class, "", tempIncludes));
         serializer.setExcludes(excludes);
 
         // logs the creation of the serializer
-        logger.trace("Education record list Serializer {} created", serializer.toString());
+        logger.trace("Feedback Serializer {} created", serializer.toString());
         return serializer;
     }
 
