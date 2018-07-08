@@ -143,7 +143,7 @@ public class TechnicalResource extends User{
     private TwoStepVerification twoStepVerification;
 
     /**
-     * A list with the lead positions that the user has occupied in the organization.
+     * A list with the lead positions that the technical resource has occupied in the organization.
      */
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "lead")
     private Set<LeadPosition> leadPositions;

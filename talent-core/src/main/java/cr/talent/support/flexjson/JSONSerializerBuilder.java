@@ -619,6 +619,10 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    /**
+     * Creates a JSONSerializer with which to serialize a Feedback object, including its description and feedback type.
+     * @return
+     */
     public static JSONSerializer getFeedbackSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
