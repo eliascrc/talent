@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 /**
  * Resource that handles the requests related to technical resources.
  *
- * @author Daniel Montes de Oca
+ * @author Daniel Montes de Oca, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
@@ -153,6 +153,37 @@ public class TechnicalResourceResource {
 
         String serializedResource = JSONSerializerBuilder.getTechnicalResourceSerializer()
                 .serialize(loggedInTechnicalResource);
+
+        return Response.ok().entity(serializedResource).build();
+    }
+
+    /**
+     * TODO documentation
+     */
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/basicInformation/feedback/get")
+    public Response getFeedback(@FormParam("technicalResource") String technicalResourceEmail) {
+        if (StringUtils.isEmpty(technicalResourceEmail))
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        // Get the user whose kudos/warnings will be returned, using their username (received from the request)
+        // and organization identifier (obtained from the logged in user's organization)
+        TechnicalResource loggedInUser = SecurityUtils.getLoggedInTechnicalResource();
+        TechnicalResource observee = this.technicalResourceService
+                .getTechnicalResourceByUsernameAndOrganizationIdentifier(technicalResourceEmail,
+                        loggedInUser.getOrganization().getUniqueIdentifier());
+
+        // Get the user making the request from security utils
+        TechnicalResource observer = this.technicalResourceService
+                .getTechnicalResourceByUsernameAndOrganizationIdentifier(loggedInUser.getUsername(),
+                        loggedInUser.getOrganization().getUniqueIdentifier());
+
+        this.technicalResourceService.editBasicInformation(observee,
+                observee.getFirstName(), observee.getLastName(), nickname);
+
+        String serializedResource = JSONSerializerBuilder.getTechnicalResourceSerializer()
+                .serialize(observee);
 
         return Response.ok().entity(serializedResource).build();
     }

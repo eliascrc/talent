@@ -19,10 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Default implementation of the {@link TechnicalResourceService}
@@ -245,5 +242,47 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
         technicalResource.setNickname(nickname);
 
         this.update(technicalResource);
+    }
+
+    /**
+     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#getFeedback(TechnicalResource, TechnicalResource)
+     */
+    public Set<Feedback> getFeedback(TechnicalResource observer, TechnicalResource observee) {
+
+        // Warnings should be returned if the user is looking at their own profile
+        boolean returnWarnings = observer.equals(observee);
+
+        // Otherwise, warnings should also be returned if observer is the observee's lead in some project
+        if(!returnWarnings) {
+            // Iterate through observee's project positions
+            for(ProjectPositionHolder observeeProjectPosition: observee.getProjectPositions()) {
+
+                // For each of the observee's project positions, look iterate through the observer's lead positions
+                for(LeadPosition observerLeadPosition: observer.getLeadPositions()){
+
+                    // If any of the observer's active lead positions are in the observee's project positions, then
+                    // warnings should be returned
+                    if(observerLeadPosition.getActive() &&
+                            observerLeadPosition.getProject().equals(observeeProjectPosition.getProjectPosition().getProject())){
+                        returnWarnings = true;
+                        break;
+                    }
+                }
+                if(returnWarnings)
+                    break;
+            }
+        }
+
+        // Return both kudos and warnings if warnings should be returned
+        if(returnWarnings)
+            return observee.getReceivedFeedback();
+
+        // If warnings should not be returned, build a set with only the kudos
+        HashSet<Feedback> receivedKudos = new HashSet<>();
+        for(Feedback feedback:observee.getReceivedFeedback())
+            if(feedback.getFeedbackType()==FeedbackType.KUDO)
+                receivedKudos.add(feedback);
+
+        return receivedKudos;
     }
 }

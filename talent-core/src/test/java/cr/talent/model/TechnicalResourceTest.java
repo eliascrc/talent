@@ -95,9 +95,9 @@ public class TechnicalResourceTest {
         technicalResource.setSkills(new HashSet<>());
         technicalResource.setEducationRecords(new HashSet<>());
         technicalResource.setProjectPositions(new HashSet<>());
-        technicalResource.setFeedbackMade(new HashSet<>());
+        technicalResource.setReceivedFeedback(new HashSet<>());
         technicalResource.setEmergencyContacts(new HashSet<>());
-        technicalResource.setFeedbackGiven(new HashSet<>());
+        technicalResource.setGivenFeedback(new HashSet<>());
         technicalResource.setLeadPositions(new HashSet<>());
 
 
@@ -134,9 +134,9 @@ public class TechnicalResourceTest {
         assertNotNull(technicalResource.getAuthorities());
         assertNotNull(technicalResource.getEducationRecords());
         assertNotNull(technicalResource.getProjectPositions());
-        assertNotNull(technicalResource.getFeedbackMade());
+        assertNotNull(technicalResource.getReceivedFeedback());
         assertNotNull(technicalResource.getEmergencyContacts());
-        assertNotNull(technicalResource.getFeedbackGiven());
+        assertNotNull(technicalResource.getGivenFeedback());
         assertNotNull(technicalResource.getSkills());
         assertNotNull(technicalResource.getLeadPositions());
 
