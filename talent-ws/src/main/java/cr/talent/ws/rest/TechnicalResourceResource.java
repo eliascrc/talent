@@ -1,6 +1,7 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+import cr.talent.model.Feedback;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Set;
 
 /**
  * Resource that handles the requests related to technical resources.
@@ -179,13 +181,12 @@ public class TechnicalResourceResource {
                 .getTechnicalResourceByUsernameAndOrganizationIdentifier(loggedInUser.getUsername(),
                         loggedInUser.getOrganization().getUniqueIdentifier());
 
-        this.technicalResourceService.editBasicInformation(observee,
-                observee.getFirstName(), observee.getLastName(), nickname);
+        Set<Feedback> feedback = this.technicalResourceService.getFeedback(observer,observee);
 
-        String serializedResource = JSONSerializerBuilder.getTechnicalResourceSerializer()
-                .serialize(observee);
+        String serializedFeedback = JSONSerializerBuilder.getFeedbackSerializer()
+                .serialize(feedback);
 
-        return Response.ok().entity(serializedResource).build();
+        return Response.ok().entity(serializedFeedback).build();
     }
 
 }

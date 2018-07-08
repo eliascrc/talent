@@ -249,40 +249,31 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
      */
     public Set<Feedback> getFeedback(TechnicalResource observer, TechnicalResource observee) {
 
-        // Warnings should be returned if the user is looking at their own profile
-        boolean returnWarnings = observer.equals(observee);
+        // If the user is looking at their own project, return all the feedback
+        if (observer.equals(observee))
+            return observer.getReceivedFeedback();
 
-        // Otherwise, warnings should also be returned if observer is the observee's lead in some project
-        if(!returnWarnings) {
-            // Iterate through observee's project positions
-            for(ProjectPositionHolder observeeProjectPosition: observee.getProjectPositions()) {
+        // Otherwise, return only the warnings whose related project's lead is observer
 
-                // For each of the observee's project positions, look iterate through the observer's lead positions
-                for(LeadPosition observerLeadPosition: observer.getLeadPositions()){
+        // Build a list of the observer's active lead positions, to avoid iterating through the inactive ones
+        HashSet<LeadPosition> observerActiveLeadPositions = new HashSet<>();
+        for(LeadPosition observerLeadPosition : observer.getLeadPositions())
+            if(observerLeadPosition.getActive())
+                observerActiveLeadPositions.add(observerLeadPosition);
 
-                    // If any of the observer's active lead positions are in the observee's project positions, then
-                    // warnings should be returned
-                    if(observerLeadPosition.getActive() &&
-                            observerLeadPosition.getProject().equals(observeeProjectPosition.getProjectPosition().getProject())){
-                        returnWarnings = true;
-                        break;
-                    }
-                }
-                if(returnWarnings)
-                    break;
-            }
+        // Get the feedback that the observer has the permission to see
+        HashSet<Feedback> feedbacks = new HashSet<>();
+        for(Feedback feedback : observee.getReceivedFeedback()) {
+            // Kudos can be seen by anybody
+            if(feedback.getFeedbackType()==FeedbackType.KUDO)
+                feedbacks.add(feedback);
+
+            // Warnings can only be seen by the related project's lead
+            else for(LeadPosition observerActiveLeadPosition : observerActiveLeadPositions)
+                if(observerActiveLeadPosition.getProject().equals(feedback.getRelatedProject()))
+                    feedbacks.add(feedback);
         }
 
-        // Return both kudos and warnings if warnings should be returned
-        if(returnWarnings)
-            return observee.getReceivedFeedback();
-
-        // If warnings should not be returned, build a set with only the kudos
-        HashSet<Feedback> receivedKudos = new HashSet<>();
-        for(Feedback feedback:observee.getReceivedFeedback())
-            if(feedback.getFeedbackType()==FeedbackType.KUDO)
-                receivedKudos.add(feedback);
-
-        return receivedKudos;
+        return feedbacks;
     }
 }

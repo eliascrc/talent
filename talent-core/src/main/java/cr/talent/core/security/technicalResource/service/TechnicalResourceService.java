@@ -86,7 +86,7 @@ public interface TechnicalResourceService extends CrudService<TechnicalResource,
      * technical resource's profile.
      * @param observer the technical resource obtaining the information
      * @param observee the technical resource whose received feedback is being obtained
-     * @return a Set with all the obsewrvee's feedback if the observer is equal to observee or their lead in any project
+     * @return a Set with all the obsewrvee's feedback if the observer is equal to observee or the warning's related project's lead
      *         a Set with only the observee's kudos otherwise.
      */
     Set<Feedback> getFeedback(TechnicalResource observer, TechnicalResource observee);

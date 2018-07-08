@@ -569,4 +569,27 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    public static JSONSerializer getFeedbackSeriazlizer {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("description");
+        tempIncludes.add("feedbackType");
+        tempIncludes.add("endDate");
+        tempIncludes.add("title");
+        tempIncludes.add("description");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(EducationRecord.class, "", tempIncludes));
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Education record list Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
 }
