@@ -75,7 +75,9 @@ public class OrganizationSkillResource {
     /**
      * Endpoint for retrieving the skills of the currently logged in technical resource
      *
-     * @return a JSON with the organization's skills organized by skill category
+     * @return  400 if the logged in technical resource does not belong to an organization
+     *          204 if the organization has no skill categories
+     *          200 and a JSON with the organization's skills organized by skill category if the request is successful
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,12 +87,13 @@ public class OrganizationSkillResource {
         if (organization == null)
             return Response.status(Response.Status.BAD_REQUEST).build();
 
+        organization = this.organizationService.findById(organization.getId()); // used to avoid LazyInitializationException
         Set<SkillCategory> organizationSkillCategories = organization.getSkillCategories();
         if (organizationSkillCategories == null || organizationSkillCategories.isEmpty())
             return Response.noContent().build();
 
-
-
-        return null;
+        return Response.ok()
+                .entity(skillCategoryService.getSerializedSkillCategories(organization))
+                .build();
     }
 }
