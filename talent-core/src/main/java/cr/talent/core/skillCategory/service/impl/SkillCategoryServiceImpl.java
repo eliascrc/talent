@@ -39,6 +39,7 @@ public class SkillCategoryServiceImpl extends CrudServiceImpl<SkillCategory, Str
         for (SkillCategory organizationSkillCategory : organization.getSkillCategories()) {
             SkillCategory skillCategory = new SkillCategory();
             skillCategory.setName(organizationSkillCategory.getName());
+            skillCategory.setId(organizationSkillCategory.getId());
 
             Set<Skill> skillCategorySkills = new HashSet<>();
             for (Skill skill : organizationSkillCategory.getSkills()) {
