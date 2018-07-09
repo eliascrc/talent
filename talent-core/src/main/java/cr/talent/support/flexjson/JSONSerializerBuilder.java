@@ -567,9 +567,9 @@ public class JSONSerializerBuilder {
 
 
     /**
-     * Gets a JSONSerializer to use in order to obtain the JSON of a User's education records
+     * Gets a JSONSerializer to use in order to obtain the JSON of a user's education records
      *
-     * @return the JSONSerializer to be used to serialize the project list.
+     * @return the JSONSerializer to be used to serialize the list of education records
      */
     public static JSONSerializer getTechnicalResourceEducationRecordsSerializer() {
         JSONSerializer serializer = getBasicSerializer();
@@ -641,6 +641,35 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("TechnicalResourceSearch Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of an organization's skills, organized by skill category
+     *
+     * @return the JSONSerializer to be used to serialize the skills list, organized by skill category
+     */
+    public static JSONSerializer getOrganizationSkillsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("skillType");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "skills", tempIncludes));
+
+        tempIncludes.add("name");
+        tempIncludes.add("skills");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(SkillCategory.class, "", tempIncludes));
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Skills list Serializer {} created", serializer.toString());
         return serializer;
     }
 
