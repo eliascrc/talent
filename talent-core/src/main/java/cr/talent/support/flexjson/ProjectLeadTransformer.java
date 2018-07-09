@@ -29,7 +29,6 @@ public class ProjectLeadTransformer extends AbstractTransformer {
      *
      * @param object
      */
-
     public void transform(Object object) {
 
         Set<LeadPosition> projectLeadHistory;
@@ -53,6 +52,9 @@ public class ProjectLeadTransformer extends AbstractTransformer {
             this.writeProjectLeadJson(projectLead);
     }
 
+    /**
+     * Writes a comma (if this field isn't the first one in an array) and the project lead field name
+     */
     private void writeJsonStart() {
         // Write a comma if necessary
         if (!getContext().peekTypeContext().isFirst())
@@ -62,6 +64,9 @@ public class ProjectLeadTransformer extends AbstractTransformer {
         getContext().writeName(projectLeadField);
     }
 
+    /**
+     * Writes the project lead with the null value
+     */
     private void writeNull() {
         writeJsonStart();
 
@@ -69,6 +74,11 @@ public class ProjectLeadTransformer extends AbstractTransformer {
         getContext().write("null");
     }
 
+    /**
+     * Writes the project lead as a json object with id, username, first name and last name as values
+     *
+     * @param projectLead the technical resource to be written in the json
+     */
     private void writeProjectLeadJson(TechnicalResource projectLead) {
         writeJsonStart();
 
@@ -100,7 +110,7 @@ public class ProjectLeadTransformer extends AbstractTransformer {
 
     /**
      * Set this to true in order to tell flexjson that we will generate the json for the project position
-     * This allows us to change the property's name from 'object' to projectLead
+     * This allows us to change the property's name from 'leadHistory' to projectLead
      */
     @Override
     public Boolean isInline() {
