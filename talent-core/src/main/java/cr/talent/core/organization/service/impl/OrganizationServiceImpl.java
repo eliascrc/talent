@@ -164,4 +164,30 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         return super.create(organization);
     }
 
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#createSkillCategory(String, Organization)
+     */
+    @Override
+    public SkillCategory createSkillCategory(String skillCategoryName, Organization organization) {
+        String alreadyCreatedSkillCategoryExceptionMsg = "That skill category is already created within the organization";
+
+        Set<SkillCategory> skillCategories = organization.getSkillCategories();
+
+        for (SkillCategory skillCategory1 : skillCategories) {
+            if (skillCategory1.getName().equals(skillCategoryName))
+                throw new AlreadyCreatedSkillCategoryException(alreadyCreatedSkillCategoryExceptionMsg);
+        }
+
+        SkillCategory skillCategory = new SkillCategory();
+        skillCategory.setName(skillCategoryName);
+        skillCategory.setOrganization(organization);
+        this.skillCategoryDao.create(skillCategory);
+
+        skillCategories.add(skillCategory);
+        organization.setSkillCategories(skillCategories);
+        this.organizationDao.update(organization);
+
+        return skillCategory;
+    }
+
 }

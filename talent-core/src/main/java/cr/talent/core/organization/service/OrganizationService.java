@@ -1,7 +1,6 @@
 package cr.talent.core.organization.service;
 
 import cr.talent.model.*;
-import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.service.CrudService;
 
 import java.util.Set;
@@ -43,13 +42,21 @@ public interface OrganizationService extends CrudService<Organization, String> {
     Set<Invitation> getValidInvitations(Organization organization);
 
     /**
+     * Creates a new skill category for an organization.
+     * @param skillCategoryName the new skill name.
+     * @param organization the organization to create an invite link for.
+     * @return the invite link of the organization.
+     */
+    SkillCategory createSkillCategory(String skillCategoryName, Organization organization);
+
+    /**
      * Creates a new skill for an organization.
      * @param skillCategory the skill category to update.
      * @param skillName the new skill name.
      * @param skillType the skill type.
      * @param organization the organization of the skill category.
-     *
      * @return the newly created skill
      */
     Skill createSkill(SkillCategory skillCategory, String skillName, SkillType skillType, Organization organization);
+
 }
