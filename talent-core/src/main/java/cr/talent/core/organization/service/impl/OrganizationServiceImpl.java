@@ -15,7 +15,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import javax.transaction.Transactional;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -133,6 +136,26 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     public String create(Organization organization) {
         this.organizationLogoService.setDefaultLogo(organization);
         return super.create(organization);
+    }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#editBasicInformation(Organization, TechnicalResource, String, String, InputStream)
+     */
+    @Override
+    public void editBasicInformation(Organization organization, TechnicalResource administrator, String name, String uniqueIdentifier, InputStream logo) {
+
+        // The user editing the information must be an administrator within the organization
+        //if(!administrator.isAdministrator())
+            // TODO create runtime exception
+
+        // For each attribute, determine if it is null/empty, set it if not
+        if(!StringUtils.isEmpty(name))
+            organization.setName(name);
+
+        if(!StringUtils.isEmpty(uniqueIdentifier))
+            organization.setUniqueIdentifier(uniqueIdentifier);
+
+
     }
 
 }

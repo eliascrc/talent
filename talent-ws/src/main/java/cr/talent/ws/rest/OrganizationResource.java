@@ -1,7 +1,9 @@
 package cr.talent.ws.rest;
 
+import com.sun.jersey.multipart.FormDataParam;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
@@ -9,21 +11,25 @@ import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.io.InputStream;
 
 /**
  * Resource with a POST endpoint that creates a new organization
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Fabián Roberto Leandro
  */
 @Component
 @Scope("request")
 @Path("/organization")
 public class OrganizationResource {
+
+    private static long MAX_FILE_SIZE = 5242880;
 
     @Autowired
     private OrganizationService organizationService;
@@ -81,6 +87,29 @@ public class OrganizationResource {
             return Response.status(Response.Status.FORBIDDEN).build();
 
         return Response.ok().entity(JSONSerializerBuilder.getOrganizationSerializer().serialize(organization)).build();
+    }
+
+    /**
+     * TODO documentation
+     */
+    @POST
+    @Path("/edit")
+    public Response editOrganizationBasicInformation(
+            @FormParam("name") String name,
+            @FormParam("uniqueIdentifier") String uniqueIdentifier,
+            @FormDataParam("logo") InputStream logo,
+            @HeaderParam("content-length") long contentLength){
+        if(contentLength >= MAX_FILE_SIZE)
+            return Response.status(Response.Status.BAD_REQUEST).build();
+
+        // Get the logged in user
+        TechnicalResource organizationAdministrator = SecurityUtils.getLoggedInTechnicalResource();
+
+        // Get the organization to be edited
+        Organization organization = this.organizationService
+                .getOrganizationByUniqueIdentifier(organizationAdministrator.getOrganization().getUniqueIdentifier());
+
+        this.organizationService.editBasicInformation(organization,organizationAdministrator,name,uniqueIdentifier,logo);
     }
 
 }

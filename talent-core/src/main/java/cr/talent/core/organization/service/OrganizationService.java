@@ -2,9 +2,11 @@ package cr.talent.core.organization.service;
 
 import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.service.CrudService;
 
+import java.io.InputStream;
 import java.util.Set;
 
 /**
@@ -42,4 +44,16 @@ public interface OrganizationService extends CrudService<Organization, String> {
      * @return a set of invitations, or an empty set if no invitations were found.
      */
     Set<Invitation> getValidInvitations(Organization organization);
+
+    /**
+     * Provides the business logic to change an organization's information including name, organization identifier and
+     * logo.
+     * @param organization      the organization to be edited
+     * @param administrator     the user making the changes
+     * @param name              the organization's new name
+     * @param uniqueIdentifier  the organization's new unique identifier
+     * @param logo              the organization's new logo
+     */
+    void editBasicInformation(Organization organization, TechnicalResource administrator, String name,
+                              String uniqueIdentifier, InputStream logo);
 }
