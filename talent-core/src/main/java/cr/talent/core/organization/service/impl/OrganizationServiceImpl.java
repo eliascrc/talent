@@ -3,12 +3,11 @@ package cr.talent.core.organization.service.impl;
 import cr.talent.core.image.organizationLogo.service.OrganizationLogoService;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.core.skill.dao.SkillDao;
+import cr.talent.core.skillCategory.dao.SkillCategoryDao;
 import cr.talent.model.*;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
-import cr.talent.support.SecurityUtils;
-import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
-import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
-import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
+import cr.talent.support.exceptions.*;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,15 +15,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Default implementation of the {@link cr.talent.core.organization.service.OrganizationService}
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Josue Cubero
  */
 @Service("organizationService")
 @Transactional
@@ -40,6 +36,11 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     private TechnicalResourceService technicalResourceService;
 
     @Autowired
+    private SkillDao skillDao;
+
+    @Autowired
+    private SkillCategoryDao skillCategoryDao;
+
     private OrganizationLogoService organizationLogoService;
 
     public void init() {
@@ -121,6 +122,34 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     public Set<Invitation> getValidInvitations(Organization organization) {
         List<Invitation> invitationList = this.organizationDao.findValidInvitations(organization.getUniqueIdentifier());
         return new HashSet<>(invitationList);
+    }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#createSkill(SkillCategory, String, SkillType, Organization)
+     */
+    @Override
+    public Skill createSkill(SkillCategory skillCategory, String skillName, SkillType skillType, Organization organization) {
+        final String alreadyCreatedSkillMsg = "The given skill name is already created within the given skill category.";
+
+        Set<Skill> skills = skillCategory.getSkills();
+
+        for (Skill skill1 : skills) {
+            if (skill1.getName().equals(skillName))
+                throw new AlreadyCreatedSkillException(alreadyCreatedSkillMsg);
+        }
+
+        Skill skill = new Skill();
+        skill.setName(skillName);
+        skill.setCategory(skillCategory);
+        skill.setSkillType(skillType);
+        skill.setOrganization(organization);
+        this.skillDao.create(skill);
+
+        skills.add(skill);
+        skillCategory.setSkills(skills);
+        this.skillCategoryDao.update(skillCategory);
+
+        return skill;
     }
 
     /**
