@@ -216,7 +216,7 @@ public class JSONSerializerBuilder {
         serializer.transform(new BooleanTransformer(), "isAdministrator");
 
         // logs the creation of the serializer
-        logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        logger.trace("TechnicalResource Serializer {} created", serializer.toString());
         return serializer;
     }
 
@@ -591,6 +591,56 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("Education record list Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a serializer that returns the id, firstName, lastName, technical position and profile picture in order to
+     * search them.
+     * @return
+     */
+    public static JSONSerializer getTechnicalResourceSearchSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+
+        // Add firstName, lastName, profilePicture and technicalPosition
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("profilePicture");
+        tempIncludes.add("technicalPosition");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
+
+        // Add the profile picture's link
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("link");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Image.class, "profilePicture", tempIncludes));
+
+        // Add the capability level from the technical position
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("capabilityLevel");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalPosition.class, "technicalPosition", tempIncludes));
+
+        // Add the capability levels name and capability from the capability level
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("capability");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class,
+                "technicalPosition.capabilityLevel", tempIncludes));
+
+        // Add the capability's name from the capability
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class,
+                "technicalPosition.capabilityLevel.capability", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("TechnicalResourceSearch Serializer {} created", serializer.toString());
         return serializer;
     }
 

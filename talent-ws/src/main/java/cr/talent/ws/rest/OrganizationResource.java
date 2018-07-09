@@ -2,6 +2,7 @@ package cr.talent.ws.rest;
 
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
+import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
@@ -83,4 +84,23 @@ public class OrganizationResource {
         return Response.ok().entity(JSONSerializerBuilder.getOrganizationSerializer().serialize(organization)).build();
     }
 
+    /**
+     * Returns the id, first name, last name , technical position (name of capability and capability level) and profile
+     * picture link of every resource in the logged user's organization.
+     *
+     * @return 200 with a json representation of the information above
+     */
+    @GET
+    @Path("technicalResource/getAll")
+    public Response getAllTechnicalResources(){
+
+        // Get the logged user's organization via SecurityUtils
+        // Cannot be null because SpringSecurity makes sure the user must be authenticated to use this endpoint
+        Organization lazyLoadedOrganization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
+
+        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(lazyLoadedOrganization.getUniqueIdentifier());
+
+        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchSerializer()
+                .serialize(organization.getResources())).build();
+    }
 }
