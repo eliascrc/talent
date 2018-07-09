@@ -97,7 +97,6 @@ public class FeedbackResource {
         if(observee == null || project == null)
             return Response.status(Response.Status.NOT_FOUND).build(); //The observee and the related project should exist
 
-        this.feedbackService.createKudo(observer, observee, project, description);
         if(!this.feedbackService.createKudo(observer, observee, project, description))
             return Response.status(Response.Status.CONFLICT).build(); //The observee or the observer were not related to the project
 

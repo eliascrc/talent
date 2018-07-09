@@ -52,16 +52,20 @@ public class FeedbackServiceImpl extends CrudServiceImpl<Feedback, String> imple
             }
         }
 
-        // iterate though lead positions
-        Iterator<LeadPosition> leadPositionIterator = project.getLeadHistory().iterator();
-        LeadPosition leadPosition;
-        while(leadPositionIterator.hasNext()){
-            leadPosition = leadPositionIterator.next();
-            if (leadPosition.getLead().equals(observee)) {
-                isObserveeRelatedToProject = true;
-            } else if(leadPosition.getLead().equals(observer)){
-                isObserverRelatedToProject = true;
+        if(!(isObserveeRelatedToProject && (isObserverRelatedToProject || isObserverAnAdministrator))) {
+
+            // iterate though lead positions
+            Iterator<LeadPosition> leadPositionIterator = project.getLeadHistory().iterator();
+            LeadPosition leadPosition;
+            while (leadPositionIterator.hasNext()) {
+                leadPosition = leadPositionIterator.next();
+                if (leadPosition.getLead().equals(observee)) {
+                    isObserveeRelatedToProject = true;
+                } else if (leadPosition.getLead().equals(observer)) {
+                    isObserverRelatedToProject = true;
+                }
             }
+
         }
 
         if(isObserveeRelatedToProject && (isObserverRelatedToProject || isObserverAnAdministrator)) {
