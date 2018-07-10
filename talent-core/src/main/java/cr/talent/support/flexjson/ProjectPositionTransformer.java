@@ -13,8 +13,11 @@ import java.util.Set;
  *
  * @author Fabián Roberto Leandro
  */
-public class ProjectPositionTransformer extends AbstractTransformer {
-    private final String projectsField = "projects";
+public class ProjectPositionTransformer extends AbstractInlineTransformer {
+
+    public ProjectPositionTransformer() {
+        fieldName = "projects";
+    }
 
     /**
      * If the received object is an instance of a set of project positions, iterate through them write an array of only
@@ -62,34 +65,5 @@ public class ProjectPositionTransformer extends AbstractTransformer {
         this.getContext().writeCloseArray();
     }
 
-    /**
-     * Writes a comma (if this field isn't the first one in an array) and the project lead field name
-     */
-    private void writeJsonStart() {
-        // Write a comma if necessary
-        if (!this.getContext().peekTypeContext().isFirst())
-            this.getContext().writeComma();
 
-        // Write the project lead field name
-        this.getContext().writeName(this.projectsField);
-    }
-
-    /**
-     * Writes the project lead with the null value
-     */
-    private void writeNull() {
-        this.writeJsonStart();
-
-        // write the "null" string
-        this.getContext().write("null");
-    }
-
-    /**
-     * Set this to true in order to tell flexjson that we will generate the json for the project position
-     * This allows us to change the property's name from 'leadHistory' to projectLead
-     */
-    @Override
-    public Boolean isInline() {
-        return Boolean.TRUE;
-    }
 }
