@@ -27,7 +27,7 @@ public class Feedback extends BasicEntity {
     private TechnicalResource observee;
 
     /**
-     * Technical resource which is receiving the feedback.
+     * Technical resource which is writing the feedback.
      */
     @ManyToOne
     @JoinColumn (name = "observer_id", nullable = false)

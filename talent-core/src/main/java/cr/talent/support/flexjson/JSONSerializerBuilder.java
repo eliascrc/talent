@@ -675,7 +675,7 @@ public class JSONSerializerBuilder {
     }
 
     /**
-     * Creates a JSONSerializer with which to serialize a Feedback object, including its description and feedback type.
+     * Creates a JSONSerializer with which to serialize a Feedback object, including its description, feedback type and observer.
      * @return
      */
     public static JSONSerializer getFeedbackSerializer() {
@@ -690,7 +690,14 @@ public class JSONSerializerBuilder {
         tempIncludes = new LinkedList<>();
         tempIncludes.add("description");
         tempIncludes.add("feedbackType");
+        tempIncludes.add("observer");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Feedback.class, "", tempIncludes));
+
+        // Add the observer's name
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "observer", tempIncludes));
+
 
         serializer.setExcludes(excludes);
 
