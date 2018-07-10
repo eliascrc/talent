@@ -706,4 +706,35 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
+    /**
+     * Gets a JSONSerializer to use in order to obtain the JSON of an organization's capabilities.
+     *
+     * @return the JSONSerializer to be used to serialize the capabilities, including its name and its capability levels with their names
+     */
+    public static JSONSerializer getCapabilitySerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        // Add the capability's name and set of capability levels (named levelHierarchy)
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("levelHierarchy");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "", tempIncludes));
+
+        // Add each capability level's name
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "levelHierarchy", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Capability Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
 }

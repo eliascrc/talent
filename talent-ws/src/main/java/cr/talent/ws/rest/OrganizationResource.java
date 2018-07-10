@@ -1,6 +1,8 @@
 package cr.talent.ws.rest;
 
+import cr.talent.core.capability.service.CapabilityService;
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.model.Capability;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
@@ -17,6 +19,7 @@ import org.springframework.util.StringUtils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.Set;
 
 /**
  * Resource with a POST endpoint that creates a new organization
@@ -30,6 +33,9 @@ public class OrganizationResource {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private CapabilityService capabilityService;
 
     /**
      * Receives the request for creating a new organization. If the unique identifier is not already
@@ -105,6 +111,31 @@ public class OrganizationResource {
         return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchSerializer()
                 .serialize(organization.getResources())).build();
     }
+
+    /**
+     * This endpoint returns every capability related to the currently logged in user's organization.
+     *
+     * @return 200 if the json is sent correctly
+     *         204 if the organization has no capabilities
+     */
+    @GET
+    @Path("capabilities/getAll")
+    public Response getAllCapabilities(){
+
+        // Get the logged in user's organization
+        Organization organization = this.organizationService
+                .findById(SecurityUtils.getLoggedInTechnicalResource().getOrganization().getId());
+
+        // Get that organization's capabilities
+        Set<Capability> organizationCapabilities = this.capabilityService.getCapabilitiesFromOrganization(organization);
+
+        if(organizationCapabilities.isEmpty())
+            return Response.status(Response.Status.NO_CONTENT).build();
+
+        // Serialize and return the organization's capabilities
+        return Response.ok().entity(JSONSerializerBuilder.getCapabilitySerializer().serialize(organizationCapabilities)).build();
+    }
+
     /**
      * This endpoint changes an organization's name or unique identifier.
      *
