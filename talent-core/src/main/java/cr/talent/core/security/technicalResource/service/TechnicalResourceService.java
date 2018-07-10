@@ -1,6 +1,7 @@
 package cr.talent.core.security.technicalResource.service;
 
 
+import cr.talent.model.Feedback;
 import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyAssignedTechnicalPositionException;
 import cr.talent.support.exceptions.NonExistentCapabilityException;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Provides business logic services related to {@link TechnicalResource} entities.
@@ -78,4 +80,14 @@ public interface TechnicalResourceService extends CrudService<TechnicalResource,
      * @param nickname the new nickname for the technical resource
      */
     void editBasicInformation(TechnicalResource technicalResource, String firstName, String lastName, String nickname);
+
+    /**
+     * Provides the business logic to obtain a user's feedback (warnings/kudos) when a technical resource looks at a
+     * technical resource's profile.
+     * @param observer the technical resource obtaining the information
+     * @param observee the technical resource whose received feedback is being obtained
+     * @return a Set with all the obsewrvee's feedback if the observer is equal to observee or the warning's related project's lead
+     *         a Set with only the observee's kudos otherwise.
+     */
+    Set<Feedback> getFeedback(TechnicalResource observer, TechnicalResource observee);
 }
