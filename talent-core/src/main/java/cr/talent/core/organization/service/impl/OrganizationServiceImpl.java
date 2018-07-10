@@ -5,15 +5,22 @@ import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.core.skill.dao.SkillDao;
 import cr.talent.core.skillCategory.dao.SkillCategoryDao;
-import cr.talent.model.*;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
+import cr.talent.model.*;
+import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
+import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
+import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
+import cr.talent.support.exceptions.NotOrganizationAdministratorException;
 import cr.talent.support.exceptions.*;
 import cr.talent.support.service.impl.CrudServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
 import javax.transaction.Transactional;
 import java.util.*;
 
@@ -162,6 +169,27 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     public String create(Organization organization) {
         this.organizationLogoService.setDefaultLogo(organization);
         return super.create(organization);
+    }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#editBasicInformation(Organization, TechnicalResource, String, String)
+     */
+    public void editBasicInformation(Organization organization, TechnicalResource administrator, String name, String uniqueIdentifier) {
+
+        // The user editing the information must be an administrator within the organization
+        if(!administrator.isAdministrator())
+            throw new NotOrganizationAdministratorException();
+
+        // For each attribute, determine if it is null/empty, set it if not
+        if(!StringUtils.isEmpty(name))
+            organization.setName(name);
+
+        if(!StringUtils.isEmpty(uniqueIdentifier))
+            organization.setUniqueIdentifier(uniqueIdentifier);
+
+        // Update the organization
+        this.organizationDao.update(organization);
+
     }
 
     /**
