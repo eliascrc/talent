@@ -15,7 +15,7 @@ public abstract class AbstractInlineTransformer extends AbstractTransformer {
     protected String fieldName;
 
     /**
-     * Writes a comma (if this field isn't the first one in an array) and the project lead field name
+     * Writes a comma (if this field isn't the first one in an array) and the field name
      */
     protected void writeJsonStart() {
         if(fieldName==null)
@@ -30,7 +30,7 @@ public abstract class AbstractInlineTransformer extends AbstractTransformer {
     }
 
     /**
-     * Writes the project lead with the null value
+     * Writes the field name with the null value
      */
     protected void writeNull() {
         this.writeJsonStart();
@@ -40,8 +40,8 @@ public abstract class AbstractInlineTransformer extends AbstractTransformer {
     }
 
     /**
-     * Set this to true in order to tell flexjson that we will generate the json for the project position
-     * This allows us to change the property's name from 'leadHistory' to projectLead
+     * Set this to true in order to tell flexjson that we will handle the entire generation of the json
+     * This lets us write a custom field name
      */
     @Override
     public Boolean isInline() {
