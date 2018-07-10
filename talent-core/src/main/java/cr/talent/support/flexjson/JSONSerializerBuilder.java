@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Builder class that holds several static factory methods for creating JSONSerializers with different include & exclude
@@ -219,7 +216,7 @@ public class JSONSerializerBuilder {
         serializer.transform(new BooleanTransformer(), "isAdministrator");
 
         // logs the creation of the serializer
-        logger.trace("TermsOfService Serializer {} created", serializer.toString());
+        logger.trace("TechnicalResource Serializer {} created", serializer.toString());
         return serializer;
     }
 
@@ -252,6 +249,31 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("OrganizationSkill Serializer {} created", serializer.toString());
+
+        return serializer;
+    }
+
+    /**
+     * Creates a basic serializer that returns a set of project skills.
+     *
+     * @return the JSONSerializer to be used to serialize a Skill.
+     */
+    public static JSONSerializer getProjectSkillsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        // Excludes all attributes of the SkillCategory class except its name
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "", tempIncludes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("ProjectSkill Serializer {} created", serializer.toString());
 
         return serializer;
     }
@@ -456,7 +478,7 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
-    /*
+    /**
      * Gets a JSONSerializer to use in order to obtain the JSON of a project basic information.
      *
      * @return the JSONSerializer to be used to serialize the project information.
@@ -467,7 +489,6 @@ public class JSONSerializerBuilder {
         List<String> tempIncludes = new LinkedList<>();
 
         excludes.addAll(getGlobalExcludes());
-        excludes.add("*.class");
 
         tempIncludes.add("name");
         tempIncludes.add("description");
@@ -477,10 +498,12 @@ public class JSONSerializerBuilder {
         tempIncludes.add("confluenceLink");
         tempIncludes.add("versionControlLink");
         tempIncludes.add("state");
+        tempIncludes.add("leadHistory");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
 
+        serializer.transform(new ProjectLeadTransformer(), "leadHistory");
         // logs the creation of the serializer
         logger.trace("Project Serializer {} created", serializer.toString());
         return serializer;
@@ -516,6 +539,163 @@ public class JSONSerializerBuilder {
         // logs the creation of the serializer
         logger.trace("Invitation Serializer {} created", serializer.toString());
 
+        return serializer;
+    }
+
+    /**
+     * Creates a basic serializer that returns the SkillCategory in JSON format.
+     *
+     * @return the JSONSerializer to be used to serialize a SkillCategory
+     */
+    public static JSONSerializer getSkillCategorySerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes = new LinkedList<>();
+
+        excludes.addAll(getGlobalExcludes()); // adds all the basic excludes
+
+        // Excludes all attributes of the SkillCategory class except its name
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(SkillCategory.class, "", tempIncludes));
+
+        // sets the added excludes to the serializer
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("SkillCategory Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+
+    /**
+     * Gets a JSONSerializer to use in order to obtain the JSON of a user's education records
+     *
+     * @return the JSONSerializer to be used to serialize the list of education records
+     */
+    public static JSONSerializer getTechnicalResourceEducationRecordsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("institution");
+        tempIncludes.add("startDate");
+        tempIncludes.add("endDate");
+        tempIncludes.add("title");
+        tempIncludes.add("description");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(EducationRecord.class, "", tempIncludes));
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Education record list Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a serializer that returns the id, firstName, lastName, technical position and profile picture in order to
+     * search them.
+     * @return
+     */
+    public static JSONSerializer getTechnicalResourceSearchSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+
+        // Add firstName, lastName, profilePicture and technicalPosition
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("profilePicture");
+        tempIncludes.add("technicalPosition");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
+
+        // Add the profile picture's link
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("link");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Image.class, "profilePicture", tempIncludes));
+
+        // Add the capability level from the technical position
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("capabilityLevel");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalPosition.class, "technicalPosition", tempIncludes));
+
+        // Add the capability levels name and capability from the capability level
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("capability");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class,
+                "technicalPosition.capabilityLevel", tempIncludes));
+
+        // Add the capability's name from the capability
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class,
+                "technicalPosition.capabilityLevel.capability", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("TechnicalResourceSearch Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /*
+     * Gets a JSONSerializer to use in order to obtain the JSON of an organization's skills, organized by skill category
+     *
+     * @return the JSONSerializer to be used to serialize the skills list, organized by skill category
+     */
+    public static JSONSerializer getOrganizationSkillsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("skillType");
+
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "skills", tempIncludes));
+
+        tempIncludes.add("name");
+        tempIncludes.add("skills");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(SkillCategory.class, "", tempIncludes));
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Skills list Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a JSONSerializer with which to serialize a Feedback object, including its description and feedback type.
+     * @return
+     */
+    public static JSONSerializer getFeedbackSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        // Exclude every attribute but description and feedback type
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("description");
+        tempIncludes.add("feedbackType");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Feedback.class, "", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Feedback Serializer {} created", serializer.toString());
         return serializer;
     }
 

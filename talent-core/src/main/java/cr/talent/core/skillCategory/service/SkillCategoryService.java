@@ -17,4 +17,13 @@ public interface SkillCategoryService extends CrudService<SkillCategory, String>
      * @param skillCategory the instance of the skill category that will be deleted from the organization.
      */
     void deleteOrganizationSkillCategory (Organization organization, SkillCategory skillCategory);
+
+    /**
+     * Used for getting the skill categories of a given organization
+     *
+     * @param organization the organization that has the skill categories
+     * @return a string with the organization's skills serialized, organized by category
+     */
+    String getSerializedSkillCategories(Organization organization);
+
 }

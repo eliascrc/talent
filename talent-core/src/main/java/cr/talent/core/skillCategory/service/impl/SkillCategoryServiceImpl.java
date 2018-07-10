@@ -7,16 +7,19 @@ import cr.talent.core.skill.dao.SkillDao;
 import cr.talent.core.skillCategory.dao.SkillCategoryDao;
 import cr.talent.core.skillCategory.service.SkillCategoryService;
 import cr.talent.model.*;
+import cr.talent.support.flexjson.JSONSerializerBuilder;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import cr.talent.support.exceptions.SkillCategoryOfAnotherOrganizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Default implementation of the {@link cr.talent.core.skillCategory.service.SkillCategoryService}.
  *
- * @author Otto Mena
+ * @author Otto Mena, Josue Cubero
  */
 @Service("skillCategoryService")
 @Transactional
@@ -44,7 +47,7 @@ public class SkillCategoryServiceImpl extends CrudServiceImpl<SkillCategory, Str
     /**
      *@see cr.talent.core.skillCategory.service.SkillCategoryService#deleteOrganizationSkillCategory(Organization, SkillCategory) (Organization, Skill Category)-
      */
-    public void deleteOrganizationSkillCategory (Organization organization, SkillCategory skillCategory){
+    public void deleteOrganizationSkillCategory (Organization organization, SkillCategory skillCategory) {
 
         SkillCategory skillCategoryToDelete = null;
 
@@ -57,8 +60,7 @@ public class SkillCategoryServiceImpl extends CrudServiceImpl<SkillCategory, Str
             throw new SkillCategoryOfAnotherOrganizationException();
 
         //delete the skills from the skill category and from the technical resource.
-        for (TechnicalResource technicalResourceIterator : organization.getResources())
-        {
+        for (TechnicalResource technicalResourceIterator : organization.getResources()) {
             for (Skill skillIterator : skillCategoryToDelete.getSkills()) {
                 technicalResourceIterator.getSkills().remove(skillIterator);
                 skillIterator.setResources(null);
@@ -69,8 +71,8 @@ public class SkillCategoryServiceImpl extends CrudServiceImpl<SkillCategory, Str
 
         //remove every required skill belonging to the skill category that will be deleted from each capability level.
         for (Skill skillIterator : skillCategoryToDelete.getSkills()) {
-            for (Capability capabilityIterator : organization.getCapabilities()){
-                for(CapabilityLevel capabilityLevelIterator : capabilityIterator.getLevelHierarchy()) {
+            for (Capability capabilityIterator : organization.getCapabilities()) {
+                for (CapabilityLevel capabilityLevelIterator : capabilityIterator.getLevelHierarchy()) {
                     capabilityLevelIterator.getRequiredSkills().remove(skillIterator);
                     capabilityLevelDao.update(capabilityLevelIterator);
                 }
@@ -81,5 +83,31 @@ public class SkillCategoryServiceImpl extends CrudServiceImpl<SkillCategory, Str
         organization.getSkillCategories().remove(skillCategoryToDelete);
         organizationDao.update(organization);
         skillCategoryDao.remove(skillCategoryToDelete);
+    }
+    /**
+     * @see cr.talent.core.skillCategory.service.SkillCategoryService#getSerializedSkillCategories(Organization)
+     */
+    @Override
+    public String getSerializedSkillCategories(Organization organization) {
+        Set<SkillCategory> skillCategories = new HashSet<>();
+
+        for (SkillCategory organizationSkillCategory : organization.getSkillCategories()) {
+            SkillCategory skillCategory = new SkillCategory();
+            skillCategory.setName(organizationSkillCategory.getName());
+            skillCategory.setId(organizationSkillCategory.getId());
+            skillCategory.setEntityCreationTimestamp(organizationSkillCategory.getEntityCreationTimestamp());
+            skillCategory.setLastUpdatedTimestamp(organizationSkillCategory.getLastUpdatedTimestamp());
+
+            Set<Skill> skillCategorySkills = new HashSet<>();
+            for (Skill skill : organizationSkillCategory.getSkills()) {
+                if (organization.equals(skill.getOrganization()))
+                    skillCategorySkills.add(skill);
+            }
+
+            skillCategory.setSkills(skillCategorySkills);
+            skillCategories.add(skillCategory);
+        }
+
+        return JSONSerializerBuilder.getOrganizationSkillsSerializer().serialize(skillCategories);
     }
 }
