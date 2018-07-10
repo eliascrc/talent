@@ -57,21 +57,21 @@ public class ProjectLeadTransformer extends AbstractTransformer {
      */
     private void writeJsonStart() {
         // Write a comma if necessary
-        if (!getContext().peekTypeContext().isFirst())
-            getContext().writeComma();
+        if (!this.getContext().peekTypeContext().isFirst())
+            this.getContext().writeComma();
 
         // Write the project lead field name
-        getContext().writeName(projectLeadField);
+        this.getContext().writeName(this.projectLeadField);
     }
 
     /**
      * Writes the project lead with the null value
      */
     private void writeNull() {
-        writeJsonStart();
+        this.writeJsonStart();
 
         // write the "null" string
-        getContext().write("null");
+        this.getContext().write("null");
     }
 
     /**
@@ -80,32 +80,32 @@ public class ProjectLeadTransformer extends AbstractTransformer {
      * @param projectLead the technical resource to be written in the json
      */
     private void writeProjectLeadJson(TechnicalResource projectLead) {
-        writeJsonStart();
+        this.writeJsonStart();
 
         // Open the lead object
-        getContext().writeOpenObject();
+        this.getContext().writeOpenObject();
 
         // Write the id
-        getContext().writeName(idField);
-        getContext().writeQuoted(projectLead.getId());
-        getContext().writeComma();
+        this.getContext().writeName(this.idField);
+        this.getContext().writeQuoted(projectLead.getId());
+        this.getContext().writeComma();
 
         // Write the username
-        getContext().writeName(usernameField);
-        getContext().writeQuoted(projectLead.getUsername());
-        getContext().writeComma();
+        this.getContext().writeName(this.usernameField);
+        this.getContext().writeQuoted(projectLead.getUsername());
+        this.getContext().writeComma();
 
         // Write the first name
-        getContext().writeName(firstNameField);
-        getContext().writeQuoted(projectLead.getFirstName());
-        getContext().writeComma();
+        this.getContext().writeName(this.firstNameField);
+        this.getContext().writeQuoted(projectLead.getFirstName());
+        this.getContext().writeComma();
 
         // Write the last name
-        getContext().writeName(lastNameField);
-        getContext().writeQuoted(projectLead.getLastName());
+        this.getContext().writeName(this.lastNameField);
+        this.getContext().writeQuoted(projectLead.getLastName());
 
         // Close the lead object
-        getContext().writeCloseObject();
+        this.getContext().writeCloseObject();
     }
 
     /**
