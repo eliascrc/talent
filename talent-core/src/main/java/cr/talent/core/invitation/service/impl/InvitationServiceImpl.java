@@ -82,12 +82,10 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         } catch (Exception e){
             throw new InvalidJSONException(invalidJSONExceptionMsg);
         }
-        System.out.println("3");
         int invitationsListSize = invitationsList.length();
 
         if(invitationsListSize == 0)
             throw new InvalidJSONException(noContentInJSONExceptionMsg);
-        System.out.println("4");
         String email, firstName, lastName;
 
         for (int i = 0; i < invitationsListSize; i++) {

@@ -51,8 +51,7 @@ public class OrganizationSkillCategoryResource {
             @FormParam("organizationUniqueIdentifier") String organizationUniqueIdentifier,
             @FormParam("skillCategoryId") String skillCategoryId) {
 
-        if (organizationUniqueIdentifier == null || skillCategoryId == null
-                || organizationUniqueIdentifier.equals("") || skillCategoryId.equals(""))
+        if (StringUtils.isEmpty(organizationUniqueIdentifier) || StringUtils.isEmpty(skillCategoryId))
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         Organization organization = organizationService.getOrganizationByUniqueIdentifier(organizationUniqueIdentifier);
@@ -61,7 +60,6 @@ public class OrganizationSkillCategoryResource {
         SkillCategory skillCategory = skillCategoryService.findById(skillCategoryId);
         if (skillCategory == null)
             return Response.status(Response.Status.NOT_FOUND).build();
-
 
         try {
 
