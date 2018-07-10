@@ -46,14 +46,12 @@ public interface OrganizationService extends CrudService<Organization, String> {
     Set<Invitation> getValidInvitations(Organization organization);
 
     /**
-     * Provides the business logic to change an organization's information including name, organization identifier and
-     * logo.
+     * Provides the business logic to change an organization's information including name and organization identifier.
      * @param organization      the organization to be edited
      * @param administrator     the user making the changes
      * @param name              the organization's new name
      * @param uniqueIdentifier  the organization's new unique identifier
-     * @param logo              the organization's new logo
      */
     void editBasicInformation(Organization organization, TechnicalResource administrator, String name,
-                              String uniqueIdentifier, InputStream logo);
+                              String uniqueIdentifier);
 }

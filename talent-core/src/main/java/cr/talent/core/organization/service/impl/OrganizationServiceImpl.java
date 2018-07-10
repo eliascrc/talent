@@ -9,6 +9,7 @@ import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
 import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
+import cr.talent.support.exceptions.NotOrganizationAdministratorException;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -139,14 +140,13 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     }
 
     /**
-     * @see cr.talent.core.organization.service.OrganizationService#editBasicInformation(Organization, TechnicalResource, String, String, InputStream)
+     * @see cr.talent.core.organization.service.OrganizationService#editBasicInformation(Organization, TechnicalResource, String, String)
      */
-    @Override
-    public void editBasicInformation(Organization organization, TechnicalResource administrator, String name, String uniqueIdentifier, InputStream logo) {
+    public void editBasicInformation(Organization organization, TechnicalResource administrator, String name, String uniqueIdentifier) {
 
         // The user editing the information must be an administrator within the organization
-        //if(!administrator.isAdministrator())
-            // TODO create runtime exception
+        if(!administrator.isAdministrator())
+            throw new NotOrganizationAdministratorException();
 
         // For each attribute, determine if it is null/empty, set it if not
         if(!StringUtils.isEmpty(name))
@@ -155,6 +155,8 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         if(!StringUtils.isEmpty(uniqueIdentifier))
             organization.setUniqueIdentifier(uniqueIdentifier);
 
+        // Update the organization
+        this.organizationDao.update(organization);
 
     }
 
