@@ -184,12 +184,10 @@ public class TechnicalResourceResource {
                 .getTechnicalResourceByUsernameAndOrganizationIdentifier(technicalResourceEmail,
                         loggedInUser.getOrganization().getUniqueIdentifier());
         if(observee == null)
-            return Response.status(Response.Status.NOT_FOUND).entity("Could not find technical resource "+technicalResourceEmail).build();
+            return Response.status(Response.Status.NOT_FOUND).build();
 
         // Get the user making the request from security utils, cannot be null
-        TechnicalResource observer = this.technicalResourceService
-                .getTechnicalResourceByUsernameAndOrganizationIdentifier(loggedInUser.getUsername(),
-                        loggedInUser.getOrganization().getUniqueIdentifier());
+        TechnicalResource observer = this.technicalResourceService.findById(loggedInUser.getId());
 
         Set<Feedback> feedback = this.technicalResourceService.getFeedback(observer,observee);
 

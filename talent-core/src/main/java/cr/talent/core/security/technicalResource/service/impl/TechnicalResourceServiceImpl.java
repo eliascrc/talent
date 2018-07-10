@@ -251,31 +251,33 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
         if(observee.getReceivedFeedback().isEmpty())
             return null;
 
-        // If the user is looking at their own project, return all the feedback
+        // If the user is looking at their own profile, return all the feedback
         if (observer.equals(observee))
             return observer.getReceivedFeedback();
 
         // Otherwise, return only the warnings whose related project's lead is observer
 
-        // Build a list of the observer's active lead positions, to avoid iterating through the inactive ones
-        HashSet<LeadPosition> observerActiveLeadPositions = new HashSet<>();
+        // Build a list of the projects where the observer has an active lead position, to avoid iterating through the
+        // inactive ones
+        Set<Project> projectsWithLeadPosition = new HashSet<>();
         for(LeadPosition observerLeadPosition : observer.getLeadPositions())
-            if(observerLeadPosition.getActive())
-                observerActiveLeadPositions.add(observerLeadPosition);
+            if(observerLeadPosition.getActive()) {
+                projectsWithLeadPosition.add(observerLeadPosition.getProject());
+            }
 
         // Get the feedback that the observer has the permission to see
-        HashSet<Feedback> feedbacks = new HashSet<>();
+        Set<Feedback> receivedFeedback = new HashSet<>();
         for(Feedback feedback : observee.getReceivedFeedback()) {
             // Kudos can be seen by anybody
             if(feedback.getFeedbackType()==FeedbackType.KUDO)
-                feedbacks.add(feedback);
+                receivedFeedback.add(feedback);
 
             // Warnings can only be seen by the related project's lead
-            else for(LeadPosition observerActiveLeadPosition : observerActiveLeadPositions)
-                if(observerActiveLeadPosition.getProject().equals(feedback.getRelatedProject()))
-                    feedbacks.add(feedback);
+            else if(feedback.getFeedbackType()==FeedbackType.WARNING&&
+                    projectsWithLeadPosition.contains(feedback.getRelatedProject()))
+                receivedFeedback.add(feedback);
         }
 
-        return feedbacks;
+        return receivedFeedback;
     }
 }
