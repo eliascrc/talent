@@ -3,11 +3,9 @@ package cr.talent.core.organization.service;
 import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
-import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.model.*;
 import cr.talent.support.service.CrudService;
 
-import java.io.InputStream;
 import java.util.Set;
 
 /**

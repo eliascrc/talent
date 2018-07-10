@@ -8,6 +8,7 @@ import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
 import cr.talent.support.exceptions.NotOrganizationAdministratorException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataIntegrityViolationException;
