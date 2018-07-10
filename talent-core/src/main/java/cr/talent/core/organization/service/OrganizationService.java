@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Provides business logic services related to {@link cr.talent.model.Organization} entities.
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Otto Mena
  */
 public interface OrganizationService extends CrudService<Organization, String> {
 
@@ -61,6 +61,13 @@ public interface OrganizationService extends CrudService<Organization, String> {
      * @return the newly created skill
      */
     Skill createSkill(SkillCategory skillCategory, String skillName, SkillType skillType, Organization organization);
+
+    /**
+     * Deletes a new skill from an organization.
+     * @param skill the skill to delete.
+     * @param organization the organization of the skill.
+     */
+    void deleteSkill(Skill skill, Organization organization);
 
 
     /**
