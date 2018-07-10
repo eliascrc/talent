@@ -5,7 +5,6 @@ import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.*;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
-import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
 import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
-import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

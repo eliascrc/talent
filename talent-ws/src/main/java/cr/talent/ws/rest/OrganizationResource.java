@@ -1,26 +1,21 @@
 package cr.talent.ws.rest;
 
-import com.sun.jersey.multipart.FormDataParam;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
-import cr.talent.support.exceptions.NonExistentConfirmationMessageException;
 import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
 import cr.talent.support.exceptions.NotOrganizationAdministratorException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.InputStream;
 
 /**
  * Resource with a POST endpoint that creates a new organization
