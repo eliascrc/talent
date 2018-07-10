@@ -1,5 +1,6 @@
 package cr.talent.ws.rest;
 
+import cr.talent.core.capability.service.CapabilityService;
 import cr.talent.core.organization.service.OrganizationService;
 import cr.talent.model.Capability;
 import cr.talent.model.Organization;
@@ -32,6 +33,9 @@ public class OrganizationResource {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private CapabilityService capabilityService;
 
     /**
      * Receives the request for creating a new organization. If the unique identifier is not already
@@ -117,9 +121,13 @@ public class OrganizationResource {
     @GET
     @Path("capabilities/getAll")
     public Response getAllCapabilities(){
+
         // Get the logged in user's organization
-        Set<Capability> organizationCapabilities = this.organizationService.findById(
-                SecurityUtils.getLoggedInTechnicalResource().getOrganization().getId()).getCapabilities();
+        Organization organization = this.organizationService
+                .findById(SecurityUtils.getLoggedInTechnicalResource().getOrganization().getId());
+
+        // Get that organization's capabilities
+        Set<Capability> organizationCapabilities = this.capabilityService.getCapabilitiesFromOrganization(organization);
 
         if(organizationCapabilities.isEmpty())
             return Response.status(Response.Status.NO_CONTENT).build();

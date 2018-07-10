@@ -3,6 +3,7 @@ package cr.talent.core.capability.service.impl;
 import cr.talent.core.capability.dao.CapabilityDao;
 import cr.talent.core.capability.service.CapabilityService;
 import cr.talent.model.Capability;
+import cr.talent.model.Organization;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationCapabilityException;
 import cr.talent.support.exceptions.AlreadyCreatedPredefinedCapabilityException;
 import cr.talent.support.exceptions.NotNullOrganizationInPredefinedCapabilityException;
@@ -11,6 +12,7 @@ import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.Set;
 
 /**
  * Default implementation of the {@link cr.talent.core.capability.service.CapabilityService}.
@@ -68,5 +70,10 @@ public class CapabilityServiceImpl extends CrudServiceImpl<Capability, String> i
             throw new AlreadyCreatedPredefinedCapabilityException(alreadyCreatedPredefinedCapabilityExceptionMsg);
 
         return this.capabilityDao.create(predefinedCapability);
+    }
+
+    @Override
+    public Set<Capability> getCapabilitiesFromOrganization(Organization organization) {
+        return organization.getCapabilities();
     }
 }
