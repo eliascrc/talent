@@ -16,6 +16,7 @@ import cr.talent.support.exceptions.ProjectWithoutLeadException;
 import cr.talent.support.exceptions.StartDateBeforeEndDateException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 
+import flexjson.JSONSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -90,7 +91,7 @@ public class ProjectResource {
         if (project == null)
             return Response.status(Response.Status.NOT_FOUND).build();
 
-        return Response.ok().entity(JSONSerializerBuilder.getProjectInformationSerializer().serialize(project)).build();
+        return Response.ok().entity(JSONSerializerBuilder.getProjectInformationSerializer().include("leadHistory").serialize(project)).build();
     }
 
     /**

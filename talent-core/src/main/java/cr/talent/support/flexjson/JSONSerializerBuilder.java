@@ -478,7 +478,7 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
-    /*
+    /**
      * Gets a JSONSerializer to use in order to obtain the JSON of a project basic information.
      *
      * @return the JSONSerializer to be used to serialize the project information.
@@ -489,7 +489,6 @@ public class JSONSerializerBuilder {
         List<String> tempIncludes = new LinkedList<>();
 
         excludes.addAll(getGlobalExcludes());
-        excludes.add("*.class");
 
         tempIncludes.add("name");
         tempIncludes.add("description");
@@ -499,10 +498,12 @@ public class JSONSerializerBuilder {
         tempIncludes.add("confluenceLink");
         tempIncludes.add("versionControlLink");
         tempIncludes.add("state");
+        tempIncludes.add("leadHistory");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
 
+        serializer.transform(new ProjectLeadTransformer(), "leadHistory");
         // logs the creation of the serializer
         logger.trace("Project Serializer {} created", serializer.toString());
         return serializer;
