@@ -12,14 +12,14 @@ import java.util.Set;
  *
  * @author Fabián Roberto Leandro
  */
-public class ProjectLeadTransformer extends AbstractInlineTransformer {
+public class LeadPositionSetTransformer extends AbstractInlineTransformer {
     private final String idField = "id";
     private final String usernameField = "username";
     private final String firstNameField = "firstName";
     private final String lastNameField = "lastName";
 
 
-    public ProjectLeadTransformer() {
+    public LeadPositionSetTransformer() {
         fieldName="projectLead";
     }
 

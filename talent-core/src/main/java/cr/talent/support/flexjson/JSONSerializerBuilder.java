@@ -503,7 +503,7 @@ public class JSONSerializerBuilder {
 
         serializer.setExcludes(excludes);
 
-        serializer.transform(new ProjectLeadTransformer(), "leadHistory");
+        serializer.transform(new LeadPositionSetTransformer(), "leadHistory");
         // logs the creation of the serializer
         logger.trace("Project Serializer {} created", serializer.toString());
         return serializer;
