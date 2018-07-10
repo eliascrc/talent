@@ -13,6 +13,18 @@ import cr.talent.support.service.CrudService;
 public interface FeedbackService extends CrudService<Feedback, String> {
 
     /**
+     * Creates a kudo from {@link cr.talent.model.Feedback}.
+     *
+     * @param observer the related project id.
+     * @param observee the technical resource receiving the kudo.
+     * @param project the related project.
+     * @param description the description of the kudo.
+     *
+     * @return a boolean on true if both resources were related to the project or on false if not.
+     */
+    boolean createKudo(TechnicalResource observer, TechnicalResource observee, Project project, String description);
+
+    /**
      * Creates a warning from {@link cr.talent.model.Feedback}.
      *
      * @param observer the related project id.
