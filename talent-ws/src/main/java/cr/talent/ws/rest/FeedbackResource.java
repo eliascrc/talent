@@ -11,9 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 /**
@@ -38,14 +36,14 @@ public class FeedbackResource {
     /**
      * Receives the request for creating a warning for a technical resource.
      *
-     * @param description the description of the warning.
+     * @param description      the description of the warning.
      * @param observeeUsername the technical resource receiving the warning.
-     * @param projectId the related project id.
+     * @param projectId        the related project id.
      * @return 200 if the warning is correctly created,
-     *         401 if the user is not authenticated,
-     *         400 if any of the parameters are null or empty strings,
-     *         404 if the observee or the related project don't not exist.
-     *         409 if the observee or observer are not related to the project or the observer is not a lead or administrator.
+     * 401 if the user is not authenticated,
+     * 400 if any of the parameters are null or empty strings,
+     * 404 if the observee or the related project don't not exist.
+     * 409 if the observee or observer are not related to the project or the observer is not a lead or administrator.
      */
     @POST
     @Path("/create/warning")
@@ -61,11 +59,46 @@ public class FeedbackResource {
 
         Project project = this.projectService.findById(projectId);
 
+        if (observee == null || project == null)
+            return Response.status(Response.Status.NOT_FOUND).build(); //The observee and the related project should exist
+
+        if (!this.feedbackService.createWarning(observer, observee, project, description))
+            return Response.status(Response.Status.CONFLICT).build(); //The observee and the related project should exist
+
+        return Response.ok().build();
+    }
+
+    /**
+     * Receives the request for creating a kudo for a technical resource.
+     *
+     * @param description      the description of the kudo.
+     * @param observeeUsername the technical resource receiving the kudo.
+     * @param projectId        the related project id.
+     * @return 200 if the kudo is correctly created,
+     * 401 if the user is not authenticated,
+     * 400 if any of the parameters are null or empty strings,
+     * 404 if the observee or the related project don't not exist.
+     * 409 if one or both resources are not related to the project.
+     */
+    @POST
+    @Path("/create/kudo")
+    public Response createKudo(@FormParam("description") String description, @FormParam("observee") String observeeUsername,
+                               @FormParam("projectId") String projectId) {
+
+        if (StringUtils.isEmpty(description) || StringUtils.isEmpty(observeeUsername) || StringUtils.isEmpty(projectId))
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
+
+        TechnicalResource observer = SecurityUtils.getLoggedInTechnicalResource();
+        TechnicalResource observee = this.technicalResourceService.getTechnicalResourceByUsernameAndOrganizationIdentifier(
+                observeeUsername, observer.getOrganization().getUniqueIdentifier());
+
+        Project project = this.projectService.findById(projectId);
+
         if(observee == null || project == null)
             return Response.status(Response.Status.NOT_FOUND).build(); //The observee and the related project should exist
 
-        if(!this.feedbackService.createWarning(observer, observee, project, description))
-            return Response.status(Response.Status.CONFLICT).build(); //The observee and the related project should exist
+        if(!this.feedbackService.createKudo(observer, observee, project, description))
+            return Response.status(Response.Status.CONFLICT).build(); //The observee or the observer were not related to the project
 
         return Response.ok().build();
     }

@@ -3,12 +3,15 @@ package cr.talent.core.organization.service.impl;
 import cr.talent.core.image.organizationLogo.service.OrganizationLogoService;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.core.skill.dao.SkillDao;
+import cr.talent.core.skillCategory.dao.SkillCategoryDao;
 import cr.talent.model.*;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
 import cr.talent.support.exceptions.NonExistentUserWithNullOrganization;
 import cr.talent.support.exceptions.NotNullInviteLinkInOrganizationException;
 import cr.talent.support.exceptions.NotOrganizationAdministratorException;
+import cr.talent.support.exceptions.*;
 import cr.talent.support.service.impl.CrudServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,15 +21,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Default implementation of the {@link cr.talent.core.organization.service.OrganizationService}
  *
- * @author Elías Calderón
+ * @author Elías Calderón, Josue Cubero
  */
 @Service("organizationService")
 @Transactional
@@ -42,6 +42,11 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     private TechnicalResourceService technicalResourceService;
 
     @Autowired
+    private SkillDao skillDao;
+
+    @Autowired
+    private SkillCategoryDao skillCategoryDao;
+
     private OrganizationLogoService organizationLogoService;
 
     public void init() {
@@ -126,6 +131,34 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     }
 
     /**
+     * @see cr.talent.core.organization.service.OrganizationService#createSkill(SkillCategory, String, SkillType, Organization)
+     */
+    @Override
+    public Skill createSkill(SkillCategory skillCategory, String skillName, SkillType skillType, Organization organization) {
+        final String alreadyCreatedSkillMsg = "The given skill name is already created within the given skill category.";
+
+        Set<Skill> skills = skillCategory.getSkills();
+
+        for (Skill skill1 : skills) {
+            if (skill1.getName().equals(skillName))
+                throw new AlreadyCreatedSkillException(alreadyCreatedSkillMsg);
+        }
+
+        Skill skill = new Skill();
+        skill.setName(skillName);
+        skill.setCategory(skillCategory);
+        skill.setSkillType(skillType);
+        skill.setOrganization(organization);
+        this.skillDao.create(skill);
+
+        skills.add(skill);
+        skillCategory.setSkills(skills);
+        this.skillCategoryDao.update(skillCategory);
+
+        return skill;
+    }
+
+    /**
      * Used to create an organization, sets the organization's logo as the default logo
      *
      * @param organization the organization that is being created
@@ -156,6 +189,32 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         // Update the organization
         this.organizationDao.update(organization);
 
+    }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#createSkillCategory(String, Organization)
+     */
+    @Override
+    public SkillCategory createSkillCategory(String skillCategoryName, Organization organization) {
+        String alreadyCreatedSkillCategoryExceptionMsg = "That skill category is already created within the organization";
+
+        Set<SkillCategory> skillCategories = organization.getSkillCategories();
+
+        for (SkillCategory skillCategory1 : skillCategories) {
+            if (skillCategory1.getName().equals(skillCategoryName))
+                throw new AlreadyCreatedSkillCategoryException(alreadyCreatedSkillCategoryExceptionMsg);
+        }
+
+        SkillCategory skillCategory = new SkillCategory();
+        skillCategory.setName(skillCategoryName);
+        skillCategory.setOrganization(organization);
+        this.skillCategoryDao.create(skillCategory);
+
+        skillCategories.add(skillCategory);
+        organization.setSkillCategories(skillCategories);
+        this.organizationDao.update(organization);
+
+        return skillCategory;
     }
 
 }

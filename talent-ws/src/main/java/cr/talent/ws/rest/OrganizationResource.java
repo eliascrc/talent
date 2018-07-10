@@ -27,8 +27,6 @@ import javax.ws.rs.core.Response;
 @Path("/organization")
 public class OrganizationResource {
 
-    private static long MAX_FILE_SIZE = 5242880;
-
     @Autowired
     private OrganizationService organizationService;
 
@@ -87,6 +85,25 @@ public class OrganizationResource {
         return Response.ok().entity(JSONSerializerBuilder.getOrganizationSerializer().serialize(organization)).build();
     }
 
+    /**
+     * Returns the id, first name, last name , technical position (name of capability and capability level) and profile
+     * picture link of every resource in the logged user's organization.
+     *
+     * @return 200 with a json representation of the information above
+     */
+    @GET
+    @Path("technicalResource/getAll")
+    public Response getAllTechnicalResources(){
+
+        // Get the logged user's organization via SecurityUtils
+        // Cannot be null because SpringSecurity makes sure the user must be authenticated to use this endpoint
+        Organization lazyLoadedOrganization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
+
+        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(lazyLoadedOrganization.getUniqueIdentifier());
+
+        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchSerializer()
+                .serialize(organization.getResources())).build();
+    }
     /**
      * This endpoint changes an organization's name or unique identifier.
      *

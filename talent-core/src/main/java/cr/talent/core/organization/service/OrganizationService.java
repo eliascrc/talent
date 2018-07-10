@@ -4,6 +4,7 @@ import cr.talent.model.Invitation;
 import cr.talent.model.Organization;
 import cr.talent.model.TechnicalResource;
 import cr.talent.support.exceptions.AlreadyCreatedOrganizationException;
+import cr.talent.model.*;
 import cr.talent.support.service.CrudService;
 
 import java.io.InputStream;
@@ -44,6 +45,25 @@ public interface OrganizationService extends CrudService<Organization, String> {
      * @return a set of invitations, or an empty set if no invitations were found.
      */
     Set<Invitation> getValidInvitations(Organization organization);
+
+    /**
+     * Creates a new skill category for an organization.
+     * @param skillCategoryName the new skill name.
+     * @param organization the organization to create an invite link for.
+     * @return the invite link of the organization.
+     */
+    SkillCategory createSkillCategory(String skillCategoryName, Organization organization);
+
+    /**
+     * Creates a new skill for an organization.
+     * @param skillCategory the skill category to update.
+     * @param skillName the new skill name.
+     * @param skillType the skill type.
+     * @param organization the organization of the skill category.
+     * @return the newly created skill
+     */
+    Skill createSkill(SkillCategory skillCategory, String skillName, SkillType skillType, Organization organization);
+
 
     /**
      * Provides the business logic to change an organization's information including name and organization identifier.
