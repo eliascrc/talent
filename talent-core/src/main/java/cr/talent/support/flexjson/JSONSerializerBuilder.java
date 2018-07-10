@@ -600,7 +600,7 @@ public class JSONSerializerBuilder {
      * search them.
      * @return
      */
-    public static JSONSerializer getTechnicalResourceSearchSerializer() {
+    public static JSONSerializer getTechnicalResourceSearchTypeaheadSerializer() {
         JSONSerializer serializer = getBasicSerializer();
         List<String> excludes = new LinkedList<>();
         List<String> tempIncludes;
@@ -641,7 +641,65 @@ public class JSONSerializerBuilder {
         serializer.setExcludes(excludes);
 
         // logs the creation of the serializer
-        logger.trace("TechnicalResourceSearch Serializer {} created", serializer.toString());
+        logger.trace("TechnicalResourceSearchTypeahead Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a serializer that returns the id, firstName, lastName, technical position and profile picture in order to
+     * search them.
+     * @return
+     */
+    public static JSONSerializer getTechnicalResourceSearchResultsSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+
+        // Add firstName, lastName, profilePicture, technicalPosition, skills and project positions
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        tempIncludes.add("profilePicture");
+        tempIncludes.add("technicalPosition");
+        tempIncludes.add("skills");
+        tempIncludes.add("projectPositions");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "", tempIncludes));
+
+        // Add the profile picture's link
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("link");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Image.class, "profilePicture", tempIncludes));
+
+        // Add the skills name
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "skills", tempIncludes));
+
+        // Add the capability level from the technical position
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("capabilityLevel");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalPosition.class, "technicalPosition", tempIncludes));
+
+        // Add the capability levels name and capability from the capability level
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("capability");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class,
+                "technicalPosition.capabilityLevel", tempIncludes));
+
+        // Add the capability's name from the capability
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class,
+                "technicalPosition.capabilityLevel.capability", tempIncludes));
+
+        serializer.setExcludes(excludes);
+        serializer.transform(new ProjectPositionTransformer(), "projectPositions");
+
+        // log the creation of the serializer
+        logger.trace("TechnicalResourceSearchResults Serializer {} created", serializer.toString());
         return serializer;
     }
 

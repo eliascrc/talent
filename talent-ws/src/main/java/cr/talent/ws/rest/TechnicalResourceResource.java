@@ -32,10 +32,12 @@ public class TechnicalResourceResource {
 
     /**
      * GET endpoint that returns the basic information of a technical resource
+     *
      * @param username the username of the resource
+     *
      * @return a 200 response with a json with the resource's information,
-     *          404 code if no technical resource was found with that username
-     *          400 if the parameter is empty or if the user requesting the log in does not belong to an organization
+     *           404 code if no technical resource was found with that username
+     *           400 if the parameter is empty or if the user requesting the log in does not belong to an organization
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,10 +63,12 @@ public class TechnicalResourceResource {
 
     /**
      * GET endpoint that returns the basic information of a technical resource
+     *
      * @param id the id of the resource
-     * @return a 200 response with a json with the resource's information,
-     *          404 code if no technical resource was found with that id
-     *          400 if the parameter is empty or if the user requesting the log in does not belong to an organization
+     *
+     * @return 200 response with a json with the resource's information,
+     *         404 code if no technical resource was found with that id
+     *         400 if the parameter is empty or if the user requesting the log in does not belong to an organization
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,17 +93,18 @@ public class TechnicalResourceResource {
 
     /**
      * Post endpoint used by organization administrators for editing the basic information of a technical resource
-     * @param technicalResourceId the identifier of the technical resource
-     * @param firstName the new first name for the technical resource
-     * @param lastName the new last name for the technical resource
-     * @param nickname the new nickname for the technical resource
      *
-     * @return  400 if a parameter was not sent or sent empty, or if the user performing the request does not belong to
-     *              an organization
-     *          403 if the resource is not the administrator of the organization
-     *          404 if no resource was found with the provided identifier or if the resource that was found belongs to
-     *              another organization (not found is used for security reasons)
-     *          200 and a JSON with the user information if the request was successful
+     * @param technicalResourceId the identifier of the technical resource
+     * @param firstName           the new first name for the technical resource
+     * @param lastName            the new last name for the technical resource
+     * @param nickname            the new nickname for the technical resource
+     *
+     * @return 400 if a parameter was not sent or sent empty, or if the user performing the request does not belong to
+     * an organization
+     *         403 if the resource is not the administrator of the organization
+     *         404 if no resource was found with the provided identifier or if the resource that was found belongs to
+     * another organization (not found is used for security reasons)
+     *         200 and a JSON with the user information if the request was successful
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -135,10 +140,11 @@ public class TechnicalResourceResource {
 
     /**
      * Post endpoint for editing the basic information of the logged in technical resource
+     *
      * @param nickname the new nickname for the technical resource
      *
-     * @return  400 if a parameter was not sent or sent empty
-     *          200 and a JSON with the user information if the request was successful
+     * @return 400 if a parameter was not sent or sent empty
+     *         200 and a JSON with the user information if the request was successful
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -165,6 +171,7 @@ public class TechnicalResourceResource {
      * related project.
      *
      * @param technicalResourceEmail the email of the resource whose feedback will be returned
+     *
      * @return 400 if the parameter is null or empty
      *         404 if a user with that username could not be found
      *         204 if the requested user has no feedback
@@ -183,21 +190,20 @@ public class TechnicalResourceResource {
         TechnicalResource observee = this.technicalResourceService
                 .getTechnicalResourceByUsernameAndOrganizationIdentifier(technicalResourceEmail,
                         loggedInUser.getOrganization().getUniqueIdentifier());
-        if(observee == null)
+        if (observee == null)
             return Response.status(Response.Status.NOT_FOUND).build();
 
         // Get the user making the request from security utils, cannot be null
         TechnicalResource observer = this.technicalResourceService.findById(loggedInUser.getId());
 
-        Set<Feedback> feedback = this.technicalResourceService.getFeedback(observer,observee);
+        Set<Feedback> feedback = this.technicalResourceService.getFeedback(observer, observee);
 
-        if(feedback==null || feedback.isEmpty())
-            return Response.status(Response.Status.NO_CONTENT).entity(technicalResourceEmail+" has not received any feedback.").build();
+        if (feedback == null || feedback.isEmpty())
+            return Response.status(Response.Status.NO_CONTENT).entity(technicalResourceEmail + " has not received any feedback.").build();
 
         String serializedFeedback = JSONSerializerBuilder.getFeedbackSerializer()
                 .serialize(feedback);
 
         return Response.ok().entity(serializedFeedback).build();
     }
-
 }

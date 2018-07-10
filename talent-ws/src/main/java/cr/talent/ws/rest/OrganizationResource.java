@@ -39,7 +39,7 @@ public class OrganizationResource {
      * @param name             the organization's name.
      * @param username         technical resource's username.
      * @return 200 if the organization is correctly created, 400 if any of the parameters are null,
-     * 409 if an organization already has the specified unique identifier.
+     *         409 if an organization already has the specified unique identifier.
      */
     @POST
     @Path("/create")
@@ -61,7 +61,7 @@ public class OrganizationResource {
             // If the organization is already created a conflict should be returned
             return Response.status(Response.Status.CONFLICT).
                     entity("AlreadyCreatedOrganization").build();
-        } catch (NonExistentUserWithNullOrganization e){
+        } catch (NonExistentUserWithNullOrganization e) {
             //If the user with the username does not have a null organization where the new organization can be assigned
             return Response.status(Response.Status.CONFLICT).
                     entity("NonExistentUserWithNullOrganization").build();
@@ -69,10 +69,10 @@ public class OrganizationResource {
     }
 
     /**
-     *  Receives the request for getting the basic information for the organization of the logged in user.
+     * Receives the request for getting the basic information for the organization of the logged in user.
      *
      * @return 200 if the organization is correctly returned,
-     *  403 if the user has no organization associated.
+     *         403 if the user has no organization associated.
      */
     @GET
     @Path("/get")
@@ -87,30 +87,10 @@ public class OrganizationResource {
     }
 
     /**
-     * Returns the id, first name, last name , technical position (name of capability and capability level) and profile
-     * picture link of every resource in the logged user's organization.
-     *
-     * @return 200 with a json representation of the information above
-     */
-    @GET
-    @Path("technicalResource/getAll")
-    public Response getAllTechnicalResources(){
-
-        // Get the logged user's organization via SecurityUtils
-        // Cannot be null because SpringSecurity makes sure the user must be authenticated to use this endpoint
-        Organization lazyLoadedOrganization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
-
-        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(lazyLoadedOrganization.getUniqueIdentifier());
-
-        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchSerializer()
-                .serialize(organization.getResources())).build();
-    }
-    /**
      * This endpoint changes an organization's name or unique identifier.
      *
-     * @param name              the organization's new name
-     * @param uniqueIdentifier  the organization's new unique identifier
-     *
+     * @param name             the organization's new name
+     * @param uniqueIdentifier the organization's new unique identifier
      * @return 401 if the currently logged in user is not their organization's administrator
      *         409 if the received unique identifier is already being used by another organization
      *         200 if the changes were done correctly
@@ -130,13 +110,50 @@ public class OrganizationResource {
 
         try {
             this.organizationService.editBasicInformation(organization, organizationAdministrator, name, uniqueIdentifier);
-        } catch(NotOrganizationAdministratorException e) {
+        } catch (NotOrganizationAdministratorException e) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
-        } catch(DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) {
             return Response.status(Response.Status.CONFLICT).build();
         }
 
         return Response.ok().build();
     }
+
+    /**
+     * Returns the id, first name, last name , technical position (name of capability and capability level) and profile
+     * picture link of every resource in the logged user's organization.
+     *
+     * @return 200 with a json representation of the information above
+     */
+    @GET
+    @Path("technicalResource/getAll")
+    public Response getAllTechnicalResources() {
+
+        // Get the logged user's organization via SecurityUtils
+        // Cannot be null because SpringSecurity makes sure the user must be authenticated to use this endpoint
+        Organization lazyLoadedOrganization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
+
+        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(lazyLoadedOrganization.getUniqueIdentifier());
+
+        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchTypeaheadSerializer()
+                .serialize(organization.getResources())).build();
+    }
+
+    /**
+     * This endpoint returns a json representation of all the resources in an organization, including their username,
+     * first name, last name, technical position, profile picture, skills and projects.
+     *
+     * @return 200 if the information is sent correctly
+     */
+    @GET
+    @Path("/technicalResource/searchResults")
+    public Response getTechnicalResourcesToDisplaySearchResults() {
+        Organization organization = this.organizationService.findById(SecurityUtils.getLoggedInTechnicalResource()
+                .getOrganization().getId());
+
+        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchResultsSerializer().include("projectPositions")
+                .serialize(organization.getResources())).build();
+    }
+
 
 }
