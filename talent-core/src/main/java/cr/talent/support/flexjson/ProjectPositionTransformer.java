@@ -35,8 +35,10 @@ public class ProjectPositionTransformer extends AbstractInlineTransformer {
             return;
         }
 
-        if(projectPositions.isEmpty())
+        if(projectPositions.isEmpty()) {
             this.writeNull();
+            return;
+        }
 
         // Start the projects entry
         this.writeJsonStart();
