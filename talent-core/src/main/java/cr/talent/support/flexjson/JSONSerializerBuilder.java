@@ -478,7 +478,7 @@ public class JSONSerializerBuilder {
         return serializer;
     }
 
-    /*
+    /**
      * Gets a JSONSerializer to use in order to obtain the JSON of a project basic information.
      *
      * @return the JSONSerializer to be used to serialize the project information.
@@ -489,7 +489,6 @@ public class JSONSerializerBuilder {
         List<String> tempIncludes = new LinkedList<>();
 
         excludes.addAll(getGlobalExcludes());
-        excludes.add("*.class");
 
         tempIncludes.add("name");
         tempIncludes.add("description");
@@ -499,10 +498,12 @@ public class JSONSerializerBuilder {
         tempIncludes.add("confluenceLink");
         tempIncludes.add("versionControlLink");
         tempIncludes.add("state");
+        tempIncludes.add("leadHistory");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Project.class, "", tempIncludes));
 
         serializer.setExcludes(excludes);
 
+        serializer.transform(new ProjectLeadTransformer(), "leadHistory");
         // logs the creation of the serializer
         logger.trace("Project Serializer {} created", serializer.toString());
         return serializer;
@@ -670,6 +671,38 @@ public class JSONSerializerBuilder {
 
         // logs the creation of the serializer
         logger.trace("Skills list Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Creates a JSONSerializer with which to serialize a Feedback object, including its description, feedback type and observer.
+     * @return
+     */
+    public static JSONSerializer getFeedbackSerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        // Exclude every attribute but description and feedback type
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("description");
+        tempIncludes.add("feedbackType");
+        tempIncludes.add("observer");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Feedback.class, "", tempIncludes));
+
+        // Add the observer's name
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "observer", tempIncludes));
+
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Feedback Serializer {} created", serializer.toString());
         return serializer;
     }
 

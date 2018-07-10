@@ -19,10 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Default implementation of the {@link TechnicalResourceService}
@@ -245,5 +242,42 @@ public class TechnicalResourceServiceImpl extends CrudServiceImpl<TechnicalResou
         technicalResource.setNickname(nickname);
 
         this.update(technicalResource);
+    }
+
+    /**
+     * @see cr.talent.core.security.technicalResource.service.TechnicalResourceService#getFeedback(TechnicalResource, TechnicalResource)
+     */
+    public Set<Feedback> getFeedback(TechnicalResource observer, TechnicalResource observee) {
+        if(observee.getReceivedFeedback().isEmpty())
+            return null;
+
+        // If the user is looking at their own profile, return all the feedback
+        if (observer.equals(observee))
+            return observer.getReceivedFeedback();
+
+        // Otherwise, return only the warnings whose related project's lead is observer
+
+        // Build a list of the projects where the observer has an active lead position, to avoid iterating through the
+        // inactive ones
+        Set<Project> projectsWithLeadPosition = new HashSet<>();
+        for(LeadPosition observerLeadPosition : observer.getLeadPositions())
+            if(observerLeadPosition.getActive()) {
+                projectsWithLeadPosition.add(observerLeadPosition.getProject());
+            }
+
+        // Get the feedback that the observer has the permission to see
+        Set<Feedback> receivedFeedback = new HashSet<>();
+        for(Feedback feedback : observee.getReceivedFeedback()) {
+            // Kudos can be seen by anybody
+            if(feedback.getFeedbackType()==FeedbackType.KUDO)
+                receivedFeedback.add(feedback);
+
+            // Warnings can only be seen by the related project's lead
+            else if(feedback.getFeedbackType()==FeedbackType.WARNING&&
+                    projectsWithLeadPosition.contains(feedback.getRelatedProject()))
+                receivedFeedback.add(feedback);
+        }
+
+        return receivedFeedback;
     }
 }
