@@ -93,26 +93,6 @@ public class OrganizationResource {
     }
 
     /**
-     * Returns the id, first name, last name , technical position (name of capability and capability level) and profile
-     * picture link of every resource in the logged user's organization.
-     *
-     * @return 200 with a json representation of the information above
-     */
-    @GET
-    @Path("technicalResource/getAll")
-    public Response getAllTechnicalResources(){
-
-        // Get the logged user's organization via SecurityUtils
-        // Cannot be null because SpringSecurity makes sure the user must be authenticated to use this endpoint
-        Organization lazyLoadedOrganization = SecurityUtils.getLoggedInTechnicalResource().getOrganization();
-
-        Organization organization = this.organizationService.getOrganizationByUniqueIdentifier(lazyLoadedOrganization.getUniqueIdentifier());
-
-        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchSerializer()
-                .serialize(organization.getResources())).build();
-    }
-
-    /**
      * This endpoint returns every capability related to the currently logged in user's organization.
      *
      * @return 200 if the json is sent correctly
@@ -170,6 +150,22 @@ public class OrganizationResource {
     }
 
     /**
+     * This endpoint returns a json representation of all the resources in an organization, including their username,
+     * first name, last name, technical position, profile picture, skills and projects.
+     *
+     * @return 200 if the information is sent correctly
+     */
+    @GET
+    @Path("/technicalResource/searchResults")
+    public Response getTechnicalResourcesToDisplaySearchResults() {
+        Organization organization = this.organizationService.findById(SecurityUtils.getLoggedInTechnicalResource()
+                .getOrganization().getId());
+
+        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchResultsSerializer().include("projectPositions")
+                .serialize(organization.getResources())).build();
+    }
+
+    /**
      * Returns the id, first name, last name , technical position (name of capability and capability level) and profile
      * picture link of every resource in the logged user's organization.
      *
@@ -188,22 +184,4 @@ public class OrganizationResource {
         return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchTypeaheadSerializer()
                 .serialize(organization.getResources())).build();
     }
-
-    /**
-     * This endpoint returns a json representation of all the resources in an organization, including their username,
-     * first name, last name, technical position, profile picture, skills and projects.
-     *
-     * @return 200 if the information is sent correctly
-     */
-    @GET
-    @Path("/technicalResource/searchResults")
-    public Response getTechnicalResourcesToDisplaySearchResults() {
-        Organization organization = this.organizationService.findById(SecurityUtils.getLoggedInTechnicalResource()
-                .getOrganization().getId());
-
-        return Response.ok().entity(JSONSerializerBuilder.getTechnicalResourceSearchResultsSerializer().include("projectPositions")
-                .serialize(organization.getResources())).build();
-    }
-
-
 }
