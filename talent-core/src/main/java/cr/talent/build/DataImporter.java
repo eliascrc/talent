@@ -153,7 +153,7 @@ public class DataImporter {
             for(Project project : projects)
             {
                 if (project.getName().equals(projectEvent.getProject().getName())){
-                    project.setcurrentState(projectEvent);
+                    project.setCurrentState(projectEvent);
                     projectService.update(project);
                 }
             }
