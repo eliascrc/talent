@@ -52,6 +52,32 @@
 		</project>
 
 		<project>
+			<name>Certified</name>
+			<description>Ampli de inge2</description>
+			<startDate>15/10/2015</startDate>
+			<endDate></endDate>
+			<jiraLink>http://jira.certified.cr</jiraLink>
+			<confluenceLink>http://confluence.talent.cr/</confluenceLink>
+			<versionControlLink>http://git.talent.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>Mobile Developer,Mobile Developer,Mobile Developer,UI Designer,UI Designer,UI Designer,Java Developer,Java Developer,Java Developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Junior,Intermediate,Senior,Junior,Intermediate,Senior,Junior,Intermediate,Senior</projectCapabilityLevelNames>
+			<organization>monkey-labs</organization>
+		</project>
+
+		<project>
+			<name>Random project</name>
+			<description>Out of funny ideas</description>
+			<startDate>15/10/2015</startDate>
+			<endDate></endDate>
+			<jiraLink>http://jira.certified.cr</jiraLink>
+			<confluenceLink>http://confluence.talent.cr/</confluenceLink>
+			<versionControlLink>http://git.talent.cr:7990</versionControlLink>
+			<projectCapabilityLevelCapabilities>Mobile Developer,Mobile Developer,Mobile Developer,UI Designer,UI Designer,UI Designer,Java Developer,Java Developer,Java Developer</projectCapabilityLevelCapabilities>
+			<projectCapabilityLevelNames>Junior,Intermediate,Senior,Junior,Intermediate,Senior,Junior,Intermediate,Senior</projectCapabilityLevelNames>
+			<organization>monkey-labs</organization>
+		</project>
+
+		<project>
 			<name>Bachmann–Landau(1)</name>
 			<description>Nice notation</description>
 			<startDate>7/12/2017</startDate>
@@ -991,7 +1017,7 @@
 			<institution>Universidad de Costa Rica</institution>
 			<date>11/11/2011</date>
 			<title>Bachillerato en Ciencias de la Computacion e Informatica</title>
-			<resource>rosalind.franklin@example.com</resource>
+			<resource>jolesa97@gmail.com</resource>
 			<humanResourceManager>kurt.cobain@gmail.com</humanResourceManager>
 			<description>A title</description>
 		</educationRecord>
@@ -1000,7 +1026,7 @@
 			<institution>Universidad de Costa Rica</institution>
 			<date>11/11/2013</date>
 			<title>Maestria Academica en Computacion e Informatica</title>
-			<resource>rosalind.franklin@example.com</resource>
+			<resource>jolesa97@gmail.com</resource>
 			<humanResourceManager>kurt.cobain@gmail.com</humanResourceManager>
 			<description>A title</description>
 		</educationRecord>
@@ -1018,7 +1044,7 @@
 			<institution>Tecnologico de Costa Rica</institution>
 			<date>12/12/2011</date>
 			<title>Licenciatura en Ingenieria en Computadores</title>
-			<resource>andres.mata@example.com</resource>
+			<resource>marianaabellan4@gmail.com</resource>
 			<humanResourceManager>kurt.cobain@gmail.com</humanResourceManager>
 			<description>A title</description>
 		</educationRecord>
@@ -1305,7 +1331,7 @@
 			<category>Social</category>
 			<organization>monkey-labs</organization>
 			<skillType>SOFT</skillType>
-			<resources>andres.mata@example.com,andrea.solano@example.com,antonio.jimenez@example.com</resources>
+			<resources>andres.mata@example.com,jolesa97@gmail.com.com,antonio.jimenez@example.com,marianaabellan4@gmail.com,eliascr98@outlook.com</resources>
 		</skill>
 
 		<skill>
@@ -1313,7 +1339,7 @@
 			<category>Frameworks</category>
 			<organization>monkey-labs</organization>
 			<skillType>TECHNICAL</skillType>
-			<resources>andres.mata@example.com,andrea.solano@example.com,antonio.jimenez@example.com</resources>
+			<resources>andres.mata@example.com,jolesa97@gmail.com.com,antonio.jimenez@example.com,marianaabellan4@gmail.com,eliascr98@outlook.com</resources>
 		</skill>
 
 		<skill>
@@ -1345,7 +1371,7 @@
 			<category>Databases</category>
 			<organization>monkey-labs</organization>
 			<skillType>TECHNICAL</skillType>
-			<resources>howard.lovecraft@example.com</resources>
+			<resources>howard.lovecraft@example.com,marianaabellan4@gmail.com,eliascr98@outlook.com</resources>
 		</skill>
 
 		<skill>
@@ -1353,7 +1379,7 @@
 			<category>Databases</category>
 			<organization>monkey-labs</organization>
 			<skillType>TECHNICAL</skillType>
-			<resources></resources>
+			<resources>marianaabellan4@gmail.com</resources>
 		</skill>
 
 		<skill>
@@ -1377,7 +1403,7 @@
 			<category>Programming Languages</category>
 			<organization>monkey-labs</organization>
 			<skillType>TECHNICAL</skillType>
-			<resources></resources>
+			<resources>marianaabellan4@gmail.com,eliascr98@outlook.com</resources>
 		</skill>
 
 		<skill>
@@ -1385,7 +1411,7 @@
 			<category>Programming Languages</category>
 			<organization>monkey-labs</organization>
 			<skillType>TECHNICAL</skillType>
-			<resources>john.tolkien@example.com</resources>
+			<resources>jolesa97@gmail.com,eliascr98@outlook.com</resources>
 		</skill>
 
 		<skill>
@@ -1393,7 +1419,7 @@
 			<category>Programming Languages</category>
 			<organization>monkey-labs</organization>
 			<skillType>TECHNICAL</skillType>
-			<resources>howard.lovecraft@example.com,john.tolkien@example.com</resources>
+			<resources>howard.lovecraft@example.com,john.tolkien@example.com,jolesa97@gmail.com,marianaabellan4@gmail.com,eliascr98@outlook.com</resources>
 		</skill>
 
 		<skill>
@@ -1575,6 +1601,24 @@
 
 		<leadPosition>
 			<active>true</active>
+			<startDate>15/10/2013</startDate>
+			<endDate></endDate>
+			<project>Certified</project>
+			<organization>monkey-labs</organization>
+			<username>jolesa97@gmail.com</username>
+		</leadPosition>
+
+		<leadPosition>
+			<active>true</active>
+			<startDate>15/10/2013</startDate>
+			<endDate></endDate>
+			<project>Random project</project>
+			<organization>monkey-labs</organization>
+			<username>jolesa97@gmail.com</username>
+		</leadPosition>
+
+		<leadPosition>
+			<active>true</active>
 			<startDate>7/12/2017</startDate>
 			<endDate>7/12/2018</endDate>
 			<project>Bachmann–Landau(1)</project>
@@ -1679,6 +1723,114 @@
 
 		<projectPosition>
 			<status>AVAILABLE</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>Certified</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>Certified</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>Certified</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>Certified</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>Certified</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>Certified</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>AVAILABLE</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>Random project</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>Random project</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>Random project</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>Random project</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<project>Random project</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>TAKEN</status>
+			<totalHours>40</totalHours>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<project>Random project</project>
+		</projectPosition>
+
+		<projectPosition>
+			<status>AVAILABLE</status>
 			<totalHours>20</totalHours>
 			<capabilityLevelName>Junior</capabilityLevelName>
 			<capabilityLevelOrganization>monkey-labs</capabilityLevelOrganization>
@@ -1709,18 +1861,6 @@
 
 	<projectPositionHolders>
 
-		<projectPositionHolder>
-			<active>true</active>
-			<assignedHours>40</assignedHours>
-			<reviewed>false</reviewed>
-			<startDate>2/2/2014</startDate>
-			<endDate></endDate>
-			<project>Talent!</project>
-			<organization>monkey-labs</organization>
-			<capabilityLevelName>Intermediate</capabilityLevelName>
-			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
-			<technicalResource>howard.lovecraft@example.com</technicalResource>
-		</projectPositionHolder>
 
 		<projectPositionHolder>
 			<active>true</active>
@@ -1759,6 +1899,85 @@
 			<capabilityLevelName>Senior</capabilityLevelName>
 			<capabilityLevelCapability>UI Designer</capabilityLevelCapability>
 			<technicalResource>jolesa97@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>8</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Certified</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>marianaabellan4@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>10</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Certified</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>jolesa97@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate></endDate>
+			<project>Certified</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>jo96cube@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>11</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Random project</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Senior</capabilityLevelName>
+			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
+			<technicalResource>jolesa97@gmail.com</technicalResource>
+		</projectPositionHolder>
+		
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>9</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate>2/2/2018</endDate>
+			<project>Random project</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Intermediate</capabilityLevelName>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>marianaabellan4@gmail.com</technicalResource>
+		</projectPositionHolder>
+
+		<projectPositionHolder>
+			<active>true</active>
+			<assignedHours>40</assignedHours>
+			<reviewed>false</reviewed>
+			<startDate>2/2/2014</startDate>
+			<endDate></endDate>
+			<project>Random project</project>
+			<organization>monkey-labs</organization>
+			<capabilityLevelName>Junior</capabilityLevelName>
+			<capabilityLevelCapability>Mobile Developer</capabilityLevelCapability>
+			<technicalResource>jo96cube@gmail.com</technicalResource>
 		</projectPositionHolder>
 
 		<projectPositionHolder>
@@ -1879,19 +2098,6 @@
 		</projectPositionHolder>
 
 		<projectPositionHolder>
-			<active>true</active>
-			<assignedHours>40</assignedHours>
-			<reviewed>false</reviewed>
-			<startDate>2/2/2014</startDate>
-			<endDate></endDate>
-			<project>Talent!</project>
-			<organization>monkey-labs</organization>
-			<capabilityLevelName>Senior</capabilityLevelName>
-			<capabilityLevelCapability>Java Developer</capabilityLevelCapability>
-			<technicalResource>kendall.garcia@gmail.com</technicalResource>
-		</projectPositionHolder>
-
-		<projectPositionHolder>
 			<active>false</active>
 			<assignedHours>40</assignedHours>
 			<reviewed>false</reviewed>
@@ -1976,8 +2182,8 @@
 
 		<feedback>
 			<description>Great teamwork</description>
-			<observee>howard.lovecraft@example.com</observee>
-			<observer>john.tolkien@example.com</observer>
+			<observee>jolesa97@gmail.com</observee>
+			<observer>marianaabellan4@gmail.com</observer>
 			<relatedProject>Talent!</relatedProject>
 			<organization>monkey-labs</organization>
 			<feedbackType>KUDO</feedbackType>
@@ -1985,8 +2191,8 @@
 
 		<feedback>
 			<description>Lots of dedication to the project</description>
-			<observee>antonio.jimenez@example.com</observee>
-			<observer>andrea.solano@example.com</observer>
+			<observee>marianaabellan4@gmail.com</observee>
+			<observer>jolesa97@gmail.com</observer>
 			<relatedProject>Talent!</relatedProject>
 			<organization>monkey-labs</organization>
 			<feedbackType>KUDO</feedbackType>
@@ -1995,7 +2201,7 @@
 		<feedback>
 			<description>Too much dedication to the project</description>
 			<observee>antonio.jimenez@example.com</observee>
-			<observer>andrea.solano@example.com</observer>
+			<observer>jolesa97@gmail.com</observer>
 			<relatedProject>Talent!</relatedProject>
 			<organization>monkey-labs</organization>
 			<feedbackType>WARNING</feedbackType>
@@ -2004,7 +2210,7 @@
 		<feedback>
 			<description>Iniciative person</description>
 			<observee>marta.martinez@example.com</observee>
-			<observer>antonio.jimenez@example.com</observer>
+			<observer>marianaabellan4@gmail.com</observer>
 			<relatedProject>Bachmann–Landau(1)</relatedProject>
 			<organization>monkey-labs</organization>
 			<feedbackType>KUDO</feedbackType>
