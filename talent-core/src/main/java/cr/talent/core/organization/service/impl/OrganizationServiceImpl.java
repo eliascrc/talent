@@ -1,8 +1,10 @@
 package cr.talent.core.organization.service.impl;
 
+import cr.talent.core.capabilityLevel.dao.CapabilityLevelDao;
 import cr.talent.core.image.organizationLogo.service.OrganizationLogoService;
 import cr.talent.core.organization.dao.OrganizationDao;
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.core.security.technicalResource.dao.TechnicalResourceDao;
 import cr.talent.core.skill.dao.SkillDao;
 import cr.talent.core.skillCategory.dao.SkillCategoryDao;
 import cr.talent.core.security.technicalResource.service.TechnicalResourceService;
@@ -27,7 +29,7 @@ import java.util.*;
 /**
  * Default implementation of the {@link cr.talent.core.organization.service.OrganizationService}
  *
- * @author Elías Calderón, Josue Cubero
+ * @author Elías Calderón, Josue Cubero, Otto Mena
  */
 @Service("organizationService")
 @Transactional
@@ -48,6 +50,13 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
     @Autowired
     private SkillCategoryDao skillCategoryDao;
 
+    @Autowired
+    private CapabilityLevelDao capabilityLevelDao;
+
+    @Autowired
+    private TechnicalResourceDao technicalResourceDao;
+
+    @Autowired
     private OrganizationLogoService organizationLogoService;
 
     public void init() {
@@ -216,6 +225,41 @@ public class OrganizationServiceImpl extends CrudServiceImpl<Organization, Strin
         this.organizationDao.update(organization);
 
         return skillCategory;
+    }
+
+    /**
+     * @see cr.talent.core.organization.service.OrganizationService#deleteSkill(Skill, Organization)
+     */
+    @Override
+    public void deleteSkill(Skill skill, Organization organization) {
+
+        SkillCategory skillCategory = skill.getCategory();
+
+        if (!skillCategory.getOrganization().equals(organization))
+            throw new SkillOfAnotherOrganizationException();
+
+        Set<TechnicalResource> resources = skill.getResources();
+        Set<Capability> capabilities = skill.getCategory().getOrganization().getCapabilities();
+
+        skillCategory.getSkills().remove(skill);
+        skillCategoryDao.update(skillCategory);
+
+        for (TechnicalResource technicalResourceIterator : resources) {
+
+            technicalResourceIterator.getSkills().remove(skill);
+            technicalResourceDao.update(technicalResourceIterator);
+        }
+
+
+        for (Capability capabilityIterator : capabilities) {
+            for (CapabilityLevel capabilityLevelIterator : capabilityIterator.getLevelHierarchy()) {
+                capabilityLevelIterator.getRequiredSkills().remove(skill);
+                capabilityLevelDao.update(capabilityLevelIterator);
+            }
+        }
+
+        skill.setResources(null);
+        skillDao.update(skill);
     }
 
 }

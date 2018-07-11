@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * Default implementation of the {@link cr.talent.core.skillCategory.service.SkillCategoryService}.
  *
- * @author Otto Mena
+ * @author Otto Mena, Josue Cubero
  */
 @Service("skillCategoryService")
 @Transactional
@@ -84,9 +84,10 @@ public class SkillCategoryServiceImpl extends CrudServiceImpl<SkillCategory, Str
         organizationDao.update(organization);
         skillCategoryDao.remove(skillCategoryToDelete);
     }
-     /**
-      * @see cr.talent.core.skillCategory.service.SkillCategoryService#getSerializedSkillCategories(Organization)
-      */
+
+    /**
+     * @see cr.talent.core.skillCategory.service.SkillCategoryService#getSerializedSkillCategories(Organization)
+     */
     @Override
     public String getSerializedSkillCategories(Organization organization) {
         Set<SkillCategory> skillCategories = new HashSet<>();

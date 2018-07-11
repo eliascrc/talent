@@ -1,6 +1,7 @@
 package cr.talent.build;
 
 import nu.xom.*;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -93,11 +94,12 @@ public class XmlParser {
      */
     protected Date getDateValue(Element parentElement, String elementName){
         String attributeValue = parentElement.getChildElements(elementName).get(0).getValue();
-        try {
-            return new SimpleDateFormat("dd/MM/yyyy").parse(attributeValue);
-        }
-        catch(ParseException e){
-            System.out.println("Wrong date format");
+        if (!StringUtils.isEmpty(attributeValue)) {
+            try {
+                return new SimpleDateFormat("dd/MM/yyyy").parse(attributeValue);
+            } catch (ParseException e) {
+                System.out.println("Wrong date format");
+            }
         }
         return null;
     }

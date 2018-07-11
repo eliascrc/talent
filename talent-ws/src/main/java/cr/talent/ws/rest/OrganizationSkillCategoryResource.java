@@ -20,6 +20,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
+
 /**
  * Resource with a POST endpoint that manages an organization skillCategories.
  *
@@ -38,8 +39,9 @@ public class OrganizationSkillCategoryResource {
 
     /**
      * Receives the request for deleting an organization's skillCategory.
+     *
      * @param organizationUniqueIdentifier the skillCategory's organization unique identifier
-     * @param skillCategoryId the skillCategory's name.
+     * @param skillCategoryId              the skillCategory's name.
      * @return 200 if the organization skillCategory is correctly deleted,
      *          400 if any of the parameters are null or empty strings,
      *          404 if the unique identifier does not belong to any organization, or the skill category does not exist,
@@ -71,8 +73,6 @@ public class OrganizationSkillCategoryResource {
         }
     }
 
-
-
     /**
      * Receives the request for creating a new skill for the organization.
      *
@@ -99,5 +99,7 @@ public class OrganizationSkillCategoryResource {
             return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
         }
     }
-
 }
+
+
+

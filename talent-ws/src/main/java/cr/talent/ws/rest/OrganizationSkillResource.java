@@ -1,10 +1,12 @@
 package cr.talent.ws.rest;
 
 import cr.talent.core.organization.service.OrganizationService;
+import cr.talent.core.skill.service.SkillService;
 import cr.talent.core.skillCategory.service.SkillCategoryService;
 import cr.talent.model.*;
 import cr.talent.support.SecurityUtils;
 import cr.talent.support.exceptions.AlreadyCreatedSkillException;
+import cr.talent.support.exceptions.SkillOfAnotherOrganizationException;
 import cr.talent.support.flexjson.JSONSerializerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,6 +33,9 @@ public class OrganizationSkillResource {
 
     @Autowired
     private SkillCategoryService skillCategoryService;
+
+    @Autowired
+    private SkillService skillService;
 
     /**
      * Receives the request for creating a new skill for the organization.
@@ -95,5 +100,38 @@ public class OrganizationSkillResource {
         return Response.ok()
                 .entity(skillCategoryService.getSerializedSkillCategories(organization))
                 .build();
+    }
+
+    /**
+     * Receives the request for creating a new skill for the organization.
+     *
+     * @param skillId the skill name.
+     * @return 200 if the organization skill is correctly deleted,
+     *         400 if any of the parameters are null or empty strings,
+     *         404 if the skillId does not belong to any skill.
+     *         409 if the skill does not belong to the organization.
+     */
+    @POST
+    @Path("/delete")
+    public Response deleteSkill(
+            @FormParam("skillId") String skillId ){
+
+        if (StringUtils.isEmpty(skillId))
+            return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
+
+        Skill skill;
+        skill = skillService.findById(skillId);
+
+        if(skill == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        TechnicalResource technicalResource = SecurityUtils.getLoggedInTechnicalResource();
+
+        try {
+            this.organizationService.deleteSkill(skill, technicalResource.getOrganization());
+            return Response.ok().build();
+        } catch (SkillOfAnotherOrganizationException e) {
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
     }
 }
