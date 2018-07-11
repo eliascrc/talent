@@ -677,24 +677,6 @@ public class JSONSerializerBuilder {
         tempIncludes.add("name");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Skill.class, "skills", tempIncludes));
 
-        // Add the capability level from the technical position
-        /*tempIncludes = new LinkedList<>();
-        tempIncludes.add("capabilityLevel");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalPosition.class, "technicalPosition", tempIncludes));*/
-
-        // Add the capability levels name and capability from the capability level
-        tempIncludes = new LinkedList<>();
-        tempIncludes.add("name");
-        tempIncludes.add("capability");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class,
-                "technicalPosition.capabilityLevel", tempIncludes));
-
-        // Add the capability's name from the capability
-        tempIncludes = new LinkedList<>();
-        tempIncludes.add("name");
-        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class,
-                "technicalPosition.capabilityLevel.capability", tempIncludes));
-
         serializer.setExcludes(excludes);
         serializer.transform(new ProjectPositionTransformer(), "projectPositions");
         serializer.transform(new TechnicalPositionTransformer(),"technicalPosition");
