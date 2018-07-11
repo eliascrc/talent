@@ -503,6 +503,7 @@ public class JSONSerializerBuilder {
 
         serializer.setExcludes(excludes);
 
+        // Use the custom serializer to write in the json only the currently active lead
         serializer.transform(new LeadPositionSetTransformer(), "leadHistory");
         // logs the creation of the serializer
         logger.trace("Project Serializer {} created", serializer.toString());

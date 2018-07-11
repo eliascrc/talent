@@ -160,12 +160,23 @@ public class Project extends BasicEntity {
         this.projectCapabilities = projectCapabilities;
     }
 
-    public ProjectEvent getcurrentState() {
+    public ProjectEvent getCurrentState() {
         return currentState;
     }
 
-    public void setcurrentState(ProjectEvent currentState) {
+    public void setCurrentState(ProjectEvent currentState) {
         this.currentState = currentState;
+    }
+
+    /**
+     * This method will be used when serializing project object, in order to return only the appropriate string and no extraneous information
+     * @return a String representation of the current state's event type
+     */
+    public String getState() {
+        if(currentState==null)
+            return ProjectEventType.ON_HOLD.toString();
+
+        return currentState.getEventType().toString();
     }
 
     public Set<LeadPosition> getLeadHistory() {
@@ -246,9 +257,5 @@ public class Project extends BasicEntity {
 
     public String getOrganizationUniqueIdentifier(){
         return this.organization.getUniqueIdentifier();
-    }
-
-    public String getState(){
-        return this.currentState.getEventType().toString();
     }
 }

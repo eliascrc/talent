@@ -66,10 +66,10 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         if (!lead.equals(projectLead))
             throw new NotProjectLeadException();
 
-        if(newStateDate.before(project.getcurrentState().getStartDate())){
+        if(newStateDate.before(project.getCurrentState().getStartDate())){
             throw new StartDateBeforeEndDateException();
         }
-        project.getcurrentState().setEndDate(newStateDate);
+        project.getCurrentState().setEndDate(newStateDate);
         ProjectEvent projectEvent = new ProjectEvent();
         projectEvent.setStartDate(newStateDate);
         projectEvent.setEventType(ProjectEventType.valueOf(status));
@@ -77,7 +77,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         Set<ProjectEvent> projectTimeline = project.getTimeline();
         projectTimeline.add(projectEvent);
         project.setTimeline(projectTimeline);
-        project.setcurrentState(projectEvent);
+        project.setCurrentState(projectEvent);
 
         this.projectEventDao.create(projectEvent);
         projectDao.update(project);
@@ -120,7 +120,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         this.projectEventDao.create(projectEvent);
 
         project.setLeadHistory(leadPositions);
-        project.setcurrentState(projectEvent);
+        project.setCurrentState(projectEvent);
         projectDao.update(project);
 
         return project;
@@ -153,8 +153,7 @@ public class ProjectServiceImpl extends CrudServiceImpl<Project, String> impleme
         Project project;
         while(projectIterator.hasNext()){ // iterate projectPositionHolders for active ones
             project = projectIterator.next();
-            if(project.getState().equals(ProjectEventType.START.toString())){
-                // this to string is because its reusing the getState method from project, necessary for JSON serializer.
+            if(project.getCurrentState()!=null && project.getCurrentState().getEventType().equals(ProjectEventType.START)){
                 activeProjects.add(project);
             }
         }
