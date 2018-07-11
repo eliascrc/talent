@@ -75,7 +75,6 @@ public class InvitationServiceImpl extends CrudServiceImpl<Invitation, String> i
         List<Invitation> invitationsToSend = new ArrayList<>();
         JSONObject invitationsJSON;
         JSONArray invitationsList;
-        invitationsJSON = new JSONObject(invitations);
         try {
             invitationsJSON = new JSONObject(invitations);
             invitationsList = invitationsJSON.getJSONArray("invitations");
