@@ -12,15 +12,15 @@ import java.util.Set;
  *
  * @author Fabián Roberto Leandro
  */
-public class ProjectLeadTransformer extends AbstractTransformer {
-    private final String projectLeadField = "projectLead";
+public class LeadPositionSetTransformer extends AbstractInlineTransformer {
     private final String idField = "id";
     private final String usernameField = "username";
     private final String firstNameField = "firstName";
     private final String lastNameField = "lastName";
 
 
-    public ProjectLeadTransformer() {
+    public LeadPositionSetTransformer() {
+        fieldName="projectLead";
     }
 
     /**
@@ -50,28 +50,6 @@ public class ProjectLeadTransformer extends AbstractTransformer {
             this.writeNull();
         else
             this.writeProjectLeadJson(projectLead);
-    }
-
-    /**
-     * Writes a comma (if this field isn't the first one in an array) and the project lead field name
-     */
-    private void writeJsonStart() {
-        // Write a comma if necessary
-        if (!this.getContext().peekTypeContext().isFirst())
-            this.getContext().writeComma();
-
-        // Write the project lead field name
-        this.getContext().writeName(this.projectLeadField);
-    }
-
-    /**
-     * Writes the project lead with the null value
-     */
-    private void writeNull() {
-        this.writeJsonStart();
-
-        // write the "null" string
-        this.getContext().write("null");
     }
 
     /**
