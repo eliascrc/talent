@@ -22,7 +22,7 @@ import javax.ws.rs.Path;
 
 
 /**
- * Resource with a POST endpoint that manages an organization skillCategorys.
+ * Resource with a POST endpoint that manages an organization skillCategories.
  *
  * @author Otto Mena, Josue Cubero
  */
@@ -43,9 +43,9 @@ public class OrganizationSkillCategoryResource {
      * @param organizationUniqueIdentifier the skillCategory's organization unique identifier
      * @param skillCategoryId              the skillCategory's name.
      * @return 200 if the organization skillCategory is correctly deleted,
-     * 400 if any of the parameters are null or empty strings,
-     * 404 if the unique identifier does not belong to any organization,
-     * 409 if the organization skillCategory has already been created within the organization.
+     *          400 if any of the parameters are null or empty strings,
+     *          404 if the unique identifier does not belong to any organization, or the skill category does not exist,
+     *          or the skill category does not belong to the organization.
      */
     @POST
     @Path("/delete")
@@ -53,8 +53,7 @@ public class OrganizationSkillCategoryResource {
             @FormParam("organizationUniqueIdentifier") String organizationUniqueIdentifier,
             @FormParam("skillCategoryId") String skillCategoryId) {
 
-        if (organizationUniqueIdentifier == null || skillCategoryId == null
-                || organizationUniqueIdentifier.equals("") || skillCategoryId.equals(""))
+        if (StringUtils.isEmpty(organizationUniqueIdentifier) || StringUtils.isEmpty(skillCategoryId))
             return Response.status(Response.Status.BAD_REQUEST).build(); //Form Parameters should not be null or empty
 
         Organization organization = organizationService.getOrganizationByUniqueIdentifier(organizationUniqueIdentifier);
@@ -64,14 +63,12 @@ public class OrganizationSkillCategoryResource {
         if (skillCategory == null)
             return Response.status(Response.Status.NOT_FOUND).build();
 
-
         try {
 
             this.skillCategoryService.deleteOrganizationSkillCategory(organization, skillCategory);
             return Response.ok().build();
 
         } catch (SkillCategoryOfAnotherOrganizationException e) {
-            // An organization skillCategory should always have an organization associated
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }

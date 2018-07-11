@@ -84,6 +84,7 @@ public class SkillCategoryServiceImpl extends CrudServiceImpl<SkillCategory, Str
         organizationDao.update(organization);
         skillCategoryDao.remove(skillCategoryToDelete);
     }
+
     /**
      * @see cr.talent.core.skillCategory.service.SkillCategoryService#getSerializedSkillCategories(Organization)
      */

@@ -675,7 +675,7 @@ public class JSONSerializerBuilder {
     }
 
     /**
-     * Creates a JSONSerializer with which to serialize a Feedback object, including its description and feedback type.
+     * Creates a JSONSerializer with which to serialize a Feedback object, including its description, feedback type and observer.
      * @return
      */
     public static JSONSerializer getFeedbackSerializer() {
@@ -690,12 +690,50 @@ public class JSONSerializerBuilder {
         tempIncludes = new LinkedList<>();
         tempIncludes.add("description");
         tempIncludes.add("feedbackType");
+        tempIncludes.add("observer");
         excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Feedback.class, "", tempIncludes));
+
+        // Add the observer's name
+        tempIncludes.add("firstName");
+        tempIncludes.add("lastName");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(TechnicalResource.class, "observer", tempIncludes));
+
 
         serializer.setExcludes(excludes);
 
         // logs the creation of the serializer
         logger.trace("Feedback Serializer {} created", serializer.toString());
+        return serializer;
+    }
+
+    /**
+     * Gets a JSONSerializer to use in order to obtain the JSON of an organization's capabilities.
+     *
+     * @return the JSONSerializer to be used to serialize the capabilities, including its name and its capability levels with their names
+     */
+    public static JSONSerializer getCapabilitySerializer() {
+        JSONSerializer serializer = getBasicSerializer();
+        List<String> excludes = new LinkedList<>();
+        List<String> tempIncludes;
+
+        excludes.addAll(getGlobalExcludes());
+        excludes.add("*.class");
+
+        // Add the capability's name and set of capability levels (named levelHierarchy)
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        tempIncludes.add("levelHierarchy");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(Capability.class, "", tempIncludes));
+
+        // Add each capability level's name
+        tempIncludes = new LinkedList<>();
+        tempIncludes.add("name");
+        excludes.addAll(JSONSerializerBuilder.getExcludesForObject(CapabilityLevel.class, "levelHierarchy", tempIncludes));
+
+        serializer.setExcludes(excludes);
+
+        // logs the creation of the serializer
+        logger.trace("Capability Serializer {} created", serializer.toString());
         return serializer;
     }
 
